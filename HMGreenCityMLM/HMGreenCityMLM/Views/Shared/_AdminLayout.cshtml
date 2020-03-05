@@ -1,34 +1,42 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
     <title>@ViewBag.Title</title>
+    <link rel="apple-touch-icon" href="../../AssociatePanelcss/app-assets/images/ico/apple-icon-120.html">
 
-    <!-- start: META -->
-    <meta charset="utf-8" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta content="Responsive Admin Template build with Twitter Bootstrap and jQuery" name="description" />
-    <meta content="DharaWorld" name="author" />
-   
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Raleway:400,100,200,300,500,600,700,800,900/" />
-    <link type="text/css" rel="stylesheet" href="../../AssociatePanelcss/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-
-    <link type="text/css" rel="stylesheet" href="../../AssociatePanelcss/bower_components/font-awesome/css/font-awesome.min.css" />
-    <link type="text/css" rel="stylesheet" href="../../AssociatePanelcss/assets/fonts/clip-font.min.css" />
-    <link type="text/css" rel="stylesheet" href="../../AssociatePanelcss/bower_components/iCheck/skins/all.css" />
-    <link type="text/css" rel="stylesheet" href="../../AssociatePanelcss/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css" />
-    <link type="text/css" rel="stylesheet" href="../../AssociatePanelcss/bower_components/sweetalert/dist/sweetalert.css" />
-    <link type="text/css" rel="stylesheet" href="../../AssociatePanelcss/assets/css/main.min.css" />
-    <link type="text/css" rel="stylesheet" href="../../AssociatePanelcss/assets/css/main-responsive.min.css" />
-    <link type="text/css" rel="stylesheet" media="print" href="../../AssociatePanelcss/assets/css/print.min.css" />
-    <link type="text/css" rel="stylesheet" id="skin_color" href="../../AssociatePanelcss/assets/css/theme/light.min.css" />
-    <link href="../../AssociatePanelcss/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet" />
-
-    <link rel="shortcut icon" href="../../WebsiteCss/images/fevicon.png" />
-    <link href="../../AdminPanelCss/Datatablecss/css/amchart/export.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/extensions/tether-theme-arrows.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/extensions/tether.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/extensions/shepherd-theme-default.css">
+    <!-- END: Vendor CSS-->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/colors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/themes/dark-layout.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/themes/semi-dark-layout.min.css">
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/core/menu/menu-types/vertical-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/core/colors/palette-gradient.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/pages/dashboard-analytics.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/pages/card-analytics.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/plugins/tour/tour.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <link href="../../AdminPanelCss/Datatablecss/css/amchart/export.css" rel="stylesheet" />
+    <!-- END: Custom CSS-->
     <style>
         .dataTables_wrapper {
             padding-top: 10px;
@@ -205,103 +213,290 @@
         }
     </style>
 </head>
-
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <!-- start: TOP NAVIGATION CONTAINER -->
-        <div class="container">
-            <div class="navbar-header">
-                <!-- start: RESPONSIVE MENU TOGGLER -->
-                <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-                    <span class="clip-list-2"></span>
-                </button>
-                <!-- end: RESPONSIVE MENU TOGGLER -->
-                <!-- start: LOGO -->
-                <a class="navbar-brand" href="/User/AssociateDashBoard">
-                    DharaWorld
-                </a>
-                <!-- end: LOGO -->
+    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+        <div class="navbar-wrapper">
+            <div class="navbar-container content">
+                <div class="navbar-collapse" id="navbar-mobile">
+                    <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+
+                    </div>
+                    <ul class="nav navbar-nav float-right">
+
+
+                        <li class="dropdown dropdown-user nav-item">
+                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">@Session["FullName"]</span><span class="user-status">@Session["Status"]</span></div><span><img class="round" src="@Session["Profile"]" alt="avatar" height="40" width="40"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+
+                                <div class="dropdown-divider"></div><a class="dropdown-item" href="/Home/Login"><i class="feather icon-power"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-tools">
-                <!-- start: TOP NAVIGATION MENU -->
-                <ul class="nav navbar-right">
+        </div>
+    </nav>
 
-
-                    <li class="dropdown current-user">
-                        <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-                            <img src="@Session["Profile"]" class="circle-img" alt="" style="height:30px;width:39px">
-                            <span class="username">@Session["FullName"]</span>
-                            <i class="clip-chevron-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                           
-
-                            <li>
-                                <a href="/Home/Login">
-                                    <i class="clip-exit"></i> &nbsp;Log Out
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a class="sb-toggle" href="#"><i class="fa fa-outdent"></i></a>
-                    </li>
-
+    <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item mr-auto">
+                    <a class="navbar-brand" href="/User/AssociateDashBoard">
+                        <div class="brand-logo"></div>
+                        <h2 class="brand-text mb-0">HM Green City</h2>
+                    </a>
+                </li>
+                <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i></a></li>
+            </ul>
+        </div>
+        <div class="shadow-bottom"></div>
+        <div class="main-menu-content">
+            @{
+                Html.RenderAction("Menu", "Home", new { area = "" });
+            }
+        </div>
+    </div>
+    @RenderBody();
+    <div class="customizer d-none d-md-block">
+        <a class="customizer-close" href="#"><i class="feather icon-x"></i></a><a class="customizer-toggle" href="#"><i class="feather icon-settings fa fa-spin fa-fw white"></i></a><div class="customizer-content p-2">
+            <h4 class="text-uppercase mb-0">Theme Customizer</h4>
+            <small>Customize & Preview in Real Time</small>
+            <hr>
+            <!-- Menu Colors Starts -->
+            <div id="customizer-theme-colors">
+                <h5>Menu Colors</h5>
+                <ul class="list-inline unstyled-list">
+                    <li class="color-box bg-primary selected" data-color="theme-primary"></li>
+                    <li class="color-box bg-success" data-color="theme-success"></li>
+                    <li class="color-box bg-danger" data-color="theme-danger"></li>
+                    <li class="color-box bg-info" data-color="theme-info"></li>
+                    <li class="color-box bg-warning" data-color="theme-warning"></li>
+                    <li class="color-box bg-dark" data-color="theme-dark"></li>
                 </ul>
-
             </div>
-        </div>
-
-    </div>
-
-    <div class="main-container">
-        @{
-            Html.RenderAction("Menu", "Home", new { area = "" });
-        }
-        <!-- start: PAGE -->
-        <div class="main-content">
-
-
-            <div class="container">
-                @RenderBody()
+            <!-- Menu Colors Ends -->
+            <hr>
+            <!-- Theme options starts -->
+            <h5 class="mt-1">Theme Layout</h5>
+            <div class="theme-layouts">
+                <div class="d-flex justify-content-start">
+                    <div class="mx-50 lidht">
+                        <fieldset>
+                            <div class="vs-radio-con vs-radio-primary">
+                                <input type="radio" name="layoutOptions" value="false" class="layout-name" data-layout="" checked>
+                                <span class="vs-radio">
+                                    <span class="vs-radio--border"></span>
+                                    <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class="">Light</span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="mx-50 dark">
+                        <fieldset>
+                            <div class="vs-radio-con vs-radio-primary">
+                                <input type="radio" name="layoutOptions" value="false" class="layout-name" data-layout="dark-layout">
+                                <span class="vs-radio">
+                                    <span class="vs-radio--border"></span>
+                                    <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class="">Dark</span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="mx-50 semi-dark">
+                        <fieldset>
+                            <div class="vs-radio-con vs-radio-primary">
+                                <input type="radio" name="layoutOptions" value="false" class="layout-name" data-layout="semi-dark-layout">
+                                <span class="vs-radio">
+                                    <span class="vs-radio--border"></span>
+                                    <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class="">Semi Dark</span>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
             </div>
+            <!-- Theme options starts -->
+            <hr>
+            <!-- Collapse sidebar switch starts -->
+            <div class="collapse-sidebar d-flex justify-content-between">
+                <div class="collapse-option-title">
+                    <h5 class="pt-25 collapse_sidebar">Collapse Sidebar</h5>
+                    <h5 class="pt-25 collapse_menu d-none">Collapse Menu</h5>
+                </div>
+                <div class="collapse-option-switch">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="collapse-sidebar-switch">
+                        <label class="custom-control-label" for="collapse-sidebar-switch"></label>
+                    </div>
+                </div>
+            </div>
+            <!-- Collapse sidebar switch Ends -->
+            <hr>
+            <!-- Navbar colors starts -->
+            <div id="customizer-navbar-colors">
+                <h5>Navbar Colors</h5>
+                <ul class="list-inline unstyled-list">
+                    <li class="color-box bg-white border selected" data-navbar-default=""></li>
+                    <li class="color-box bg-primary" data-navbar-color="bg-primary"></li>
+                    <li class="color-box bg-success" data-navbar-color="bg-success"></li>
+                    <li class="color-box bg-danger" data-navbar-color="bg-danger"></li>
+                    <li class="color-box bg-info" data-navbar-color="bg-info"></li>
+                    <li class="color-box bg-warning" data-navbar-color="bg-warning"></li>
+                    <li class="color-box bg-dark" data-navbar-color="bg-dark"></li>
+                </ul>
+                <hr>
+            </div>
+            <!-- Navbar colors starts -->
+            <!-- Navbar Type Starts -->
+            <div id="navbar-type">
+                <h5 class="navbar_type">Navbar Type</h5>
+                <h5 class="menu_type d-none">Menu Type</h5>
+                <div class="navbar-type d-flex justify-content-start">
+                    <div class="mx-50">
+                        <fieldset>
+                            <div class="vs-radio-con vs-radio-primary">
+                                <input type="radio" name="navbarType" value="false" id="navbar-hidden">
+                                <span class="vs-radio">
+                                    <span class="vs-radio--border"></span>
+                                    <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class="">Hidden</span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="mx-50">
+                        <fieldset>
+                            <div class="vs-radio-con vs-radio-primary">
+                                <input type="radio" name="navbarType" value="false" id="navbar-static">
+                                <span class="vs-radio">
+                                    <span class="vs-radio--border"></span>
+                                    <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class="">Static</span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="mx-50">
+                        <fieldset>
+                            <div class="vs-radio-con vs-radio-primary">
+                                <input type="radio" name="navbarType" value="false" id="navbar-sticky">
+                                <span class="vs-radio">
+                                    <span class="vs-radio--border"></span>
+                                    <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class="">Sticky</span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="mx-50">
+                        <fieldset>
+                            <div class="vs-radio-con vs-radio-primary">
+                                <input type="radio" name="navbarType" value="false" id="navbar-floating" checked>
+                                <span class="vs-radio">
+                                    <span class="vs-radio--border"></span>
+                                    <span class="vs-radio--circle"></span>
+                                </span>
+                                <span class="">Floating</span>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <!-- Navbar Type Starts -->
+            <!-- Footer Type Starts -->
+            <h5>Footer Type</h5>
+            <div class="footer-type d-flex justify-content-start">
+                <div class="mx-50">
+                    <fieldset>
+                        <div class="vs-radio-con vs-radio-primary">
+                            <input type="radio" name="footerType" value="false" id="footer-hidden">
+                            <span class="vs-radio">
+                                <span class="vs-radio--border"></span>
+                                <span class="vs-radio--circle"></span>
+                            </span>
+                            <span class="">Hidden</span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="mx-50">
+                    <fieldset>
+                        <div class="vs-radio-con vs-radio-primary">
+                            <input type="radio" name="footerType" value="false" id="footer-static" checked>
+                            <span class="vs-radio">
+                                <span class="vs-radio--border"></span>
+                                <span class="vs-radio--circle"></span>
+                            </span>
+                            <span class="">Static</span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="mx-50">
+                    <fieldset>
+                        <div class="vs-radio-con vs-radio-primary">
+                            <input type="radio" name="footerType" value="false" id="footer-sticky">
+                            <span class="vs-radio">
+                                <span class="vs-radio--border"></span>
+                                <span class="vs-radio--circle"></span>
+                            </span>
+                            <span class="">Sticky</span>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- Footer Type Ends -->
+            <hr>
+            <!-- Hide Scroll To Top Starts-->
+            <div class="hide-scroll-to-top d-flex justify-content-between py-25">
+                <div class="hide-scroll-title">
+                    <h5 class="pt-25">Hide Scroll To Top</h5>
+                </div>
+                <div class="hide-scroll-top-switch">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="hide-scroll-top-switch">
+                        <label class="custom-control-label" for="hide-scroll-top-switch"></label>
+                    </div>
+                </div>
+            </div>
+            <!-- Hide Scroll To Top Ends-->
         </div>
-        <!-- end: PAGE -->
     </div>
+    <!-- End: Customizer-->
+    <!-- Buynow Button-->
 
-    <div class="footer clearfix">
-        <div class="footer-inner">
-            <script>
-                document.write(new Date().getFullYear())
-            </script>
-        </div>
-        <div class="footer-items">
-            <span class="go-top"><i class="clip-chevron-up"></i></span>
-        </div>
-    </div>
-    <script type="text/javascript" src="../../AssociatePanelcss/bower_components/jquery/dist/jquery.min.js"></script>
-    <!--<![endif]-->
-    <script type="text/javascript" src="../../AssociatePanelcss/bower_components/jquery-ui/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="../../AssociatePanelcss/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../AssociatePanelcss/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
-    <script type="text/javascript" src="../../AssociatePanelcss/bower_components/blockUI/jquery.blockUI.js"></script>
-    <script type="text/javascript" src="../../AssociatePanelcss/bower_components/iCheck/icheck.min.js"></script>
-    <script type="text/javascript" src="../../AssociatePanelcss/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js"></script>
-    <script type="text/javascript" src="../../AssociatePanelcss/bower_components/jquery.cookie/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../../AssociatePanelcss/bower_components/sweetalert/dist/sweetalert.min.js"></script>
-    <script type="text/javascript" src="../../AssociatePanelcss/assets/js/min/main.min.js"></script>
-    <!-- end: MAIN JAVASCRIPTS -->
-    <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-    <script src="../../AssociatePanelcss/bower_components/Flot/jquery.flot.js"></script>
-    <script src="../../AssociatePanelcss/bower_components/Flot/jquery.flot.pie.js"></script>
-    <script src="../../AssociatePanelcss/bower_components/Flot/jquery.flot.resize.js"></script>
-    <script src="../../AssociatePanelcss/assets/plugin/jquery.sparkline.min.js"></script>
-    <script src="../../AssociatePanelcss/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-    <script src="../../AssociatePanelcss/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-    <script src="../../AssociatePanelcss/bower_components/moment/min/moment.min.js"></script>
-    <script src="../../AssociatePanelcss/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="../../AssociatePanelcss/assets/js/min/index.min.js"></script>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    <!-- BEGIN: Footer-->
+    @*<footer class="footer footer-static footer-light">
+            <p class="clearfix blue-grey lighten-2 mb-0">
+                <span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT  &copy; 2019<a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
+                <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+            </p>
+        </footer>*@
+    <!-- END: Footer-->
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../AssociatePanelcss/app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../AssociatePanelcss/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/vendors/js/extensions/tether.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/vendors/js/extensions/shepherd.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="../../AssociatePanelcss/app-assets/js/core/app-menu.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/core/app.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/scripts/components.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/scripts/customizer.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/scripts/footer.min.js"></script>
+    <!-- END: Theme JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="../../AssociatePanelcss/app-assets/js/scripts/pages/dashboard-analytics.min.js"></script>
+    <!-- END: Page JS-->
 
     <script src="./../Datatablecss/datatables/datatables.min.js"></script>
     <script src="./../Datatablecss/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -322,6 +517,5 @@
 </body>
 
 </html>
-
 
 
