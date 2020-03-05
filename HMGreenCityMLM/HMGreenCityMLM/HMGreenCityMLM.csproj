@@ -1,0 +1,674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0AD623FC-CC1C-4BAD-93F1-5C6C436A05BA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HMGreenCityMLM</RootNamespace>
+    <AssemblyName>HMGreenCityMLM</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AssociatePanelcss\loader.css" />
+    <Content Include="AssociatePanelcss\logo.png" />
+    <Content Include="css\menu.css" />
+    <Content Include="css\tree-responsive.css" />
+    <Content Include="css\tree.css" />
+    <Content Include="Datatablecss\css\amchart\export.css" />
+    <Content Include="Datatablecss\datatables\cdn.datatables.net\buttons\1.2.2\js\buttons.flash.min.js" />
+    <Content Include="Datatablecss\datatables\cdn.datatables.net\buttons\1.2.2\js\buttons.html5.min.js" />
+    <Content Include="Datatablecss\datatables\cdn.datatables.net\buttons\1.2.2\js\buttons.print.min.js" />
+    <Content Include="Datatablecss\datatables\cdn.datatables.net\buttons\1.2.2\js\dataTables.buttons.min.js" />
+    <Content Include="Datatablecss\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\build\pdfmake.min.js" />
+    <Content Include="Datatablecss\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\build\vfs_fonts.js" />
+    <Content Include="Datatablecss\datatables\cdnjs.cloudflare.com\ajax\libs\jszip\2.5.0\jszip.min.js" />
+    <Content Include="Datatablecss\datatables\datatables-init.js" />
+    <Content Include="Datatablecss\datatables\datatables.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="images\delete-icon.png" />
+    <Content Include="images\dhara-logo.png" />
+    <Content Include="images\edit-icon.png" />
+    <Content Include="images\exel.png" />
+    <Content Include="images\loader.gif" />
+    <Content Include="images\lock.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\mail.png" />
+    <Content Include="images\pdf.png" />
+    <Content Include="images\Printer.png" />
+    <Content Include="images\process.gif" />
+    <Content Include="images\ProfilePicture\1b08199b-6889-491b-b0a3-18e5358cfee1.jpg" />
+    <Content Include="images\ProfilePicture\24ea7b20-05f3-4389-a950-029206fcf692.jpg" />
+    <Content Include="images\ProfilePicture\68107dd3-ee11-44a2-b9cb-da5cc61c7c44.jpg" />
+    <Content Include="images\ProfilePicture\69fa6ced-f4f9-4647-9277-cbd3fc9411f5.jpg" />
+    <Content Include="images\ProfilePicture\b3e7ddcb-8957-41ad-a66c-b360dc0da54b.jpg" />
+    <Content Include="images\ProfilePicture\noimage.jpeg" />
+    <Content Include="images\RewardImages\Alto.jpg" />
+    <Content Include="images\RewardImages\Audii.jpg" />
+    <Content Include="images\RewardImages\Flat.jpg" />
+    <Content Include="images\RewardImages\Fortuner.jpg" />
+    <Content Include="images\RewardImages\HeroDeluxeBike.jpg" />
+    <Content Include="images\RewardImages\HondaCity.jpg" />
+    <Content Include="images\RewardImages\LandRover.jpg" />
+    <Content Include="images\RewardImages\TataStorme.jpg" />
+    <Content Include="images\RewardImages\VillaAndJaguar.jpg" />
+    <Content Include="images\search-icon.png" />
+    <Content Include="images\tick.png" />
+    <Content Include="images\treeicon.jpg" />
+    <Content Include="images\TreeIcon\default.png" />
+    <Content Include="images\TreeIcon\girl-active.png" />
+    <Content Include="images\TreeIcon\girl-block.png" />
+    <Content Include="images\TreeIcon\girl-inactive.png" />
+    <Content Include="images\TreeIcon\men-active.png" />
+    <Content Include="images\TreeIcon\men-block.png" />
+    <Content Include="images\TreeIcon\men-inactive.png" />
+    <Content Include="images\user.png" />
+    <Content Include="images\view.png" />
+    <Content Include="images\weather.jpg" />
+    <Content Include="images\World.png" />
+    <Content Include="images\XwHw.gif" />
+    <Content Include="Models\WebService\AgentServices.asmx" />
+    <Content Include="scripts\ai.0.22.9-build00167.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="WebsiteCss\css\animate.css" />
+    <Content Include="WebsiteCss\css\bootstrap.css" />
+    <Content Include="WebsiteCss\css\color-switcher-design.css" />
+    <Content Include="WebsiteCss\css\color-themes\blue-theme.css" />
+    <Content Include="WebsiteCss\css\color-themes\brown-theme.css" />
+    <Content Include="WebsiteCss\css\color-themes\default-theme.css" />
+    <Content Include="WebsiteCss\css\color-themes\green-theme.css" />
+    <Content Include="WebsiteCss\css\color-themes\orange-theme.css" />
+    <Content Include="WebsiteCss\css\color-themes\purple-theme.css" />
+    <Content Include="WebsiteCss\css\color-themes\redd-color.css" />
+    <Content Include="WebsiteCss\css\color-themes\teal-theme.css" />
+    <Content Include="WebsiteCss\css\flaticon.css" />
+    <Content Include="WebsiteCss\css\font-awesome.css" />
+    <Content Include="WebsiteCss\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="WebsiteCss\css\images\ui-icons_555555_256x240.png" />
+    <Content Include="WebsiteCss\css\images\ui-icons_777620_256x240.html" />
+    <Content Include="WebsiteCss\css\images\ui-icons_cc0000_256x240.html" />
+    <Content Include="WebsiteCss\css\images\ui-icons_ffffff_256x240.html" />
+    <Content Include="WebsiteCss\css\jquery-ui.css" />
+    <Content Include="WebsiteCss\css\jquery.bootstrap-touchspin.css" />
+    <Content Include="WebsiteCss\css\jquery.fancybox.min.css" />
+    <Content Include="WebsiteCss\css\jquery.mCustomScrollbar.min.css" />
+    <Content Include="WebsiteCss\css\mCSB_buttons.html" />
+    <Content Include="WebsiteCss\css\owl.css" />
+    <Content Include="WebsiteCss\css\owl.video.play.html" />
+    <Content Include="WebsiteCss\css\responsive.css" />
+    <Content Include="WebsiteCss\css\style.css" />
+    <Content Include="WebsiteCss\fonts\Flaticon.svg" />
+    <Content Include="WebsiteCss\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="WebsiteCss\images\admin1.png" />
+    <Content Include="WebsiteCss\images\background.gif" />
+    <Content Include="WebsiteCss\images\background\1.jpg" />
+    <Content Include="WebsiteCss\images\background\4.jpg" />
+    <Content Include="WebsiteCss\images\background\5.jpg" />
+    <Content Include="WebsiteCss\images\background\about-banner.jpg" />
+    <Content Include="WebsiteCss\images\choose-us-img-four.png" />
+    <Content Include="WebsiteCss\images\clients\certi-1.jpg" />
+    <Content Include="WebsiteCss\images\clients\certi-2.jpg" />
+    <Content Include="WebsiteCss\images\clients\certi-3.jpg" />
+    <Content Include="WebsiteCss\images\clients\certi-4.jpg" />
+    <Content Include="WebsiteCss\images\clients\certi-5.jpg" />
+    <Content Include="WebsiteCss\images\clients\certi-6.jpg" />
+    <Content Include="WebsiteCss\images\clients\certi-7.jpg" />
+    <Content Include="WebsiteCss\images\coming-soon.png" />
+    <Content Include="WebsiteCss\images\company-desk.png" />
+    <Content Include="WebsiteCss\images\dhara-main.png" />
+    <Content Include="WebsiteCss\images\dhara-world-pop\popup-1.jpg" />
+    <Content Include="WebsiteCss\images\dhara-world-pop\popup-2.jpg" />
+    <Content Include="WebsiteCss\images\dhara-world-pop\popup-3.jpg" />
+    <Content Include="WebsiteCss\images\dhara-world-pop\popup-4.jpg" />
+    <Content Include="WebsiteCss\images\dhara-world-pop\popup-5.jpg" />
+    <Content Include="WebsiteCss\images\dhara-world-pop\popup-6.jpg" />
+    <Content Include="WebsiteCss\images\events\event1.jpeg" />
+    <Content Include="WebsiteCss\images\events\event10.jpg" />
+    <Content Include="WebsiteCss\images\events\event11.jpg" />
+    <Content Include="WebsiteCss\images\events\event12.jpg" />
+    <Content Include="WebsiteCss\images\events\event13.jpg" />
+    <Content Include="WebsiteCss\images\events\event14.jpg" />
+    <Content Include="WebsiteCss\images\events\event15.jpg" />
+    <Content Include="WebsiteCss\images\events\event16.jpg" />
+    <Content Include="WebsiteCss\images\events\event17.jpg" />
+    <Content Include="WebsiteCss\images\events\event18.jpg" />
+    <Content Include="WebsiteCss\images\events\event19.jpg" />
+    <Content Include="WebsiteCss\images\events\event2.jpeg" />
+    <Content Include="WebsiteCss\images\events\event3.jpeg" />
+    <Content Include="WebsiteCss\images\events\event4.jpeg" />
+    <Content Include="WebsiteCss\images\events\event5.jpeg" />
+    <Content Include="WebsiteCss\images\events\event6.jpeg" />
+    <Content Include="WebsiteCss\images\events\event7.jpeg" />
+    <Content Include="WebsiteCss\images\events\event8.jpeg" />
+    <Content Include="WebsiteCss\images\events\event9.jpeg" />
+    <Content Include="WebsiteCss\images\favicon.png" />
+    <Content Include="WebsiteCss\images\footer-logo.png" />
+    <Content Include="WebsiteCss\images\free-2.png" />
+    <Content Include="WebsiteCss\images\gallery\herbal-pharma-product-1.jpg" />
+    <Content Include="WebsiteCss\images\gallery\herbal-pharma-product-2.jpg" />
+    <Content Include="WebsiteCss\images\gallery\herbal-product-1.jpg" />
+    <Content Include="WebsiteCss\images\gallery\herbal-product-2.jpg" />
+    <Content Include="WebsiteCss\images\gallery\personal-care-products-1.jpg" />
+    <Content Include="WebsiteCss\images\gallery\personal-care-products-2.jpg" />
+    <Content Include="WebsiteCss\images\icons\icon-dot.png" />
+    <Content Include="WebsiteCss\images\icons\icon-dots-dark.jpg" />
+    <Content Include="WebsiteCss\images\icons\icon-dots.png" />
+    <Content Include="WebsiteCss\images\icons\icon-flower.png" />
+    <Content Include="WebsiteCss\images\icons\icon-lines-dark.jpg" />
+    <Content Include="WebsiteCss\images\icons\icon-lines.jpg" />
+    <Content Include="WebsiteCss\images\icons\icon-select.png" />
+    <Content Include="WebsiteCss\images\icons\icon1.png" />
+    <Content Include="WebsiteCss\images\icons\icon2.png" />
+    <Content Include="WebsiteCss\images\icons\icon3.png" />
+    <Content Include="WebsiteCss\images\icons\icon4.png" />
+    <Content Include="WebsiteCss\images\icons\map-marker.png" />
+    <Content Include="WebsiteCss\images\icons\pentagon.png" />
+    <Content Include="WebsiteCss\images\icons\preloader.svg" />
+    <Content Include="WebsiteCss\images\icons\shape-2.png" />
+    <Content Include="WebsiteCss\images\icons\tick.png" />
+    <Content Include="WebsiteCss\images\ipl\ipl10.jpg" />
+    <Content Include="WebsiteCss\images\ipl\ipl3.jpg" />
+    <Content Include="WebsiteCss\images\ipl\ipl4.jpg" />
+    <Content Include="WebsiteCss\images\ipl\ipl6.jpg" />
+    <Content Include="WebsiteCss\images\ipl\ipl7.jpg" />
+    <Content Include="WebsiteCss\images\ipl\ipl8.jpg" />
+    <Content Include="WebsiteCss\images\ipl\ipl9.jpg" />
+    <Content Include="WebsiteCss\images\ipl\ipla.jpg" />
+    <Content Include="WebsiteCss\images\ipl\iplb.jpg" />
+    <Content Include="WebsiteCss\images\ipl\iplc.jpg" />
+    <Content Include="WebsiteCss\images\ipl\ipld.jpg" />
+    <Content Include="WebsiteCss\images\landing-logo.png" />
+    <Content Include="WebsiteCss\images\legal-document\certificate.jpg" />
+    <Content Include="WebsiteCss\images\legal-document\certification-1.jpeg" />
+    <Content Include="WebsiteCss\images\legal-document\certification-2.jpeg" />
+    <Content Include="WebsiteCss\images\legal-document\certification-3.jpeg" />
+    <Content Include="WebsiteCss\images\legal-document\certification-4.jpeg" />
+    <Content Include="WebsiteCss\images\legal-document\pan-card-dhara.jpg" />
+    <Content Include="WebsiteCss\images\logo-2.png" />
+    <Content Include="WebsiteCss\images\main-slider\banner1.jpg" />
+    <Content Include="WebsiteCss\images\main-slider\banner2.jpg" />
+    <Content Include="WebsiteCss\images\main-slider\banner3.jpg" />
+    <Content Include="WebsiteCss\images\main-slider\banner4.jpg" />
+    <Content Include="WebsiteCss\images\our-mission.png" />
+    <Content Include="WebsiteCss\images\our-vision.png" />
+    <Content Include="WebsiteCss\images\products-packages\pro-package-1.jpeg" />
+    <Content Include="WebsiteCss\images\products-packages\pro-package-2.jpeg" />
+    <Content Include="WebsiteCss\images\products-packages\pro-package-3.jpeg" />
+    <Content Include="WebsiteCss\images\products-packages\pro-package-4.jpeg" />
+    <Content Include="WebsiteCss\images\products-packages\pro-package-5.jpeg" />
+    <Content Include="WebsiteCss\images\products-packages\pro-package-6.jpeg" />
+    <Content Include="WebsiteCss\images\products\health-care-pharma1.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care-pharma2.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care-pharma3.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care-pharma4.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care-pharma5.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care-pharma6.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care1.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care2.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care3.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care4.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care5.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care6.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care7.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care8.jpg" />
+    <Content Include="WebsiteCss\images\products\health-care9.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-pharma-product-1.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-pharma-product-2.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-pharma-product-3.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-pharma-product-4.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-pharma-product-5.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-pharma-product-6.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-product-1.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-product-2.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-product-3.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-product-4.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-product-5.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-product-6.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-product-7.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-product-8.jpg" />
+    <Content Include="WebsiteCss\images\products\herbal-product-9.jpg" />
+    <Content Include="WebsiteCss\images\products\hsp-1.jpg" />
+    <Content Include="WebsiteCss\images\products\hsp2.jpg" />
+    <Content Include="WebsiteCss\images\products\hsp3.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-pharma-product-1.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-pharma-product-2.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-pharma-product-3.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-pharma-product-4.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-pharma-product-5.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-pharma-product-6.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-product-1.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-product-2.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-product-3.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-product-4.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-product-5.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-product-6.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-product-7.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-product-8.jpg" />
+    <Content Include="WebsiteCss\images\products\new\herbal-product-9.jpg" />
+    <Content Include="WebsiteCss\images\products\new\personal-care-products-4.jpg" />
+    <Content Include="WebsiteCss\images\products\new\personal-care-products-5.jpg" />
+    <Content Include="WebsiteCss\images\products\new\personal-care-products-6.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care-products-1.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care-products-2.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care-products-3.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care1.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care2.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care3.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care4.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care5.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care6.jpg" />
+    <Content Include="WebsiteCss\images\products\personal-care7.jpg" />
+    <Content Include="WebsiteCss\images\tulsi-amrit.jpg" />
+    <Content Include="WebsiteCss\js\appear.js" />
+    <Content Include="WebsiteCss\js\bootstrap.min.js" />
+    <Content Include="WebsiteCss\js\color-settings.js" />
+    <Content Include="WebsiteCss\js\jquery-ui.js" />
+    <Content Include="WebsiteCss\js\jquery.bootstrap-touchspin.js" />
+    <Content Include="WebsiteCss\js\jquery.countdown.js" />
+    <Content Include="WebsiteCss\js\jquery.fancybox.js" />
+    <Content Include="WebsiteCss\js\jquery.js" />
+    <Content Include="WebsiteCss\js\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="WebsiteCss\js\main.js" />
+    <Content Include="WebsiteCss\js\map-script.js" />
+    <Content Include="WebsiteCss\js\mixitup.js" />
+    <Content Include="WebsiteCss\js\owl.js" />
+    <Content Include="WebsiteCss\js\popper.min.js" />
+    <Content Include="WebsiteCss\js\script.js" />
+    <Content Include="WebsiteCss\js\util.js" />
+    <Content Include="WebsiteCss\js\validate.js" />
+    <Content Include="WebsiteCss\js\wow.js" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
+    <None Include="scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="scripts\jquery-1.7.1.js" />
+    <Content Include="scripts\jquery-1.7.1.min.js" />
+    <Content Include="scripts\jquery-ui-1.8.20.js" />
+    <Content Include="scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="scripts\MicrosoftAjax.debug.js" />
+    <Content Include="scripts\MicrosoftAjax.js" />
+    <Content Include="scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="scripts\MicrosoftMvcAjax.js" />
+    <Content Include="scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="scripts\MicrosoftMvcValidation.js" />
+    <Content Include="scripts\modernizr-2.5.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Views\Accounts\ApproveEwalletRequest.cshtml" />
+    <Content Include="Views\Accounts\ApprovepayoutRequest.cshtml" />
+    <Content Include="Views\Accounts\ProductTopUp.cshtml" />
+    <Content Include="Views\Accounts\RetopUp.cshtml" />
+    <Content Include="Views\Accounts\Topup.cshtml" />
+    <Content Include="Views\Admin\AdminDashBoard.cshtml" />
+    <Content Include="Views\Admin\AdvancePayment.cshtml" />
+    <Content Include="Views\Admin\AdvancePaymentReport.cshtml" />
+    <Content Include="Views\Admin\AssociateListForKYC.cshtml" />
+    <Content Include="Views\Admin\BinaryTree.cshtml" />
+    <Content Include="Views\Admin\ConfirmRegistration.cshtml" />
+    <Content Include="Views\Admin\CreatePin.cshtml" />
+    <Content Include="Views\Admin\PaidPayout.cshtml" />
+    <Content Include="Views\Admin\PayPayout.cshtml" />
+    <Content Include="Views\Admin\Registration.cshtml" />
+    <Content Include="Views\Admin\TopUpByPin.cshtml" />
+    <Content Include="Views\Admin\TransferPin.cshtml" />
+    <Content Include="Views\Admin\UnusedPins.cshtml" />
+    <Content Include="Views\Admin\UsedPins.cshtml" />
+    <Content Include="Views\Admin\_Tree.cshtml" />
+    <Content Include="Views\AdminProfile\AssociateList.cshtml" />
+    <Content Include="Views\AdminProfile\BoosterAchieverCurrent.cshtml" />
+    <Content Include="Views\AdminProfile\PaidBooster.cshtml" />
+    <Content Include="Views\AdminProfile\PayBoosterAchieverCurrent.cshtml" />
+    <Content Include="Views\AdminProfile\UpdateAssociateProfile.cshtml" />
+    <Content Include="Views\AdminProfile\WelcomeLetter.cshtml" />
+    <Content Include="Views\AdminReports\AssociateIncomeReport.cshtml" />
+    <Content Include="Views\AdminReports\BusinessReport.cshtml" />
+    <Content Include="Views\AdminReports\DailyIncomeReport.cshtml" />
+    <Content Include="Views\AdminReports\Direct.cshtml" />
+    <Content Include="Views\AdminReports\DownLine.cshtml" />
+    <Content Include="Views\AdminReports\GenerateDailyIncome.cshtml" />
+    <Content Include="Views\AdminReports\GetAllMessages.cshtml" />
+    <Content Include="Views\AdminReports\GetDailyIncome.cshtml" />
+    <Content Include="Views\AdminReports\PayoutDetail.cshtml" />
+    <Content Include="Views\AdminReports\PayoutReceipt.cshtml" />
+    <Content Include="Views\AdminReports\PrintReciept.cshtml" />
+    <Content Include="Views\AdminReports\PrintTopUp.cshtml" />
+    <Content Include="Views\AdminReports\ProductAssociateIncomeReport.cshtml" />
+    <Content Include="Views\AdminReports\ProductBusinessReport.cshtml" />
+    <Content Include="Views\AdminReports\ProductPayoutDetails.cshtml" />
+    <Content Include="Views\AdminReports\ProductPayoutReceipt.cshtml" />
+    <Content Include="Views\AdminReports\ProductTopupReport.cshtml" />
+    <Content Include="Views\AdminReports\RewardAchiever.cshtml" />
+    <Content Include="Views\AdminReports\TDSReport.cshtml" />
+    <Content Include="Views\AdminReports\TDSReportByLoginID.cshtml" />
+    <Content Include="Views\AdminReports\TopupReport.cshtml" />
+    <Content Include="Views\AdminReports\TransactionLog.cshtml" />
+    <Content Include="Views\AdminReports\TransferPinReport.cshtml" />
+    <Content Include="Views\Downline\DirectList.cshtml" />
+    <Content Include="Views\Downline\DownLineList.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmployeeDetails.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmployeeRegistration.cshtml" />
+    <Content Include="Views\ForgotPassword\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\ConfirmRegistration.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\KYCDocuments\KYCDocuments.cshtml" />
+    <Content Include="Views\Master\AddNews.cshtml" />
+    <Content Include="Views\Master\NewsList.cshtml" />
+    <Content Include="Views\Master\ProductList.cshtml" />
+    <Content Include="Views\Master\ProductMaster.cshtml" />
+    <Content Include="Views\Permission\SetPermission.cshtml" />
+    <Content Include="Views\Profile\ChangePassword.cshtml" />
+    <Content Include="Views\Profile\UpdateAssociateProfile.cshtml" />
+    <Content Include="Views\Setting\ChangeAssociatePassword.cshtml" />
+    <Content Include="Views\Setting\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Transactions\ActivateUser.cshtml" />
+    <Content Include="Views\Transactions\DistributePayment.cshtml" />
+    <Content Include="Views\Transactions\EwalletDeduction.cshtml" />
+    <Content Include="Views\Transactions\PayoutDeduction.cshtml" />
+    <Content Include="Views\Transactions\ProductDistributePayment.cshtml" />
+    <Content Include="Views\Transactions\UpdateMemberLogin.cshtml" />
+    <Content Include="Views\User\AdvancePaymentReport.cshtml" />
+    <Content Include="Views\User\AssociateDashBoard.cshtml" />
+    <Content Include="Views\User\BinaryTree.cshtml" />
+    <Content Include="Views\User\ConfirmRegistration.cshtml" />
+    <Content Include="Views\User\DailyIncomeReport1.cshtml" />
+    <Content Include="Views\User\Opportunity.cshtml" />
+    <Content Include="Views\User\PrintTopup.cshtml" />
+    <Content Include="Views\User\ProductTopupList.cshtml" />
+    <Content Include="Views\User\Registration.cshtml" />
+    <Content Include="Views\User\TopupList.cshtml" />
+    <Content Include="Views\User\UserProductReward.cshtml" />
+    <Content Include="Views\User\UserReward.cshtml" />
+    <Content Include="Views\User\ViewProfile.cshtml" />
+    <Content Include="Views\UserReports\BoosterLedger.cshtml" />
+    <Content Include="Views\UserReports\BusinessReport.cshtml" />
+    <Content Include="Views\UserReports\PayoutReceipt.cshtml" />
+    <Content Include="Views\UserReports\PayoutReport.cshtml" />
+    <Content Include="Views\UserReports\ProductBusinessReport.cshtml" />
+    <Content Include="Views\UserReports\ProductPayoutReport.cshtml" />
+    <Content Include="Views\UserReports\UnPaidIncomes.cshtml" />
+    <Content Include="Views\UserReports\UnPaidProductIncomes.cshtml" />
+    <Content Include="Views\Wallet\EwalletLedger.cshtml" />
+    <Content Include="Views\Wallet\EWalletRequest.cshtml" />
+    <Content Include="Views\Wallet\EwalletRequestList.cshtml" />
+    <Content Include="Views\Wallet\PayoutLedger.cshtml" />
+    <Content Include="Views\Wallet\PayoutRequest.cshtml" />
+    <Content Include="Views\Wallet\PayoutRequestList.cshtml" />
+    <Content Include="Views\Wallet\ProductWalletLedger.cshtml" />
+    <Content Include="Views\Wallet\ProductWalletRequest.cshtml" />
+    <Content Include="Views\Wallet\ProductWalletRequestList.cshtml" />
+    <Content Include="Views\Wallet\Topup.cshtml" />
+    <Content Include="Views\Wallet\TopUpByPin.cshtml" />
+    <Content Include="Views\Wallet\TransferEwalletToEwallet.cshtml" />
+    <Content Include="Views\Wallet\UnusedPins.cshtml" />
+    <Content Include="Views\Wallet\UsedPins.cshtml" />
+    <Content Include="WebsiteCss\fonts\Flaticon.eot" />
+    <Content Include="WebsiteCss\fonts\Flaticon.ttf" />
+    <Content Include="WebsiteCss\fonts\Flaticon.woff" />
+    <Content Include="WebsiteCss\fonts\Flaticond41d.eot" />
+    <Content Include="WebsiteCss\fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="WebsiteCss\fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="WebsiteCss\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="WebsiteCss\fonts\fontawesome-webfont3e6e.woff2" />
+    <Content Include="WebsiteCss\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="WebsiteCss\images\pdf-files\dhara-world-distributor-form.pdf" />
+    <Content Include="WebsiteCss\images\pdf-files\DW_FRANCHISE_FORM.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AdminBaseController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminProfileController.cs" />
+    <Compile Include="Controllers\AdminReportsController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DownlineController.cs" />
+    <Compile Include="Controllers\EmployeeRegistrationController.cs" />
+    <Compile Include="Controllers\ForgotPasswordController.cs" />
+    <Compile Include="Controllers\FranchiseAdminBaseController.cs" />
+    <Compile Include="Controllers\FranchiseAdminController.cs" />
+    <Compile Include="Controllers\FranchiseBaseController.cs" />
+    <Compile Include="Controllers\FranchiseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KYCDocumentsController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="Controllers\ProductBoosterController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserReportsController.cs" />
+    <Compile Include="Controllers\WalletController.cs" />
+    <Compile Include="Filters\SimpleAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AgentIncomes.cs" />
+    <Compile Include="Models\AgentModel.cs" />
+    <Compile Include="Models\AgentPara.cs" />
+    <Compile Include="Models\BLSMS.cs" />
+    <Compile Include="Models\Common.cs" />
+    <Compile Include="Models\Crypto.cs" />
+    <Compile Include="Models\DAL\AgentDAL.cs" />
+    <Compile Include="Models\DAL\ReturnData.cs" />
+    <Compile Include="Models\DashBoard.cs" />
+    <Compile Include="Models\DBHelper.cs" />
+    <Compile Include="Models\EmployeeRegistrations.cs" />
+    <Compile Include="Models\ForgotPassword.cs" />
+    <Compile Include="Models\FormMaster.cs" />
+    <Compile Include="Models\FormTypeMaster.cs" />
+    <Compile Include="Models\Franchise.cs" />
+    <Compile Include="Models\Home.cs" />
+    <Compile Include="Models\KYCDocuments.cs" />
+    <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\Password.cs" />
+    <Compile Include="Models\Permisssions.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\PurchaseOrder.cs" />
+    <Compile Include="Models\Reports.cs" />
+    <Compile Include="Models\SaleOrder.cs" />
+    <Compile Include="Models\Setting.cs" />
+    <Compile Include="Models\Transactions.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Wallet.cs" />
+    <Compile Include="Models\WebService\AgentServices.asmx.cs">
+      <DependentUpon>AgentServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="AssociatePanelcss\css\" />
+    <Folder Include="AssociatePanelcss\img\" />
+    <Folder Include="AssociatePanelcss\js\" />
+    <Folder Include="KYCDocuments\" />
+    <Folder Include="ProductRewardImages\" />
+    <Folder Include="RequestImage\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4156</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4156/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

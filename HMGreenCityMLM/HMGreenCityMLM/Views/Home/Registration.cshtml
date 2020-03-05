@@ -1,0 +1,354 @@
+﻿@model HMGreenCityMLM.Models.Home
+@{
+    Layout = "~/Views/Shared/_WebisteLayout.cshtml";
+}
+<br />
+<br />
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../images/loader.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+    
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+<div class="loader" id="divload"></div>
+
+<div class="registration-page">
+    <div class="auto-container">
+        <!--Checkout Details-->
+        <div class="checkout-form">
+            <form method="post">
+                <div class="row clearfix">
+                    <!--Column-->
+                    <div class="column col-lg-12 col-md-12 col-sm-12">
+                        <div class="row clearfix">
+                            <!--Form Group-->
+                            <div class="form-group col-md-6 col-sm-12">
+                                <div class="field-label">Sponsor Id <sup style="color:red;font-size: 21px;">*</sup></div>
+                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Refer By", @onchange = "getsponsordetails(this);" })
+                                @Html.ValidationMessageFor(m => m.LoginId)
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-6 col-sm-12">
+                                <div class="field-label">Sponsor Name </div>
+                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12">                               
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label text-white" for="inlineRadio1"> Leg </label>
+                                    &nbsp;<input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
+                                    <label class="form-check-label text-white" for="inlineRadio1"> Left </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
+                                    <label class="form-check-label text-white" for="inlineRadio2">Right</label>
+                                </div>                               
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-6 col-sm-12">
+                                <div class="field-label">First Name <sup style="color:red;font-size: 21px;">*</sup></div>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-6 col-sm-12">
+                                <div class="field-label">Last Name </div>
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-6 col-sm-12">
+                                <div class="field-label">Email Id </div>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email id" })
+                                @Html.ValidationMessageFor(m => m.Email)
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-6 col-sm-12">
+                                <div class="field-label">Mobile No. <sup style="color:red;font-size: 21px;">*</sup></div>
+                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                @Html.ValidationMessageFor(m => m.MobileNo)
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-6 col-sm-12">
+                                <div class="field-label">Gender</div>
+                                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlgender, "Value", "Text"))
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-6 col-sm-12">
+                                <div class="field-label">Pan Card </div>
+                                @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @Placeholder = "Pan Card", @Maxlength = "10", @onchange = "return validatepan(event);" })
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-12 col-sm-12">
+                                <div class="field-label">Address </div>
+                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-4 col-sm-12">
+                                <div class="field-label">Pin Code </div>
+                                @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @Placeholder = "PinCode", @onchange = "return getstatecity();" })
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-4 col-sm-12">
+                                <div class="field-label">State </div>
+                                @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @Disabled = "disabled" })
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-4 col-sm-12">
+                                <div class="field-label">State </div>
+                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @Disabled = "disabled" })
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-6 col-sm-12">
+                                <div class="pull-left">
+                                    <div class="form-group no-margin">
+                                        <input type="button" id="Confirm" onclick="return confirmregistration();" class="theme-btn btn-style-one" name="Confirm" value="Confirm" />
+                                        <input type="button" id="Register" onclick="return saveregistration();" class="theme-btn btn-style-one" style="display: none" name="Register" value="Register" />
+                                        <input type="button" id="Edit" onclick="editregistration();" style="display: none" class="theme-btn btn-style-one" name="Edit" value="Edit" />
+                                        <a class="theme-btn btn-style-one" href="/Home/Login">
+                                            Sign In
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+
+                        </div>
+                    </div>
+                    <!--Column-->
+                </div>
+            </form>
+        </div>
+        <!--End Checkout Details-->
+
+
+    </div>
+</div>
+<!--End CheckOut Page-->
+<!--Clients Section-->
+<section class="clients-section style-two">
+    <div class="auto-container">
+        <div class="sponsors-outer">
+            <!--Sponsors Carousel-->
+            <ul class="sponsors-carousel owl-carousel owl-theme">
+                <li class="slide-item">
+                    <figure class="image-box">
+                        <a href="#"><img src="../../Websitecss/images/clients/certi-1.jpg" alt="client"></a>
+                    </figure>
+                </li>
+                <li class="slide-item">
+                    <figure class="image-box">
+                        <a href="#"><img src="../../Websitecss/images/clients/certi-2.jpg" alt="client"></a>
+                    </figure>
+                </li>
+                <li class="slide-item">
+                    <figure class="image-box">
+                        <a href="#"><img src="../../Websitecss/images/clients/certi-3.jpg" alt="client"></a>
+                    </figure>
+                </li>
+                <li class="slide-item">
+                    <figure class="image-box">
+                        <a href="#"><img src="../../Websitecss/images/clients/certi-4.jpg" alt="client"></a>
+                    </figure>
+                </li>
+                <li class="slide-item">
+                    <figure class="image-box">
+                        <a href="#"><img src="../../Websitecss/images/clients/certi-5.jpg" alt="client"></a>
+                    </figure>
+                </li>
+                <li class="slide-item">
+                    <figure class="image-box">
+                        <a href="#"><img src="../../Websitecss/images/clients/certi-6.jpg" alt="client"></a>
+                    </figure>
+                </li>
+                <li class="slide-item">
+                    <figure class="image-box">
+                        <a href="#"><img src="../../Websitecss/images/clients/certi-7.jpg" alt="client"></a>
+                    </figure>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<script src="../../AssociatePanelcss/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    function getsponsordetails(obj) {
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: '/Home/GetSponserDetails',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { 'ReferBy': $(obj).val() },
+            success: function (response) {
+                if (response.Result == "Yes") {
+                    $("#divload").css({ 'display': 'none' });
+                    $('#SponsorName').val(response.DisplayName);
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    $("#SponsorId").addClass('errortext');
+                    $('#SponsorName').val('');
+                    $('#SponsorId').val('');
+                    $('#SponsorId').focus();
+                    alert(response.Result);
+                }
+            }
+        })
+    }
+    function validatepan(event) {
+        $(".errortext").removeClass("errortext");
+        var regExp = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/;
+        var txtpan = $('#PanCard').val();
+        if (txtpan.length == 10) {
+            if (txtpan.match(regExp)) {
+
+            }
+            else {
+                $("#PanCard").addClass('errortext');
+                $('#PanCard').focus();
+                $('#PanCard').val('');
+                alert('Please enter valid PanNo');
+
+            }
+        }
+        else {
+            $("#PanCard").addClass('errortext');
+            $('#PanCard').focus();
+            $('#PanCard').val('');
+            alert('Please enter 10 digits for a valid PAN number');
+
+        }
+    }
+    function getstatecity() {
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: "/Home/GetStateCity",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PinCode: $("#PinCode").val() },
+            success: function (data) {
+                if (data.Result == "1") {
+                    $("#State").val(data.State);
+                    $("#City").val(data.City);
+                }
+                else {
+                    $("#State").val('');
+                    $("#City").val('');
+                    $("#PinCode").val('');
+                    $("#PinCode").addClass('errortext');
+                    $('#PinCode').focus();
+                    alert(data.Result);
+
+                }
+
+
+            }
+
+        });
+    }
+    function confirmregistration() {
+        $(".errortext").removeClass("errortext");
+        if ($('#SponsorId').val() == '') {
+            $("#SponsorId").addClass('errortext');
+            $('#SponsorId').focus();
+            return false;
+        }
+        if ($('#FirstName').val() == '') {
+            $("#FirstName").addClass('errortext');
+            $('#FirstName').focus();
+            return false;
+        }
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+
+        $("#PaymentMethod").attr("disabled", "disabled");
+        $("#Commitment").attr("disabled", "disabled");
+        $("#MobileNo").attr("disabled", "disabled");
+        $("#FirstName").attr("disabled", "disabled");
+        $("#SponsorId").attr("disabled", "disabled");
+        $("#Email").attr("disabled", "disabled");
+        $("#LastName").attr("disabled", "disabled");
+        $("#Gender").attr("disabled", "disabled");
+        $("#PanCard").attr("disabled", "disabled");
+        $("#Address").attr("disabled", "disabled");
+        $("#PinCode").attr("disabled", "disabled");
+        $('#Confirm').hide();
+        $('#Edit').show();
+        $('#Register').show();
+    }
+
+    function editregistration() {
+        $("#PaymentMethod").attr("disabled", false);
+        $("#Commitment").attr("disabled", false);
+        $("#MobileNo").attr("disabled", false);
+        $("#FirstName").attr("disabled", false);
+        $("#SponsorId").attr("disabled", false);
+        $("#Email").attr("disabled", false);
+        $("#LastName").attr("disabled", false);
+        $("#Gender").attr("disabled", false);
+        $("#PanCard").attr("disabled", false);
+        $("#Address").attr("disabled", false);
+        $("#PinCode").attr("disabled", false);
+        $('#Confirm').show();
+        $('#Edit').hide();
+        $('#Register').hide();
+
+    }
+
+    function saveregistration() {
+        $("#divload").css({ 'display': '' });
+        var Leg = "";
+        if ($('#left').prop('checked')) {
+            Leg = "L";
+        }
+        else {
+            Leg = "R";
+        }
+        $.ajax({
+            url: "/Home/RegistrationAction",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), Email: $("#Email").val(), MobileNo: $("#MobileNo").val(), PanCard: $("#PanCard").val(), Address: $("#Address").val(), Gender: $("#Gender").val(), OTP: $("#OTP").val(), PinCode: $("#PinCode").val(), Leg: Leg },
+            success: function (data) {
+                if (data.Response == "1") {
+                    window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    alert(data.Response);
+                }
+            }
+
+        });
+    }
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>
+<style>
+    .errortext {
+    border: 2px solid red!important;
+    background-color: #c18888 !important;
+}
+</style>
+

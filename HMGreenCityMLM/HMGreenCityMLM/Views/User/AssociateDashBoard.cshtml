@@ -1,0 +1,330 @@
+﻿@model HMGreenCityMLM.Models.DashBoard
+@{
+    ViewBag.Title = "AssociateDashBoard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="#">
+                    Home
+                </a>
+            </li>
+            <li class="active">
+                Dashboard
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row space12">
+            <ul class="mini-stats col-sm-12">
+                <li class="col-sm-3">
+                    <div class="values">
+                        <strong>@ViewBag.TotalDownline</strong> Total Downline
+                    </div>
+                </li>
+                <li class="col-sm-3">
+                    <div class="values">
+                        <strong>@ViewBag.TotalDirects</strong> Total Directs
+                    </div>
+                </li>
+                <li class="col-sm-3">
+                    <div class="values">
+                        <strong>@ViewBag.TotalActive</strong> Total Active
+                    </div>
+                </li>
+                <li class="col-sm-3">
+                    <div class="values">
+                        <strong>@ViewBag.TotalInActive</strong> Total InActive
+                    </div>
+                </li>
+            </ul>
+            <ul class="mini-stats col-sm-12">
+                <li class="col-sm-3">
+                    <div class="values">
+                        <strong>@ViewBag.TotalPayout</strong>Total Payout
+                    </div>
+                </li>
+                <li class="col-sm-3">
+                    <div class="values">
+                        <strong>@ViewBag.TotalAdvance</strong> Total Advance
+                    </div>
+                </li>
+                <li class="col-sm-3">
+                    <div class="values">
+                        <strong>@ViewBag.TotalDeduction</strong>Total Deduction
+                    </div>
+                </li>
+                <li class="col-sm-3">
+                    <div class="values">
+                        <strong>@ViewBag.PayoutWalletBalance</strong> Payout Balance
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            <p>http://dharaworld.com/Home/Registration?Pid=@Session["LoginId"]&lg=Left </p>
+        </div>
+        <div class="alert alert-info">
+            <p>http://dharaworld.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right </p>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="clip-users-2"></i> Investment Details
+
+            </div>
+            <div class="panel-body panel-scroll ps-container ps-theme-default ps-active-y" style="height:300px" data-ps-id="dd7857d5-15b2-fcd8-16a1-51130e44d04e">
+                <table id="example23" class="display nowrap table table-hover table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Sr No.</th>
+                            <th>Product Name</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            if (Model.lstinvestment != null)
+                            {
+                                int i = 1;
+                                foreach (var Item in Model.lstinvestment)
+                                {
+                        <tr class="text-left">
+                            <td>@i</td>
+                            <td>@Item.ProductName</td>
+                            <td>@Item.Amount</td>
+                            <td>@Item.Status</td>
+
+
+                        </tr>
+                                    i++;
+                                }
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="clip-users-2"></i> Total Business
+
+            </div>
+            <div class="panel-body panel-scroll ps-container ps-theme-default ps-active-y" style="height:300px" data-ps-id="dd7857d5-15b2-fcd8-16a1-51130e44d04e">
+                <table id="example22" class="display nowrap table table-hover table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>Total</th>
+                            <th>Paid</th>
+                            <th>C/F</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-left">
+                            <td>Left</td>
+                            <td>@ViewBag.TotalBusinessLeft</td>
+                            <td>@ViewBag.PaidBusinessLeft</td>
+                            <td>@ViewBag.CarryLeft</td>
+
+
+                        </tr>
+                        <tr class="text-left">
+                            <td>Right</td>
+                            <td>@ViewBag.TotalBusinessRight</td>
+                            <td>@ViewBag.PaidBusinessRight</td>
+                            <td>@ViewBag.CarryRight</td>
+
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="clip-users-2"></i> Product Total Business
+
+            </div>
+            <div class="panel-body panel-scroll ps-container ps-theme-default ps-active-y" style="height:300px" data-ps-id="dd7857d5-15b2-fcd8-16a1-51130e44d04e">
+                <table id="example22" class="display nowrap table table-hover table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>Total</th>
+                            <th>Paid</th>
+                            <th>C/F</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-left">
+                            <td>Left</td>
+                            <td>@ViewBag.ProductTotalBusinessLeft</td>
+                            <td>@ViewBag.ProductPaidBusinessLeft</td>
+                            <td>@ViewBag.ProductCarryLeft</td>
+
+
+                        </tr>
+                        <tr class="text-left">
+                            <td>Right</td>
+                            <td>@ViewBag.ProductTotalBusinessRight</td>
+                            <td>@ViewBag.ProductPaidBusinessRight</td>
+                            <td>@ViewBag.ProductCarryRight</td>
+
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+
+                    <div class="panel-body panel-scroll ps-container ps-theme-default ps-active-y" style="height:460px" data-ps-id="dd341fdb-4b50-773a-1735-745af50b49c0">
+                        <ol class="discussion">
+                            @if (Model != null)
+                            {
+                                if (Model.lstmessages != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.lstmessages)
+                                    {
+                                        <li class="@item.cssclass">
+                                            <div class="avatar">
+                                                <img alt="" src="@item.ProfilePic">
+                                            </div>
+                                            <div class="messages">
+                                                <p>
+                                                    @item.Message
+                                                </p>
+                                                <span class="time"> @item.MemberName @item.AddedOn </span>
+                                            </div>
+                                        </li>
+                                        
+                                    }
+                                }
+                            }
+                        </ol>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="chat-form">
+                    <div class="input-group">
+                        <input id="txtmessage" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-teal" type="button" onclick="return savemessage();">
+                                <i class="fa fa-check"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog" style="display: none">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <h4 class="modal-title" style="color: red">NOTICE</h4>
+            </div>
+            <div class="modal-body" style="color: black">
+                <p>
+                    Dear Associates,
+                    5% of your Payout Balance will be deducted for Product Wallet.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal();">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="../../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#myModal").modal('show');
+    });
+
+    function closeModal() {
+        $("#myModal").hide();
+        $('body').removeClass().removeAttr('style');
+        $('.modal-backdrop').remove();
+    }
+</script>
+
+<script>
+
+    function savemessage() {
+        $(".errortext").removeClass("errortext");
+        if ($('#txtmessage').val() == '') {
+            $("#txtmessage").addClass('errortext');
+            $('#txtmessage').focus();
+            return false;
+        }
+        $.ajax({
+            url: "/User/SaveMessages",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Message: $("#txtmessage").val(), MessageBy: "Associate" },
+            success: function (data) {
+                if (data.Result == "1") {
+                    alert('Message Send Successfully');
+                    window.location.href = '@Url.Action("AssociateDashBoard", "User")';
+                }
+                else {
+                    alert(data.Result);
+                    // window.location.href = '@Url.Action("Registration", "Home")';
+                }
+
+
+            }
+
+        });
+    }
+
+
+</script>
