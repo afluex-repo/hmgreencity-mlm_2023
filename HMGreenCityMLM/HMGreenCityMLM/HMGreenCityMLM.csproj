@@ -487,6 +487,8 @@
     <Content Include="AssociatePanelcss\app-assets\vendors\js\ui\prism.min.js" />
     <Content Include="AssociatePanelcss\app-assets\vendors\js\vendors.min.js" />
     <Content Include="AssociatePanelcss\assets\css\style.css" />
+    <Content Include="AssociatePanelcss\Fonts\chat-bg.svg" />
+    <Content Include="AssociatePanelcss\Fonts\feather.svg" />
     <Content Include="AssociatePanelcss\logo.png" />
     <Content Include="css\menu.css" />
     <Content Include="css\tree-responsive.css" />
@@ -755,6 +757,10 @@
     <Content Include="WebsiteCss\js\wow.js" />
     <Content Include="AssociatePanelcss\app-assets\vendors\css\editors\quill\fonts\KaTeX_Main-Regular.woff2" />
     <Content Include="AssociatePanelcss\app-assets\vendors\css\editors\quill\fonts\KaTeX_Math-Italic.woff2" />
+    <Content Include="AssociatePanelcss\Fonts\feather %281%29.eot" />
+    <Content Include="AssociatePanelcss\Fonts\feather.eot" />
+    <Content Include="AssociatePanelcss\Fonts\feather.ttf" />
+    <Content Include="AssociatePanelcss\Fonts\feather.woff" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
