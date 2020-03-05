@@ -5,26 +5,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="row">
-    <div class="col-sm-12">
-
-        <ol class="breadcrumb">
-            <li>
-                <i class="clip-home-3"></i>
-                <a href="#">
-                    Pin Management
-                </a>
-            </li>
-            <li class="active">
-                Create Pin
-            </li>
-
-        </ol>
-
-
-    </div>
-</div>
-<br />
 
 @using (Html.BeginForm("CreatePinAction", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -32,78 +12,96 @@
         @TempData["createpin"]
     </span>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Create Pin
+    <br />
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Create Pin </span>
+                                        </a>
+                                    </li>
 
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Login Id <span style="color: red">*</span></label>
-                                <div class="col-sm-9">
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "getname();" })
-                                    <span id="spName"></span>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Login Id <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "getname();" })
+                                                        <span id="spName"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Package <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "FillAmount();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Amount <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @disabled = "disabled", @onkeypress = "return isNumberKey(event);", @onchange = "getfinalamount();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">No of Pins <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.NoofPins, new { @class = "form-control", @placeholder = "No of Pins", @onchange = "getfinalamount();", @onkeypress = "return isNumberKey(event);" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Total Amount <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Total Amount", @disabled = "disabled" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-9">
+                                                        <input class="btn btn-success" onclick="return validateform()" type="submit" value="Create Pin" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Package <span style="color: red">*</span></label>
-                                <div class="col-sm-9">
-                                    @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "FillAmount();" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Amount <span style="color: red">*</span></label>
-                                <div class="col-sm-9">
-                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @disabled = "disabled", @onkeypress = "return isNumberKey(event);", @onchange = "getfinalamount();" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">No of Pins <span style="color: red">*</span></label>
-                                <div class="col-sm-9">
-                                    @Html.TextBoxFor(m => m.NoofPins, new { @class = "form-control", @placeholder = "No of Pins", @onchange = "getfinalamount();", @onkeypress = "return isNumberKey(event);" })
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Total Amount <span style="color: red">*</span></label>
-                                <div class="col-sm-9">
-                                    @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Total Amount", @disabled = "disabled" })
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group row">
-                                <div class="col-sm-9">
-                                    <input class="btn btn-success" onclick="return validateform()" type="submit" value="Create Pin" />
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
+                </section>
             </div>
         </div>
     </div>
+
 }
 <script src="../../WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

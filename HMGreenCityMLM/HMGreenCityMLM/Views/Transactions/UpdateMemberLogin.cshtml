@@ -5,26 +5,7 @@
 }
 
 
-<div class="row">
-    <div class="col-sm-12">
 
-        <ol class="breadcrumb">
-            <li>
-                <i class="clip-home-3"></i>
-                <a href="#">
-                    Transaction
-                </a>
-            </li>
-            <li class="active">
-                Update Member Login
-            </li>
-
-        </ol>
-
-
-    </div>
-</div>
-<br />
 
 <!-- /.row -->
 @using (Html.BeginForm("UpdateMemberLogin", "Transactions", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
@@ -32,53 +13,75 @@
     <span style="color: red">
         @TempData["UpdateMemberLogin"]
     </span>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Update Member Login
+    <br />
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block"> Update Member Login </span>
+                                        </a>
+                                    </li>
 
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Login Id <span style="color: red">*</span></label>
-                                <div class="col-sm-9">
-                                    @Html.TextBoxFor(m => m.LoginID, new { @id = "txtLoginID", @required = "required", @class = "form-control", @onchange = "getMemberDetails(this);" })
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Login Id <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.LoginID, new { @id = "txtLoginID", @required = "required", @class = "form-control", @onchange = "getMemberDetails(this);" })
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Name <span style="color: red">*</span></label>
-                                <div class="col-sm-9">
-                                    @Html.TextBoxFor(m => m.MemberName, new { @id = "txtMemberName", @class = "form-control", @disabled = "disabled" })
-                                    @Html.HiddenFor(m => m.PK_UserID)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">New Login Id <span style="color: red">*</span></label>
-                                <div class="col-sm-9">
-                                    @Html.TextBoxFor(m => m.NewLoginID, new { @id = "txtNewLoginID", @class = "form-control", @required = "required" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Name <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.MemberName, new { @id = "txtMemberName", @class = "form-control", @disabled = "disabled" })
+                                                        @Html.HiddenFor(m => m.PK_UserID)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">New Login Id <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.NewLoginID, new { @id = "txtNewLoginID", @class = "form-control", @required = "required" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="submit" id="btnUpdate" class="btn btn-success" name="btnUpdate" value="Update" onclick="return validateForm();" />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="submit" id="btnUpdate" class="btn btn-success" name="btnUpdate" value="Update" onclick="return validateForm();" />
-                        </div>
-                    </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>
+
+
 
 }
 <style>

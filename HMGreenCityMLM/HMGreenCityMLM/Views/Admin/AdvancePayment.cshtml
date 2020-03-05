@@ -5,94 +5,112 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        <ol class="breadcrumb">
-            <li>
-                <i class="clip-home-3"></i>
-                <a href="#">Admin</a>
-            </li>
-            <li class="active">
-                Advance Payment
-            </li>
-        </ol>
-    </div>
-</div>
+
 <br />
 
 @using (Html.BeginForm("AdvancePayment", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Advance Payment
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    @if (TempData["Advance"] != null)
-                    {
-                        <div class="@TempData["Class"]">
-                            @TempData["Advance"]
-                        </div>
-                    }
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="col-form-label">Login ID</label><span style="color: red">*</span>
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "getname();" })
-                                <span id="spName"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="col-form-label">Amount</label><span style="color: red">*</span>
-                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);" })
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="col-form-label">Description</label>
-                                @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @placeholder = "Description" })
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label class="col-form-label">Payment Mode</label><span style="color: red">*</span>
-                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
+<div>
+
+    @if (TempData["Advance"] != null)
+    {
+        <div class="@TempData["Class"]">
+            @TempData["Advance"]
+        </div>
+    }
+</div>
+    <br />
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">  Advance Payment </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-form-label">Login ID</label><span style="color: red">*</span>
+                                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "getname();" })
+                                                    <span id="spName"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-form-label">Amount</label><span style="color: red">*</span>
+                                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="col-form-label">Description</label>
+                                                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @placeholder = "Description" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="col-form-label">Payment Mode</label><span style="color: red">*</span>
+                                                    @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3" id="bankname" style="display: none">
+                                                Bank Name <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                            </div>
+                                            <div class="col-md-3" id="chequeno" style="display: none">
+                                                Transaction No <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
+                                            </div>
+                                            <div class="col-md-3" id="chequdate" style="display: none">
+                                                Transaction Date <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
+                                            </div>
+                                            <div class="col-md-3" id="bankbranch" style="display: none">
+                                                Branch <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                                                <br />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input class="btn btn-success pull-left" onclick="return validateform()" type="submit" value="Save Payment" name="btnSavePayment" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3" id="bankname" style="display: none">
-                            Bank Name <span style="color: red">*</span>
-                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
-                        </div>
-                        <div class="col-md-3" id="chequeno" style="display: none">
-                            Transaction No <span style="color: red">*</span>
-                            @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
-                        </div>
-                        <div class="col-md-3" id="chequdate" style="display: none">
-                            Transaction Date <span style="color: red">*</span>
-                            @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
-                        </div>
-                        <div class="col-md-3" id="bankbranch" style="display: none">
-                            Branch <span style="color: red">*</span>
-                            @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
-                            <br />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input class="btn btn-success pull-right" onclick="return validateform()" type="submit" value="Save Payment" name="btnSavePayment" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>
+
+
+
+
 }
 
 <script src="../../WebsiteCss/js/jquery.js"></script>

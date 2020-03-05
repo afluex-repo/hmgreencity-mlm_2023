@@ -153,7 +153,7 @@
         right: 0;
     }
 
-    
+
     .popover {
         background: #f5f5f5 !important;
         max-width: 400px;
@@ -166,35 +166,32 @@
         display: none !important;
     }
 
-    
+
 
     .popover-content {
         float: left;
         width: 100%;
-          color: #29292b;
+        color: #29292b;
         font-size: 13px;
-         background: #f5f5f5 !important;
-     
+        background: #f5f5f5 !important;
     }
 
-    
 
-            .popover-content .table td, .popover-content .table th {
-                font-size: 11px;
-                border: 1px solid black;
-                border-left: 1px solid black;
-                word-wrap: break-word !important;
-                padding: 2px 2px;
-                word-break: break-all;
-                  background: #f5f5f5 !important;
-     
-            }
 
-            .popover-content .table th {
-                  background: #f5f5f5 !important;
-     
-                color: black;
-            }
+        .popover-content .table td, .popover-content .table th {
+            font-size: 11px;
+            border: 1px solid black;
+            border-left: 1px solid black;
+            word-wrap: break-word !important;
+            padding: 2px 2px;
+            word-break: break-all;
+            background: #f5f5f5 !important;
+        }
+
+        .popover-content .table th {
+            background: #f5f5f5 !important;
+            color: black;
+        }
 
     #member-details {
         position: absolute;
@@ -468,189 +465,200 @@
 
 <div class="loader" id="divload"></div>
 
-<div class="row">
-    <div class="col-sm-12">
-
-        <ol class="breadcrumb">
-            <li>
-                <i class="clip-home-3"></i>
-                <a href="#">
-                    Team
-                </a>
-            </li>
-            <li class="active">
-               Binary Tree
-            </li>
-
-        </ol>
-
-
-    </div>
-</div>
 <br />
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="col-md-2"></div>
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <!-- users edit start -->
+            <section class="users-edit">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs mb-3" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                       aria-controls="account" role="tab" aria-selected="true">
+                                        <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Binary treet</span>
+                                    </a>
+                                </li>
 
-                        <div class="col-md-4">
-                            <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID" autocomplete="off">
-                        </div>
-                        <div class="col-md-4">
-                            <input type="hidden" name="hfCustomerId" id="hfCustomerId">
-                            <input type="hidden" name="HiddenField1" id="HiddenField1">
-                            <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
-                            <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
-                                <input type="hidden" id="lblRequest" />Go Up
-                            </a>
-                            <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
-
-
-
-
-                        </div>
-                        <div class="form-group col-md-12">
-                            <div class="col-sm-12 col-md-12" id="chart">
-                                <div class="tree family-tree clearfix">
-                                    <ul>
-                                        <li id="firstRow">
-                                            <a href="" id="firstHead"></a>
-                                            <span id="rptRow1_lblFooter"></span>
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="container-fluid" id="member-details" style="background-color: white">
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
                                     <div class="row">
-
-                                        <div class="col-md-12">
+                                        <div class="col-12">
                                             <div class="card">
                                                 <div class="card-body">
                                                     <div class="form-row">
-                                                        <div class="form-group col-md-9">
-                                                            <button type="button" class="next-tree" onclick='ClickHere(this)'>
-                                                                <a style="width: 100%; height: 50%; background-color: white;" title="Go Down" class="clip-tree"></a>
+                                                        <div class="col-md-2"></div>
 
-                                                            </button>
-                                                            <div class="media-body">
-                                                                <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:black">@ViewBag.Fk_UserId</h3>
-                                                                <p class="mb-0" id="lblMemberId" style="text-align: center;color:black"></p>
-                                                                <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:black"></p>
-                                                                <p class="mb-0" id="lblstatus" style="text-align: center;color:black"></p>
+                                                        <div class="col-md-4">
+                                                            <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID" autocomplete="off">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="hidden" name="hfCustomerId" id="hfCustomerId">
+                                                            <input type="hidden" name="HiddenField1" id="HiddenField1">
+                                                            <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
+                                                            <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
+                                                                <input type="hidden" id="lblRequest" />Go Up
+                                                            </a>
+                                                            <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
+
+
+
+
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <div class="col-sm-12 col-md-12" id="chart">
+                                                                <div class="tree family-tree clearfix">
+                                                                    <ul>
+                                                                        <li id="firstRow">
+                                                                            <a href="" id="firstHead"></a>
+                                                                            <span id="rptRow1_lblFooter"></span>
+
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="container-fluid" id="member-details" style="background-color: white">
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-12">
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <div class="form-row">
+                                                                                        <div class="form-group col-md-9">
+                                                                                            <button type="button" class="next-tree" onclick='ClickHere(this)'>
+                                                                                                <a style="width: 100%; height: 50%; background-color: white;" title="Go Down" class="clip-tree"></a>
+
+                                                                                            </button>
+                                                                                            <div class="media-body">
+                                                                                                <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:black">@ViewBag.Fk_UserId</h3>
+                                                                                                <p class="mb-0" id="lblMemberId" style="text-align: center;color:black"></p>
+                                                                                                <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:black"></p>
+                                                                                                <p class="mb-0" id="lblstatus" style="text-align: center;color:black"></p>
+                                                                                            </div>
+
+
+                                                                                        </div>
+                                                                                        <div class="form-group col-md-3">
+                                                                                            <br />
+                                                                                            <button type="button" id="close">&times;</button>
+                                                                                            <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
+                                                                                        </div>
+                                                                                        <div class="form-group col-md-12 table-responsive">
+                                                                                            <table class="display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
+                                                                                                <tr>
+                                                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</td>
+                                                                                                    <th id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">: </th>
+                                                                                                    <th id="lblFk_UserId" style="display: none">: 0</th>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</td>
+                                                                                                    <th id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">: </th>
+
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Sponsor Details</td>
+                                                                                                    <th id="lblParnetId" style="font-size: 13px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b" ">: </th>
+                                                                                                </tr>
+
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="form-group col-md-12 table-responsive">
+                                                                                            <table class="display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Type</b></th>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Left</b></th>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Right</b></th>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Total</b></th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</th>
+                                                                                                        <td data-title="ID" class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td data-title="ID" class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td data-title="ID" class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</th>
+                                                                                                        <td data-title="ID" class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td data-title="ID" class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td data-title="ID" class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</th>
+                                                                                                        <td data-title="ID" class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td class="TotalMemberRight" data-title="ID" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td data-title="ID" class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</th>
+                                                                                                        <td data-title="ID" class="LeftBusinessvol" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td class="RightBusinessvol" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td data-title="ID" class="TotalBusinessvol" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Business Volume</th>
+                                                                                                        <td data-title="ID" class="LeftBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td class="RightBusiness" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td data-title="ID" class="TotalBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Product Business</th>
+                                                                                                        <td data-title="ID" class="ProductLeftBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td class="ProductRightBusiness" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                                        <td data-title="ID" class="ProductTotalBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+
+
+
                                                             </div>
 
-
-                                                        </div>
-                                                        <div class="form-group col-md-3">
-                                                            <br/>
-                                                            <button type="button" id="close">&times;</button>
-                                                            <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
-                                                        </div>
-                                                        <div class="form-group col-md-12 table-responsive">
-                                                            <table class="display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
-                                                                <tr>
-                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</td>
-                                                                    <th id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">: </th>
-                                                                    <th id="lblFk_UserId" style="display: none">: 0</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</td>
-                                                                    <th id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">: </th>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Sponsor Details</td>
-                                                                    <th id="lblParnetId" style="font-size: 13px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b" ">: </th>
-                                                                </tr>
-
-                                                            </table>
-                                                        </div>
-                                                        <div class="form-group col-md-12 table-responsive">
-                                                            <table class="display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Type</b></th>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Left</b></th>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Right</b></th>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Total</b></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</th>
-                                                                        <td data-title="ID" class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td data-title="ID" class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td data-title="ID" class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</th>
-                                                                        <td data-title="ID" class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td data-title="ID" class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td data-title="ID" class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</th>
-                                                                        <td data-title="ID" class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td class="TotalMemberRight" data-title="ID" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td data-title="ID" class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</th>
-                                                                        <td data-title="ID" class="LeftBusinessvol" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td class="RightBusinessvol" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td data-title="ID" class="TotalBusinessvol" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Business Volume</th>
-                                                                        <td data-title="ID" class="LeftBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td class="RightBusiness" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td data-title="ID" class="TotalBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Product Business</th>
-                                                                        <td data-title="ID" class="ProductLeftBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td class="ProductRightBusiness" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                        <td data-title="ID" class="ProductTotalBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                 </div>
-
-
-
-
-
                             </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
 </div>
-
-
-
-
 
 
 
@@ -829,7 +837,7 @@
     $("#close").click(function () {
         $("#member-details").removeClass('active');
     });
-  
+
 </script>
 
 <script type="text/javascript">
@@ -852,9 +860,9 @@
     $(window).on("load", function () {
 
         var id = $("#firtsMemberID").val();
-       
+
         GetDataFirst(id, "clicked");
-       
+
         //GetData(id);
 
     });
@@ -1273,12 +1281,12 @@
 
             failure: function (response) {
                 $('#divload').hide();
-              
+
 
             },
             error: function (response) {
                 $('#divload').hide();
-               
+
             }
 
         });
@@ -1324,7 +1332,7 @@
                 $firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "','" + item.Leg + "','" + item.ParentLoginId + "','" + item.JoiningDate + "','" + item.ProductName + "','" + item.AllLeg1 + "','" + item.AllLeg2 + "','" + item.PermanentLeg1 + "','" + item.PermanentLeg2 + "','" + item.InactiveLeft + "','" + item.InactiveRight + "','" + item.PCountLeg1 + "','" + item.PCountLeg2 + "','" + item.PaidLeg1 + "','" + item.PaidLeg2 + "','" + item.BalanceLeft + "','" + item.BalanceRight + "','" + item.ProfilePic + "','" + item.ActivationDate + "'," + '"' + item.AllBusinessLeft + '"' + "," + '"' + item.AllBusinessRight + '"' + "," + '"' + item.ProductRightBusiness + '"' + "," + '"' + item.ProductLeftBusiness + '"' + ")");
                 $firstHead.attr("data-toggle", "popover");
 
-               // $("#firstHead").attr("onclick", "ClickHere(this;)");
+                // $("#firstHead").attr("onclick", "ClickHere(this;)");
                 $("#firstHead").attr("class", status);
                 $("#firstHead").attr("style", "opacity: 1;");
                 $("#firstHead").attr("href", "#");

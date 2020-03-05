@@ -4,95 +4,99 @@
     ViewBag.Title = "TransferPinReport";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<div class="row">
-    <div class="col-sm-12">
-        <ol class="breadcrumb">
-            <li>
-                <i class="clip-home-3"></i>
-                <a href="#">
-                    Reports
-                </a>
-            </li>
-            <li class="active">
-                Pin Transfer Report
-            </li>
-        </ol>
-    </div>
-</div>
-<br />
+ 
 
 @using (Html.BeginForm("TransferPinReport", "AdminReports", FormMethod.Post, new { @id = "form1" }))
 {
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Pin Transfer Report
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12 table-responsive">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    From Login ID
-                                    @Html.TextBoxFor(m => m.FromLoginId, new { @class = "form-control", @placeholder = "From Login ID"})
-                                </div>
-                                <div class="col-md-4">
-                                    To Login ID
-                                    @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control", @placeholder = "To Login ID" })
-                                </div>
-                                <div class="col-md-4">
-                                    <br />
-                                    <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails" />
+    <br />
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block"> Pin Transfer Report </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+                                        <div class="row">
+                                            <div class="col-md-12 table-responsive">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        From Login ID
+                                                        @Html.TextBoxFor(m => m.FromLoginId, new { @class = "form-control", @placeholder = "From Login ID" })
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        To Login ID
+                                                        @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control", @placeholder = "To Login ID" })
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <br />
+                                                        <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails" />
+                                                    </div>
+                                                </div>
+
+                                                <br />
+                                                <div class="dt-responsive table-responsive">
+                                                    <table class="table mb-0" id="example23">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr No.</th>
+                                                                <th>EPin Number</th>
+                                                                <th>From Login ID</th>
+                                                                <th>From Name</th>
+                                                                <th>To Login ID</th>
+                                                                <th>To Name</th>
+                                                                <th>Transfer Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if (Model != null)
+                                                            {
+                                                                if (Model.lsttopupreport != null)
+                                                                {
+                                                                    int i = 1;
+                                                                    foreach (var Item in Model.lsttopupreport)
+                                                                    {
+                                                                        <tr class="text-left">
+                                                                            <td>@i</td>
+                                                                            <td>@Item.EPinNo</td>
+                                                                            <td>@Item.FromLoginId</td>
+                                                                            <td>@Item.ToLoginID</td>
+                                                                            <td>@Item.ToName</td>
+                                                                            <td>@Item.TransferDate</td>
+                                                                        </tr>
+                                                                        i++;
+                                                                    }
+
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <br />
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Sr No.</th>
-                                        <th>EPin Number</th>
-                                        <th>From Login ID</th>
-                                        <th>From Name</th>
-                                        <th>To Login ID</th>
-                                        <th>To Name</th>
-                                        <th>Transfer Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
-                                    {
-                                        if (Model.lsttopupreport != null)
-                                        {
-                                            int i = 1;
-                                            foreach (var Item in Model.lsttopupreport)
-                                            {
-                                                <tr class="text-left">
-                                                    <td>@i</td>
-                                                    <td>@Item.EPinNo</td>
-                                                    <td>@Item.FromLoginId</td>
-                                                    <td>@Item.ToLoginID</td>
-                                                    <td>@Item.ToName</td>
-                                                    <td>@Item.TransferDate</td>
-                                                </tr>
-                                                i++;
-                                            }
-
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                </section>
             </div>
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
-        <!-- partial -->
     </div>
+
 
 }
