@@ -1,6 +1,6 @@
 ﻿@model HMGreenCityMLM.Models.Home
 @{
-    Layout = "~/Views/Shared/_WebisteLayout.cshtml";
+    Layout = null;
 }
 <br />
 <br />
@@ -12,169 +12,262 @@
         z-index: 9999;
         background: url("../images/loader.gif") no-repeat center center rgba(0,0,0,0.25);
     }
-    
+
     .errortext {
         border: 1px solid red !important;
     }
 </style>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+<!-- BEGIN: Vendor CSS-->
+
+<link href="../../AssociatePanelcss/app-assets/vendors/css/vendors.min.css" rel="stylesheet" />
+<!-- END: Vendor CSS-->
+<!-- BEGIN: Theme CSS-->
+
+<link href="../../AssociatePanelcss/app-assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../../AssociatePanelcss/app-assets/css/bootstrap-extended.min.css" rel="stylesheet" />
+<link href="../../AssociatePanelcss/app-assets/css/colors.min.css" rel="stylesheet" />
+<link href="../../AssociatePanelcss/app-assets/css/components.min.css" rel="stylesheet" />
+
+
+<link href="../../AssociatePanelcss/app-assets/css/themes/dark-layout.min.css" rel="stylesheet" />
+<link href="../../AssociatePanelcss/app-assets/css/themes/semi-dark-layout.min.css" rel="stylesheet" />
+<!-- BEGIN: Page CSS-->
+
+<link href="../../AssociatePanelcss/app-assets/css/core/menu/menu-types/vertical-menu.min.css" rel="stylesheet" />
+<link href="../../AssociatePanelcss/app-assets/css/core/colors/palette-gradient.min.css" rel="stylesheet" />
+<link href="../../AssociatePanelcss/app-assets/css/pages/authentication.css" rel="stylesheet" />
+<!-- END: Page CSS-->
+<!-- BEGIN: Custom CSS-->
+
+<link href="../../AssociatePanelcss/assets/css/style.css" rel="stylesheet" />
 <div class="loader" id="divload"></div>
 
-<div class="registration-page">
-    <div class="auto-container">
-        <!--Checkout Details-->
-        <div class="checkout-form">
-            <form method="post">
-                <div class="row clearfix">
-                    <!--Column-->
-                    <div class="column col-lg-12 col-md-12 col-sm-12">
-                        <div class="row clearfix">
-                            <!--Form Group-->
-                            <div class="form-group col-md-6 col-sm-12">
-                                <div class="field-label">Sponsor Id <sup style="color:red;font-size: 21px;">*</sup></div>
-                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Refer By", @onchange = "getsponsordetails(this);" })
-                                @Html.ValidationMessageFor(m => m.LoginId)
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-6 col-sm-12">
-                                <div class="field-label">Sponsor Name </div>
-                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
-                            </div>
-                            <div class="form-group col-md-12 col-sm-12">                               
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label text-white" for="inlineRadio1"> Leg </label>
-                                    &nbsp;<input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
-                                    <label class="form-check-label text-white" for="inlineRadio1"> Left </label>
+@*<div class="registration-page">
+        <div class="auto-container">
+            <!--Checkout Details-->
+            <div class="checkout-form">
+                <form method="post">
+                    <div class="row clearfix">
+                        <!--Column-->
+                        <div class="column col-lg-12 col-md-12 col-sm-12">
+                            <div class="row clearfix">
+                                <!--Form Group-->
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <div class="field-label">Sponsor Id <sup style="color:red;font-size: 21px;">*</sup></div>
+                                    @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Refer By", @onchange = "getsponsordetails(this);" })
+                                    @Html.ValidationMessageFor(m => m.LoginId)
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
-                                    <label class="form-check-label text-white" for="inlineRadio2">Right</label>
-                                </div>                               
+                                <!--Form Group-->
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <div class="field-label">Sponsor Name </div>
+                                    @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label text-white" for="inlineRadio1"> Leg </label>
+                                        &nbsp;<input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
+                                        <label class="form-check-label text-white" for="inlineRadio1"> Left </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
+                                        <label class="form-check-label text-white" for="inlineRadio2">Right</label>
+                                    </div>
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <div class="field-label">First Name <sup style="color:red;font-size: 21px;">*</sup></div>
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <div class="field-label">Last Name </div>
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <div class="field-label">Email Id </div>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email id" })
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <div class="field-label">Mobile No. <sup style="color:red;font-size: 21px;">*</sup></div>
+                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                    @Html.ValidationMessageFor(m => m.MobileNo)
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <div class="field-label">Gender</div>
+                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlgender, "Value", "Text"))
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <div class="field-label">Pan Card </div>
+                                    @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @Placeholder = "Pan Card", @Maxlength = "10", @onchange = "return validatepan(event);" })
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <div class="field-label">Address </div>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <div class="field-label">Pin Code </div>
+                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @Placeholder = "PinCode", @onchange = "return getstatecity();" })
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <div class="field-label">State </div>
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @Disabled = "disabled" })
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <div class="field-label">State </div>
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @Disabled = "disabled" })
+                                </div>
+                                <!--Form Group-->
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <div class="pull-left">
+                                        <div class="form-group no-margin">
+                                            <input type="button" id="Confirm" onclick="return confirmregistration();" class="theme-btn btn-style-one" name="Confirm" value="Confirm" />
+                                            <input type="button" id="Register" onclick="return saveregistration();" class="theme-btn btn-style-one" style="display: none" name="Register" value="Register" />
+                                            <input type="button" id="Edit" onclick="editregistration();" style="display: none" class="theme-btn btn-style-one" name="Edit" value="Edit" />
+                                            <a class="theme-btn btn-style-one" href="/Home/Login">
+                                                Sign In
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                             </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-6 col-sm-12">
-                                <div class="field-label">First Name <sup style="color:red;font-size: 21px;">*</sup></div>
-                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-6 col-sm-12">
-                                <div class="field-label">Last Name </div>
-                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-6 col-sm-12">
-                                <div class="field-label">Email Id </div>
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email id" })
-                                @Html.ValidationMessageFor(m => m.Email)
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-6 col-sm-12">
-                                <div class="field-label">Mobile No. <sup style="color:red;font-size: 21px;">*</sup></div>
-                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
-                                @Html.ValidationMessageFor(m => m.MobileNo)
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-6 col-sm-12">
-                                <div class="field-label">Gender</div>
-                                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlgender, "Value", "Text"))
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-6 col-sm-12">
-                                <div class="field-label">Pan Card </div>
-                                @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @Placeholder = "Pan Card", @Maxlength = "10", @onchange = "return validatepan(event);" })
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-12 col-sm-12">
-                                <div class="field-label">Address </div>
-                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-4 col-sm-12">
-                                <div class="field-label">Pin Code </div>
-                                @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @Placeholder = "PinCode", @onchange = "return getstatecity();" })
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-4 col-sm-12">
-                                <div class="field-label">State </div>
-                                @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @Disabled = "disabled" })
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-4 col-sm-12">
-                                <div class="field-label">State </div>
-                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @Disabled = "disabled" })
-                            </div>
-                            <!--Form Group-->
-                            <div class="form-group col-md-6 col-sm-12">
-                                <div class="pull-left">
-                                    <div class="form-group no-margin">
-                                        <input type="button" id="Confirm" onclick="return confirmregistration();" class="theme-btn btn-style-one" name="Confirm" value="Confirm" />
-                                        <input type="button" id="Register" onclick="return saveregistration();" class="theme-btn btn-style-one" style="display: none" name="Register" value="Register" />
-                                        <input type="button" id="Edit" onclick="editregistration();" style="display: none" class="theme-btn btn-style-one" name="Edit" value="Edit" />
-                                        <a class="theme-btn btn-style-one" href="/Home/Login">
-                                            Sign In
-                                        </a>
+                        </div>
+                        <!--Column-->
+                    </div>
+                </form>
+            </div>
+            <!--End Checkout Details-->
+
+
+        </div>
+    </div>*@
+<!--End CheckOut Page-->
+<!--Clients Section-->
+
+<body class="vertical-layout vertical-menu-modern 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <section class="row flexbox-container">
+                    <div class="col-xl-12 col-12 d-flex justify-content-center">
+                        <div class="card bg-authentication rounded-0 mb-0">
+                            <div class="row m-0">
+                                <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
+                                    <img src="../../AssociatePanelcss/app-assets/images/pages/register.jpg">
+                                </div>
+
+                                <div class="col-lg-6 col-12 p-0">
+                                    <div class="card rounded-0 mb-0 px-2">
+                                        <div class="card-header pb-1">
+                                            <div class="card-title">
+                                                <h4 class="mb-0">Create Account</h4>
+                                            </div>
+                                        </div>
+                                        <p class="px-2">Fill the below form to create a new account.</p>
+                                        <div class="card-content">
+                                            <div class="card-body pt-1">
+                                              
+                                                <div class="form-label-group">
+                                                    @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Refer By", @onchange = "getsponsordetails(this);" })
+                                                    @Html.ValidationMessageFor(m => m.LoginId)
+                                                    
+                                                    <label for="user-name">SponsorId</label>
+                                                 </div>
+                                                <div class="form-label-group">
+                                                    @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
+                                                    
+                                                    <label for="user-password">SponsorName</label>
+                                                </div>
+                                                    <div class="form-label-group">
+                                                        <div class="form-check form-check-inline">
+                                                            <label for="inlineRadio1"> Leg </label>
+                                                            &nbsp;<input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
+                                                            <label for="inlineRadio1"> Left </label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
+                                                            <label for="inlineRadio2">Right</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
+                                                        <label for="inputPassword">FirstName</label>
+                                                    </div>
+                                                <div class="form-label-group">
+                                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
+                                                    <label for="inputPassword">LastName</label>
+                                                </div>
+                                                <div class="form-label-group">
+                                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                                    <label for="inputPassword">Mobile</label>
+                                                </div>
+                                                <div class="form-label-group">
+                                                    <label> Gender </label>
+                                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlgender, "Value", "Text"), new { @class = "form-control"  })
+                                                </div>
+                                                    <br />
+
+                                                    <a href="/Home/Login" class="btn btn-outline-primary float-left btn-inline mb-50">Login</a>
+
+                                                    <input type="button" id="Confirm" onclick="return confirmregistration();" class="btn btn-primary float-right btn-inline mb-50" name="Confirm" value="Confirm" />
+                                                    <input type="button" id="Register" onclick="return saveregistration();" class="btn btn-primary float-right btn-inline mb-50" style="display:none" name="Register" value="Register" />
+                                                    <input type="button" id="Edit" onclick="editregistration();" style="display: none" class="btn btn-primary float-right btn-inline mb-50" name="Edit" value="Edit" />
+
+
+                                                    <br />
+
+                                                </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            
-                            
-
                         </div>
                     </div>
-                    <!--Column-->
-                </div>
-            </form>
-        </div>
-        <!--End Checkout Details-->
-
-
-    </div>
-</div>
-<!--End CheckOut Page-->
-<!--Clients Section-->
-<section class="clients-section style-two">
-    <div class="auto-container">
-        <div class="sponsors-outer">
-            <!--Sponsors Carousel-->
-            <ul class="sponsors-carousel owl-carousel owl-theme">
-                <li class="slide-item">
-                    <figure class="image-box">
-                        <a href="#"><img src="../../Websitecss/images/clients/certi-1.jpg" alt="client"></a>
-                    </figure>
-                </li>
-                <li class="slide-item">
-                    <figure class="image-box">
-                        <a href="#"><img src="../../Websitecss/images/clients/certi-2.jpg" alt="client"></a>
-                    </figure>
-                </li>
-                <li class="slide-item">
-                    <figure class="image-box">
-                        <a href="#"><img src="../../Websitecss/images/clients/certi-3.jpg" alt="client"></a>
-                    </figure>
-                </li>
-                <li class="slide-item">
-                    <figure class="image-box">
-                        <a href="#"><img src="../../Websitecss/images/clients/certi-4.jpg" alt="client"></a>
-                    </figure>
-                </li>
-                <li class="slide-item">
-                    <figure class="image-box">
-                        <a href="#"><img src="../../Websitecss/images/clients/certi-5.jpg" alt="client"></a>
-                    </figure>
-                </li>
-                <li class="slide-item">
-                    <figure class="image-box">
-                        <a href="#"><img src="../../Websitecss/images/clients/certi-6.jpg" alt="client"></a>
-                    </figure>
-                </li>
-                <li class="slide-item">
-                    <figure class="image-box">
-                        <a href="#"><img src="../../Websitecss/images/clients/certi-7.jpg" alt="client"></a>
-                    </figure>
-                </li>
-            </ul>
+                </section>
+            </div>
         </div>
     </div>
-</section>
+    <!-- END: Content-->
+    <!-- BEGIN: Vendor JS-->
+
+    <script src="../../AssociatePanelcss/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="../../WebsiteCss/js/jquery.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="../../AssociatePanelcss/app-assets/js/core/app-menu.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/core/app.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/scripts/components.min.js"></script>
+
+    <!-- END: Theme JS-->
+    <!-- BEGIN: Page JS-->
+    <!-- END: Page JS-->
+</body>
+
+
 <script src="../../AssociatePanelcss/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -347,8 +440,7 @@
 </script>
 <style>
     .errortext {
-    border: 2px solid red!important;
-    background-color: #c18888 !important;
-}
+        border: 2px solid red !important;
+        background-color: #ffd3c6 !important;
+    }
 </style>
-
