@@ -156,7 +156,9 @@
 
     .popover {
         background: #f5f5f5 !important;
-        max-width: 400px;
+        max-width: 100%;
+        z-index:99;
+        width: 500px;
         webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
         -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
         box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
@@ -170,7 +172,6 @@
 
     .popover-content {
         float: left;
-        width: 100%;
         color: #29292b;
         font-size: 13px;
         background: #f5f5f5 !important;
@@ -186,18 +187,19 @@
             padding: 2px 2px;
             word-break: break-all;
             background: #f5f5f5 !important;
+            color: #29292b;
         }
 
         .popover-content .table th {
             background: #f5f5f5 !important;
-            color: black;
+            color: #29292b;
         }
 
     #member-details {
         position: absolute;
         right: -300px;
         width: 300px;
-        height: auto;
+        height: 500px;
         background-color: #fff;
         z-index: 99;
         top: 0px;
@@ -221,6 +223,8 @@
             margin: 0px;
             border-collapse: collapse;
             max-width: 100%;
+            width: 500px;
+            height: 500px;
         }
 
 
@@ -542,6 +546,7 @@
                                                                                                 <p class="mb-0" id="lblMemberId" style="text-align: center;color:black"></p>
                                                                                                 <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:black"></p>
                                                                                                 <p class="mb-0" id="lblstatus" style="text-align: center;color:black"></p>
+                                                                                                <p style="display:none" id="lblFk_UserId"></p>
                                                                                             </div>
 
 
@@ -551,84 +556,144 @@
                                                                                             <button type="button" id="close">&times;</button>
                                                                                             <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
                                                                                         </div>
-                                                                                        <div class="form-group col-md-12 table-responsive">
-                                                                                            <table class="table mb-0">
-                                                                                                <tr>
-                                                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</td>
-                                                                                                    <th id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">: </th>
-                                                                                                    <th id="lblFk_UserId" style="display: none">: 0</th>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</td>
-                                                                                                    <th id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">: </th>
+                                                                                       
+                                                                                        
+                                                                                    </div>
+                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
+                                                                                        <div class="col-md-6">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</p>
 
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Sponsor Details</td>
-                                                                                                    <th id="lblParnetId" style="font-size: 13px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b" ">: </th>
-                                                                                                </tr>
 
-                                                                                            </table>
                                                                                         </div>
-                                                                                        <div class="form-group col-md-12 table-responsive">
-                                                                                            <table class="display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
-                                                                                                <thead>
-                                                                                                    <tr>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Type</b></th>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Left</b></th>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Right</b></th>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Total</b></th>
-                                                                                                    </tr>
-                                                                                                </thead>
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</th>
-                                                                                                        <td data-title="ID" class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td data-title="ID" class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td data-title="ID" class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</th>
-                                                                                                        <td data-title="ID" class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td data-title="ID" class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td data-title="ID" class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</th>
-                                                                                                        <td data-title="ID" class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td class="TotalMemberRight" data-title="ID" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td data-title="ID" class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</th>
-                                                                                                        <td data-title="ID" class="LeftBusinessvol" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td class="RightBusinessvol" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td data-title="ID" class="TotalBusinessvol" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Business Volume</th>
-                                                                                                        <td data-title="ID" class="LeftBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td class="RightBusiness" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td data-title="ID" class="TotalBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                        <div class="col-md-6">
+                                                                                            <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
 
 
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Product Business</th>
-                                                                                                        <td data-title="ID" class="ProductLeftBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td class="ProductRightBusiness" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
-                                                                                                        <td data-title="ID" class="ProductTotalBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</p>
 
 
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Sponsor Details</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+
+
                                                                                         </div>
                                                                                     </div>
+                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered"  style="border:1px solid black">
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Type</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Left</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Right</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="TotalMemberRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="LeftBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="RightBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="TotalBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -679,7 +744,7 @@
         $("a").popover('hide');
     });
     function openPopup(obj, item1, item2, item3, item4, item5, JoiningDate, ProductName, AllLeg1, AllLeg2, PermanentLeg1, PermanentLeg2, InactiveLeft, InactiveRight, PCountLeg1, PCountLeg2, PaidLeg1, PaidLeg2, BalanceLeft, BalanceRight, Profilepic, ActivationDate, AllBusinessLeft, AllBusinessRight, ProductRightBusiness, ProductLeftBusiness) {
-        
+
         var loginid = 'LoginId - ' + ' ' + item2;
         var JoiningDate = 'JoiningDate - ' + ' ' + JoiningDate;
         $("#lblFk_UserId").text(item1);
@@ -845,10 +910,10 @@
     var winHeight = $(window).height();
     var winWidth = $(window).width();
     var clickOption = "";
-    
+
     if (winWidth < 980) {
         //clickOption = "";
-        
+
         clickOption = "";
     }
     else {
@@ -887,7 +952,7 @@
 
         function OnSuccess(response) {
 
-            
+
             var ul = $("<ul></ul>");
             var freeBlock = "";
             var freeBlockL = "";

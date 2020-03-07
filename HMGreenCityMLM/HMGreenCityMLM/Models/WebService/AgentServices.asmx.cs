@@ -73,8 +73,7 @@ namespace HMGreenCityMLM.Models.WebService
                     ActivationDate = dr["ActivationDate"].ToString(),
                     AllBusinessLeft = dr["AllBusinessLeft"].ToString(),
                     AllBusinessRight = dr["AllBusinessRight"].ToString(),
-                    ProductLeftBusiness = dr["ProductBusinessLeft"].ToString(),
-                    ProductRightBusiness = dr["ProductBusinessRight"].ToString(),
+                  
                 });
 
 
@@ -136,8 +135,7 @@ namespace HMGreenCityMLM.Models.WebService
                     AllBusinessLeft = dr["AllBusinessLeft"].ToString(),
                     AllBusinessRight = dr["AllBusinessRight"].ToString(),
 
-                    ProductLeftBusiness = dr["ProductBusinessLeft"].ToString(),
-                    ProductRightBusiness = dr["ProductBusinessRight"].ToString(),
+                
                 });
 
 
@@ -193,8 +191,7 @@ namespace HMGreenCityMLM.Models.WebService
                 model.ActivationDate = dr["ActivationDate"].ToString();
                 model.AllBusinessLeft = dr["AllBusinessLeft"].ToString();
                 model.AllBusinessRight = dr["AllBusinessRight"].ToString();
-                model.ProductLeftBusiness = dr["ProductLeftBusiness"].ToString();
-                model.ProductRightBusiness = dr["ProductRightBusiness"].ToString();
+               
                 List.Add(model);
             }
 
@@ -246,8 +243,7 @@ namespace HMGreenCityMLM.Models.WebService
                 model.ActivationDate = dr["ActivationDate"].ToString();
                 model.AllBusinessLeft = dr["AllBusinessLeft"].ToString();
                 model.AllBusinessRight = dr["AllBusinessRight"].ToString();
-                model.ProductLeftBusiness = dr["ProductLeftBusiness"].ToString();
-                model.ProductRightBusiness = dr["ProductRightBusiness"].ToString();
+               
                 List.Add(model);
             }
 
