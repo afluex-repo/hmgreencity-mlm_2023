@@ -758,10 +758,6 @@
     <Compile Include="Controllers\DownlineController.cs" />
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
-    <Compile Include="Controllers\FranchiseAdminBaseController.cs" />
-    <Compile Include="Controllers\FranchiseAdminController.cs" />
-    <Compile Include="Controllers\FranchiseBaseController.cs" />
-    <Compile Include="Controllers\FranchiseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KYCDocumentsController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
