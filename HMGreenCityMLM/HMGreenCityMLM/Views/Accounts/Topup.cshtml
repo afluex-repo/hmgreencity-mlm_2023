@@ -10,8 +10,8 @@
 @using (Html.BeginForm("TopUpByAdmin", "Accounts", FormMethod.Post, new { @id = "form1" }))
 {
 
-    <span style="color: red">@TempData["Topup"] </span>
-    <br />
+    
+   
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -43,15 +43,43 @@
                                                     <div class="col-sm-9">
                                                         @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);" })
                                                         <br />
-                                                        <span id="txtname" style="color: blue"></span>
+                                                        <span id="txtname" style="color: #fff"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Package <span style="color: red">*</span></label>
+                                                    <label class="col-sm-3 col-form-label">Site <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "FillAmount();" })
+                                                        @Html.DropDownListFor(m => m.Fk_SiteId, new SelectList(ViewBag.ddlsite, "Value", "Text"), new { @class = "form-control", @onchange = "getsectorname();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Sector <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.FK_SectorId, new SelectList(ViewBag.ddlsector, "Value", "Text"), new { @class = "form-control", @onchange = "getblockname();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Block <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.Fk_BlockId, new SelectList(ViewBag.ddlblock, "Value", "Text"), new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Plot Number <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -63,8 +91,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group row">
@@ -82,17 +111,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4" style="display:none" id="divPlotNumber">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Plot Number <span style="color: red">*</span></label>
-                                                    <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-4 form-group">
+                                                <span style="color: red">@TempData["Topup"] </span>
                                                 <input class="btn btn-success pull-right" onclick="return validateform()" type="submit" value="Top Up" />
                                             </div>
                                         </div>
@@ -112,8 +132,8 @@
 
 <style>
     .errortext {
-        border: 1px solid red !important;
-        background-color: #fff0f0 !important;
+       border: 2px solid red !important;
+       
     }
 </style>
 
@@ -171,19 +191,28 @@
             $('#LoginId').focus();
             return false;
         }
-        if ($('#Package').val() == '0') {
-            $("#Package").addClass('errortext');
-            $('#Package').focus();
+        if ($('#Fk_SiteId').val() == '0') {
+            $("#Fk_SiteId").addClass('errortext');
+            $('#Fk_SiteId').focus();
+            return false;
+        }
+        if ($('#FK_SectorId').val() == '0') {
+            $("#FK_SectorId").addClass('errortext');
+            $('#FK_SectorId').focus();
+            return false;
+        }
+        if ($('#Fk_BlockId').val() == '0') {
+            $("#Fk_BlockId").addClass('errortext');
+            $('#Fk_BlockId').focus();
             return false;
         }
 
-        if ($('#Package').val() == "4") {
-            if ($('#PlotNumber').val() == '') {
-                $("#PlotNumber").addClass('errortext');
-                $('#PlotNumber').focus();
-                return false;
-            }
+        if ($('#PlotNumber').val() == '') {
+            $("#PlotNumber").addClass('errortext');
+            $('#PlotNumber').focus();
+            return false;
         }
+
 
         if ($('#Amount').val() == '') {
             $("#Amount").addClass('errortext');
@@ -232,6 +261,51 @@
 
         return true;
     }
+    function getsectorname() {
+        $("#divload").css({ 'display': '' });
+        $.ajax({
+            url: '/Accounts/GetSectorName',
+            type: "GET",
+            dataType: "JSON",
+            data: { Fk_SiteId: $('#Fk_SiteId').val() },
+            success: function (data) {
+              
+                $("#FK_SectorId").html(""); // clear before appending new list 
+                $("#FK_SectorId").empty();
+                $("#FK_SectorId").append(
+                      $('<option></option>').val(0).html('Select Sector'));
+                $.each(data.ddlSector, function (index, BlockCount) {
+                    $("#FK_SectorId").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+            }
+            
+        });
+        $("#divload").css({ 'display': 'none' });
+    }
+    function getblockname()
+    {
+        $("#divload").css({ 'display': '' });
+        $.ajax({
+            url: '/Accounts/GetBlockName',
+            type: "GET",
+            dataType: "JSON",
+            data: { Fk_SiteId: $('#Fk_SiteId').val(), FK_SectorId: $('#FK_SectorId').val() },
+            success: function (data) {
 
+                $("#Fk_BlockId").html(""); // clear before appending new list 
+                $("#Fk_BlockId").empty();
+                $("#Fk_BlockId").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.ddlblock, function (index, BlockCount) {
+                    $("#Fk_BlockId").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+            }
+
+        });
+        $("#divload").css({ 'display': 'none' });
+
+    }
 </script>
 

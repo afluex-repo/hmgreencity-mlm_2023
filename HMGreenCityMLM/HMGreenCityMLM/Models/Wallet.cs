@@ -4,14 +4,20 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace HMGreenCityMLM.Models
 {
     public class Wallet : Common
     {
+        public List<SelectListItem> ddlblock { get; set; }
+
+        public List<SelectListItem> ddlSector { get; set; }
+
         public string ProductWalletBalance { get; set; }
         public string PlotNumber { get; set; }
         public string Leg { get; set; }
+        public string Fk_SiteId { get; set; }
         public bool IsDownline { get; set; }
         public string TransactionNo { get; set; }
         public string TransactionDate { get; set; }
@@ -96,7 +102,8 @@ namespace HMGreenCityMLM.Models
         public string CrAmount { get; set; }
 
         public List<Wallet> lstewalletledger { get; set; }
-
+        public string FK_SectorId { get; set; }
+        public string Fk_BlockId { get; set; }
         public DataSet EwalletLedger()
         {
             SqlParameter[] para = {
@@ -202,40 +209,51 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("TopUpIdByEWallet", para);
             return ds;
         }
-
+       
         public DataSet TopUpIdByAdmin()
         {
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@AddedBy", AddedBy),
-                                    new SqlParameter("@Fk_ProductId", Package),
-                                    new SqlParameter("@TopupDate", TopUpDate),
-                                    new SqlParameter("@Amount", Amount),
-                                    new SqlParameter("@PlotNumber", PlotNumber),
-                                    new SqlParameter("@Description", Description) };
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@AddedBy", AddedBy),
+                                        new SqlParameter("@Fk_ProductId", "1"),
+                                        new SqlParameter("@TopupDate", TopUpDate),
+                                        new SqlParameter("@Amount", Amount),
+                                        new SqlParameter("@Fk_SiteId", Fk_SiteId),
+                                        new SqlParameter("@Fk_SectorId", FK_SectorId),
+                                        new SqlParameter("@Fk_BlockId", Fk_BlockId),
+                                        new SqlParameter("@PlotNumber", PlotNumber),
+                                        new SqlParameter("@Description", Description)
+                                 };
             DataSet ds = DBHelper.ExecuteQuery("TopUpByAdmin", para);
             return ds;
         }
         public DataSet TopUpIdByAdminProduct()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@AddedBy", AddedBy),
-                                    new SqlParameter("@Fk_ProductId", Package),
-                                    new SqlParameter("@TopupDate", TopUpDate),
-                                    new SqlParameter("@Amount", Amount),
-                                    new SqlParameter("@PlotNumber", PlotNumber),
-                                    new SqlParameter("@Description", Description) };
+                                        new SqlParameter("@AddedBy", AddedBy),
+                                        new SqlParameter("@Fk_ProductId", "1"),
+                                        new SqlParameter("@TopupDate", TopUpDate),
+                                        new SqlParameter("@Amount", Amount),
+                                        new SqlParameter("@Fk_SiteId", Fk_SiteId),
+                                        new SqlParameter("@Fk_SectorId", FK_SectorId),
+                                        new SqlParameter("@Fk_BlockId", Fk_BlockId),
+                                        new SqlParameter("@PlotNumber", PlotNumber),
+                                        new SqlParameter("@Description", Description) };
             DataSet ds = DBHelper.ExecuteQuery("ProductTopUpByAdmin", para);
             return ds;
         }
         public DataSet ReTopup()
         {
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@AddedBy", AddedBy),
-                                    new SqlParameter("@Fk_ProductId", Package),
-                                    new SqlParameter("@TopupDate", TopUpDate),
-                                    new SqlParameter("@Amount", Amount),
-                                    new SqlParameter("@PlotNumber", PlotNumber),
-                                    new SqlParameter("@Description", Description) };
+            SqlParameter[] para = {  new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@AddedBy", AddedBy),
+                                        new SqlParameter("@Fk_ProductId", "1"),
+                                        new SqlParameter("@TopupDate", TopUpDate),
+                                        new SqlParameter("@Amount", Amount),
+                                        new SqlParameter("@Fk_SiteId", Fk_SiteId),
+                                        new SqlParameter("@Fk_SectorId", FK_SectorId),
+                                        new SqlParameter("@Fk_BlockId", Fk_BlockId),
+                                        new SqlParameter("@PlotNumber", PlotNumber),
+                                        new SqlParameter("@Description", Description)};
             DataSet ds = DBHelper.ExecuteQuery("ReTopup", para);
             return ds;
         }
@@ -398,6 +416,23 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@ToPaymentDate", PaymentToDate),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetProductPaidBoosterDetails", para);
+            return ds;
+        }
+        public DataSet GetSectorList()
+        {
+            SqlParameter[] para = {
+                                    new SqlParameter("@FK_SiteID", Fk_SiteId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetSectorbySite", para);
+            return ds;
+        }
+        public DataSet GetBlockList()
+        {
+            SqlParameter[] para = {
+                                    new SqlParameter("@SiteID", Fk_SiteId),
+                                     new SqlParameter("@SectorID", FK_SectorId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetBlockList", para);
             return ds;
         }
     }

@@ -118,6 +118,12 @@ namespace HMGreenCityMLM.Models
 
             return ds;
         }
+        public DataSet GetSite()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetSiteName");
+
+            return ds;
+        }
         public DataSet GetMemberDetailsForSale()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", ReferBy), };

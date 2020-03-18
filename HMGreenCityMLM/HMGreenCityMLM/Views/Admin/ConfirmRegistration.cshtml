@@ -3,122 +3,169 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
- 
-    <style>
-    .bg-register {
-		background:url(websitelinks/images/bg/login-bg.jpeg);
-		background-size:cover;
-		background-repeat:no-repeat;
-		background-position:center;
-		min-height: 100vh;
-	}
-	.user-account h1 {
-    color: #2b2b2b;
-    font-weight: 300;
-    margin: 30px 0 20px;
-     }
-	.registration-block {
-		background-color:rgba(256, 256, 256, 0.8);
-		padding:15px 40px;
-	}
-	h2.big-green {
-    font-size: 35px;
-    color: #77b43f;
-    font-style: italic;
-    /* text-transform: uppercase; */
-    text-align: center;
-    margin-bottom: 15px;
-}
-.wrapper-thanks h3, .wrapper-thanks h4, .wrapper-thanks h2 {
-    margin-bottom: 15px;
-}
-.account-info.clearfix {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 10px 0;
-}
-.account-info .list-inline {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-.account-info .list-inline li {
-    display: inline-block;
-}
-span.border-box {
-    border: 2px solid #77b43f;
-    padding: 7px 5px;
-    color: #4a9604;
-    background: #f9f9f9;
-}
-.wrapper-thanks {
-    width: 100%;
-    
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-.animated-gif {
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
-    /* padding-right: 102px; */
-    overflow: hidden;
-    text-align: center;
-    margin: 0 auto;
-    line-height: 92px;
-    border: 0px solid green;
-}
-    </style>
-    <style type="text/css">
-    @@media (max-width:560px){
 
-.account-info .list-inline li {
-    display: inline-block;
-    margin-top: 18px;
-}
-}
+<style>
+    .bg-register {
+        background: url(websitelinks/images/bg/login-bg.jpeg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100vh;
+    }
+
+    .user-account h1 {
+        color: #2b2b2b;
+        font-weight: 300;
+        margin: 30px 0 20px;
+    }
+
+    .registration-block {
+        background-color: rgba(256, 256, 256, 0.8);
+        padding: 15px 40px;
+    }
+
+    h2.big-green {
+        font-size: 35px;
+        color: #77b43f;
+        font-style: italic;
+        /* text-transform: uppercase; */
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .wrapper-thanks h3, .wrapper-thanks h4, .wrapper-thanks h2 {
+        margin-bottom: 15px;
+    }
+
+    .account-info.clearfix {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px 0;
+    }
+
+    .account-info .list-inline {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+        .account-info .list-inline li {
+            display: inline-block;
+        }
+
+    span.border-box {
+        border: 2px solid #77b43f;
+        padding: 7px 5px;
+        color: #4a9604;
+        background: #f9f9f9;
+    }
+
+    .wrapper-thanks {
+        width: 100%;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .animated-gif {
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+        /* padding-right: 102px; */
+        overflow: hidden;
+        text-align: center;
+        margin: 0 auto;
+        line-height: 92px;
+        border: 0px solid green;
+    }
+</style>
+<style type="text/css">
+    @@media (max-width:560px) {
+
+        .account-info .list-inline li {
+            display: inline-block;
+            margin-top: 18px;
+        }
+    }
 </style>
 
-<br/>
+<br />
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <!-- users edit start -->
+            <section class="users-edit">
                 <div class="card">
-                    
                     <div class="card-content">
-                        <h4 class="card-title">Registration Confirmation 
-										<span class="pull-right">
-                                           <a href="/Admin/Tree" class="btn btn-info btn-sm" title="Back">Back</a>
-                                        </span>
-                        </h4>
+                        <div class="card-body">
+                            <ul class="nav nav-tabs mb-3" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                       aria-controls="account" role="tab" aria-selected="true">
+                                        <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Confirm Registration</span>
+                                    </a>
+                                </li>
 
-                        <div class="wrapper-thanks">
-                            <div class="animated-gif">
-                                <img src="../../images/XwHw.gif" alt="" style="width: 100px;" />
-                            </div>
-                            <h2 class="big-green">Congratulations !!</h2>
-                            <div class="clearfix text-center">
-                                <h3>Now you are HM Green City Associate</h3>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
-                                <div class="account-info clearfix">
-                                    <div class="clearfix text-left">
-                                        <div class="col-md-12 account-info-text text-center">
-                                            <!-- <p class="heading"><b>Account Information</b></p>-->
-                                            <ul class="list-inline">
-                                                <li><span class="border-box">Name: @Session["DisplayName"]</span></li>
-                                                <li><span class="border-box">Login ID: @Session["LoginId"]</span></li>
-                                                <li><span class="border-box">Password:  @Session["Password"]</span></li>
-                                            </ul>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+
+                                                <div class="card-content">
+                                                    <h4 class="card-title">
+                                                        Registration Confirmation
+                                                        <span class="pull-right">
+                                                            <a href="/Admin/Tree" class="btn btn-info btn-sm" title="Back">Back</a>
+                                                        </span>
+                                                    </h4>
+
+                                                    <div class="wrapper-thanks">
+                                                        <div class="animated-gif">
+                                                            <img src="../../images/XwHw.gif" alt="" style="width: 100px;" />
+                                                        </div>
+                                                        <h2 class="big-green">Congratulations !!</h2>
+                                                        <div class="clearfix text-center">
+                                                            <h3>Now you are HM Green City Associate</h3>
+
+                                                            <div class="account-info clearfix">
+                                                                <div class="clearfix text-left">
+                                                                    <div class="col-md-12 account-info-text text-center">
+                                                                        <!-- <p class="heading"><b>Account Information</b></p>-->
+                                                                        <ul class="list-inline">
+                                                                            <li><span class="border-box" style="color: black;">Name: @Session["DisplayName"]</span></li>
+                                                                            <li><span class="border-box" style="color: black;">Login ID: @Session["LoginId"]</span></li>
+                                                                            <li><span class="border-box" style="color: black;">Password:  @Session["Password"]</span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="clearfix">
+                                                                <h2 class="big-green">Thank You!</h2>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+</div>
+
                                         </div>
                                     </div>
-
-
                                 </div>
 
-                                <div class="clearfix">
-                                    <h2 class="big-green">Thank You!</h2>
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-           
-
-
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>

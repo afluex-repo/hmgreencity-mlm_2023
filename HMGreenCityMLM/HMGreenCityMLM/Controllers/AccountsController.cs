@@ -12,27 +12,24 @@ namespace HMGreenCityMLM.Controllers
     {
         public ActionResult Topup()
         {
-            #region Product Bind
-            Common objcomm = new Common();
-            List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProduct();
-            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
+            Common obj = new Common();
+            #region GetSite
+            List<SelectListItem> ddlsite = new List<SelectListItem>();
+            List<SelectListItem> ddlsector = new List<SelectListItem>();
+            List<SelectListItem> ddlblock = new List<SelectListItem>();
+            DataSet ds = obj.GetSite();
+            ddlsite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+            ddlsector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ddlblock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            if (ds!=null && ds.Tables[0].Rows.Count>0)
             {
-                int count = 0;
-                foreach (DataRow r in ds1.Tables[1].Rows)
-                {
-                    if (count == 0)
-                    {
-                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    }
-                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
-                    count++;
-                }
+                foreach (DataRow r in ds.Tables[0].Rows)
+                { ddlsite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() }); }
             }
-
-            ViewBag.ddlProduct = ddlProduct;
-
-            #endregion
+            ViewBag.ddlsite = ddlsite;
+            ViewBag.ddlsector = ddlsector;
+            ViewBag.ddlblock = ddlblock;
+            #endregion GetSite
             return View();
         }
         public ActionResult FillAmount(string ProductId)
@@ -280,30 +277,26 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult RetopUp()
         {
-            #region Product Bind
-            Common objcomm = new Common();
-            List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProduct();
-            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
+            Common obj = new Common();
+            #region GetSite
+            List<SelectListItem> ddlsite = new List<SelectListItem>();
+            List<SelectListItem> ddlsector = new List<SelectListItem>();
+            List<SelectListItem> ddlblock = new List<SelectListItem>();
+            DataSet ds = obj.GetSite();
+            ddlsite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+            ddlsector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ddlblock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
-                int count = 0;
-                foreach (DataRow r in ds1.Tables[1].Rows)
-                {
-                    if (count == 0)
-                    {
-                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    }
-                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
-                    count++;
-                }
+                foreach (DataRow r in ds.Tables[0].Rows)
+                { ddlsite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() }); }
             }
-
-            ViewBag.ddlProduct = ddlProduct;
-
-            #endregion
-            Wallet model = new Wallet();
-            model.Package = "4";
-            return View(model);
+            ViewBag.ddlsite = ddlsite;
+            ViewBag.ddlsector = ddlsector;
+            ViewBag.ddlblock = ddlblock;
+            #endregion GetSite
+          
+            return View();
         }
 
         public ActionResult RetopUpAction(Wallet obj)
@@ -397,6 +390,71 @@ namespace HMGreenCityMLM.Controllers
 
 
         #endregion ProductTopUp
+
+        public ActionResult GetSectorName(string Fk_SiteId)
+        {
+            try
+            {
+                Wallet model = new Wallet();
+                model.Fk_SiteId = Fk_SiteId;
+
+               
+                #region GetSectors
+                List<SelectListItem> ddlSector = new List<SelectListItem>();
+                DataSet dsSector = model.GetSectorList();
+
+                if (dsSector != null && dsSector.Tables.Count > 0)
+                {
+                    foreach (DataRow r in dsSector.Tables[0].Rows)
+                    {
+                        ddlSector.Add(new SelectListItem { Text = r["SectorName"].ToString(), Value = r["PK_SectorID"].ToString() });
+
+                    }
+                }
+                model.ddlSector = ddlSector;
+                #endregion
+               
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+
+        public ActionResult GetBlockName(string Fk_SiteId,string FK_SectorId)
+        {
+            try
+            {
+                Wallet model = new Wallet();
+                model.Fk_SiteId = Fk_SiteId;
+                model.FK_SectorId = FK_SectorId;
+
+                #region GetBlock
+                List<SelectListItem> ddlblock = new List<SelectListItem>();
+                DataSet dsBlock = model.GetBlockList();
+
+                if (dsBlock != null && dsBlock.Tables.Count > 0)
+                {
+                    foreach (DataRow r in dsBlock.Tables[0].Rows)
+                    {
+                        ddlblock.Add(new SelectListItem { Text = r["BlockName"].ToString(), Value = r["PK_BlockID"].ToString() });
+
+                    }
+                }
+                model.ddlblock = ddlblock;
+                #endregion
+
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
 
     }
 }
