@@ -821,6 +821,7 @@
     <Content Include="Views\Master\SectorList.cshtml" />
     <Content Include="Views\Master\BlockMaster.cshtml" />
     <Content Include="Views\Master\BlockList.cshtml" />
+    <Content Include="Views\AdminReports\UserPermission.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1467,6 +1467,67 @@ namespace HMGreenCityMLM.Controllers
         #endregion
 
 
+        #region UserPermission
+
+        public ActionResult UserPermission(Reports model)
+        {
+            #region ddluser
+           List<SelectListItem> ddluser = new List<SelectListItem>();
+            ddluser.Add(new SelectListItem { Text = "Select User", Value = "0" });
+            DataSet ds = model.GettingUserDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                { ddluser.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_AdminId"].ToString() }); }
+            }
+            ViewBag.ddluser = ddluser;
+
+            #endregion
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("UserPermission")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult GetPermission(Reports obj)
+        {
+            Reports model = new Reports();
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = obj.GettingUserFormPermission();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Reports ob = new Reports();
+                    ob.FormName = dr["FormName"].ToString();
+                    ob.Fk_FormId = dr["PK_FormId"].ToString();
+                    ob.Fk_FormTypeId = dr["PK_FormTypeId"].ToString();
+                    ob.Fk_UserId = dr["FK_UserId"].ToString();
+                    lst.Add(ob);
+                }
+                model.lstpermission = lst;
+            }
+            DataSet ds1 = new DataSet();
+            
+            #region ddluser
+
+            List<SelectListItem> ddluser = new List<SelectListItem>();
+            ddluser.Add(new SelectListItem { Text = "Select User", Value = "0" });
+            Reports rep = new Reports();
+            ds1 = rep.GettingUserDetails();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                { ddluser.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_AdminId"].ToString() }); }
+            }
+
+            ViewBag.ddluser = ddluser;
+
+            #endregion
+            return View(model);
+        }
+        #endregion
+
 
     }
 }

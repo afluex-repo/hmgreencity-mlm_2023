@@ -108,6 +108,8 @@ namespace HMGreenCityMLM.Models
 
         public string FromDate { get; set; }
         public string ToDate { get; set; }
+        public List<Reports> lstpermission { get; set; }
+        public string FormName { get; set; }
 
         public DataSet GetPayoutReport()
         {
@@ -315,7 +317,8 @@ namespace HMGreenCityMLM.Models
 
         public string ProductName { get; set; }
         public string HSNCode { get; set; }
-
+        public string Fk_FormId { get; set; }
+        public string Fk_FormTypeId { get; set; }
 
         public DataSet GetBoosterAchieverCurrent()
         {
@@ -586,6 +589,22 @@ namespace HMGreenCityMLM.Models
             }
                                     ;
             DataSet ds = DBHelper.ExecuteQuery("ApproveReward", para);
+            return ds;
+        }
+
+        public DataSet GettingUserDetails()
+        {
+
+            DataSet ds = DBHelper.ExecuteQuery("GetEmployeeDetails");
+            return ds;
+        }
+
+        public DataSet GettingUserFormPermission()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetUserFormPermission", para);
             return ds;
         }
 
