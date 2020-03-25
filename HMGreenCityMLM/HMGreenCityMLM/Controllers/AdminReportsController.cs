@@ -1494,11 +1494,12 @@ namespace HMGreenCityMLM.Controllers
             Reports model = new Reports();
             List<Reports> lst = new List<Reports>();
             DataSet ds = obj.GettingUserFormPermission();
-            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            if (ds != null && ds.Tables[1].Rows.Count > 0)
             {
-                foreach (DataRow dr in ds.Tables[0].Rows)
+                foreach (DataRow dr in ds.Tables[1].Rows)
                 {
                     Reports ob = new Reports();
+                    ob.FormType = dr["FormType"].ToString();
                     ob.FormName = dr["FormName"].ToString();
                     ob.Fk_FormId = dr["PK_FormId"].ToString();
                     ob.Fk_FormTypeId = dr["PK_FormTypeId"].ToString();
