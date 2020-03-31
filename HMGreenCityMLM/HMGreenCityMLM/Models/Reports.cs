@@ -110,6 +110,7 @@ namespace HMGreenCityMLM.Models
         public string ToDate { get; set; }
         public List<Reports> lstpermission { get; set; }
         public string FormName { get; set; }
+        public string FormType { get; set; }
 
         public DataSet GetPayoutReport()
         {
