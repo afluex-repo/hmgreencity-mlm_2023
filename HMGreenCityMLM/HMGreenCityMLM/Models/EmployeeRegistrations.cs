@@ -51,6 +51,8 @@ namespace HMGreenCityMLM.Models
         [NotMapped]
         public List<EmployeeRegistrations> lstemp { get; set; }
         public string LoginId { get; set; }
+        public string Password { get;  set; }
+
         public DataSet SaveEmpoyeeData()
         {
             SqlParameter[] para = { 

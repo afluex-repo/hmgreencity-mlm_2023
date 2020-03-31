@@ -48,6 +48,7 @@ namespace HMGreenCityMLM.Controllers
                     Objload.LoginId = dr["LoginId"].ToString();
                     Objload.Mobile = dr["Contact"].ToString();
                     Objload.Email = dr["Email"].ToString();
+                    Objload.Password = dr["Password"].ToString();
                     Objload.EducationQualififcation = dr["EducationQualifiacation"].ToString();
                    
                     lst.Add(Objload);

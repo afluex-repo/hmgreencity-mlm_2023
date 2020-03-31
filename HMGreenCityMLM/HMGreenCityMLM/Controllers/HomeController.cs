@@ -20,66 +20,10 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult Index(Reports obj)
         {
-            if (Session["Count"] == null)
-            {
-                DataSet ds = obj.RewardListForWebsite();
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
-                {
-                    Session["Count"] = "1";
-                    return RedirectToAction("RewardData");
-                }
-                else
-                {
-                    Session["Count"] = null;
-                    return View();
-                }
-            }
-            else
-            {
-                Session["Count"] = null;
-                return View();
-            }
-            
+            return View();
+
         }
-        public ActionResult RewardData(Reports obj)
-        {
-            List<Reports> lsttop4 = new List<Reports>();
-            List<Reports> lst = new List<Reports>();
-            DataSet ds = obj.RewardListForWebsite();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                ViewBag.TotalCount = ds.Tables[1].Rows.Count;
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    Reports obj1 = new Reports();
-
-                    obj1.RewardImage = r["RewardImage"].ToString();
-                    obj1.RewardName = r["RewardName"].ToString();
-                   
-                    lsttop4.Add(obj1);
-                }
-                obj.lstassociate = lsttop4;
-
-                foreach (DataRow r in ds.Tables[1].Rows)
-                {
-                    Reports obj1 = new Reports();
-
-                    obj1.PK_RewardItemId = r["PK_UserProdRewardID"].ToString();
-                    obj1.RewardID = r["FK_RewardId"].ToString();
-                    obj1.Status = r["Status"].ToString();
-                    obj1.QualifyDate = r["QualifyDate"].ToString();
-                    obj1.LoginId = r["LoginId"].ToString();
-                    obj1.RewardName = r["RewardName"].ToString();
-                    obj1.Name = r["FirstName"].ToString();
-                    obj1.RewardImage = r["RewardImage"].ToString();
-
-                    lst.Add(obj1);
-                }
-                obj.lsttopupreport = lst;
-            }
-            
-            return View(obj);
-        }
+       
         public ActionResult Index2()
         {
             return View();
@@ -134,46 +78,55 @@ namespace HMGreenCityMLM.Controllers
                 DataSet ds = obj.Login();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    if ((ds.Tables[0].Rows[0]["UserType"].ToString() == "Associate"))
+                    if(ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
                     {
-                        if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
+                        if ((ds.Tables[0].Rows[0]["UserType"].ToString() == "Associate"))
+                        {
+                            if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
+                            {
+                                Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                                Session["Pk_userId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
+                                Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
+                                Session["FullName"] = ds.Tables[0].Rows[0]["FullName"].ToString();
+                                Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                                Session["TransPassword"] = ds.Tables[0].Rows[0]["TransPassword"].ToString();
+                                Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
+                                Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
+                                FormName = "AssociateDashBoard";
+                                Controller = "User";
+                            }
+                            else
+                            {
+                                TempData["Login"] = "Incorrect Password";
+                                FormName = "Login";
+                                Controller = "Home";
+
+                            }
+                        }
+                        else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                         {
                             Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                            Session["Pk_userId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
-                            Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
-                            Session["FullName"] = ds.Tables[0].Rows[0]["FullName"].ToString();
-                            Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
-                            Session["TransPassword"] = ds.Tables[0].Rows[0]["TransPassword"].ToString();
-                            Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
-                            Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
-                            FormName = "AssociateDashBoard";
-                            Controller = "User";
+                            Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                            Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
+                            Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
+
+                            if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
+                            {
+                                Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                                FormName = "Registration";
+                                Controller = "FranchiseAdmin";
+                            }
+                            else
+                            {
+                                FormName = "AdminDashBoard";
+                                Controller = "Admin";
+                            }
                         }
                         else
                         {
-                            TempData["Login"] = "Incorrect Password";
+                            TempData["Login"] = "Incorrect LoginId Or Password";
                             FormName = "Login";
                             Controller = "Home";
-
-                        }
-                    }
-                    else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
-                    {
-                        Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                        Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
-                        Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
-                        Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
-
-                        if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
-                        {
-                            Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
-                            FormName = "Registration";
-                            Controller = "FranchiseAdmin";
-                        }
-                        else
-                        {
-                            FormName = "AdminDashBoard";
-                            Controller = "Admin";
                         }
                     }
                     else
@@ -181,6 +134,7 @@ namespace HMGreenCityMLM.Controllers
                         TempData["Login"] = "Incorrect LoginId Or Password";
                         FormName = "Login";
                         Controller = "Home";
+
                     }
 
                 }

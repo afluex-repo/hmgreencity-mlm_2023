@@ -39,7 +39,8 @@ namespace HMGreenCityMLM.Controllers
                 ViewBag.CarryLeft = ds.Tables[2].Rows[0]["CarryLeft"].ToString();
                 ViewBag.CarryRight = ds.Tables[2].Rows[0]["CarryRight"].ToString();
 
-
+                ViewBag.TeamBusiness = ds.Tables[3].Rows[0]["TeamBusiness"].ToString();
+                ViewBag.DirectBusiness = ds.Tables[4].Rows[0]["DirectBusiness"].ToString();
                 //ViewBag.ProductPaidBusinessLeft = ds.Tables[3].Rows[0]["PaidBusinessLeft"].ToString();
                 //ViewBag.ProductPaidBusinessRight = ds.Tables[3].Rows[0]["PaidBusinessRight"].ToString();
                 //ViewBag.ProductTotalBusinessLeft = ds.Tables[3].Rows[0]["TotalBusinessLeft"].ToString();

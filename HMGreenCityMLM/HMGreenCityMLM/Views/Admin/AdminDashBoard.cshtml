@@ -20,10 +20,13 @@
                                 <div class="avatar bg-rgba-primary p-50 m-0">
                                     <div class="avatar-content">
                                         <i class="feather icon-users text-primary font-medium-5"></i>
+                                       
                                     </div>
+                                   
                                 </div>
                                 <h2 class="text-bold-700 mt-1 mb-25">@ViewBag.TotalUsers</h2>
-                                <p class="mb-0">Total Associates</p>
+                                <a class="mb-0" style="color:#fff" href="/AdminProfile/AssociateList">Total Associates</a>
+                                <br/>
                             </div>
 
                         </div>
@@ -38,7 +41,8 @@
                                     </div>
                                 </div>
                                 <h2 class="text-bold-700 mt-1 mb-25">@ViewBag.ActiveUsers</h2>
-                                <p class="mb-0">Active Users</p>
+                                <a class="mb-0" style="color:#fff" href="/AdminProfile/AssociateList?Status=P">Active Users</a>
+                                <br />
                             </div>
 
                         </div>
@@ -52,7 +56,9 @@
                                     </div>
                                 </div>
                                 <h2 class="text-bold-700 mt-1 mb-25">@ViewBag.InactiveUsers</h2>
-                                <p class="mb-0">InActive Users</p>
+                                <a class="mb-0" style="color:#fff" href="/AdminProfile/AssociateList?Status=T">InActive Users</a>
+                               
+                              <br/>
                             </div>
 
                         </div>
@@ -66,7 +72,8 @@
                                     </div>
                                 </div>
                                 <h2 class="text-bold-700 mt-1 mb-25">@ViewBag.BlockedUsers</h2>
-                                <p class="mb-0">Blocked Users</p>
+                                <a class="mb-0" style="color:#fff" href="/AdminProfile/AssociateList?Status=B">Blocked Users</a>
+                                <br />
                             </div>
 
                         </div>

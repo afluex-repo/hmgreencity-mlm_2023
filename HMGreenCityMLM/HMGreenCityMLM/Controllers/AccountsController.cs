@@ -30,6 +30,27 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlsector = ddlsector;
             ViewBag.ddlblock = ddlblock;
             #endregion GetSite
+            #region Product Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProduct();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlProduct = ddlProduct;
+
+            #endregion
             return View();
         }
         public ActionResult FillAmount(string ProductId)
@@ -37,9 +58,9 @@ namespace HMGreenCityMLM.Controllers
             Wallet obj = new Wallet();
             obj.Package = ProductId;
             DataSet ds = obj.BindPriceByProduct();
-            if (ds.Tables != null && ds.Tables[2].Rows.Count > 0)
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
-                obj.Amount = ds.Tables[2].Rows[0]["ProductPrice"].ToString();
+                obj.Amount = ds.Tables[0].Rows[0]["ProductPrice"].ToString();
             }
             else { }
             return Json(obj, JsonRequestBehavior.AllowGet);
@@ -68,7 +89,10 @@ namespace HMGreenCityMLM.Controllers
             {
                 obj.TopUpDate = Common.ConvertToSystemDate(obj.TopUpDate, "dd/MM/yyyy");
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
-
+                if(obj.TopupType== "RealEstate")
+                {
+                    obj.Package = "1";
+                }
                 DataSet ds = obj.TopUpIdByAdmin();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {

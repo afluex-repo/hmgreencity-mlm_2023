@@ -35,9 +35,19 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Topup Type <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                       <input type="radio" id="rdbtype" name="rdbtype" checked="checked" onclick="return showdetails('RealEstate')"/> Real Estate
+                                                       <input type="radio" id="rdbtype" name="rdbtype" onclick="return showdetails('Product')" /> Product
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" >
+                                            <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Login Id <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
@@ -47,7 +57,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6" id="divpackage" style="display:none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Package <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "FillAmount();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" id="divisite">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Site <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
@@ -55,7 +73,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                          
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6" id="divsector">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Sector <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
@@ -63,19 +86,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Block <span style="color: red">*</span></label>
-                                                    <div class="col-sm-9">
-                                                        @Html.DropDownListFor(m => m.Fk_BlockId, new SelectList(ViewBag.ddlblock, "Value", "Text"), new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
+                                           
+                                            <div class="col-md-6" id="divplot">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Plot Number <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
@@ -83,7 +95,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+
+
+                                        </div>
+                                        <div class="row">
+                                         
+                                            <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Amount <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
@@ -91,11 +108,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Topup Date <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
@@ -103,10 +116,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                        </div>
+                                        <div class="row">
+                                          
+                                            <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Description </label>
                                                     <div class="col-sm-9">
+                                                        @Html.HiddenFor(m=>m.TopupType)
                                                         @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @Placeholder = "Description" })
                                                     </div>
                                                 </div>
@@ -143,7 +160,10 @@
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script>
-
+    $(document).ready(function () {
+        $('#TopupType').val('RealEstate');
+    });
+  
     $('#TopUpDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
@@ -161,14 +181,14 @@
         var Productid = "";
 
         Productid = $('#Package').val();
-        if (Productid == "4") {
+        if (Productid == "1") {
 
-            $("#divPlotNumber").show();
+           
             $("#Amount").val('');
             $("#Amount").attr("disabled", false);
         }
         else {
-            $("#divPlotNumber").hide();
+           
             $("#Amount").attr("disabled", "disabled");
         }
 
@@ -191,26 +211,33 @@
             $('#LoginId').focus();
             return false;
         }
-        if ($('#Fk_SiteId').val() == '0') {
-            $("#Fk_SiteId").addClass('errortext');
-            $('#Fk_SiteId').focus();
-            return false;
-        }
-        if ($('#FK_SectorId').val() == '0') {
-            $("#FK_SectorId").addClass('errortext');
-            $('#FK_SectorId').focus();
-            return false;
-        }
-        if ($('#Fk_BlockId').val() == '0') {
-            $("#Fk_BlockId").addClass('errortext');
-            $('#Fk_BlockId').focus();
-            return false;
-        }
+        if ($('#TopupType').val() == "RealEstate")
+        {
+            if ($('#Fk_SiteId').val() == '0') {
+                $("#Fk_SiteId").addClass('errortext');
+                $('#Fk_SiteId').focus();
+                return false;
+            }
+            if ($('#FK_SectorId').val() == '0') {
+                $("#FK_SectorId").addClass('errortext');
+                $('#FK_SectorId').focus();
+                return false;
+            }
+           
 
-        if ($('#PlotNumber').val() == '') {
-            $("#PlotNumber").addClass('errortext');
-            $('#PlotNumber').focus();
-            return false;
+            if ($('#PlotNumber').val() == '') {
+                $("#PlotNumber").addClass('errortext');
+                $('#PlotNumber').focus();
+                return false;
+            }
+        }
+        else
+        {
+            if ($('#Package').val() == '0') {
+                $("#Package").addClass('errortext');
+                $('#Package').focus();
+                return false;
+            }
         }
 
 
@@ -251,7 +278,29 @@
             }
         });
     }
+    function showdetails(type)
+    {
+        if(type=="Product")
+        {
+            $('#divisite').hide();
+            $('#divblock').hide();
+            $('#divsector').hide();
+            $('#divplot').hide();
+            $('#divpackage').show();
+            $('#TopupType').val('Product');
+           
+        }
+        else
+        {
+            $('#divisite').show();
+            $('#divblock').show();
+            $('#divsector').show();
+            $('#divplot').show();
+            $('#divpackage').hide();
+            $('#TopupType').val('RealEstate');
+        }
 
+    }
     function isNumberKey(evt) {
 
         var charCode = (evt.which) ? evt.which : event.keyCode;

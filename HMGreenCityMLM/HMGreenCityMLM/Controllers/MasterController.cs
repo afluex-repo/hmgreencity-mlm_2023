@@ -78,9 +78,10 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult ProductMaster(string productID)
         {
+            Master obj = new Master();
             if (productID != null)
             {
-                Master obj = new Master();
+                
                 try
                 {
                     obj.ProductID = productID;
@@ -108,7 +109,7 @@ namespace HMGreenCityMLM.Controllers
             }
             else
             {
-                return View();
+                return View(obj);
             }
             
         }

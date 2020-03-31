@@ -267,12 +267,16 @@ namespace HMGreenCityMLM.Controllers
         }
         #endregion
 
-        public ActionResult AssociateList(Reports model)
+        public ActionResult AssociateList(Reports model,string Status)
         {
             #region ddlstatus
             List<SelectListItem> ddlstatus = Common.AssociateStatus();
             ViewBag.ddlstatus = ddlstatus;
             #endregion
+            if(Status!="" && Status!=null)
+            {
+                model.Status = Status;
+            }
             List<Reports> lst = new List<Reports>();
 
             DataSet ds = model.GetAssociateList();

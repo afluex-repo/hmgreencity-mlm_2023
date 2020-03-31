@@ -97,11 +97,12 @@
                                             @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @Disabled = "disabled" })
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="button" id="Confirm" onclick="return confirmregistration();" class="btn btn-success" name="Confirm" value="Confirm">
-                                            <input type="button" id="Register" onclick="return saveregistration();" class="btn btn-success" style="display: none" name="Register" value="Register">
-                                            <input type="button" id="Edit" onclick="editregistration();" style="display: none" class="btn btn-info" name="Edit" value="Edit">
+                                            <a href="#" id="Confirm" onclick="return confirmregistration();" class="btn btn-success" >Confirm</a>
+                                            <a href="#" id="Register"  style="display: none" onclick="return saveregistration();" class="btn btn-success">Register</a>
+                                            <a href="#" id="Edit" style="display: none" onclick="return editregistration();" class="btn btn-info">Edit</a>
+                                           
                                             <br />
-                                            <p>Already have account ? <a href="/Home/Login" style="color:aquamarine">Sign In</a></p>
+                                           
                                         </div>
                                         <br />
                                         <p style="color: red">@TempData["Registration"] </p>

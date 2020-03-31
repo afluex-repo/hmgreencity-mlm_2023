@@ -36,6 +36,8 @@ namespace HMGreenCityMLM.Models
         public string BankBranch { get; set; }
         public string DocumentImg { get; set; }
         public string Package { get; set; }
+
+        public string TopupType { get; set; }
         public string TopUpDate { get; set; }
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }
@@ -215,7 +217,7 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginId),
                                         new SqlParameter("@AddedBy", AddedBy),
-                                        new SqlParameter("@Fk_ProductId", "1"),
+                                        new SqlParameter("@Fk_ProductId",Package),
                                         new SqlParameter("@TopupDate", TopUpDate),
                                         new SqlParameter("@Amount", Amount),
                                         new SqlParameter("@Fk_SiteId", Fk_SiteId),
