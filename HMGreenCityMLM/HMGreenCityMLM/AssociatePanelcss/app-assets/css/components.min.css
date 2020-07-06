@@ -3747,3 +3747,36 @@ html body .content {
     margin-bottom: 110px;
 }
 }
+
+@media (min-width: 414px) and (max-width: 736px) {
+    .main-menu .navbar-header {
+        width: 300px;
+        height: 5rem;
+        position: relative;
+        padding: .35rem 1rem .3rem 1.64rem;
+        -webkit-transition: .3s ease all;
+        transition: .3s ease all;
+    }
+    i.fa.fa-bars.dashb {
+    font-size: 30px;
+}
+    
+element.style {
+}
+html body .content.app-content {
+    overflow: hidden;
+}
+html body .content {
+    padding: 0;
+    position: relative;
+    -webkit-transition: .3s ease all;
+    transition: .3s ease all;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    min-height: calc(100% - 4rem);
+    margin-left: 43px;
+}
+.dt-responsive.table-responsive.associatman {
+    margin-bottom: 110px;
+}
+}

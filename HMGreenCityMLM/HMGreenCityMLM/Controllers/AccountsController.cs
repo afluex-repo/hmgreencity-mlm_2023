@@ -83,6 +83,32 @@ namespace HMGreenCityMLM.Controllers
             else { obj.Result = "No"; }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult GetMemberNameForTopUp(string LoginId)
+        {
+            Common obj = new Common();
+            obj.ReferBy = LoginId;
+            DataSet ds = obj.GetMemberDetailsForTopup();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                {
+                    obj.DisplayName = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    obj.Result = "No";
+                }
+                else
+                {
+                    obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
+
+                    obj.Result = "Yes";
+                }
+
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult TopUpByAdmin(Wallet obj)
         {
             try

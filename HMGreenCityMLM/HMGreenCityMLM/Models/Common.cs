@@ -118,6 +118,17 @@ namespace HMGreenCityMLM.Models
 
             return ds;
         }
+
+        public DataSet GetMemberDetailsForTopup()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", ReferBy),
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetMemberNameForTopUp", para);
+
+            return ds;
+        }
         public DataSet GetSite()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetSiteName");

@@ -197,7 +197,7 @@
         debugger;
         var LoginId = $('#LoginId').val();
         $.ajax({
-            url: '/Accounts/GetMemberName',
+            url: '/Accounts/GetMemberNameForTopUp',
             type: "GET",
             dataType: "JSON",
             data: { LoginId: LoginId },
@@ -208,6 +208,14 @@
 
                     divname.style.display = "block";
                 } else {
+                    if (data.DisplayName != null) {
+                        alert(data.DisplayName);
+                        $("#LoginId").addClass('errortext');
+                        $('#txtname').html("");
+                        $('#LoginId').val("");
+                        $('#LoginId').focus();
+                        return false;
+                    }
                     alert("Invalid Login ID");
                     $("#LoginId").addClass('errortext');
                     $('#txtname').html("");
