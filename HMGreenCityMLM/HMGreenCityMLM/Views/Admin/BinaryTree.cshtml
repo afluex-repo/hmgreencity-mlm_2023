@@ -502,8 +502,10 @@
                                                         <div class="col-md-2"></div>
 
                                                         <div class="col-md-4">
-                                                            <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID" autocomplete="off">
-                                                        </div>
+                                                            <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID/Name" autocomplete="off">
+                                                    
+                                                            <input type="hidden" id="ToLoginID">
+                                                           </div>
                                                         <div class="col-md-4">
                                                             <input type="hidden" name="hfCustomerId" id="hfCustomerId">
                                                             <input type="hidden" name="HiddenField1" id="HiddenField1">
@@ -734,6 +736,41 @@
 <script src="../../WebsiteCss/js/jquery.js"></script>
 
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/Admin/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+
+
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#txtLoginID').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+
+
     var winHeight = $(window).height();
     var winWidth = $(window).width();
 
@@ -907,6 +944,7 @@
 
 <script type="text/javascript">
 
+    
     var winHeight = $(window).height();
     var winWidth = $(window).width();
     var clickOption = "";
@@ -1414,9 +1452,22 @@
 
     }
 
-
+   
     $(function () {
+
         $("#btnSearch").click(function () {
+
+
+            var txtLoginID = $('#txtLoginID').val();
+            if (txtLoginID == "") {
+                $('#ToLoginID').val(null);
+            } else {
+                var txtLoginID = $('#ToLoginID').val();
+                $('#txtLoginID').val(txtLoginID);
+            }
+
+
+
             if ($("#txtLoginID").val() != "") {
                 $.ajax({
                     url: '/Models/WebService/AgentServices.asmx/SearchCustomersByLoginId2',

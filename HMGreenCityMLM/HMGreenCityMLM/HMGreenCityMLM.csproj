@@ -490,6 +490,9 @@
     <Content Include="AssociatePanelcss\Fonts\chat-bg.svg" />
     <Content Include="AssociatePanelcss\Fonts\feather.svg" />
     <Content Include="AssociatePanelcss\logo.png" />
+    <Content Include="Autofill\jquery-2.1.3.js" />
+    <Content Include="Autofill\jquery-ui.css" />
+    <Content Include="Autofill\jquery-ui.js" />
     <Content Include="css\menu.css" />
     <Content Include="css\tree-responsive.css" />
     <Content Include="css\tree.css" />

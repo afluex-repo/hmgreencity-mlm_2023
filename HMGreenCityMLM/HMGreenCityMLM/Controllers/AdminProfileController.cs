@@ -170,7 +170,7 @@ namespace HMGreenCityMLM.Controllers
                 Response.Write(style);
                 Response.Write(s_Write.ToString());
                 Response.End();
-                
+
             }
 
             return null;
@@ -267,13 +267,13 @@ namespace HMGreenCityMLM.Controllers
         }
         #endregion
 
-        public ActionResult AssociateList(Reports model,string Status)
+        public ActionResult AssociateList(Reports model, string Status)
         {
             #region ddlstatus
             List<SelectListItem> ddlstatus = Common.AssociateStatus();
             ViewBag.ddlstatus = ddlstatus;
             #endregion
-            if(Status!="" && Status!=null)
+            if (Status != "" && Status != null)
             {
                 model.Status = Status;
             }
@@ -290,7 +290,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.JoiningDate = r["JoiningDate"].ToString();
-                    obj.Password =Crypto.Decrypt( r["Password"].ToString());
+                    obj.Password = Crypto.Decrypt(r["Password"].ToString());
                     obj.Mobile = (r["Mobile"].ToString());
                     obj.Email = (r["Email"].ToString());
                     obj.SponsorId = (r["SponsorId"].ToString());
@@ -311,7 +311,7 @@ namespace HMGreenCityMLM.Controllers
         public ActionResult AssociateListBy(Reports model)
         {
             List<Reports> lst = new List<Reports>();
-
+            model.LoginId = model.ToLoginID;
             DataSet ds = model.GetAssociateList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -357,7 +357,7 @@ namespace HMGreenCityMLM.Controllers
             else { obj.Result = "Invalid SponsorId"; }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult UpdateAssociateProfile(string LoginID)
         {
             #region ddlgender
@@ -370,12 +370,12 @@ namespace HMGreenCityMLM.Controllers
             #endregion
             Profile obj = new Profile();
             obj.LoginId = LoginID;
-           
+
             DataSet ds = obj.GetUserProfile();
-            
+
             if (ds != null && ds.Tables.Count > 0)
             {
-                obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString(); 
+                obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                 obj.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
                 obj.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
                 obj.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
@@ -648,8 +648,23 @@ namespace HMGreenCityMLM.Controllers
             return RedirectToAction("AssociateList", "AdminProfile");
         }
 
-
-      
+        public ActionResult GetUserList()
+        {
+            Profile obj = new Profile();
+            List<Profile> lst = new List<Profile>();
+            DataSet ds = obj.GettingUserProfile();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Profile objList = new Profile();
+                    objList.UserName = dr["Fullname"].ToString();
+                    objList.LoginID = dr["LoginId"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
 
 
     }

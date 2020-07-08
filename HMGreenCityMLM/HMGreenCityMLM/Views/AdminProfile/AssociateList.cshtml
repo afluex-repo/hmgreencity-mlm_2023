@@ -45,7 +45,9 @@
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Login ID </label>
-                                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control"})
+
+                                                            @Html.HiddenFor(m => m.ToLoginID)
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
@@ -87,7 +89,7 @@
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <br />
-                                                            <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
+                                                            <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return validateLogin();" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -196,6 +198,49 @@
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
 
+    function validateLogin() {
+        var login = $('#LoginId').val();
+        if (login == "") {
+            $('#ToLoginID').val(null);
+        } else {
+            var loginid = $('#ToLoginID').val();
+
+        }
+    }
+
+    $(document).ready(function () {
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminProfile/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+
+
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginID + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
         changeYear: true,
@@ -206,4 +251,6 @@
         changeYear: true,
         changeMonth: true
     });
+
+
 </script>

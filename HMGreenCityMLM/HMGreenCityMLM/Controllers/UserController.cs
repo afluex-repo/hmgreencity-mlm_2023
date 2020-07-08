@@ -766,5 +766,23 @@ namespace HMGreenCityMLM.Controllers
             return RedirectToAction("UserProductReward");
         }
         #endregion
+
+        public ActionResult GetUserList()
+        {
+            Reports obj = new Reports();
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = obj.GettingUserProfile();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Reports objList = new Reports();
+                    objList.UserName = dr["Fullname"].ToString();
+                    objList.LoginIDD = dr["LoginId"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
     }
 }

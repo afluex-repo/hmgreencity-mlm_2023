@@ -567,6 +567,7 @@ namespace HMGreenCityMLM.Controllers
         {
 
             List<Reports> lst = new List<Reports>();
+            model.LoginId = model.ToLoginID;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             model.FromActivationDate = string.IsNullOrEmpty(model.FromActivationDate) ? null : Common.ConvertToSystemDate(model.FromActivationDate, "dd/MM/yyyy");
@@ -1528,6 +1529,24 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
         }
         #endregion
+
+        public ActionResult GetUserList()
+        {
+            Reports obj = new Reports();
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = obj.GettingUserProfile();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Reports objList = new Reports();
+                    objList.UserName = dr["Fullname"].ToString();
+                    objList.LoginIDD = dr["LoginId"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
 
 
     }

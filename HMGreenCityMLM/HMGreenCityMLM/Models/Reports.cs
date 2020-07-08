@@ -9,6 +9,8 @@ namespace HMGreenCityMLM.Models
 {
     public class Reports : Common
     {
+        public string LoginIDD { get; set; }
+        public string UserName { get; set; }
         public string EncryptPayoutNo { get; set; }
         public string BatchNo { get; set; }
         public string CGST { get; set; }
@@ -408,6 +410,12 @@ namespace HMGreenCityMLM.Models
         public string RewardName { get; set; }
         public string Contact { get; set; }
         public string PK_RewardItemId { get; set; }
+        public DataSet GettingUserProfile()
+        {
+
+            DataSet ds = DBHelper.ExecuteQuery("GetUserProfile");
+            return ds;
+        }
 
         public DataSet RewardList()
         {

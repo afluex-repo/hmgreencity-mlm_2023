@@ -80,14 +80,14 @@
                                                             <th>Payout No</th>
                                                             <th>Closing Date</th>
                                                             <th>Direct Income</th>
-                                                            <th>Harmony </th>
-                                                            <th>Direct Leadership Bonus</th>
+                                                            <th>Binary Income </th>
+                                                            <th hidden="hidden">Direct Leadership Bonus</th>
                                                             <th>Gross Amount</th>
                                                             <th>TDS Amount</th>
                                                             <th>Processing Fee</th>
                                                             <th>Product Wallet</th>
                                                             <th>Net Payable Amount</th>
-                                                            <th>Action</th>
+                                                            <th hidden="hidden">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -106,13 +106,13 @@
                                                             <td>@Item.ClosingDate</td>
                                                             <td>@Item.DirectIncome</td>
                                                             <td>@Item.BinaryIncome</td>
-                                                            <td>@Item.LeadershipBonus</td>
+                                                            <td hidden="hidden">@Item.LeadershipBonus</td>
                                                             <td>@Item.GrossAmount</td>
                                                             <td>@Item.TDSAmount</td>
                                                             <td>@Item.ProcessingFee</td>
                                                             <td>@Item.ProductWallet</td>
                                                             <td>@Item.NetAmount</td>
-                                                            <td>
+                                                            <td hidden="hidden">
                                                                 <a href="/AdminReports/PayoutReceipt?lid=@Item.EncryptName&pno=@Item.EncryptPayoutNo" class="btn btn-sm btn-primary" target="_blank">Print</a>
                                                             </td>
                                                         </tr>
