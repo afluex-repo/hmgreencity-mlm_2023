@@ -55,12 +55,12 @@
                             <th>Payout No</th>
                             <th>Closing Date</th>
                             <th>Direct Income</th>
-                            <th>Harmony</th>
+                            <th>Binary Income</th>
                             <th hidden="hidden">Direct Leadership Bonus</th>
                             <th>Gross Amount</th>
                             <th>TDS Amount</th>
                             <th>Processing Fee</th>
-                            <th>Product Wallet</th>
+                            <th hidden="hidden">Product Wallet</th>
                             <th>NET Payable Amount</th>
                             <th>Action</th>
                         </tr>
@@ -85,7 +85,7 @@
                                 <td>@Item.GrossAmount</td>
                                 <td>@Item.TDSAmount</td>
                                 <td>@Item.ProcessingFee</td>
-                                <td>@Item.ProductWallet</td>
+                                <td hidden="hidden">@Item.ProductWallet</td>
                                 <td>@Item.NetAmount</td>
                                 <td>
                                     <a href="/UserReports/ProductPayoutReceipt?lid=@Item.EncryptLoginID&pno=@Item.EncryptPayoutNo" class="btn btn-sm btn-primary" target="_blank">Print</a>
