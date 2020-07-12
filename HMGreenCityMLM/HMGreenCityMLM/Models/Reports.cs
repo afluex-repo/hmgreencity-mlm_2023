@@ -412,8 +412,9 @@ namespace HMGreenCityMLM.Models
         public string PK_RewardItemId { get; set; }
         public DataSet GettingUserProfile()
         {
-
-            DataSet ds = DBHelper.ExecuteQuery("GetUserProfile");
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId)};
+            DataSet ds = DBHelper.ExecuteQuery("GetUserProfile",para);
             return ds;
         }
 

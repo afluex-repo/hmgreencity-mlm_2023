@@ -85,16 +85,16 @@
                                                                 int i = 1;
                                                                 foreach (var Item in Model.lsttopupreport)
                                                                 {
-                                                        <tr class="text-left">
-                                                            <td>@i</td>
-                                                            <td>@Item.TransactionDate</td>
-                                                            <td>@Item.ToLoginID</td>
-                                                            <td>@Item.ToName</td>
-                                                            <td>@Item.Amount</td>
-                                                            <td>@Item.IncomeType</td>
-                                                            <td>@Item.Status</td>
+                                                                    <tr class="text-left">
+                                                                        <td>@i</td>
+                                                                        <td>@Item.TransactionDate</td>
+                                                                        <td>@Item.ToLoginID</td>
+                                                                        <td>@Item.ToName</td>
+                                                                        <td>@Item.Amount</td>
+                                                                        <td>@Item.IncomeType</td>
+                                                                        <td>@Item.Status</td>
 
-                                                        </tr>
+                                                                    </tr>
                                                                     i++;
                                                                 }
 
@@ -121,28 +121,41 @@
     </div>
 }
 
-                        <script src="../..//WebsiteCss/js/jquery.min.js"></script>
+<script src="../vendor/jquery/jquery.min.js"></script>
 
-                        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-                        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
-                        <script>
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="../..//WebsiteCss/js/jquery.min.js"></script>
 
-                            $('#FromDate').datepicker({
-                                dateFormat: 'dd/mm/yy',
-                            });
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
-                            $('#ToDate').datepicker({
-                                dateFormat: 'dd/mm/yy',
-                            });
+<script>
 
-                            function isNumberOrDecimal(evt) {
-                                var charCode = (evt.which) ? evt.which : evt.keyCode;
-                                if (charCode != 46 && charCode > 31
-                                  && (charCode < 48 || charCode > 57))
-                                    return false;
 
-                                return true;
-                            }
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
 
-                        </script>
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</script>

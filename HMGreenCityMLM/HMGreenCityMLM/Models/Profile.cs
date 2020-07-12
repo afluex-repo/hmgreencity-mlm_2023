@@ -9,7 +9,7 @@ namespace HMGreenCityMLM.Models
 {
     public class Profile : Common
     {
-        public string LoginID { get; set; }
+        public string LoginIDD { get; set; }
         public string UserName { get; set; }
         public string EncryptLoginID { get; set; }
         public string EncryptPayoutNo { get; set; }
@@ -45,7 +45,8 @@ namespace HMGreenCityMLM.Models
         }
         public DataSet GettingUserProfile()
         {
-           
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId)};
             DataSet ds = DBHelper.ExecuteQuery("GetUserProfile");
             return ds;
         }

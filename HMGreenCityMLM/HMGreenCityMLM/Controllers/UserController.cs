@@ -16,6 +16,8 @@ namespace HMGreenCityMLM.Controllers
         public ActionResult AssociateDashBoard()
         {
             DashBoard obj = new DashBoard();
+            List<DashBoard> lstNotice = new List<DashBoard>();
+
             List<DashBoard> lstinvestment = new List<DashBoard>();
             obj.Fk_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = obj.GetAssociateDashboard();
@@ -90,6 +92,24 @@ namespace HMGreenCityMLM.Controllers
                 model.lstinvestment = lstinvestment;
             }
             #endregion Investment
+
+
+            #region Notice
+            DataSet ds12 = model.ListNoticeMaster();
+            if (ds12 != null && ds12.Tables.Count > 0 && ds12.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds12.Tables[0].Rows)
+                {
+                    DashBoard Obj = new DashBoard();
+                    Obj.Title = r["Title"].ToString();
+                    Obj.News = r["News"].ToString();
+
+                    lstNotice.Add(Obj);
+                }
+                model.NoticeMasterlist = lstNotice;
+            }
+            #endregion Investment
+
             return View(model);
         }
 
@@ -771,6 +791,7 @@ namespace HMGreenCityMLM.Controllers
         {
             Reports obj = new Reports();
             List<Reports> lst = new List<Reports>();
+            obj.LoginId = Session["LoginId"].ToString();
             DataSet ds = obj.GettingUserProfile();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {

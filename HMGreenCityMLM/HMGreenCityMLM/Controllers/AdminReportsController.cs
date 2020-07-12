@@ -369,7 +369,8 @@ namespace HMGreenCityMLM.Controllers
         {
             Reports incomeReport = new Reports();
             List<Reports> lst1 = new List<Reports>();
-
+            incomeReport.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
+            incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
             DataSet ds11 = incomeReport.GetIncomeReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -554,10 +555,12 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult Direct()
         {
+            Reports model = new Reports();
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.ddlleg = Leg;
+
             return View();
         }
         [HttpPost]
@@ -1534,6 +1537,7 @@ namespace HMGreenCityMLM.Controllers
         {
             Reports obj = new Reports();
             List<Reports> lst = new List<Reports>();
+            obj.LoginId = Session["LoginId"].ToString();
             DataSet ds = obj.GettingUserProfile();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {

@@ -109,7 +109,7 @@
                                                                 <th>Email Id</th>
                                                                 <th></th>
                                                                 <th></th>
-                                                                <th></th>
+                                                                <th hidden="hidden"></th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -150,7 +150,7 @@
                                                                                     </a>
                                                                                 }
                                                                             </td>
-                                                                            <td>
+                                                                            <td hidden="hidden">
                                                                                 @if (Item.Status == "Inactive")
                                                                                 {
                                                                                     <a href="/AdminProfile/ActivateUser?FK_UserID=@Item.Fk_UserId" class="btn btn-success btn-sm" onclick="return confirm('Sure you want to activate this User ?')">
@@ -221,7 +221,7 @@
 
 
                     $(response).each(function (index, item) {
-                        cityuse.push(item.UserName + "(" + item.LoginID + ")");
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
 
                     $('#LoginId').autocomplete({

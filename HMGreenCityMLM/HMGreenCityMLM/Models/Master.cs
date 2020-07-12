@@ -10,6 +10,9 @@ namespace HMGreenCityMLM.Models
 {
     public class Master : Common
     {
+        public string PK_NoticeMasterId { get; set; }
+        public string Title { get; set; }
+        public string News { get; set; }
         public string ProductID { get; set; }
         public string ProductName { get; set; }
         public string ProductPrice { get; set; }
@@ -49,6 +52,7 @@ namespace HMGreenCityMLM.Models
         public string SectorName { get; set; }
         public string SectorID { get; set; }
         public List<Master> lstSector { get; set; }
+        public List<Master> NoticeMasterlist { get; set; }
         public List<SelectListItem> ddlSector { get; set; }
 
 
@@ -203,6 +207,18 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+        public DataSet SaveNoticeMaster()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Title", Title),
+                                      new SqlParameter("@News", News),
+                                      new SqlParameter("@AddedBy", AddedBy)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveNoticeMaster", para);
+            return ds;
+        }
+
         public DataSet UpdateSite()
         {
             SqlParameter[] para = {   
@@ -217,6 +233,20 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+        public DataSet UpdateNotice()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Title", Title),
+                                      new SqlParameter("@News", News),
+                                      new SqlParameter("@UpdatedBy", UpdatedBy),
+
+                                      new SqlParameter("@PK_NoticeMasterId", PK_NoticeMasterId)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateNotice", para);
+            return ds;
+        }
+
         public DataSet DeleteSite()
         {
             SqlParameter[] para = { new SqlParameter("@SiteID", SiteID),
@@ -224,6 +254,16 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("DeleteSite", para);
             return ds;
         }
+
+        public DataSet DeleteNotice()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_NoticeMasterId", PK_NoticeMasterId),
+                                  new SqlParameter("@DeletedBy", UpdatedBy) };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteNotice", para);
+            return ds;
+        }
+
+
 
 
         public DataSet GetSectorList()
@@ -342,6 +382,15 @@ namespace HMGreenCityMLM.Models
                                      new SqlParameter("@BlockID",BlockID),
                                  };
             DataSet ds = DBHelper.ExecuteQuery("GetBlockList", para);
+            return ds;
+        }
+
+        public DataSet ListNoticeMaster()
+        {
+            SqlParameter[] para ={ 
+                                     new SqlParameter("@PK_NoticeMasterId",PK_NoticeMasterId),
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("GetNoticeMaster", para);
             return ds;
         }
 

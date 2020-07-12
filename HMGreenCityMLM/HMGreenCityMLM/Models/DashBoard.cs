@@ -9,6 +9,12 @@ namespace HMGreenCityMLM.Models
 {
     public class DashBoard:Common
     {
+
+        public string PK_NoticeMasterId { get; set; }
+        public string Title { get; set; }
+        public string News { get; set; }
+        public List<DashBoard> NoticeMasterlist { get; set; }
+
         public string Total { get; set; }
 
         public string Status { get; set; }
@@ -45,6 +51,15 @@ namespace HMGreenCityMLM.Models
         {
             SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId) };
             DataSet ds = DBHelper.ExecuteQuery("GetMessages", para);
+            return ds;
+        }
+
+        public DataSet ListNoticeMaster()
+        {
+            SqlParameter[] para ={
+                                     new SqlParameter("@PK_NoticeMasterId",PK_NoticeMasterId),
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("GetNoticeMaster", para);
             return ds;
         }
 

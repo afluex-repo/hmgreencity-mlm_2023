@@ -373,7 +373,7 @@ namespace HMGreenCityMLM.Controllers
 
             DataSet ds = obj.GetUserProfile();
 
-            if (ds != null && ds.Tables.Count > 0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
             {
                 obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                 obj.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
@@ -659,7 +659,7 @@ namespace HMGreenCityMLM.Controllers
                 {
                     Profile objList = new Profile();
                     objList.UserName = dr["Fullname"].ToString();
-                    objList.LoginID = dr["LoginId"].ToString();
+                    objList.LoginIDD = dr["LoginId"].ToString();
                     lst.Add(objList);
                 }
             }

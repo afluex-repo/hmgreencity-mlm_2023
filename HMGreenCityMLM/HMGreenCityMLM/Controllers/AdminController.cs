@@ -1082,6 +1082,7 @@ namespace HMGreenCityMLM.Controllers
         {
             Reports obj = new Reports();
             List<Reports> lst = new List<Reports>();
+            obj.LoginId = Session["LoginId"].ToString();
             DataSet ds = obj.GettingUserProfile();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {

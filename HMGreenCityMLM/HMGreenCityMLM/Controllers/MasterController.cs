@@ -913,5 +913,151 @@ namespace HMGreenCityMLM.Controllers
         }
 
         #endregion
+
+        public ActionResult NoticeMaster(string PK_NoticeMasterId)
+        {
+            Master model = new Master();
+            if (PK_NoticeMasterId != null)
+            {
+                model.PK_NoticeMasterId = PK_NoticeMasterId;
+                List<Master> lst = new List<Master>();
+                DataSet ds = model.ListNoticeMaster();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Title = ds.Tables[0].Rows[0]["Title"].ToString();
+                    model.News = ds.Tables[0].Rows[0]["News"].ToString();
+                    model.PK_NoticeMasterId = ds.Tables[0].Rows[0]["PK_NoticeMasterId"].ToString();
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("NoticeMaster")]
+        [OnAction(ButtonName = "btnSave")]
+        public ActionResult SaveNoticeMaster(Master obj)
+        {
+            try
+            {
+
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = new DataSet();
+                ds = obj.SaveNoticeMaster();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["NoticeMaster"] = "Notice saved successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["NoticeMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["NoticeMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["NoticeMaster"] = ex.Message;
+            }
+            return RedirectToAction("NoticeMaster", "Master");
+        }
+
+
+        public ActionResult NoticeMasterList(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.ListNoticeMaster();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_NoticeMasterId = r["PK_NoticeMasterId"].ToString();
+                    obj.Title = r["Title"].ToString();
+                    obj.AddedBy = r["AddedBy"].ToString();
+                    obj.News = r["News"].ToString();
+                    lst.Add(obj);
+                }
+                model.NoticeMasterlist = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("NoticeMaster")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdateNoticeMaster(Master obj)
+        {
+            try
+            {
+                obj.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = new DataSet();
+                ds = obj.UpdateNotice();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["NoticeMasterList"] = "Notice Updated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["NoticeMaster"] = ds.Tables[0].Rows[0][0].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["NoticeMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["NoticeMaster"] = ex.Message;
+            }
+            return RedirectToAction("NoticeMasterList", "Master");
+        }
+
+
+        public ActionResult DeleteNotice(string id)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                Master obj = new Master();
+                obj.PK_NoticeMasterId = id;
+                obj.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = obj.DeleteNotice();
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["NoticeMasterList"] = "Notice deleted successfully";
+                        FormName = "NoticeMasterList";
+                        Controller = "Master";
+                    }
+                    else
+                    {
+                        TempData["NoticeMasterList"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "NoticeMasterList";
+                        Controller = "Master";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["NoticeMasterList"] = ex.Message;
+                FormName = "NoticeMasterList";
+                Controller = "Master";
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+
     }
 }
