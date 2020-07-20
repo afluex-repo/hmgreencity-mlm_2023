@@ -17,7 +17,7 @@ namespace HMGreenCityMLM.Models
             try
             {
                 //connectionString = "Data Source=DESKTOP-UDD0G1A\\SQLEXPRESS;Initial Catalog=dharaworlddb;User Id=sa;Password=1234;Integrated Security=false;";
-                connectionString = "Data Source=23.111.171.42;Initial Catalog=HMGreenCItyMLM;User Id=dharaworlduser;Password=dharaworld123!@#;Integrated Security=false;";
+                connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=hmgreendb;User Id=hmgreen;Password=W1ttl1&9;Integrated Security=false;";
               //  connectionString = "Data Source=23.111.171.42;Initial Catalog=dharaworlddb30122019;User Id=dharaworlduser;Password=dharaworld123!@#;Integrated Security=false;";
             }
             catch (Exception)
