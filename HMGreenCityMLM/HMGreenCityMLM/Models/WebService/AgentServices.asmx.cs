@@ -26,11 +26,13 @@ namespace HMGreenCityMLM.Models.WebService
     {
         [ScriptMethod()]
         [WebMethod]
-        public List<AgentModel> GetGeneology(string memID)
+        public List<AgentModel> GetGeneology(string memID, string sessionid)
         {
             AgentModel model = new AgentModel();
             model.Fk_UserId = memID;
+            model.SessionPkId = sessionid;
             AgentDAL obj = new AgentDAL();
+
             DataTable dt = obj.GetTreeMembers(model);
             List<AgentModel> tree = new List<AgentModel>();
             foreach (DataRow dr in dt.Rows)

@@ -302,15 +302,15 @@ namespace HMGreenCityMLM.Models
 
     public class SoftwareDetails
     {
-        public static string CompanyName = "Dhara World";
-        public static string CompanyAddress = "D1/1, 2nd Floor, Vineet Khand Gomti Nagar,Lucknow-226012 (UP)";
-        public static string Pin1 = "226012";
+        public static string CompanyName = "HM Green City";
+        public static string CompanyAddress = "H.O. : 8/883/2, Vikas Nagar, khurram Nagar Road, Opp, Fatimi Masjid, Lucknow";
+        public static string Pin1 = "";
         public static string State1 = "UP";
         public static string City1 = "Lucknow";
         public static string ContactNo = "";
-        public static string LandLine = "0522-4002394";
+        public static string LandLine = "0522 430 1189";
         public static string Website = "";
-        public static string EmailID = "dharaworldhealth@gmail.com";
+        public static string EmailID = "hmcity7374@gmail.com";
     }
 
 }

@@ -504,7 +504,7 @@
                                                         <div class="col-md-4">
                                                             <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID" autocomplete="off">
                                                             <input type="hidden" id="ToLoginID">
-                                                         </div>
+                                                        </div>
                                                         <div class="col-md-4">
                                                             <input type="hidden" name="hfCustomerId" id="hfCustomerId">
                                                             <input type="hidden" name="HiddenField1" id="HiddenField1">
@@ -744,7 +744,7 @@
 <script type="text/javascript">
 
 
-   
+
 
     var winHeight = $(window).height();
     var winWidth = $(window).width();
@@ -990,7 +990,7 @@
         $.ajax({
             type: "POST",
             url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
-            data: '{memID: ' + id + '}',
+            data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: OnSuccess,
@@ -1125,7 +1125,7 @@
                             $.ajax({
                                 type: "POST",
                                 url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
-                                data: '{memID: ' + id + '}',
+                                data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 success: function (response2) {
@@ -1232,7 +1232,7 @@
                                                     $.ajax({
                                                         type: "POST",
                                                         url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
-                                                        data: '{memID: ' + id + '}',
+                                                        data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
                                                         contentType: "application/json; charset=utf-8",
                                                         dataType: "json",
                                                         success: function (response3) {

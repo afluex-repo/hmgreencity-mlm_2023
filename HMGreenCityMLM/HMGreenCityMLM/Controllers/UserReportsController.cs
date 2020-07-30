@@ -77,9 +77,8 @@ namespace HMGreenCityMLM.Controllers
         [HttpPost]
         [ActionName("PayoutReport")]
         [OnAction(ButtonName = "Search")]
-        public ActionResult PayoutReportBy()
+        public ActionResult PayoutReportBy(Profile payoutDetail)
         {
-            Profile payoutDetail = new Profile();
             List<Profile> lst1 = new List<Profile>();
             payoutDetail.FromDate = string.IsNullOrEmpty(payoutDetail.FromDate) ? null : Common.ConvertToSystemDate(payoutDetail.FromDate, "dd/MM/yyyy");
             payoutDetail.ToDate = string.IsNullOrEmpty(payoutDetail.ToDate) ? null : Common.ConvertToSystemDate(payoutDetail.ToDate, "dd/MM/yyyy");
