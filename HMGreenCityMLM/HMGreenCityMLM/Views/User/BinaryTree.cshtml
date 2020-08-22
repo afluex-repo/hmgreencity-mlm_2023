@@ -520,7 +520,7 @@
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <div class="col-sm-12 col-md-12" id="chart">
-                                                                <div class="tree family-tree clearfix">
+                                                                <div class="tree family-tree clearfix" style="overflow-x:auto">
                                                                     <ul>
                                                                         <li id="firstRow">
                                                                             <a href="" id="firstHead"></a>
@@ -1120,7 +1120,8 @@
 
                     }
 
-                    if (winWidth > 766) {
+                    //if (winWidth > 766)
+                    {
                         if (id != null) {
                             $.ajax({
                                 type: "POST",
@@ -1227,7 +1228,8 @@
                                                     ul2.append(freeBlock + child);
                                                 }
                                             }
-                                            if (winWidth > 980) {
+                                            //if (winWidth > 980)
+                                            {
                                                 if (id != null) {
                                                     $.ajax({
                                                         type: "POST",
@@ -1350,11 +1352,11 @@
                                                     });
                                                 }
                                             }
-                                            else {
-                                                $("#firstRow").fadeIn(1000);
-                                                $("#firstHead").attr("style", "opacity:1;");
-                                                $('[id*="level"]').fadeIn(300);
-                                            }
+                                            //else {
+                                            //    $("#firstRow").fadeIn(1000);
+                                            //    $("#firstHead").attr("style", "opacity:1;");
+                                            //    $('[id*="level"]').fadeIn(300);
+                                            //}
                                         });
                                         $("#level" + i).append(ul2);
                                     }
@@ -1373,12 +1375,12 @@
                             });
                         }
                     }
-                    else {
-                        $("#firstRow").fadeIn(1000);
-                        $("#firstHead").attr("style", "opacity:1;");
-                        $('[id*="level"]').fadeIn(500);
-                        $("#firstRow").append(ul);
-                    }
+                    //else {
+                    //    $("#firstRow").fadeIn(1000);
+                    //    $("#firstHead").attr("style", "opacity:1;");
+                    //    $('[id*="level"]').fadeIn(500);
+                    //    $("#firstRow").append(ul);
+                    //}
                 });
                 $("#firstRow").append(ul);
             }
