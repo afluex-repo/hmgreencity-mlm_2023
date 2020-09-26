@@ -3715,7 +3715,7 @@ tr.group {
     }
 }
 
-@media (min-width: 320px) and (max-width: 568px) {
+@media (min-width: 320px) and (max-width: 568px) { 
     i.men-active {
     width: 20px!important;
     height: 20px!important;
