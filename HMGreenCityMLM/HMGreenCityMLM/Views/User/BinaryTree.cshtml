@@ -284,7 +284,7 @@
 
 
     i.men-active {
-        width: 50px ;
+        width: 50px;
         height: 50px;
         background-image: url(../../images/TreeIcon/men-active.png) !important;
         display: block;
@@ -440,6 +440,15 @@
     .family-tree .member-img.block-member {
         border: 2px solid #b33c18;
     }*/
+
+    member-details {
+        pointer-events: none;
+        /*z-index:99999*/
+    }
+
+    .main-menu {
+        z-index: 1 !important;
+    }
 </style>
 <style>
     #divload {
@@ -829,6 +838,7 @@
             html: true,
             placement: 'auto',
             trigger: 'hover',
+            boundary: 'window'
 
         });
     }
@@ -929,7 +939,7 @@
 
 <script type="text/javascript">
 
-     $(document).ready(function () {
+    $(document).ready(function () {
         $("input").attr("autocomplete", "off");
 
         var cityuse = [];
