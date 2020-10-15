@@ -100,6 +100,9 @@ namespace HMGreenCityMLM.Controllers
                     Obj.PlotNumber = r["PlotNumber"].ToString();
                     Obj.Description = r["Description"].ToString();
 
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;
@@ -159,6 +162,9 @@ namespace HMGreenCityMLM.Controllers
                     Obj.PrintingDate = r["PrintingDate"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
                     Obj.Description = r["Description"].ToString();
+
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;

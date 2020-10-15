@@ -9,6 +9,8 @@ namespace HMGreenCityMLM.Models
 {
     public class Reports : Common
     {
+        public string SectorName { get; set; }
+        public string SiteName { get; set; }
         public string LoginIDD { get; set; }
         public string UserName { get; set; }
         public string EncryptPayoutNo { get; set; }

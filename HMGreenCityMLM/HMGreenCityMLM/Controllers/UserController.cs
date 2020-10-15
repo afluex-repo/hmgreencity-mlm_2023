@@ -587,6 +587,9 @@ namespace HMGreenCityMLM.Controllers
                         Reports obj = new Reports();
                         obj.FK_InvestmentID = Crypto.Encrypt(r["Pk_InvestmentId"].ToString());
                         obj.Name = r["Name"].ToString() + " (" + r["LoginId"].ToString() + ")";
+                        obj.SiteName = r["SiteName"].ToString();
+                        obj.SectorName = r["SectorName"].ToString();
+
                         obj.UpgradtionDate = r["UpgradtionDate"].ToString();
                         obj.ProductName = r["Package"].ToString();
                         obj.Amount = r["Amount"].ToString();
