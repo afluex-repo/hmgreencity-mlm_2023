@@ -65,7 +65,7 @@
         }
 
     .tree li a {
-        width: 100px;
+        width: 95px;
         height: auto;
         border: 0;
         padding: 0;
@@ -284,40 +284,40 @@
 
 
     i.men-active {
-        width: 50px !important;
-        height: 50px !important;
+        width: 50px;
+        height: 50px;
         background-image: url(../../images/TreeIcon/men-active.png) !important;
         display: block;
         margin: 0 auto;
     }
 
     i.men-inactive {
-        width: 50px !important;
-        height: 50px !important;
+        width: 50px;
+        height: 50px;
         background-image: url(../../images/TreeIcon/men-inactive.png) !important;
         display: block;
         margin: 0 auto;
     }
 
     i.girl-active {
-        width: 50px !important;
-        height: 50px !important;
+        width: 50px;
+        height: 50px;
         background-image: url(../../images/TreeIcon/girl-active.png) !important;
         display: block;
         margin: 0 auto;
     }
 
     i.girl-inactive {
-        width: 50px !important;
-        height: 50px !important;
+        width: 50px;
+        height: 50px;
         background-image: url(../../images/TreeIcon/girl-inactive.png) !important;
         display: block;
         margin: 0 auto;
     }
 
     i.join-member {
-        width: 50px !important;
-        height: 50px !important;
+        width: 50px;
+        height: 50px;
         background-image: url(../../images/noimage.jpg) !important;
         display: block;
         margin: 0 auto;
@@ -340,8 +340,8 @@
     }
 
     i.men-block {
-        width: 50px !important;
-        height: 50px !important;
+        width: 50px;
+        height: 50px;
         background-image: url(../../images/TreeIcon/men-block.png) !important;
         display: block;
         margin: 0 auto;
@@ -440,6 +440,15 @@
     .family-tree .member-img.block-member {
         border: 2px solid #b33c18;
     }*/
+
+    member-details {
+        pointer-events: none;
+        /*z-index:99999*/
+    }
+
+    .main-menu {
+        z-index: 1 !important;
+    }
 </style>
 <style>
     #divload {
@@ -520,7 +529,7 @@
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <div class="col-sm-12 col-md-12" id="chart">
-                                                                <div class="tree family-tree clearfix">
+                                                                <div class="tree family-tree clearfix" style="overflow-x:auto">
                                                                     <ul>
                                                                         <li id="firstRow">
                                                                             <a href="" id="firstHead"></a>
@@ -539,14 +548,14 @@
                                                                                     <div class="form-row">
                                                                                         <div class="form-group col-md-9">
                                                                                             <button type="button" class="next-tree" onclick='ClickHere(this)'>
-                                                                                                <a style="width: 100%; height: 50%; background-color: white;" title="Go Down" class="clip-tree"></a>
+                                                                                                <a style="background-color: white;" title="Go Down" class="clip-tree"><i class="fa fa-users" aria-hidden="true"></i></a>
 
                                                                                             </button>
                                                                                             <div class="media-body">
-                                                                                                <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:black">@ViewBag.Fk_UserId</h3>
-                                                                                                <p class="mb-0" id="lblMemberId" style="text-align: center;color:black"></p>
-                                                                                                <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:black"></p>
-                                                                                                <p class="mb-0" id="lblstatus" style="text-align: center;color:black"></p>
+                                                                                                <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:#fff">@ViewBag.Fk_UserId</h3>
+                                                                                                <p class="mb-0" id="lblMemberId" style="text-align: center;color:#fff"></p>
+                                                                                                <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:#fff"></p>
+                                                                                                <p class="mb-0" id="lblstatus" style="text-align: center;color:#fff"></p>
                                                                                                 <p style="display:none" id="lblFk_UserId"></p>
                                                                                             </div>
 
@@ -562,79 +571,79 @@
                                                                                     </div>
                                                                                     <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
                                                                                         <div class="col-md-6">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Topup Amount</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-6">
-                                                                                            <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+                                                                                            <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-6">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Activation Date</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-6">
-                                                                                            <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+                                                                                            <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-6">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Sponsor Details</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Sponsor Details</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-6">
-                                                                                            <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+                                                                                            <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
 
 
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
                                                                                         <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Type</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Type</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Left</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Left</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Right</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Right</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Total</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Active</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-3">
-                                                                                            <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+                                                                                            <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-3">
-                                                                                            <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+                                                                                            <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-3">
-                                                                                            <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+                                                                                            <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
 
 
                                                                                         </div>
                                                                                         <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">InActive</p>
 
 
                                                                                         </div>
@@ -654,7 +663,7 @@
 
                                                                                         </div>
                                                                                         <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Total</p>
 
 
                                                                                         </div>
@@ -829,6 +838,7 @@
             html: true,
             placement: 'auto',
             trigger: 'hover',
+            boundary: 'window'
 
         });
     }
@@ -929,7 +939,7 @@
 
 <script type="text/javascript">
 
-     $(document).ready(function () {
+    $(document).ready(function () {
         $("input").attr("autocomplete", "off");
 
         var cityuse = [];
@@ -1120,7 +1130,8 @@
 
                     }
 
-                    if (winWidth > 766) {
+                    //if (winWidth > 766)
+                    {
                         if (id != null) {
                             $.ajax({
                                 type: "POST",
@@ -1227,7 +1238,8 @@
                                                     ul2.append(freeBlock + child);
                                                 }
                                             }
-                                            if (winWidth > 980) {
+                                            //if (winWidth > 980)
+                                            {
                                                 if (id != null) {
                                                     $.ajax({
                                                         type: "POST",
@@ -1350,11 +1362,11 @@
                                                     });
                                                 }
                                             }
-                                            else {
-                                                $("#firstRow").fadeIn(1000);
-                                                $("#firstHead").attr("style", "opacity:1;");
-                                                $('[id*="level"]').fadeIn(300);
-                                            }
+                                            //else {
+                                            //    $("#firstRow").fadeIn(1000);
+                                            //    $("#firstHead").attr("style", "opacity:1;");
+                                            //    $('[id*="level"]').fadeIn(300);
+                                            //}
                                         });
                                         $("#level" + i).append(ul2);
                                     }
@@ -1373,12 +1385,12 @@
                             });
                         }
                     }
-                    else {
-                        $("#firstRow").fadeIn(1000);
-                        $("#firstHead").attr("style", "opacity:1;");
-                        $('[id*="level"]').fadeIn(500);
-                        $("#firstRow").append(ul);
-                    }
+                    //else {
+                    //    $("#firstRow").fadeIn(1000);
+                    //    $("#firstHead").attr("style", "opacity:1;");
+                    //    $('[id*="level"]').fadeIn(500);
+                    //    $("#firstRow").append(ul);
+                    //}
                 });
                 $("#firstRow").append(ul);
             }

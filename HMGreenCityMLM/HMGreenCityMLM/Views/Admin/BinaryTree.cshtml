@@ -65,7 +65,7 @@
         }
 
     .tree li a {
-        width: 100px;
+        width: 95px;
         height: auto;
         border: 0;
         padding: 0;
@@ -157,7 +157,7 @@
     .popover {
         background: #f5f5f5 !important;
         max-width: 100%;
-        z-index:99;
+        z-index: 99;
         width: 500px;
         webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
         -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
@@ -440,6 +440,14 @@
     .family-tree .member-img.block-member {
         border: 2px solid #b33c18;
     }*/
+    member-details {
+        pointer-events: none;
+        /*z-index:99999*/
+    }
+
+    .main-menu {
+        z-index: 1 !important;
+    }
 </style>
 <style>
     #divload {
@@ -503,9 +511,9 @@
 
                                                         <div class="col-md-4">
                                                             <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID/Name" autocomplete="off">
-                                                    
+
                                                             <input type="hidden" id="ToLoginID">
-                                                           </div>
+                                                        </div>
                                                         <div class="col-md-4">
                                                             <input type="hidden" name="hfCustomerId" id="hfCustomerId">
                                                             <input type="hidden" name="HiddenField1" id="HiddenField1">
@@ -521,7 +529,7 @@
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <div class="col-sm-12 col-md-12" id="chart">
-                                                                <div class="tree family-tree clearfix">
+                                                                <div class="tree family-tree clearfix" style="overflow-x:auto">
                                                                     <ul>
                                                                         <li id="firstRow">
                                                                             <a href="" id="firstHead"></a>
@@ -558,8 +566,8 @@
                                                                                             <button type="button" id="close">&times;</button>
                                                                                             <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
                                                                                         </div>
-                                                                                       
-                                                                                        
+
+
                                                                                     </div>
                                                                                     <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
                                                                                         <div class="col-md-6">
@@ -593,7 +601,7 @@
 
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered"  style="border:1px solid black">
+                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
                                                                                         <div class="col-md-3">
                                                                                             <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Type</p>
 
@@ -695,7 +703,7 @@
 
                                                                                         </div>
                                                                                     </div>
-                                                                                    
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -853,6 +861,7 @@
             html: true,
             placement: 'auto',
             trigger: 'hover',
+            boundary: 'window'
 
         });
     }
@@ -944,7 +953,7 @@
 
 <script type="text/javascript">
 
-    
+
     var winHeight = $(window).height();
     var winWidth = $(window).width();
     var clickOption = "";
@@ -1105,7 +1114,8 @@
 
                     }
 
-                    if (winWidth > 766) {
+                    //if (winWidth > 766)
+                    {
                         if (id != null) {
                             $.ajax({
                                 type: "POST",
@@ -1212,7 +1222,8 @@
                                                     ul2.append(freeBlock + child);
                                                 }
                                             }
-                                            if (winWidth > 980) {
+                                            //if (winWidth > 980)
+                                            {
                                                 if (id != null) {
                                                     $.ajax({
                                                         type: "POST",
@@ -1335,11 +1346,11 @@
                                                     });
                                                 }
                                             }
-                                            else {
-                                                $("#firstRow").fadeIn(1000);
-                                                $("#firstHead").attr("style", "opacity:1;");
-                                                $('[id*="level"]').fadeIn(300);
-                                            }
+                                            //else {
+                                            //    $("#firstRow").fadeIn(1000);
+                                            //    $("#firstHead").attr("style", "opacity:1;");
+                                            //    $('[id*="level"]').fadeIn(300);
+                                            //}
                                         });
                                         $("#level" + i).append(ul2);
                                     }
@@ -1358,12 +1369,12 @@
                             });
                         }
                     }
-                    else {
-                        $("#firstRow").fadeIn(1000);
-                        $("#firstHead").attr("style", "opacity:1;");
-                        $('[id*="level"]').fadeIn(500);
-                        $("#firstRow").append(ul);
-                    }
+                    //else {
+                    //    $("#firstRow").fadeIn(1000);
+                    //    $("#firstHead").attr("style", "opacity:1;");
+                    //    $('[id*="level"]').fadeIn(500);
+                    //    $("#firstRow").append(ul);
+                    //}
                 });
                 $("#firstRow").append(ul);
             }
@@ -1452,7 +1463,7 @@
 
     }
 
-   
+
     $(function () {
 
         $("#btnSearch").click(function () {
