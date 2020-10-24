@@ -118,7 +118,9 @@ namespace HMGreenCityMLM.Controllers
             try
             {
                 obj.TopUpDate = Common.ConvertToSystemDate(obj.TopUpDate, "dd/MM/yyyy");
-                obj.TransactionDate = Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
+                obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
+
+              //  obj.TransactionDate = Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 if(obj.TopupType== "RealEstate")
                 {

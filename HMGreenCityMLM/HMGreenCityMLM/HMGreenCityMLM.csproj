@@ -828,6 +828,8 @@
     <Content Include="Views\AdminReports\UserPermission.cshtml" />
     <Content Include="Views\Master\NoticeMaster.cshtml" />
     <Content Include="Views\Master\NoticeMasterList.cshtml" />
+    <Content Include="Views\AdminReports\AssociateLoginLog.cshtml" />
+    <Content Include="Views\AdminProfile\AssociateListByNew.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

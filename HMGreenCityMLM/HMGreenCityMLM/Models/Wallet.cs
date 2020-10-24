@@ -10,6 +10,7 @@ namespace HMGreenCityMLM.Models
 {
     public class Wallet : Common
     {
+        public string word { get; set; }
         public List<SelectListItem> ddlblock { get; set; }
 
         public List<SelectListItem> ddlSector { get; set; }

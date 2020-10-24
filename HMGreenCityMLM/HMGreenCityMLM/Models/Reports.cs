@@ -9,6 +9,12 @@ namespace HMGreenCityMLM.Models
 {
     public class Reports : Common
     {
+        public List<Reports> lstassociatenew { get; set; }
+        public string PK_LoginLogId { get; set; }
+        public string IP { get; set; }
+        public string LoginDateTime { get; set; }
+        public string UserType { get; set; }
+        public List<Reports> lstAssociateLoginLog { get; set; }
         public string SectorName { get; set; }
         public string SiteName { get; set; }
         public string LoginIDD { get; set; }
@@ -127,6 +133,15 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@IsDownline", IsDownline),
                                     new SqlParameter("@Leg", Leg) };
             DataSet ds = DBHelper.ExecuteQuery("PayoutReportForMember", para);
+            return ds;
+        }
+
+        public DataSet AssociateLoginLogList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@Name", Name)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("AssociateLoginLogList", para);
             return ds;
         }
         public DataSet GetProductPayoutReport()

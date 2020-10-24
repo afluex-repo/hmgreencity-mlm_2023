@@ -9,3 +9,5 @@ $(document).ready(function () {
 });
 $('#example23').DataTable({ dom: 'Bfrtip', buttons: ['copy', 'csv', 'excel', 'pdf', 'print'], "displayLength": 50 });
 $('#example22').DataTable({ dom: 'Bfrtip', buttons: ['copy', 'csv', 'excel', 'pdf', 'print'], "displayLength": 50 });
+
+$('#example24').DataTable({ dom: 'Bfrtip', buttons: ['copy', 'csv', 'excel', 'pdf', 'print'], "displayLength": 25 });

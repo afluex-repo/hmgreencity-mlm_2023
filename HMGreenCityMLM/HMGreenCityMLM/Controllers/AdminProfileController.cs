@@ -341,6 +341,85 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
         }
 
+
+
+
+
+        public ActionResult AssociateListByNew(Reports model, string Status)
+        {
+            #region ddlstatus
+            List<SelectListItem> ddlstatus = Common.AssociateStatus();
+            ViewBag.ddlstatus = ddlstatus;
+            #endregion
+            if (Status != "" && Status != null)
+            {
+                model.Status = Status;
+            }
+            List<Reports> lst = new List<Reports>();
+
+            DataSet ds = model.GetAssociateList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Fk_UserId = r["Pk_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.JoiningDate = r["JoiningDate"].ToString();
+                    obj.Password = Crypto.Decrypt(r["Password"].ToString());
+                    obj.Mobile = (r["Mobile"].ToString());
+                    obj.Email = (r["Email"].ToString());
+                    obj.SponsorId = (r["SponsorId"].ToString());
+                    obj.SponsorName = (r["SponsorName"].ToString());
+                    obj.isBlocked = (r["isBlocked"].ToString());
+                    obj.Status = r["MemberStatus"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstassociatenew = lst;
+
+
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("AssociateListByNew")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult AssociateListByNew2(Reports model)
+        {
+            List<Reports> lst = new List<Reports>();
+            //model.LoginId = model.ToLoginID;
+            DataSet ds = model.GetAssociateList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Fk_UserId = r["Pk_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.JoiningDate = r["JoiningDate"].ToString();
+                    obj.Password = Crypto.Decrypt(r["Password"].ToString());
+                    obj.Mobile = (r["Mobile"].ToString());
+                    obj.Email = (r["Email"].ToString());
+                    obj.SponsorId = (r["SponsorId"].ToString());
+                    obj.SponsorName = (r["SponsorName"].ToString());
+                    obj.isBlocked = (r["isBlocked"].ToString());
+                    obj.Status = r["MemberStatus"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstassociatenew = lst;
+            }
+            #region ddlstatus
+            List<SelectListItem> ddlstatus = Common.AssociateStatus();
+            ViewBag.ddlstatus = ddlstatus;
+            #endregion
+            return View(model);
+        }
+
+
         public ActionResult GetSponserDetails(string ReferBy)
         {
             Common obj = new Common();

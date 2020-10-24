@@ -1559,5 +1559,28 @@ namespace HMGreenCityMLM.Controllers
         }
 
 
+        public ActionResult AssociateLoginLog(Reports model)
+        {
+            List<Reports> list = new List<Reports>();
+            DataSet ds = model.AssociateLoginLogList();
+            if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach(DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.PK_LoginLogId = r["PK_LoginLogId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.UserType = r["UserType"].ToString();
+                    obj.Remarks = r["Remarks"].ToString();
+                    obj.IP = r["IP"].ToString();
+                    obj.LoginDateTime = r["LoginDateTime"].ToString();
+                    obj.DisplayName = r["Name"].ToString();
+                    list.Add(obj);
+                }
+                model.lstAssociateLoginLog = list;
+            }
+            return View(model);
+        }
+
     }
 }
