@@ -224,7 +224,12 @@ namespace HMGreenCityMLM.Models
                                         new SqlParameter("@Fk_SectorId", FK_SectorId),
                                         new SqlParameter("@Fk_BlockId", Fk_BlockId),
                                         new SqlParameter("@PlotNumber", PlotNumber),
-                                        new SqlParameter("@Description", Description)
+                                        new SqlParameter("@Description", Description),
+                                          new SqlParameter("@PaymentMode", PaymentMode),
+                                            new SqlParameter("@TransactionNo", TransactionNo),
+                                              new SqlParameter("@TransactionDate", TransactionDate),
+                                                new SqlParameter("@BankName", BankName),
+                                                  new SqlParameter("@BankBranch", BankBranch)
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUpByAdmin", para);
             return ds;

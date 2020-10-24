@@ -51,6 +51,10 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlProduct = ddlProduct;
 
             #endregion
+            #region ddlpaymentmode
+            List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+            #endregion
             return View();
         }
         public ActionResult FillAmount(string ProductId)
@@ -114,6 +118,7 @@ namespace HMGreenCityMLM.Controllers
             try
             {
                 obj.TopUpDate = Common.ConvertToSystemDate(obj.TopUpDate, "dd/MM/yyyy");
+                obj.TransactionDate = Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 if(obj.TopupType== "RealEstate")
                 {

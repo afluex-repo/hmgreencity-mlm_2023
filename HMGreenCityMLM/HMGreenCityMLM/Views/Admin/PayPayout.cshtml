@@ -37,6 +37,8 @@
                                                 LoginId
                                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
                                             </div>
+                                            @Html.HiddenFor(m => m.ToLoginID)
+
                                             <div class="col-md-1">
                                                 Downline
                                                 @Html.CheckBoxFor(m => m.IsDownline)
@@ -48,7 +50,7 @@
                                             <div class="col-md-4">
                                                 <br />
                                                 @*<a href="/Admin/PayVoucherAchiever" class="btn btn-info">Get Details</a>*@
-                                                <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails" />
+                                                <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails" onclick="return validateLogin();"  />
                                                 <input type="submit" class="btn btn-success" value="Export To Excel" name="Export" />
                                             </div>
                                         </div>
@@ -100,9 +102,13 @@
                                                                     <td>@Item.MemberAccNo</td>
                                                                     <td>@Item.BankName</td>
                                                                     <td>@Item.IFSCCode</td>
-                                                                    <td>
-                                                                        @Item.Amount
+                                                                    <td hidden="hidden">
+                                                                       @Item.Amount
                                                                     </td>
+                                                                    <td>
+                                                                        @Item.Amount1
+                                                                    </td>
+                                                                   
                                                                     <td>
                                                                         <input type="text" class="form-control" id="txtamount_ @i" name="txtamount_ @i" />
                                                                     </td>
@@ -148,6 +154,7 @@
 }
 <script src="../vendor/jquery/jquery.min.js"></script>
 
+<script src="../../WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
@@ -169,6 +176,35 @@
             }
 
         });
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/Admin/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+
+
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
     });
 
     function isNumberKey(evt) {
@@ -178,6 +214,16 @@
             return false;
 
         return true;
+    }
+
+    function validateLogin() {
+        var login = $('#LoginId').val();
+        if (login == "") {
+            $('#ToLoginID').val(null);
+        } else {
+            var loginid = $('#ToLoginID').val();
+
+        }
     }
 
 </script>

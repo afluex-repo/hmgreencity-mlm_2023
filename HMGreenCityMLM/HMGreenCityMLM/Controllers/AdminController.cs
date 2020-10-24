@@ -901,6 +901,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
                     obj.Amount = (r["Amount"].ToString());
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
+                    obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -919,6 +920,7 @@ namespace HMGreenCityMLM.Controllers
             //model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
             //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.LoginId = model.ToLoginID;
             List<Reports> lst = new List<Reports>();
             // model.LoginId = Session["LoginId"].ToString();
             DataSet ds = model.GetPayPayout();
@@ -934,7 +936,9 @@ namespace HMGreenCityMLM.Controllers
                     obj.IFSCCode = (r["IFSCCode"].ToString());
                     obj.BankName = (r["MemberBankName"].ToString());
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
+
                     obj.Amount = (r["Amount"].ToString());
+                    obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;

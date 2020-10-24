@@ -110,9 +110,9 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Topup Date <span style="color: red">*</span></label>
+                                                    <label class="col-sm-3 col-form-label">Amount in Words<span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @Placeholder = "TopUp Date" })
+                                                        @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", @Placeholder = "Amount in Words" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,11 +128,75 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                           
+
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Topup Date <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @Placeholder = "TopUp Date",@readonly="readonly" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Payment Mode </label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" id="bankname" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Bank Name <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                       @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" id="chequeno" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Transaction No <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                       @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6" id="chequdate" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Transaction Date <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="col-md-6" id="bankbranch" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Branch <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                           
+
                                             <div class="col-md-4 form-group">
                                                 <span style="color: red">@TempData["Topup"] </span>
                                                 <input class="btn btn-success pull-right" onclick="return validateform()" type="submit" value="Top Up" />
                                             </div>
+
+                                            
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -154,6 +218,14 @@
     }
 </style>
 
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script src="../../WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -164,9 +236,15 @@
         $('#TopupType').val('RealEstate');
     });
   
+  
     $('#TopUpDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+
 
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -176,6 +254,23 @@
 
         return true;
     }
+
+    function getpaymentdetails() {
+        var paymentmode = ($("#PaymentMode option:selected").text());
+        if (paymentmode != "Cash") {
+            bankname.style.display = "block";
+            chequeno.style.display = "block";
+            chequdate.style.display = "block";
+            bankbranch.style.display = "block";
+        }
+        else {
+            bankname.style.display = "none";
+            chequeno.style.display = "none";
+            chequdate.style.display = "none";
+            bankbranch.style.display = "none";
+        }
+    }
+
     function FillAmount() {
         //$("#Fk_CityId").empty();
         var Productid = "";
@@ -251,6 +346,37 @@
             $('#TopUpDate').focus();
             return false;
         }
+
+
+        if ($('#PaymentMode').val() != 'Cash') {
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                return false;
+            }
+            if ($('#TransactionNo').val() == '') {
+                $("#TransactionNo").addClass('errortext');
+                $('#TransactionNo').focus();
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                return false;
+            }
+        }
+        else {
+            $('#TransactionNo').val('');
+            $('#BankName').val('');
+            $('#TransactionDate').val('');
+            $('#BankBranch').val('');
+        }
+
         return true;
 
     }
