@@ -10,6 +10,7 @@ namespace HMGreenCityMLM.Models
 {
     public class Wallet : Common
     {
+        public int Amount2 { get; set; }
         public string word { get; set; }
         public List<SelectListItem> ddlblock { get; set; }
 
@@ -57,6 +58,16 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@AddedBy", AddedBy)
                                      };
             DataSet ds = DBHelper.ExecuteQuery("ProductWalletRequest", para);
+            return ds;
+        }
+
+         public DataSet fAmountInWords()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@AMount", Amount2)
+
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("GetAMountInWords", para);
             return ds;
         }
         public DataSet SaveEWalletRequest()

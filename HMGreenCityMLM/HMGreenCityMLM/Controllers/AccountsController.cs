@@ -113,6 +113,32 @@ namespace HMGreenCityMLM.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult AmountinWords(int Amount)
+        {
+            Wallet obj = new Wallet();
+            obj.Amount2 = Amount;
+            
+            DataSet ds = obj.fAmountInWords();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                {
+                    obj.word = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    obj.Result = "No";
+                }
+                else
+                {
+                    obj.word = ds.Tables[0].Rows[0]["AmountInWords"].ToString();
+
+                    obj.Result = "Yes";
+                }
+
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult TopUpByAdmin(Wallet obj)
         {
             try
