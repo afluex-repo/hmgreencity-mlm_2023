@@ -146,7 +146,7 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Payment Mode </label>
+                                                    <label class="col-sm-3 col-form-label">Payment Mode <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
                                                         @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
                                                     </div>
@@ -159,7 +159,7 @@
                                            
                                             <div class="col-md-6" id="bankname" style="display: none">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Bank Name <span style="color: red">*</span></label>
+                                                    <label class="col-sm-3 col-form-label">Bank Name </label>
                                                     <div class="col-sm-9">
                                                         @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
                                                     </div>
@@ -167,7 +167,7 @@
                                             </div>
                                             <div class="col-md-6" id="chequeno" style="display: none">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Transaction No <span style="color: red">*</span></label>
+                                                    <label class="col-sm-3 col-form-label">Transaction No</label>
                                                     <div class="col-sm-9">
                                                         @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
                                                     </div>
@@ -176,7 +176,7 @@
 
                                             <div class="col-md-6" id="chequdate" style="display: none">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Transaction Date <span style="color: red">*</span></label>
+                                                    <label class="col-sm-3 col-form-label">Transaction Date</label>
                                                     <div class="col-sm-9">
                                                         @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = "readonly" })
                                                     </div>
@@ -188,7 +188,7 @@
 
                                             <div class="col-md-6" id="bankbranch" style="display: none">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Branch <span style="color: red">*</span></label>
+                                                    <label class="col-sm-3 col-form-label">Branch </label>
                                                     <div class="col-sm-9">
                                                         @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
                                                     </div>
@@ -374,33 +374,10 @@
         }
 
 
-        if ($('#PaymentMode').val() != 'Cash') {
-            if ($('#BankName').val() == '') {
-                $("#BankName").addClass('errortext');
-                $('#BankName').focus();
-                return false;
-            }
-            if ($('#TransactionNo').val() == '') {
-                $("#TransactionNo").addClass('errortext');
-                $('#TransactionNo').focus();
-                return false;
-            }
-            if ($('#TransactionDate').val() == '') {
-                $("#TransactionDate").addClass('errortext');
-                $('#TransactionDate').focus();
-                return false;
-            }
-            if ($('#BankBranch').val() == '') {
-                $("#BankBranch").addClass('errortext');
-                $('#BankBranch').focus();
-                return false;
-            }
-        }
-        else {
-            $('#TransactionNo').val('');
-            $('#BankName').val('');
-            $('#TransactionDate').val('');
-            $('#BankBranch').val('');
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            return false;
         }
 
         return true;
