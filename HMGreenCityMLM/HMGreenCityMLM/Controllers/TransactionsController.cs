@@ -279,6 +279,38 @@ namespace HMGreenCityMLM.Controllers
 
         #region distributePayment
 
+
+        public ActionResult DistributePaymentPassword(Transactions model)
+        {
+
+            return View() ;
+        }
+
+        [HttpPost]
+        [OnAction(ButtonName = "btnSave")]
+        [ActionName("DistributePaymentPassword")]
+        public ActionResult ValidateDistributePayment(Transactions model)
+        {
+            string FormName = "";
+            string Controller = "";
+            DataSet ds = model.ValidatePassword();
+            if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    FormName = "DistributePayment";
+                    Controller = "Transactions";
+                }
+                else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                {
+                    TempData["DistributePaymentPassword"] = "Distribute Payment Password is Incorrect";
+                    FormName = "AdminDashBoard";
+                    Controller = "Admin";
+                }
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+
         public ActionResult DistributePayment()
         {
             Transactions model = new Transactions();

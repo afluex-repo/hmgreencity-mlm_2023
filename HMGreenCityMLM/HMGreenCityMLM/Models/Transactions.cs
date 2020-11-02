@@ -9,6 +9,7 @@ namespace HMGreenCityMLM.Models
 {
     public class Transactions : Common
     {
+        public string DistPaymentPassword { get; set; }
         public string PK_UserID { get; set; }
         public string LoginID { get; set; }
         public string NewLoginID { get; set; }
@@ -30,6 +31,13 @@ namespace HMGreenCityMLM.Models
         {
             //SqlParameter[] para = { new SqlParameter("@LoginId", LoginID) };
             DataSet ds = DBHelper.ExecuteQuery("MakePaymentList");
+            return ds;
+        }
+
+        public DataSet ValidatePassword()
+        {
+            SqlParameter[] para = { new SqlParameter("@DistPaymentPassword", DistPaymentPassword) };
+            DataSet ds = DBHelper.ExecuteQuery("ValidateDistributePassword",para);
             return ds;
         }
         public DataSet GetProductDitributePaymentList()
