@@ -15,6 +15,7 @@ namespace HMGreenCityMLM.Models
         public string NewLoginID { get; set; }
         public string MemberName { get; set; }
         public string ClosingDate { get; set; }
+        public string ClosingDateValid { get; set; }
         public string Name { get; set; }
         public string JoiningDate { get; set; }
         public string Password { get; set; }

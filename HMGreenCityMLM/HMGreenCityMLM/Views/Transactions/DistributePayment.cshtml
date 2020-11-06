@@ -53,14 +53,22 @@
                                                         <div class="form-group">
                                                             <label>Closing Date<span style="color:red">*</span></label>
                                                             @Html.TextBoxFor(m => m.ClosingDate, new { @class = "form-control", @placeholder = "Closing Date" })
+                                                            @Html.HiddenFor(m => m.ClosingDateValid)
                                                         </div>
                                                     </div>
 
 
                                                     <div class="col-lg-3">
                                                         <br />
-                                                        <input class="btn btn-success" onclick="return validateform()" type="submit" value="Distribute Payment" />
-                                                        <input type="submit" class="btn btn-success" value="Export To Excel" name="Export" formtarget="_blank" />
+                                                        @*<input class="btn btn-success" onclick="return validateform()" type="submit" value="Distribute Payment" />*@
+                                                      
+                                                        
+                                                        <a onclick="return validateform()" class="btn btn-success">
+                                                            Distribute Payment
+                                                        </a>
+                                                        
+                                                        
+                                                          <input type="submit" class="btn btn-success" value="Export To Excel" name="Export" formtarget="_blank" />
                                                     </div>
                                                 </div>
 
@@ -153,11 +161,15 @@
 
     function validateform() {
         $(".errortext").removeClass("errortext");
+
+        var conta = $('#ClosingDate').val();
         if ($('#ClosingDate').val() == '') {
             $("#ClosingDate").addClass('errortext');
             $('#ClosingDate').focus();
             return false;
         }
+
+        window.location.href = '@Url.Action("DistributePaymentPassword", "Transactions")?id=' + conta;
     }
 </script>
 <style>

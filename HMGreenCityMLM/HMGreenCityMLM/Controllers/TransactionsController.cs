@@ -280,90 +280,72 @@ namespace HMGreenCityMLM.Controllers
         #region distributePayment
 
 
-        public ActionResult DistributePaymentPassword(Transactions model)
-        {
+        public ActionResult DistributePaymentPassword(string id)
 
-            return View() ;
+
+        {
+            Transactions model = new Transactions();
+            model.ClosingDate = id;
+            return View(model) ;
         }
+
+        //[HttpPost]
+        //[OnAction(ButtonName = "btnSave")]
+        //[ActionName("DistributePaymentPassword")]
+        //public ActionResult ValidateDistributePayment(Transactions model)
+        //{
+        //    string FormName = "";
+        //    string Controller = "";
+        //   model.ClosingDate = model.ClosingDate;
+        //    DataSet ds = model.ValidatePassword();
+        //    if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+        //        {
+        //            model.ClosingDate = model.ClosingDate;
+        //        }
+        //        else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+        //        {
+        //            TempData["DistributePaymentPassword"] = "Distribute Payment Password is Incorrect";
+        //            FormName = "AdminDashBoard";
+        //            Controller = "Admin";
+        //        }
+        //    }
+        //    return RedirectToAction("DistiributePayemntToMembers","Transactions",model.ClosingDate);
+        //}
 
         [HttpPost]
         [OnAction(ButtonName = "btnSave")]
         [ActionName("DistributePaymentPassword")]
-        public ActionResult ValidateDistributePayment(Transactions model)
-        {
-            string FormName = "";
-            string Controller = "";
-            DataSet ds = model.ValidatePassword();
-            if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count > 0)
-            {
-                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
-                {
-                    FormName = "DistributePayment";
-                    Controller = "Transactions";
-                }
-                else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
-                {
-                    TempData["DistributePaymentPassword"] = "Distribute Payment Password is Incorrect";
-                    FormName = "AdminDashBoard";
-                    Controller = "Admin";
-                }
-            }
-            return RedirectToAction(FormName, Controller);
-        }
-
-        public ActionResult DistributePayment()
-        {
-            Transactions model = new Transactions();
-            List<Transactions> lst = new List<Transactions>();
-
-            ViewBag.Binary = ViewBag.Direct = ViewBag.Gross = ViewBag.TDS = ViewBag.Processing = ViewBag.NetIncome = 0;
-            DataSet ds = model.GetDitributePaymentList();
-
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    Transactions obj = new Transactions();
-                    obj.LoginID = r["LoginId"].ToString();
-                    obj.FirstName = r["FirstName"].ToString();
-                    obj.BinaryIncome = r["BinaryIncome"].ToString();
-                    obj.DirectIncome = r["DirectIncome"].ToString();
-                    obj.GrossIncome = (r["GrossIncome"].ToString());
-                    obj.TDS = (r["TDS"].ToString());
-                    obj.Processing = (r["Processing"].ToString());
-                    obj.NetIncome = (r["NetIncome"].ToString());
-
-                    obj.LeadershipBonus = r["DirectLeaderShipBonus"].ToString();
-                    ViewBag.Binary = Convert.ToDecimal(ViewBag.Binary) + Convert.ToDecimal(r["BinaryIncome"].ToString());
-                    ViewBag.Direct = Convert.ToDecimal(ViewBag.Direct) + Convert.ToDecimal(r["DirectIncome"].ToString());
-                    ViewBag.Gross = Convert.ToDecimal(ViewBag.Gross) + Convert.ToDecimal(r["GrossIncome"].ToString());
-                    ViewBag.TDS = Convert.ToDecimal(ViewBag.TDS) + Convert.ToDecimal(r["TDS"].ToString());
-                    ViewBag.Processing = Convert.ToDecimal(ViewBag.Processing) + Convert.ToDecimal(r["Processing"].ToString());
-                    ViewBag.NetIncome = Convert.ToDecimal(ViewBag.NetIncome) + Convert.ToDecimal(r["NetIncome"].ToString());
-
-                    lst.Add(obj);
-                }
-                model.lstassociate = lst;
-                
-            }
-            model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
-            model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
-            return View(model);
-        }
-
         public ActionResult DistiributePayemntToMembers(Transactions obj)
         {
             string FormName = "";
             string Controller = "";
             try
             {
-                obj.ClosingDate = Common.ConvertToSystemDate(obj.ClosingDate, "dd/MM/yyyy");
-                obj.UpdatedBy = Session["PK_AdminId"].ToString();
-                DataSet ds = obj.AutoDistributePayment();
 
-                TempData["DistributePayment"] = "Payment distributed successfully";
-                FormName = "DistributePayment";
-                Controller = "Transactions";
+                DataSet ds = obj.ValidatePassword();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.ClosingDate = Common.ConvertToSystemDate(obj.ClosingDate, "dd/MM/yyyy");
+                        obj.UpdatedBy = Session["PK_AdminId"].ToString();
+                        DataSet ds1 = obj.AutoDistributePayment();
+
+                        TempData["DistributePayment"] = "Payment distributed successfully";
+                        FormName = "DistributePayment";
+                        Controller = "Transactions";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["DistributePayment"] = "Distribute Payment Password is Incorrect";
+                        FormName = "DistributePayment";
+                        Controller = "Transactions";
+                    }
+                }
+                
+                
             }
             catch (Exception ex)
             {
@@ -417,6 +399,48 @@ namespace HMGreenCityMLM.Controllers
 
             return null;
         }
+
+        public ActionResult DistributePayment()
+        {
+            Transactions model = new Transactions();
+            List<Transactions> lst = new List<Transactions>();
+
+            ViewBag.Binary = ViewBag.Direct = ViewBag.Gross = ViewBag.TDS = ViewBag.Processing = ViewBag.NetIncome = 0;
+            DataSet ds = model.GetDitributePaymentList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Transactions obj = new Transactions();
+                    obj.LoginID = r["LoginId"].ToString();
+                    obj.FirstName = r["FirstName"].ToString();
+                    obj.BinaryIncome = r["BinaryIncome"].ToString();
+                    obj.DirectIncome = r["DirectIncome"].ToString();
+                    obj.GrossIncome = (r["GrossIncome"].ToString());
+                    obj.TDS = (r["TDS"].ToString());
+                    obj.Processing = (r["Processing"].ToString());
+                    obj.NetIncome = (r["NetIncome"].ToString());
+
+                    obj.LeadershipBonus = r["DirectLeaderShipBonus"].ToString();
+                    ViewBag.Binary = Convert.ToDecimal(ViewBag.Binary) + Convert.ToDecimal(r["BinaryIncome"].ToString());
+                    ViewBag.Direct = Convert.ToDecimal(ViewBag.Direct) + Convert.ToDecimal(r["DirectIncome"].ToString());
+                    ViewBag.Gross = Convert.ToDecimal(ViewBag.Gross) + Convert.ToDecimal(r["GrossIncome"].ToString());
+                    ViewBag.TDS = Convert.ToDecimal(ViewBag.TDS) + Convert.ToDecimal(r["TDS"].ToString());
+                    ViewBag.Processing = Convert.ToDecimal(ViewBag.Processing) + Convert.ToDecimal(r["Processing"].ToString());
+                    ViewBag.NetIncome = Convert.ToDecimal(ViewBag.NetIncome) + Convert.ToDecimal(r["NetIncome"].ToString());
+
+                    lst.Add(obj);
+                }
+                model.lstassociate = lst;
+
+            }
+            model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
+            model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
+            return View(model);
+        }
+
+
 
         #endregion
 
