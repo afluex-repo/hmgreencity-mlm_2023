@@ -72,8 +72,8 @@
                                                                 <th>Bank Name</th>
                                                                 <th>IFSC Code</th>
                                                                 <th>Amount</th>
-                                                                <th>Pay Amount</th>
-                                                                <th>Transaction No</th>
+                                                                <th style="padding: 10px 50px;white-space: nowrap;">Pay Amount</th>
+                                                                <th  style="padding: 10px 50px;white-space: nowrap;">Transaction No</th>
                                                                 <th>Transaction Date</th>
                                                             </tr>
                                                         </thead>
@@ -109,10 +109,10 @@
                                                                         @Item.Amount1
                                                                     </td>
                                                                    
-                                                                    <td>
+                                                                    <td width="200px">
                                                                         <input type="text" class="form-control" id="txtamount_ @i" name="txtamount_ @i" />
                                                                     </td>
-                                                                    <td>
+                                                                    <td width="200px">
                                                                         <input type="text" class="form-control" id="txttranno_ @i" name="txttranno_ @i" />
                                                                         <input type="hidden" class="form-control" id="Fk_UserId_ @i" name="Fk_UserId_ @i" value="@Item.Fk_UserId" />
                                                                     </td>
