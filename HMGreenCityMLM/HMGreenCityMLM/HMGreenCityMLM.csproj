@@ -581,6 +581,7 @@
     <Content Include="WebsiteCss\css\style.css" />
     <Content Include="WebsiteCss\fonts\Flaticon.svg" />
     <Content Include="WebsiteCss\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="WebsiteCss\hmgreencity.jpg" />
     <Content Include="WebsiteCss\js\appear.js" />
     <Content Include="WebsiteCss\js\bootstrap.min.js" />
     <Content Include="WebsiteCss\js\color-settings.js" />
