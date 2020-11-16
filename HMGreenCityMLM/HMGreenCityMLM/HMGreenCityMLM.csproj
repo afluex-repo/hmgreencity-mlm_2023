@@ -774,6 +774,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserReportsController.cs" />
     <Compile Include="Controllers\WalletController.cs" />
+    <Compile Include="Controllers\WebAPIController.cs" />
     <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -781,6 +782,7 @@
     <Compile Include="Models\AgentIncomes.cs" />
     <Compile Include="Models\AgentModel.cs" />
     <Compile Include="Models\AgentPara.cs" />
+    <Compile Include="Models\API.cs" />
     <Compile Include="Models\BLSMS.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Crypto.cs" />
@@ -844,6 +846,8 @@
     <Folder Include="KYCDocuments\" />
     <Folder Include="ProductRewardImages\" />
     <Folder Include="RequestImage\" />
+    <Folder Include="Views\API\" />
+    <Folder Include="Views\WebAPI\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
