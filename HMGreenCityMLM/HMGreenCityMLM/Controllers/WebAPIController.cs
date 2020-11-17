@@ -31,14 +31,15 @@ namespace HMGreenCityMLM.Controllers
 
             try
             {
+                string Password = model.Password;
+                model.Password = Crypto.Encrypt(Password);
                 DataSet dsResult = model.Login();
                 {
                     if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
                         if ((dsResult.Tables[0].Rows[0]["UserType"].ToString() == "Associate"))
                         {
-                            if (obj.Password == Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString()))
-                            {
+                            
                                 obj.Status = "0";
                                 obj.Message = "Successfully Logged in";
                                 obj.LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
@@ -49,13 +50,7 @@ namespace HMGreenCityMLM.Controllers
                                 obj.TransPassword = dsResult.Tables[0].Rows[0]["TransPassword"].ToString();
                                 obj.Profile = dsResult.Tables[0].Rows[0]["Profile"].ToString();
                                 obj.Status = dsResult.Tables[0].Rows[0]["Status"].ToString();
-                            }
-                            else
-                            {
-                                obj.Status = "1";
-                                obj.Message = "Incorrect Password";
 
-                            }
                         }
                         else if (dsResult.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                         {
@@ -235,6 +230,23 @@ namespace HMGreenCityMLM.Controllers
             }
 
 
+        }
+
+        #endregion
+
+        #region TopupList
+
+        public ActionResult TopupList(API model)
+        {
+            API obj = new API();
+            if(model.LoginId =="" || model.LoginId == null)
+            {
+                obj.Status = "1";
+                obj.Message = "Please enter LoginId";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
