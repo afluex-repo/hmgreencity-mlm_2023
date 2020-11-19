@@ -1588,6 +1588,8 @@ namespace HMGreenCityMLM.Controllers
         
         public ActionResult DateWiseBusinessReport(Reports model)
         {
+            model.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
+            model.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
             return View(model);
         }
 

@@ -167,11 +167,15 @@
 
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
-
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
     });
+
 
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
