@@ -99,17 +99,49 @@
     </div>
 
 }
-
 <script src="../vendor/jquery/jquery.min.js"></script>
 
+<script src="../../WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
+    $(document).ready(function () {
+        $("input").attr("autocomplete", "off");
 
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+
+
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
+
 </script>

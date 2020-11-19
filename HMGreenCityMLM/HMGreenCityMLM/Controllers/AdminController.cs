@@ -1080,8 +1080,6 @@ namespace HMGreenCityMLM.Controllers
             return View(objewallet);
         }
         #endregion
-
-
         public ActionResult GetUserList()
         {
             Reports obj = new Reports();
@@ -1100,6 +1098,8 @@ namespace HMGreenCityMLM.Controllers
             }
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
+
+    
 
     }
 }

@@ -39,6 +39,7 @@
                                                     <div class="col-lg-3">
                                                         Login Id
                                                         @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                                                        @Html.HiddenFor(m => m.ToLoginID)
                                                     </div>
                                                     <div class="col-lg-3">
                                                         Name
@@ -98,24 +99,24 @@
                                                                 int i = 1;
                                                                 foreach (var Item in Model.lsttopupreport)
                                                                 {
-                                                        <tr class="text-left">
-                                                            <td>@i</td>
-                                                            <td>@Item.LoginId</td>
-                                                            <td>@Item.DisplayName</td>
-                                                            <td>@Item.PayoutNo</td>
-                                                            <td>@Item.ClosingDate</td>
-                                                            <td>@Item.DirectIncome</td>
-                                                            <td>@Item.BinaryIncome</td>
-                                                            <td hidden="hidden">@Item.LeadershipBonus</td>
-                                                            <td>@Item.GrossAmount</td>
-                                                            <td>@Item.TDSAmount</td>
-                                                            <td>@Item.ProcessingFee</td>
-                                                            <td hidden="hidden">@Item.ProductWallet</td>
-                                                            <td>@Item.NetAmount</td>
-                                                            <td hidden="hidden">
-                                                                <a href="/AdminReports/PayoutReceipt?lid=@Item.EncryptName&pno=@Item.EncryptPayoutNo" class="btn btn-sm btn-primary" target="_blank">Print</a>
-                                                            </td>
-                                                        </tr>
+                                                                    <tr class="text-left">
+                                                                        <td>@i</td>
+                                                                        <td>@Item.LoginId</td>
+                                                                        <td>@Item.DisplayName</td>
+                                                                        <td>@Item.PayoutNo</td>
+                                                                        <td>@Item.ClosingDate</td>
+                                                                        <td>@Item.DirectIncome</td>
+                                                                        <td>@Item.BinaryIncome</td>
+                                                                        <td hidden="hidden">@Item.LeadershipBonus</td>
+                                                                        <td>@Item.GrossAmount</td>
+                                                                        <td>@Item.TDSAmount</td>
+                                                                        <td>@Item.ProcessingFee</td>
+                                                                        <td hidden="hidden">@Item.ProductWallet</td>
+                                                                        <td>@Item.NetAmount</td>
+                                                                        <td hidden="hidden">
+                                                                            <a href="/AdminReports/PayoutReceipt?lid=@Item.EncryptName&pno=@Item.EncryptPayoutNo" class="btn btn-sm btn-primary" target="_blank">Print</a>
+                                                                        </td>
+                                                                    </tr>
                                                                     i++;
                                                                 }
 
@@ -139,45 +140,72 @@
     </div>
 }
 
-                        <script src="../../vendor/jquery/jquery.min.js"></script>
-                        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-                        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="../vendor/jquery/jquery.min.js"></script>
 
-                        <script>
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
-                            $(document).ready(function () {
+<script>
 
-                                if ($("#IsDownline").is(':checked')) {
-                                    $("#divLeg").show();
-                                }
+    $(document).ready(function () {
+        if ($("#IsDownline").is(':checked')) {
+            $("#divLeg").show();
+        }
+        //$('#IsDownline').prop('checked', true);
+        $('#IsDownline').change(function () {
+            if (this.checked) {
+                $("#divLeg").show();
+                //alert('Show');
+            }
+            else {
+                $("#divLeg").hide();
+            }
+        });
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/Admin/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
 
-                                //$('#IsDownline').prop('checked', true);
-                                $('#IsDownline').change(function () {
-                                    if (this.checked) {
-                                        $("#divLeg").show();
-                                        //alert('Show');
-                                    }
-                                    else {
-                                        $("#divLeg").hide();
-                                    }
 
-                                });
-                            });
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
 
-                            $('#FromDate').datepicker({
-                                dateFormat: 'dd/mm/yy',
-                            });
-                            $('#ToDate').datepicker({
-                                dateFormat: 'dd/mm/yy',
-                            });
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
 
-                            function isNumberOrDecimal(evt) {
-                                var charCode = (evt.which) ? evt.which : evt.keyCode;
-                                if (charCode != 46 && charCode > 31
-                                  && (charCode < 48 || charCode > 57))
-                                    return false;
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
 
-                                return true;
-                            }
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
 
-                        </script>
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</script>

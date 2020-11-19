@@ -727,10 +727,29 @@ namespace HMGreenCityMLM.Controllers
             return RedirectToAction("AssociateList", "AdminProfile");
         }
 
+        //public ActionResult GetUserList()
+        //{
+        //    Profile obj = new Profile();
+        //    List<Profile> lst = new List<Profile>();
+        //    obj.LoginId = Session["LoginId"].ToString();
+        //    DataSet ds = obj.GettingUserProfile();
+        //    if (ds != null && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        foreach (DataRow dr in ds.Tables[0].Rows)
+        //        {
+        //            Profile objList = new Profile();
+        //            objList.UserName = dr["Fullname"].ToString();
+        //            objList.LoginIDD = dr["LoginId"].ToString();
+        //            lst.Add(objList);
+        //        }
+        //    }
+        //    return Json(lst, JsonRequestBehavior.AllowGet);
+        //}
         public ActionResult GetUserList()
         {
             Profile obj = new Profile();
             List<Profile> lst = new List<Profile>();
+            obj.LoginId = Session["LoginId"].ToString();
             DataSet ds = obj.GettingUserProfile();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -744,7 +763,6 @@ namespace HMGreenCityMLM.Controllers
             }
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
-
 
     }
 }

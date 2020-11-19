@@ -43,14 +43,14 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
             return ds;
         }
+     
         public DataSet GettingUserProfile()
         {
             SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginId)};
-            DataSet ds = DBHelper.ExecuteQuery("GetUserProfile");
+            DataSet ds = DBHelper.ExecuteQuery("GetUserProfile", para);
             return ds;
         }
-
 
         public DataSet UpdateProfile()
         {
