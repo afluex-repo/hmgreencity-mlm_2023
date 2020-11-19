@@ -392,7 +392,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.Amount = r["Amount"].ToString();
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
-
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreport = lst1;
@@ -436,11 +436,13 @@ namespace HMGreenCityMLM.Controllers
                     Obj.Amount = r["Amount"].ToString();
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
-
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreport = lst1;
             }
+
+
             #region PaidStatus
             List<SelectListItem> PaidStatus = Common.PaidStatus();
             ViewBag.PaidStatus = PaidStatus;
@@ -1581,6 +1583,52 @@ namespace HMGreenCityMLM.Controllers
             }
             return View(model);
         }
+
+        #region Date Wise Business Report
+        
+        public ActionResult DateWiseBusinessReport(Reports model)
+        {
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("DateWiseBusinessReport")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult FilterDateWiseBusinessReport(Reports model)
+        {
+            List<Reports> lst1 = new List<Reports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+          
+            DataSet ds11 = model.GetDatebusinessdetails();
+            if (ds11.Tables[0].Rows[0]["Msg"].ToString() == "0")
+            {
+                return View(model);
+            }else
+            {
+                if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds11.Tables[0].Rows)
+                    {
+                        Reports Obj = new Reports();
+                        Obj.LoginId = r["LoginId"].ToString();
+                        Obj.Name = r["FirstName"].ToString();
+                        Obj.LeftBusiness = r["LeftBusiness"].ToString();
+                        Obj.RightBusiness = r["RightBusiness"].ToString();
+                        Obj.TotalBusiness = r["TotalBusiness"].ToString();
+                        Obj.DirectBusiness = r["DirectBusiness"].ToString();
+
+                        lst1.Add(Obj);
+                    }
+                    model.lstDateWiseBusiness = lst1;
+                }
+            }
+           
+            
+            return View(model);
+        }
+        #endregion
 
     }
 }

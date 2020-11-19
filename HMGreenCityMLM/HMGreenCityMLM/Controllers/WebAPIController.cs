@@ -763,9 +763,18 @@ namespace HMGreenCityMLM.Controllers
 
                     lst.Add(Objload);
                 }
+                objewallet.Status = "0";
+                objewallet.Message = "Data Fetched";
                 objewallet.lstpayoutledger = lst;
+                return Json(objewallet, JsonRequestBehavior.AllowGet);
             }
-            return Json(objewallet,JsonRequestBehavior.AllowGet);
+            else
+            {
+                objewallet.Status = "1";
+                objewallet.Message = "No Data for this id";
+                return Json(objewallet, JsonRequestBehavior.AllowGet);
+            }
+            
         }
 
         #endregion

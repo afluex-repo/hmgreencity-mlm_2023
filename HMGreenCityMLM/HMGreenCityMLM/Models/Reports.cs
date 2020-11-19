@@ -9,6 +9,12 @@ namespace HMGreenCityMLM.Models
 {
     public class Reports : Common
     {
+        public string Total { get; set; }
+        public string DirectBusiness { get; set; }
+        public string TotalBusiness { get; set; }
+        public string RightBusiness { get; set; }
+        public string LeftBusiness { get; set; }
+        public List<Reports> lstDateWiseBusiness { get; set; }
         public List<Reports> lstassociatenew { get; set; }
         public string PK_LoginLogId { get; set; }
         public string IP { get; set; }
@@ -182,6 +188,17 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@ToDate", ToDate),
             };
             DataSet ds = DBHelper.ExecuteQuery("ProductIncomeReport", para);
+            return ds;
+        }
+
+        public DataSet GetDatebusinessdetails()
+        {
+            SqlParameter[] para = { 
+                                    new SqlParameter("@LoginId", ToLoginID),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetBusinessDetails", para);
             return ds;
         }
         public DataSet GetAssociateList()
