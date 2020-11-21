@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HMGreenCityMLM.Filter;
 
 namespace HMGreenCityMLM.Controllers
 {
@@ -13,10 +14,29 @@ namespace HMGreenCityMLM.Controllers
         //
         // GET: /EmployeeRegistration/
 
-        public ActionResult EmployeeRegistration()
+        public ActionResult EmployeeRegistration(string LoginId)
         {
+            EmployeeRegistrations emp = new EmployeeRegistrations();
+            if (LoginId != null)
+            {
 
-          
+                emp.LoginId = LoginId;
+
+                DataSet ds = emp.GetEmployeeData();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    emp.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                    emp.LoginId = ds.Tables[0].Rows[0].ToString();
+                    emp.Mobile = ds.Tables[0].Rows[0]["Contact"].ToString();
+                    emp.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    emp.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                    emp.Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                    emp.EducationQualififcation = ds.Tables[0].Rows[0]["EducationQualifiacation"].ToString();
+
+                }
+            }
+
+
 
             #region ddlUserType
             Common obj = new Common();
@@ -31,7 +51,7 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlUserType = ddlUserType;
             #endregion
 
-            return View();
+            return View(emp);
         }
         public ActionResult EmployeeDetails()
         {
@@ -49,6 +69,7 @@ namespace HMGreenCityMLM.Controllers
                     Objload.Mobile = dr["Contact"].ToString();
                     Objload.Email = dr["Email"].ToString();
                     Objload.Password = dr["Password"].ToString();
+                    Objload.Status = dr["Status"].ToString();
                     Objload.EducationQualififcation = dr["EducationQualifiacation"].ToString();
                    
                     lst.Add(Objload);
@@ -57,6 +78,62 @@ namespace HMGreenCityMLM.Controllers
             }
             return View(emp);
         }
+
+        public ActionResult ActivateEmployee(string LoginId)
+        {
+            EmployeeRegistrations model = new EmployeeRegistrations();
+            try
+            {
+                model.LoginId = LoginId;
+                model.CreatedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = model.ActivateEmployeeByAdmin();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["EmployeeDetails"] = "Employee activated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["EmployeeDetails"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["EmployeeDetails"] = ex.Message;
+            }
+            return RedirectToAction("EmployeeDetails", "EmployeeRegistration");
+        }
+        public ActionResult DeactivateEmployee(string LoginId)
+        {
+            EmployeeRegistrations model = new EmployeeRegistrations();
+            try
+            {
+                model.LoginId = LoginId;
+                model.CreatedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = model.DeActivateEmployeeByAdmin();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["EmployeeDetails"] = "Employee deactivated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["EmployeeDetails"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["EmployeeDetails"] = ex.Message;
+            }
+            return RedirectToAction("EmployeeDetails", "EmployeeRegistration");
+        }
+
         public ActionResult SaveEmployeeRegistration( string Name,string Mobile,string Email,string Qualification,string Fk_UserTypeId )
         {
            
@@ -102,5 +179,69 @@ namespace HMGreenCityMLM.Controllers
             catch(Exception ex) {}
             return Json(objregi, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetMemberNameForTopUp(string LoginId)
+        {
+            EmployeeRegistrations obj = new EmployeeRegistrations();
+            obj.LoginId = LoginId;
+            DataSet ds = obj.GetEmployeeName();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                {
+                    obj.DisplayName = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    obj.Result = "No";
+                }
+                else
+                {
+                    obj.DisplayName = ds.Tables[0].Rows[0]["Name"].ToString();
+
+                    obj.Result = "Yes";
+                }
+
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult EmployeeChangePassword(EmployeeRegistrations model)
+        {
+            return View(model);
+        }
+
+        [HttpPost]
+        [OnAction(ButtonName = "btnUpdate")]
+        [ActionName("EmployeeChangePassword")]
+        public ActionResult UpdateEmpPassword(EmployeeRegistrations obj)
+        {
+            try
+            {
+
+                obj.CreatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = new DataSet();
+                ds = obj.UpdateEmpPassword();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["EmployeeChangePassword"] = "Password Change successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["EmployeeChangePassword"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["EmployeeChangePassword"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["EmployeeChangePassword"] = ex.Message;
+            }
+            return RedirectToAction("EmployeeChangePassword", "EmployeeRegistration");
+        }
+
     }
 }

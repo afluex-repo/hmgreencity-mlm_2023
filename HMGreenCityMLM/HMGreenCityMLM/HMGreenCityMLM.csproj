@@ -833,6 +833,7 @@
     <Content Include="Views\AdminProfile\AssociateListByNew.cshtml" />
     <Content Include="Views\Transactions\DistributePaymentPassword.cshtml" />
     <Content Include="Views\AdminReports\DateWiseBusinessReport.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmployeeChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

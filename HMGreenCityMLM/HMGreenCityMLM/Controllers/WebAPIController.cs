@@ -275,10 +275,10 @@ namespace HMGreenCityMLM.Controllers
                 DataSet ds = model.GetTopupReport();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
-                    List<TopUpAPI> lstTopupReport = new List<TopUpAPI>();
+                    List<TopUp> lstTopupReport = new List<TopUp>();
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
-                        TopUpAPI obj1 = new TopUpAPI();
+                        TopUp obj1 = new TopUp();
                         obj1.FK_InvestmentID = Crypto.Encrypt(r["Pk_InvestmentId"].ToString());
                         obj1.Name = r["Name"].ToString() + " (" + r["LoginId"].ToString() + ")";
                         obj1.SiteName = r["SiteName"].ToString();
@@ -286,11 +286,13 @@ namespace HMGreenCityMLM.Controllers
                         obj1.UpgradtionDate = r["UpgradtionDate"].ToString();
                         obj1.ProductName = r["Package"].ToString();
                         obj1.Amount = r["Amount"].ToString();
+
                         lstTopupReport.Add(obj1);
                     }
                     obj.lsttopupreport = lstTopupReport;
-                    obj.Status = "0";
                     obj.Message = "TopupList";
+                    obj.Status = "0";
+
                 }
                 else
                 {
@@ -324,7 +326,7 @@ namespace HMGreenCityMLM.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
 
-            List<PrintTopupAPI> list = new List<PrintTopupAPI>();
+            List<PrintTopup> list = new List<PrintTopup>();
 
             if (model.invid != null)
             {
@@ -336,7 +338,7 @@ namespace HMGreenCityMLM.Controllers
                     {
                         foreach (DataRow r in ds.Tables[0].Rows)
                         {
-                            PrintTopupAPI obj1 = new PrintTopupAPI();
+                            PrintTopup obj1 = new PrintTopup();
 
                             obj1.FK_InvestmentID = r["Pk_InvestmentId"].ToString();
                             //obj.EncryptKey = Crypto.Encrypt(r["Fk_SaleOrderId"].ToString());
@@ -376,12 +378,16 @@ namespace HMGreenCityMLM.Controllers
                         }
                         obj.lsttopupreport = list;
                         obj.Status = "0";
+                        obj.invid = model.invid;
+
+                        obj.LoginId = model.LoginId;
                         obj.Message = "Data Fetch Successfully";
                         return Json(obj, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        obj.Status = "1";
+                        obj.Status = "1"; obj.invid = model.invid;
+                        obj.LoginId = model.LoginId;
                         obj.Message = "No Data Found";
                         return Json(obj, JsonRequestBehavior.AllowGet);
 
@@ -407,44 +413,50 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult PayoutReport(PayoutReportAPI payoutDetail)
         {
-            List<PayoutReportAPI> lst1 = new List<PayoutReportAPI>();
+            List<PayoutReport> lst1 = new List<PayoutReport>();
 
             payoutDetail.LoginId = payoutDetail.LoginId;
             DataSet ds11 = payoutDetail.GetPayoutReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
             {
-                foreach (DataRow r in ds11.Tables[0].Rows)
+                if (ds11.Tables[0].Rows[0]["Msg"].ToString() == "0")
                 {
-                    PayoutReportAPI Obj = new PayoutReportAPI();
-                    Obj.EncryptLoginID = Crypto.Encrypt(r["LoginId"].ToString());
-                    Obj.EncryptPayoutNo = Crypto.Encrypt(r["PayoutNo"].ToString());
-
-                    Obj.LoginId = r["LoginId"].ToString();
-                    Obj.DisplayName = r["FirstName"].ToString();
-                    Obj.PayoutNo = r["PayoutNo"].ToString();
-                    Obj.ClosingDate = r["ClosingDate"].ToString();
-                    Obj.BinaryIncome = r["BinaryIncome"].ToString();
-                    Obj.DirectIncome = r["DirectIncome"].ToString();
-                    Obj.GrossAmount = r["GrossAmount"].ToString();
-                    Obj.TDSAmount = r["TDSAmount"].ToString();
-                    Obj.ProcessingFee = r["ProcessingFee"].ToString();
-                    Obj.NetAmount = r["NetAmount"].ToString();
-                    Obj.LeadershipBonus = r["DirectLeaderShipBonus"].ToString();
-                    Obj.ProductWallet = r["ProductWallet"].ToString();
-                    lst1.Add(Obj);
+                    payoutDetail.Status = "1";
+                    payoutDetail.Message = ds11.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(payoutDetail, JsonRequestBehavior.AllowGet);
                 }
-                payoutDetail.lstPayoutDetail = lst1;
-                payoutDetail.Status = "0";
-                payoutDetail.Message = "Data Fetched";
-                return Json(payoutDetail, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    foreach (DataRow r in ds11.Tables[0].Rows)
+                    {
+                        PayoutReport Obj = new PayoutReport();
+                        Obj.EncryptLoginID = Crypto.Encrypt(r["LoginId"].ToString());
+                        Obj.EncryptPayoutNo = Crypto.Encrypt(r["PayoutNo"].ToString());
+
+                        Obj.LoginId = r["LoginId"].ToString();
+                        Obj.DisplayName = r["FirstName"].ToString();
+                        Obj.PayoutNo = r["PayoutNo"].ToString();
+                        Obj.ClosingDate = r["ClosingDate"].ToString();
+                        Obj.BinaryIncome = r["BinaryIncome"].ToString();
+                        Obj.DirectIncome = r["DirectIncome"].ToString();
+                        Obj.GrossAmount = r["GrossAmount"].ToString();
+                        Obj.TDSAmount = r["TDSAmount"].ToString();
+                        Obj.ProcessingFee = r["ProcessingFee"].ToString();
+                        Obj.NetAmount = r["NetAmount"].ToString();
+                        Obj.LeadershipBonus = r["DirectLeaderShipBonus"].ToString();
+                        Obj.ProductWallet = r["ProductWallet"].ToString();
+                        lst1.Add(Obj);
+                    }
+                    payoutDetail.lstPayoutDetail = lst1;
+                    payoutDetail.Status = "0";
+                    payoutDetail.Message = "Data Fetched";
+                    return Json(payoutDetail, JsonRequestBehavior.AllowGet);
+                }
+
             }
-            else
-            {
-                payoutDetail.Status = "1";
-                payoutDetail.Message = "No Data Found";
-                return Json(payoutDetail, JsonRequestBehavior.AllowGet);
-            }
+            return Json(payoutDetail, JsonRequestBehavior.AllowGet);
+
         }
 
 
@@ -452,7 +464,7 @@ namespace HMGreenCityMLM.Controllers
 
         #region PayoutReportSearch
 
-        public ActionResult PayoutReportBy(PayoutReportSearch payoutDetail)
+        public ActionResult PayoutReportBy(PayoutReportSearchAPI payoutDetail)
         {
             List<PayoutReportSearch> lst1 = new List<PayoutReportSearch>();
             payoutDetail.FromDate = string.IsNullOrEmpty(payoutDetail.FromDate) ? null : Common.ConvertToSystemDate(payoutDetail.FromDate, "dd/MM/yyyy");
@@ -462,27 +474,37 @@ namespace HMGreenCityMLM.Controllers
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
             {
-                foreach (DataRow r in ds11.Tables[0].Rows)
+                if (ds11.Tables[0].Rows[0]["Msg"].ToString() == "0")
                 {
-                    PayoutReportSearch Obj = new PayoutReportSearch();
-                    Obj.LoginId = r["LoginId"].ToString();
-                    Obj.DisplayName = r["FirstName"].ToString();
-                    Obj.PayoutNo = r["PayoutNo"].ToString();
-                    Obj.ClosingDate = r["ClosingDate"].ToString();
-                    Obj.BinaryIncome = r["BinaryIncome"].ToString();
-                    Obj.DirectIncome = r["DirectIncome"].ToString();
-                    Obj.GrossAmount = r["GrossAmount"].ToString();
-                    Obj.TDSAmount = r["TDSAmount"].ToString();
-                    Obj.ProcessingFee = r["ProcessingFee"].ToString();
-                    Obj.NetAmount = r["NetAmount"].ToString();
-                    Obj.LeadershipBonus = r["DirectLeaderShipBonus"].ToString();
-                    Obj.ProductWallet = r["ProductWallet"].ToString();
-                    lst1.Add(Obj);
+                    payoutDetail.Status = "1";
+                    payoutDetail.Message = ds11.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(payoutDetail, JsonRequestBehavior.AllowGet);
                 }
-                payoutDetail.lstPayoutDetail = lst1;
-                payoutDetail.Status = "0";
-                payoutDetail.Message = "Data Fetched";
-                return Json(payoutDetail, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    foreach (DataRow r in ds11.Tables[0].Rows)
+                    {
+                        PayoutReportSearch Obj = new PayoutReportSearch();
+                        Obj.LoginId = r["LoginId"].ToString();
+                        Obj.DisplayName = r["FirstName"].ToString();
+                        Obj.PayoutNo = r["PayoutNo"].ToString();
+                        Obj.ClosingDate = r["ClosingDate"].ToString();
+                        Obj.BinaryIncome = r["BinaryIncome"].ToString();
+                        Obj.DirectIncome = r["DirectIncome"].ToString();
+                        Obj.GrossAmount = r["GrossAmount"].ToString();
+                        Obj.TDSAmount = r["TDSAmount"].ToString();
+                        Obj.ProcessingFee = r["ProcessingFee"].ToString();
+                        Obj.NetAmount = r["NetAmount"].ToString();
+                        Obj.LeadershipBonus = r["DirectLeaderShipBonus"].ToString();
+                        Obj.ProductWallet = r["ProductWallet"].ToString();
+                        lst1.Add(Obj);
+                    }
+                    payoutDetail.lstPayoutDetail = lst1;
+                    payoutDetail.Status = "0";
+                    payoutDetail.Message = "Data Fetched";
+                    return Json(payoutDetail, JsonRequestBehavior.AllowGet);
+                }
+
             }
             else
             {
@@ -554,45 +576,45 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult AssociateDashboardInvestment(AssoeDashInvstAPI data)
         {
-            AssoeDashInvstAPI obj = new AssoeDashInvstAPI();
+
             try
             {
-                List<AssoeDashInvstAPI> lstinvestment = new List<AssoeDashInvstAPI>();
+                List<AssoeDashInvst> lstinvestment = new List<AssoeDashInvst>();
                 DataSet ds = data.GetAssociateDashboard();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
 
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                     {
-                        obj.Status = "1";
-                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        return Json(obj, JsonRequestBehavior.AllowGet);
+                        data.Status = "1";
+                        data.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(data, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
                         foreach (DataRow r in ds.Tables[1].Rows)
                         {
-                            AssoeDashInvstAPI Obj = new AssoeDashInvstAPI();
+                            AssoeDashInvst Obj = new AssoeDashInvst();
                             Obj.ProductName = r["ProductName"].ToString();
                             Obj.Amount = r["Amount"].ToString();
                             Obj.Status = r["Status"].ToString();
 
                             lstinvestment.Add(Obj);
                         }
-                        obj.lstinvestment = lstinvestment;
-                        obj.Status = "0";
-                        obj.Message = "Data Fetched";
-                        return Json(obj, JsonRequestBehavior.AllowGet);
+                        data.lstinvestment = lstinvestment;
+                        data.Status = "0";
+                        data.Message = "Data Fetched";
+                        return Json(data, JsonRequestBehavior.AllowGet);
                     }
 
                 }
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                return Json(data, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                obj.Status = "1";
-                obj.Message = ex.Message;
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                data.Status = "1";
+                data.Message = ex.Message;
+                return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -603,19 +625,17 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult AssoDashTotalBusiness(TotalBusinessAPI data)
         {
-            TotalBusinessAPI obj = new TotalBusinessAPI();
             try
             {
-
-                List<AssoeDashInvstAPI> lstinvestment = new List<AssoeDashInvstAPI>();
+                TotalBusiness obj = new TotalBusiness();
                 DataSet ds = data.GetAssociateDashboard();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                     {
-                        obj.Status = "1";
-                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        return Json(obj, JsonRequestBehavior.AllowGet);
+                        data.Status = "1";
+                        data.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(data, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
@@ -629,16 +649,12 @@ namespace HMGreenCityMLM.Controllers
                         obj.Message = "Data Fetched";
                         return Json(obj, JsonRequestBehavior.AllowGet);
                     }
-
-
-
-
                 }
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                return Json(data, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -649,11 +665,9 @@ namespace HMGreenCityMLM.Controllers
         public ActionResult ViewProfile(ViewProfileAPI data)
         {
 
-            ViewProfileAPI obj = new ViewProfileAPI();
+            ViewProfile obj = new ViewProfile();
             try
             {
-
-                List<ViewProfileAPI> lstprofile = new List<ViewProfileAPI>();
 
                 DataSet ds = data.GetUserProfile();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -677,19 +691,20 @@ namespace HMGreenCityMLM.Controllers
                     obj.Message = "Data Fetched";
 
                     return Json(obj, JsonRequestBehavior.AllowGet);
-                }else
+                }
+                else
                 {
 
-                    obj.Status = "0";
-                    obj.Message = "No Data Fetch for this id";
-                    return Json(obj, JsonRequestBehavior.AllowGet);
+                    data.Status = "1";
+                    data.Message = "No Data Fetch for this id";
+                    return Json(data, JsonRequestBehavior.AllowGet);
                 }
-               
+
             }
             catch (Exception ex)
             {
-                obj.Status = "1";
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                data.Status = "1";
+                return Json(data, JsonRequestBehavior.AllowGet);
             }
 
         }
@@ -702,6 +717,7 @@ namespace HMGreenCityMLM.Controllers
         {
             string FormName = "";
             string Controller = "";
+            UpdateProfile data = new UpdateProfile();
             try
             {
                 if (fileProfilePicture != null)
@@ -716,25 +732,25 @@ namespace HMGreenCityMLM.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        obj.Message = "Profile updated successfully..";
-                        obj.Status = "0";
-                        return Json(obj, JsonRequestBehavior.AllowGet);
+                        data.Message = "Profile updated successfully..";
+                        data.Status = "0";
+                        return Json(data, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        obj.Status = "1";
-                        return Json(obj, JsonRequestBehavior.AllowGet);
+                        data.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        data.Status = "1";
+                        return Json(data, JsonRequestBehavior.AllowGet);
                     }
                 }
             }
             catch (Exception ex)
             {
-               obj.Status = "1";
+                data.Status = "1";
 
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                return Json(data, JsonRequestBehavior.AllowGet);
             }
-            return Json(obj, JsonRequestBehavior.AllowGet);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -743,18 +759,18 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult PayoutLedger(PayoutLedgerAPI PayoutLedger)
         {
-            PayoutLedgerAPI objewallet = new PayoutLedgerAPI();
-
+            PayoutLedgerA od = new PayoutLedgerA();
+                  PayoutLedger obj = new PayoutLedger();
             //   objewallet.Fk_UserId = Session["Pk_UserId"].ToString();
             PayoutLedger.FromDate = string.IsNullOrEmpty(PayoutLedger.FromDate) ? null : Common.ConvertToSystemDate(PayoutLedger.FromDate, "dd/MM/yyyy");
             PayoutLedger.ToDate = string.IsNullOrEmpty(PayoutLedger.ToDate) ? null : Common.ConvertToSystemDate(PayoutLedger.ToDate, "dd/MM/yyyy");
-            List<PayoutLedgerAPI> lst = new List<PayoutLedgerAPI>();
+            List<PayoutLedger> lst = new List<PayoutLedger>();
             DataSet ds = PayoutLedger.PayoutLedger();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    PayoutLedgerAPI Objload = new PayoutLedgerAPI();
+                    PayoutLedger Objload = new PayoutLedger();
                     Objload.Narration = dr["Narration"].ToString();
                     Objload.DrAmount = dr["DrAMount"].ToString();
                     Objload.CrAmount = dr["CrAmount"].ToString();
@@ -763,18 +779,18 @@ namespace HMGreenCityMLM.Controllers
 
                     lst.Add(Objload);
                 }
-                objewallet.Status = "0";
-                objewallet.Message = "Data Fetched";
-                objewallet.lstpayoutledger = lst;
-                return Json(objewallet, JsonRequestBehavior.AllowGet);
+                PayoutLedger.Status = "0";
+                PayoutLedger.Message = "Data Fetched";
+                PayoutLedger.lstpayoutledger = lst;
+                return Json(PayoutLedger, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                objewallet.Status = "1";
-                objewallet.Message = "No Data for this id";
-                return Json(objewallet, JsonRequestBehavior.AllowGet);
+                od.Status = "1";
+                od.Message = "No Data for this id";
+                return Json(od, JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
         #endregion
@@ -782,7 +798,7 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult GetSponsorName(SponsorNameAPI sponsorname)
         {
-            SponsorNameAPI obj = new SponsorNameAPI();
+            SponsorNameA obj = new SponsorNameA();
             DataSet ds = sponsorname.GetMemberDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -793,9 +809,10 @@ namespace HMGreenCityMLM.Controllers
                 obj.Message = "Sponsor Name Fetched";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
-            else {
-                obj.Status = "1";
-                obj.Message = "Invalid SponsorId"; return Json(obj, JsonRequestBehavior.AllowGet);
+            else
+            {
+                sponsorname.Status = "1";
+                sponsorname.Message = "Invalid SponsorId"; return Json(sponsorname, JsonRequestBehavior.AllowGet);
             }
         }
 

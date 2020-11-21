@@ -42,15 +42,19 @@ namespace HMGreenCityMLM.Models
 
         [Display(Name = "EducationQualification")]
         public string EducationQualififcation { get; set; }
-
+        public string Status { get; set; }
         public string Fk_UserTypeId { get; set; }
         public string Fk_BranchId { get; set; }
         public string CreatedBy { get; set; }
         public string Message { get; set; }
+        public string DisplayName { get; set; } public string Result { get; set; }
 
         [NotMapped]
         public List<EmployeeRegistrations> lstemp { get; set; }
         public string LoginId { get; set; }
+        public string PK_AdminId { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string NewPassword { get; set; }
         public string Password { get;  set; }
 
         public DataSet SaveEmpoyeeData()
@@ -70,10 +74,47 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("EmployeeRegistration", para);
             return ds;
         }
+
+        public DataSet UpdateEmpPassword()
+        {
+            SqlParameter[] para = {
+            new SqlParameter("@LoginId", LoginId),
+            new SqlParameter("@NewPassword", NewPassword),
+            new SqlParameter("@UpdatedBy", CreatedBy),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateEmployeePassword", para);
+            return ds;
+        }
+
+
+        public DataSet ActivateEmployeeByAdmin()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@UpdatedBy", CreatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("ActivateEmployeeByAdmin", para);
+            return ds;
+        }
+
+        public DataSet DeActivateEmployeeByAdmin()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@UpdatedBy", CreatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("DeActivateEmployeeByAdmin", para);
+            return ds;
+        }
         public DataSet GetEmployeeData()
         {
-
-            DataSet ds = DBHelper.ExecuteQuery("GetEmployeeDetails");
+            SqlParameter[] para = { 
+                                    new SqlParameter("@LoginId", LoginId)};
+            DataSet ds = DBHelper.ExecuteQuery("GetEmployeeDetails",para);
+            return ds;
+        }
+        public DataSet GetEmployeeName()
+        {
+            SqlParameter[] para = {
+            new SqlParameter("@LoginId", LoginId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetEmployeeName",para);
             return ds;
         }
     }

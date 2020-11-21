@@ -7,7 +7,7 @@
 
 
 
-@using (Html.BeginForm("PayoutReport", "AdminReport", FormMethod.Post, new { @id = "form1" }))
+@using (Html.BeginForm("EmployeeDetails", "EmployeeRegistration", FormMethod.Post, new { @id = "form1" }))
 {
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -30,6 +30,9 @@
                                     </li>
 
                                 </ul>
+                                <div class="row">
+                                    <p style="color: red">@TempData["EmployeeDetails"] </p>
+                                </div>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
                                         <div class="row">
@@ -68,6 +71,26 @@
 
                                                                         <td>@Html.DisplayFor(m => item.Mobile)</td>
                                                                         <td>@Html.DisplayFor(m => item.Email)</td>
+                                                                        <td hidden="hidden">
+                                                                            <a href="/EmployeeRegistration/EmployeeRegistration?LoginID=@item.LoginId" class="btn btn-info btn-sm">
+                                                                                Edit
+                                                                            </a>
+                                                                        </td>
+                                                                       
+                                                                        <td >
+                                                                            @if (item.Status == "Inactive")
+                                                                            {
+                                                                                <a href="/EmployeeRegistration/ActivateEmployee?LoginId=@item.LoginId" class="btn btn-success btn-sm" onclick="return confirm('Sure you want to activate this User ?')">
+                                                                                    Activate
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="/EmployeeRegistration/DeactivateEmployee?LoginId=@item.LoginId" class="btn btn-danger btn-sm" onclick="return confirm('Sure you want to deactivate this User ?')">
+                                                                                    Deactivate
+                                                                                </a>
+                                                                            }
+                                                                        </td>
 
                                                                     </tr>
 

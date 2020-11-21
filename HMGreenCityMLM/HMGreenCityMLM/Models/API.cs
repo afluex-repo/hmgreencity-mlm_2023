@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace HMGreenCityMLM.Models
 {
-    public class API:Common
+    public class API : Common
     {
         public string Website { get; set; }
         public string LandLine { get; set; }
@@ -72,9 +72,9 @@ namespace HMGreenCityMLM.Models
 
         public string Password { get; set; }
 
-        
 
-        
+
+
 
     }
     public class LoginAPI
@@ -136,7 +136,7 @@ namespace HMGreenCityMLM.Models
         public string FirstName { get; set; }
         public string FullName { get; set; }
         public string LoginId { get; set; }
-        
+
         public string TransPassword { get; set; }
         public string Email { get; set; }
         public string LastName { get; set; }
@@ -171,44 +171,55 @@ namespace HMGreenCityMLM.Models
 
     public class TopUpAPI
     {
-        public List<TopUpAPI> lsttopupreport { get; set; }
+        public List<TopUp> lsttopupreport { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
         public string LoginId { get; set; }
-        public string Name { get; set; }
-        public string FromDate { get; set; }
-        public string ToDate { get; set; }
-        public string Package { get; set; }
-        public string UpgradtionDate { get; set; }
-        public string ProductName { get; set; }
-        public string Amount { get; set; }
-        public string SiteName { get; set; }
-        public string FK_InvestmentID { get; set; }
-        public string SectorName { get; set; }
-
-
         public DataSet GetTopupReport()
         {
-            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId),
-                                      new SqlParameter("@Name", Name),
-                                      new SqlParameter("@FromDate", FromDate),
-                                      new SqlParameter("@ToDate", ToDate),
-                                      new SqlParameter("@Package", Package),
-                                      new SqlParameter("@ClaculationStatus", Status),
+            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreport", para);
             return ds;
         }
-
-
-
     }
+    public class TopUp
+    {
+    public string Name { get; set; }
+    public string FromDate { get; set; }
+    public string ToDate { get; set; }
+    public string Package { get; set; }
+    public string UpgradtionDate { get; set; }
+    public string ProductName { get; set; }
+    public string Amount { get; set; }
+    public string SiteName { get; set; }
+    public string FK_InvestmentID { get; set; }
+    public string SectorName { get; set; }
+
+       
+    }
+
     public class PrintTopupAPI
     {
+        public List<PrintTopup> lsttopupreport { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
         public string invid { get; set; }
+        public string LoginId { get; set; }
+
+        public DataSet PrintTopUp()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_InvestmentId", LoginId), };
+            DataSet ds = DBHelper.ExecuteQuery("PrintTopUpReport", para);
+            return ds;
+        }
+    }
+
+
+    public class PrintTopup
+    {
+       
         public string LoginId { get; set; }
         public string FK_InvestmentID { get; set; }
         public string Name { get; set; }
@@ -236,17 +247,10 @@ namespace HMGreenCityMLM.Models
         public string HSNCode { get; set; }
         public string ProductName { get; set; }
 
-        public List<PrintTopupAPI> lsttopupreport { get; set; }
+        
         public string OrderNo { get; set; }
 
 
-
-        public DataSet PrintTopUp()
-        {
-            SqlParameter[] para = { new SqlParameter("@Pk_InvestmentId", LoginId), };
-            DataSet ds = DBHelper.ExecuteQuery("PrintTopUpReport", para);
-            return ds;
-        }
 
     }
 
@@ -255,15 +259,28 @@ namespace HMGreenCityMLM.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string LoginId { get; set; }
-        public string FromDate { get; set; }
+       
+        public List<PayoutReport> lstPayoutDetail { get; set; }
+
+        public DataSet GetPayoutReport()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutReportForMember", para);
+            return ds;
+        }
+    }
+
+    public class PayoutReport
+    {
+        public string LoginId { get; set; }
         public string DisplayName { get; set; }
         public string PayoutNo { get; set; }
         public string ClosingDate { get; set; }
         public string BinaryIncome { get; set; }
         public string GrossAmount { get; set; }
         public string DirectIncome { get; set; }
-
-        public string ToDate { get; set; }
+        
         public string ProcessingFee { get; set; }
 
         public string LeadershipBonus { get; set; }
@@ -272,7 +289,17 @@ namespace HMGreenCityMLM.Models
         public string ProductWallet { get; set; }
         public string EncryptLoginID { get; set; }
         public string EncryptPayoutNo { get; set; }
-        public List<PayoutReportAPI> lstPayoutDetail { get; set; }
+    }
+
+    public class PayoutReportSearchAPI
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string PayoutNo { get; set; }
+        public List<PayoutReportSearch> lstPayoutDetail { get; set; }
 
         public DataSet GetPayoutReport()
         {
@@ -290,40 +317,22 @@ namespace HMGreenCityMLM.Models
 
     public class PayoutReportSearch
     {
-        public string Status { get; set; }
-        public string Message { get; set; }
+        
         public string LoginId { get; set; }
-        public string FromDate { get; set; }
         public string DisplayName { get; set; }
         public string PayoutNo { get; set; }
         public string ClosingDate { get; set; }
         public string BinaryIncome { get; set; }
         public string GrossAmount { get; set; }
         public string DirectIncome { get; set; }
-
-        public string ToDate { get; set; }
+        
         public string ProcessingFee { get; set; }
 
         public string LeadershipBonus { get; set; }
         public string TDSAmount { get; set; }
         public string NetAmount { get; set; }
         public string ProductWallet { get; set; }
-        public string EncryptLoginID { get; set; }
-        public string EncryptPayoutNo { get; set; }
-        public List<PayoutReportSearch> lstPayoutDetail { get; set; }
 
-        public DataSet GetPayoutReport()
-        {
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                      new SqlParameter("@PayoutNo", PayoutNo),
-
-                                         new SqlParameter("@FromDate", FromDate),
-                                         new SqlParameter("@ToDate", ToDate),
-
-            };
-            DataSet ds = DBHelper.ExecuteQuery("PayoutReportForMember", para);
-            return ds;
-        }
     }
 
     public class AssociateDashBoardAPI
@@ -354,12 +363,32 @@ namespace HMGreenCityMLM.Models
 
     public class AssoeDashInvstAPI
     {
+
         public string Status { get; set; }
         public string Message { get; set; }
+        public string Fk_UserId { get; set; }
+        public List<AssoeDashInvst> lstinvestment { get; set; }
+
+        public DataSet GetAssociateDashboard()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId), };
+            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate", para);
+            return ds;
+        }
+    }
+    public class AssoeDashInvst
+    {
         public string ProductName { get; set; }
         public string Amount { get; set; }
+        public string Status { get; set; }
+
+    }
+
+    public class TotalBusinessAPI
+    {
         public string Fk_UserId { get; set; }
-        public List<AssoeDashInvstAPI> lstinvestment { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
 
         public DataSet GetAssociateDashboard()
         {
@@ -370,33 +399,39 @@ namespace HMGreenCityMLM.Models
     }
 
 
-    public class TotalBusinessAPI
+    public class TotalBusiness
     {
         public string Status { get; set; }
         public string Message { get; set; }
+
         public string PaidBusinessLeft { get; set; }
         public string PaidBusinessRight { get; set; }
         public string TotalBusinessLeft { get; set; }
         public string TotalBusinessRight { get; set; }
-        public string Fk_UserId { get; set; }
         public string CarryLeft { get; set; }
         public string TeamBusiness { get; set; }
         public string CarryRight { get; set; }
-
-        public DataSet GetAssociateDashboard()
-        {
-            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId), };
-            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate", para);
-            return ds;
-        }
     }
 
     public class ViewProfileAPI
     {
+        public string LoginId { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
+
+        public DataSet GetUserProfile()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId) };
+            DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
+            return ds;
+        }
+    }
+
+    public class ViewProfile
+    {
         public string Status { get; set; }
         public string Message { get; set; }
         public string LoginId { get; set; }
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string JoiningDate { get; set; }
@@ -409,13 +444,6 @@ namespace HMGreenCityMLM.Models
         public string BankBranch { get; set; }
         public string IFSC { get; set; }
         public string ProfilePicture { get; set; }
-
-        public DataSet GetUserProfile()
-        {
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId) };
-            DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
-            return ds;
-        }
     }
 
     public class UpdateProfileAPI
@@ -454,20 +482,20 @@ namespace HMGreenCityMLM.Models
         }
     }
 
+    public class UpdateProfile
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+    }
 
     public class PayoutLedgerAPI
     {
-        public List<PayoutLedgerAPI> lstpayoutledger { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
         public string Fk_UserId { get; set; }
         public string FromDate { get; set; }
-        public string Narration { get; set; }
-        public string DrAmount { get; set; }
-        public string CrAmount { get; set; }
-        public string AddedOn { get; set; }
-        public string PayoutBalance { get; set; }
         public string ToDate { get; set; }
+        public List<PayoutLedger> lstpayoutledger { get; set; }
 
         public DataSet PayoutLedger()
         {
@@ -483,14 +511,30 @@ namespace HMGreenCityMLM.Models
 
     }
 
+    public class PayoutLedgerA
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+    }
+
+    public class PayoutLedger
+    {
+      
+      
+        public string Narration { get; set; }
+        public string DrAmount { get; set; }
+        public string CrAmount { get; set; }
+        public string AddedOn { get; set; }
+        public string PayoutBalance { get; set; }
+    }
+
 
     public class SponsorNameAPI
     {
         public string Status { get; set; }
         public string Message { get; set; }
         public string sponsorId { get; set; }
-        public string SponsorName { get; set; }
-
+      
 
         public DataSet GetMemberDetails()
         {
@@ -502,6 +546,14 @@ namespace HMGreenCityMLM.Models
 
             return ds;
         }
+    }
+
+    public class SponsorNameA
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string SponsorName { get; set; }
+
     }
 
 }
