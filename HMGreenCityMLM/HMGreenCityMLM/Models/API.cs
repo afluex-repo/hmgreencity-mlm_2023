@@ -556,4 +556,43 @@ namespace HMGreenCityMLM.Models
 
     }
 
+    public class TreeAPI
+    {
+        public List<Tree> GetGenelogy { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string FK_UserId { get; set; }
+        public DataSet GetTree()
+        {
+            SqlParameter[] para = {   new SqlParameter("@Fk_UserId", FK_UserId)
+                                  };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetTree", para);
+            return ds;
+        }
+    }
+
+    public class Tree
+    {
+        public string Fk_UserId { get; set; }
+        public string SponsorId { get; set; }
+        public string Fk_ParentId { get; set; }
+        public string TeamPermanent { get; set; }
+        public string LoginId { get; set; }
+        public string Fk_SponsorId { get; set; }
+        public string MemberName { get; set; }
+        public string MemberLevel { get; set; }
+
+        public string Id { get; set; }
+        public string Leg { get; set; }
+
+        public string ActivationDate { get; set; }
+        public string ActiveLeft { get; set; }
+        public string ActiveRight { get; set; }
+        public string InactiveLeft { get; set; }
+        public string InactiveRight { get; set; }
+        public string BusinessLeft { get; set; }
+        public string BusinessRight { get; set; }
+    }
+
 }

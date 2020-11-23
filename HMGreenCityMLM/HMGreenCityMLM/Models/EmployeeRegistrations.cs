@@ -75,6 +75,25 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+        public DataSet UpdateEmpoyeeData()
+        {
+            SqlParameter[] para = {
+            new SqlParameter("@Name", Name),
+            new SqlParameter("@Mobile", Mobile),
+            new SqlParameter("@Email", Email),
+            new SqlParameter("@Address", Address),
+            new SqlParameter("@DOB", DOB),
+            new SqlParameter("@Qualification", EducationQualififcation),
+            new SqlParameter("@FathName", FathersName),
+            new SqlParameter("@Fk_UserTypeId", Fk_UserTypeId),
+            new SqlParameter("@Fk_BranchId", Fk_BranchId),
+            new SqlParameter("@UpdateBy", CreatedBy),
+             new SqlParameter("@LoginId", LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateEmployee", para);
+            return ds;
+        }
+
         public DataSet UpdateEmpPassword()
         {
             SqlParameter[] para = {

@@ -131,7 +131,7 @@ namespace HMGreenCityMLM.Models
 
         public DataSet GetPayoutReport()
         {
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+            SqlParameter[] para = { new SqlParameter("@LoginID", ToLoginID),
                                     new SqlParameter("@PayoutNo", PayoutNo),
                                     new SqlParameter("@Name", Name),
                                     new SqlParameter("@FromDate", FromDate),

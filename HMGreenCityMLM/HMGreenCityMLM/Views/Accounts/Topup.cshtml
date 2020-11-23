@@ -125,15 +125,19 @@
                                         </div>
                                         
                                         <div class="row">
-                                            <div class="col-md-12">
+
+                                            <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Amount in Words</label>
-                                                    <div class="col-sm-12">
-                                                        @Html.TextBoxFor(m => m.word, new { @class = "form-control", @placeholder = "Amount in words", @readonly = "readonly" })
+                                                    <label class="col-sm-3 col-form-label">In Words<span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.word, new { @class = "form-control", @style = "font-weight:800;color:red;", @placeholder = "Amount in words", @disabled = "true" })
+
 
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                             <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Description </label>

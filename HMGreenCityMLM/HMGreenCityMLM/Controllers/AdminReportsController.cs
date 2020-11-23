@@ -102,7 +102,7 @@ namespace HMGreenCityMLM.Controllers
 
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
-
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;
@@ -165,6 +165,7 @@ namespace HMGreenCityMLM.Controllers
 
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;

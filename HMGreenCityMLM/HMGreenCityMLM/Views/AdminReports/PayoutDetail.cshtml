@@ -69,7 +69,7 @@
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <br />
-                                                        <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
+                                                        <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch"onclick="return validateLogin();"  />
                                                     </div>
                                                 </div>
                                                 <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -206,6 +206,16 @@
             return false;
 
         return true;
+    }
+
+    function validateLogin() {
+        var login = $('#LoginId').val();
+        if (login == "") {
+            $('#ToLoginID').val(null);
+        } else {
+            var loginid = $('#ToLoginID').val();
+
+        }
     }
 
 </script>

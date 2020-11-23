@@ -816,5 +816,72 @@ namespace HMGreenCityMLM.Controllers
             }
         }
 
+
+        public ActionResult Tree(TreeAPI model)
+        {
+
+            UpdateProfile sta = new UpdateProfile();
+            TreeAPI obj = new TreeAPI();
+            if (model.FK_UserId == "" || model.FK_UserId == null)
+            {
+                model.Status = "1";
+                model.Message = "Please enter LoginId";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+
+            try
+            {
+                DataSet ds = model.GetTree();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Tree> GetGenelogy = new List<Tree>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Tree obj1 = new Tree();
+                        obj1.Fk_UserId = r["Fk_UserId"].ToString();
+                        obj1.Fk_ParentId = r["Fk_ParentId"].ToString();
+                        obj1.Fk_SponsorId = r["Fk_SponsorId"].ToString();
+                        obj1.SponsorId = r["SponsorId"].ToString();
+                        obj1.LoginId = r["LoginId"].ToString();
+                        obj1.TeamPermanent = r["TeamPermanent"].ToString();
+                        obj1.MemberName = r["MemberName"].ToString();
+                        obj1.MemberLevel = r["MemberLevel"].ToString();
+                        obj1.Leg = r["Leg"].ToString();
+                        obj1.Id = r["Id"].ToString();
+
+                        obj1.ActivationDate = r["ActivationDate"].ToString();
+                        obj1.ActiveLeft = r["ActiveLeft"].ToString();
+                        obj1.ActiveRight = r["ActiveRight"].ToString();
+                        obj1.InactiveLeft = r["InactiveLeft"].ToString();
+                        obj1.InactiveRight = r["InactiveRight"].ToString();
+                        obj1.BusinessLeft = r["BusinessLeft"].ToString();
+                        obj1.BusinessRight = r["BusinessRight"].ToString();
+
+                        GetGenelogy.Add(obj1);
+                    }
+                    obj.GetGenelogy = GetGenelogy;
+                    obj.Message = "Tree";
+                    obj.Status = "0";
+                    obj.FK_UserId = model.FK_UserId;
+                }
+                else
+                {
+                    sta.Status = "1";
+                    sta.Message = "No Data Found";
+                    return Json(sta, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                sta.Status = "1";
+                sta.Message = ex.Message; 
+                return Json(sta, JsonRequestBehavior.AllowGet);
+            }
+
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

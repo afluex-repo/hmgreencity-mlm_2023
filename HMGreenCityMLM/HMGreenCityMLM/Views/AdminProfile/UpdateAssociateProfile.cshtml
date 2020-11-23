@@ -31,7 +31,7 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-                                        
+
 
 
 
@@ -60,7 +60,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Mobile No <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
+                                                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -204,88 +204,98 @@
                                                 <input type="button" id="btnEdit" class="btn btn-primary pull-left" value="Edit" onclick="return editProfile()" style="display: none" />
                                             </div>
                                         </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
         </div>
+    </div>
 
 
-                                        }
-                                        <style>
-                                            .errortext {
-                                                border: 2px solid red !important;
-                                            }
-                                        </style>
-                                        <script>
+}
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>
+<script>
 
-                                            function editProfile() {
-                                                $(".errortext").removeClass("errortext");
-                                                if ($('#FirstName').val() == '') {
-                                                    $("#FirstName").addClass('errortext');
-                                                    $('#FirstName').focus();
-                                                    return false;
-                                                }
-                                                if ($('#Mobile').val() == '') {
-                                                    $("#Mobile").addClass('errortext');
-                                                    $('#Mobile').focus();
-                                                    return false;
-                                                }
-                                                
-
-                                                return true;
-                                            }
-                                            function getstatecity() {
-                                                $(".errortext").removeClass("errortext");
-                                                $.ajax({
-                                                    url: "/AdminProfile/GetStateCity",
-                                                    Type: "Get",
-                                                    DataType: "JSON",
-                                                    data: { PinCode: $("#PinCode").val() },
-                                                    success: function (data) {
-                                                        if (data.Result == "1") {
-                                                            $("#State").val(data.State);
-                                                            $("#City").val(data.City);
-                                                        }
-                                                        else {
-                                                            $("#State").val('');
-                                                            $("#City").val('');
-                                                            $("#PinCode").val('');
-                                                            $("#PinCode").addClass('errortext');
-                                                            $('#PinCode').focus();
-                                                            alert(data.Result);
-
-                                                        }
+    function editProfile() {
+        $(".errortext").removeClass("errortext");
+        if ($('#FirstName').val() == '') {
+            $("#FirstName").addClass('errortext');
+            $('#FirstName').focus();
+            return false;
+        }
+        if ($('#Mobile').val() == '') {
+            $("#Mobile").addClass('errortext');
+            $('#Mobile').focus();
+            return false;
+        }
 
 
-                                                    }
+        return true;
+    }
+    function getstatecity() {
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: "/AdminProfile/GetStateCity",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PinCode: $("#PinCode").val() },
+            success: function (data) {
+                if (data.Result == "1") {
+                    $("#State").val(data.State);
+                    $("#City").val(data.City);
+                }
+                else {
+                    $("#State").val('');
+                    $("#City").val('');
+                    $("#PinCode").val('');
+                    $("#PinCode").addClass('errortext');
+                    $('#PinCode').focus();
+                    alert(data.Result);
 
-                                                });
-                                            }
-                                            function getsponsordetails(obj) {
-                                                $(".errortext").removeClass("errortext");
-                                                $.ajax({
-                                                    url: '/AdminProfile/GetSponserDetails',
-                                                    type: 'GET',
-                                                    dataType: 'JSON',
-                                                    data: { 'ReferBy': $(obj).val() },
-                                                    success: function (response) {
-                                                        if (response.Result == "Yes") {
+                }
 
-                                                            $('#SponsorName').val(response.DisplayName);
-                                                        }
-                                                        else {
-                                                            $("#SponsorId").addClass('errortext');
-                                                            $('#SponsorName').val('');
-                                                            $('#SponsorId').val('');
-                                                            $('#SponsorId').focus();
-                                                            alert(response.Result);
-                                                        }
-                                                    }
-                                                })
-                                            }
-                                        </script>
+
+            }
+
+        });
+    }
+    function getsponsordetails(obj) {
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: '/AdminProfile/GetSponserDetails',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { 'ReferBy': $(obj).val() },
+            success: function (response) {
+                if (response.Result == "Yes") {
+
+                    $('#SponsorName').val(response.DisplayName);
+                }
+                else {
+                    $("#SponsorId").addClass('errortext');
+                    $('#SponsorName').val('');
+                    $('#SponsorId').val('');
+                    $('#SponsorId').focus();
+                    alert(response.Result);
+                }
+            }
+        })
+    }
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>

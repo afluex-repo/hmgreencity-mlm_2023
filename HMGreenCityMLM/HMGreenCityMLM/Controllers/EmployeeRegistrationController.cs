@@ -179,6 +179,55 @@ namespace HMGreenCityMLM.Controllers
             catch(Exception ex) {}
             return Json(objregi, JsonRequestBehavior.AllowGet);
         }
+
+
+           public ActionResult UpdateEmployeeRegistration( string Name,string Mobile,string Email,string Qualification,string Fk_UserTypeId,string LoginId)
+        {
+           
+            #region ddlUserType
+            Common obj = new Common();
+            List<SelectListItem> ddlUserType = new List<SelectListItem>();
+            DataSet ds11 = obj.BindUserTypeForRegistration();
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                { ddlUserType.Add(new SelectListItem { Text = r["UserType"].ToString(), Value = r["PK_UserTypeId"].ToString() }); }
+            }
+
+            ViewBag.ddlUserType = ddlUserType;
+            #endregion
+            EmployeeRegistrations objregi = new EmployeeRegistrations();
+            try
+            {
+
+                objregi.Name = Name;
+                objregi.Mobile = Mobile;
+                objregi.Email = Email;
+                objregi.LoginId = LoginId;
+                objregi.DOB = string.IsNullOrEmpty(objregi.DOB) ? null : Common.ConvertToSystemDate(objregi.DOB, "dd-MM-yyyy");
+                objregi.EducationQualififcation = Qualification;
+               
+                objregi.Fk_UserTypeId = Fk_UserTypeId;
+                objregi.CreatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = objregi.UpdateEmpoyeeData();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        objregi.Message = "Employee Details Updated successfully";
+                    }
+                    else
+                    {
+                        objregi.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(objregi, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch(Exception ex) {}
+            return Json(objregi, JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult GetMemberNameForTopUp(string LoginId)
         {
             EmployeeRegistrations obj = new EmployeeRegistrations();

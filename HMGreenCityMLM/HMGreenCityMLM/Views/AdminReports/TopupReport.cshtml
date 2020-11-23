@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
- 
+
 @using (Html.BeginForm("TopupReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <br />
@@ -122,10 +122,28 @@
                                                                 }
                                                             }
                                                         </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th></th>
+
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th style="text-align:right">Total Amount</th>
+                                                                <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
+                                                               
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+
+                                                            </tr>
+                                                        </tfoot>
                                                     </table>
-                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -162,8 +180,7 @@
 }
 <style>
     .errortext {
-       border: 2px solid red !important;
-       
+        border: 2px solid red !important;
     }
 </style>
 
@@ -182,7 +199,7 @@
     });
 
 
-    
+
 </script>
 <script>
     $(document).ready(function () {
