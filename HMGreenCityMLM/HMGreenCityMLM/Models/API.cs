@@ -595,4 +595,27 @@ namespace HMGreenCityMLM.Models
         public string BusinessRight { get; set; }
     }
 
+    public class ReportsAPI
+    {
+        public List<Report> lstunpaidincomes { get; set; }
+        public string LoginId { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public DataSet GetUnPaidIncomes()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId) };
+            DataSet ds = DBHelper.ExecuteQuery("GetUnPaidIncomes", para);
+            return ds;
+        }
+    }
+
+    public class Report
+    {
+      
+        public string FromLoginId { get; set; }
+        public string FromUserName { get; set; }
+        public string Amount { get; set; }
+        public string IncomeType { get; set; }
+        public string Date { get; set; }
+    }
 }

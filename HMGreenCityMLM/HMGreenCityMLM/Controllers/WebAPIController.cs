@@ -883,5 +883,57 @@ namespace HMGreenCityMLM.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult UnPaidIncomes(ReportsAPI objreports)
+        {
+            UpdateProfile sta = new UpdateProfile();
+            if (objreports.LoginId == "" || objreports.LoginId == null)
+            {
+                sta.Status = "1";
+                sta.Message = "Please enter LoginId";
+                return Json(sta, JsonRequestBehavior.AllowGet);
+            }
+
+            try
+            {
+                objreports.LoginId = objreports.LoginId;
+                DataSet ds = objreports.GetUnPaidIncomes();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Report> lst = new List<Report>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Report obj = new Report();
+                        obj.FromLoginId = r["FromLoginId"].ToString();
+                        obj.FromUserName = r["FromUserName"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+
+                        obj.IncomeType = (r["IncomeType"].ToString());
+                        obj.Date = (r["CurrentDate"].ToString());
+
+
+                        lst.Add(obj);
+                    }
+                    objreports.lstunpaidincomes = lst;
+                    objreports.Message = "Unpaid Income";
+                    objreports.Status = "0";
+                    objreports.LoginId = objreports.LoginId;
+                    return Json(objreports, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    sta.Status = "0";
+                    sta.Message = "No Data Found ";
+                    return Json(sta, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                sta.Status = "1";
+                sta.Message = ex.Message;
+                return Json(sta, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }
