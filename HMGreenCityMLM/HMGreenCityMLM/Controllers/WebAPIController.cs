@@ -828,7 +828,12 @@ namespace HMGreenCityMLM.Controllers
                 model.Message = "Please enter LoginId";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
-
+            if (model.Fk_headId == "" || model.Fk_headId == null)
+            {
+                model.Status = "1";
+                model.Message = "Please enter headId";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
             try
             {
                 DataSet ds = model.GetTree();
@@ -856,13 +861,14 @@ namespace HMGreenCityMLM.Controllers
                         obj1.InactiveRight = r["InactiveRight"].ToString();
                         obj1.BusinessLeft = r["BusinessLeft"].ToString();
                         obj1.BusinessRight = r["BusinessRight"].ToString();
-
+                        obj1.ImageURL = r["ImageURL"].ToString();
                         GetGenelogy.Add(obj1);
                     }
                     obj.GetGenelogy = GetGenelogy;
                     obj.Message = "Tree";
                     obj.Status = "0";
                     obj.FK_UserId = model.FK_UserId;
+                    obj.Fk_headId = model.Fk_headId;
                 }
                 else
                 {

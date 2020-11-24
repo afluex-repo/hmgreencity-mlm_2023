@@ -562,9 +562,11 @@ namespace HMGreenCityMLM.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string FK_UserId { get; set; }
+        public string Fk_headId { get; set; }
         public DataSet GetTree()
         {
-            SqlParameter[] para = {   new SqlParameter("@Fk_UserId", FK_UserId)
+            SqlParameter[] para = {   new SqlParameter("@Fk_UserId", FK_UserId),
+                 new SqlParameter("@Fk_headId", Fk_headId)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTree", para);
@@ -593,6 +595,7 @@ namespace HMGreenCityMLM.Models
         public string InactiveRight { get; set; }
         public string BusinessLeft { get; set; }
         public string BusinessRight { get; set; }
+        public string ImageURL { get; set; }
     }
 
     public class ReportsAPI
