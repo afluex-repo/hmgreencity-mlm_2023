@@ -361,6 +361,23 @@ namespace HMGreenCityMLM.Models
 
     }
 
+    public class Upload
+    {
+        public string Fk_UserId { get; set; }
+        public string ImageURL { get; set; }
+
+        public DataSet UpdateImage()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserID",Fk_UserId ) ,
+                                      new SqlParameter("@ProfilePic", ImageURL),
+                                   //   new SqlParameter("@ProfilePic", ProfilePicture)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateImage", para);
+            return ds;
+        }
+
+    }
+
     public class AssoeDashInvstAPI
     {
 
@@ -459,7 +476,7 @@ namespace HMGreenCityMLM.Models
         public string AccountNumber { get; set; }
         public string BankName { get; set; }
         public string IFSC { get; set; }
-        public string ProfilePicture { get; set; }
+     
         public string BankBranch { get; set; }
         public string PK_UserID { get; set; }
 
@@ -475,6 +492,23 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@BankName", BankName) ,
                                       new SqlParameter("@BankBranch", BankBranch) ,
                                       new SqlParameter("@IFSC", IFSC),
+                                   //   new SqlParameter("@ProfilePic", ProfilePicture)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);
+            return ds;
+        }
+    }
+
+    public class UpdateProAPI
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string PK_UserID { get; set; }
+       public string ProfilePicture { get; set; }
+
+        public DataSet UpdateProfile()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserID",PK_UserID ) ,
                                       new SqlParameter("@ProfilePic", ProfilePicture)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);
@@ -561,11 +595,11 @@ namespace HMGreenCityMLM.Models
         public List<Tree> GetGenelogy { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
-        public string FK_UserId { get; set; }
+        public string LoginId { get; set; }
         public string Fk_headId { get; set; }
         public DataSet GetTree()
         {
-            SqlParameter[] para = {   new SqlParameter("@Fk_UserId", FK_UserId),
+            SqlParameter[] para = {   new SqlParameter("@LoginId", LoginId),
                  new SqlParameter("@Fk_headId", Fk_headId)
                                   };
 

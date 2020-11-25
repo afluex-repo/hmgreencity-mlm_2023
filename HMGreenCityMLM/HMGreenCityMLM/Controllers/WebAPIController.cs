@@ -720,12 +720,6 @@ namespace HMGreenCityMLM.Controllers
             UpdateProfile data = new UpdateProfile();
             try
             {
-                if (fileProfilePicture != null)
-                {
-                    obj.ProfilePicture = "/images/ProfilePicture/" + Guid.NewGuid() + Path.GetExtension(fileProfilePicture.FileName);
-                    fileProfilePicture.SaveAs(Path.Combine(Server.MapPath(obj.ProfilePicture)));
-                }
-
                 //Profile objProfile = new Profile();
                 DataSet ds = obj.UpdateProfile();
                 if (ds != null && ds.Tables.Count > 0)
@@ -733,6 +727,38 @@ namespace HMGreenCityMLM.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         data.Message = "Profile updated successfully..";
+                        data.Status = "0";
+                        return Json(data, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        data.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        data.Status = "1";
+                        return Json(data, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                data.Status = "1";
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult UpdateProfileImage(UpdateProAPI obj)
+        {
+            UpdateProfile data = new UpdateProfile();
+            try
+            {
+                //Profile objProfile = new Profile();
+                DataSet ds = obj.UpdateProfile();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        data.Message = "Image updated successfully..";
                         data.Status = "0";
                         return Json(data, JsonRequestBehavior.AllowGet);
                     }
@@ -822,7 +848,7 @@ namespace HMGreenCityMLM.Controllers
 
             UpdateProfile sta = new UpdateProfile();
             TreeAPI obj = new TreeAPI();
-            if (model.FK_UserId == "" || model.FK_UserId == null)
+            if (model.LoginId == "" || model.LoginId == null)
             {
                 model.Status = "1";
                 model.Message = "Please enter LoginId";
@@ -839,36 +865,48 @@ namespace HMGreenCityMLM.Controllers
                 DataSet ds = model.GetTree();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
-                    List<Tree> GetGenelogy = new List<Tree>();
-                    foreach (DataRow r in ds.Tables[0].Rows)
-                    {
-                        Tree obj1 = new Tree();
-                        obj1.Fk_UserId = r["Fk_UserId"].ToString();
-                        obj1.Fk_ParentId = r["Fk_ParentId"].ToString();
-                        obj1.Fk_SponsorId = r["Fk_SponsorId"].ToString();
-                        obj1.SponsorId = r["SponsorId"].ToString();
-                        obj1.LoginId = r["LoginId"].ToString();
-                        obj1.TeamPermanent = r["TeamPermanent"].ToString();
-                        obj1.MemberName = r["MemberName"].ToString();
-                        obj1.MemberLevel = r["MemberLevel"].ToString();
-                        obj1.Leg = r["Leg"].ToString();
-                        obj1.Id = r["Id"].ToString();
 
-                        obj1.ActivationDate = r["ActivationDate"].ToString();
-                        obj1.ActiveLeft = r["ActiveLeft"].ToString();
-                        obj1.ActiveRight = r["ActiveRight"].ToString();
-                        obj1.InactiveLeft = r["InactiveLeft"].ToString();
-                        obj1.InactiveRight = r["InactiveRight"].ToString();
-                        obj1.BusinessLeft = r["BusinessLeft"].ToString();
-                        obj1.BusinessRight = r["BusinessRight"].ToString();
-                        obj1.ImageURL = r["ImageURL"].ToString();
-                        GetGenelogy.Add(obj1);
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "0")
+                    {
+
+                        List<Tree> GetGenelogy = new List<Tree>();
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            Tree obj1 = new Tree();
+                            obj1.Fk_UserId = r["Fk_UserId"].ToString();
+                            obj1.Fk_ParentId = r["Fk_ParentId"].ToString();
+                            obj1.Fk_SponsorId = r["Fk_SponsorId"].ToString();
+                            obj1.SponsorId = r["SponsorId"].ToString();
+                            obj1.LoginId = r["LoginId"].ToString();
+                            obj1.TeamPermanent = r["TeamPermanent"].ToString();
+                            obj1.MemberName = r["MemberName"].ToString();
+                            obj1.MemberLevel = r["MemberLevel"].ToString();
+                            obj1.Leg = r["Leg"].ToString();
+                            obj1.Id = r["Id"].ToString();
+
+                            obj1.ActivationDate = r["ActivationDate"].ToString();
+                            obj1.ActiveLeft = r["ActiveLeft"].ToString();
+                            obj1.ActiveRight = r["ActiveRight"].ToString();
+                            obj1.InactiveLeft = r["InactiveLeft"].ToString();
+                            obj1.InactiveRight = r["InactiveRight"].ToString();
+                            obj1.BusinessLeft = r["BusinessLeft"].ToString();
+                            obj1.BusinessRight = r["BusinessRight"].ToString();
+                            obj1.ImageURL = r["ImageURL"].ToString();
+                            GetGenelogy.Add(obj1);
+                        }
+                        obj.GetGenelogy = GetGenelogy;
+                        obj.Message = "Tree";
+                        obj.Status = "0";
+                        obj.LoginId = model.LoginId;
+                        obj.Fk_headId = model.Fk_headId;
+
+                    }else
+                    {
+                        sta.Status = "1";
+                        sta.Message = "No Data Found";
+                        return Json(sta, JsonRequestBehavior.AllowGet);
                     }
-                    obj.GetGenelogy = GetGenelogy;
-                    obj.Message = "Tree";
-                    obj.Status = "0";
-                    obj.FK_UserId = model.FK_UserId;
-                    obj.Fk_headId = model.Fk_headId;
+
                 }
                 else
                 {

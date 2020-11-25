@@ -762,6 +762,7 @@
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageUploadController.cs" />
     <Compile Include="Controllers\KYCDocumentsController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
@@ -794,6 +795,7 @@
     <Compile Include="Models\FormTypeMaster.cs" />
     <Compile Include="Models\Franchise.cs" />
     <Compile Include="Models\Home.cs" />
+    <Compile Include="Models\Imagelist.cs" />
     <Compile Include="Models\KYCDocuments.cs" />
     <Compile Include="Models\Master.cs" />
     <Compile Include="Models\Password.cs" />
