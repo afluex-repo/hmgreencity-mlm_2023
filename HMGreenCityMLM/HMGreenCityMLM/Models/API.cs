@@ -446,6 +446,7 @@ namespace HMGreenCityMLM.Models
 
     public class ViewProfile
     {
+        public string Pk_UserId { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
         public string LoginId { get; set; }
@@ -654,5 +655,44 @@ namespace HMGreenCityMLM.Models
         public string Amount { get; set; }
         public string IncomeType { get; set; }
         public string Date { get; set; }
+    }
+
+
+    public class BusinessReportAPI
+    {
+        public List<BusinessReport> lstassociate { get; set; }
+        public string Leg { get; set; }
+        public string ToDate { get; set; }
+        public string FromDate { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string TotalNetAmount { get; set; }
+        public string TotalBV { get; set; }
+        public string IsDownline { get; set; }
+        public DataSet BusinessReport()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate),
+
+                                     new SqlParameter("@Leg", Leg),
+                                    new SqlParameter("@IsDownline", IsDownline),
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetBusiness", para);
+            return ds;
+        }
+    }
+
+    public class BusinessReport
+    {
+        public string Leg { get; set; }
+        public string ClosingDate { get; set; }
+        public string DisplayName { get; set; }
+        public string LoginId { get; set; }
+        public string NetAmount { get; set; }
+        public string LeadershipBonus { get; set; }
+
     }
 }

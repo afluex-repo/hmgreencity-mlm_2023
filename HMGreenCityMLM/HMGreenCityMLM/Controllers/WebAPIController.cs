@@ -686,6 +686,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.BankBranch = ds.Tables[0].Rows[0]["BankBranch"].ToString();
                     obj.IFSC = ds.Tables[0].Rows[0]["IFSC"].ToString();
                     obj.ProfilePicture = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                    obj.Pk_UserId = ds.Tables[0].Rows[0]["Pk_UserId"].ToString();
 
                     obj.Status = "0";
                     obj.Message = "Data Fetched";
@@ -786,7 +787,7 @@ namespace HMGreenCityMLM.Controllers
         public ActionResult PayoutLedger(PayoutLedgerAPI PayoutLedger)
         {
             PayoutLedgerA od = new PayoutLedgerA();
-                  PayoutLedger obj = new PayoutLedger();
+            PayoutLedger obj = new PayoutLedger();
             //   objewallet.Fk_UserId = Session["Pk_UserId"].ToString();
             PayoutLedger.FromDate = string.IsNullOrEmpty(PayoutLedger.FromDate) ? null : Common.ConvertToSystemDate(PayoutLedger.FromDate, "dd/MM/yyyy");
             PayoutLedger.ToDate = string.IsNullOrEmpty(PayoutLedger.ToDate) ? null : Common.ConvertToSystemDate(PayoutLedger.ToDate, "dd/MM/yyyy");
@@ -821,7 +822,7 @@ namespace HMGreenCityMLM.Controllers
 
         #endregion
 
-
+        #region SponsporName
         public ActionResult GetSponsorName(SponsorNameAPI sponsorname)
         {
             SponsorNameA obj = new SponsorNameA();
@@ -841,8 +842,9 @@ namespace HMGreenCityMLM.Controllers
                 sponsorname.Message = "Invalid SponsorId"; return Json(sponsorname, JsonRequestBehavior.AllowGet);
             }
         }
+        #endregion
 
-
+        #region Tree
         public ActionResult Tree(TreeAPI model)
         {
 
@@ -900,7 +902,8 @@ namespace HMGreenCityMLM.Controllers
                         obj.LoginId = model.LoginId;
                         obj.Fk_headId = model.Fk_headId;
 
-                    }else
+                    }
+                    else
                     {
                         sta.Status = "1";
                         sta.Message = "No Data Found";
@@ -919,14 +922,16 @@ namespace HMGreenCityMLM.Controllers
             {
 
                 sta.Status = "1";
-                sta.Message = ex.Message; 
+                sta.Message = ex.Message;
                 return Json(sta, JsonRequestBehavior.AllowGet);
             }
 
 
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Unpaid Income
         public ActionResult UnPaidIncomes(ReportsAPI objreports)
         {
             UpdateProfile sta = new UpdateProfile();
@@ -978,6 +983,62 @@ namespace HMGreenCityMLM.Controllers
                 return Json(sta, JsonRequestBehavior.AllowGet);
             }
         }
+        #endregion
+
+
+        #region BusinessReportBy
+
+        public ActionResult BusinessReportBy(BusinessReportAPI model)
+        {
+            UpdateProfile sta = new UpdateProfile();
+            #region ddlleg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.Leg = Leg;
+            #endregion ddlleg
+            BusinessReport obj = new BusinessReport();
+            List<BusinessReport> lst1 = new List<BusinessReport>();
+            model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.LoginId = model.LoginId;
+
+            // model.IsDownline = Request["Chk_"].ToString(); 
+            DataSet ds11 = model.BusinessReport();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    BusinessReport Obj1 = new BusinessReport();
+                    Obj1.LoginId = r["LoginId"].ToString();
+                    Obj1.DisplayName = r["FirstName"].ToString();
+                    Obj1.Leg = r["Leg"].ToString();
+                    Obj1.ClosingDate = r["CalculationDate"].ToString();
+                    Obj1.NetAmount = r["AMount"].ToString();
+                    Obj1.LeadershipBonus = r["BV"].ToString();
+
+                    lst1.Add(Obj1);
+                }
+                model.lstassociate = lst1;
+                model.TotalNetAmount = double.Parse(ds11.Tables[0].Compute("sum(AMount)", "").ToString()).ToString("n2");
+                model.TotalBV = double.Parse(ds11.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
+                model.Status = "0";
+                model.Message = "Buisness Details";
+                model.Leg = model.Leg;
+                model.IsDownline = model.IsDownline;
+                model.FromDate = model.FromDate;
+                model.ToDate = model.ToDate;
+            }
+            else
+            {
+                sta.Status = "1";
+                sta.Message = "No Data Found"; return Json(sta, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
 
     }
 }
