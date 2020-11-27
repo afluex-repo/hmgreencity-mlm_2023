@@ -337,6 +337,7 @@ namespace HMGreenCityMLM.Models
 
     public class AssociateDashBoardAPI
     {
+        public string TotalTopUp { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
         public string TotalDownline { get; set; }
@@ -347,7 +348,8 @@ namespace HMGreenCityMLM.Models
         public string TotalAdvance { get; set; }
         public string TotalActive { get; set; }
         public string TotalInActive { get; set; }
-      
+        public string UpdaidIncome { get; set; }
+
         public string DirectBusiness { get; set; }
         public string Fk_UserId { get; set; }
 
@@ -564,6 +566,52 @@ namespace HMGreenCityMLM.Models
     }
 
 
+    public class DirectSearchAPI
+    {
+        public string Status1 { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Name { get; set; }
+        public string FromDate { get; set; }
+        public string LoginId { get; set; }
+        public string ToDate { get; set; }
+        //public string FromActivationDate { get; set; }
+       // public string ToActivationDate { get; set; }
+        public string Leg { get; set; }
+        public List<DirectSearch> lstdirect { get; set; }
+        public DataSet GetDirectList()
+        {
+
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@Name", Name),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate),
+                                   // new SqlParameter("@FromActivationDate", FromActivationDate),
+                                   // new SqlParameter("@ToActivationDate", ToActivationDate),
+                                    new SqlParameter("@Leg", Leg),
+                                    new SqlParameter("@Status", Status),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetDirectList", para);
+            return ds;
+        }
+    }
+    public class DirectSearch
+    {
+        public string Mobile { get; set; }
+        public string Email { get; set; }
+        public string JoiningDate { get; set; }
+        public string Leg { get; set; }
+        public string PermanentDate { get; set; }
+        public string Status { get; set; }
+        public string SponsorId { get; set; }
+        public string SponsorName { get; set; }
+        public string Package { get; set; }
+    }
+    public class DirectSearchA
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+    }
     public class SponsorNameAPI
     {
         public string Status { get; set; }
@@ -694,5 +742,115 @@ namespace HMGreenCityMLM.Models
         public string NetAmount { get; set; }
         public string LeadershipBonus { get; set; }
 
+    }
+
+
+    public class DirectAPI
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public List<Direct> lstdirect { get; set; }
+        public DataSet GetDirectList()
+        {
+
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetDirectList", para);
+            return ds;
+        }
+    }
+    public class Direct
+    {
+        public string Mobile { get; set; }
+        public string Email { get; set; }
+        public string JoiningDate { get; set; }
+        public string Leg { get; set; }
+        public string PermanentDate { get; set; }
+        public string Status { get; set; }
+        public string SponsorId { get; set; }
+        public string SponsorName { get; set; }
+        public string Package { get; set; }
+    }
+    public class DirectA
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+    }
+
+
+     public class DownlineAPI
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public List<Downline> lstdirect { get; set; }
+        public DataSet GetDownlineList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineList", para);
+            return ds;
+        }
+    }
+    public class Downline
+    {
+        public string Name { get; set; }
+        public string LoginId { get; set; }
+        public string JoiningDate { get; set; }
+        public string Leg { get; set; }
+        public string PermanentDate { get; set; }
+        public string Status { get; set; }
+        public string Mobile { get; set; }
+        public string Package { get; set; }
+    }
+    public class DownlineA
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+    }
+
+
+
+
+    public class DownlineSearchAPI
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Name { get; set; }
+        public string FromDate { get; set; }
+        public string LoginId { get; set; }
+        public string ToDate { get; set; }
+        //public string FromActivationDate { get; set; }
+        // public string ToActivationDate { get; set; }
+        public string Leg { get; set; }
+        public List<DownlineSearch> lstdirect { get; set; }
+        public DataSet GetDownlineList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@Name", Name),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@Leg", Leg),
+                                    new SqlParameter("@Status", Status), };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineList", para);
+            return ds;
+        }
+    }
+    public class DownlineSearch
+    {
+        public string Name { get; set; }
+        public string LoginId { get; set; }
+        public string JoiningDate { get; set; }
+        public string Leg { get; set; }
+        public string PermanentDate { get; set; }
+        public string Status { get; set; }
+        public string Mobile { get; set; }
+        public string Package { get; set; }
+    }
+    public class DownlineSearchA
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
     }
 }

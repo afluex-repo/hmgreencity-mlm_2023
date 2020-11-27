@@ -539,6 +539,8 @@ namespace HMGreenCityMLM.Controllers
                     obj.TotalAdvance = ds.Tables[0].Rows[0]["TotalAdvance"].ToString();
                     obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                     obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                    obj.UpdaidIncome = ds.Tables[0].Rows[0]["UpdaidIncome"].ToString();
+                    obj.TotalTopUp = ds.Tables[0].Rows[0]["TotalTopUp"].ToString();
 
                     //ViewBag.ProductPaidBusinessLeft = ds.Tables[3].Rows[0]["PaidBusinessLeft"].ToString();
                     //ViewBag.ProductPaidBusinessRight = ds.Tables[3].Rows[0]["PaidBusinessRight"].ToString();
@@ -1040,5 +1042,191 @@ namespace HMGreenCityMLM.Controllers
 
         #endregion
 
+        #region Direct
+
+        public ActionResult Direct(DirectAPI direct)
+        {
+            UpdateProfile objs = new UpdateProfile();
+            if (direct.LoginId == "0" || direct.LoginId == null)
+            {
+                objs.Status = "1";
+                objs.Message = "Please Select Login Id";
+                return Json(objs, JsonRequestBehavior.AllowGet);
+            }
+
+
+            DirectA od = new DirectA();
+            Direct obj = new Direct();
+            
+            List<Direct> lst = new List<Direct>();
+            DataSet ds = direct.GetDirectList();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Direct Objload = new Direct();
+                    Objload.Mobile = dr["Mobile"].ToString();
+                    Objload.Email = dr["Email"].ToString();
+                    Objload.JoiningDate = dr["JoiningDate"].ToString();
+                    Objload.Leg = dr["Leg"].ToString();
+                    Objload.PermanentDate = (dr["PermanentDate"].ToString());
+                    Objload.Status = (dr["Status"].ToString());
+                    Objload.SponsorId = (dr["LoginId"].ToString());
+                    Objload.SponsorName = (dr["Name"].ToString());
+                    Objload.Package = (dr["ProductName"].ToString());
+
+                    lst.Add(Objload);
+                }
+                direct.Status = "0";
+                direct.Message = "Data Fetched";
+                direct.lstdirect = lst;
+                return Json(direct, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                od.Status = "1";
+                od.Message = "No Data for this id";
+                return Json(od, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public ActionResult SearchDirect(DirectSearchAPI direct)
+        {
+            DirectSearchA od = new DirectSearchA();
+            DirectSearch obj = new DirectSearch();
+            direct.FromDate = string.IsNullOrEmpty(direct.FromDate) ? null : Common.ConvertToSystemDate(direct.FromDate, "dd/MM/yyyy");
+            direct.ToDate = string.IsNullOrEmpty(direct.ToDate) ? null : Common.ConvertToSystemDate(direct.ToDate, "dd/MM/yyyy");
+            
+            List<DirectSearch> lst = new List<DirectSearch>();
+            DataSet ds = direct.GetDirectList();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    DirectSearch Objload = new DirectSearch();
+                    Objload.Mobile = dr["Mobile"].ToString();
+                    Objload.Email = dr["Email"].ToString();
+                    Objload.JoiningDate = dr["JoiningDate"].ToString();
+                    Objload.Leg = dr["Leg"].ToString();
+                    Objload.PermanentDate = (dr["PermanentDate"].ToString());
+                    Objload.Status = (dr["Status"].ToString());
+                    Objload.SponsorId = (dr["LoginId"].ToString());
+                    Objload.SponsorName = (dr["Name"].ToString());
+                    Objload.Package = (dr["ProductName"].ToString());
+
+                    lst.Add(Objload);
+                }
+                direct.Status1 = "0";
+                direct.Message = "Data Fetched";
+                direct.lstdirect = lst;
+                return Json(direct, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                od.Status = "1";
+                od.Message = "No Data for this id";
+                return Json(od, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        #endregion
+
+        #region Downline
+
+
+        public ActionResult Downline(DownlineAPI direct)
+        {
+            UpdateProfile objs = new UpdateProfile();
+            if (direct.LoginId == "0" || direct.LoginId == null)
+            {
+                objs.Status = "1";
+                objs.Message = "Please Select Login Id";
+                return Json(objs, JsonRequestBehavior.AllowGet);
+            }
+
+            DownlineA od = new DownlineA();
+            Downline obj = new Downline();
+
+            List<Downline> lst = new List<Downline>();
+            DataSet ds = direct.GetDownlineList();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Downline Objload = new Downline();
+                    Objload.Name = dr["Name"].ToString();
+                    Objload.LoginId = dr["LoginId"].ToString();
+                    Objload.JoiningDate = dr["JoiningDate"].ToString();
+                    Objload.Leg = dr["Leg"].ToString();
+                    Objload.PermanentDate = (dr["PermanentDate"].ToString());
+                    Objload.Status = (dr["Status"].ToString());
+                    Objload.Mobile = (dr["Mobile"].ToString());
+                    Objload.Package = (dr["ProductName"].ToString());
+
+                    lst.Add(Objload);
+                }
+                direct.Status = "0";
+                direct.Message = "Data Fetched";
+                direct.lstdirect = lst;
+                return Json(direct, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                od.Status = "1";
+                od.Message = "No Data for this id";
+                return Json(od, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+           public ActionResult SearchDownline(DownlineSearchAPI direct)
+        {
+            UpdateProfile objs = new UpdateProfile();
+            if (direct.LoginId == "0" || direct.LoginId == null)
+            {
+                objs.Status = "1";
+                objs.Message = "Please Select Login Id";
+                return Json(objs, JsonRequestBehavior.AllowGet);
+            }
+
+            DownlineSearchA od = new DownlineSearchA();
+            DownlineSearch obj = new DownlineSearch();
+
+            List<DownlineSearch> lst = new List<DownlineSearch>();
+            DataSet ds = direct.GetDownlineList();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    DownlineSearch Objload = new DownlineSearch();
+                    Objload.Name = dr["Name"].ToString();
+                    Objload.LoginId = dr["LoginId"].ToString();
+                    Objload.JoiningDate = dr["JoiningDate"].ToString();
+                    Objload.Leg = dr["Leg"].ToString();
+                    Objload.PermanentDate = (dr["PermanentDate"].ToString());
+                    Objload.Status = (dr["Status"].ToString());
+                    Objload.Mobile = (dr["Mobile"].ToString());
+                    Objload.Package = (dr["ProductName"].ToString());
+
+                    lst.Add(Objload);
+                }
+                direct.Status = "0";
+                direct.Message = "Data Fetched";
+                direct.lstdirect = lst;
+                return Json(direct, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                od.Status = "1";
+                od.Message = "No Data for this id";
+                return Json(od, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        #endregion
     }
 }
