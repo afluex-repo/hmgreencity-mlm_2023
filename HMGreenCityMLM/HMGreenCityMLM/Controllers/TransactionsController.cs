@@ -429,7 +429,7 @@ namespace HMGreenCityMLM.Controllers
                     ViewBag.TDS = Convert.ToDecimal(ViewBag.TDS) + Convert.ToDecimal(r["TDS"].ToString());
                     ViewBag.Processing = Convert.ToDecimal(ViewBag.Processing) + Convert.ToDecimal(r["Processing"].ToString());
                     ViewBag.NetIncome = Convert.ToDecimal(ViewBag.NetIncome) + Convert.ToDecimal(r["NetIncome"].ToString());
-
+                    ViewBag.Total = ds.Tables[2].Rows[0]["Total"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;

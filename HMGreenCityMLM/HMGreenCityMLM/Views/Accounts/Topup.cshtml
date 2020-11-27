@@ -136,7 +136,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Receipt No </label>
+                                                    <div class="col-sm-9">
+                                                       
+                                                        @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Receipt No", @onkeypress = "return isNumberKey(event);", @onchange ="return validateReceipt();" })
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group row">
@@ -439,6 +447,29 @@
         }
 
     }
+
+    function validateReceipt() {
+        //$("#Fk_CityId").empty();
+        var ReceiptNo = "";
+
+        ReceiptNo = $('#ReceiptNo').val();
+        
+        $.ajax({
+            url: "/Accounts/ValidateReceipt",
+            Type: "Get",
+            DataType: "JSON",
+            data: { ReceiptNo: ReceiptNo },
+            success: function (data) {
+                if (data.Result == "1") {
+                    alert('Receipt No Already Exists')
+                    $('#ReceiptNo').val("");
+                }
+            }
+
+        });
+    }
+
+
     function isNumberKey(evt) {
 
         var charCode = (evt.which) ? evt.which : event.keyCode;

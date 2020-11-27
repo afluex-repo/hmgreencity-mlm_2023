@@ -70,6 +70,28 @@ namespace HMGreenCityMLM.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
 
         }
+
+        public ActionResult ValidateReceipt(string ReceiptNo)
+        {
+            Wallet obj = new Wallet();
+            obj.ReceiptNo = ReceiptNo;
+            DataSet ds = obj.ValidatingReceipt();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+                {
+                    obj.Result = "1";
+                }
+                else
+                {
+                    obj.Result = "0";
+                }
+               
+            }
+            else { }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+
+        }
         public ActionResult GetMemberName(string LoginId)
         {
             Common obj = new Common();

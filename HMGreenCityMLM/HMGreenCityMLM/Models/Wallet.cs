@@ -10,6 +10,7 @@ namespace HMGreenCityMLM.Models
 {
     public class Wallet : Common
     {
+        public string ReceiptNo { get; set; }
         public int Amount2 { get; set; }
         public string word { get; set; }
         public List<SelectListItem> ddlblock { get; set; }
@@ -43,6 +44,18 @@ namespace HMGreenCityMLM.Models
         public string TopUpDate { get; set; }
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }
+
+
+        public DataSet ValidatingReceipt()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@ReceiptNo", ReceiptNo),
+
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("ValidateReceipt", para);
+            return ds;
+        }
+
 
         public DataSet SaveProductWalletRequest()
         {
@@ -241,7 +254,8 @@ namespace HMGreenCityMLM.Models
                                             new SqlParameter("@TransactionNo", TransactionNo),
                                               new SqlParameter("@TransactionDate", TransactionDate),
                                                 new SqlParameter("@BankName", BankName),
-                                                  new SqlParameter("@BankBranch", BankBranch)
+                                                  new SqlParameter("@BankBranch", BankBranch),
+                                                   new SqlParameter("@ReceiptNo", ReceiptNo)
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUpByAdmin", para);
             return ds;

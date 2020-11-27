@@ -102,6 +102,7 @@ namespace HMGreenCityMLM.Controllers
 
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -285,7 +286,7 @@ namespace HMGreenCityMLM.Controllers
                             obj.ProductName = r["ProductName"].ToString();
                             obj.HSNCode = r["HSNCode"].ToString();
 
-                            ViewBag.OrderNo = r["Pk_InvestmentId"].ToString();
+                            ViewBag.OrderNo = r["ReceiptNo"].ToString();
 
                             ViewBag.TotalFinalAmount = ds.Tables[1].Rows[0]["TotalFinalAmount"].ToString();
                             ViewBag.TotalFinalAmountWords = ds.Tables[1].Rows[0]["TotalFinalAmountWords"].ToString();
