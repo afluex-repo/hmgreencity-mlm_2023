@@ -337,7 +337,7 @@ namespace HMGreenCityMLM.Models
 
     public class AssociateDashBoardAPI
     {
-        public string TotalTopUp { get; set; }
+        public string SelfBusiness { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
         public string TotalDownline { get; set; }
@@ -348,7 +348,7 @@ namespace HMGreenCityMLM.Models
         public string TotalAdvance { get; set; }
         public string TotalActive { get; set; }
         public string TotalInActive { get; set; }
-        public string UpdaidIncome { get; set; }
+        public string UnpaidIncome { get; set; }
 
         public string DirectBusiness { get; set; }
         public string Fk_UserId { get; set; }

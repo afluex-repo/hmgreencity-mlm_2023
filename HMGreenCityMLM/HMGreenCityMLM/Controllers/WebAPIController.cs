@@ -539,8 +539,8 @@ namespace HMGreenCityMLM.Controllers
                     obj.TotalAdvance = ds.Tables[0].Rows[0]["TotalAdvance"].ToString();
                     obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                     obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
-                    obj.UpdaidIncome = ds.Tables[0].Rows[0]["UpdaidIncome"].ToString();
-                    obj.TotalTopUp = ds.Tables[0].Rows[0]["TotalTopUp"].ToString();
+                    obj.UnpaidIncome = ds.Tables[0].Rows[0]["UpdaidIncome"].ToString();
+                    obj.SelfBusiness = ds.Tables[0].Rows[0]["TotalTopUp"].ToString();
 
                     //ViewBag.ProductPaidBusinessLeft = ds.Tables[3].Rows[0]["PaidBusinessLeft"].ToString();
                     //ViewBag.ProductPaidBusinessRight = ds.Tables[3].Rows[0]["PaidBusinessRight"].ToString();
