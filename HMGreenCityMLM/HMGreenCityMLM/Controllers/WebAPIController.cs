@@ -1095,8 +1095,54 @@ namespace HMGreenCityMLM.Controllers
         {
             DirectSearchA od = new DirectSearchA();
             DirectSearch obj = new DirectSearch();
-            direct.FromDate = string.IsNullOrEmpty(direct.FromDate) ? null : Common.ConvertToSystemDate(direct.FromDate, "dd/MM/yyyy");
-            direct.ToDate = string.IsNullOrEmpty(direct.ToDate) ? null : Common.ConvertToSystemDate(direct.ToDate, "dd/MM/yyyy");
+
+
+
+            if (direct.Status == "null")
+            {
+                direct.Status = null;
+            }
+            else
+            {
+                direct.Status = direct.Status;
+            }
+
+            if (direct.Name == "null")
+            {
+                direct.Name = null;
+            }
+            else
+            {
+                direct.Name = direct.Name;
+            }
+
+
+
+            if (direct.Leg == "null")
+            {
+                direct.Leg = null;
+            }
+            else
+            {
+                direct.Leg = direct.Leg;
+            }
+
+            if (direct.FromDate == "null")
+            {
+                direct.FromDate = null;
+            }else
+            {
+                direct.FromDate = string.IsNullOrEmpty(direct.FromDate) ? null : Common.ConvertToSystemDate(direct.FromDate, "dd/MM/yyyy");
+            }
+            if (direct.ToDate == "null")
+            {
+                direct.ToDate = null;
+            }
+            else
+            {
+                direct.ToDate = string.IsNullOrEmpty(direct.ToDate) ? null : Common.ConvertToSystemDate(direct.ToDate, "dd/MM/yyyy");
+            }
+
 
             List<DirectSearch> lst = new List<DirectSearch>();
             DataSet ds = direct.GetDirectList();
@@ -1124,7 +1170,7 @@ namespace HMGreenCityMLM.Controllers
             }
             else
             {
-                od.Status = "1";
+                od.Status1 = "1";
                 od.Message = "No Data for this id";
                 return Json(od, JsonRequestBehavior.AllowGet);
             }
@@ -1195,6 +1241,54 @@ namespace HMGreenCityMLM.Controllers
             DownlineSearchA od = new DownlineSearchA();
             DownlineSearch obj = new DownlineSearch();
 
+
+            if (direct.Status == "null")
+            {
+                direct.Status = null;
+            }
+            else
+            {
+                direct.Status = direct.Status;
+            }
+
+            if (direct.Name == "null")
+            {
+                direct.Name = null;
+            }
+            else
+            {
+                direct.Name = direct.Name;
+            }
+
+
+
+            if (direct.Leg == "null")
+            {
+                direct.Leg = null;
+            }
+            else
+            {
+                direct.Leg = direct.Leg;
+            }
+
+            if (direct.FromDate == "null")
+            {
+                direct.FromDate = null;
+            }
+            else
+            {
+                direct.FromDate = string.IsNullOrEmpty(direct.FromDate) ? null : Common.ConvertToSystemDate(direct.FromDate, "dd/MM/yyyy");
+            }
+            if (direct.ToDate == "null")
+            {
+                direct.ToDate = null;
+            }
+            else
+            {
+                direct.ToDate = string.IsNullOrEmpty(direct.ToDate) ? null : Common.ConvertToSystemDate(direct.ToDate, "dd/MM/yyyy");
+            }
+
+
             List<DownlineSearch> lst = new List<DownlineSearch>();
             DataSet ds = direct.GetDownlineList();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -1220,7 +1314,7 @@ namespace HMGreenCityMLM.Controllers
             }
             else
             {
-                od.Status = "1";
+                od.Status1 = "1";
                 od.Message = "No Data for this id";
                 return Json(od, JsonRequestBehavior.AllowGet);
             }

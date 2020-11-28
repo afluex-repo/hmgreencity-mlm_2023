@@ -634,7 +634,7 @@ namespace HMGreenCityMLM.Models
     }
     public class DirectSearchA
     {
-        public string Status { get; set; }
+        public string Status1 { get; set; }
         public string Message { get; set; }
     }
     public class SponsorNameAPI
@@ -875,7 +875,7 @@ namespace HMGreenCityMLM.Models
     }
     public class DownlineSearchA
     {
-        public string Status { get; set; }
+        public string Status1 { get; set; }
         public string Message { get; set; }
     }
 }
