@@ -1240,10 +1240,10 @@ namespace HMGreenCityMLM.Controllers
 
             var objectToSerialize = new Downl();
             objectToSerialize.items = new List<FetchLeg>
-                          {
+                          { new FetchLeg { LegId = "null", LegName = "All" },
                              new FetchLeg { LegId = "L", LegName = "Left" },
-                              new FetchLeg { LegId = "R", LegName = "Right" },
-                               new FetchLeg { LegId = "null", LegName = "All" },
+                              new FetchLeg { LegId = "R", LegName = "Right" }
+                              
                           };
             objectToSerialize.Leg = "null";
             return Json(objectToSerialize, JsonRequestBehavior.AllowGet);
