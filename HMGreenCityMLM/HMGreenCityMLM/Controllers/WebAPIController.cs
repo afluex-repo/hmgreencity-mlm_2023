@@ -1243,9 +1243,9 @@ namespace HMGreenCityMLM.Controllers
                           {
                              new FetchLeg { LegId = "L", LegName = "Left" },
                               new FetchLeg { LegId = "R", LegName = "Right" },
-                               new FetchLeg { LegId = null, LegName = "All" },
+                               new FetchLeg { LegId = "null", LegName = "All" },
                           };
-            objectToSerialize.Leg = direct.Leg;
+            objectToSerialize.Leg = "null";
             return Json(objectToSerialize, JsonRequestBehavior.AllowGet);
 
         }
@@ -1266,12 +1266,13 @@ namespace HMGreenCityMLM.Controllers
             var objectToSerialize = new State();
             objectToSerialize.items = new List<FetchState>
                           {
-                new FetchState { StatusId = null, StatusName = "All" },
+                new FetchState { StatusId = "null", StatusName = "All" },
                              new FetchState { StatusId = "P", StatusName = "Active" },
                               new FetchState { StatusId = "T", StatusName = "Inactive" },
                                 new FetchState { StatusId = "B", StatusName = "Blocked" }
 
                           };
+            objectToSerialize.Status = "null";
             return Json(objectToSerialize, JsonRequestBehavior.AllowGet);
 
         }
