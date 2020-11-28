@@ -5,95 +5,100 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        <ol class="breadcrumb">
-            <li>
-                <i class="clip-home-3"></i>
-                <a href="#">
-                    Reports
-                </a>
-            </li>
-            <li class="active">
-                TDS Report By Login ID
-            </li>
-        </ol>
-    </div>
-</div>
-<br />
+
 
 @using (Html.BeginForm("TDSReportByLoginID", "AdminReports", FormMethod.Post, new { @id = "form1" }))
 {
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    TDS Report By Login ID
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12 table-responsive">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    PAN Number
-                                    @Html.TextBoxFor(m => m.PAN, new { @class = "form-control", @placeholder = "PAN Number", @maxlength = "10" })
-                                </div>
-                                <div class="col-md-3">
-                                    Login ID
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login ID" })
-                                </div>
-                                <div class="col-md-3">
-                                    From Date
-                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date" })
-                                </div>
-                                <div class="col-md-3">
-                                    To Date
-                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Date" })
-                                </div>
-                                <div class="col-md-3">
-                                    <br />
-                                    <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails" />
-                                </div>
-                            </div>
+    <div class="app-content content">
+        <div class="content-wrapper">
+          
+            <div class="content-body">
+                <!-- users edit start -->
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">TDS Report</span>
+                                        </a>
+                                    </li>
 
-                            <br />
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Sr No.</th>
-                                        <th>Login ID</th>
-                                        <th>Name</th>
-                                        <th>PAN Number</th>
-                                        <th>TDS</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-12 table-responsive">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        PAN Number
+                                                        @Html.TextBoxFor(m => m.PAN, new { @class = "form-control", @placeholder = "PAN Number", @maxlength = "10" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        Login ID
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login ID" })
+                                                   @Html.HiddenFor(m => m.ToLoginID)
+                                                     </div>
+                                                    <div class="col-md-3">
+                                                        From Date
+                                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        To Date
+                                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Date" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <br />
+                                                        <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails"  onclick="return validateLogin();"  />
+                                                    </div>
+                                                </div>
+
+                                                <br />
+                                                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr No.</th>
+                                                            <th>Login ID</th>
+                                                            <th>Name</th>
+                                                            <th>PAN Number</th>
+                                                            <th>TDS</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (Model != null)
                                     {
                                         if (Model.lsttopupreport != null)
                                         {
                                             int i = 1;
                                             foreach (var Item in Model.lsttopupreport)
                                             {
-                                                <tr class="text-left">
-                                                    <td>@i</td>
-                                                    <td>@Item.LoginId</td>
-                                                    <td>@Item.Name</td>
-                                                    <td>@Item.PAN</td>
-                                                    <td>@Item.TDSAmount</td>
-                                                </tr>
+                                                        <tr class="text-left">
+                                                            <td>@i</td>
+                                                            <td>@Item.LoginId</td>
+                                                            <td>@Item.Name</td>
+                                                            <td>@Item.PAN</td>
+                                                            <td>@Item.TDSAmount</td>
+                                                        </tr>
                                                 i++;
                                             }
 
                                         }
                                     }
 
-                                </tbody>
-                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- content-wrapper ends -->
+                            <!-- partial:../../partials/_footer.html -->
+                            <!-- partial -->
                         </div>
                     </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -143,5 +148,13 @@
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
+    function validateLogin() {
+        var login = $('#LoginId').val();
+        if (login == "") {
+            $('#ToLoginID').val(null);
+        } else {
+            var loginid = $('#ToLoginID').val();
 
+        }
+    }
 </script>

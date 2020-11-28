@@ -487,7 +487,7 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para = { new SqlParameter("@PanNumber", PAN) ,
                                   new SqlParameter("@FromDate", FromDate),
                                   new SqlParameter("@ToDate", ToDate),
-                                  new SqlParameter("@LoginID", LoginId)
+                                  new SqlParameter("@LoginID", ToLoginID)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetTDSReportByLoginID", para);
             return ds;

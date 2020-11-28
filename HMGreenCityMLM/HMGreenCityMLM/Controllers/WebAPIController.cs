@@ -1057,7 +1057,7 @@ namespace HMGreenCityMLM.Controllers
 
             DirectA od = new DirectA();
             Direct obj = new Direct();
-            
+
             List<Direct> lst = new List<Direct>();
             DataSet ds = direct.GetDirectList();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -1097,7 +1097,7 @@ namespace HMGreenCityMLM.Controllers
             DirectSearch obj = new DirectSearch();
             direct.FromDate = string.IsNullOrEmpty(direct.FromDate) ? null : Common.ConvertToSystemDate(direct.FromDate, "dd/MM/yyyy");
             direct.ToDate = string.IsNullOrEmpty(direct.ToDate) ? null : Common.ConvertToSystemDate(direct.ToDate, "dd/MM/yyyy");
-            
+
             List<DirectSearch> lst = new List<DirectSearch>();
             DataSet ds = direct.GetDirectList();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -1182,7 +1182,7 @@ namespace HMGreenCityMLM.Controllers
         }
 
 
-           public ActionResult SearchDownline(DownlineSearchAPI direct)
+        public ActionResult SearchDownline(DownlineSearchAPI direct)
         {
             UpdateProfile objs = new UpdateProfile();
             if (direct.LoginId == "0" || direct.LoginId == null)
@@ -1226,6 +1226,58 @@ namespace HMGreenCityMLM.Controllers
             }
 
         }
+
+        #endregion
+
+
+        #region LegDropdown
+
+
+        public ActionResult LegDropdown(Downl direct)
+        {
+            UpdateProfile onj = new UpdateProfile();
+            FetchLeg obj = new FetchLeg();
+
+            var objectToSerialize = new Downl();
+            objectToSerialize.items = new List<FetchLeg>
+                          {
+                             new FetchLeg { LegId = "L", LegName = "Left" },
+                              new FetchLeg { LegId = "R", LegName = "Right" },
+                               new FetchLeg { LegId = null, LegName = "All" },
+                          };
+            objectToSerialize.Leg = direct.Leg;
+            return Json(objectToSerialize, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+
+        #endregion
+
+        #region StatusDropdown
+
+
+        public ActionResult StatusDropdown(State Status1)
+        {
+            UpdateProfile onj = new UpdateProfile();
+            FetchState obj = new FetchState();
+
+            var objectToSerialize = new State();
+            objectToSerialize.items = new List<FetchState>
+                          {
+                new FetchState { StatusId = null, StatusName = "All" },
+                             new FetchState { StatusId = "P", StatusName = "Active" },
+                              new FetchState { StatusId = "T", StatusName = "Inactive" },
+                                new FetchState { StatusId = "B", StatusName = "Blocked" }
+
+                          };
+            return Json(objectToSerialize, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
 
         #endregion
     }

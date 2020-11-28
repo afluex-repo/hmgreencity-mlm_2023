@@ -239,6 +239,8 @@ namespace HMGreenCityMLM.Models
 
             return Leg;
         }
+
+       
         public static List<SelectListItem> BindTopupStatus()
         {
             List<SelectListItem> IncomeStatus = new List<SelectListItem>();

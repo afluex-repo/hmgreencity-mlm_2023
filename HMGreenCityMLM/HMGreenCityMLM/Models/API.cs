@@ -98,7 +98,32 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
     }
+    public class FetchLeg
+    {
+        public string LegId;
+        public string LegName { get; set; }
+    }
 
+    public class Downl
+    {
+        public List<FetchLeg> items { get; set; }
+        public string Leg { get; set; }
+    }
+
+    public class FetchState
+    {
+        public string StatusId ;
+        public string StatusName;
+        
+        
+    }
+
+    public class State
+    {
+        public List<FetchState> items { get; set; }
+        public string Status { get; set; }
+        
+    }
 
     public class ChangePasswordAPI
     {
