@@ -1019,6 +1019,45 @@ namespace HMGreenCityMLM.Controllers
             #endregion ddlleg
             BusinessReport obj = new BusinessReport();
             List<BusinessReport> lst1 = new List<BusinessReport>();
+
+
+
+          
+            if (model.Leg == "null")
+            {
+                model.Leg = null;
+            }
+            else
+            {
+                model.Leg = model.Leg;
+            }
+
+            if (model.FromDate == "null")
+            {
+                model.FromDate = null;
+            }
+            else
+            {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            }
+            if (model.ToDate == "null")
+            {
+                model.ToDate = null;
+            }
+            else
+            {
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            }
+            if (model.IsDownline == "null")
+            {
+                model.IsDownline = null;
+            }
+            else
+            {
+                model.IsDownline = model.IsDownline;
+            }
+
+
             model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
@@ -1050,6 +1089,50 @@ namespace HMGreenCityMLM.Controllers
                 model.IsDownline = model.IsDownline;
                 model.FromDate = model.FromDate;
                 model.ToDate = model.ToDate;
+            }
+            else
+            {
+                sta.Status = "1";
+                sta.Message = "No Data Found"; return Json(sta, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult BusinessReport(BusinessAPI model)
+        {
+            UpdateProfile sta = new UpdateProfile();
+            if (model.LoginId == "" || model.LoginId == null)
+            {
+                sta.Status = "1";
+                sta.Message = "Please enter LoginId";
+                return Json(sta, JsonRequestBehavior.AllowGet);
+            }
+
+
+            model.LoginId = model.LoginId;
+            List<Business> lst1 = new List<Business>();
+          
+            // model.IsDownline = Request["Chk_"].ToString(); 
+            DataSet ds11 = model.BusinessReport();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Business Obj1 = new Business();
+                    Obj1.LoginId = r["LoginId"].ToString();
+                    Obj1.DisplayName = r["FirstName"].ToString();
+                    Obj1.Leg = r["Leg"].ToString();
+                    Obj1.ClosingDate = r["CalculationDate"].ToString();
+                    Obj1.NetAmount = r["AMount"].ToString();
+                    Obj1.LeadershipBonus = r["BV"].ToString();
+
+                    lst1.Add(Obj1);
+                }
+                model.lstassociate = lst1;
+                model.Status = "0";
+                model.Message = "Buisness Details";
             }
             else
             {
