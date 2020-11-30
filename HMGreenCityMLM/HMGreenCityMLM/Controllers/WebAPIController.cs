@@ -518,13 +518,13 @@ namespace HMGreenCityMLM.Controllers
 
         #region AssociateDashboard
 
-        public ActionResult AssociateDashBoardTotals(AssociateDashBoardAPI assocdash)
+        public ActionResult AssociateDashBoard(AssociateDashBoardAPI assocdash)
         {
             AssociateDashBoardAPI obj = new AssociateDashBoardAPI();
 
             try
             {
-
+                List<AssoeDashInvst> lstinvestment = new List<AssoeDashInvst>();
                 DataSet ds = assocdash.GetAssociateDashboard();
 
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0]["Msg"].ToString() != "0")
@@ -542,6 +542,14 @@ namespace HMGreenCityMLM.Controllers
                     obj.UnpaidIncome = ds.Tables[0].Rows[0]["UpdaidIncome"].ToString();
                     obj.SelfBusiness = ds.Tables[0].Rows[0]["TotalTopUp"].ToString();
 
+
+                    obj.PaidBusinessLeft = ds.Tables[2].Rows[0]["PaidBusinessLeft"].ToString();
+                    obj.PaidBusinessRight = ds.Tables[2].Rows[0]["PaidBusinessRight"].ToString();
+                    obj.TotalBusinessLeft = ds.Tables[2].Rows[0]["TotalBusinessLeft"].ToString();
+                    obj.TotalBusinessRight = ds.Tables[2].Rows[0]["TotalBusinessRight"].ToString();
+                    obj.CarryLeft = ds.Tables[2].Rows[0]["CarryLeft"].ToString();
+                    obj.CarryRight = ds.Tables[2].Rows[0]["CarryRight"].ToString();
+
                     //ViewBag.ProductPaidBusinessLeft = ds.Tables[3].Rows[0]["PaidBusinessLeft"].ToString();
                     //ViewBag.ProductPaidBusinessRight = ds.Tables[3].Rows[0]["PaidBusinessRight"].ToString();
                     //ViewBag.ProductTotalBusinessLeft = ds.Tables[3].Rows[0]["TotalBusinessLeft"].ToString();
@@ -549,6 +557,18 @@ namespace HMGreenCityMLM.Controllers
                     //ViewBag.ProductCarryLeft = ds.Tables[3].Rows[0]["CarryLeft"].ToString();
                     //ViewBag.ProductCarryRight = ds.Tables[3].Rows[0]["CarryRight"].ToString();
 
+                    foreach (DataRow r in ds.Tables[1].Rows)
+                    {
+                        AssoeDashInvst Obj1 = new AssoeDashInvst();
+                        Obj1.ProductName = r["ProductName"].ToString();
+                        Obj1.Amount = r["Amount"].ToString();
+                        Obj1.Status = r["Status"].ToString();
+
+                        lstinvestment.Add(Obj1);
+                    }
+                    obj.lstinvestment = lstinvestment;
+
+                    obj.Fk_UserId = assocdash.Fk_UserId;
                     obj.Status = "0";
                     obj.Message = "Data Fetched";
                     return Json(obj, JsonRequestBehavior.AllowGet);
@@ -1307,7 +1327,7 @@ namespace HMGreenCityMLM.Controllers
 
                     lst.Add(Objload);
                 }
-                direct.Status = "0";
+                direct.Status1 = "0";
                 direct.Message = "Data Fetched";
                 direct.lstdirect = lst;
                 return Json(direct, JsonRequestBehavior.AllowGet);

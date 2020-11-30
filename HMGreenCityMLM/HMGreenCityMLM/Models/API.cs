@@ -362,6 +362,7 @@ namespace HMGreenCityMLM.Models
 
     public class AssociateDashBoardAPI
     {
+        public List<AssoeDashInvst> lstinvestment { get; set; }
         public string SelfBusiness { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
@@ -374,8 +375,15 @@ namespace HMGreenCityMLM.Models
         public string TotalActive { get; set; }
         public string TotalInActive { get; set; }
         public string UnpaidIncome { get; set; }
+        public string PaidBusinessLeft { get; set; }
+        public string PaidBusinessRight { get; set; }
+        public string TotalBusinessLeft { get; set; }
+        public string TotalBusinessRight { get; set; }
+        public string CarryLeft { get; set; }
+///public string TeamBusiness { get; set; }
+        public string CarryRight { get; set; }
 
-        public string DirectBusiness { get; set; }
+   //     public string DirectBusiness { get; set; }
         public string Fk_UserId { get; set; }
 
 
@@ -841,6 +849,7 @@ namespace HMGreenCityMLM.Models
     public class DownlineSearchAPI
     {
         public string Status { get; set; }
+        public string Status1 { get; set; }
         public string Message { get; set; }
         public string Name { get; set; }
         public string FromDate { get; set; }
