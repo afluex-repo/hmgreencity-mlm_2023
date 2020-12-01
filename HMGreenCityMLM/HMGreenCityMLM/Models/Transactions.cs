@@ -137,5 +137,7 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("AutoProductDistributePayment", para);
             return null;
         }
+
+        
     }
 }

@@ -10,6 +10,7 @@ namespace HMGreenCityMLM.Models
     public class Reports : Common
     {
         public string Total { get; set; }
+        public string ReceiptNo { get; set; }
         public string DirectBusiness { get; set; }
         public string TotalBusiness { get; set; }
         public string RightBusiness { get; set; }

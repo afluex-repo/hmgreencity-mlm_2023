@@ -59,10 +59,13 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Sr No.</th>
+                                                            <th>Date</th>
                                                             <th>Login ID</th>
-                                                            <th>Name</th>
+                                                            <th >Name</th>
                                                             <th>PAN Number</th>
                                                             <th>TDS</th>
+                                                            <th>Paid Amount</th>
+                                                            <th>Total</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -75,10 +78,13 @@
                                             {
                                                         <tr class="text-left">
                                                             <td>@i</td>
+                                                            <td>@Item.ClosingDate</td>
                                                             <td>@Item.LoginId</td>
-                                                            <td>@Item.Name</td>
+                                                            <td >@Item.Name</td>
                                                             <td>@Item.PAN</td>
                                                             <td>@Item.TDSAmount</td>
+                                                            <td>@Item.NetAmount</td>
+                                                            <td>@Item.GrossAmount</td>
                                                         </tr>
                                                 i++;
                                             }
@@ -87,6 +93,21 @@
                                     }
 
                                                     </tbody>
+
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th></th>
+
+                                                            <th></th>
+                                                            <th></th>
+                                                            <th></th>
+                                                            <th></th>
+                                                            <th style="color:dodgerblue;font-weight:800">Total TDs @ViewBag.TotalTDS</th>
+                                                            <th></th>
+                                                           
+
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                             </div>
                                         </div>

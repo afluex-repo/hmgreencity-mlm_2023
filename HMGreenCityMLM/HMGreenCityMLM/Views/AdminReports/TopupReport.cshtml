@@ -85,6 +85,7 @@
                                                                
                                                                 <th>Price</th>
                                                                 <th>Calculation Status</th>
+                                                                <th>ReceiptNo</th>
                                                                 <th>Print</th>
                                                             </tr>
                                                         </thead>
@@ -113,7 +114,7 @@
                                                                             <td>@Item.Amount</td>
 
                                                                             <td>@Item.Status</td>
-
+                                                                            <td>@Item.ReceiptNo</td>
                                                                             <td>
                                                                                 @*<a href="/AdminReports/PrintReciept/@Item.LoginId">Print</a>*@
                                                                                 <a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class="btn btn-sm btn-primary" target="_blank">Print </a>

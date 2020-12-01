@@ -103,6 +103,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.PaymentMode = r["PaymentMode"].ToString();
+                    Obj.ReceiptNo = r["ReceiptNo"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -163,7 +164,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.PrintingDate = r["PrintingDate"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
                     Obj.Description = r["Description"].ToString();
-
+                    Obj.ReceiptNo = r["ReceiptNo"].ToString();
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
@@ -754,7 +755,11 @@ namespace HMGreenCityMLM.Controllers
                     Obj.Name = r["Name"].ToString();
                     Obj.TDSAmount = r["TDS"].ToString();
                     Obj.PAN = r["PanNumber"].ToString();
+                    Obj.ClosingDate = r["ClosingDate"].ToString();
+                    Obj.NetAmount = r["NetAmount"].ToString();
+                    Obj.GrossAmount = r["GrossAmount"].ToString();
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["TDS"].ToString());
+                    ViewBag.TotalTDS =  Convert.ToDecimal(r["TotalTDS"].ToString());
 
                     lst1.Add(Obj);
                 }
