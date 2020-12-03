@@ -400,7 +400,10 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlsector = ddlsector;
             ViewBag.ddlblock = ddlblock;
             #endregion GetSite
-          
+            #region ddlpaymentmode
+            List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+            #endregion
             return View();
         }
 

@@ -395,7 +395,48 @@ namespace HMGreenCityMLM.Models
         }
 
     }
+    public class Response
+    {
+        public string Status { get; set; }
+        public string ErrorMessage { get; set; }
+        public string SuccessMessage { get; set; }
+    }
+    public class UploadKYC
+    {
+        public string Fk_UserId { get; set; }
+        public string ImageURL { get; set; }
+        public string AdharNumber { get; set; }
+        public string AdharImage { get; set; }
+        public string PanImage { get; set; }
+        public string PanNumber { get; set; }
+        public string DocNumber { get; set; }
+        public string DocImage { get; set; }
 
+        public DataSet UpdateImage()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserID",Fk_UserId ) ,
+                                      new SqlParameter("@ProfilePic", ImageURL),
+                                   //   new SqlParameter("@ProfilePic", ProfilePicture)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateImage", para);
+            return ds;
+        }
+
+        public DataSet UploadKYCDocuments()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID",Fk_UserId ) ,
+                                      new SqlParameter("@AdharNumber", AdharNumber) ,
+                                       new SqlParameter("@AdharImage", AdharImage),
+                                         new SqlParameter("@PanNumber", PanNumber) ,
+                                       new SqlParameter("@PanImage", PanImage),
+                                        new SqlParameter("@DocumentNumber", DocNumber) ,
+                                       new SqlParameter("@DocumentImage", DocImage),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UploadKYC", para);
+            return ds;
+        }
+
+    }
     public class Upload
     {
         public string Fk_UserId { get; set; }
@@ -408,6 +449,25 @@ namespace HMGreenCityMLM.Models
                                    //   new SqlParameter("@ProfilePic", ProfilePicture)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateImage", para);
+            return ds;
+        }
+
+    }
+
+
+    public class UploadPan
+    {
+        public string Fk_UserId { get; set; }
+        public string ImageURL { get; set; }
+        public string PanNumber { get; set; }
+        
+        public DataSet UploadPanDocuments()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID",Fk_UserId ) ,
+                                      new SqlParameter("@PanNumber", PanNumber) ,
+                                       new SqlParameter("@PanImage", ImageURL),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UploadKYC", para);
             return ds;
         }
 

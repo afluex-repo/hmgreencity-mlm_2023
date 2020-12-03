@@ -128,9 +128,9 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">In Words<span style="color: red">*</span></label>
+                                                    <label class="col-sm-3 col-form-label">In Words<span style="color: white">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.word, new { @class = "form-control", @style = "font-weight:800;color:red;", @placeholder = "Amount in words", @disabled = "true" })
+                                                        @Html.TextBoxFor(m => m.word, new { @class = "form-control", @style = "font-weight:800;color:white;", @placeholder = "Amount in words", @disabled = "true" })
 
 
                                                     </div>
@@ -138,7 +138,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Receipt No </label>
+                                                    <label class="col-sm-3 col-form-label">Receipt No <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
                                                        
                                                         @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Receipt No", @onkeypress = "return isNumberKey(event);", @onchange ="return validateReceipt();" })
@@ -385,7 +385,11 @@
             return false;
         }
 
-
+        if ($('#ReceiptNo').val() == '') {
+            $("#ReceiptNo").addClass('errortext');
+            $('#ReceiptNo').focus();
+            return false;
+        }
         if ($('#PaymentMode').val() == '0') {
             $("#PaymentMode").addClass('errortext');
             $('#PaymentMode').focus();

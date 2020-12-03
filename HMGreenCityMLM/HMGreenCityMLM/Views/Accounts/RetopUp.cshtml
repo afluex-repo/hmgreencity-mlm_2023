@@ -103,11 +103,76 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Receipt No  <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+
+                                                        @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Receipt No", @onkeypress = "return isNumberKey(event);" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Payment Mode <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="row">
+
+
+                                            <div class="col-md-4" id="bankname" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Bank Name </label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4" id="chequeno" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Transaction No</label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4" id="chequdate" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Transaction Date</label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="col-md-4" id="bankbranch" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Branch </label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                             <div class="col-md-4 form-group">
                                                 <span style="color: red">@TempData["Topup"] </span>
                                                 <input class="btn btn-success pull-right" onclick="return validateform()" type="submit" value="Re-Top Up" />
                                             </div>
+                                        
+
+
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -140,6 +205,21 @@
         dateFormat: 'dd/mm/yy',
     });
 
+    function getpaymentdetails() {
+        var paymentmode = ($("#PaymentMode option:selected").text());
+        if (paymentmode != "Cash") {
+            bankname.style.display = "block";
+            chequeno.style.display = "block";
+            chequdate.style.display = "block";
+            bankbranch.style.display = "block";
+        }
+        else {
+            bankname.style.display = "none";
+            chequeno.style.display = "none";
+            chequdate.style.display = "none";
+            bankbranch.style.display = "none";
+        }
+    }
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
@@ -187,6 +267,16 @@
         if ($('#TopUpDate').val() == '') {
             $("#TopUpDate").addClass('errortext');
             $('#TopUpDate').focus();
+            return false;
+        }
+        if ($('#ReceiptNo').val() == '') {
+            $("#ReceiptNo").addClass('errortext');
+            $('#ReceiptNo').focus();
+            return false;
+        }
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
             return false;
         }
         return true;

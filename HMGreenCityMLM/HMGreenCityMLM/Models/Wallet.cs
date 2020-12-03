@@ -286,7 +286,10 @@ namespace HMGreenCityMLM.Models
                                         new SqlParameter("@Fk_SectorId", FK_SectorId),
                                         new SqlParameter("@Fk_BlockId", Fk_BlockId),
                                         new SqlParameter("@PlotNumber", PlotNumber),
-                                        new SqlParameter("@Description", Description)};
+                                        new SqlParameter("@Description", Description),
+                                                                    new SqlParameter("@ReceiptNo", ReceiptNo),
+                                                                    new SqlParameter("@PaymentMode", PaymentMode),
+            };
             DataSet ds = DBHelper.ExecuteQuery("ReTopup", para);
             return ds;
         }
