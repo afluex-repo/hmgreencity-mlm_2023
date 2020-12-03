@@ -133,31 +133,33 @@ namespace HMGreenCityMLM.Controllers
                     model.AdharImage = cleanString + timeStamp + "img" + fCount + ".png";
                     model.PanImage = cleanString1 + timeStamp + "img" + fCount + ".png";
                     model.DocImage = cleanString2 + timeStamp + "img" + fCount + ".png";
+
+                    DataSet dsResult = model.UploadKYCDocuments();
+                    if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
+                    {
+                        if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            obj.Status = "0";
+                            obj.SuccessMessage = "Image Upload Successfully.";
+
+                        }
+                        else
+                        {
+                            obj.Status = "1";
+                            obj.ErrorMessage = dsResult.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.ErrorMessage = "Some Error Occured.";
+                    }
+                    return Json(obj, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
                     obj.Status = "0";
                     obj.SuccessMessage = "Please upload all 3 Documents";
-                }
-                DataSet dsResult = model.UploadKYCDocuments();
-                if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
-                {
-                    if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
-                    {
-                        obj.Status = "0";
-                        obj.SuccessMessage = "Image Upload Successfully.";
-
-                    }
-                    else
-                    {
-                        obj.Status = "1";
-                        obj.ErrorMessage = dsResult.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                    }
-                }
-                else
-                {
-                    obj.Status = "1";
-                    obj.ErrorMessage = "Some Error Occured.";
                 }
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
