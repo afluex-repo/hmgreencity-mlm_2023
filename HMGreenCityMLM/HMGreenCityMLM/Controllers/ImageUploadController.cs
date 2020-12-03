@@ -136,7 +136,8 @@ namespace HMGreenCityMLM.Controllers
                 }
                 else
                 {
-                    model.ImageURL = "";
+                    obj.Status = "0";
+                    obj.SuccessMessage = "Please upload all 3 Documents";
                 }
                 DataSet dsResult = model.UploadKYCDocuments();
                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
