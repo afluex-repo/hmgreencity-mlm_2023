@@ -836,6 +836,7 @@
     <Content Include="Views\Transactions\DistributePaymentPassword.cshtml" />
     <Content Include="Views\AdminReports\DateWiseBusinessReport.cshtml" />
     <Content Include="Views\EmployeeRegistration\EmployeeChangePassword.cshtml" />
+    <Content Include="Views\Admin\PayoutLedger.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

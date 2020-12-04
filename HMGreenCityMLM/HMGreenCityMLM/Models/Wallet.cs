@@ -219,6 +219,18 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+        public DataSet PayoutLedgerAdmin()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                       new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate),
+
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutLedgerAdmin", para);
+            return ds;
+        }
+
         public DataSet BindPriceByProduct()
         {
             SqlParameter[] para = { new SqlParameter("@ProductId", Package) };

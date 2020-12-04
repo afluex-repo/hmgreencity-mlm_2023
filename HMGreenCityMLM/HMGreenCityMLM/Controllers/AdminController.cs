@@ -1099,7 +1099,58 @@ namespace HMGreenCityMLM.Controllers
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
-    
+
+        public ActionResult PayoutLedger(Wallet objewallet)
+        {
+            
+            return View(objewallet);
+        }
+        [HttpPost]
+        [ActionName("PayoutLedger")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult PayoutLedgerBy(Wallet objewallet)
+        {
+
+          //  objewallet.Fk_UserId = Session["Pk_UserId"].ToString();
+            objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
+            objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
+            if (objewallet.LoginId != null)
+            {
+                List<Wallet> lst = new List<Wallet>();
+                DataSet ds = objewallet.PayoutLedgerAdmin();
+                if (ds.Tables != null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Wallet Objload = new Wallet();
+                            Objload.Narration = dr["Narration"].ToString();
+                            Objload.DrAmount = dr["DrAMount"].ToString();
+                            Objload.CrAmount = dr["CrAmount"].ToString();
+                            Objload.AddedOn = dr["TransactionDate"].ToString();
+                            Objload.PayoutBalance = dr["Balance"].ToString();
+
+                            lst.Add(Objload);
+                        }
+                        objewallet.lstpayoutledger = lst;
+                    }
+                    else
+                    {
+                        TempData["PayoutLedger"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+
+                   
+                }
+            }else
+            {
+                TempData["PayoutLedger"] = "Please Enter Login Id";
+            }
+            
+            return View(objewallet);
+        }
+
+
 
     }
 }
