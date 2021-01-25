@@ -453,6 +453,7 @@ namespace HMGreenCityMLM.Controllers
 
             ViewBag.Binary = ViewBag.Direct = ViewBag.Gross = ViewBag.TDS = ViewBag.Processing = ViewBag.NetIncome = 0;
             DataSet ds = model.GetProductDitributePaymentList();
+          
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {

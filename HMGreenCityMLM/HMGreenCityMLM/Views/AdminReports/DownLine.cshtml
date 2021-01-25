@@ -9,6 +9,9 @@
 
 @using (Html.BeginForm("Downline", "AdminReports", FormMethod.Post, new { @id = "form1" }))
 {
+    <p style="color: red">
+        @TempData["msg"]
+    </p>
     <br />
     <div class="app-content content">
         <div class="content-overlay"></div>
