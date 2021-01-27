@@ -629,36 +629,44 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult DownLineList(Reports model)
         {
-
-            List<Reports> lst = new List<Reports>();
-            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-
-            DataSet ds = model.GetDownlineList();
-
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            try
             {
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    Reports obj = new Reports();
-                    obj.Name = r["Name"].ToString();
-                    obj.LoginId = r["LoginId"].ToString();
-                    obj.Password = Crypto.Decrypt(r["Password"].ToString());
-                    obj.JoiningDate = r["JoiningDate"].ToString();
-                    obj.Leg = r["Leg"].ToString();
-                    obj.PermanentDate = (r["PermanentDate"].ToString());
-                    obj.Package = (r["ProductName"].ToString());
-                    obj.Status = (r["Status"].ToString());
-                    obj.Mobile = (r["Mobile"].ToString());
+                List<Reports> lst = new List<Reports>();
+                model.LoginId = model.ToLoginID;
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
-                    lst.Add(obj);
+                DataSet ds = model.GetDownlineList();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Name = r["Name"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Password = Crypto.Decrypt(r["Password"].ToString());
+                        obj.JoiningDate = r["JoiningDate"].ToString();
+                        obj.Leg = r["Leg"].ToString();
+                        obj.PermanentDate = (r["PermanentDate"].ToString());
+                        obj.Package = (r["ProductName"].ToString());
+                        obj.Status = (r["Status"].ToString());
+                        obj.Mobile = (r["Mobile"].ToString());
+
+                        lst.Add(obj);
+                    }
+                    model.lstassociate = lst;
                 }
-                model.lstassociate = lst;
+                List<SelectListItem> AssociateStatus = Common.AssociateStatus();
+                ViewBag.ddlStatus = AssociateStatus;
+                List<SelectListItem> Leg = Common.Leg();
+                ViewBag.ddlleg = Leg;
             }
-            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
-            ViewBag.ddlStatus = AssociateStatus;
-            List<SelectListItem> Leg = Common.Leg();
-            ViewBag.ddlleg = Leg;
+            catch(Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+          
             return View(model);
         }
 
@@ -1611,32 +1619,37 @@ namespace HMGreenCityMLM.Controllers
 
           
             DataSet ds11 = model.GetDatebusinessdetails();
-            if (ds11.Tables[0].Rows[0]["Msg"].ToString() == "0")
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
             {
-                return View(model);
-            }else
-            {
-                if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+                if (ds11.Tables[0].Rows[0]["Msg"].ToString() == "0")
                 {
-                    foreach (DataRow r in ds11.Tables[0].Rows)
-                    {
-                        Reports Obj = new Reports();
-                        Obj.LoginId = r["LoginId"].ToString();
-                        Obj.Name = r["FirstName"].ToString();
-                        Obj.LeftBusiness = r["LeftBusiness"].ToString();
-                        Obj.RightBusiness = r["RightBusiness"].ToString();
-                        Obj.TotalBusiness = r["TotalBusiness"].ToString();
-                        Obj.DirectBusiness = r["DirectBusiness"].ToString();
-
-                        lst1.Add(Obj);
-                    }
-                    model.lstDateWiseBusiness = lst1;
+                    return View(model);
                 }
+                else
+                {
+                    if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds11.Tables[0].Rows)
+                        {
+                            Reports Obj = new Reports();
+                            Obj.LoginId = r["LoginId"].ToString();
+                            Obj.Name = r["FirstName"].ToString();
+                            Obj.LeftBusiness = r["LeftBusiness"].ToString();
+                            Obj.RightBusiness = r["RightBusiness"].ToString();
+                            Obj.TotalBusiness = r["TotalBusiness"].ToString();
+                            Obj.DirectBusiness = r["DirectBusiness"].ToString();
+
+                            lst1.Add(Obj);
+                        }
+                        model.lstDateWiseBusiness = lst1;
+                    }
+                }
+               
             }
-           
-            
             return View(model);
         }
+               
+            
         #endregion
 
     }
