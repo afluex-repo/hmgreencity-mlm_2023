@@ -80,6 +80,7 @@ namespace HMGreenCityMLM.Models
         public List<Reports> lstunpaidincomes { get; set; }
 
         public string TransactionDate { get; set; }
+        public string BankBranch { get; set; }
 
         public string FromName { get; set; }
 
@@ -194,7 +195,7 @@ namespace HMGreenCityMLM.Models
 
         public DataSet GetDatebusinessdetails()
         {
-            SqlParameter[] para = { 
+            SqlParameter[] para = {
                                     new SqlParameter("@LoginId", ToLoginID),
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate),
@@ -450,7 +451,7 @@ namespace HMGreenCityMLM.Models
         {
             SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginId)};
-            DataSet ds = DBHelper.ExecuteQuery("GetUserProfile",para);
+            DataSet ds = DBHelper.ExecuteQuery("GetUserProfile", para);
             return ds;
         }
 
@@ -517,8 +518,13 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@TransactionNo", TransactionNo),
                                     new SqlParameter("@TransactionDate", TransactionDate),
                                     new SqlParameter("@Amount", Amount),
-                                    new SqlParameter("@AddedBy", AddedBy), };
-            DataSet ds = DBHelper.ExecuteQuery("PayPayout", para);
+                                    new SqlParameter("@AddedBy", AddedBy),
+                                    new SqlParameter("@BankName", BankName),
+                                    new SqlParameter("@BankBranch", BankBranch),
+                                    new SqlParameter("@PaymentMode", PaymentMode),
+                                    new SqlParameter("@Remarks", Remarks),
+            };
+                                    DataSet ds = DBHelper.ExecuteQuery("PayPayout", para);
             return ds;
         }
         #endregion

@@ -185,7 +185,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-6" id="chequdate" style="display: none">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Transaction Date</label>
@@ -194,10 +193,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
-
                                             <div class="col-md-6" id="bankbranch" style="display: none">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Branch </label>
@@ -252,8 +247,40 @@
 
 <script>
     $(document).ready(function () {
+
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminProfile/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+
+
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
         $('#TopupType').val('RealEstate');
     });
+ 
 
 
     $('#TopUpDate').datepicker({

@@ -16,7 +16,7 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult SetPermission(Permisssions model)
         {
-            
+
             DataSet ds1 = new DataSet();
 
             #region ddlformtype
@@ -44,7 +44,7 @@ namespace HMGreenCityMLM.Controllers
             }
             else
             {
-                ddluser.Add(new SelectListItem { Text = "Select User", Value = "0"});
+                ddluser.Add(new SelectListItem { Text = "Select User", Value = "0" });
             }
 
             ViewBag.ddluser = ddluser;
@@ -176,6 +176,72 @@ namespace HMGreenCityMLM.Controllers
             return RedirectToAction("SetPermission");
 
         }
+        public ActionResult SetmainId(Permisssions model)
+        {
+            #region ddluser
+            DataSet ds1 = new DataSet();
+            DataSet ds = new DataSet();
+            List<SelectListItem> ddluser = new List<SelectListItem>();
+            List<SetMain> LstSetMain = new List<Models.SetMain>();
+            EmployeeRegistrations emp = new EmployeeRegistrations();
+            ds1 = emp.GetEmployeeData();
+            ds = model.GetEmployeeAssociateSettings();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    ddluser.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["Pk_AdminId"].ToString() });
 
+                }
+            }
+            else
+            {
+                ddluser.Add(new SelectListItem { Text = "Select User", Value = "0" });
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    LstSetMain.Add(new SetMain() {
+                        EmployeeName = r["EmployeeName"].ToString(),
+                        LoginId = r["LoginId"].ToString(),
+                        UserName = r["UserName"].ToString(),
+                        //Fk_EmployeeId = r["Fk_EmployeeId"],
+                        //Fk_UserId = r["Fk_UserId"],
+                        //Pk_MainId = r["Pk_MainId"] 
+                    }); 
+                }
+            }
+            ViewBag.LstSetMain = LstSetMain;
+            ViewBag.ddluser = ddluser;
+
+            #endregion
+            return View();
+        }
+        [HttpPost]
+        [ActionName("SetmainId")]
+        [OnAction(ButtonName = "Set")]
+        public ActionResult SetId(Permisssions model)
+        {
+            try
+            {
+                model.CreatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SetMainid();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    TempData["Msg"] = "Set Main Id Successfully";
+                }
+                else
+                {
+                    TempData["Msg"] = ds.Tables[0].Rows[0]["Msg"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Msg"] = ex.Message;
+            }
+            return RedirectToAction("SetmainId");
+        }
     }
 }

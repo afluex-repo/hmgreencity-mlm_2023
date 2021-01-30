@@ -91,6 +91,24 @@
                                                             <th hidden="hidden">Action</th>
                                                         </tr>
                                                     </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th></th>
+                                                            <th></th>
+                                                            <th></th>
+                                                            <th>Total</th>
+                                                            <th>@ViewBag.DirectIncome</th>
+                                                            <th>@ViewBag.BinaryIncome</th>
+                                                            <th hidden="hidden"></th>
+                                                            <th>@ViewBag.GrossAmount</th>
+                                                            <th>@ViewBag.TDSAmount</th>
+                                                            <th>@ViewBag.ProcessingFee</th>
+                                                            <th hidden="hidden"></th>
+                                                            <th>@ViewBag.NetAmount</th>
+                                                      
+                                                        </tr>
+                                                    </tfoot>
                                                     <tbody>
                                                         @if (Model != null)
                                                         {

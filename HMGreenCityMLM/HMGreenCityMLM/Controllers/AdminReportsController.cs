@@ -146,6 +146,7 @@ namespace HMGreenCityMLM.Controllers
             newdata.Package = newdata.Package == "0" ? null : newdata.Package;
             newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+            newdata.LoginId = newdata.ToLoginID;
             DataSet ds11 = newdata.GetTopupReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -423,7 +424,7 @@ namespace HMGreenCityMLM.Controllers
             {
                 incomeReport.Status = null;
             }
-            incomeReport.ToLoginID = string.IsNullOrEmpty(incomeReport.ToLoginID) ? null : incomeReport.ToLoginID.Trim();
+            incomeReport.LoginId = incomeReport.ToLoginID;
             DataSet ds11 = incomeReport.GetIncomeReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -524,6 +525,12 @@ namespace HMGreenCityMLM.Controllers
                     lst1.Add(Obj);
                 }
                 payoutDetail.lsttopupreport = lst1;
+                ViewBag.BinaryIncome = double.Parse(ds11.Tables[0].Compute("sum(BinaryIncome)", "").ToString()).ToString("n2");
+                ViewBag.DirectIncome = double.Parse(ds11.Tables[0].Compute("sum(DirectIncome)", "").ToString()).ToString("n2");
+                ViewBag.GrossAmount = double.Parse(ds11.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.TDSAmount = double.Parse(ds11.Tables[0].Compute("sum(TDSAmount)", "").ToString()).ToString("n2");
+                ViewBag.ProcessingFee = double.Parse(ds11.Tables[0].Compute("sum(ProcessingFee)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds11.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
             }
             return View(payoutDetail);
         }
@@ -989,7 +996,7 @@ namespace HMGreenCityMLM.Controllers
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.Leg = Leg;
             #endregion ddlleg
-
+            model.LoginId = model.ToLoginID;
             List<Reports> lst1 = new List<Reports>();
             model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");

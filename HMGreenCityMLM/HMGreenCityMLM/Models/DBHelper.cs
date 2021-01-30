@@ -17,8 +17,7 @@ namespace HMGreenCityMLM.Models
             try
             {
                 connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=hmgreendb;User Id=hmgreen;Password=W1ttl1&9;Integrated Security=false;";
-            //    connectionString = "Data Source=DESKTOP-280F4KN;Initial Catalog=Hmgreencitynew;User Id=sa;Password=sa123;Integrated Security=false;";
-
+                //connectionString = "Data Source=DESKTOP-KPDI8EN\\AFLUEX;Initial Catalog=HMGreenCityMLM;User Id=sa;Password=123;Integrated Security=false;";
             }
             catch (Exception)
             {

@@ -246,6 +246,22 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.Fk_UserId = "1";
             return View();
         }
+
+        public ActionResult EmpBinaryTree()
+        {
+            Permisssions p = new Permisssions();
+            p.EmployeeId = Session["Pk_AdminId"].ToString();
+            DataSet ds = p.GetMainId();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.Fk_UserId = ds.Tables[0].Rows[0][0];
+            }
+            else
+            {
+                ViewBag.Fk_UserId = "1";
+            }  
+            return View();
+        }
         public ActionResult Registration(string Pid, string lg)
         {
             Home obj = new Home();
@@ -905,6 +921,10 @@ namespace HMGreenCityMLM.Controllers
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
+                #region ddlpaymentmode
+                List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
+                ViewBag.ddlpaymentmode = ddlpaymentmode;
+                #endregion
             }
             return View(model);
         }
@@ -913,6 +933,10 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetPayPayout(Reports model)
         {
+            #region ddlpaymentmode
+            List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+            #endregion
             #region ddlLeg
             List<SelectListItem> ddlLeg = Common.Leg();
             ViewBag.ddlLeg = ddlLeg;
@@ -962,7 +986,7 @@ namespace HMGreenCityMLM.Controllers
             //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             List<Reports> lst = new List<Reports>();
-            // model.LoginId = Session["LoginId"].ToString();
+            model.LoginId = model.ToLoginID;
             DataSet ds = model.GetPayPayout();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1007,21 +1031,38 @@ namespace HMGreenCityMLM.Controllers
             string description = "";
             string transactiono = "";
             string transactiondate = "";
+            string bankname = "";
+            string branchname = "";
+            string remarks = "";
             string Pk_PaidBoosterId_ = "";
+            string PaymentMode = "";
             for (int i = 1; i < int.Parse(hdrows2); i++)
             {
-                Pk_PaidBoosterId_ = Request["Fk_UserId_ " + i].ToString();
+                Pk_PaidBoosterId_ = Request["Fk_UserId_" + i].ToString();
                 amount = "";
 
-                transactiono = Request["txttranno_ " + i].ToString();
-                transactiondate = Request["txttransdate_ " + i].ToString();
-                model.Amount = Request["txtamount_ " + i].ToString();
+                transactiono = Request["txttranno_" + i].ToString();
+                transactiondate = Request["txttransdate_" + i].ToString();
+                bankname = Request["txtbankname_" + i].ToString();
+                branchname = Request["txtbankbranch_" + i].ToString();
+                remarks = Request["txtremarks_" + i].ToString();
+                model.Amount = Request["txtamount_" + i].ToString();
+                PaymentMode= Request["paymentmode_" + i].ToString();
                 model.Fk_UserId = Pk_PaidBoosterId_;
 
                 model.TransactionNo = transactiono;
+                model.BankName = bankname;
+                model.BankBranch = branchname;
+                model.Remarks = remarks;
+              
                 DataSet ds = null;
-                if (!string.IsNullOrEmpty(transactiondate))
+                if (!string.IsNullOrEmpty(PaymentMode))
                 {
+                    model.PaymentMode = PaymentMode;
+                    model.TransactionNo = transactiono;
+                    model.BankName = bankname;
+                    model.BankBranch = branchname;
+                    model.Remarks = remarks;
                     model.TransactionDate = transactiondate;
                     model.AddedBy = Session["Pk_AdminId"].ToString();
                     ds = model.SavePayPayout();
@@ -1031,16 +1072,16 @@ namespace HMGreenCityMLM.Controllers
 
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-
+                        TempData["PayPayout"] = "Paymnent Done";
                     }
                     else
                     {
-                        // TempData["BoosterPay"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                         TempData["PayPayout"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
 
             }
-            TempData["PayPayout"] = "Paymnent Done";
+            
             return RedirectToAction("PayPayout");
         }
         #endregion
