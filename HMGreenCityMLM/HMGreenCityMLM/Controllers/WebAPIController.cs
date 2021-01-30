@@ -285,6 +285,7 @@ namespace HMGreenCityMLM.Controllers
                         obj1.SectorName = r["SectorName"].ToString();
                         obj1.UpgradtionDate = r["UpgradtionDate"].ToString();
                         obj1.ProductName = r["Package"].ToString();
+                        obj1.PlotNumber = r["PlotNumber"].ToString();
                         obj1.Amount = r["Amount"].ToString();
                         obj1.PlotNumber = r["PlotNumber"].ToString();
                         lstTopupReport.Add(obj1);
