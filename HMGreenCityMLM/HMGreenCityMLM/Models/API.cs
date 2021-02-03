@@ -219,7 +219,7 @@ namespace HMGreenCityMLM.Models
     public string UpgradtionDate { get; set; }
     public string ProductName { get; set; }
     public string Amount { get; set; }
-    public string PlotNumber { get; set; }
+    //public string PlotNumber { get; set; }
     public string SiteName { get; set; }
     public string FK_InvestmentID { get; set; }
     public string SectorName { get; set; }
