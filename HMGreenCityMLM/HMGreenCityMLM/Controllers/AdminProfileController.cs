@@ -311,6 +311,8 @@ namespace HMGreenCityMLM.Controllers
         public ActionResult AssociateListBy(Reports model)
         {
             List<Reports> lst = new List<Reports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             model.LoginId = model.ToLoginID;
             DataSet ds = model.GetAssociateList();
 

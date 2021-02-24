@@ -7,14 +7,15 @@
 
 @using (Html.BeginForm("SetmainId", "Permission", FormMethod.Post, new { @class = "tr-form" }))
 {
-    <span style="color: red">
-        @TempData["Msg"]
-    </span>
+ 
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
             <div class="content-header row">
+                <span style="color: #f90b37;padding-left:18px;font-weight: 800">
+                    @TempData["Msg"]
+                </span>
             </div>
             <div class="content-body">
                 <!-- users edit start -->

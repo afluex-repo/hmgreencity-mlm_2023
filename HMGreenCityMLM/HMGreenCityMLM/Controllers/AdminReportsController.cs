@@ -353,7 +353,8 @@ namespace HMGreenCityMLM.Controllers
         {
 
             List<Reports> lst1 = new List<Reports>();
-
+            newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
             DataSet ds11 = newdata.GetTransactionLog();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -361,6 +362,8 @@ namespace HMGreenCityMLM.Controllers
                 foreach (DataRow r in ds11.Tables[0].Rows)
                 {
                     Reports Obj = new Reports();
+                    
+                    Obj.Name = r["Name"].ToString();
                     Obj.AddedOn = r["AddedOn"].ToString();
                     Obj.Action = r["Action"].ToString();
                     Obj.Remarks = r["Remarks"].ToString();
@@ -1001,8 +1004,6 @@ namespace HMGreenCityMLM.Controllers
             model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-
-
             // model.IsDownline = Request["Chk_"].ToString(); 
             DataSet ds11 = model.BusinessReport();
 
@@ -1013,6 +1014,9 @@ namespace HMGreenCityMLM.Controllers
                     Reports Obj = new Reports();
                     Obj.LoginId = r["LoginId"].ToString();
                     Obj.DisplayName = r["FirstName"].ToString();
+                    Obj.SectorName = r["sectorname"].ToString();
+                    Obj.SiteName = r["sitename"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
                     Obj.Leg = r["Leg"].ToString();
                     Obj.ClosingDate = r["CalculationDate"].ToString();
                     Obj.NetAmount = r["AMount"].ToString();

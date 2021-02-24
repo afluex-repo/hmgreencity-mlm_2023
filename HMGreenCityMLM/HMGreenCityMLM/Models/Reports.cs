@@ -548,10 +548,8 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate),
-
                                      new SqlParameter("@Leg", Leg),
-                                    new SqlParameter("@IsDownline", IsDownline),
-
+                                    new SqlParameter("@IsDownline", IsDownline)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetBusiness", para);
             return ds;
