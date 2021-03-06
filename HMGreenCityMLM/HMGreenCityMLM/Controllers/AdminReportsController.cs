@@ -994,7 +994,6 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult BusinessReportBy(Reports model)
         {
-
             #region ddlleg
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.Leg = Leg;
@@ -1002,6 +1001,7 @@ namespace HMGreenCityMLM.Controllers
             model.LoginId = model.ToLoginID;
             List<Reports> lst1 = new List<Reports>();
             model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
+
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             // model.IsDownline = Request["Chk_"].ToString(); 

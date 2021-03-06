@@ -1109,7 +1109,7 @@ namespace HMGreenCityMLM.Controllers
                     Objload.LoginId = dr["Loginid"].ToString();
                     Objload.DisplayName = dr["Name"].ToString();
                     Objload.PaymentDate = dr["Paymentdate"].ToString();
-
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
                     Objload.Amount = dr["Amount"].ToString();
                     Objload.TransactionDate = dr["TransactionDate"].ToString();
                     Objload.TransactionNo = dr["TransactionNo"].ToString();
