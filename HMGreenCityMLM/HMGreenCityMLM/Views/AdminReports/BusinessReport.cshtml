@@ -76,10 +76,10 @@
                                                                 <th>Sr No.</th>
                                                                 <th>LoginId</th>
                                                                 <th>Name</th>
-
+                                                                <th>Plot Details</th>
                                                                 <th>Calculation Date</th>
                                                                 <th style="text-align:right">Amount</th>
-                                                                <th style="text-align:right">BV</th>
+                                                                <th style="text-align:right;display:none">BV</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -94,10 +94,10 @@
                                                                             <td>@i</td>
                                                                             <td>@Item.LoginId</td>
                                                                             <td>@Item.DisplayName</td>
-
+                                                                            <td>@Item.SiteName, @Item.SectorName, @Item.PlotNumber</td>
                                                                             <td>@Item.ClosingDate</td>
                                                                             <td style="text-align:right">@Item.NetAmount</td>
-                                                                            <td style="text-align:right">@Item.LeadershipBonus</td>
+                                                                            <td style="text-align:right;display:none">@Item.LeadershipBonus</td>
                                                                         </tr>
                                                                         i++;
                                                                     }

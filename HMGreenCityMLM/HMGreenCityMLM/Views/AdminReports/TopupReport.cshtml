@@ -38,14 +38,15 @@
                                                     <div class="col-lg-3">
                                                         Login Id
                                                         @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                                                        @Html.HiddenFor(m => m.ToLoginID)
                                                     </div>
                                                     <div class="col-lg-3">
                                                         Name
                                                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                                                     </div>
                                                     <div class="col-lg-3">
-                                                        Package
-                                                        @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
+                                                        Site
+                                                        @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control" })
                                                     </div>
                                                     <div class="col-md-3">
                                                         Status

@@ -99,7 +99,6 @@ namespace HMGreenCityMLM.Controllers
                     Obj.PrintingDate = r["PrintingDate"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
                     Obj.Description = r["Description"].ToString();
-
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.PaymentMode = r["PaymentMode"].ToString();
@@ -134,6 +133,27 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlProduct = ddlProduct;
 
             #endregion
+            #region Site
+          
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dssite = objcomm.GetSite();
+            if (dssite != null && dssite.Tables.Count > 0 && dssite.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in dssite.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["Pk_SiteID"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlSite = ddlSite;
+
+            #endregion
             return View(newdata);
         }
         [HttpPost]
@@ -143,7 +163,7 @@ namespace HMGreenCityMLM.Controllers
         {
 
             List<Reports> lst1 = new List<Reports>();
-            newdata.Package = newdata.Package == "0" ? null : newdata.Package;
+            newdata.SiteId = newdata.SiteId == "0" ? null : newdata.SiteId;
             newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
             newdata.LoginId = newdata.ToLoginID;
@@ -198,7 +218,27 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlProduct = ddlProduct;
 
             #endregion
+            #region Site
 
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dssite = objcomm.GetSite();
+            if (dssite != null && dssite.Tables.Count > 0 && dssite.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in dssite.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["Pk_SiteID"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlSite = ddlSite;
+
+            #endregion
             return View(newdata);
         }
         //public ActionResult PrintTopUp(string ToLoginID)
@@ -353,7 +393,8 @@ namespace HMGreenCityMLM.Controllers
         {
 
             List<Reports> lst1 = new List<Reports>();
-
+            newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
             DataSet ds11 = newdata.GetTransactionLog();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -361,6 +402,8 @@ namespace HMGreenCityMLM.Controllers
                 foreach (DataRow r in ds11.Tables[0].Rows)
                 {
                     Reports Obj = new Reports();
+                    
+                    Obj.Name = r["Name"].ToString();
                     Obj.AddedOn = r["AddedOn"].ToString();
                     Obj.Action = r["Action"].ToString();
                     Obj.Remarks = r["Remarks"].ToString();
@@ -991,7 +1034,6 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult BusinessReportBy(Reports model)
         {
-
             #region ddlleg
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.Leg = Leg;
@@ -999,10 +1041,9 @@ namespace HMGreenCityMLM.Controllers
             model.LoginId = model.ToLoginID;
             List<Reports> lst1 = new List<Reports>();
             model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
+
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-
-
             // model.IsDownline = Request["Chk_"].ToString(); 
             DataSet ds11 = model.BusinessReport();
 
@@ -1013,6 +1054,9 @@ namespace HMGreenCityMLM.Controllers
                     Reports Obj = new Reports();
                     Obj.LoginId = r["LoginId"].ToString();
                     Obj.DisplayName = r["FirstName"].ToString();
+                    Obj.SectorName = r["sectorname"].ToString();
+                    Obj.SiteName = r["sitename"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
                     Obj.Leg = r["Leg"].ToString();
                     Obj.ClosingDate = r["CalculationDate"].ToString();
                     Obj.NetAmount = r["AMount"].ToString();
