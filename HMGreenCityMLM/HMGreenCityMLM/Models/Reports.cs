@@ -9,6 +9,7 @@ namespace HMGreenCityMLM.Models
 {
     public class Reports : Common
     {
+        public string SiteId { get; set; }
         public string Total { get; set; }
         public string ReceiptNo { get; set; }
         public string DirectBusiness { get; set; }
@@ -270,6 +271,7 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@FromDate", FromDate),
                                       new SqlParameter("@ToDate", ToDate),
                                       new SqlParameter("@Package", Package),
+                                      new SqlParameter("@SiteId", SiteId),
                                       new SqlParameter("@ClaculationStatus", Status),
                                   };
 
