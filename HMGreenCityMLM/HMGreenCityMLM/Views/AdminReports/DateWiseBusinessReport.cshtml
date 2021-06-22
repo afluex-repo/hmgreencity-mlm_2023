@@ -4,8 +4,6 @@
     ViewBag.Title = "DateWiseBusinessReport";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-
 @using (Html.BeginForm("DateWiseBusinessReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     
@@ -48,11 +46,12 @@
                                                     <div class="col-lg-3">
                                                         Login ID
                                                         @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
-
-
                                                         @Html.HiddenFor(m => m.ToLoginID)
                                                     </div>
-
+                                                    <div class="col-lg-3">
+                                                        IsDownline
+                                                        @Html.CheckBoxFor(m => m.IsDownline)
+                                                    </div>
 
                                                     <div class="col-lg-3">
                                                         <br />
