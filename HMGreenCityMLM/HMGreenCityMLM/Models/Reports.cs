@@ -200,6 +200,7 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@LoginId", ToLoginID),
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate),
+                                       new SqlParameter("@IsDownline", IsDownline)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetBusinessDetails", para);
             return ds;
