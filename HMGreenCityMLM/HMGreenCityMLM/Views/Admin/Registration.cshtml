@@ -218,6 +218,11 @@
             $('#MobileNo').focus();
             return false;
         }
+        if ($('#PanCard').val() == '') {
+            $("#PanCard").addClass('errortext');
+            $('#PanCard').focus();
+            return false;
+        }
 
         $("#PaymentMethod").attr("disabled", "disabled");
         $("#Commitment").attr("disabled", "disabled");

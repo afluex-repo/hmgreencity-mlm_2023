@@ -44,7 +44,7 @@ namespace HMGreenCityMLM.Models
         public string TopUpDate { get; set; }
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }
-
+        public string ToLoginID { get; set; }
 
         public DataSet ValidatingReceipt()
         {
