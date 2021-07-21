@@ -273,6 +273,8 @@ namespace HMGreenCityMLM.Controllers
             List<SelectListItem> ddlstatus = Common.AssociateStatus();
             ViewBag.ddlstatus = ddlstatus;
             #endregion
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
             if (Status != "" && Status != null)
             {
                 model.Status = Status;
@@ -311,6 +313,8 @@ namespace HMGreenCityMLM.Controllers
         public ActionResult AssociateListBy(Reports model)
         {
             List<Reports> lst = new List<Reports>();
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             model.LoginId = model.ToLoginID;
