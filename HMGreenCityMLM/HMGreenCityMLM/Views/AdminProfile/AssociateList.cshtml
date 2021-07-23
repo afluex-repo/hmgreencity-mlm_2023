@@ -45,7 +45,7 @@
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Login ID </label>
-                                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control"})
+                                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
 
                                                             @Html.HiddenFor(m => m.ToLoginID)
                                                         </div>
@@ -85,6 +85,14 @@
                                                             <label>Status</label>
                                                             @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlstatus, "Value", "Text"), new { @class = "form-control" })
                                                         </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        Downline
+                                                        @Html.CheckBoxFor(m => m.IsDownline)
+                                                    </div>
+                                                    <div class="col-lg-2" id="divLeg" style="display:none">
+                                                        Leg
+                                                        @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.ddlLeg, "Value", "Text"), new { @class = "form-control" })
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
@@ -212,6 +220,16 @@
             var loginid = $('#ToLoginID').val();
 
         }
+        if ($("#IsDownline").is(':checked')) {
+            if ($("#LoginId").val() == "") {
+                alert('Please Enter LoginId');
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 
     //$(document).ready(function () {
@@ -247,6 +265,19 @@
     //    });
     //});
     $(document).ready(function () {
+        if ($("#IsDownline").is(':checked')) {
+            $("#divLeg").show();
+        }
+        //$('#IsDownline').prop('checked', true);
+        $('#IsDownline').change(function () {
+            if (this.checked) {
+                $("#divLeg").show();
+                //alert('Show');
+            }
+            else {
+                $("#divLeg").hide();
+            }
+        });
         $("input").attr("autocomplete", "off");
 
         var cityuse = [];

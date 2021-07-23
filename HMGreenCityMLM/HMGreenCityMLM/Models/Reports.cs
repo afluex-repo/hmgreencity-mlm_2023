@@ -213,7 +213,10 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@ToDate", ToDate),
                                     new SqlParameter("@SponsorID", SponsorId),
                                     new SqlParameter("@SponsorName", SponsorName),
-                                    new SqlParameter("@Status", Status), };
+                                    new SqlParameter("@Status", Status),
+                                    new SqlParameter("@IsDownline", IsDownline),
+                                    new SqlParameter("@Leg", Leg)
+            };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateList", para);
             return ds;
         }

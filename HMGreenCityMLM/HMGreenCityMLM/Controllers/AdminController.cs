@@ -25,7 +25,7 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ActiveUsers = Ds.Tables[1].Rows[0]["ActiveUsers"].ToString();
             #region Messages
 
-            
+
             List<DashBoard> lst1 = new List<DashBoard>();
 
             DataSet ds11 = newdata.GetAllMessages();
@@ -50,7 +50,7 @@ namespace HMGreenCityMLM.Controllers
             #endregion Messages
             return View(newdata);
         }
-        
+
         public ActionResult AssociateListForKYC(Reports model)
         {
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
@@ -259,7 +259,7 @@ namespace HMGreenCityMLM.Controllers
             else
             {
                 ViewBag.Fk_UserId = "1";
-            }  
+            }
             return View();
         }
         public ActionResult Registration(string Pid, string lg)
@@ -332,7 +332,7 @@ namespace HMGreenCityMLM.Controllers
         public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string Email, string MobileNo, string PanCard, string Address, string Gender, string OTP, string PinCode, string Leg)
         {
             Home obj = new Home();
-           
+
 
             try
             {
@@ -357,10 +357,10 @@ namespace HMGreenCityMLM.Controllers
                     {
                         Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["DisplayName"] = ds.Tables[0].Rows[0]["Name"].ToString();
-                        Session["PassWord"] =Crypto.Decrypt( ds.Tables[0].Rows[0]["Password"].ToString());
+                        Session["PassWord"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                         Session["Transpassword"] = ds.Tables[0].Rows[0]["Password"].ToString();
                         Session["MobileNo"] = ds.Tables[0].Rows[0]["MobileNo"].ToString();
-                        
+
                         obj.Response = "1";
 
                     }
@@ -436,7 +436,7 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlProduct = ddlProduct;
 
             #endregion
-           
+
             return View();
 
         }
@@ -446,7 +446,7 @@ namespace HMGreenCityMLM.Controllers
             try
             {
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
-                
+
                 DataSet ds = obj.CreatePin();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -474,7 +474,7 @@ namespace HMGreenCityMLM.Controllers
         {
             Wallet objewallet = new Wallet();
 
-           
+
             objewallet.Status = "Unused";
             List<Wallet> lst = new List<Wallet>();
             DataSet ds = objewallet.GetUsedUnUsedPins();
@@ -525,7 +525,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult UnusedPinsBy(Wallet objewallet)
         {
-           
+
             objewallet.Status = "Unused";
             List<Wallet> lst = new List<Wallet>();
             objewallet.Package = objewallet.Package == "0" ? null : objewallet.Package;
@@ -640,7 +640,7 @@ namespace HMGreenCityMLM.Controllers
         {
             Wallet objewallet = new Wallet();
 
-            
+
             objewallet.Status = "Used";
             List<Wallet> lst = new List<Wallet>();
             DataSet ds = objewallet.GetUsedUnUsedPins();
@@ -690,7 +690,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult UsedPinsBy(Wallet objewallet)
         {
-          
+
 
 
             objewallet.Status = "Used";
@@ -814,7 +814,7 @@ namespace HMGreenCityMLM.Controllers
             {
                 TempData["Class"] = "alert alert-danger";
                 TempData["Advance"] = ex.Message;
-            } 
+            }
             return RedirectToAction("AdvancePayment");
         }
 
@@ -825,6 +825,7 @@ namespace HMGreenCityMLM.Controllers
             {
                 model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
                 model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                decimal Sum = 0;
                 DataSet ds = model.AdvancePaymentReport();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -839,8 +840,10 @@ namespace HMGreenCityMLM.Controllers
                         obj.PaymentMode = r["PaymentMode"].ToString();
                         obj.TransactionNo = r["PayMode"].ToString();
                         obj.Description = r["Description"].ToString();
+                        Sum = Sum + Convert.ToDecimal(r["Amount"]);
                         lstReport.Add(obj);
                     }
+                    ViewBag.Total = Sum;
                     model.lstewalletledger = lstReport;
                 }
             }
@@ -855,11 +858,13 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "btnDetails")]
         public ActionResult AdvancePaymentReportSearch(Wallet model)
         {
-           
+
             try
             {
                 model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
                 model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                model.LoginId = model.ToLoginID;
+                decimal Sum = 0;
                 DataSet ds = model.AdvancePaymentReport();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -873,8 +878,10 @@ namespace HMGreenCityMLM.Controllers
                         obj.PaymentDate = r["PaymentDate"].ToString();
                         obj.PaymentMode = r["PaymentMode"].ToString();
                         obj.Description = r["PayMode"].ToString();
+                        Sum = Sum + Convert.ToDecimal(r["Amount"]);
                         lstReport.Add(obj);
                     }
+                    ViewBag.Total = Sum;
                     model.lstewalletledger = lstReport;
                 }
             }
@@ -1047,14 +1054,14 @@ namespace HMGreenCityMLM.Controllers
                 branchname = Request["txtbankbranch_" + i].ToString();
                 remarks = Request["txtremarks_" + i].ToString();
                 model.Amount = Request["txtamount_" + i].ToString();
-                PaymentMode= Request["paymentmode_" + i].ToString();
+                PaymentMode = Request["paymentmode_" + i].ToString();
                 model.Fk_UserId = Pk_PaidBoosterId_;
 
                 model.TransactionNo = transactiono;
                 model.BankName = bankname;
                 model.BankBranch = branchname;
                 model.Remarks = remarks;
-              
+
                 DataSet ds = null;
                 if (!string.IsNullOrEmpty(PaymentMode))
                 {
@@ -1076,12 +1083,12 @@ namespace HMGreenCityMLM.Controllers
                     }
                     else
                     {
-                         TempData["PayPayout"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["PayPayout"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
 
             }
-            
+
             return RedirectToAction("PayPayout");
         }
         #endregion
@@ -1099,6 +1106,7 @@ namespace HMGreenCityMLM.Controllers
             List<Wallet> lst = new List<Wallet>();
             objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
             objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
+            objewallet.LoginId = objewallet.ToLoginID;
             DataSet ds = objewallet.GetPaidPayout();
             ViewBag.Total = "0";
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -1143,7 +1151,7 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult PayoutLedger(Wallet objewallet)
         {
-            
+
             return View(objewallet);
         }
         [HttpPost]
@@ -1152,16 +1160,17 @@ namespace HMGreenCityMLM.Controllers
         public ActionResult PayoutLedgerBy(Wallet objewallet)
         {
 
-          //  objewallet.Fk_UserId = Session["Pk_UserId"].ToString();
+            //  objewallet.Fk_UserId = Session["Pk_UserId"].ToString();
             objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
             objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
+            objewallet.LoginId = objewallet.ToLoginID;
             if (objewallet.LoginId != null)
             {
                 List<Wallet> lst = new List<Wallet>();
                 DataSet ds = objewallet.PayoutLedgerAdmin();
-                if (ds.Tables != null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count > 0)
+                if (ds.Tables != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    if (ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
                         foreach (DataRow dr in ds.Tables[0].Rows)
                         {
@@ -1181,13 +1190,14 @@ namespace HMGreenCityMLM.Controllers
                         TempData["PayoutLedger"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
 
-                   
+
                 }
-            }else
+            }
+            else
             {
                 TempData["PayoutLedger"] = "Please Enter Login Id";
             }
-            
+
             return View(objewallet);
         }
 
