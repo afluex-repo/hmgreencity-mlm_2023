@@ -917,7 +917,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
                     obj.Amount = (r["Amount"].ToString());
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
-                    obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
+                    obj.Amount1 =Math.Round(Convert.ToDecimal(r["Amount"].ToString()), 2);
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -962,7 +962,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
 
                     obj.Amount = (r["Amount"].ToString());
-                    obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
+                    obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()), 2);
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;

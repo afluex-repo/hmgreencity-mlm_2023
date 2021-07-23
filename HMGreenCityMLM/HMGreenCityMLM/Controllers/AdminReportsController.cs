@@ -814,7 +814,8 @@ namespace HMGreenCityMLM.Controllers
                     Obj.TDSAmount = r["TDS"].ToString();
                     Obj.PAN = r["PanNumber"].ToString();
                     Obj.ClosingDate = r["ClosingDate"].ToString();
-                    Obj.NetAmount = r["NetAmount"].ToString();
+                    Obj.NetAmount =  r["NetAmount"].ToString();
+                    //Obj.Amount1 = Math.Round(Convert.ToDecimal(r["NetAmount"].ToString()), 2);
                     Obj.GrossAmount = r["GrossAmount"].ToString();
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["TDS"].ToString());
                     ViewBag.TotalTDS =  Convert.ToDecimal(r["TotalTDS"].ToString());

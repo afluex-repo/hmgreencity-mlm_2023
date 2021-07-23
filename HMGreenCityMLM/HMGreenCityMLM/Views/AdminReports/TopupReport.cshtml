@@ -221,8 +221,6 @@
             type: 'Post',
             success: function (response) {
                 if (response != null) {
-
-
                     $(response).each(function (index, item) {
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
