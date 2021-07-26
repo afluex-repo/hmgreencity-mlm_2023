@@ -78,6 +78,7 @@
                                         </div>
 
                                         <div class="row">
+
                                             <div class="col-md-6" id="divsector">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Sector <span style="color: red">*</span></label>
@@ -87,6 +88,14 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-6" id="divblock">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Block </label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.Fk_BlockId, new SelectList(ViewBag.ddlblock, "Value", "Text"), new { @class = "form-control"})
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-6" id="divplot">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Plot Number <span style="color: red">*</span></label>
@@ -95,11 +104,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                         <div class="row">
-
                                             <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Amount <span style="color: red">*</span></label>
@@ -384,7 +390,11 @@
                 $('#FK_SectorId').focus();
                 return false;
             }
-
+            //if ($('#Fk_BlockId').val() == '0') {
+            //    $("#Fk_BlockId").addClass('errortext');
+            //    $('#Fk_BlockId').focus();
+            //    return false;
+            //}
 
             if ($('#PlotNumber').val() == '') {
                 $("#PlotNumber").addClass('errortext');
