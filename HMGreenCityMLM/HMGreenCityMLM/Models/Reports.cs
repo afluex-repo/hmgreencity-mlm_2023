@@ -123,7 +123,8 @@ namespace HMGreenCityMLM.Models
         public string Quantity { get; set; }
         public string Amount { get; set; }
         public decimal Amount1 { get; set; }
-
+        public decimal TDSAmount1 { get; set; }
+        public decimal GrossAmount1 { get; set; }
         public string TopupBy { get; set; }
 
         public string FromDate { get; set; }

@@ -811,14 +811,14 @@ namespace HMGreenCityMLM.Controllers
                     Reports Obj = new Reports();
                     Obj.LoginId = r["LoginId"].ToString();
                     Obj.Name = r["Name"].ToString();
-                    Obj.TDSAmount = r["TDS"].ToString();
+                    Obj.TDSAmount1 = Math.Round(Convert.ToDecimal(r["TDS"].ToString()));
                     Obj.PAN = r["PanNumber"].ToString();
                     Obj.ClosingDate = r["ClosingDate"].ToString();
                     Obj.NetAmount =  r["NetAmount"].ToString();
-                    //Obj.Amount1 = Math.Round(Convert.ToDecimal(r["NetAmount"].ToString()), 2);
-                    Obj.GrossAmount = r["GrossAmount"].ToString();
-                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["TDS"].ToString());
-                    ViewBag.TotalTDS =  Convert.ToDecimal(r["TotalTDS"].ToString());
+                    Obj.Amount1 = Math.Round(Convert.ToDecimal(r["NetAmount"].ToString()));
+                    Obj.GrossAmount1 = Math.Round(Convert.ToDecimal(r["GrossAmount"].ToString()));
+                    ViewBag.Total = Math.Round(Convert.ToDecimal(ViewBag.Total)) + Math.Round(Convert.ToDecimal(r["TDS"].ToString()));
+                    ViewBag.TotalTDS = Math.Round(Convert.ToDecimal(r["TotalTDS"].ToString()));
 
                     lst1.Add(Obj);
                 }
