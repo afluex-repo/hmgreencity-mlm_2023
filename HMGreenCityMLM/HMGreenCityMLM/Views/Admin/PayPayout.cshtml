@@ -202,16 +202,13 @@
         var cityuse = [];
         $("#loader").css({ 'display': '' });
         $.ajax({
-            url: '/Admin/GetUserList',
+            url: '/AdminProfile/GetUserList',
             type: 'Post',
-            success: function (response) {
-                if (response != null) {
-
-
-                    $(response).each(function (index, item) {
+            success: function (d) {
+                if (d != null) {
+                    $(d).each(function (index, item) {
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
-
                     $('#LoginId').autocomplete({
                         source: cityuse,
                         select: function (event, ui) {
@@ -222,7 +219,6 @@
                             } else {
                                 $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
                             }
-
                         }
                     })
                 }

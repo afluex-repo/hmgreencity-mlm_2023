@@ -1608,17 +1608,18 @@ namespace HMGreenCityMLM.Controllers
         }
         #endregion
 
+
         public ActionResult GetUserList()
         {
-            Reports obj = new Reports();
-            List<Reports> lst = new List<Reports>();
+            Profile obj = new Profile();
+            List<Profile> lst = new List<Profile>();
             obj.LoginId = Session["LoginId"].ToString();
             DataSet ds = obj.GettingUserProfile();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    Reports objList = new Reports();
+                    Profile objList = new Profile();
                     objList.UserName = dr["Fullname"].ToString();
                     objList.LoginIDD = dr["LoginId"].ToString();
                     lst.Add(objList);
@@ -1626,7 +1627,6 @@ namespace HMGreenCityMLM.Controllers
             }
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
-
 
         public ActionResult AssociateLoginLog(Reports model)
         {

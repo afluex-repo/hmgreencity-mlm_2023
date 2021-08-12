@@ -180,10 +180,12 @@
                 $("#divLeg").hide();
             }
         });
+        $("input").attr("autocomplete", "off");
+
         var cityuse = [];
         $("#loader").css({ 'display': '' });
         $.ajax({
-            url: '/Admin/GetUserList',
+            url: '/AdminProfile/GetUserList',
             type: 'Post',
             success: function (response) {
                 if (response != null) {
@@ -208,8 +210,8 @@
                 $("#loader").css({ 'display': 'none' });
             }
         });
+     
     });
-
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });

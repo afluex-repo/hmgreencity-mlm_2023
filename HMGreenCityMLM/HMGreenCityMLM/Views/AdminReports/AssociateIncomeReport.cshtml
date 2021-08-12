@@ -138,18 +138,8 @@
     </div>
 }
 
-@*<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-
+<script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../../WebsiteCss/js/jquery.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-<script src="../..//WebsiteCss/js/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
-<script src="../../WebsiteCss/js/jquery.js"></script>
-
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
@@ -161,11 +151,9 @@
         $.ajax({
             url: '/AdminReports/GetUserList',
             type: 'Post',
-            success: function (response) {
-                if (response != null) {
-
-
-                    $(response).each(function (index, item) {
+            success: function (d) {
+                if (d != null) {
+                    $(d).each(function (index, item) {
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
 
@@ -184,8 +172,8 @@
                 $("#loader").css({ 'display': 'none' });
             }
         });
+   
     });
-
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
         changeYear: true,
