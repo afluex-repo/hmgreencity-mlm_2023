@@ -751,7 +751,7 @@
         var cityuse = [];
         $("#loader").css({ 'display': '' });
         $.ajax({
-            url: '/Admin/GetUserList',
+            url: '/AdminReports/GetUserList',
             type: 'Post',
             success: function (response) {
                 if (response != null) {
