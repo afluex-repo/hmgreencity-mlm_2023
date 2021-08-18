@@ -263,12 +263,9 @@
             type: 'Post',
             success: function (response) {
                 if (response != null) {
-
-
                     $(response).each(function (index, item) {
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
-
                     $('#LoginId').autocomplete({
                         source: cityuse,
                         select: function (event, ui) {
