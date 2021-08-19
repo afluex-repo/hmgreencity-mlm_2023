@@ -134,7 +134,7 @@ namespace HMGreenCityMLM.Controllers
 
             #endregion
             #region Site
-          
+
             List<SelectListItem> ddlSite = new List<SelectListItem>();
             DataSet dssite = objcomm.GetSite();
             if (dssite != null && dssite.Tables.Count > 0 && dssite.Tables[0].Rows.Count > 0)
@@ -161,7 +161,10 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult TopupReportBy(Reports newdata)
         {
-
+            if (newdata.LoginId == null)
+            {
+                newdata.ToLoginID = null;
+            }
             List<Reports> lst1 = new List<Reports>();
             newdata.SiteId = newdata.SiteId == "0" ? null : newdata.SiteId;
             newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
@@ -402,7 +405,7 @@ namespace HMGreenCityMLM.Controllers
                 foreach (DataRow r in ds11.Tables[0].Rows)
                 {
                     Reports Obj = new Reports();
-                    
+
                     Obj.Name = r["Name"].ToString();
                     Obj.AddedOn = r["AddedOn"].ToString();
                     Obj.Action = r["Action"].ToString();
@@ -712,11 +715,11 @@ namespace HMGreenCityMLM.Controllers
                 List<SelectListItem> Leg = Common.Leg();
                 ViewBag.ddlleg = Leg;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TempData["msg"] = ex.Message;
             }
-          
+
             return View(model);
         }
 
@@ -814,7 +817,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.TDSAmount1 = Math.Round(Convert.ToDecimal(r["TDS"].ToString()));
                     Obj.PAN = r["PanNumber"].ToString();
                     Obj.ClosingDate = r["ClosingDate"].ToString();
-                    Obj.NetAmount =  r["NetAmount"].ToString();
+                    Obj.NetAmount = r["NetAmount"].ToString();
                     Obj.Amount1 = Math.Round(Convert.ToDecimal(r["NetAmount"].ToString()));
                     Obj.GrossAmount1 = Math.Round(Convert.ToDecimal(r["GrossAmount"].ToString()));
                     ViewBag.Total = Math.Round(Convert.ToDecimal(ViewBag.Total)) + Math.Round(Convert.ToDecimal(r["TDS"].ToString()));
@@ -1449,7 +1452,7 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlReward = ddlReward;
             #endregion
 
-            
+
 
             return View(model);
         }
@@ -1464,21 +1467,21 @@ namespace HMGreenCityMLM.Controllers
             DataSet ds = model.RewardListForAchiever();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-               foreach (DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Reports obj = new Reports();
-                          
+
                     obj.PK_RewardItemId = r["PK_UserProdRewardID"].ToString();
                     obj.RewardID = r["FK_RewardId"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.QualifyDate = r["QualifyDate"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.RewardName = r["RewardName"].ToString();
-                    obj.Name=  r["FirstName"].ToString();
+                    obj.Name = r["FirstName"].ToString();
 
                     lst1.Add(obj);
                 }
-                model.lstassociate= lst1;
+                model.lstassociate = lst1;
 
 
             }
@@ -1503,10 +1506,10 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlReward = ddlReward;
             #endregion
 
-            
+
             return View(model);
         }
-        public ActionResult ApprovePayment(string PK_RewardItemId, string Description, string ApprovedDate,string PaidDate)
+        public ActionResult ApprovePayment(string PK_RewardItemId, string Description, string ApprovedDate, string PaidDate)
         {
             string FormName = "";
             string Controller = "";
@@ -1551,7 +1554,7 @@ namespace HMGreenCityMLM.Controllers
         public ActionResult UserPermission(Reports model)
         {
             #region ddluser
-           List<SelectListItem> ddluser = new List<SelectListItem>();
+            List<SelectListItem> ddluser = new List<SelectListItem>();
             ddluser.Add(new SelectListItem { Text = "Select User", Value = "0" });
             DataSet ds = model.GettingUserDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1588,7 +1591,7 @@ namespace HMGreenCityMLM.Controllers
                 model.lstpermission = lst;
             }
             DataSet ds1 = new DataSet();
-            
+
             #region ddluser
 
             List<SelectListItem> ddluser = new List<SelectListItem>();
@@ -1632,9 +1635,9 @@ namespace HMGreenCityMLM.Controllers
         {
             List<Reports> list = new List<Reports>();
             DataSet ds = model.AssociateLoginLogList();
-            if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count > 0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                foreach(DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Reports obj = new Reports();
                     obj.PK_LoginLogId = r["PK_LoginLogId"].ToString();
@@ -1652,7 +1655,7 @@ namespace HMGreenCityMLM.Controllers
         }
 
         #region Date Wise Business Report
-        
+
         public ActionResult DateWiseBusinessReport(Reports model)
         {
             model.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
@@ -1669,7 +1672,7 @@ namespace HMGreenCityMLM.Controllers
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
-          
+
             DataSet ds11 = model.GetDatebusinessdetails();
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
             {
@@ -1696,12 +1699,12 @@ namespace HMGreenCityMLM.Controllers
                         model.lstDateWiseBusiness = lst1;
                     }
                 }
-               
+
             }
             return View(model);
         }
-               
-            
+
+
         #endregion
 
     }
