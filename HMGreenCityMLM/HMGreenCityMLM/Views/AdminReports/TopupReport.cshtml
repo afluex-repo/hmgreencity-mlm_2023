@@ -197,8 +197,6 @@
         dateFormat: 'dd/mm/yy',
     });
 
-
-
 </script>
 <script>
     $(document).ready(function () {
@@ -214,6 +212,7 @@
             type: 'Post',
             success: function (response) {
                 debugger;
+
                 if (response != null) {
                     $(response).each(function (index, item) {
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
@@ -228,6 +227,7 @@
                         }
                     })
                 }
+
             }, error: function () {
                 alert('Some Thing wrong!');
                 $("#loader").css({ 'display': 'none' });

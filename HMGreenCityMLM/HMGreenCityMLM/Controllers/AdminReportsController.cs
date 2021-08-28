@@ -425,8 +425,12 @@ namespace HMGreenCityMLM.Controllers
         {
             Reports incomeReport = new Reports();
             List<Reports> lst1 = new List<Reports>();
-            incomeReport.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
-            incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+            //incomeReport.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
+            //incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+
+            incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
+            incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
+
             DataSet ds11 = incomeReport.GetIncomeReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -462,7 +466,10 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult AssociateIncomeReportBy(Reports incomeReport)
         {
-
+            //if (incomeReport.LoginId == null)
+            //{
+            //    incomeReport.ToLoginID = null;
+            //}
             List<Reports> lst1 = new List<Reports>();
             incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
             incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
@@ -1038,6 +1045,11 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult BusinessReportBy(Reports model)
         {
+            if(model.LoginId==null)
+            {
+                model.ToLoginID = null;
+            }
+
             #region ddlleg
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.Leg = Leg;

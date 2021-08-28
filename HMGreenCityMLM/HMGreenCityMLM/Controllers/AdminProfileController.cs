@@ -312,6 +312,10 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult AssociateListBy(Reports model)
         {
+            if(model.LoginId==null)
+            {
+                model.ToLoginID = null;
+            }
             List<Reports> lst = new List<Reports>();
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.ddlleg = Leg;
@@ -394,6 +398,10 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult AssociateListByNew2(Reports model)
         {
+            if(model.LoginId==null)
+            {
+                model.ToLoginID = null;
+            }
             List<Reports> lst = new List<Reports>();
             //model.LoginId = model.ToLoginID;
             DataSet ds = model.GetAssociateList();
