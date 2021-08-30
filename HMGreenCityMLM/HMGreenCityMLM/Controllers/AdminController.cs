@@ -861,6 +861,10 @@ namespace HMGreenCityMLM.Controllers
 
             try
             {
+                if(model.LoginId==null)
+                {
+                    model.ToLoginID = null;
+                }
                 model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
                 model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
                 model.LoginId = model.ToLoginID;
@@ -1105,6 +1109,10 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetPaidPayout(Wallet objewallet)
         {
+            if(objewallet.LoginId==null)
+            {
+                objewallet.ToLoginID = null;
+            }
             List<Wallet> lst = new List<Wallet>();
             objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
             objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
@@ -1161,7 +1169,10 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult PayoutLedgerBy(Wallet objewallet)
         {
-
+            if(objewallet.LoginId==null)
+            {
+                objewallet.ToLoginID = null;
+            }
             //  objewallet.Fk_UserId = Session["Pk_UserId"].ToString();
             objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
             objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
