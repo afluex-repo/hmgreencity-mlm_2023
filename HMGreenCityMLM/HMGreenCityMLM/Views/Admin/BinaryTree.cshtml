@@ -448,6 +448,9 @@
     .main-menu {
         z-index: 1 !important;
     }
+    .custom{
+        color:red;
+    }
 </style>
 <style>
     #divload {
@@ -738,7 +741,12 @@
 
 
 
-
+<style>
+    .ui-menu-item {
+    border: 1px solid #d3d3d3;
+    color: red !important;
+}
+</style>
 <input type="hidden" id="firtsMemberID" value="@ViewBag.Fk_UserId" />
 
 <script src="../../WebsiteCss/js/jquery.js"></script>
@@ -746,8 +754,9 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+       
         $("input").attr("autocomplete", "off");
-
+        var elements = document.getElementsByClassName('ui-widget.ui-widget-content');
         var cityuse = [];
         $("#loader").css({ 'display': '' });
         $.ajax({
@@ -755,18 +764,32 @@
             type: 'Post',
             success: function (response) {
                 if (response != null) {
-
-
+                   
                     $(response).each(function (index, item) {
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
-                    });
+                        if (item.cssStatus == "Red") {
+                            $(".ui-menu-item").css("color", "red important");
+                            //alert($(".ui-menu-item").css("color", "red important"))
+                            //alert(item.cssStatus)
+                        }
+                        else if (item.cssStatus == "Green") {
+                            $(".ui-widget.ui-widget-content").css("color", "Green");
+                            //alert(item.cssStatus)
+                        }
+                        else if (item.cssStatus == "Black") {
+                            $(".ui-widget.ui-widget-content").css("color", "Black");
+                            //alert(item.cssStatus)
+                        }
+                        else {
 
+                        }
+                    });
+             
                     $('#txtLoginID').autocomplete({
                         source: cityuse,
                         select: function (event, ui) {
                             var str = ui.item.label;
                             var strsplit = str.split("(");
-
                             $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
                         }
                     })

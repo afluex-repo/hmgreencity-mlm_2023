@@ -53,6 +53,7 @@ namespace HMGreenCityMLM.Models
         public string PAN { get; set; }
         public string Leg { get; set; }
         public string LoginId { get; set; }
+        public string PayoutLoginId { get; set; }
 
         public string Name { get; set; }
 
@@ -662,6 +663,13 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@FK_UserId", Fk_UserId)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetUserFormPermission", para);
+            return ds;
+        }
+        public DataSet GetpayoutByAmount()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", PayoutLoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutReportForAmount", para);
             return ds;
         }
 

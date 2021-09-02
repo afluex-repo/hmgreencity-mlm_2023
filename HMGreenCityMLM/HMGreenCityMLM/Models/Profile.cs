@@ -36,7 +36,9 @@ namespace HMGreenCityMLM.Models
         public string ProfilePicture { get; set; }
         public string LeadershipBonus { get; set; }
         public string AccountHolder { get; set; }
-        
+        public string cssStatus { get; set; }
+
+
         public DataSet GetUserProfile()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId) };
