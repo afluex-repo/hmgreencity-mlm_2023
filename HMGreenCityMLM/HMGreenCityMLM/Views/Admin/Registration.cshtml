@@ -42,17 +42,14 @@
                                         <div class="col-md-6 form-group">
                                             Sponsor Name <span style="color: red">*</span>
                                             @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
-
                                         </div>
-
-                                        <div class="col-md-12 form-group">
+                                        <div class="col-md-6 form-group">
                                             Leg <span style="color: red">*</span> &nbsp;&nbsp;
                                             <input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
                                             Left &nbsp;&nbsp;
                                             <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
                                             Right
                                         </div>
-
                                         <div class="col-md-6 form-group">
                                             First Name <span style="color: red">*</span>
                                             @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
@@ -71,7 +68,6 @@
                                             @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
                                             @Html.ValidationMessageFor(m => m.MobileNo)
                                         </div>
-
                                         <div class="col-md-6 form-group">
                                             Gender
                                             @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlgender, "Value", "Text"), new { @class = "form-control" })
@@ -79,6 +75,10 @@
                                         <div class="col-md-6 form-group">
                                             Pan Card
                                             @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @Placeholder = "Pan Card", @Maxlength = "10", @onchange = "return validatepan(event);" })
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            Adhar No <span style="color: red">*</span>
+                                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No ", @maxlength = "12", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validateAdhar();" })
                                         </div>
                                         <div class="col-md-12 form-group">
                                             Address
@@ -96,13 +96,16 @@
                                             City
                                             @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @Disabled = "disabled" })
                                         </div>
+                                        @*<div class="col-md-4 form-group">
+                                            Adhar No
+                                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No", @Disabled = "disabled" })
+                                        </div>*@
                                         <div class="col-md-6">
                                             <a href="#" id="Confirm" onclick="return confirmregistration();" class="btn btn-success" >Confirm</a>
                                             <a href="#" id="Register"  style="display: none" onclick="return saveregistration();" class="btn btn-success">Register</a>
                                             <a href="#" id="Edit" style="display: none" onclick="return editregistration();" class="btn btn-info">Edit</a>
                                            
                                             <br />
-                                           
                                         </div>
                                         <br />
                                         <p style="color: red">@TempData["Registration"] </p>
@@ -163,7 +166,6 @@
                 $('#PanCard').focus();
                 $('#PanCard').val('');
                 alert('Please enter valid PanNo');
-
             }
         }
         else {
@@ -171,7 +173,6 @@
             $('#PanCard').focus();
             $('#PanCard').val('');
             alert('Please enter 10 digits for a valid PAN number');
-
         }
     }
     function getstatecity() {
@@ -193,7 +194,6 @@
                     $("#PinCode").addClass('errortext');
                     $('#PinCode').focus();
                     alert(data.Result);
-
                 }
 
 
@@ -223,6 +223,13 @@
             $('#PanCard').focus();
             return false;
         }
+        if ($('#AdharNo').val() == '') {
+            $("#AdharNo").addClass('errortext');
+            $('#AdharNo').focus();
+            return false;
+        }
+
+
 
         $("#PaymentMethod").attr("disabled", "disabled");
         $("#Commitment").attr("disabled", "disabled");
@@ -270,7 +277,7 @@
             url: "/Admin/RegistrationAction",
             Type: "Get",
             DataType: "JSON",
-            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), Email: $("#Email").val(), MobileNo: $("#MobileNo").val(), PanCard: $("#PanCard").val(), Address: $("#Address").val(), Gender: $("#Gender").val(), OTP: $("#OTP").val(), PinCode: $("#PinCode").val(), Leg: Leg },
+            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), Email: $("#Email").val(), MobileNo: $("#MobileNo").val(), PanCard: $("#PanCard").val(), AdharNo: $("#AdharNo").val(), Address: $("#Address").val(), Gender: $("#Gender").val(), OTP: $("#OTP").val(), PinCode: $("#PinCode").val(), Leg: Leg },
             success: function (data) {
                 if (data.Response == "1") {
                     window.location.href = '@Url.Action("ConfirmRegistration", "Admin")';
@@ -279,13 +286,18 @@
                     $("#divload").css({ 'display': 'none' });
                     alert(data.Response);
                 }
-
-
             }
-
         });
     }
 
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
 
     function isNumberKey(evt) {
 
@@ -296,6 +308,28 @@
 
         return true;
     }
+
+
+    function validateAdhar() {
+        var AdharNumber = $('#AdharNo').val();
+        $.ajax({
+            url: '/Admin/GetAdharDetails', type: 'post', dataType: 'json',
+            data: { 'AdharNumber': AdharNumber },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $('#AdharNo').val(AdharNumber);
+                }
+                else if (data.Result == "no") {
+                    alert("Adhar No already registred another ID try another no.!!");
+                    $("#AdharNo").val('');
+                    $("#AdharNo").addClass('errortext');
+                }
+            }
+        });
+    }
+
+
+
 </script>
 <style>
     .errortext {

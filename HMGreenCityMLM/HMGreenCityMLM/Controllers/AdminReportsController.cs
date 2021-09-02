@@ -1716,8 +1716,40 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
         }
 
-
         #endregion
+
+
+        public ActionResult DefaultAssociateList(Reports model)
+        {
+           
+            return View(model);
+            
+        }
+
+        [HttpPost]
+        [ActionName("DefaultAssociateList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult DefaultAssociateLists()
+        {
+            Reports model = new Reports();
+            List<Reports> list = new List<Reports>();
+            DataSet ds = model.GetDefaulterList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.LastTopUpAmount = r["LastTopupamount"].ToString();
+                    obj.LastTopUpDate = r["LastTopupdate"].ToString();
+                    list.Add(obj);
+                }
+                model.lstDefaultAssociateList = list;
+            }
+            return View(model);
+
+        }
 
     }
 }
