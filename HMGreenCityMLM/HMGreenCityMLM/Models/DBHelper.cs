@@ -17,9 +17,9 @@ namespace HMGreenCityMLM.Models
             try
             {
                 //connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=hmgreendb;User Id=hmgreenuser; Password=W1ttl1&9; Integrated Security=false;";
-                //connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=hmgreendb;User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
+                connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=hmgreendb;User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
 
-                connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=hmgreendbtest;User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
+                //connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=hmgreendbtest;User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
                 //connectionString = "Data Source=DESKTOP-KPDI8EN\\AFLUEX;Initial Catalog=HMGreenCityMLM;User Id=sa;Password=123;Integrated Security=false;";
             }
             catch (Exception)
