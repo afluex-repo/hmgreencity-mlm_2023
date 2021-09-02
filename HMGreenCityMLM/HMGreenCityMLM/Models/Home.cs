@@ -84,6 +84,7 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@RegistrationBy",RegistrationBy),
                                      new SqlParameter("@Address",Address),
                                      new SqlParameter("@Gender",Gender),
+                                      new SqlParameter("@AdharNo",AdharNo),
                                      new SqlParameter("@PinCode",PinCode),
                                      new SqlParameter("@Leg",Leg),
                                      new SqlParameter("@Password",Password)
@@ -93,12 +94,26 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+        public DataSet GetAdharDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@AdharNumber", AdharNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetAdharDetails", para);
+            return ds;
+        }
+
+
+
+
         public string RegistrationBy { get; set; }
 
         public string Response { get; set; }
 
         public string Gender { get; set; }
         public string PanCard { get; set; }
+        public string AdharNo { get; set; }
+        public string Result { get; set; }
         public string Address { get; set; }
         public string PinCode { get; set; }
         public string State { get; set; }

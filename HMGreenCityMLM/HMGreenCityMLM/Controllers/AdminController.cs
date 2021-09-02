@@ -329,7 +329,7 @@ namespace HMGreenCityMLM.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string Email, string MobileNo, string PanCard, string Address, string Gender, string OTP, string PinCode, string Leg)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string Email, string MobileNo, string PanCard, string AdharNo, string Address, string Gender, string OTP, string PinCode, string Leg)
         {
             Home obj = new Home();
 
@@ -343,6 +343,7 @@ namespace HMGreenCityMLM.Controllers
                 obj.Email = Email;
                 obj.MobileNo = MobileNo;
                 obj.PanCard = PanCard;
+                obj.AdharNo = AdharNo;
                 obj.Address = Address;
                 obj.RegistrationBy = "Web";
                 obj.Gender = Gender;
@@ -1214,7 +1215,38 @@ namespace HMGreenCityMLM.Controllers
             return View(objewallet);
         }
 
+        public ActionResult GetAdharDetails(string AdharNumber)
+        {
+            try
+            {
+                Home model = new Home();
+                model.AdharNo = AdharNumber;
+                #region GetAdharDetails
+                DataSet dsadhardetails = model.GetAdharDetails();
+                if (dsadhardetails != null && dsadhardetails.Tables[0].Rows.Count > 0)
+                {
+                    if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                    }
+                    else if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Result = "no";
+                    }
+                }
+                else
+                {
+                    model.Result = "no";
 
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
 
     }
 }
