@@ -488,6 +488,7 @@ namespace HMGreenCityMLM.Controllers
                 obj.State = ds.Tables[0].Rows[0]["State"].ToString();
                 obj.RealtionName = ds.Tables[0].Rows[0]["GaurdianName"].ToString();
                 obj.AccountHolder = ds.Tables[0].Rows[0]["BankHolderName"].ToString();
+                obj.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                 // return View(obj);
             }
             return View(obj);

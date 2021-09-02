@@ -134,6 +134,12 @@ namespace HMGreenCityMLM.Models
         public string FormName { get; set; }
         public string FormType { get; set; }
 
+
+        public string LastTopUpAmount { get; set; }
+        public string LastTopUpDate { get; set; }
+
+        public List<Reports> lstDefaultAssociateList { get; set; }
+
         public DataSet GetPayoutReport()
         {
             SqlParameter[] para = { new SqlParameter("@LoginID", ToLoginID),
@@ -670,6 +676,18 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para = { new SqlParameter("@LoginID", PayoutLoginId)
             };
             DataSet ds = DBHelper.ExecuteQuery("PayoutReportForAmount", para);
+            return ds;
+        }
+
+
+
+
+        public DataSet GetDefaulterList()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetdefaulterList", para);
             return ds;
         }
 

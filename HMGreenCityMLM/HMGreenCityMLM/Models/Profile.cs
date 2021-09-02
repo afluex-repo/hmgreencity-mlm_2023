@@ -36,6 +36,9 @@ namespace HMGreenCityMLM.Models
         public string ProfilePicture { get; set; }
         public string LeadershipBonus { get; set; }
         public string AccountHolder { get; set; }
+        public string AdharNo { get; set; }
+
+
         public string cssStatus { get; set; }
 
 
@@ -92,7 +95,8 @@ namespace HMGreenCityMLM.Models
                                              new SqlParameter("@City", City) ,
                                              new SqlParameter("@Gender", Gender) ,
                                               new SqlParameter("@PinCode", PinCode),
-                                               new SqlParameter("@BankHolderName", AccountHolder)
+                                               new SqlParameter("@BankHolderName", AccountHolder),
+                                                new SqlParameter("@AdharNo", AdharNo)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateAssociateProfileByAdmin", para);
             return ds;

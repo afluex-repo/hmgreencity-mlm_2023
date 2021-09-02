@@ -839,6 +839,7 @@
     <Content Include="Views\Admin\PayoutLedger.cshtml" />
     <Content Include="Views\Permission\SetmainId.cshtml" />
     <Content Include="Views\Admin\EmpBinaryTree.cshtml" />
+    <Content Include="Views\AdminReports\DefaultAssociateList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
