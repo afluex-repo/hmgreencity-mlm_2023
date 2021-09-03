@@ -1730,15 +1730,20 @@ namespace HMGreenCityMLM.Controllers
         [HttpPost]
         [ActionName("DefaultAssociateList")]
         [OnAction(ButtonName = "Search")]
-        public ActionResult DefaultAssociateLists()
+        public ActionResult DefaultAssociateLists(Reports model)
         {
-            Reports model = new Reports();
+      
             List<Reports> list = new List<Reports>();
+            if (model.LoginId == null)
+            {
+                model.LoginId = null;
+            }
             DataSet ds = model.GetDefaulterList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
+
                     Reports obj = new Reports();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();

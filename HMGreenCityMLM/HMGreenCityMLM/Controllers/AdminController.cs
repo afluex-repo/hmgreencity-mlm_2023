@@ -862,7 +862,7 @@ namespace HMGreenCityMLM.Controllers
 
             try
             {
-                if(model.LoginId==null)
+                if (model.LoginId == null)
                 {
                     model.ToLoginID = null;
                 }
@@ -929,7 +929,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
                     obj.Amount = (r["Amount"].ToString());
                     ViewBag.Total = Math.Round(Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString()));
-                    obj.Amount1 =Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
+                    obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -1110,7 +1110,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetPaidPayout(Wallet objewallet)
         {
-            if(objewallet.LoginId==null)
+            if (objewallet.LoginId == null)
             {
                 objewallet.ToLoginID = null;
             }
@@ -1170,7 +1170,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult PayoutLedgerBy(Wallet objewallet)
         {
-            if(objewallet.LoginId==null)
+            if (objewallet.LoginId == null)
             {
                 objewallet.ToLoginID = null;
             }
@@ -1238,7 +1238,10 @@ namespace HMGreenCityMLM.Controllers
                         }
                         model.lsttopupreport = lst;
                     }
-
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetAdharDetails(string AdharNumber)
         {
             try
