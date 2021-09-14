@@ -1722,9 +1722,7 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult DefaultAssociateList(Reports model)
         {
-           
             return View(model);
-            
         }
 
         [HttpPost]
