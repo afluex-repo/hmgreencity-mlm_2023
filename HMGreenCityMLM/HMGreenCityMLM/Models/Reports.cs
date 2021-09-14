@@ -136,7 +136,6 @@ namespace HMGreenCityMLM.Models
 
         public string LastTopUpAmount { get; set; }
         public string LastTopUpDate { get; set; }
-
         public List<Reports> lstDefaultAssociateList { get; set; }
 
         public DataSet GetPayoutReport()
