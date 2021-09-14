@@ -387,12 +387,13 @@
                 $('#FK_SectorId').focus();
                 return false;
             }
-            //if ($('#Fk_BlockId').val() == '0') {
-            //    $("#Fk_BlockId").addClass('errortext');
-            //    $('#Fk_BlockId').focus();
-            //    return false;
-            //}
-
+            if ($('#Fk_SiteId').val() == '33') {
+                if ($('#Fk_BlockId').val() == '0') {
+                    $("#Fk_BlockId").addClass('errortext');
+                    $('#Fk_BlockId').focus();
+                    return false;
+                }
+            }
             if ($('#PlotNumber').val() == '') {
                 $("#PlotNumber").addClass('errortext');
                 $('#PlotNumber').focus();
