@@ -769,7 +769,11 @@
             success: function (response) {
                 if (response != null) {
                     $(response).each(function (index, item1) {
-                        cityuse.push(item1.UserName + "(" + item1.LoginIDD + ")");
+                        cityuse.push
+                        //cityuse.push(item1.UserName + "(" + item1.LoginIDD + ")");
+                        //cityuse.addClass('Rajan');
+                        //console.log(cityuse.push(item1.UserName + "(" + item1.LoginIDD + ")"))
+                        //alert(cityuse)
                         $('#txtLoginID').autocomplete({
                             source: cityuse,
                             select: function (event, ui) {
