@@ -39,6 +39,9 @@ namespace HMGreenCityMLM.Models
         public string AdharNo { get; set; }
 
 
+        public string cssStatus { get; set; }
+
+
         public DataSet GetUserProfile()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId) };

@@ -862,7 +862,7 @@ namespace HMGreenCityMLM.Controllers
 
             try
             {
-                if(model.LoginId==null)
+                if (model.LoginId == null)
                 {
                     model.ToLoginID = null;
                 }
@@ -929,7 +929,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
                     obj.Amount = (r["Amount"].ToString());
                     ViewBag.Total = Math.Round(Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString()));
-                    obj.Amount1 =Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
+                    obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -1110,7 +1110,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetPaidPayout(Wallet objewallet)
         {
-            if(objewallet.LoginId==null)
+            if (objewallet.LoginId == null)
             {
                 objewallet.ToLoginID = null;
             }
@@ -1170,7 +1170,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult PayoutLedgerBy(Wallet objewallet)
         {
-            if(objewallet.LoginId==null)
+            if (objewallet.LoginId == null)
             {
                 objewallet.ToLoginID = null;
             }
@@ -1214,7 +1214,34 @@ namespace HMGreenCityMLM.Controllers
 
             return View(objewallet);
         }
+        public ActionResult GetPayoutReportforAmount(string PayoutLoginId)
+        {
+            Reports model = new Reports();
+            List<Reports> lst = new List<Reports>();
+            model.PayoutLoginId = PayoutLoginId;
+            DataSet dspayout = model.GetpayoutByAmount();
+            if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
+            {
+                if (dspayout.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                {
+                    model.Result = "yes";
+                    if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in dspayout.Tables[0].Rows)
+                        {
+                            Reports obj = new Reports();
+                            obj.PayoutNo = r["PayoutNo"].ToString();
+                            obj.ClosingDate = r["ClosingDate"].ToString();
+                            obj.NetAmount = r["NetAmount"].ToString();
 
+                            lst.Add(obj);
+                        }
+                        model.lsttopupreport = lst;
+                    }
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetAdharDetails(string AdharNumber)
         {
             try

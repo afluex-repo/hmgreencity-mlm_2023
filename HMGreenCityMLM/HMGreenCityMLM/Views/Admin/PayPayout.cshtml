@@ -7,6 +7,19 @@
     #dataTables-example{
         max-height:600px;
     }
+    body.dark-layout .modal .modal-body, body.dark-layout .modal .modal-content, body.dark-layout .modal .modal-footer {
+    background-color: #f0f1f7;
+}
+    body.dark-layout .modal .modal-header .close, body.dark-layout .modal .modal-header[class*=bg-] .close {
+    background-color: #f0f1f7;
+    text-shadow: none;
+}
+    
+.modal-body {
+    color: black;
+    overflow-y: scroll;
+    max-height: 500px;
+}
 </style>
 @using (Html.BeginForm("PayPayout", "Admin", FormMethod.Post, new { @id = "form1" }))
 {
@@ -114,11 +127,13 @@
                                                                     <td>@Item.BankName</td>
                                                                     <td>@Item.IFSCCode</td>
                                                                     <td hidden="hidden">
-                                                                        @Item.Amount
-                                                                    </td>
-                                                                    <td>
-                                                                        @Item.Amount1
-                                                                    </td>
+                                                                        <a href="#" class="btn btn-danger btn-sm" onclick="openDeletePopup('@Item.LoginId');">
+                                                                            @Item.Amount
+                                                                        </a>
+</td>
+                                                                    <td><a href="#" class="btn btn-danger btn-sm" onclick="openDeletePopup('@Item.LoginId');">
+    @Item.Amount1</a>
+</td>
                                                                     <td>
                                                                         <input type="text" class="form-control" id="txtremarks_@i" name="txtremarks_@i" />
                                                                     </td>
@@ -174,7 +189,48 @@
             </div>
         </div>
     </div>
+    @Html.HiddenFor(m => m.PayoutLoginId)
+    <div class="modal fade" id="myModal" role="dialog" style="display: none;padding-top:55px;">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Payout Details</h6>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel-body table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="tblData" style="color:white">
+                                    <thead>
+                                        <tr>
+                                            <th>Payout No</th>
+                                            <th>Closing Date</th>
+                                            <th>Net Payable Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            </tr>
+                                        </tfoot>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal();">Close</button>
+                    </div>*@
+            </div>
+
+        </div>
+    </div>
 }
 <script src="../vendor/jquery/jquery.min.js"></script>
 
@@ -228,6 +284,37 @@
             }
         });
     });
+    function openDeletePopup(PayoutLoginId) {
+        $("#PayoutLoginId").val(PayoutLoginId);
+        $(".errortext").removeClass("errortext");
+            //$("#divload").css({ 'display': '' });
+            $.ajax({
+                url: "/Admin/GetPayoutReportforAmount",
+                Type: "Get",
+                DataType: "JSON",
+                data: { PayoutLoginId: $("#PayoutLoginId").val() },
+                success: function (data) {
+                    console.log(data)
+                    $('#tblData').find("tr:not(:first)").remove();
+                    if (data.lsttopupreport.length > 0) {
+                        for (var i = 0; i < data.lsttopupreport.length; i++) {
+                            $("#tblData").append('<tr><td id="PayoutNo' + i + ' " >' + data.lsttopupreport[i].PayoutNo +
+                                '</td><td id="ClosingDate' + i + ' " >' + data.lsttopupreport[i].ClosingDate +
+                                 '</td><td id="NetAmount' + i + ' " >' + data.lsttopupreport[i].NetAmount +
+                                '</td></tr>')
+                        }
+                        $("#myModal").modal('show');
+                    }
+                }
+            });
+
+    }
+
+    function closeModal() {
+        $("#myModal").hide();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+
     //function getpaymentdetails() {
     //    var table = document.getElementById("dataTables-example");
     //    var paymentmode = ($("#PaymentMode option:selected").text());
