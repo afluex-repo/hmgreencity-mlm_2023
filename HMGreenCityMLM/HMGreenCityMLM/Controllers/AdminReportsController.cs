@@ -379,6 +379,7 @@ namespace HMGreenCityMLM.Controllers
                     Reports Obj = new Reports();
                     Obj.AddedOn = r["AddedOn"].ToString();
                     Obj.Action = r["Action"].ToString();
+                    Obj.Name = r["Name"].ToString();
                     Obj.Remarks = r["Remarks"].ToString();
 
                     lst1.Add(Obj);
