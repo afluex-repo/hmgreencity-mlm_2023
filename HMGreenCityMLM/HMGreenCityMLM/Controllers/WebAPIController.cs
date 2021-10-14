@@ -175,7 +175,7 @@ namespace HMGreenCityMLM.Controllers
 
         #region Registration
 
-        public ActionResult Registration(RegistrationAPI model)
+        public ActionResult Registration_notinUsed(RegistrationAPI model)
         {
             RegistrationAPI obj = new RegistrationAPI();
             if (model.SponsorId == "" || model.SponsorId == null)

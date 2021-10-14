@@ -25,6 +25,7 @@ namespace HMGreenCityMLM.Models
         public List<Reports> lstAssociateLoginLog { get; set; }
         public string SectorName { get; set; }
         public string SiteName { get; set; }
+        public string BlockName { get; set; }
         public string LoginIDD { get; set; }
         public string UserName { get; set; }
         public string EncryptPayoutNo { get; set; }
@@ -137,7 +138,6 @@ namespace HMGreenCityMLM.Models
 
         public string LastTopUpAmount { get; set; }
         public string LastTopUpDate { get; set; }
-
         public List<Reports> lstDefaultAssociateList { get; set; }
 
         public DataSet GetPayoutReport()

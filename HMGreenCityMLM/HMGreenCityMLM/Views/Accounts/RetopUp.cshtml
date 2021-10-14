@@ -42,7 +42,9 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Login Id <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);" })
+                                                        @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);" })
+                                                        @Html.HiddenFor(m => m.LoginId)
+                                                        
                                                         <br />
                                                         <span id="txtname" style="color: #fff"></span>
                                                     </div>
@@ -105,7 +107,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Topup Date <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @Placeholder = "TopUp Date" })
+                                                        @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @Placeholder = "TopUp Date",@readonly=true })
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,7 +215,37 @@
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script>
+    $(document).ready(function () {
 
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminProfile/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+                    $('#ToLoginID').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#LoginId').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+       
+    });
     $('#TopUpDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
@@ -271,6 +303,13 @@
             $("#FK_SectorId").addClass('errortext');
             $('#FK_SectorId').focus();
             return false;
+        }
+        if ($('#Fk_SiteId').val() == '33') {
+            if ($('#Fk_BlockId').val() == '0') {
+                $("#Fk_BlockId").addClass('errortext');
+                $('#Fk_BlockId').focus();
+                return false;
+            }
         }
         //if ($('#Fk_BlockId').val() == '0') {
         //    $("#Fk_BlockId").addClass('errortext');
