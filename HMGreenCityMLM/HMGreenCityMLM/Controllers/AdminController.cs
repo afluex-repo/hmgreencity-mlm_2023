@@ -349,6 +349,7 @@ namespace HMGreenCityMLM.Controllers
                 obj.Gender = Gender;
                 obj.PinCode = PinCode;
                 obj.Leg = Leg;
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
                 string password = Common.GenerateRandom();
                 obj.Password = Crypto.Encrypt(password);
                 DataSet ds = obj.Registration();
