@@ -87,7 +87,8 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@AdharNo",AdharNo),
                                      new SqlParameter("@PinCode",PinCode),
                                      new SqlParameter("@Leg",Leg),
-                                     new SqlParameter("@Password",Password)
+                                     new SqlParameter("@Password",Password),
+                                     new SqlParameter("@AddedBy",AddedBy)
 
                                    };
             DataSet ds = DBHelper.ExecuteQuery("Registration", para);
@@ -121,7 +122,7 @@ namespace HMGreenCityMLM.Models
         public string OTP { get; set; }
 
         public string Leg { get; set; }
-
+        public string AddedBy { get; set; }
         public DataTable PermissionDBSet { get; set; }
         public List<Home> lstsubmenu { get; set; }
         public string Pk_AdminId { get; set; }
