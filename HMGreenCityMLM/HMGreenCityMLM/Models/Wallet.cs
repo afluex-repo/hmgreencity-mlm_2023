@@ -45,7 +45,7 @@ namespace HMGreenCityMLM.Models
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }
         public string ToLoginID { get; set; }
-
+        public bool IsNewBusiness { get; set; }
         public DataSet ValidatingReceipt()
         {
             SqlParameter[] para = {
@@ -267,7 +267,8 @@ namespace HMGreenCityMLM.Models
                                               new SqlParameter("@TransactionDate", TransactionDate),
                                                 new SqlParameter("@BankName", BankName),
                                                   new SqlParameter("@BankBranch", BankBranch),
-                                                   new SqlParameter("@ReceiptNo", ReceiptNo)
+                                                   new SqlParameter("@ReceiptNo", ReceiptNo),
+                                                     new SqlParameter("@IsNewBusiness", IsNewBusiness)
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUpByAdmin", para);
             return ds;
@@ -301,6 +302,9 @@ namespace HMGreenCityMLM.Models
                                         new SqlParameter("@Description", Description),
                                                                     new SqlParameter("@ReceiptNo", ReceiptNo),
                                                                     new SqlParameter("@PaymentMode", PaymentMode),
+                                                                        new SqlParameter("@IsNewBusiness", IsNewBusiness)
+
+
             };
             DataSet ds = DBHelper.ExecuteQuery("ReTopup", para);
             return ds;

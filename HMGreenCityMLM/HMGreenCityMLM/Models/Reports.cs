@@ -68,6 +68,7 @@ namespace HMGreenCityMLM.Models
         public string PayoutNo { get; set; }
         public string SponsorName { get; set; }
         public List<Reports> lstassociate { get; set; }
+        public List<Reports> lstBusinessStatus { get; set; }
 
         public string PermanentDate { get; set; }
 
@@ -688,6 +689,15 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@LoginId", LoginId)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetdefaulterList", para);
+            return ds;
+        }
+
+
+
+        public DataSet UpdateBussinessStatus()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_InvestmentId", ToLoginID), };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateBusinessStatus", para);
             return ds;
         }
 
