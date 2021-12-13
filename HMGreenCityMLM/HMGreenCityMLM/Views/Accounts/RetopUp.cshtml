@@ -9,9 +9,6 @@
 
 @using (Html.BeginForm("RetopUpAction", "Accounts", FormMethod.Post, new { @id = "form1" }))
 {
-
-
-    
     
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -37,6 +34,21 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Topup Type <span style="color: red">*</span></label>                     
+                                                    <div class="col-sm-9">
+                                                        <input type="radio" name="rdbtype" onclick="return showdetails('NewBusiness')" value="NewBusiness" /> New Business
+                                                        <input type="radio" name="rdbtype" onclick="return showdetails('OtherBusiness')" value="OtherBusiness" /> Other Business
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group row">
@@ -44,7 +56,7 @@
                                                     <div class="col-sm-9">
                                                         @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);" })
                                                         @Html.HiddenFor(m => m.LoginId)
-                                                        
+                                                        @Html.HiddenFor(m => m.TopupType)
                                                         <br />
                                                         <span id="txtname" style="color: #fff"></span>
                                                     </div>
@@ -265,6 +277,36 @@
             bankbranch.style.display = "none";
         }
     }
+    function showdetails(type) {
+        debugger;
+        if (type == "Product") {
+            $('#divisite').hide();
+            $('#divblock').hide();
+            $('#divsector').hide();
+            $('#divplot').hide();
+            $('#divpackage').show();
+            $('#TopupType').val('Product');
+
+        }
+        else if (type == "NewBusiness") {
+           
+            $('#TopupType').val('NewBusiness');
+
+        }
+        else if (type == "OtherBusiness") {
+            $('#TopupType').val('OtherBusiness');
+
+        }
+        else {
+            $('#divisite').show();
+            $('#divblock').show();
+            $('#divsector').show();
+            $('#divplot').show();
+            $('#divpackage').hide();
+            $('#TopupType').val('RealEstate');
+        }
+
+    }
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
@@ -289,9 +331,26 @@
     }
     function validateform() {
         $(".errortext").removeClass("errortext");
-        if ($('#LoginId').val() == '') {
-            $("#LoginId").addClass('errortext');
-            $('#LoginId').focus();
+
+        debugger;
+        $(".errortext").removeClass("errortext");
+
+        var status = $("input[name='rdbtype']:checked").val();
+
+        if (status == "NewBusiness") {
+
+        }
+        else if (status == "OtherBusiness") {
+
+        }
+        else {
+            alert("Please Select TopUp Type");
+            return false;
+        }
+
+        if ($('#ToLoginID').val() == '') {
+            $("#ToLoginID").addClass('errortext');
+            $('#ToLoginID').focus();
             return false;
         }
         if ($('#Fk_SiteId').val() == '0') {

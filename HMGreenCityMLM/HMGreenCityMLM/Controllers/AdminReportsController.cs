@@ -1758,5 +1758,68 @@ namespace HMGreenCityMLM.Controllers
 
         }
 
+
+        public ActionResult UpdateBusinessStatus(string ToLoginID)
+        {
+            List<Reports> list = new List<Reports>();
+            Reports model = new Reports();
+            if (ToLoginID != null)
+            {
+                model.ToLoginID = ToLoginID;
+                try
+                {
+                    DataSet ds = model.UpdateBussinessStatus();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            Reports obj = new Reports();
+                            obj.FK_InvestmentID = r["Pk_InvestmentId"].ToString();
+                            //obj.EncryptKey = Crypto.Encrypt(r["Fk_SaleOrderId"].ToString());
+                            //obj.ProductID = r["Fk_ProductId"].ToString();
+                            obj.Quantity = r["Quantity"].ToString();
+                            obj.MRP = r["Amount"].ToString();
+                            obj.IGST = r["IGST"].ToString();
+                            obj.CGST = r["CGST"].ToString();
+                            obj.SGST = r["SGST"].ToString();
+                            obj.FinalAmount = r["Amount"].ToString();
+                            //obj.TaxableAmount = r["TaxableAmount"].ToString();
+                            obj.ProductName = r["ProductName"].ToString();
+                            obj.HSNCode = r["HSNCode"].ToString();
+
+                            ViewBag.OrderNo = r["ReceiptNo"].ToString();
+
+                            ViewBag.TotalFinalAmount = ds.Tables[1].Rows[0]["TotalFinalAmount"].ToString();
+                            ViewBag.TotalFinalAmountWords = ds.Tables[1].Rows[0]["TotalFinalAmountWords"].ToString();
+                            ViewBag.PurchaseDate = ds.Tables[0].Rows[0]["UpgradtionDate"].ToString();
+                            ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                            ViewBag.Loginid = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                            ViewBag.AssociateAddress = ds.Tables[0].Rows[0]["Address"].ToString();
+                            ViewBag.ValueBeforeTax = ds.Tables[1].Rows[0]["Taxable"].ToString();
+                            ViewBag.TaxAdded = ds.Tables[1].Rows[0]["TaxAmount"].ToString();
+
+                            ViewBag.CompanyName = SoftwareDetails.CompanyName;
+                            ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
+                            ViewBag.Pin1 = SoftwareDetails.Pin1;
+                            ViewBag.State1 = SoftwareDetails.State1;
+                            ViewBag.City1 = SoftwareDetails.City1;
+                            ViewBag.ContactNo = SoftwareDetails.ContactNo;
+                            ViewBag.LandLine = SoftwareDetails.LandLine;
+                            ViewBag.Website = SoftwareDetails.Website;
+                            ViewBag.EmailID = SoftwareDetails.EmailID;
+                            list.Add(obj);
+
+                        }
+                        model.lstBusinessStatus = list;
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            return View(model);
+        }
+        
     }
 }
