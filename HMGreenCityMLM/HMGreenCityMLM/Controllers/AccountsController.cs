@@ -176,10 +176,12 @@ namespace HMGreenCityMLM.Controllers
                 //}
                 if (obj.TopupType == "NewBusiness")
                 {
+                    obj.Package = "1";
                     obj.IsNewBusiness = true;
                 }
                 else if(obj.TopupType == "OtherBusiness")
                 {
+                    obj.Package = "1";
                     obj.IsNewBusiness = false;
                 }
                 else
