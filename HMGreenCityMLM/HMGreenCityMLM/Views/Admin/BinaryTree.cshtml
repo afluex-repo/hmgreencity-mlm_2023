@@ -8,8 +8,7 @@
 <link href="../../css/tree.css" rel="stylesheet" />
 <style type="text/css">
     .ui-autocomplete-loading {
-        /*background: white url("../img/player_loading.gif") right center no-repeat;*/
-        background: url("../img/player_loading.gif") right center no-repeat;
+        background: white url("../img/player_loading.gif") right center no-repeat;
         background-size: 20px;
     }
 
@@ -347,7 +346,21 @@
         display: block;
         margin: 0 auto;
     }
+   i.girl-hold {
+        width: 50px !important;
+        height: 50px !important;
+        background-image: url(../../images/TreeIcon/girl-hold.png) !important;
+        display: block;
+        margin: 0 auto;
+    }
 
+    i.men-hold {
+        width: 50px !important;
+        height: 50px !important;
+        background-image: url(../../images/TreeIcon/men-hold.png) !important;
+        display: block;
+        margin: 0 auto;
+    }
     #lblDisplayName {
         font-size: 18px;
         padding: 5px 5px 10px;
@@ -449,14 +462,9 @@
     .main-menu {
         z-index: 1 !important;
     }
-
-    .custom {
-        color: red;
+    .custom{
+        color:red;
     }
-
-   
-
-   
 </style>
 <style>
     #divload {
@@ -499,11 +507,6 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <ul>
-                                <li id="li1">
-                                    yytytu
-                                </li>
-                            </ul>
                             <ul class="nav nav-tabs mb-3" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
@@ -752,13 +755,16 @@
 
 
 
-@*<style>
-        #ui-id-2030 {
-        border: 1px solid #d3d3d3;
-        color: red !important;
-    }
-    </style>*@
-
+<style>
+    .Red{
+    border: 1px solid #d3d3d3;
+    color: red !important;
+}
+       .Green{
+    border: 1px solid #d3d3d3;
+    color: darkgreen !important;
+}
+</style>
 <input type="hidden" id="firtsMemberID" value="@ViewBag.Fk_UserId" />
 
 <script src="../../WebsiteCss/js/jquery.js"></script>
@@ -766,50 +772,52 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        debugger;
-        
+       
         $("input").attr("autocomplete", "off");
-
+        var elements = document.getElementsByClassName('ui-widget.ui-widget-content');
         var cityuse = [];
         $("#loader").css({ 'display': '' });
         $.ajax({
             url: '/AdminReports/GetUserList',
             type: 'Post',
             success: function (response) {
-                debugger;
                 if (response != null) {
-                    $(response).each(function (index, item) {
-                        if (item.cssStatus == "Red") {
-                            debugger;
-                            $("body .ui-autocomplete .ui-menu-item").attr('style', "color: green");
-                            //alert($(".ui-menu-item").css("color", "red important"))
-                            // alert(item.cssStatus)
-                        }
-                        else if (item.cssStatus == "Green") {
-                            $("body .ui-autocomplete .ui-menu-item").removeAttr("style");
-                            //  $("#ui-id-4").css("color", "green !important");
-                            //alert(item.cssStatus)
-                        }
-                        else if (item.cssStatus == "Black") {
-                            //  $(".ui-menu-item").css("color", "black !important");
-                            //alert(item.cssStatus)
-                        }
-                        else {
-
-                        }
-                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    $(response).each(function (index, item1) {
+                        //cityuse.push
+                        cityuse.push(item1.UserName + "(" + item1.LoginIDD + ")");
+                        //cityuse.addClass('Rajan');
+                        //console.log(cityuse.push(item1.UserName + "(" + item1.LoginIDD + ")"))
+                        //alert(cityuse)
+                        $('#txtLoginID').autocomplete({
+                            source: cityuse,
+                            select: function (event, ui) {
+                                //console.log(item.cssStatus)
+                                var str = ui.item.label;
+                                var strsplit = str.split("(");
+                                $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                             
+                            },
+                            minLength: 1
+                        }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                            console.log(ul)
+                                var div = $("<li>")
+                                    .append("<li class='" + item1.cssStatus + "' id='ui-id-6' tabindex='-1'>(" + item.label + ")</li>")
+                                    .appendTo(ul);
+                                return div;
+                             
+                        };
                     });
-
-                    $('#txtLoginID').autocomplete({
-
-                        source: cityuse,
-                        select: function (event, ui) {
-                            debugger;
-                            var str = ui.item.label;
-                            var strsplit = str.split("(");
-                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                        }
-                    })
+             
+                //    $('#txtLoginID').autocomplete({
+                //        source: cityuse,
+                //        select: function (event, ui) {
+                //            var str = ui.item.label;
+                //            var strsplit = str.split("(");
+                //            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                //        }
+                //    })
+                    //}
+                   
                 }
             }, error: function () {
                 alert('Some Thing wrong!');
@@ -892,7 +900,7 @@
 
         if (winWidth < 998) {
             $("#member-details").addClass('active');
-            $("#go-top").find('input[type="hidden"]').val(item1); s
+            $("#go-top").find('input[type="hidden"]').val(item1);
         }
         $("#loading-image").hide();
         $('#' + obj.id).attr("data-content", $("#member-details").html());
@@ -1101,6 +1109,14 @@
                             cssclass = "girl-inactive";
                         }
                     }
+                    else if (cssclaa == "hold-member") {
+                        if (Gender == "M") {
+                            cssclass = "men-hold";
+                        }
+                        else {
+                            cssclass = "girl-hold";
+                        }
+                    }
                     else {
                         cssclass = "join-member";
                     }
@@ -1213,6 +1229,14 @@
                                                     cssclass = "girl-inactive";
                                                 }
                                             }
+                                            else if (cssclaa == "hold-member") {
+                                                if (Gender == "M") {
+                                                    cssclass = "men-hold";
+                                                }
+                                                else {
+                                                    cssclass = "girl-hold";
+                                                }
+                                            }
                                             else {
                                                 cssclass = "join-member";
                                             }
@@ -1319,6 +1343,14 @@
                                                                         }
                                                                         else {
                                                                             cssclass = "girl-inactive";
+                                                                        }
+                                                                    }
+                                                                    else if (cssclaa == "hold-member") {
+                                                                        if (Gender == "M") {
+                                                                            cssclass = "men-hold";
+                                                                        }
+                                                                        else {
+                                                                            cssclass = "girl-hold";
                                                                         }
                                                                     }
                                                                     else {
@@ -1468,6 +1500,15 @@
                     }
                     else {
                         status = "girl-active"
+                    }
+                }
+                else if (status == "Y") {
+
+                    if (gender == "M") {
+                        status = "men-hold"
+                    }
+                    else {
+                        status = "girl-hold"
                     }
                 }
                 else {

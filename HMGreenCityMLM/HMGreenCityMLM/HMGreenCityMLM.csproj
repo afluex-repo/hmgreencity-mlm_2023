@@ -538,9 +538,11 @@
     <Content Include="images\TreeIcon\default.png" />
     <Content Include="images\TreeIcon\girl-active.png" />
     <Content Include="images\TreeIcon\girl-block.png" />
+    <Content Include="images\TreeIcon\girl-hold.png" />
     <Content Include="images\TreeIcon\girl-inactive.png" />
     <Content Include="images\TreeIcon\men-active.png" />
     <Content Include="images\TreeIcon\men-block.png" />
+    <Content Include="images\TreeIcon\men-hold.png" />
     <Content Include="images\TreeIcon\men-inactive.png" />
     <Content Include="images\user.png" />
     <Content Include="images\view.png" />
@@ -604,6 +606,7 @@
     <Content Include="AssociatePanelcss\Fonts\feather.eot" />
     <Content Include="AssociatePanelcss\Fonts\feather.ttf" />
     <Content Include="AssociatePanelcss\Fonts\feather.woff" />
+    <Content Include="WebsiteCss\KohinoorCity.jpeg" />
     <None Include="Properties\PublishProfiles\HMGreenCityMLM.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
