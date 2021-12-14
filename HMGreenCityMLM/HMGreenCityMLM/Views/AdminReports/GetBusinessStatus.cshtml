@@ -1,11 +1,11 @@
 ﻿@model HMGreenCityMLM.Models.Reports
 
 @{
-    ViewBag.Title = "UpdateBusinessStatus";
+    ViewBag.Title = "GetBusinessStatus";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm("UpdateBusinessStatus", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("GetBusinessStatus", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <br />
     <div class="app-content content">
@@ -86,16 +86,17 @@
                                                                 <th>Price</th>
                                                                 <th>Calculation Status</th>
                                                                 <th>ReceiptNo</th>
-                                                                <th>Print</th>
+                                                                <th>Top-Up</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             @if (Model != null)
                                                             {
-                                                                if (Model.lstBusinessStatus != null)
+                                                                if (Model.lsttopupreport != null)
                                                                 {
                                                                     int i = 1;
-                                                                    foreach (var Item in Model.lstBusinessStatus)
+                                                                    foreach (var Item in Model.lsttopupreport)
                                                                     {
                                                                         <tr class="text-left">
                                                                             <td>@i</td>
@@ -112,8 +113,19 @@
                                                                             <td>@Item.Status</td>
                                                                             <td>@Item.ReceiptNo</td>
                                                                             <td>
+                                                                                <input type="radio" name="rdbtype" value="NewBusiness" /> New Business
+                                                                                <input type="radio" name="rdbtype" value="OtherBusiness" /> Other Business
+
+                                                                            </td>
+
+
+                                                                            <td>
                                                                                 @*<a href="/AdminReports/PrintReciept/@Item.LoginId">Print</a>*@
-                                                                                <a href="/AdminReports/UpdateBusinessStatus?ToLoginID=@Item.ToLoginID" class="btn btn-sm btn-primary" target="_blank">Update</a>
+                                                                                <a href="javascript:void(0)" class="btn btn-sm btn-primary Update" target="_blank">Update</a>
+                                                                                <input type="hidden" class="PK_InvestmentId" value="@Item.ToLoginID" />
+                                                                                @*<a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class="btn btn-sm btn-primary" target="_blank">New Business</a>
+                                                                                    <a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class="btn btn-sm btn-primary" target="_blank">Other Business</a>*@
+
                                                                                 @*  <button onclick="changeprintdate('@Item.PrintingDate','@Item.LoginId')">Print</button>*@
                                                                             </td>
                                                                         </tr>
@@ -134,7 +146,6 @@
                                                                 <th></th>
                                                                 <th style="text-align:right">Total Amount</th>
                                                                 <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
-
                                                                 <th></th>
                                                                 <th></th>
                                                                 <th></th>
@@ -270,9 +281,34 @@
             }
         });
     }
+    $("body").on("click", "[id*=example24] .Update", function () {
+        debugger;
+
+        var row = $(this).closest("tr");
+        if (row.find("input[name='rdbtype']:checked").val() == undefined) {
+            alert('Please select Top-Up Type');
+            return false;
+        }
+        var Type = row.find("input[name='rdbtype']:checked").val();
+        var PK_InvestmentId = row.find(".PK_InvestmentId").val();
+        $.ajax({
+            url: "/AdminReports/UpdateBusinessStatus",
+            Type: "POST",
+            DataType: "JSON",
+            data: { Type: Type, PK_InvestmentId: PK_InvestmentId },
+            success: function (data) {
+                if (data.Result == "Yes") {
+                    alert("Status Updated");
+                    window.location.href = "/AdminReports/GetBusinessStatus";
+                }
+                else {
+                    alert("Not Updated. Please Try again");
+                }
+            }
+        });
+    });
+
 </script>
-
-
 
 
 
