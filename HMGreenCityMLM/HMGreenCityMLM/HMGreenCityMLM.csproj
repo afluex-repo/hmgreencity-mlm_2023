@@ -842,7 +842,7 @@
     <Content Include="Views\Permission\SetmainId.cshtml" />
     <Content Include="Views\Admin\EmpBinaryTree.cshtml" />
     <Content Include="Views\AdminReports\DefaultAssociateList.cshtml" />
-    <Content Include="Views\AdminReports\UpdateBusinessStatus.cshtml" />
+    <Content Include="Views\AdminReports\GetBusinessStatus.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
