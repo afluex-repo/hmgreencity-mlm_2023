@@ -606,6 +606,7 @@
     <Content Include="AssociatePanelcss\Fonts\feather.eot" />
     <Content Include="AssociatePanelcss\Fonts\feather.ttf" />
     <Content Include="AssociatePanelcss\Fonts\feather.woff" />
+    <Content Include="WebsiteCss\KohinoorCity.jpeg" />
     <None Include="Properties\PublishProfiles\HMGreenCityMLM.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
