@@ -1725,7 +1725,8 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult DefaultAssociateList(Reports model)
         {
-            return View(model);
+            
+            return View();
         }
 
         [HttpPost]
@@ -1733,12 +1734,13 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult DefaultAssociateLists(Reports model)
         {
-
             List<Reports> list = new List<Reports>();
-            if (model.LoginId == null)
-            {
-                model.LoginId = null;
-            }
+            //if (model.LoginId == null)
+            //{
+            //    model.LoginId = null;
+            //}
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.Status = model.Status == "0" ? null : model.Status;
             DataSet ds = model.GetDefaulterList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -1748,8 +1750,9 @@ namespace HMGreenCityMLM.Controllers
                     Reports obj = new Reports();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
-                    obj.LastTopUpAmount = r["LastTopupamount"].ToString();
-                    obj.LastTopUpDate = r["LastTopupdate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    //obj.LastTopUpAmount = r["LastTopupamount"].ToString();
+                    //obj.LastTopUpDate = r["LastTopupdate"].ToString();
                     list.Add(obj);
                 }
                 model.lstDefaultAssociateList = list;
