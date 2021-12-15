@@ -39,9 +39,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Topup Type <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9" style="display:none">
+                                                            <input type="radio" id="rdb_type" name="rdbtype" checked="checked" onclick="return showdetails('RealEstate')" /> Real Estate
+                                                            <input type="radio" id="rdb_type" name="rdbtype" onclick="return showdetails('Product')" /> Product
+                                                        </div>
                                                     <div class="col-sm-9">
-                                                        <input type="radio" id="rdbtype" name="rdbtype" checked="checked" onclick="return showdetails('RealEstate')" /> Real Estate
-                                                        <input type="radio" id="rdbtype" name="rdbtype" onclick="return showdetails('Product')" /> Product
+                                                        <input type="radio"  name="rdbtype" onclick="return showdetails('NewBusiness')" value="NewBusiness"/> New Business
+                                                        <input type="radio"  name="rdbtype" onclick="return showdetails('OtherBusiness')"  value="OtherBusiness"/> Other Business
                                                     </div>
                                                 </div>
                                             </div>
@@ -52,8 +56,8 @@
                                                     <label class="col-sm-3 col-form-label">Login Id <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
                                                         @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);" })
-                                                        @Html.HiddenFor(m=>m.LoginId)                                                       
-                                                         <br />
+                                                        @Html.HiddenFor(m => m.LoginId)
+                                                        <br />
                                                         <span id="txtname" style="color: #fff"></span>
                                                     </div>
                                                 </div>
@@ -93,7 +97,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Block </label>
                                                     <div class="col-sm-9">
-                                                        @Html.DropDownListFor(m => m.Fk_BlockId, new SelectList(ViewBag.ddlblock, "Value", "Text"), new { @class = "form-control"})
+                                                        @Html.DropDownListFor(m => m.Fk_BlockId, new SelectList(ViewBag.ddlblock, "Value", "Text"), new { @class = "form-control" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,14 +134,14 @@
                                             </div>
 
                                         </div>
-                                        
+
                                         <div class="row">
 
                                             <div class="col-md-6">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">In Words<span style="color: white">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.word, new { @class = "form-control", @style = "font-weight:800;color:white;", @placeholder = "Amount in words", @disabled = "true" })
+                                                        @Html.TextBoxFor(m => m.word, new { @class = "form-control", @style = "color:black;", @placeholder = "Amount in words", @disabled = "true" })
 
 
                                                     </div>
@@ -147,8 +151,8 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Receipt No <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                       
-                                                        @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Receipt No", @onchange ="return validateReceipt();" })
+
+                                                        @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Receipt No", @onchange = "return validateReceipt();" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,7 +179,7 @@
                                         </div>
                                         <div class="row">
 
-                                           
+
                                             <div class="col-md-6" id="bankname" style="display: none">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Bank Name </label>
@@ -284,7 +288,7 @@
         });
         $('#TopupType').val('RealEstate');
     });
- 
+
 
 
     $('#TopUpDate').datepicker({
@@ -367,47 +371,65 @@
                 debugger;
                 $('#Amount').val(data.Amount);
             }
-
         });
     }
     function validateform() {
+        debugger;
         $(".errortext").removeClass("errortext");
-        if ($('#LoginId').val() == '') {
-            $("#LoginId").addClass('errortext');
-            $('#LoginId').focus();
-            return false;
+       
+        var status = $("input[name='rdbtype']:checked").val();
+
+        if (status == "NewBusiness") {
+            
         }
-        if ($('#TopupType').val() == "RealEstate") {
-            if ($('#Fk_SiteId').val() == '0') {
-                $("#Fk_SiteId").addClass('errortext');
-                $('#Fk_SiteId').focus();
-                return false;
-            }
-            if ($('#FK_SectorId').val() == '0') {
-                $("#FK_SectorId").addClass('errortext');
-                $('#FK_SectorId').focus();
-                return false;
-            }
-            if ($('#Fk_SiteId').val() == '33') {
-                if ($('#Fk_BlockId').val() == '0') {
-                    $("#Fk_BlockId").addClass('errortext');
-                    $('#Fk_BlockId').focus();
-                    return false;
-                }
-            }
-            if ($('#PlotNumber').val() == '') {
-                $("#PlotNumber").addClass('errortext');
-                $('#PlotNumber').focus();
-                return false;
-            }
+        else if(status == "OtherBusiness")
+        {
+
         }
         else {
-            if ($('#Package').val() == '0') {
-                $("#Package").addClass('errortext');
-                $('#Package').focus();
+            alert("Please Select TopUp Type");
+            return false;
+        }
+        //if ($('#rdbtype').val() == '') {
+        //    $("#rdbtype").addClass('errortext');
+        //    $('#rdbtype').focus();
+        //    return false;
+        //}
+        if ($('#ToLoginID').val() == '') {
+            $("#ToLoginID").addClass('errortext');
+            $('#ToLoginID').focus();
+            return false;
+        }
+        //if ($('#TopupType').val() == "RealEstate") {
+        if ($('#Fk_SiteId').val() == '0') {
+            $("#Fk_SiteId").addClass('errortext');
+            $('#Fk_SiteId').focus();
+            return false;
+        }
+        if ($('#FK_SectorId').val() == '0') {
+            $("#FK_SectorId").addClass('errortext');
+            $('#FK_SectorId').focus();
+            return false;
+        }
+        if ($('#Fk_SiteId').val() == '33') {
+            if ($('#Fk_BlockId').val() == '0') {
+                $("#Fk_BlockId").addClass('errortext');
+                $('#Fk_BlockId').focus();
                 return false;
             }
         }
+        if ($('#PlotNumber').val() == '') {
+            $("#PlotNumber").addClass('errortext');
+            $('#PlotNumber').focus();
+            return false;
+        }
+        //else {
+        //    if ($('#Package').val() == '0') {
+        //        $("#Package").addClass('errortext');
+        //        $('#Package').focus();
+        //        return false;
+        //    }
+        //}
 
 
         if ($('#Amount').val() == '') {
@@ -448,7 +470,7 @@
                 if (data.Result == "Yes") {
                     $('#txtname').html(data.DisplayName);
 
-                    divname.style.display = "block";
+                    //divname.style.display = "block";
                 } else {
                     if (data.DisplayName != null) {
                         alert(data.DisplayName);
@@ -477,6 +499,24 @@
             $('#TopupType').val('Product');
 
         }
+        else if (type == "NewBusiness") {
+            //$('#divisite').hide();
+            //$('#divblock').hide();
+            //$('#divsector').hide();
+            //$('#divplot').hide();
+            //$('#divpackage').show();
+            $('#TopupType').val('NewBusiness');
+
+        }
+        else if (type == "OtherBusiness") {
+            //$('#divisite').hide();
+            //$('#divblock').hide();
+            //$('#divsector').hide();
+            //$('#divplot').hide();
+            //$('#divpackage').show();
+            $('#TopupType').val('OtherBusiness');
+
+        }
         else {
             $('#divisite').show();
             $('#divblock').show();
@@ -493,7 +533,7 @@
         var ReceiptNo = "";
 
         ReceiptNo = $('#ReceiptNo').val();
-        
+
         $.ajax({
             url: "/Accounts/ValidateReceipt",
             Type: "Get",

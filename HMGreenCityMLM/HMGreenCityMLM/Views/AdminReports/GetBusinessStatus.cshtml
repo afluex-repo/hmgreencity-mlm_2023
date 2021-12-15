@@ -1,0 +1,314 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "GetBusinessStatus";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("GetBusinessStatus", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <br />
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">  Update Business Status </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+                                        <div class="row">
+                                            <div class="col-md-12 table-responsive">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        Login Id
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                                                        @Html.HiddenFor(m => m.ToLoginID)
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        Name
+                                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        Site
+                                                        @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        Status
+                                                        @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlstatus, "Value", "Text"), new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        From Date
+                                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "readonly" })
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        To Date
+                                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly" })
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <br />
+                                                        <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="dt-responsive table-responsive">
+                                                    <table class="table mb-0" id="example24">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr No.</th>
+                                                                <th>Login Id</th>
+                                                                <th>Name</th>
+                                                                <th>Site Name</th>
+                                                                <th>Sector Name</th>
+                                                                <th>Block Name</th>
+                                                                <th>PlotNo</th>
+                                                                <th>Upgradation Date</th>
+                                                                <th>Payment Mode</th>
+                                                                <th>Description</th>
+                                                                <th>Price</th>
+                                                                <th>Calculation Status</th>
+                                                                <th>ReceiptNo</th>
+                                                                <th>Top-Up</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if (Model != null)
+                                                            {
+                                                                if (Model.lsttopupreport != null)
+                                                                {
+                                                                    int i = 1;
+                                                                    foreach (var Item in Model.lsttopupreport)
+                                                                    {
+                                                                        <tr class="text-left">
+                                                                            <td>@i</td>
+                                                                            <td>@Item.LoginId</td>
+                                                                            <td>@Item.DisplayName</td>
+                                                                            <td>@Item.SiteName</td>
+                                                                            <td>@Item.SectorName</td>
+                                                                            <td>@Item.BlockName</td>
+                                                                            <td>@Item.PlotNumber</td>
+                                                                            <td>@Item.UpgradtionDate</td>
+                                                                            <td>@Item.PaymentMode</td>
+                                                                            <td>@Item.Description</td>
+                                                                            <td>@Item.Amount</td>
+                                                                            <td>@Item.Status</td>
+                                                                            <td>@Item.ReceiptNo</td>
+                                                                            <td>
+                                                                                <input type="radio" name="rdbtype" value="NewBusiness" /> New Business
+                                                                                <input type="radio" name="rdbtype" value="OtherBusiness" /> Other Business
+
+                                                                            </td>
+
+
+                                                                            <td>
+                                                                                @*<a href="/AdminReports/PrintReciept/@Item.LoginId">Print</a>*@
+                                                                                <a href="javascript:void(0)" class="btn btn-sm btn-primary Update">Update</a>
+                                                                                <input type="hidden" class="PK_InvestmentId" value="@Item.ToLoginID" />
+                                                                                @*<a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class="btn btn-sm btn-primary" target="_blank">New Business</a>
+                                                                                    <a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class="btn btn-sm btn-primary" target="_blank">Other Business</a>*@
+
+                                                                                @*  <button onclick="changeprintdate('@Item.PrintingDate','@Item.LoginId')">Print</button>*@
+                                                                            </td>
+                                                                        </tr>
+                                                                        i++;
+                                                                    }
+
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th></th>
+
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th style="text-align:right">Total Amount</th>
+                                                                <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
+
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+                        <!-- main-panel ends -->
+
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Printing Date</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="printingdate" readonly />
+                    <input type="hidden" id="hdfloginnid" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closepopup();">Close</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="printrecipt();">Print</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>
+
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+        $("input").attr("autocomplete", "off");
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                debugger;
+
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+    $('#printingdate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+
+    });
+    function changeprintdate(PrintingDate, LoginId) {
+        $('#printingdate').val(PrintingDate);
+        $('#hdfloginnid').val(LoginId);
+        $('#myModal').show();
+    }
+    function closepopup() {
+        $('#myModal').hide();
+    }
+    function printrecipt() {
+        $(".errortext").removeClass("errortext");
+        if ($('#printingdate').val() == '') {
+            $("#printingdate").addClass('errortext');
+            $('#printingdate').focus();
+            return false;
+        }
+        var LoginId = $('#hdfloginnid').val();
+        $.ajax({
+            url: '/AdminReports/PrintReciept1',
+            type: "GET",
+            dataType: "JSON",
+            data: { id: LoginId, PrintingDate: $('#printingdate').val() },
+            success: function (data) {
+                debugger;
+                window.location.href = '@Url.Action("PrintReciept", "AdminReports")';
+            }
+        });
+    }
+    $("body").on("click", "[id*=example24] .Update", function () {
+        debugger;
+
+        var row = $(this).closest("tr");
+        if (row.find("input[name='rdbtype']:checked").val() == undefined) {
+            alert('Please select Top-Up Type');
+            return false;
+        }
+        var Type = row.find("input[name='rdbtype']:checked").val();
+        var PK_InvestmentId = row.find(".PK_InvestmentId").val();
+        $.ajax({
+            url: "/AdminReports/UpdateBusinessStatus",
+            Type: "POST",
+            DataType: "JSON",
+            data: { Type: Type, PK_InvestmentId: PK_InvestmentId },
+            success: function (data) {
+                if (data.Result == "Yes") {
+                    alert("Status Updated");
+                    window.location.href = "/AdminReports/GetBusinessStatus";
+                }
+                else {
+                    alert("Not Updated. Please Try again");
+                }
+            }
+        });
+    });
+
+</script>
+
+
+

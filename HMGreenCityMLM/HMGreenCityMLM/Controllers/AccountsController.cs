@@ -170,9 +170,23 @@ namespace HMGreenCityMLM.Controllers
 
               //  obj.TransactionDate = Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
-                if(obj.TopupType== "RealEstate")
+                //if(obj.TopupType== "RealEstate")
+                //{
+                //    obj.Package = "1";
+                //}
+                if (obj.TopupType == "NewBusiness")
                 {
                     obj.Package = "1";
+                    obj.IsNewBusiness = true;
+                }
+                else if(obj.TopupType == "OtherBusiness")
+                {
+                    obj.Package = "1";
+                    obj.IsNewBusiness = false;
+                }
+                else
+                {
+
                 }
                 DataSet ds = obj.TopUpIdByAdmin();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -414,6 +428,18 @@ namespace HMGreenCityMLM.Controllers
                 obj.TopUpDate = Common.ConvertToSystemDate(obj.TopUpDate, "dd/MM/yyyy");
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 obj.Package = "4";
+                if (obj.TopupType == "NewBusiness")
+                {
+                    obj.IsNewBusiness = true;
+                }
+                else if (obj.TopupType == "OtherBusiness")
+                {
+                    obj.IsNewBusiness = false;
+                }
+                else
+                {
+
+                }
 
                 DataSet ds = obj.ReTopup();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)

@@ -68,6 +68,7 @@ namespace HMGreenCityMLM.Models
         public string PayoutNo { get; set; }
         public string SponsorName { get; set; }
         public List<Reports> lstassociate { get; set; }
+        public List<Reports> lstBusinessStatus { get; set; }
 
         public string PermanentDate { get; set; }
 
@@ -137,6 +138,7 @@ namespace HMGreenCityMLM.Models
 
 
         public string LastTopUpAmount { get; set; }
+        public bool IsNewBusiness { get; set; }
         public string LastTopUpDate { get; set; }
         public List<Reports> lstDefaultAssociateList { get; set; }
 
@@ -538,7 +540,7 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@PaymentMode", PaymentMode),
                                     new SqlParameter("@Remarks", Remarks),
             };
-                                    DataSet ds = DBHelper.ExecuteQuery("PayPayout", para);
+            DataSet ds = DBHelper.ExecuteQuery("PayPayout", para);
             return ds;
         }
         #endregion
@@ -685,12 +687,37 @@ namespace HMGreenCityMLM.Models
         public DataSet GetDefaulterList()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@LoginId", LoginId)
+                                      new SqlParameter("@LoginId", LoginId),
+                                       new SqlParameter("@Status",Status)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetdefaulterList", para);
             return ds;
         }
 
+
+        public DataSet GetBusinessStatus()
+        {
+            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@Name", Name),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate),
+                                      new SqlParameter("@Package", Package),
+                                      new SqlParameter("@SiteId", SiteId),
+                                      new SqlParameter("@ClaculationStatus", Status),
+                                  };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetTopupreportForUpdateBusinessStatus", para);
+            return ds;
+        }
+        public DataSet UpdateBusinessStatus()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_InvestmentId", ToLoginID),
+                                    new SqlParameter("@IsNewBusiness", IsNewBusiness),
+                                    new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateBusinessStatus", para);
+            return ds;
+        }
     }
 }
 
