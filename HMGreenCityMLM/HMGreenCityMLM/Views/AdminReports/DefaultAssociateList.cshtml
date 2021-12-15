@@ -46,6 +46,20 @@
                                                             @Html.HiddenFor(m => m.LoginId)
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>Status</label>
+                                                            <select class="form-control"  id="Status" name="Status" >
+                                                                <option value="">Select</option>
+                                                                <option value="Yellow">Yellow</option>
+                                                                <option value="Green">Green</option>
+                                                                <option value="Red">Red</option>
+                                                                <option value="Block">Block</option>
+                                                            </select>
+                                                          
+                                                            @*@Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlstatus, "Value", "Text"), new { @class = "form-control" })*@
+                                                        </div>
+                                                    </div>
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <br />
@@ -60,8 +74,9 @@
                                                                 <th>Sr No.</th>
                                                                 <th> Login Id</th>
                                                                 <th>Name</th>
-                                                                <th>Last TopUp Amount</th>
-                                                                <th>Last TopUp Date</th>
+                                                                <th>Status</th>
+                                                                @*<th>Last TopUp Amount</th>
+                                                                <th>Last TopUp Date</th>*@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -76,8 +91,9 @@
                                                                             <td>@i</td>
                                                                             <td>@Item.LoginId</td>
                                                                             <td>@Item.Name</td>
-                                                                            <td>@Item.LastTopUpAmount</td>
-                                                                            <td>@Item.LastTopUpDate</td>
+                                                                            <td>@Item.Status</td>
+                                                                            @*<td>@Item.LastTopUpAmount</td>
+                                                                            <td>@Item.LastTopUpDate</td>*@
                                                                         </tr>
                                                                         i++;
                                                                     }

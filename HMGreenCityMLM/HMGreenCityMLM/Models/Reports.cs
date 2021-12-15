@@ -687,7 +687,8 @@ namespace HMGreenCityMLM.Models
         public DataSet GetDefaulterList()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@LoginId", LoginId)
+                                      new SqlParameter("@LoginId", LoginId),
+                                       new SqlParameter("@Status",Status)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetdefaulterList", para);
             return ds;
