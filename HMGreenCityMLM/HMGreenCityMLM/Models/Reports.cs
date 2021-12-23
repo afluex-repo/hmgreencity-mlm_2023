@@ -688,7 +688,8 @@ namespace HMGreenCityMLM.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@LoginId", LoginId),
-                                       new SqlParameter("@Status",Status)
+                                       new SqlParameter("@Status",Status),
+                                        new SqlParameter("@IsDownline", IsDownline)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetdefaulterList", para);
             return ds;
