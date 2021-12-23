@@ -39,14 +39,14 @@
 
                                             <div class="col-md-12 table-responsive">
                                                 <div class="row">
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Login ID </label>
                                                             @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control" })
                                                             @Html.HiddenFor(m => m.LoginId)
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Status</label>
                                                             <select class="form-control"  id="Status" name="Status" >
@@ -58,6 +58,12 @@
                                                             </select>
                                                           
                                                             @*@Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlstatus, "Value", "Text"), new { @class = "form-control" })*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group mt-2">
+                                                            IsDownline &nbsp;&nbsp;
+                                                            @Html.CheckBoxFor(m => m.IsDownline)
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
