@@ -61,14 +61,27 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
-                                                        <div class="form-group mt-2">
+                                                        <div class="form-group">
+                                                            <label>From Date</label>
+                                                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Joining Date" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>To Date</label>
+                                                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Joining Date" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
                                                             IsDownline &nbsp;&nbsp;
                                                             @Html.CheckBoxFor(m => m.IsDownline)
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
-                                                            <br />
                                                             <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return validateLogin();" />
                                                         </div>
                                                     </div>
@@ -81,6 +94,7 @@
                                                                 <th> Login Id</th>
                                                                 <th>Name</th>
                                                                 <th>Status</th>
+                                                                <th>Date</th>
                                                                 @*<th>Last TopUp Amount</th>
                                                                 <th>Last TopUp Date</th>*@
                                                             </tr>
@@ -98,6 +112,7 @@
                                                                             <td>@Item.LoginId</td>
                                                                             <td>@Item.Name</td>
                                                                             <td>@Item.Status</td>
+                                                                            <td>@Item.Date</td>
                                                                             @*<td>@Item.LastTopUpAmount</td>
                                                                             <td>@Item.LastTopUpDate</td>*@
                                                                         </tr>
