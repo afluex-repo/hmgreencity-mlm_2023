@@ -1640,7 +1640,7 @@ namespace HMGreenCityMLM.Controllers
                     Profile objList = new Profile();
                     objList.UserName = dr["Fullname"].ToString();
                     objList.LoginIDD = dr["LoginId"].ToString();
-                    objList.cssStatus = dr["cssStatus"].ToString();
+                    //objList.cssStatus = dr["cssStatus"].ToString();
                     lst.Add(objList);
                 }
             }
@@ -1741,6 +1741,8 @@ namespace HMGreenCityMLM.Controllers
             //}
             model.LoginId = model.LoginId == "0" ? null : model.LoginId;
             model.Status = model.Status == "0" ? null : model.Status;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.GetDefaulterList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -1751,6 +1753,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.Status = r["Status"].ToString();
+                    //obj.Date = r["Status"].ToString();
                     //obj.LastTopUpAmount = r["LastTopupamount"].ToString();
                     //obj.LastTopUpDate = r["LastTopupdate"].ToString();
                     list.Add(obj);
