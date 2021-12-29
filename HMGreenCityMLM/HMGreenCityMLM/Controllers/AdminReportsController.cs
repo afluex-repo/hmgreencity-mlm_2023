@@ -1640,7 +1640,7 @@ namespace HMGreenCityMLM.Controllers
                     Profile objList = new Profile();
                     objList.UserName = dr["Fullname"].ToString();
                     objList.LoginIDD = dr["LoginId"].ToString();
-                    //objList.cssStatus = dr["cssStatus"].ToString();
+                    objList.cssStatus = dr["cssStatus"].ToString();
                     lst.Add(objList);
                 }
             }

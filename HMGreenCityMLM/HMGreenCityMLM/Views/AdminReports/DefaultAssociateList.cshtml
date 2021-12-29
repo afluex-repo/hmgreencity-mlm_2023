@@ -63,14 +63,14 @@
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>From Date</label>
-                                                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Joining Date" })
+                                                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date", @readonly = true })
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>To Date</label>
-                                                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Joining Date" })
+                                                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Date",@readonly=true })
                                                         </div>
                                                     </div>
 
@@ -94,7 +94,7 @@
                                                                 <th> Login Id</th>
                                                                 <th>Name</th>
                                                                 <th>Status</th>
-                                                                <th>Date</th>
+                                                                @*<th>Date</th>*@
                                                                 @*<th>Last TopUp Amount</th>
                                                                 <th>Last TopUp Date</th>*@
                                                             </tr>
@@ -112,7 +112,7 @@
                                                                             <td>@Item.LoginId</td>
                                                                             <td>@Item.Name</td>
                                                                             <td>@Item.Status</td>
-                                                                            <td>@Item.Date</td>
+                                                                            @*<td>@Item.Date</td>*@
                                                                             @*<td>@Item.LastTopUpAmount</td>
                                                                             <td>@Item.LastTopUpDate</td>*@
                                                                         </tr>
@@ -136,7 +136,6 @@
     </div>
 }
 <script src="../vendor/jquery/jquery.min.js"></script>
-
 <script src="../../WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
@@ -177,7 +176,16 @@
             }
         });
     });
-
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
     </script>
 
 
