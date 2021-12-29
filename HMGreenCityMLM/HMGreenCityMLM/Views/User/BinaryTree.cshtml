@@ -318,7 +318,21 @@
         display: block;
         margin: 0 auto;
     }
+       i.girl-hold {
+        width: 50px !important;
+        height: 50px !important;
+        background-image: url(../../images/TreeIcon/girl-hold.png) !important;
+        display: block;
+        margin: 0 auto;
+    }
 
+    i.men-hold {
+        width: 50px !important;
+        height: 50px !important;
+        background-image: url(../../images/TreeIcon/men-hold.png) !important;
+        display: block;
+        margin: 0 auto;
+    }
     i.join-member {
         width: 50px;
         height: 50px;
@@ -1104,6 +1118,14 @@
                             cssclass = "girl-inactive";
                         }
                     }
+                    else if (cssclaa == "hold-member") {
+                        if (Gender == "M") {
+                            cssclass = "men-hold";
+                        }
+                        else {
+                            cssclass = "girl-hold";
+                        }
+                    }
                     else {
                         cssclass = "join-member";
                     }
@@ -1218,6 +1240,14 @@
                                                     cssclass = "girl-inactive";
                                                 }
                                             }
+                                            else if (cssclaa == "hold-member") {
+                                                if (Gender == "M") {
+                                                    cssclass = "men-hold";
+                                                }
+                                                else {
+                                                    cssclass = "girl-hold";
+                                                }
+                                            }
                                             else {
                                                 cssclass = "join-member";
                                             }
@@ -1326,6 +1356,14 @@
                                                                         }
                                                                         else {
                                                                             cssclass = "girl-inactive";
+                                                                        }
+                                                                    }
+                                                                    else if (cssclaa == "hold-member") {
+                                                                        if (Gender == "M") {
+                                                                            cssclass = "men-hold";
+                                                                        }
+                                                                        else {
+                                                                            cssclass = "girl-hold";
                                                                         }
                                                                     }
                                                                     else {
@@ -1476,6 +1514,15 @@
                     }
                     else {
                         status = "girl-active"
+                    }
+                }
+                else if (status == "Y") {
+
+                    if (gender == "M") {
+                        status = "men-hold"
+                    }
+                    else {
+                        status = "girl-hold"
                     }
                 }
                 else {
