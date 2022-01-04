@@ -140,6 +140,9 @@ namespace HMGreenCityMLM.Models
         public string LastTopUpAmount { get; set; }
         public bool IsNewBusiness { get; set; }
         public string LastTopUpDate { get; set; }
+        public string BusinessType { get; set; }
+
+        
         public List<Reports> lstDefaultAssociateList { get; set; }
 
         public DataSet GetPayoutReport()
@@ -151,6 +154,8 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@ToDate", ToDate),
                                     new SqlParameter("@IsDownline", IsDownline),
                                     new SqlParameter("@Leg", Leg) };
+
+
             DataSet ds = DBHelper.ExecuteQuery("PayoutReportForMember", para);
             return ds;
         }
@@ -287,6 +292,7 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@Package", Package),
                                       new SqlParameter("@SiteId", SiteId),
                                       new SqlParameter("@ClaculationStatus", Status),
+                                      new SqlParameter("@Fk_BusinessId", BusinessType)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreport", para);
