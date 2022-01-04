@@ -191,18 +191,18 @@
             data: { Name: $("#Name").val(), Mobile: $("#Mobile").val(), Email: $("#Email").val(), Qualification: $("#EducationQualififcation").val(), Fk_UserTypeId: Fk_UserTypeId },
             success: function (data) {
                 debugger;
-                if (data) {
-
+                if (data.Result=="1") {
                     debugger;
                     $('#Name').html("");
                     $('#Mobile').html("");
                     $('#Email').html("");
-
                     alert(data.Message);
                     var url = '@Url.Action("EmployeeDetails", "EmployeeRegistration")';
                     window.location.href = url;
                 }
-
+                else {
+                    alert(data.Message);
+                }
             }
         });
 
