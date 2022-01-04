@@ -60,6 +60,15 @@
                                                         To Date
                                                         @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly" })
                                                     </div>
+
+                                                    <div class="col-lg-3">
+                                                        Business Type
+                                                       <select id="BusinessType" name="BusinessType" class="form-control">
+                                                           <option value="">All Business</option>
+                                                           <option value="1">New Business</option>
+                                                           <option value="0">Other Business</option>
+                                                       </select>
+                                                    </div>
                                                     <div class="col-lg-3">
                                                         <br />
                                                         <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
@@ -86,17 +95,18 @@
                                                                 <th>Price</th>
                                                                 <th>Calculation Status</th>
                                                                 <th>ReceiptNo</th>
+                                                                <th>Business Type</th>
                                                                 <th>Print</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             @if (Model != null)
-                                                            {
-                                                                if (Model.lsttopupreport != null)
-                                                                {
-                                                                    int i = 1;
-                                                                    foreach (var Item in Model.lsttopupreport)
-                                                                    {
+                                                                   {
+                                                                       if (Model.lsttopupreport != null)
+                                                                       {
+                                                                           int i = 1;
+                                                                           foreach (var Item in Model.lsttopupreport)
+                                                                           {
                                                                         <tr class="text-left">
                                                                             <td>@i</td>
                                                                             <td>@Item.LoginId</td>
@@ -111,6 +121,7 @@
                                                                             <td>@Item.Amount</td>
                                                                             <td>@Item.Status</td>
                                                                             <td>@Item.ReceiptNo</td>
+                                                                            <td>@Item.BusinessType</td>
                                                                             <td>
                                                                                 @*<a href="/AdminReports/PrintReciept/@Item.LoginId">Print</a>*@
                                                                                 <a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class="btn btn-sm btn-primary" target="_blank">Print </a>
@@ -120,7 +131,7 @@
                                                                         i++;
                                                                     }
 
-                                                                }
+                                                           }
                                                             }
                                                         </tbody>
                                                         <tfoot>
@@ -132,9 +143,12 @@
                                                                 <th></th>
                                                                 <th></th>
                                                                 <th></th>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th></th>
                                                                 <th style="text-align:right">Total Amount</th>
                                                                 <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
-                                                               
+
                                                                 <th></th>
                                                                 <th></th>
                                                                 <th></th>
@@ -153,11 +167,7 @@
             </div>
         </div>
     </div>
-
-
                         <!-- main-panel ends -->
-
-
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 

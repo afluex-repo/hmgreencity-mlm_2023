@@ -104,6 +104,8 @@ namespace HMGreenCityMLM.Controllers
                     Obj.PaymentMode = r["PaymentMode"].ToString();
                     Obj.ReceiptNo = r["ReceiptNo"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
+                    Obj.BusinessType = r["Business"].ToString();
+
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -168,6 +170,7 @@ namespace HMGreenCityMLM.Controllers
             }
             List<Reports> lst1 = new List<Reports>();
             newdata.SiteId = newdata.SiteId == "0" ? null : newdata.SiteId;
+            newdata.BusinessType = newdata.BusinessType == "" ? null : newdata.BusinessType;
             newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
             newdata.LoginId = newdata.ToLoginID;
@@ -193,6 +196,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
+                    Obj.BusinessType = r["Business"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
