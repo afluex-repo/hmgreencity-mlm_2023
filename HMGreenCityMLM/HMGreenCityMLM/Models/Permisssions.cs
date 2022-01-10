@@ -67,8 +67,8 @@ namespace HMGreenCityMLM.Models
 
         public DataSet GetEmployeeAssociateSettings()
         {
-            SqlParameter[] para = { };
-            DataSet ds = DBHelper.ExecuteQuery("GetEmployeeAssociateSettings", para);
+            //SqlParameter[] para = { };
+            DataSet ds = DBHelper.ExecuteQuery("GetEmployeeAssociateSettings");
             return ds;
         }
         public DataSet GetMainId()

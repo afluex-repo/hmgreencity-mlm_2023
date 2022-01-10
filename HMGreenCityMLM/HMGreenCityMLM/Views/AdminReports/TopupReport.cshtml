@@ -27,7 +27,6 @@
                                             <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">  Topup Reports </span>
                                         </a>
                                     </li>
-
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
@@ -63,20 +62,17 @@
 
                                                     <div class="col-lg-3">
                                                         Business Type
-                                                       <select id="BusinessType" name="BusinessType" class="form-control">
-                                                           <option value="">All Business</option>
-                                                           <option value="1">New Business</option>
-                                                           <option value="0">Other Business</option>
-                                                       </select>
+                                                        <select id="BusinessType" name="BusinessType" class="form-control">
+                                                            <option value="">All Business</option>
+                                                            <option value="1">New Business</option>
+                                                            <option value="0">Other Business</option>
+                                                        </select>
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <br />
                                                         <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
                                                     </div>
                                                 </div>
-
-
-
                                                 <div class="dt-responsive table-responsive">
                                                     <table class="table mb-0" id="example24">
 
@@ -101,12 +97,12 @@
                                                         </thead>
                                                         <tbody>
                                                             @if (Model != null)
-                                                                   {
-                                                                       if (Model.lsttopupreport != null)
-                                                                       {
-                                                                           int i = 1;
-                                                                           foreach (var Item in Model.lsttopupreport)
-                                                                           {
+                                                            {
+                                                                if (Model.lsttopupreport != null)
+                                                                {
+                                                                    int i = 1;
+                                                                    foreach (var Item in Model.lsttopupreport)
+                                                                    {
                                                                         <tr class="text-left">
                                                                             <td>@i</td>
                                                                             <td>@Item.LoginId</td>
@@ -130,14 +126,12 @@
                                                                         </tr>
                                                                         i++;
                                                                     }
-
-                                                           }
+                                                                }
                                                             }
                                                         </tbody>
                                                         <tfoot>
                                                             <tr>
                                                                 <th></th>
-
                                                                 <th></th>
                                                                 <th></th>
                                                                 <th></th>
@@ -148,12 +142,10 @@
                                                                 <th></th>
                                                                 <th style="text-align:right">Total Amount</th>
                                                                 <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
-
                                                                 <th></th>
                                                                 <th></th>
                                                                 <th></th>
                                                                 <th></th>
-
                                                             </tr>
                                                         </tfoot>
                                                     </table>
@@ -179,7 +171,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" class="form-control" id="printingdate" readonly />
-                        <input type="hidden" id="hdfloginnid" />
+                    <input type="hidden" id="hdfloginnid" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closepopup();">Close</button>
