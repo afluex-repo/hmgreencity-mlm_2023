@@ -136,7 +136,7 @@
 <script>
 
     $(document).ready(function () {
-
+        debugger;
         if ($("#IsDownline").is(':checked')) {
             $("#divLeg").show();
         }
@@ -155,12 +155,9 @@
             type: 'Post',
             success: function (response) {
                 if (response != null) {
-
-
                     $(response).each(function (index, item) { 
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
-
                     $('#LoginId').autocomplete({
                         source: cityuse,
                         select: function (event, ui) {
@@ -171,11 +168,12 @@
                             } else {
                                 $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
                             }
-
                         }
                     })
                 }
-            }, error: function () {
+            },
+            error: function () {
+                debugger;
                 alert('Some Thing wrong!');
                 $("#loader").css({ 'display': 'none' });
             }
