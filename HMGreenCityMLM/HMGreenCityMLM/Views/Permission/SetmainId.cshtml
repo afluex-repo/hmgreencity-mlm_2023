@@ -150,30 +150,31 @@
         });
         var cityuse = [];
         $("#loader").css({ 'display': '' });
+        $("input").attr("autocomplete", "off");
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
         $.ajax({
-            url: '/Admin/GetUserList',
+            url: '/AdminReports/GetUserList',
             type: 'Post',
             success: function (response) {
                 if (response != null) {
-                    $(response).each(function (index, item) { 
+
+
+                    $(response).each(function (index, item) {
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
+
                     $('#LoginId').autocomplete({
                         source: cityuse,
                         select: function (event, ui) {
-                            var str = ui.item.label; 
+                            var str = ui.item.label;
                             var strsplit = str.split("(");
-                            if (strsplit[2] != undefined) {
-                                $('#ToLoginID').val(strsplit[2].substr(0, strsplit[2].length - 1));
-                            } else {
-                                $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                            }
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
                         }
                     })
                 }
-            },
-            error: function () {
-                debugger;
+            }, error: function () {
                 alert('Some Thing wrong!');
                 $("#loader").css({ 'display': 'none' });
             }

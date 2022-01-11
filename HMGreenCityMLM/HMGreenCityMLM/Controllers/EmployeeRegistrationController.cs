@@ -168,10 +168,17 @@ namespace HMGreenCityMLM.Controllers
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
                         objregi.Message = "Employee Registration successfully";
+                        obj.Result = "1";
+                    }
+                   else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "2")
+                    {
+                        objregi.Message = ds.Tables[0].Rows[0]["Result"].ToString();
+                        obj.Result = "2";
                     }
                     else
                     {
-                        objregi.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        objregi.Message = ds.Tables[0].Rows[0]["Result"].ToString();
+                        obj.Result = "0";
                         return Json(objregi, JsonRequestBehavior.AllowGet);
                     }
                 }

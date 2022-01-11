@@ -1158,7 +1158,7 @@ namespace HMGreenCityMLM.Controllers
                     lst.Add(objList);
                 }
             }
-            return Json(obj, JsonRequestBehavior.AllowGet);
+            return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
 
