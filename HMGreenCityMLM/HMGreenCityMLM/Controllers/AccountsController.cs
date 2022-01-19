@@ -188,6 +188,22 @@ namespace HMGreenCityMLM.Controllers
                 {
 
                 }
+
+                if (obj.Reward == "IsInclude")
+                {
+                    obj.Package = "1";
+                    obj.IsInclude = true;
+                }
+                else if (obj.Reward == "NotInclude")
+                {
+                    obj.Package = "1";
+                    obj.IsInclude = false;
+                }
+                else
+                {
+
+                }
+                
                 DataSet ds = obj.TopUpIdByAdmin();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {

@@ -142,7 +142,9 @@ namespace HMGreenCityMLM.Models
         public string LastTopUpDate { get; set; }
         public string BusinessType { get; set; }
 
-        
+        public bool IsInclude { get; set; }
+
+
         public List<Reports> lstDefaultAssociateList { get; set; }
 
         public DataSet GetPayoutReport()
@@ -714,14 +716,14 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@SiteId", SiteId),
                                       new SqlParameter("@ClaculationStatus", Status),
                                   };
-
-            DataSet ds = DBHelper.ExecuteQuery("GetTopupreportForUpdateBusinessStatus", para);
+            DataSet ds = DBHelper.ExecuteQuery("GetTopupreportForUpdateBusinessStatus",para);
             return ds;
         }
         public DataSet UpdateBusinessStatus()
         {
             SqlParameter[] para = { new SqlParameter("@PK_InvestmentId", ToLoginID),
                                     new SqlParameter("@IsNewBusiness", IsNewBusiness),
+                                    new SqlParameter("@IsInclude", IsInclude),
                                     new SqlParameter("@AddedBy", AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("UpdateBusinessStatus", para);
