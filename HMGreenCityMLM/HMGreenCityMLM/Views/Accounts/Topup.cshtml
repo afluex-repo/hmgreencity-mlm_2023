@@ -9,9 +9,6 @@
 
 @using (Html.BeginForm("TopUpByAdmin", "Accounts", FormMethod.Post, new { @id = "form1" }))
 {
-
-
-
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -49,6 +46,23 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Reward<span style="color: red">*</span></label>
+                                                    <div class="col-sm-9" style="display:none">
+                                                        <input type="radio" id="rdb_type" name="rdbtype" checked="checked" onclick="return showdetails('RealEstate')" /> Real Estate
+                                                        <input type="radio" id="rdb_type" name="rdbtype" onclick="return showdetails('Product')" /> Product
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <input type="radio" name="rdbtypename" onclick="return showdetails('IsInclude')" value="IsInclude" /> Is Include
+                                                        <input type="radio" name="rdbtypename" onclick="return showdetails('NotInclude')" value="NotInclude" /> Not Include
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -390,6 +404,21 @@
             alert("Please Select TopUp Type");
             return false;
         }
+
+        var status = $("input[name='rdbtypename']:checked").val();
+
+        if (status == "IsInclude") {
+
+        }
+        else if (status == "NotInclude") {
+
+        }
+        else {
+            alert("Please Select Reward");
+            return false;
+        }
+
+
         //if ($('#rdbtype').val() == '') {
         //    $("#rdbtype").addClass('errortext');
         //    $('#rdbtype').focus();
@@ -515,7 +544,6 @@
             //$('#divplot').hide();
             //$('#divpackage').show();
             $('#TopupType').val('OtherBusiness');
-
         }
         else {
             $('#divisite').show();

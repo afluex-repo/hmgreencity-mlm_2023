@@ -41,11 +41,13 @@ namespace HMGreenCityMLM.Models
         public string Package { get; set; }
 
         public string TopupType { get; set; }
+        public string Reward { get; set; }
         public string TopUpDate { get; set; }
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }
         public string ToLoginID { get; set; }
         public bool IsNewBusiness { get; set; }
+        public bool IsInclude { get; set; }
         public DataSet ValidatingReceipt()
         {
             SqlParameter[] para = {
@@ -268,7 +270,10 @@ namespace HMGreenCityMLM.Models
                                                 new SqlParameter("@BankName", BankName),
                                                   new SqlParameter("@BankBranch", BankBranch),
                                                    new SqlParameter("@ReceiptNo", ReceiptNo),
-                                                     new SqlParameter("@IsNewBusiness", IsNewBusiness)
+                                                     new SqlParameter("@IsNewBusiness", IsNewBusiness),
+                                                       new SqlParameter("@IsInclude", IsInclude)
+
+                                                     
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUpByAdmin", para);
             return ds;
@@ -302,7 +307,8 @@ namespace HMGreenCityMLM.Models
                                         new SqlParameter("@Description", Description),
                                                                     new SqlParameter("@ReceiptNo", ReceiptNo),
                                                                     new SqlParameter("@PaymentMode", PaymentMode),
-                                                                        new SqlParameter("@IsNewBusiness", IsNewBusiness)
+                                                                        new SqlParameter("@IsNewBusiness", IsNewBusiness),
+                                                                         new SqlParameter("@IsInclude", IsInclude)
 
 
             };

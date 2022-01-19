@@ -1960,6 +1960,20 @@ namespace HMGreenCityMLM.Controllers
             {
                
             }
+
+            if (Type == "IsInclude")
+            {
+                model.IsInclude = true;
+            }
+            else if (Type == "NotInclude")
+            {
+                model.IsInclude = false;
+            }
+            else
+            {
+
+            }
+            
             model.AddedBy = Session["Pk_AdminId"].ToString();
             DataSet ds = model.UpdateBusinessStatus();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

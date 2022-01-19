@@ -86,7 +86,7 @@
                                                                 <th>Price</th>
                                                                 <th>Calculation Status</th>
                                                                 <th>ReceiptNo</th>
-                                                                <th>Top-Up</th>
+                                                                <th>Reward</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -113,8 +113,11 @@
                                                                             <td>@Item.Status</td>
                                                                             <td>@Item.ReceiptNo</td>
                                                                             <td>
-                                                                                <input type="radio" name="rdbtype" value="NewBusiness" /> New Business
-                                                                                <input type="radio" name="rdbtype" value="OtherBusiness" /> Other Business
+                                                                                @*<input type="radio" name="rdbtype" value="NewBusiness" /> New Business
+                                                                                <input type="radio" name="rdbtype" value="OtherBusiness" /> Other Business*@
+
+                                                                                <input type="radio" name="rdbtypename" value="IsInclude" /> Is Include
+                                                                                <input type="radio" name="rdbtypename" value="NotInclude" /> Not Include
 
                                                                             </td>
 
@@ -281,15 +284,43 @@
             }
         });
     }
+    //$("body").on("click", "[id*=example24] .Update", function () {
+    //    debugger;
+
+    //    var row = $(this).closest("tr");
+    //    if (row.find("input[name='rdbtype']:checked").val() == undefined) {
+    //        alert('Please select Top-Up Type');
+    //        return false;
+    //    }
+    //    var Type = row.find("input[name='rdbtype']:checked").val();
+    //    var PK_InvestmentId = row.find(".PK_InvestmentId").val();
+    //    $.ajax({
+    //        url: "/AdminReports/UpdateBusinessStatus",
+    //        Type: "POST",
+    //        DataType: "JSON",
+    //        data: { Type: Type, PK_InvestmentId: PK_InvestmentId },
+    //        success: function (data) {
+    //            if (data.Result == "Yes") {
+    //                alert("Status Updated");
+    //                window.location.href = "/AdminReports/GetBusinessStatus";
+    //            }
+    //            else {
+    //                alert("Not Updated. Please Try again");
+    //            }
+    //        }
+    //    });
+    //});
+
+
     $("body").on("click", "[id*=example24] .Update", function () {
         debugger;
 
         var row = $(this).closest("tr");
-        if (row.find("input[name='rdbtype']:checked").val() == undefined) {
-            alert('Please select Top-Up Type');
+        if (row.find("input[name='rdbtypename']:checked").val() == undefined) {
+            alert('Please select Reward');
             return false;
         }
-        var Type = row.find("input[name='rdbtype']:checked").val();
+        var Type = row.find("input[name='rdbtypename']:checked").val();
         var PK_InvestmentId = row.find(".PK_InvestmentId").val();
         $.ajax({
             url: "/AdminReports/UpdateBusinessStatus",
@@ -307,6 +338,10 @@
             }
         });
     });
+
+
+
+
 
 </script>
 
