@@ -844,6 +844,7 @@
     <Content Include="Views\Admin\EmpBinaryTree.cshtml" />
     <Content Include="Views\AdminReports\DefaultAssociateList.cshtml" />
     <Content Include="Views\AdminReports\GetBusinessStatus.cshtml" />
+    <Content Include="Views\AdminReports\RewardIncludedList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
