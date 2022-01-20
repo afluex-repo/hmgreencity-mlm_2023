@@ -2057,10 +2057,5 @@ namespace HMGreenCityMLM.Controllers
             }
             return View(incomeReport);
         }
-
-
-
-
-
     }
 }
