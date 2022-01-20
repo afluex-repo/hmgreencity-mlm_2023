@@ -116,6 +116,7 @@ namespace HMGreenCityMLM.Models
         public string DocumentImage { get; set; }
 
         public List<Reports> lsttopupreport { get; set; }
+        public List<Reports> lstRewardList { get; set; }
         public List<Reports> lstAdvancePaymentReport { get; set; }
 
         public string UpgradtionDate { get; set; }
@@ -141,8 +142,10 @@ namespace HMGreenCityMLM.Models
         public bool IsNewBusiness { get; set; }
         public string LastTopUpDate { get; set; }
         public string BusinessType { get; set; }
-
         public bool IsInclude { get; set; }
+        public string Reward { get; set; }
+
+
 
 
         public List<Reports> lstDefaultAssociateList { get; set; }
@@ -196,6 +199,10 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("IncomeReport", para);
             return ds;
         }
+
+
+
+
         public DataSet GetProductIncomeReport()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
@@ -716,7 +723,7 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@SiteId", SiteId),
                                       new SqlParameter("@ClaculationStatus", Status),
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("GetTopupreportForUpdateBusinessStatus",para);
+            DataSet ds = DBHelper.ExecuteQuery("GetTopupreportForUpdateBusinessStatus", para);
             return ds;
         }
         public DataSet UpdateBusinessStatus()
@@ -727,6 +734,23 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@AddedBy", AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("UpdateBusinessStatus", para);
+            return ds;
+        }
+
+
+        public DataSet GetRewardIncludedDetails()
+        {
+            SqlParameter[] para = {
+                                       new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@ToLoginId", ToLoginID),
+                                    new SqlParameter("@FromName", FromName),
+                                    new SqlParameter("@ToName", ToName),
+                                    new SqlParameter("@IncomeType", IncomeType),
+                                   new SqlParameter("@IsReward", Reward),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRewardIncludedDetails", para);
             return ds;
         }
     }

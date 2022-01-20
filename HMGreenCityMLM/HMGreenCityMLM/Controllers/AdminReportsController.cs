@@ -1989,5 +1989,78 @@ namespace HMGreenCityMLM.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        
+
+        public ActionResult RewardIncludedList()
+        {
+            Reports incomeReport = new Reports();
+            List<Reports> lst1 = new List<Reports>();
+            incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
+            incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
+
+            DataSet ds11 = incomeReport.GetRewardIncludedDetails();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.TransactionDate = r["DATE"].ToString();
+                    Obj.FromName = r["FromName"].ToString();
+                    Obj.FromLoginId = r["FromLoginID"].ToString();
+                    Obj.ToName = r["ToName"].ToString();
+                    Obj.ToLoginID = r["ToLoginID"].ToString();
+                    Obj.Amount = r["Amount"].ToString();
+                    Obj.IncomeType = r["IncomeType"].ToString();
+                    Obj.Reward = r["IsReward"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    lst1.Add(Obj);
+                }
+                incomeReport.lstRewardList = lst1;
+            }
+            return View(incomeReport);
+        }
+
+        [HttpPost]
+        [ActionName("RewardIncludedList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult RewardIncludedList(Reports incomeReport)
+        {
+            List<Reports> lst1 = new List<Reports>();
+            incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
+            incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
+            //if (incomeReport.Status == "null")
+            //{
+            //    incomeReport.Status = null;
+            //}
+            //incomeReport.LoginId = incomeReport.ToLoginID;
+            DataSet ds11 = incomeReport.GetRewardIncludedDetails();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.TransactionDate = r["DATE"].ToString();
+                    Obj.FromName = r["FromName"].ToString();
+                    Obj.FromLoginId = r["FromLoginID"].ToString();
+                    Obj.ToName = r["ToName"].ToString();
+                    Obj.ToLoginID = r["ToLoginID"].ToString();
+                    Obj.Amount = r["Amount"].ToString();
+                    Obj.IncomeType = r["IncomeType"].ToString();
+                    Obj.Reward = r["IsReward"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    lst1.Add(Obj);
+                }
+                incomeReport.lstRewardList = lst1;
+            }
+            return View(incomeReport);
+        }
+
+
+
+
+
     }
 }
