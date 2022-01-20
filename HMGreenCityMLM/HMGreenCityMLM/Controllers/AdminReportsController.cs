@@ -2034,7 +2034,7 @@ namespace HMGreenCityMLM.Controllers
             //{
             //    incomeReport.Status = null;
             //}
-            //incomeReport.LoginId = incomeReport.ToLoginID;
+            incomeReport.LoginId = incomeReport.ToLoginID;
             DataSet ds11 = incomeReport.GetRewardIncludedDetails();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
