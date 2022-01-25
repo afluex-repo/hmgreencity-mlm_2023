@@ -256,7 +256,7 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginId),
                                         new SqlParameter("@AddedBy", AddedBy),
-                                        new SqlParameter("@Fk_ProductId",Package),
+                                        new SqlParameter("@Fk_ProductId","1"),
                                         new SqlParameter("@TopupDate", TopUpDate),
                                         new SqlParameter("@Amount", Amount),
                                         new SqlParameter("@Fk_SiteId", Fk_SiteId),

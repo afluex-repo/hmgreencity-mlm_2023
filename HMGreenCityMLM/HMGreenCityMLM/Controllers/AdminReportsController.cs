@@ -1948,18 +1948,18 @@ namespace HMGreenCityMLM.Controllers
         {
             Reports model = new Reports();
             model.ToLoginID = PK_InvestmentId;
-            if (Type == "NewBusiness")
-            {
-                model.IsNewBusiness = true;
-            }
-            else if (Type == "OtherBusiness")
-            {
-                model.IsNewBusiness = false;
-            }
-            else
-            {
+            //if (Type == "NewBusiness")
+            //{
+            //    model.IsNewBusiness = true;
+            //}
+            //else if (Type == "OtherBusiness")
+            //{
+            //    model.IsNewBusiness = false;
+            //}
+            //else
+            //{
                
-            }
+            //}
 
             if (Type == "IsInclude")
             {

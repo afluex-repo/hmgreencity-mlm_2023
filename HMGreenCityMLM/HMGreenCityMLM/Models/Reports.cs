@@ -722,7 +722,7 @@ namespace HMGreenCityMLM.Models
         public DataSet UpdateBusinessStatus()
         {
             SqlParameter[] para = { new SqlParameter("@PK_InvestmentId", ToLoginID),
-                                    new SqlParameter("@IsNewBusiness", IsNewBusiness),
+                                    //new SqlParameter("@IsNewBusiness", IsNewBusiness),
                                     new SqlParameter("@IsInclude", IsInclude),
                                     new SqlParameter("@AddedBy", AddedBy)
             };

@@ -854,6 +854,7 @@
   <ItemGroup>
     <Folder Include="AadharPicture\" />
     <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
     <Folder Include="Datatablecss\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\build\" />
     <Folder Include="DocumentPicture\" />
     <Folder Include="KYCDocuments\" />
