@@ -53,6 +53,9 @@ namespace HMGreenCityMLM.Models
         public string ToActivationDate { get; set; }
         public string PAN { get; set; }
         public string Leg { get; set; }
+        public bool IsInclude { get; set; }
+        public string Reward { get; set; }
+
         public string LoginId { get; set; }
         public string PayoutLoginId { get; set; }
 
@@ -142,8 +145,8 @@ namespace HMGreenCityMLM.Models
         public bool IsNewBusiness { get; set; }
         public string LastTopUpDate { get; set; }
         public string BusinessType { get; set; }
-        public bool IsInclude { get; set; }
-        public string Reward { get; set; }
+        //public bool IsInclude { get; set; }
+        //public string Reward { get; set; }
 
 
 
@@ -736,23 +739,20 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateBusinessStatus", para);
             return ds;
         }
-
-
+        
         public DataSet GetRewardIncludedDetails()
         {
-            SqlParameter[] para = {
-                                       new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@ToLoginId", ToLoginID),
-                                    new SqlParameter("@FromName", FromName),
-                                    new SqlParameter("@ToName", ToName),
-                                    new SqlParameter("@IncomeType", IncomeType),
-                                   new SqlParameter("@IsReward", Reward),
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
                                     new SqlParameter("@FromDate", FromDate),
-                                    new SqlParameter("@ToDate", ToDate)
+                                    new SqlParameter("@ToDate", ToDate),
+                                     new SqlParameter("@IsReward", Reward),
+                                    new SqlParameter("@IsDownline", IsDownline)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetRewardIncludedDetails", para);
             return ds;
         }
+
+
     }
 }
 
