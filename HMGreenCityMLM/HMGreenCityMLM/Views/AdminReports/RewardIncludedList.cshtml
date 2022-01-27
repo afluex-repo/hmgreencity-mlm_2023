@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-
-@using (Html.BeginForm("RewardIncludedList", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("RewardIncludedList", "AdminReports", FormMethod.Post, new { @id = "form1" }))
 {
 
+    <br />
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -25,30 +25,33 @@
                                     <li class="nav-item">
                                         <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
                                            aria-controls="account" role="tab" aria-selected="true">
-                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Reward Included List</span>
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Reward List</span>
                                         </a>
                                     </li>
+
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
                                         <div class="row">
 
                                             <div class="col-md-12 table-responsive">
                                                 <div class="row">
-                                                    <div class="col-lg-3">
-                                                        From Date
-                                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        To Date
-                                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control" })
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        Login ID
-                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                                                    <div class="col-md-3">
+                                                        Login Id
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
                                                         @Html.HiddenFor(m => m.ToLoginID)
                                                     </div>
-                                                    <div class="col-lg-3">
+                                                    <div class="col-md-3">
+                                                        From Date
+                                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From  Date" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        To Date
+                                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To  Date" })
+                                                    </div>
+
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Reward</label>
                                                          <select name="Reward" id="Reward" class="form-control">
@@ -56,90 +59,102 @@
                                                              <option value="1">Include</option>
                                                              <option value="0">Not Include</option>
                                                          </select>
-                                                        </div>
+                                                           </div>
                                                     </div>
-                                                    <div class="col-lg-3">
+                                                    <div class="col-md-3">
+                                                        IsDownline
+                                                        @Html.CheckBoxFor(m => m.IsDownline)
+                                                    </div>
+                                                    <div class="col-md-3">
                                                         <br />
-                                                        <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validate();" />
+                                                        <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails" onclick="return Validate();" />
                                                     </div>
+
                                                 </div>
-                                                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Sr No.</th>
-                                                            <th>Date</th>
-                                                            <th>LoginID</th>
-                                                            <th>Name</th>
-                                                            <th>Amount</th>
-                                                            <th>Income Type</th>
-                                                            <th>Reward</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @if (Model != null)
-                                                        {
-                                                            if (Model.lstRewardList != null)
+
+                                                <div class="dt-responsive table-responsive">
+                                                    <table class="table mb-0" id="example23">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr No.</th>
+                                                                <th>LoginId</th>
+                                                                <th>Name</th>
+                                                                <th>Plot Details</th>
+                                                                <th>Calculation Date</th>
+                                                                <th style="text-align:right">Amount</th>
+                                                                <th>Reward</th>
+                                                                <th style="text-align:right;display:none">BV</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if (Model != null)
                                                             {
-                                                                int i = 1;
-                                                                foreach (var Item in Model.lstRewardList)
+                                                                if (Model.lstassociate != null)
                                                                 {
-                                                                    <tr class="text-left">
-                                                                        <td>@i</td>
-                                                                        <td>@Item.TransactionDate</td>
-                                                                        <td>@Item.ToLoginID</td>
-                                                                        <td>@Item.ToName</td>
-                                                                        <td>@Item.Amount</td>
-                                                                        <td>@Item.IncomeType</td>
-                                                                        <td>@Item.Reward</td>
-                                                                    </tr>
-                                                                    i++;
+                                                                    int i = 1;
+                                                                    foreach (var Item in Model.lstassociate)
+                                                                    {
+                                                                        <tr class="text-left">
+                                                                            <td>@i</td>
+                                                                            <td>@Item.LoginId</td>
+                                                                            <td>@Item.DisplayName</td>
+                                                                            <td>@Item.SiteName, @Item.SectorName, @Item.PlotNumber</td>
+                                                                            <td>@Item.ClosingDate</td>
+                                                                            <td style="text-align:right">@Item.NetAmount</td>
+                                                                            <td>@Item.Reward</td>
+                                                                            <td style="text-align:right;display:none">@Item.LeadershipBonus</td>
+                                                                        </tr>
+                                                                        i++;
+                                                                    }
                                                                 }
                                                             }
-                                                        }
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th></th>
-                                                            <th></th>
-                                                            <th style="text-align:right">Total Amount</th>
-                                                            <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
-                                                            <th></th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td>Total</td>
+                                                                <td style="text-align:right"><b style="color:#ff0000;text-align:left">@ViewBag.TotalNetAmount</b></td>
+                                                                <td style="text-align:right"> <b style="color:#ff0000;text-align:left">@ViewBag.TotalBV</b></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- content-wrapper ends -->
-                            <!-- partial:../../partials/_footer.html -->
-                            <!-- partial -->
-                        </div>
-                        <!-- main-panel ends -->
-                    </div>
                 </section>
             </div>
         </div>
     </div>
+
+                            <!-- main-panel ends -->
 }
-<script src="../vendor/jquery/jquery.min.js"></script>
+
+
 <script src="../../WebsiteCss/js/jquery.js"></script>
+
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
 <script>
     $(document).ready(function () {
         $("input").attr("autocomplete", "off");
+
         var cityuse = [];
         $("#loader").css({ 'display': '' });
         $.ajax({
             url: '/AdminReports/GetUserList',
             type: 'Post',
-            success: function (d) {
-                if (d != null) {
-                    $(d).each(function (index, item) {
+            success: function (response) {
+                if (response != null) {
+
+
+                    $(response).each(function (index, item) {
                         cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
 
@@ -158,20 +173,44 @@
                 $("#loader").css({ 'display': 'none' });
             }
         });
-
     });
+    function Validate() {
+
+        $(".errortext").removeClass("errortext");
+
+        if ($("#IsDownline").prop("checked") == true) {
+            if ($('#LoginId').val() == '') {
+                $("#LoginId").addClass('errortext');
+                $('#LoginId').focus();
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+
+        //var LoginId = $("#LoginId").val();
+        //if (LoginId=="")
+        //{
+        //    $("#ToLoginID").val(null);
+        //}
+        //else
+        //{
+        //    var loginid = $("#ToLoginID").val();
+        //}
+    }
+
+
+    $('#ClosingDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
-        changeYear: true,
-        changeMonth: true
     });
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
-        changeYear: true,
-        changeMonth: true
     });
-
-
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode != 46 && charCode > 31
@@ -181,24 +220,11 @@
         return true;
     }
 
-
-    function validate()
-    {
-        var loginid = $("#LoginId").val();
-        if (loginid=="")
-        {
-            $("#ToLoginID").val(null);
-        }
-        else
-        {
-            var loginid = $("#ToLoginID").val();
-        }
-    }
-
-
-
 </script>
-
-
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>
 
 
