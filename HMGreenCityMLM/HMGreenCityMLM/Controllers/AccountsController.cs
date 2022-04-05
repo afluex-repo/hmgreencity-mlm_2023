@@ -176,12 +176,12 @@ namespace HMGreenCityMLM.Controllers
                 //}
                 if (obj.TopupType == "NewBusiness")
                 {
-                    obj.Package = "1";
+                  
                     obj.IsNewBusiness = true;
                 }
                 else if(obj.TopupType == "OtherBusiness")
                 {
-                    obj.Package = "1";
+                  
                     obj.IsNewBusiness = false;
                 }
                 else
@@ -191,12 +191,10 @@ namespace HMGreenCityMLM.Controllers
 
                 if (obj.Reward == "IsInclude")
                 {
-                    obj.Package = "1";
                     obj.IsInclude = true;
                 }
                 else if (obj.Reward == "NotInclude")
                 {
-                    obj.Package = "1";
                     obj.IsInclude = false;
                 }
                 else
@@ -443,7 +441,7 @@ namespace HMGreenCityMLM.Controllers
             {
                 obj.TopUpDate = Common.ConvertToSystemDate(obj.TopUpDate, "dd/MM/yyyy");
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
-                obj.Package = "4";
+                //obj.Package = "4";
                 if (obj.TopupType == "NewBusiness")
                 {
                     obj.IsNewBusiness = true;
@@ -456,7 +454,18 @@ namespace HMGreenCityMLM.Controllers
                 {
 
                 }
+                if (obj.Reward == "IsInclude")
+                {
+                    obj.IsInclude = true;
+                }
+                else if (obj.Reward == "NotInclude")
+                {
+                    obj.IsInclude = false;
+                }
+                else
+                {
 
+                }
                 DataSet ds = obj.ReTopup();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {

@@ -1757,7 +1757,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.Status = r["Status"].ToString();
-                    //obj.Date = r["Status"].ToString();
+                    obj.Date = string.IsNullOrEmpty(r["Date"].ToString()) ? "N/A" : r["Date"].ToString();
                     //obj.LastTopUpAmount = r["LastTopupamount"].ToString();
                     //obj.LastTopUpDate = r["LastTopupdate"].ToString();
                     list.Add(obj);
@@ -1948,18 +1948,18 @@ namespace HMGreenCityMLM.Controllers
         {
             Reports model = new Reports();
             model.ToLoginID = PK_InvestmentId;
-            if (Type == "NewBusiness")
-            {
-                model.IsNewBusiness = true;
-            }
-            else if (Type == "OtherBusiness")
-            {
-                model.IsNewBusiness = false;
-            }
-            else
-            {
+            //if (Type == "NewBusiness")
+            //{
+            //    model.IsNewBusiness = true;
+            //}
+            //else if (Type == "OtherBusiness")
+            //{
+            //    model.IsNewBusiness = false;
+            //}
+            //else
+            //{
                
-            }
+            //}
 
             if (Type == "IsInclude")
             {
