@@ -484,7 +484,9 @@ namespace HMGreenCityMLM.Controllers
             {
                 incomeReport.Status = null;
             }
-            incomeReport.LoginId = incomeReport.ToLoginID;
+            
+            //incomeReport.LoginId = incomeReport.ToLoginID;
+          
             DataSet ds11 = incomeReport.GetIncomeReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -1084,7 +1086,9 @@ namespace HMGreenCityMLM.Controllers
                     Obj.ClosingDate = r["CalculationDate"].ToString();
                     Obj.NetAmount = r["AMount"].ToString();
                     Obj.LeadershipBonus = r["BV"].ToString();
-
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
+                    Obj.BankName = r["BankName"].ToString();
+                    Obj.BusinessType = r["BussinessType"].ToString();
                     lst1.Add(Obj);
                 }
                 model.lstassociate = lst1;

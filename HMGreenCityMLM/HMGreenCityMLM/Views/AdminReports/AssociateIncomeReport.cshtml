@@ -45,7 +45,7 @@
                                                     </div>
                                                     <div class="col-lg-3">
                                                         Login ID
-                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control"})
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
                                                         @Html.HiddenFor(m => m.ToLoginID)
                                                     </div>
 
@@ -62,8 +62,16 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>IsDownline</label>
+                                                            @Html.CheckBoxFor(m => m.IsDownline)
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-3">
                                                         <br />
-                                                        <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validate();"/>
+                                                        <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validate();" />
                                                     </div>
                                                 </div>
                                                 <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -172,7 +180,7 @@
                 $("#loader").css({ 'display': 'none' });
             }
         });
-   
+
     });
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
@@ -196,17 +204,32 @@
     }
 
 
-    function validate()
-    {
-        var loginid = $("#LoginId").val();
-        if (loginid=="")
-        {
-            $("#ToLoginID").val(null);
+    function validate() {
+        if ($("#IsDownline").prop("checked") == true) {
+            if ($("#LoginId").val() == "") {
+                $("#LoginId").addClass();
+                $("#LoginId").focus();
+                $("#LoginId").val('');
+                return false;
+            }
         }
-        else
-        {
-            var loginid = $("#ToLoginID").val();
+        else {
+            return true;
         }
+
+
+
+
+
+        //var loginid = $("#LoginId").val();
+        //if (loginid=="")
+        //{
+        //    $("#ToLoginID").val(null);
+        //}
+        //else
+        //{
+        //    var loginid = $("#ToLoginID").val();
+        //}
     }
 
 
