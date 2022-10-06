@@ -1133,6 +1133,7 @@ namespace HMGreenCityMLM.Controllers
                     Objload.Amount = dr["Amount"].ToString();
                     Objload.TransactionDate = dr["TransactionDate"].ToString();
                     Objload.TransactionNo = dr["TransactionNo"].ToString();
+                    Objload.ReceiptNo = dr["Remarks"].ToString();
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(dr["Amount"].ToString());
                     lst.Add(Objload);
                 }
