@@ -198,7 +198,7 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@Status", Status),
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate),
-                                    //new SqlParameter("@IsDownline", IsDownline)
+                                 new SqlParameter("@IsDownline", IsDownline)
             };
             DataSet ds = DBHelper.ExecuteQuery("IncomeReport", para);
             return ds;

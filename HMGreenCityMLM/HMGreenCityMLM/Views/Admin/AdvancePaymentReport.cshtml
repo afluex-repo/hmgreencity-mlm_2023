@@ -36,7 +36,7 @@
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
                                         <div class="row">
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-3 form-group">
                                                 <label>Login ID</label>
                                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login ID" })
                                                 @Html.HiddenFor(m => m.ToLoginID)
@@ -49,9 +49,13 @@
                                                 <label>To Date </label>
                                                 @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly" })
                                             </div>
+                                            <div class="col-lg-3 form-group">
+                                                Downline
+                                                @Html.CheckBoxFor(m => m.IsDownline)
+                                            </div>
                                             <div class="col-md-6 form-group">
                                                 <br />
-                                                <input type="submit" class="btn btn-success pull-left" value="Get Details" name="btnDetails" />
+                                                <input type="submit" class="btn btn-success pull-left" value="Get Details" onclick="return validateLogin();" name="btnDetails" />
                                             </div>
                                         </div>
                                         <div class="row">
@@ -176,4 +180,22 @@
             }
         });
     });
+    function validateLogin() {
+        var login = $('#LoginId').val();
+        if (login == "") {
+            $('#ToLoginID').val(null);
+        } else {
+            var loginid = $('#ToLoginID').val();
+
+        }
+        if ($("#IsDownline").is(':checked')) {
+            if ($("#LoginId").val() == "") {
+                alert('Please Enter LoginId');
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    }
 </script>

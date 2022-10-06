@@ -460,7 +460,8 @@ namespace HMGreenCityMLM.Models
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
                                     new SqlParameter("@FromDate", FromDate),
-                                    new SqlParameter("@ToDate", ToDate), };
+                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@IsDownline",IsDownline)};
             DataSet ds = DBHelper.ExecuteQuery("AdvancePaymentReport", para);
             return ds;
         }
