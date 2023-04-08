@@ -349,6 +349,7 @@ namespace HMGreenCityMLM.Controllers
                 obj.Gender = Gender;
                 obj.PinCode = PinCode;
                 obj.Leg = Leg;
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
                 string password = Common.GenerateRandom();
                 obj.Password = Crypto.Encrypt(password);
                 DataSet ds = obj.Registration();
@@ -1132,7 +1133,13 @@ namespace HMGreenCityMLM.Controllers
                     Objload.Amount = dr["Amount"].ToString();
                     Objload.TransactionDate = dr["TransactionDate"].ToString();
                     Objload.TransactionNo = dr["TransactionNo"].ToString();
+                    Objload.Remarks = dr["Remarks"].ToString();
+                    Objload.BankName = dr["BankName"].ToString();
+                    Objload.BankBranch = dr["BankBranch"].ToString();
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
+                    
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(dr["Amount"].ToString());
+                    
                     lst.Add(Objload);
                 }
                 objewallet.lstpayoutledger = lst;
@@ -1140,6 +1147,7 @@ namespace HMGreenCityMLM.Controllers
             return View(objewallet);
         }
         #endregion
+        [HttpPost]
         public ActionResult GetUserList()
         {
             Reports obj = new Reports();

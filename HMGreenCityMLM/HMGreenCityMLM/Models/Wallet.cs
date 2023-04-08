@@ -41,10 +41,22 @@ namespace HMGreenCityMLM.Models
         public string Package { get; set; }
 
         public string TopupType { get; set; }
+        public string Reward { get; set; }
         public string TopUpDate { get; set; }
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }
         public string ToLoginID { get; set; }
+        public bool IsNewBusiness { get; set; }
+        public bool IsInclude { get; set; }
+        public string Remarks { get; set; }
+
+
+        public string AccNo { get; set; }
+        public string Ifsccode { get; set; }
+        
+
+
+
 
         public DataSet ValidatingReceipt()
         {
@@ -254,7 +266,7 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginId),
                                         new SqlParameter("@AddedBy", AddedBy),
-                                        new SqlParameter("@Fk_ProductId",Package),
+                                        new SqlParameter("@Fk_ProductId","1"),
                                         new SqlParameter("@TopupDate", TopUpDate),
                                         new SqlParameter("@Amount", Amount),
                                         new SqlParameter("@Fk_SiteId", Fk_SiteId),
@@ -267,7 +279,11 @@ namespace HMGreenCityMLM.Models
                                               new SqlParameter("@TransactionDate", TransactionDate),
                                                 new SqlParameter("@BankName", BankName),
                                                   new SqlParameter("@BankBranch", BankBranch),
-                                                   new SqlParameter("@ReceiptNo", ReceiptNo)
+                                                   new SqlParameter("@ReceiptNo", ReceiptNo),
+                                                     new SqlParameter("@IsNewBusiness", IsNewBusiness),
+                                                       new SqlParameter("@IsInclude", IsInclude)
+
+                                                     
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUpByAdmin", para);
             return ds;
@@ -301,6 +317,10 @@ namespace HMGreenCityMLM.Models
                                         new SqlParameter("@Description", Description),
                                                                     new SqlParameter("@ReceiptNo", ReceiptNo),
                                                                     new SqlParameter("@PaymentMode", PaymentMode),
+                                                                        new SqlParameter("@IsNewBusiness", IsNewBusiness),
+                                                                         new SqlParameter("@IsInclude", IsInclude)
+
+
             };
             DataSet ds = DBHelper.ExecuteQuery("ReTopup", para);
             return ds;
@@ -450,7 +470,8 @@ namespace HMGreenCityMLM.Models
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
                                     new SqlParameter("@FromDate", FromDate),
-                                    new SqlParameter("@ToDate", ToDate), };
+                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@IsDownline",IsDownline)};
             DataSet ds = DBHelper.ExecuteQuery("AdvancePaymentReport", para);
             return ds;
         }
@@ -474,6 +495,19 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetSectorbySite", para);
             return ds;
         }
+
+        public DataSet SelectSectorFromCrm()
+        {
+            SqlParameter[] para = {
+                                    new SqlParameter("@FK_SiteID", Fk_SiteId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("SelectSectorFromCrm", para);
+            return ds;
+        }
+
+
+
+
         public DataSet GetBlockList()
         {
             SqlParameter[] para = {
@@ -483,5 +517,32 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetBlockList", para);
             return ds;
         }
+
+
+        public DataSet GetBlockListFromCrm()
+        {
+            SqlParameter[] para = {
+                                    new SqlParameter("@SiteID", Fk_SiteId),
+                                     new SqlParameter("@SectorID", FK_SectorId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetBlockListFromCrm", para);
+            return ds;
+        }
+
+
+        public DataSet CheckPlotAvailibility()
+        {
+            SqlParameter[] para =
+                            {
+                                new SqlParameter("@SiteID",Fk_SiteId),
+                                new SqlParameter("@SectorID",FK_SectorId),
+                                new SqlParameter("@BlockID",Fk_BlockId),
+                                new SqlParameter("@PlotNumber",PlotNumber)
+                            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPlotStatus", para);
+            return ds;
+        }
+        
+
     }
 }

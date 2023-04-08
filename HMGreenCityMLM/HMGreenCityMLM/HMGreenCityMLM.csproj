@@ -538,9 +538,11 @@
     <Content Include="images\TreeIcon\default.png" />
     <Content Include="images\TreeIcon\girl-active.png" />
     <Content Include="images\TreeIcon\girl-block.png" />
+    <Content Include="images\TreeIcon\girl-hold.png" />
     <Content Include="images\TreeIcon\girl-inactive.png" />
     <Content Include="images\TreeIcon\men-active.png" />
     <Content Include="images\TreeIcon\men-block.png" />
+    <Content Include="images\TreeIcon\men-hold.png" />
     <Content Include="images\TreeIcon\men-inactive.png" />
     <Content Include="images\user.png" />
     <Content Include="images\view.png" />
@@ -604,6 +606,9 @@
     <Content Include="AssociatePanelcss\Fonts\feather.eot" />
     <Content Include="AssociatePanelcss\Fonts\feather.ttf" />
     <Content Include="AssociatePanelcss\Fonts\feather.woff" />
+    <Content Include="WebsiteCss\KohinoorCity.jpeg" />
+    <Content Include="WebsiteCss\KohinoorCity1.jpeg" />
+    <Content Include="WebsiteCss\Offer.jpeg" />
     <None Include="Properties\PublishProfiles\HMGreenCityMLM.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
@@ -840,6 +845,12 @@
     <Content Include="Views\Permission\SetmainId.cshtml" />
     <Content Include="Views\Admin\EmpBinaryTree.cshtml" />
     <Content Include="Views\AdminReports\DefaultAssociateList.cshtml" />
+    <Content Include="Views\AdminReports\GetBusinessStatus.cshtml" />
+    <Content Include="Views\AdminReports\RewardIncludedList.cshtml" />
+    <Content Include="Views\Master\SiteMasterListFromCrm.cshtml" />
+    <Content Include="Views\Master\SectorListFromCrm.cshtml" />
+    <Content Include="Views\Master\BlockListFromCrm.cshtml" />
+    <Content Include="Views\Master\PlotListfromCRM.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -850,6 +861,7 @@
   <ItemGroup>
     <Folder Include="AadharPicture\" />
     <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
     <Folder Include="Datatablecss\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\build\" />
     <Folder Include="DocumentPicture\" />
     <Folder Include="KYCDocuments\" />

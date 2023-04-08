@@ -81,6 +81,10 @@ namespace HMGreenCityMLM.Controllers
         {
             Reports newdata = new Reports();
             List<Reports> lst1 = new List<Reports>();
+            DateTime currentdate = DateTime.Now;
+            currentdate = currentdate.AddMonths(-1);
+            newdata.FromDate = currentdate.ToString("dd/MM/yyyy");
+            newdata.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
             DataSet ds11 = newdata.GetTopupReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -103,6 +107,9 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.PaymentMode = r["PaymentMode"].ToString();
                     Obj.ReceiptNo = r["ReceiptNo"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.BusinessType = r["Business"].ToString();
+
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -167,6 +174,7 @@ namespace HMGreenCityMLM.Controllers
             }
             List<Reports> lst1 = new List<Reports>();
             newdata.SiteId = newdata.SiteId == "0" ? null : newdata.SiteId;
+            newdata.BusinessType = newdata.BusinessType == "" ? null : newdata.BusinessType;
             newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
             newdata.LoginId = newdata.ToLoginID;
@@ -191,6 +199,9 @@ namespace HMGreenCityMLM.Controllers
                     Obj.ReceiptNo = r["ReceiptNo"].ToString();
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.BusinessType = r["Business"].ToString();
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -428,7 +439,6 @@ namespace HMGreenCityMLM.Controllers
             List<Reports> lst1 = new List<Reports>();
             //incomeReport.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             //incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
-
             incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
             incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
 
@@ -478,7 +488,9 @@ namespace HMGreenCityMLM.Controllers
             {
                 incomeReport.Status = null;
             }
-            incomeReport.LoginId = incomeReport.ToLoginID;
+            
+            //incomeReport.LoginId = incomeReport.ToLoginID;
+          
             DataSet ds11 = incomeReport.GetIncomeReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -1046,7 +1058,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult BusinessReportBy(Reports model)
         {
-            if(model.LoginId==null)
+            if (model.LoginId == null)
             {
                 model.ToLoginID = null;
             }
@@ -1061,7 +1073,7 @@ namespace HMGreenCityMLM.Controllers
 
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-            // model.IsDownline = Request["Chk_"].ToString(); 
+            //model.IsDownline = Request["Chk_"].ToString(); 
             DataSet ds11 = model.BusinessReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -1078,7 +1090,9 @@ namespace HMGreenCityMLM.Controllers
                     Obj.ClosingDate = r["CalculationDate"].ToString();
                     Obj.NetAmount = r["AMount"].ToString();
                     Obj.LeadershipBonus = r["BV"].ToString();
-
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
+                    Obj.BankName = r["BankName"].ToString();
+                    Obj.BusinessType = r["BussinessType"].ToString();
                     lst1.Add(Obj);
                 }
                 model.lstassociate = lst1;
@@ -1723,7 +1737,8 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult DefaultAssociateList(Reports model)
         {
-            return View(model);
+            
+            return View();
         }
 
         [HttpPost]
@@ -1731,12 +1746,15 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult DefaultAssociateLists(Reports model)
         {
-      
             List<Reports> list = new List<Reports>();
-            if (model.LoginId == null)
-            {
-                model.LoginId = null;
-            }
+            //if (model.LoginId == null)
+            //{
+            //    model.LoginId = null;
+            //}
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.Status = model.Status == "0" ? null : model.Status;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.GetDefaulterList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -1746,8 +1764,10 @@ namespace HMGreenCityMLM.Controllers
                     Reports obj = new Reports();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
-                    obj.LastTopUpAmount = r["LastTopupamount"].ToString();
-                    obj.LastTopUpDate = r["LastTopupdate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Date = string.IsNullOrEmpty(r["Date"].ToString()) ? "N/A" : r["Date"].ToString();
+                    //obj.LastTopUpAmount = r["LastTopupamount"].ToString();
+                    //obj.LastTopUpDate = r["LastTopupdate"].ToString();
                     list.Add(obj);
                 }
                 model.lstDefaultAssociateList = list;
@@ -1756,5 +1776,285 @@ namespace HMGreenCityMLM.Controllers
 
         }
 
+
+        public ActionResult GetBusinessStatus()
+        {
+            Reports newdata = new Reports();
+            List<Reports> lst1 = new List<Reports>();
+            newdata.SiteId = newdata.SiteId == "0" ? null : newdata.SiteId;
+            newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+            DataSet ds11 = newdata.GetBusinessStatus();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.ToLoginID = r["Pk_InvestmentId"].ToString();
+                    Obj.LoginId = r["LoginId"].ToString();
+                    Obj.DisplayName = r["Name"].ToString();
+                    Obj.UpgradtionDate = r["UpgradtionDate"].ToString();
+                    Obj.Package = r["Package"].ToString();
+                    Obj.Amount = r["Amount"].ToString();
+                    Obj.TopupBy = r["TopupBy"].ToString();
+                    Obj.Status = r["Status"].ToString();
+                    Obj.PrintingDate = r["PrintingDate"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
+                    Obj.Description = r["Description"].ToString();
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
+                    Obj.ReceiptNo = r["ReceiptNo"].ToString();
+                    //Obj.BlockName = r["BlockName"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    lst1.Add(Obj);
+                }
+                newdata.lsttopupreport = lst1;
+            }
+            #region ddlstatus
+            List<SelectListItem> ddlstatus = Common.BindTopupStatus();
+            ViewBag.ddlstatus = ddlstatus;
+            #endregion
+            #region Product Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProduct();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlProduct = ddlProduct;
+
+            #endregion
+            #region Site
+
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dssite = objcomm.GetSite();
+            if (dssite != null && dssite.Tables.Count > 0 && dssite.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in dssite.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["Pk_SiteID"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlSite = ddlSite;
+
+            #endregion
+            return View(newdata);
+        }
+
+
+        [HttpPost]
+        [ActionName("GetBusinessStatus")]
+        public ActionResult GetBusinessStatus(Reports newdata)
+        {
+            if (newdata.LoginId == null)
+            {
+                newdata.ToLoginID = null;
+            }
+            List<Reports> lst1 = new List<Reports>();
+            newdata.SiteId = newdata.SiteId == "0" ? null : newdata.SiteId;
+            newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+            newdata.LoginId = newdata.ToLoginID;
+            DataSet ds11 = newdata.GetBusinessStatus();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.ToLoginID = r["Pk_InvestmentId"].ToString();
+                    Obj.LoginId = r["LoginId"].ToString();
+                    Obj.DisplayName = r["Name"].ToString();
+                    Obj.UpgradtionDate = r["UpgradtionDate"].ToString();
+                    Obj.Package = r["Package"].ToString();
+                    Obj.Amount = r["Amount"].ToString();
+                    Obj.TopupBy = r["TopupBy"].ToString();
+                    Obj.Status = r["Status"].ToString();
+                    Obj.PrintingDate = r["PrintingDate"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
+                    Obj.Description = r["Description"].ToString();
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
+                    Obj.ReceiptNo = r["ReceiptNo"].ToString();
+                    //Obj.BlockName = r["BlockName"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    lst1.Add(Obj);
+                }
+                newdata.lsttopupreport = lst1;
+            }
+            #region ddlstatus
+            List<SelectListItem> ddlstatus = Common.BindTopupStatus();
+            ViewBag.ddlstatus = ddlstatus;
+            #endregion
+            #region Product Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProduct();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlProduct = ddlProduct;
+
+            #endregion
+            #region Site
+
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dssite = objcomm.GetSite();
+            if (dssite != null && dssite.Tables.Count > 0 && dssite.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in dssite.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["Pk_SiteID"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlSite = ddlSite;
+
+            #endregion
+            return View(newdata);
+        }
+       
+        public ActionResult UpdateBusinessStatus(string Type, string PK_InvestmentId)
+        {
+            Reports model = new Reports();
+            model.ToLoginID = PK_InvestmentId;
+            //if (Type == "NewBusiness")
+            //{
+            //    model.IsNewBusiness = true;
+            //}
+            //else if (Type == "OtherBusiness")
+            //{
+            //    model.IsNewBusiness = false;
+            //}
+            //else
+            //{
+               
+            //}
+
+            if (Type == "IsInclude")
+            {
+                model.IsInclude = true;
+            }
+            else if (Type == "NotInclude")
+            {
+                model.IsInclude = false;
+            }
+            else
+            {
+
+            }
+            
+            model.AddedBy = Session["Pk_AdminId"].ToString();
+            DataSet ds = model.UpdateBusinessStatus();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    model.Result = "Yes";
+                }
+                else
+                {
+                    model.Result = "No";
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        
+
+        public ActionResult RewardIncludedList()
+        {
+          
+            return View();
+        }
+        
+
+        [HttpPost]
+        [ActionName("RewardIncludedList")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult RewardIncludedList(Reports model)
+        {
+            if (model.LoginId == null)
+            {
+                model.ToLoginID = null;
+            }
+
+            //#region ddlleg
+            //List<SelectListItem> Leg = Common.Leg();
+            //ViewBag.Leg = Leg;
+            //#endregion ddlleg
+            model.LoginId = model.ToLoginID;
+            List<Reports> lst1 = new List<Reports>();
+            //model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            //model.IsDownline = Request["Chk_"].ToString(); 
+            DataSet ds11 = model.GetRewardIncludedDetails();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.LoginId = r["LoginId"].ToString();
+                    Obj.DisplayName = r["FirstName"].ToString();
+                    Obj.SectorName = r["sectorname"].ToString();
+                    Obj.SiteName = r["sitename"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
+                    Obj.Reward = r["IsReward"].ToString();
+                    Obj.ClosingDate = r["CalculationDate"].ToString();
+                    Obj.NetAmount = r["AMount"].ToString();
+                    Obj.LeadershipBonus = r["BV"].ToString();
+
+                    lst1.Add(Obj);
+                }
+                model.lstassociate = lst1;
+                ViewBag.TotalNetAmount = double.Parse(ds11.Tables[0].Compute("sum(AMount)", "").ToString()).ToString("n2");
+                ViewBag.TotalBV = double.Parse(ds11.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
+            }
+
+
+            return View(model);
+        }
+  
     }
 }

@@ -1,0 +1,157 @@
+﻿@model HMGreenCityMLM.Models.Transactions
+
+@{
+    ViewBag.Title = "PayoutDeduction";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<!-- /.row -->
+@using (Html.BeginForm("PayoutWalletDeduction", "Transactions", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <span style="color: red">
+        @TempData["pwallet"]
+    </span>
+    <br />
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block"> Payout Deduction </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Login Id <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.LoginID, new { @id = "txtLoginID", @placeholder = "LoginId", @class = "form-control", @onchange = "getMemberDetails(this);" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Name <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.MemberName, new { @id = "txtMemberName", @class = "form-control", @disabled = "disabled" })
+                                                        @Html.HiddenFor(m => m.PK_UserID)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Amount <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Transaction Type <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.TransactionAction, new SelectList(ViewBag.ddlTransactionType, "Value", "Text"), new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="submit" id="btnDeductEwallet" class="btn btn-success" name="btnDeductEwallet" value="Update" onclick="return validate()" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+<style>
+    .errortext {
+       border: 2px solid red !important;
+       
+    }
+</style>
+<script>
+    function validate() {
+        $(".errortext").removeClass("errortext");
+        if ($('#txtLoginID').val() == '') {
+            $("#txtLoginID").addClass('errortext');
+            $('#txtLoginID').focus();
+            return false;
+        }
+        if ($('#Amount').val() == '') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            return false;
+        }
+        if ($('#TransactionAction').val() == '0') {
+            $("#TransactionAction").addClass('errortext');
+            $('#TransactionAction').focus();
+            return false;
+        }
+    }
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    function getMemberDetails(obj) {
+
+        $.ajax({
+            url: '/Transactions/GetMemberDetails',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { 'LoginID': $(obj).val() },
+            success: function (response) {
+                if (response.Result == "Yes") {
+
+                    $('#txtMemberName').val(response.DisplayName);
+                }
+                else {
+
+                    $('#txtLoginID').val('');
+                    $('#txtMemberName').val('');
+                    alert(response.Result);
+                }
+            }
+        })
+    }
+</script>
+

@@ -78,6 +78,9 @@
                                                                 <th>Plot Details</th>
                                                                 <th>Calculation Date</th>
                                                                 <th style="text-align:right">Amount</th>
+                                                                <th style="text-align:right">Payment Mode</th>
+                                                                <th style="text-align:right">Bank Name</th>
+                                                                <th style="text-align:right">Business Type</th>
                                                                 <th style="text-align:right;display:none">BV</th>
                                                             </tr>
                                                         </thead>
@@ -96,6 +99,9 @@
                                                                             <td>@Item.SiteName, @Item.SectorName, @Item.PlotNumber</td>
                                                                             <td>@Item.ClosingDate</td>
                                                                             <td style="text-align:right">@Item.NetAmount</td>
+                                                                            <td style="text-align:right">@Item.PaymentMode</td>
+                                                                            <td style="text-align:right">@Item.BankName</td>
+                                                                            <td style="text-align:right">@Item.BusinessType</td>
                                                                             <td style="text-align:right;display:none">@Item.LeadershipBonus</td>
                                                                         </tr>
                                                                         i++;
@@ -131,10 +137,10 @@
 
 
 <script src="../../WebsiteCss/js/jquery.js"></script>
- 
+
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
- 
+
 <script>
     $(document).ready(function () {
         $("input").attr("autocomplete", "off");
@@ -217,7 +223,6 @@
 </script>
 <style>
     .errortext {
-       border: 2px solid red !important;
-       
+        border: 2px solid red !important;
     }
 </style>

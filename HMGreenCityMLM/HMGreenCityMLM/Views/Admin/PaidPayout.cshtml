@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 From Date
-                                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date",@readonly=true })
+                                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date", @readonly = true })
                                             </div>
                                             <div class="col-md-3">
                                                 To Date
@@ -60,8 +60,12 @@
                                                         <th>Name</th>
                                                         <th>Payment Date</th>
                                                         <th>Amount</th>
+                                                        <th>Bank Name</th>
+                                                        <th>Bank Branch</th>
+                                                        <th>Payment Mode</th>
                                                         <th>Transaction Date</th>
                                                         <th>TransactionNo</th>
+                                                        <th>Remarks</th>
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
@@ -71,6 +75,7 @@
                                                         <th></th>
                                                         <th><b>Total</b></th>
                                                         <th>@ViewBag.Total</th>
+                                                        <th></th>
                                                         <th></th>
                                                         <th></th>
                                                     </tr>
@@ -83,15 +88,18 @@
                                                             int i = 1;
                                                             foreach (var Item in Model.lstpayoutledger)
                                                             {
-                                                    <tr class="text-left">
-                                                        <td>@i</td>
-                                                        <td>@Item.LoginId</td>
-                                                        <td>@Item.DisplayName</td>
-                                                       
-                                                        <td>@Item.PaymentDate</td>
-                                                        <td>@Item.Amount</td>
+                                                                <tr class="text-left">
+                                                                    <td>@i</td>
+                                                                    <td>@Item.LoginId</td>
+                                                                    <td>@Item.DisplayName</td>
+                                                                    <td>@Item.PaymentDate</td>
+                                                                    <td>@Item.Amount</td>
+                                                                    <td>@Item.BankName</td>
+                                                        <td>@Item.BankBranch</td>
+                                                                    <td>@Item.PaymentMode</td>
                                                         <td>@Item.TransactionDate</td>
                                                         <td>@Item.TransactionNo</td>
+                                                        <td>@Item.ReceiptNo</td>
                                                     </tr>
                                                                 i++;
                                                             }
@@ -121,6 +129,8 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
+
+
 
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
