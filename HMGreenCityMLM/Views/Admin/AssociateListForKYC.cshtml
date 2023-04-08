@@ -1,0 +1,100 @@
+﻿@model HMGreenCityMLM.Models.Reports
+@{
+    ViewBag.Title = "AssociateListForKYC";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("ApproveKYC", "Admin", FormMethod.Post, new { @id = "form1", name = "formKYC" }))
+{
+
+
+    <br />
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Approve KYC </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+                                        <div class="row">
+                                            <div class="col-md-12 table-responsive">
+
+                                                <div class="dt-responsive table-responsive">
+                                                    <table class="table mb-0" id="example23">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr No.</th>
+                                                                <th> Login Id</th>
+                                                                <th>Name</th>
+                                                                <th>Document Number</th>
+                                                                <th>Document Image</th>
+                                                                <th>Document Type</th>
+                                                                <th>Status</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if (Model != null)
+                                                            {
+                                                                if (Model.lstassociate != null)
+                                                                {
+                                                                    int i = 1;
+                                                                    foreach (var Item in Model.lstassociate)
+                                                                    {
+                                                                        <tr class="text-left">
+                                                                            <td>@i</td>
+                                                                            <td>@Item.LoginId</td>
+                                                                            <td>@Item.Name</td>
+                                                                            <td>@Item.DocumentNumber</td>
+                                                                            <td>
+                                                                                <img src="@Item.DocumentImage" height="120" width="180" />
+                                                                            </td>
+                                                                            <td>@Item.DocumentType</td>
+                                                                            <td>@Item.Status</td>
+                                                                            <td>
+                                                                                @*@Html.ActionLink("Approve","ApproveKYC","Admin",new{@Item.PK_DocumentID,@Item.DocumentType})*@
+                                                                                <a href="/Admin/ApproveKYC?Id=@Item.PK_DocumentID&&DocumentType=@Item.DocumentType&&LoginID=@Item.LoginId" runat="server" class="btn btn-success pull-right" name="btnUpdate">Approve</a>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        i++;
+                                                                    }
+                                                                }
+                                                            }
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+}

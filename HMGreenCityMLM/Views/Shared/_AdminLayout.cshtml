@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>@ViewBag.Title</title>
+    <link rel="apple-touch-icon" href="../../AssociatePanelcss/app-assets/images/ico/apple-icon-120.html">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/extensions/tether-theme-arrows.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/extensions/tether.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/vendors/css/extensions/shepherd-theme-default.css">
+    <!-- END: Vendor CSS-->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/colors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/themes/dark-layout.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/themes/semi-dark-layout.min.css">
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/core/menu/menu-types/vertical-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/core/colors/palette-gradient.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/pages/dashboard-analytics.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/pages/card-analytics.min.css">
+    <link rel="stylesheet" type="text/css" href="../../AssociatePanelcss/app-assets/css/plugins/tour/tour.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link href="../AssociatePanelcss/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <link href="../../AdminPanelCss/Datatablecss/css/amchart/export.css" rel="stylesheet" />
+
+    <link href="../../Autofill/jquery-ui.css" rel="stylesheet" />
+    <!-- END: Custom CSS-->
+    <style>
+        .dataTables_wrapper {
+            padding-top: 10px;
+        }
+
+        * {
+            outline: none;
+        }
+
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        user agent stylesheet div {
+            display: block;
+        }
+
+        .card {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: .25rem;
+        }
+
+        .dt-buttons {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding-top: 5px;
+        }
+
+        * {
+            outline: none;
+        }
+
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        user agent stylesheet div {
+            display: block;
+        }
+
+        .card {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: .25rem;
+        }
+
+        .dt-buttons .dt-button {
+            background: #1976d2 none repeat scroll 0 0;
+            border-radius: 4px;
+            color: black;
+            margin-right: 3px;
+            padding: 5px 15px;
+        }
+
+        a {
+            color: #0c0c0c;
+            text-decoration: none;
+            background-color: transparent;
+            -webkit-text-decoration-skip: objects;
+        }
+
+        * {
+            outline: none;
+        }
+
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        user agent stylesheet a:-webkit-any-link {
+            color: -webkit-link;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .dataTables_filter {
+            float: right;
+        }
+
+        * {
+            outline: none;
+        }
+
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        user agent stylesheet div {
+            display: block;
+        }
+
+        .dataTables_info, .dataTables_length {
+            display: inline-block;
+        }
+
+        * {
+            outline: none;
+        }
+
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        user agent stylesheet div {
+            display: block;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+            background: transparent none repeat scroll 0 0;
+            border: 1px solid rgba(120,130,140,.13);
+            box-shadow: none;
+            color: #67757c;
+            cursor: default;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            border: 1px solid rgba(120,130,140,.13);
+            box-sizing: border-box;
+            color: #67757c;
+            cursor: pointer;
+            display: inline-block;
+            min-width: 1.5em;
+            padding: .5em 1em;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        a {
+            color: #0c0c0c;
+            text-decoration: none;
+            background-color: transparent;
+            -webkit-text-decoration-skip: objects;
+        }
+
+        * {
+            outline: none;
+        }
+
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            float: right;
+            padding-top: .25em;
+            text-align: right;
+        }
+
+        .dt-buttons {
+            margin-left: 0px !important;
+        }
+    </style>
+</head>
+<body class="menu-expanded pace-done semi-dark-layout">@*dark-layout*@
+    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+        <div class="navbar-wrapper">
+            <div class="navbar-container content">
+                <div class="navbar-collapse" id="navbar-mobile">
+                    <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+
+                    </div>
+                    <ul class="nav navbar-nav float-right">
+
+
+                        <li class="dropdown dropdown-user nav-item">
+                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">@Session["Name"]</span><span class="user-status"></span></div><span><img class="round" src="../../AssociatePanelcss/app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+
+                                <div class="dropdown-divider"></div><a class="dropdown-item" href="/Home/Login"><i class="feather icon-power"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item mr-auto">
+                    <a class="navbar-brand" href="/Admin/AdminDashBoard">
+                        <div class="brand-logo"></div>
+                        <h2 class="brand-text mb-0">HM Green City</h2>
+                    </a>
+                </li>
+                <li class="nav-item nav-toggle">
+                    <a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">                        
+                        <i class="fa fa-bars dashb" aria-hidden="true"></i>
+                        <i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="shadow-bottom"></div>
+        <div class="main-menu-content">
+            @{
+                Html.RenderAction("Menu", "Home", new { area = "" });
+            }
+        </div>
+    </div>
+    @RenderBody();
+
+    <!-- End: Customizer-->
+    <!-- Buynow Button-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    <!-- BEGIN: Footer-->
+    @*<footer class="footer footer-static footer-light">
+            <p class="clearfix blue-grey lighten-2 mb-0">
+                <span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT  &copy; 2019<a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
+                <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+            </p>
+        </footer>*@
+    <!-- END: Footer-->
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../associatepanelcss/app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../AssociatePanelcss/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/vendors/js/extensions/tether.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/vendors/js/extensions/shepherd.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="../../AssociatePanelcss/app-assets/js/core/app-menu.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/core/app.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/scripts/components.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/scripts/customizer.min.js"></script>
+    <script src="../../AssociatePanelcss/app-assets/js/scripts/footer.min.js"></script>
+
+    <!-- END: Theme JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="../../AssociatePanelcss/app-assets/js/scripts/pages/dashboard-analytics.min.js"></script>
+    <!-- END: Page JS-->
+
+    <script src="./../Datatablecss/datatables/datatables.min.js"></script>
+    <script src="./../Datatablecss/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="./../Datatablecss/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="./../Datatablecss/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="./../Datatablecss/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="./../Datatablecss/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="./../Datatablecss/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="./../Datatablecss/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="./../Datatablecss/datatables/datatables-init.js"></script>
+
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+    <script src="../../Autofill/jquery-ui.js"></script>
+    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <script>
+        jQuery(document).ready(function () {
+            Main.init();
+            Index.init();
+        });
+    </script>
+</body>
+
+</html>
+
+
