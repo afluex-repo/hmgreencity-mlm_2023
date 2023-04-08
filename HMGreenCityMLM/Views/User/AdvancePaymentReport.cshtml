@@ -4,8 +4,6 @@
     ViewBag.Title = "AdvancePaymentReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 @using (Html.BeginForm("PayoutLedger", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="row">
