@@ -16,7 +16,6 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult SetPermission(Permisssions model)
         {
-
             DataSet ds1 = new DataSet();
 
             #region ddlformtype
@@ -76,8 +75,6 @@ namespace HMGreenCityMLM.Controllers
                     {
                         ob.SelectedValue = "checked";
                     }
-
-
                     ob.IsSaveValue = Convert.ToBoolean(dr["FormSave"].ToString());
 
 
@@ -89,7 +86,6 @@ namespace HMGreenCityMLM.Controllers
                     {
                         ob.FormSave = "checked";
                     }
-
                     ob.IsUpdateValue = Convert.ToBoolean(dr["FormUpdate"].ToString());
                     ob.IsDeleteValue = Convert.ToBoolean(dr["FormDelete"].ToString());
                     ob.Fk_FormId = dr["PK_FormId"].ToString();
@@ -130,7 +126,6 @@ namespace HMGreenCityMLM.Controllers
             #endregion
             return View(model);
         }
-
         [HttpPost]
         [ActionName("SetPermission")]
         [OnAction(ButtonName = "Save")]
@@ -145,7 +140,6 @@ namespace HMGreenCityMLM.Controllers
             string hdfformid = "";
             string hdfloginid = "";
             DataTable dtpermission = new DataTable();
-
             dtpermission.Columns.Add("Fk_FormTypeId");
             dtpermission.Columns.Add("Fk_FormId");
             dtpermission.Columns.Add("IsSave");
@@ -173,9 +167,7 @@ namespace HMGreenCityMLM.Controllers
                 hdfloginid = Request["hdLoginid_ " + i].ToString();
 
                 dtpermission.Rows.Add(hdfformtypeid, hdfformid, "0", chkSave == "on" ? "1" : "0", "0", chkselect == "on" ? "1" : "0");
-
             }
-
             obj.UserTypeFormPermisssion = dtpermission;
             obj.CreatedBy = Session["Pk_AdminId"].ToString();
             obj.Fk_UserId = hdfloginid;
@@ -193,9 +185,7 @@ namespace HMGreenCityMLM.Controllers
                     TempData["Permission"] = ds.Tables[0].Rows[0]["Remark"].ToString();
                 }
             }
-
             return RedirectToAction("SetPermission");
-
         }
         public ActionResult SetmainId(Permisssions model)
         {
@@ -260,7 +250,6 @@ namespace HMGreenCityMLM.Controllers
             }
             catch (Exception ex)
             {
-
                 TempData["Msg"] = ex.Message;
             }
             return RedirectToAction("SetmainId");
