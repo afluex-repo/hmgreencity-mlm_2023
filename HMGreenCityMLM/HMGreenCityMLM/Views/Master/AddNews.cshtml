@@ -28,7 +28,6 @@
                 </div>
                 <div class="panel-body">
                     <fieldset>
-
                         <div class="row">
                             <div class="col-lg-3"></div>
                             <div class="col-lg-6">
@@ -39,7 +38,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-lg-3"></div>
                             <div class="col-lg-6">
@@ -49,7 +47,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-lg-9">
                                 <div class="form-group">
@@ -62,6 +59,7 @@
                                         <input type="submit" class="btn btn-success pull-right" value="Update" onclick="return updateNews();" />
                                     }
                                 </div>
+
                             </div>
                         </div>
                     </fieldset>
@@ -69,16 +67,13 @@
             </div>
         </div>
     </div>
-         
 }
 <style>
     .errortext {
        border: 2px solid red !important;
-       
     }
 </style>
 <script>
-    
     function saveProduct() {
         $(".errortext").removeClass("errortext");
         if ($('#NewsHeading').val() == '') {
@@ -91,8 +86,6 @@
             $('#NewsBody').focus();
             return false;
         }
-
-
         $.ajax({
             url: "/Master/SaveNews",
             Type: "Get",
@@ -101,24 +94,17 @@
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("NewsList", "Master")';
-
             }
-
         });
     }
-
     function isNumberKey(evt) {
 
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
           && (charCode < 48 || charCode > 57))
             return false;
-
         return true;
     }
-    
-    
-
     function updateNews() {
         $(".errortext").removeClass("errortext");
         if ($('#NewsHeading').val() == '') {
@@ -131,8 +117,6 @@
             $('#NewsBody').focus();
             return false;
         }
-
-
         $.ajax({
             url: "/Master/UpdateNews",
             Type: "Get",
@@ -141,10 +125,7 @@
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("NewsList", "Master")';
-
             }
-
         });
     }
-
 </script>
