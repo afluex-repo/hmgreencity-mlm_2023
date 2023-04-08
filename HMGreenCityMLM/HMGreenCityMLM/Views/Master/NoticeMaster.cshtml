@@ -29,7 +29,6 @@
                                             <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Notice Master</span>
                                         </a>
                                     </li>
-
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
@@ -39,12 +38,9 @@
                                                     <label class="col-sm-4 col-form-label">Title <span style="color: red">*</span></label>
                                                     <div class="col-sm-8">
                                                         @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @placeholder = "Title" })
-
-
                                                     </div>
                                                 </div>
                                             </div>
-                                           
                                         </div>
                                         <div class="row">
                                             <div class="col-md-5">
@@ -53,17 +49,12 @@
                                                     <div class="col-md-12">
                                                         @Html.TextAreaFor(m => m.News, new { @class = "form-control", @Placeholder = "Notification", @Rows = "7", @cols = "20" })
                                                         @Html.HiddenFor(m => m.PK_NoticeMasterId, new { @class = "form-control" })
-
-
-
-
                                                     </div>
                                                 </div>
                                             </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-
                                                     @if (Model.PK_NoticeMasterId == null)
                                                     {
                                                         <input type="submit" id="btnSave" class="btn btn-success" name="btnSave" value="Save" onclick="return validateform();" />
@@ -79,8 +70,6 @@
                                                     <span style="color: red">
                                                         @TempData["NoticeMaster"]
                                                     </span>
-
-
                                                 </div>
                                             </div>
                                         </div>
@@ -89,20 +78,12 @@
                             <!-- /.panel -->
                             <!-- /.panel -->
                         </div>
-
-
-
-
                     </div>
-
                 </div>
             </section>
         </div>
     </div>
 </div>
-
-
-
 }
 <style>
     .errortext {
