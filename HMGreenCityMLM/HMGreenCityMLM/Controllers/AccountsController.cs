@@ -17,7 +17,8 @@ namespace HMGreenCityMLM.Controllers
             List<SelectListItem> ddlsite = new List<SelectListItem>();
             List<SelectListItem> ddlsector = new List<SelectListItem>();
             List<SelectListItem> ddlblock = new List<SelectListItem>();
-            DataSet ds = obj.GetSite();
+            DataSet ds = obj.GetSiteNameFromCrm();
+            //DataSet ds = obj.GetSite();
             ddlsite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
             ddlsector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
             ddlblock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
@@ -560,7 +561,8 @@ namespace HMGreenCityMLM.Controllers
                
                 #region GetSectors
                 List<SelectListItem> ddlSector = new List<SelectListItem>();
-                DataSet dsSector = model.GetSectorList();
+                //DataSet dsSector = model.GetSectorList();
+                 DataSet dsSector = model.SelectSectorFromCrm();
 
                 if (dsSector != null && dsSector.Tables.Count > 0)
                 {
@@ -593,8 +595,8 @@ namespace HMGreenCityMLM.Controllers
 
                 #region GetBlock
                 List<SelectListItem> ddlblock = new List<SelectListItem>();
-                DataSet dsBlock = model.GetBlockList();
-
+                //DataSet dsBlock = model.GetBlockList();
+                DataSet dsBlock = model.GetBlockListFromCrm();
                 if (dsBlock != null && dsBlock.Tables.Count > 0)
                 {
                     foreach (DataRow r in dsBlock.Tables[0].Rows)
@@ -614,6 +616,34 @@ namespace HMGreenCityMLM.Controllers
                 return View(ex.Message);
             }
         }
+
+
+        
+
+        public ActionResult CheckPlot(string SiteID, string SectorID, string BlockID, string PlotNumber)
+        {
+            Wallet model = new Wallet();
+            model.Fk_SiteId = SiteID;
+            model.FK_SectorId = SectorID;
+            model.Fk_BlockId = BlockID;
+            model.PlotNumber = PlotNumber;
+            DataSet dsblock = model.CheckPlotAvailibility();
+            if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
+            {
+                if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                {
+                    model.Result = "no";
+                }
+                else
+                {
+                    model.Result = "yes";
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
     }
 }

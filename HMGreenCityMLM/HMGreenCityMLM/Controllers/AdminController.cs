@@ -1133,8 +1133,13 @@ namespace HMGreenCityMLM.Controllers
                     Objload.Amount = dr["Amount"].ToString();
                     Objload.TransactionDate = dr["TransactionDate"].ToString();
                     Objload.TransactionNo = dr["TransactionNo"].ToString();
-                    Objload.ReceiptNo = dr["Remarks"].ToString();
+                    Objload.Remarks = dr["Remarks"].ToString();
+                    Objload.BankName = dr["BankName"].ToString();
+                    Objload.BankBranch = dr["BankBranch"].ToString();
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
+                    
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(dr["Amount"].ToString());
+                    
                     lst.Add(Objload);
                 }
                 objewallet.lstpayoutledger = lst;

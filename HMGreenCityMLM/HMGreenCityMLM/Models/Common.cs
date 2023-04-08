@@ -135,6 +135,14 @@ namespace HMGreenCityMLM.Models
 
             return ds;
         }
+
+        public DataSet GetSiteNameFromCrm()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm");
+
+            return ds;
+        }
+
         public DataSet GetMemberDetailsForSale()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", ReferBy), };

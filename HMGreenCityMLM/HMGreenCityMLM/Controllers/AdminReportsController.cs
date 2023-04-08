@@ -201,6 +201,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.BusinessType = r["Business"].ToString();
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
