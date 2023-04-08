@@ -1,0 +1,188 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "DateWiseBusinessReport";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@using (Html.BeginForm("DateWiseBusinessReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Date Wise Business Report </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+                                        <div class="row">
+                                            <div class="col-md-12 table-responsive">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        From Date
+                                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        To Date
+                                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        Login ID
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
+                                                        @Html.HiddenFor(m => m.ToLoginID)
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        IsDownline
+                                                        @Html.CheckBoxFor(m => m.IsDownline)
+                                                    </div>
+
+                                                    <div class="col-lg-3">
+                                                        <br />
+                                                        <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validateLogin();" />
+                                                    </div>
+                                                </div>
+                                                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr No.</th>
+                                                            <th>Login Id</th>
+                                                            <th>Name</th>
+                                                            <th>Left Business</th>
+                                                            <th>Right Business</th>
+                                                            <th>Total Business</th>
+                                                            <th>Direct Business</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (Model != null)
+                                                        {
+                                                            if (Model.lstDateWiseBusiness != null)
+                                                            {
+                                                                int i = 1;
+                                                                foreach (var Item in Model.lstDateWiseBusiness)
+                                                                {
+                                                        <tr class="text-left">
+                                                            <td>@i</td>
+                                                            <td>@Item.LoginId</td>
+                                                            <td>@Item.Name</td>
+                                                            <td>@Item.LeftBusiness</td>
+                                                            <td>@Item.RightBusiness</td>
+                                                            <td>@Item.TotalBusiness</td>
+                                                            <td>@Item.DirectBusiness</td>
+
+                                                        </tr>
+                                                                    i++;
+                                                                }
+
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+
+
+    $(document).ready(function () {
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+
+
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+
+    function validateLogin() {
+        var login = $('#LoginId').val();
+        if (login == "") {
+            $('#ToLoginID').val(null);
+        } else {
+            var loginid = $('#ToLoginID').val();
+
+        }
+    }
+
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</script>

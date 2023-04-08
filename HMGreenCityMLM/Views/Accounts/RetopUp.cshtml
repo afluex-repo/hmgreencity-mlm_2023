@@ -1,0 +1,534 @@
+﻿@model HMGreenCityMLM.Models.Wallet
+
+@{
+    ViewBag.Title = "RetopUp";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("RetopUpAction", "Accounts", FormMethod.Post, new { @id = "form1" }))
+{
+    
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block"> Re-TopUp </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Topup Type <span style="color: red">*</span></label>                     
+                                                    <div class="col-sm-9">
+                                                        <input type="radio" name="rdbtype" onclick="return showdetails('NewBusiness')" value="NewBusiness" /> New Business
+                                                        <input type="radio" name="rdbtype" onclick="return showdetails('OtherBusiness')" value="OtherBusiness" /> Other Business
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Reward<span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="radio" name="rdbtypename" onclick="return showdetailsreward('IsInclude')" value="IsInclude" /> Is Include
+                                                        <input type="radio" name="rdbtypename" onclick="return showdetailsreward('NotInclude')" value="NotInclude" /> Not Include
+                                                    </div>
+                                                    @Html.HiddenFor(m => m.Reward)
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Login Id <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);" })
+                                                        @Html.HiddenFor(m => m.LoginId)
+                                                        @Html.HiddenFor(m => m.TopupType)
+                                                        <br />
+                                                        <span id="txtname" style="color: #fff"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Site <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.Fk_SiteId, new SelectList(ViewBag.ddlsite, "Value", "Text"), new { @class = "form-control", @onchange = "getsectorname();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Sector <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.FK_SectorId, new SelectList(ViewBag.ddlsector, "Value", "Text"), new { @class = "form-control", @onchange = "getblockname();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Block</label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.Fk_BlockId, new SelectList(ViewBag.ddlblock, "Value", "Text"), new { @class = "form-control"})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Plot Number <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Amount <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Topup Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return getAmountinWords();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">In Words<span style="color: black">*</span></label>
+                                                    <div class="col-sm-10">
+                                                        @Html.TextBoxFor(m => m.word, new { @class = "form-control", @style = "font-weight:400;color:#8a8b91;", @placeholder = "Amount in words", @disabled = "true" })
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Topup Date <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @Placeholder = "TopUp Date",@readonly=true })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Description </label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @Placeholder = "Description" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Receipt No  <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+
+                                                        @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Receipt No" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Payment Mode <span style="color: red">*</span></label>
+                                                    <div class="col-sm-9">
+                                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4" id="bankname" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Bank Name </label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4" id="chequeno" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Transaction No</label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4" id="chequdate" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Transaction Date</label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="col-md-4" id="bankbranch" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Branch </label>
+                                                    <div class="col-sm-9">
+                                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-4 form-group">
+                                                <span style="color: red">@TempData["Topup"] </span>
+                                                <input class="btn btn-success pull-right" onclick="return validateform()" type="submit" value="Re-Top Up" />
+                                            </div>
+                                        
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+
+
+}
+
+<style>
+    .errortext {
+       border: 2px solid red !important;
+       
+    }
+</style>
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+    $(document).ready(function () {
+
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminProfile/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+                    $('#ToLoginID').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#LoginId').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+       
+    });
+    $('#TopUpDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+    function getpaymentdetails() {
+        var paymentmode = ($("#PaymentMode option:selected").text());
+        if (paymentmode != "Cash") {
+            bankname.style.display = "block";
+            chequeno.style.display = "block";
+            chequdate.style.display = "block";
+            bankbranch.style.display = "block";
+        }
+        else {
+            bankname.style.display = "none";
+            chequeno.style.display = "none";
+            chequdate.style.display = "none";
+            bankbranch.style.display = "none";
+        }
+    }
+    function showdetails(type) {
+        debugger;
+        if (type == "Product") {
+            $('#divisite').hide();
+            $('#divblock').hide();
+            $('#divsector').hide();
+            $('#divplot').hide();
+            $('#divpackage').show();
+            $('#TopupType').val('Product');
+
+        }
+        else if (type == "NewBusiness") {
+           
+            $('#TopupType').val('NewBusiness');
+
+        }
+        else if (type == "OtherBusiness") {
+            $('#TopupType').val('OtherBusiness');
+
+        }
+        else {
+            $('#divisite').show();
+            $('#divblock').show();
+            $('#divsector').show();
+            $('#divplot').show();
+            $('#divpackage').hide();
+            $('#TopupType').val('RealEstate');
+        }
+
+    }
+    function showdetailsreward(type) {
+        if (type == "IsInclude") {
+            //$('#divisite').hide();
+            //$('#divblock').hide();
+            //$('#divsector').hide();
+            //$('#divplot').hide();
+            //$('#divpackage').show();
+            $('#Reward').val('IsInclude');
+
+        }
+        else if (type == "NotInclude") {
+            //$('#divisite').hide();
+            //$('#divblock').hide();
+            //$('#divsector').hide();
+            //$('#divplot').hide();
+            //$('#divpackage').show();
+            $('#Reward').val('NotInclude');
+        }
+        else {
+            $('#Reward').val('NotInclude');
+        }
+
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    function getAmountinWords() {
+        var Amount = $('#Amount').val();
+        $.ajax({
+            url: "/Accounts/AmountinWords",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Amount: Amount },
+            success: function (data) {
+                debugger;
+                $('#word').val(data.word);
+            }
+
+        });
+    }
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+
+        debugger;
+        $(".errortext").removeClass("errortext");
+
+        var status = $("input[name='rdbtype']:checked").val();
+
+        if (status == "NewBusiness") {
+
+        }
+        else if (status == "OtherBusiness") {
+
+        }
+        else {
+            alert("Please Select TopUp Type");
+            return false;
+        }
+
+
+        var rewardstatus = $("input[name='rdbtypename']:checked").val();
+
+        if (rewardstatus == "IsInclude") {
+
+        }
+        else if (rewardstatus == "NotInclude") {
+
+        }
+        else {
+            alert("Please Select Reward");
+            return false;
+        }
+
+
+        if ($('#ToLoginID').val() == '') {
+            $("#ToLoginID").addClass('errortext');
+            $('#ToLoginID').focus();
+            return false;
+        }
+        if ($('#Fk_SiteId').val() == '0') {
+            $("#Fk_SiteId").addClass('errortext');
+            $('#Fk_SiteId').focus();
+            return false;
+        }
+        if ($('#FK_SectorId').val() == '0') {
+            $("#FK_SectorId").addClass('errortext');
+            $('#FK_SectorId').focus();
+            return false;
+        }
+        if ($('#Fk_SiteId').val() == '33') {
+            if ($('#Fk_BlockId').val() == '0') {
+                $("#Fk_BlockId").addClass('errortext');
+                $('#Fk_BlockId').focus();
+                return false;
+            }
+        }
+        //if ($('#Fk_BlockId').val() == '0') {
+        //    $("#Fk_BlockId").addClass('errortext');
+        //    $('#Fk_BlockId').focus();
+        //    return false;
+        //}
+
+        if ($('#PlotNumber').val() == '') {
+            $("#PlotNumber").addClass('errortext');
+            $('#PlotNumber').focus();
+            return false;
+        }
+
+
+        if ($('#Amount').val() == '') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            return false;
+        }
+        if ($('#TopUpDate').val() == '') {
+            $("#TopUpDate").addClass('errortext');
+            $('#TopUpDate').focus();
+            return false;
+        }
+        if ($('#ReceiptNo').val() == '') {
+            $("#ReceiptNo").addClass('errortext');
+            $('#ReceiptNo').focus();
+            return false;
+        }
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            return false;
+        }
+        return true;
+
+    }
+
+    function getmembername() {
+        debugger;
+        var LoginId = $('#LoginId').val();
+        $.ajax({
+            url: '/Accounts/GetMemberNameForTopUp',
+            type: "GET",
+            dataType: "JSON",
+            data: { LoginId: LoginId },
+            success: function (data) {
+                debugger;
+                if (data.Result == "Yes") {
+                    $('#txtname').html(data.DisplayName);
+
+                    divname.style.display = "block";
+                } else {
+                    if (data.DisplayName != null) {
+                        alert(data.DisplayName);
+                        $("#LoginId").addClass('errortext');
+                        $('#txtname').html("");
+                        $('#LoginId').val("");
+                        $('#LoginId').focus();
+                        return false;
+                    }
+                    alert("Invalid Login ID");
+                    $("#LoginId").addClass('errortext');
+                    $('#txtname').html("");
+                    $('#LoginId').val("");
+                    $('#LoginId').focus();
+                }
+            }
+        });
+    }
+    function getsectorname() {
+        $("#divload").css({ 'display': '' });
+        $.ajax({
+            url: '/Accounts/GetSectorName',
+            type: "GET",
+            dataType: "JSON",
+            data: { Fk_SiteId: $('#Fk_SiteId').val() },
+            success: function (data) {
+
+                $("#FK_SectorId").html(""); // clear before appending new list 
+                $("#FK_SectorId").empty();
+                $("#FK_SectorId").append(
+                      $('<option></option>').val(0).html('Select Sector'));
+                $.each(data.ddlSector, function (index, BlockCount) {
+                    $("#FK_SectorId").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+            }
+
+        });
+        $("#divload").css({ 'display': 'none' });
+    }
+    function getblockname() {
+        $("#divload").css({ 'display': '' });
+        $.ajax({
+            url: '/Accounts/GetBlockName',
+            type: "GET",
+            dataType: "JSON",
+            data: { Fk_SiteId: $('#Fk_SiteId').val(), FK_SectorId: $('#FK_SectorId').val() },
+            success: function (data) {
+
+                $("#Fk_BlockId").html(""); // clear before appending new list 
+                $("#Fk_BlockId").empty();
+                $("#Fk_BlockId").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.ddlblock, function (index, BlockCount) {
+                    $("#Fk_BlockId").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+            }
+
+        });
+        $("#divload").css({ 'display': 'none' });
+
+    }
+</script>
+
