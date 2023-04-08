@@ -81,36 +81,40 @@ namespace HMGreenCityMLM.Controllers
         {
             Reports newdata = new Reports();
             List<Reports> lst1 = new List<Reports>();
-            //DataSet ds11 = newdata.GetTopupReport();
+            DateTime currentdate = DateTime.Now;
+            currentdate = currentdate.AddMonths(-1);
+            newdata.FromDate = currentdate.ToString("dd/MM/yyyy");
+            newdata.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+            DataSet ds11 = newdata.GetTopupReport();
 
-            //if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
-            //{
-            //    foreach (DataRow r in ds11.Tables[0].Rows)
-            //    {
-            //        Reports Obj = new Reports();
-            //        Obj.ToLoginID = r["Pk_InvestmentId"].ToString();
-            //        Obj.LoginId = r["LoginId"].ToString();
-            //        Obj.DisplayName = r["Name"].ToString();
-            //        Obj.UpgradtionDate = r["UpgradtionDate"].ToString();
-            //        Obj.Package = r["Package"].ToString();
-            //        Obj.Amount = r["Amount"].ToString();
-            //        Obj.TopupBy = r["TopupBy"].ToString();
-            //        Obj.Status = r["Status"].ToString();
-            //        Obj.PrintingDate = r["PrintingDate"].ToString();
-            //        Obj.PlotNumber = r["PlotNumber"].ToString();
-            //        Obj.Description = r["Description"].ToString();
-            //        Obj.SiteName = r["SiteName"].ToString();
-            //        Obj.SectorName = r["SectorName"].ToString();
-            //        Obj.PaymentMode = r["PaymentMode"].ToString();
-            //        Obj.ReceiptNo = r["ReceiptNo"].ToString();
-            //        Obj.BlockName = r["BlockName"].ToString();
-            //        Obj.BusinessType = r["Business"].ToString();
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.ToLoginID = r["Pk_InvestmentId"].ToString();
+                    Obj.LoginId = r["LoginId"].ToString();
+                    Obj.DisplayName = r["Name"].ToString();
+                    Obj.UpgradtionDate = r["UpgradtionDate"].ToString();
+                    Obj.Package = r["Package"].ToString();
+                    Obj.Amount = r["Amount"].ToString();
+                    Obj.TopupBy = r["TopupBy"].ToString();
+                    Obj.Status = r["Status"].ToString();
+                    Obj.PrintingDate = r["PrintingDate"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
+                    Obj.Description = r["Description"].ToString();
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
+                    Obj.ReceiptNo = r["ReceiptNo"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.BusinessType = r["Business"].ToString();
 
-            //        ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
-            //        lst1.Add(Obj);
-            //    }
-            //    newdata.lsttopupreport = lst1;
-            //}
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    lst1.Add(Obj);
+                }
+                newdata.lsttopupreport = lst1;
+            }
             #region ddlstatus
             List<SelectListItem> ddlstatus = Common.BindTopupStatus();
             ViewBag.ddlstatus = ddlstatus;
@@ -435,7 +439,6 @@ namespace HMGreenCityMLM.Controllers
             List<Reports> lst1 = new List<Reports>();
             //incomeReport.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             //incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
-
             incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
             incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
 
