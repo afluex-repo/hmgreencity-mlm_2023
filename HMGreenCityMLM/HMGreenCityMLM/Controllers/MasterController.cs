@@ -1231,7 +1231,6 @@ namespace HMGreenCityMLM.Controllers
                 }
                 model.lstPlot = lst;
             }
-
             //DataSet ds = model.GetPlotList();
             List<SelectListItem> ddlSector = new List<SelectListItem>();
             ddlSector.Add(new SelectListItem { Text = "Select Phase", Value = "0" });
@@ -1333,7 +1332,6 @@ namespace HMGreenCityMLM.Controllers
                     foreach (DataRow r in dsBlock.Tables[0].Rows)
                     {
                         ddlblock.Add(new SelectListItem { Text = r["BlockName"].ToString(), Value = r["PK_BlockID"].ToString() });
-
                     }
                 }
                 model.ddlblock = ddlblock; 
