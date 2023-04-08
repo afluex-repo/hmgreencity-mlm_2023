@@ -210,6 +210,5 @@ E:\PraveenProject\repository\hmgreencity-mlm-master07\HMGreenCityMLM\HMGreenCity
 E:\PraveenProject\repository\hmgreencity-mlm-master07\HMGreenCityMLM\HMGreenCityMLM\bin\System.Net.Http.Formatting.xml
 E:\PraveenProject\repository\hmgreencity-mlm-master07\HMGreenCityMLM\HMGreenCityMLM\bin\System.Web.Http.xml
 E:\PraveenProject\repository\hmgreencity-mlm-master07\HMGreenCityMLM\HMGreenCityMLM\bin\System.Web.Http.WebHost.xml
-E:\PraveenProject\repository\hmgreencity-mlm-master07\HMGreenCityMLM\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
 E:\PraveenProject\repository\hmgreencity-mlm-master07\HMGreenCityMLM\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 E:\PraveenProject\repository\hmgreencity-mlm-master07\HMGreenCityMLM\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
