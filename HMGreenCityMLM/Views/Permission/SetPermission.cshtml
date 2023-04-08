@@ -28,7 +28,6 @@
                                             <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Set Permission</span>
                                         </a>
                                     </li>
-
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
@@ -57,9 +56,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                         <div class="row">
                                             <div class="col-md-12 table-responsive">
                                                 <table id="example23333" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -86,7 +83,6 @@
                                                                 @Html.DisplayFor(m => item.FormName)
 
                                                             </td>
-
                                                             <td>
                                                                 <input type="hidden" name="hdFormtypeId_ @i" id="hdFormtypeId_ @i" value="@item.Fk_FormTypeId" />
                                                                 <input type="hidden" name="hdFormId_ @i" id="hdFormId_ @i" value="@item.Fk_FormId" />
@@ -101,8 +97,7 @@
                                                                 @if (i == 4)
                                                                 {
                                                                     <input type="checkbox" name="chkSave_ @i" id="chkSave_ @i" @item.FormSave />
-                                                                }
-                                                                                       
+                                                                }                      
                                                             </td>
                                                             </tr>
                                                                     i++;
