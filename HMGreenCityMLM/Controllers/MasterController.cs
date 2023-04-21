@@ -435,8 +435,8 @@ namespace HMGreenCityMLM.Controllers
         {
             List<Master> lst = new List<Master>();
 
-            DataSet ds = model.GetSiteList();
-
+            //DataSet ds = model.GetSiteList();
+            DataSet ds = model.GetSiteNameFromCrm();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
@@ -521,6 +521,93 @@ namespace HMGreenCityMLM.Controllers
                 return View(ex.Message);
             }
         }
+
+
+
+
+
+        public ActionResult SelectSectorFromCrm(string SiteID)
+        {
+            try
+            {
+                Master model = new Master();
+                model.Fk_SiteId = SiteID;
+
+                #region GetSectors
+                List<SelectListItem> ddlSector = new List<SelectListItem>();
+                DataSet dsSector = model.GetSelectSectorFromCrm();
+
+                if (dsSector != null && dsSector.Tables.Count > 0)
+                {
+                    foreach (DataRow r in dsSector.Tables[0].Rows)
+                    {
+                        ddlSector.Add(new SelectListItem { Text = r["SectorName"].ToString(), Value = r["PK_SectorID"].ToString() });
+
+                    }
+                }
+
+                model.Result = "yes";
+                ViewBag.ddlSector = ddlSector;
+                model.ddlSector = ddlSector;
+                #endregion
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+
+
+
+        public ActionResult GetSelectSectorFromCrmForRetopup(string SiteID)
+        {
+            try
+            {
+                Master model = new Master();
+                model.Fk_SiteId = SiteID;
+
+                #region GetSectors
+                List<SelectListItem> ddlSector = new List<SelectListItem>();
+                DataSet dsSector = model.GetSelectSectorFromCrmForRetopup();
+
+                if (dsSector != null && dsSector.Tables.Count > 0)
+                {
+                    foreach (DataRow r in dsSector.Tables[0].Rows)
+                    {
+                        ddlSector.Add(new SelectListItem { Text = r["SectorName"].ToString(), Value = r["PK_SectorID"].ToString() });
+
+                    }
+                }
+
+                model.Result = "yes";
+                ViewBag.ddlSector = ddlSector;
+                model.ddlSector = ddlSector;
+                #endregion
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
 
 
         #endregion
@@ -643,7 +730,10 @@ namespace HMGreenCityMLM.Controllers
         {
             List<Master> lst = new List<Master>();
 
-            DataSet ds = model.GetSector();
+            //DataSet ds = model.GetSector();
+            DataSet ds = model.SelectSectorFromCrm();
+
+            
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -854,8 +944,9 @@ namespace HMGreenCityMLM.Controllers
         {
             List<Master> lst = new List<Master>();
 
-            DataSet ds = model.GetBlockList();
-
+            //DataSet ds = model.GetBlockList();
+            DataSet ds = model.GetBlockListFromCrm();
+            
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
@@ -875,6 +966,155 @@ namespace HMGreenCityMLM.Controllers
             }
             return View(model);
         }
+
+       
+        public ActionResult PlotListfromCRM(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            //DataSet ds = model.PlotListfromCRM();
+
+            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    foreach (DataRow r in ds.Tables[0].Rows)
+            //    {
+            //        Master obj = new Master();
+            //        obj.PlotNumber = r["PK_PlotID"].ToString();
+            //        obj.PlotNumber = r["PK_PlotSizeMaster"].ToString();
+            //        obj.SectorID = r["PK_SectorID"].ToString();
+            //        obj.EncryptKey = Crypto.Encrypt(r["PK_SectorID"].ToString());
+            //        obj.BlockID = r["PK_BlockID"].ToString();
+            //        obj.SiteID = r["PK_SiteID"].ToString();
+            //        obj.SiteName = r["SiteName"].ToString();
+            //        obj.SectorName = r["SectorName"].ToString();
+            //        obj.BlockName = r["BlockName"].ToString();
+            //        obj.PlotNumber = r["PlotNumber"].ToString();
+            //        obj.SectorName = r["PlotRate"].ToString();
+            //        obj.PlotAmount = r["PlotAmount"].ToString();
+            //        obj.PLCCharge = r["PLCCharge"].ToString();
+            //        obj.BookingPercent = r["BookingPercent"].ToString();
+            //        obj.AllottmentPercent = r["AllottmentPercent"].ToString();
+            //        obj.PlotStatus = r["PlotStatus"].ToString();
+            //        obj.StatusColor = r["StatusColor"].ToString();
+            //        obj.PlotSize = r["PlotSize"].ToString();
+            //        obj.TotalArea = r["TotalArea"].ToString();
+            //        lst.Add(obj);
+            //    }
+            //    model.lstBlock1 = lst;
+            //}
+
+
+              
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteNameFromCrm();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+
+
+
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Phase", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+          
+
+            
+            #endregion
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("PlotListfromCRM")]
+        [OnAction(ButtonName = "btnsearch")]
+        public ActionResult GetPlotListfromCRM(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+            model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+            model.BlockID = model.BlockID == "0" ? null : model.BlockID;
+            model.PlotNumber = model.PlotNumber == "0" ? null : model.PlotNumber;
+            model.Status = model.Status == "0" ? null : model.Status;
+
+            DataSet ds = model.PlotListfromCRM();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PlotNumber = r["PK_PlotID"].ToString();
+                    obj.PlotNumber = r["PK_PlotSizeMaster"].ToString();
+                    obj.SectorID = r["PK_SectorID"].ToString();
+                    obj.EncryptKey = Crypto.Encrypt(r["PK_SectorID"].ToString());
+                    obj.BlockID = r["PK_BlockID"].ToString();
+                    obj.SiteID = r["PK_SiteID"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    obj.PlotNumber = r["PlotNumber"].ToString();
+                    obj.PlotRate = r["PlotRate"].ToString();
+                    obj.PlotAmount = r["PlotAmount"].ToString();
+                    obj.PLCCharge = r["PLCCharge"].ToString();
+                    obj.BookingPercent = r["BookingPercent"].ToString();
+                    obj.AllottmentPercent = r["AllottmentPercent"].ToString();
+                    obj.PlotStatus = r["PlotStatus"].ToString();
+                    obj.StatusColor = r["StatusColor"].ToString();
+                    obj.PlotSize = r["PlotSize"].ToString();
+                    obj.TotalArea = r["TotalArea"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstBlock1 = lst;
+            }
+            
+
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dsSite = model.GetSiteNameFromCrm();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Phase", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+            #endregion
+
+
+            return View(model);
+        }
+
+        
 
         public ActionResult DeleteBlock(string id)
         {
@@ -1058,6 +1298,226 @@ namespace HMGreenCityMLM.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+
+
+
+
+
+
+        public ActionResult GetBlockListFromCrm(string SiteID, string SectorID)
+        {
+            List<SelectListItem> lstBlock = new List<SelectListItem>();
+            Master model = new Master();
+            model.Fk_SiteId = SiteID;
+            model.FK_SectorId = SectorID;
+            DataSet dsblock = model.GetBlockListFromCrm();
+
+            #region ddlBlock
+            if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dsblock.Tables[0].Rows)
+                {
+                    lstBlock.Add(new SelectListItem { Text = dr["BlockName"].ToString(), Value = dr["PK_BlockID"].ToString() });
+                }
+
+            }
+
+            model.lstBlock = lstBlock;
+            #endregion
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult GetBlockListFromCrmupdatePlot(string SiteID, string SectorID)
+        {
+            List<SelectListItem> lstBlock = new List<SelectListItem>();
+            Master model = new Master();
+            model.Fk_SiteId = SiteID;
+            model.SectorID = SectorID;
+            DataSet dsblock = model.GetBlockListFromCrmupdatePlot();
+
+            #region ddlBlock
+            if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dsblock.Tables[0].Rows)
+                {
+                    lstBlock.Add(new SelectListItem { Text = dr["BlockName"].ToString(), Value = dr["PK_BlockID"].ToString() });
+                }
+
+            }
+
+            model.lstBlock = lstBlock;
+            #endregion
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        
+
+        public ActionResult GetBlockListFromCrmForRetopup(string SiteID, string SectorID)
+        {
+            List<SelectListItem> lstBlock = new List<SelectListItem>();
+            Master model = new Master();
+            model.Fk_SiteId = SiteID;
+            model.FK_SectorId = SectorID;
+            DataSet dsblock = model.GetBlockListFromCrmForRetopup();
+
+            #region ddlBlock
+            if (dsblock != null && dsblock.Tables.Count > 0 && dsblock.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dsblock.Tables[0].Rows)
+                {
+                    lstBlock.Add(new SelectListItem { Text = dr["BlockName"].ToString(), Value = dr["PK_BlockID"].ToString() });
+                }
+
+            }
+
+            model.lstBlock = lstBlock;
+            #endregion
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        
+
+        public ActionResult CheckPlot(string SiteID, string SectorID, string BlockID, string PlotNumber)
+        {
+
+            Master model = new Master();
+            model.Fk_SiteId = SiteID;
+            model.FK_SectorId = SectorID;
+            model.Fk_BlockId = BlockID;
+            model.PlotNumber = PlotNumber;
+            DataSet dsblock = model.CheckPlotAvailibility();
+            if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
+            {
+                if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                {
+                    model.Result = "no";
+                }
+                else
+                {
+                   model.Result = "yes";
+                   model.PlotStatus = dsblock.Tables[0].Rows[0]["PlotStatus"].ToString();
+                    
+
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+            //return View();
+        }
+
+        
+
+        public ActionResult CheckPlotForRetopup(string SiteID, string SectorID, string BlockID, string PlotNumber)
+        {
+
+            Master model = new Master();
+            model.Fk_SiteId = SiteID;
+            model.FK_SectorId = SectorID;
+            model.Fk_BlockId = BlockID;
+            model.PlotNumber = PlotNumber;
+            DataSet dsblock = model.CheckPlotAvailibilityForRetopup();
+            if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
+            {
+                if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                {
+                    model.Result = "no";
+                }
+                else
+                {
+                    model.Result = "yes";
+                    model.PlotStatus = dsblock.Tables[0].Rows[0]["PlotStatus"].ToString();
+
+
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+            //return View();
+        }
+
+
+
+        public ActionResult CheckPlotForUpdatePlot(string SiteID, string SectorID, string BlockID, string PlotNumber)
+        {
+
+            Master model = new Master();
+            model.Fk_SiteId = SiteID;
+            model.SectorID = SectorID;
+            model.BlockID = BlockID;
+            model.PlotNumber = PlotNumber;
+            DataSet dsblock = model.CheckPlotAvailibilityForUpdatePlot();
+            if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
+            {
+                if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                {
+                    model.Result = "no";
+                }
+                else
+                {
+                    model.Result = "yes";
+                    model.PlotID = dsblock.Tables[0].Rows[0]["PK_PlotID"].ToString();
+                    model.PlotStatus = dsblock.Tables[0].Rows[0]["PlotStatus"].ToString();
+
+
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+            //return View();
+        }
+
+
+
+
+
+
+
+        [HttpPost]
+        public ActionResult UpdatePlotDetailsToMLM(string PK_InvestmentID, string Fk_SiteId, string SectorID, string BlockID, string PlotNumber, string PlotID) 
+        {
+
+            Master model = new Master();
+            model.PK_InvestmentID = PK_InvestmentID;
+            model.Fk_SiteId = Fk_SiteId;
+            model.SectorID = SectorID;
+            model.BlockID = BlockID;
+            model.PlotID = PlotID;
+            model.PlotNumber = PlotNumber;
+            DataSet dsblock = model.UpdatePlotDetailsToMLM();
+            if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
+            {
+                try
+                {
+                    if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        model.Result = "yes";
+
+                    }
+                    else
+                    {
+                        model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+
+
+
+
 
     }
 }

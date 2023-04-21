@@ -16,6 +16,17 @@ namespace HMGreenCityMLM.Models
         public string Result { get; set; }
         public string DisplayName { get; set; }
         public string AddedOn { get; set; }
+        public string SectorID { get; set; }
+        public string BlockID { get; set; }
+        public string PlotNumber { get; set; }
+        //public string SiteID { get; set; }
+        public string Fk_SiteId { get; set; }
+        public string Fk_UserId { get; set; }
+        public string Address { get; set; }
+        public string PinCode { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+
         public static string GenerateRandom()
         {
             Random r = new Random();
@@ -135,6 +146,33 @@ namespace HMGreenCityMLM.Models
 
             return ds;
         }
+
+
+
+        public DataSet GetSiteNameFromCrm()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_SiteID",Fk_SiteId)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm", para);
+            return ds;
+        }
+
+
+        public DataSet GetSiteNameFromCrmForRetopup()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_SiteID",Fk_SiteId)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm", para);
+            return ds;
+        }
+
+        
         public DataSet GetMemberDetailsForSale()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", ReferBy), };
@@ -268,13 +306,7 @@ namespace HMGreenCityMLM.Models
 
             return PaidStatus;
         }
-        public string Fk_UserId { get; set; }
-        public string Address { get; set; }
-        public string PinCode { get; set; }
-
-        public string City { get; set; }
-
-        public string State { get; set; }
+      
 
         public DataSet GetStateCity()
         {

@@ -416,7 +416,8 @@ namespace HMGreenCityMLM.Controllers
             List<SelectListItem> ddlsite = new List<SelectListItem>();
             List<SelectListItem> ddlsector = new List<SelectListItem>();
             List<SelectListItem> ddlblock = new List<SelectListItem>();
-            DataSet ds = obj.GetSite();
+            //DataSet ds = obj.GetSite();
+            DataSet ds = obj.GetSiteNameFromCrm();
             ddlsite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
             ddlsector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
             ddlblock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
@@ -637,6 +638,7 @@ namespace HMGreenCityMLM.Controllers
                 else
                 {
                     model.Result = "yes";
+                    model.PlotStatus = dsblock.Tables[0].Rows[0]["PlotStatus"].ToString();
                 }
             }
             return Json(model, JsonRequestBehavior.AllowGet);

@@ -485,6 +485,24 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetSectorbySite", para);
             return ds;
         }
+
+
+
+        public DataSet GetSelectSectorFromCrm()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@FK_SiteID",Fk_SiteId)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("SelectSectorFromCrm", para);
+            return ds;
+        }
+
+
+
+
+
         public DataSet GetBlockList()
         {
             SqlParameter[] para = {
@@ -494,5 +512,18 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetBlockList", para);
             return ds;
         }
+
+
+        public DataSet GetBlockListFromCrm()
+        {
+            SqlParameter[] para ={ new SqlParameter("@SiteID",SiteID),
+                                     new SqlParameter("@SectorID",SectorID),
+                                     new SqlParameter("@BlockID",BlockID),
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("GetBlockListFromCrm", para);
+            return ds;
+        }
+
+        public string SiteID { get; set; }
     }
 }
