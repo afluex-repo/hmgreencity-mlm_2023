@@ -388,7 +388,7 @@ namespace HMGreenCityMLM.Models
         }
 
         public string PrintingDate { get; set; }
-        public string PlotNumber { get; set; }
+        //public string PlotNumber { get; set; }
 
         public string ProductName { get; set; }
         public string HSNCode { get; set; }
@@ -750,6 +750,47 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@IsDownline", IsDownline)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetRewardIncludedDetails", para);
+            return ds;
+        }
+
+
+
+
+        public DataSet UpdatePlotDetails()
+        {
+            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@Name", Name),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate),
+                                      new SqlParameter("@Package", Package),
+                                      new SqlParameter("@SiteId", SiteId),
+                                      new SqlParameter("@ClaculationStatus", Status),
+                                      new SqlParameter("@Fk_BusinessId", BusinessType)
+                                  };
+
+            DataSet ds = DBHelper.ExecuteQuery("UpdatePlotDetails", para);
+            return ds;
+        }
+
+        public DataSet GetBlockList()
+        {
+            SqlParameter[] para ={ new SqlParameter("@SiteID",SiteId),
+                                     new SqlParameter("@SectorID",SectorID),
+                                     new SqlParameter("@BlockID",BlockID),
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("GetBlockList", para);
+            return ds;
+        }
+
+
+        public DataSet GetSiteNameFromCrmForUpdateplotDetails()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_SiteID",Fk_SiteId)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm", para);
             return ds;
         }
 

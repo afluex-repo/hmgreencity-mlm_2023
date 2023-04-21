@@ -42,7 +42,7 @@
                                                             <th>Site Name</th>
                                                             <th>Sector Name</th>
                                                             <th>Block Name</th>
-                                                            <th>Action</th>
+                                                            @*<th>Action</th>*@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -59,10 +59,10 @@
                                                                         <td>@Item.SectorName</td>
                                                                         <td>@Item.BlockName</td>
 
-                                                                        <td>
+                                                                        @*<td>
                                                                             <a href="/Master/BlockMaster?BlockID=@Item.BlockID" class="btn btn-info btn-sm">Edit</a>
                                                                             <a href="/Master/DeleteBlock?id=@Item.BlockID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Block?');" name="btnDelete">Delete</a>
-                                                                        </td>
+                                                                        </td>*@
 
                                                                     </tr>
 

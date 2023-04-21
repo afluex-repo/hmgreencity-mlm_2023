@@ -40,7 +40,7 @@
                                                             <th>S No.</th>
                                                             <th>Site Name</th>
                                                             <th>Location</th>
-                                                            <th>Action</th>
+                                                            @*<th>Action</th>*@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -56,10 +56,10 @@
                                                                         <td>@Item.SiteName</td>
                                                                         <td>@Item.SectorName</td>
 
-                                                                        <td>
+                                                                        @*<td>
                                                                             <a href="/Master/SectorMaster?SectorID=@Item.SectorID" class="btn btn-info btn-sm">Edit</a>
                                                                             <a href="/Master/DeleteSector?id=@Item.SectorID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Sector?');" name="btnDelete">Delete</a>
-                                                                        </td>
+                                                                        </td>*@
 
                                                                     </tr>
 

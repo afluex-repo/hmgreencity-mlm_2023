@@ -17,7 +17,9 @@ namespace HMGreenCityMLM.Controllers
             List<SelectListItem> ddlsite = new List<SelectListItem>();
             List<SelectListItem> ddlsector = new List<SelectListItem>();
             List<SelectListItem> ddlblock = new List<SelectListItem>();
-            DataSet ds = obj.GetSite();
+            //DataSet ds = obj.GetSite();
+            DataSet ds = obj.GetSiteNameFromCrm();
+            
             ddlsite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
             ddlsector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
             ddlblock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
@@ -415,7 +417,8 @@ namespace HMGreenCityMLM.Controllers
             List<SelectListItem> ddlsite = new List<SelectListItem>();
             List<SelectListItem> ddlsector = new List<SelectListItem>();
             List<SelectListItem> ddlblock = new List<SelectListItem>();
-            DataSet ds = obj.GetSite();
+            //DataSet ds = obj.GetSite();
+            DataSet ds = obj.GetSiteNameFromCrmForRetopup();
             ddlsite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
             ddlsector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
             ddlblock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
@@ -560,7 +563,10 @@ namespace HMGreenCityMLM.Controllers
                
                 #region GetSectors
                 List<SelectListItem> ddlSector = new List<SelectListItem>();
-                DataSet dsSector = model.GetSectorList();
+                //DataSet dsSector = model.GetSectorList();
+                DataSet dsSector = model.GetSelectSectorFromCrm();
+                
+
 
                 if (dsSector != null && dsSector.Tables.Count > 0)
                 {
@@ -593,8 +599,9 @@ namespace HMGreenCityMLM.Controllers
 
                 #region GetBlock
                 List<SelectListItem> ddlblock = new List<SelectListItem>();
-                DataSet dsBlock = model.GetBlockList();
-
+                //DataSet dsBlock = model.GetBlockList();
+                DataSet dsBlock = model.GetBlockListFromCrm();
+                
                 if (dsBlock != null && dsBlock.Tables.Count > 0)
                 {
                     foreach (DataRow r in dsBlock.Tables[0].Rows)

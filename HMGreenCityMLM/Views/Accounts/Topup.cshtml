@@ -120,7 +120,11 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Plot Number <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
+                                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" , @onchange = "return CheckPlotStatus();" })
+
+                                                        <span style="color:red;" id="PlotStatus123"></span>
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,9 +271,9 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
-<script src="../../WebsiteCss/js/jquery.js"></script>
+@*<script src="../../WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
 
 <script>
     $(document).ready(function () {
@@ -609,50 +613,155 @@
 
         return true;
     }
-    function getsectorname() {
-        $("#divload").css({ 'display': '' });
-        $.ajax({
-            url: '/Accounts/GetSectorName',
-            type: "GET",
-            dataType: "JSON",
-            data: { Fk_SiteId: $('#Fk_SiteId').val() },
-            success: function (data) {
+    //function getsectorname() {
+    //    $("#divload").css({ 'display': '' });
+    //    $.ajax({
+    //        url: '/Accounts/GetSectorName',
+    //        type: "GET",
+    //        dataType: "JSON",
+    //        data: { Fk_SiteId: $('#Fk_SiteId').val() },
+    //        success: function (data) {
 
-                $("#FK_SectorId").html(""); // clear before appending new list
-                $("#FK_SectorId").empty();
-                $("#FK_SectorId").append(
-                      $('<option></option>').val(0).html('Select Sector'));
-                $.each(data.ddlSector, function (index, BlockCount) {
+    //            $("#FK_SectorId").html(""); // clear before appending new list
+    //            $("#FK_SectorId").empty();
+    //            $("#FK_SectorId").append(
+    //                  $('<option></option>').val(0).html('Select Sector'));
+    //            $.each(data.ddlSector, function (index, BlockCount) {
+    //                $("#FK_SectorId").append(
+    //                      $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+    //            });
+    //        }
+
+    //    });
+    //    $("#divload").css({ 'display': 'none' });
+    //}
+    //function getblockname() {
+    //    $("#divload").css({ 'display': '' });
+    //    $.ajax({
+    //        url: '/Accounts/GetBlockName',
+    //        type: "GET",
+    //        dataType: "JSON",
+    //        data: { Fk_SiteId: $('#Fk_SiteId').val(), FK_SectorId: $('#FK_SectorId').val() },
+    //        success: function (data) {
+
+    //            $("#Fk_BlockId").html(""); // clear before appending new list
+    //            $("#Fk_BlockId").empty();
+    //            $("#Fk_BlockId").append(
+    //                  $('<option></option>').val(0).html('Select Block'));
+    //            $.each(data.ddlblock, function (index, BlockCount) {
+    //                $("#Fk_BlockId").append(
+    //                      $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+    //            });
+    //        }
+
+    //    });
+    //    $("#divload").css({ 'display': 'none' });
+
+    //}
+
+    function CheckPlotStatus() {
+        debugger
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#Fk_SiteId').val();
+        var sectorID = $('#FK_SectorId').val();
+        var block = $('#Fk_BlockId').val();
+        var plotno = $('#PlotNumber').val();
+
+        $.ajax({
+            url: '/Master/CheckPlot', type: 'get', dataType: 'json',
+            data: { 'SiteID': siteID, 'SectorID': sectorID, 'BlockID': block, 'PlotNumber': plotno },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#PlotNumber").removeClass('errortext');
+                    $("#PlotStatus123").text(data.PlotStatus);
+                }
+                else if (data.Result == "no") {
+                    alert('This Plot Number is not available !');
+                    $("#PlotNumber").addClass('errortext');
+                    $('#PlotNumber').focus();
+                    $("#PlotNumber").val('');
+                }
+                else {
+                    alert('Plot not available !');
+                    $("#PlotNumber").addClass('errortext');
+                    $("#PlotNumber").val('');
+                }
+            }
+        });
+    }
+
+</script>
+
+  @*,SiteID),
+,SectorID),
+,BlockID),*@
+
+
+<script>
+
+    //function onSiteChange() {
+    
+    function getsectorname() {
+        debugger;
+        var value = $('#Fk_SiteId').val();
+        var values = $('#FK_SectorId').val();
+        var tr = [];                         
+        $.ajax({
+            url: "/Master/SelectSectorFromCrm",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                var j = 1;
+                if (data.Result == "yes") {
+                    $('#Rate').val(data.Rate);
+                    $("#FK_SectorId").html(""); // clear before appending new list
+                    $("#FK_SectorId").empty();
                     $("#FK_SectorId").append(
-                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
-                });
+                          $('<option></option>').val(0).html('Select Phase'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#FK_SectorId").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+
+
             }
 
         });
-        $("#divload").css({ 'display': 'none' });
+
     }
+
+    
+
+    //function onSectorChange() {
     function getblockname() {
-        $("#divload").css({ 'display': '' });
+        debugger;
+        var siteID = $('#Fk_SiteId').val();
+        var sectorID = $('#FK_SectorId').val();
         $.ajax({
-            url: '/Accounts/GetBlockName',
-            type: "GET",
-            dataType: "JSON",
-            data: { Fk_SiteId: $('#Fk_SiteId').val(), FK_SectorId: $('#FK_SectorId').val() },
+            url: '/Master/GetBlockListFromCrm', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
             success: function (data) {
 
                 $("#Fk_BlockId").html(""); // clear before appending new list
                 $("#Fk_BlockId").empty();
                 $("#Fk_BlockId").append(
                       $('<option></option>').val(0).html('Select Block'));
-                $.each(data.ddlblock, function (index, BlockCount) {
+                $.each(data.lstBlock, function (index, BlockCount) {
                     $("#Fk_BlockId").append(
                           $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
                 });
+
             }
 
         });
-        $("#divload").css({ 'display': 'none' });
-
     }
 </script>
-

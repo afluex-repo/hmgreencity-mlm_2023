@@ -10,6 +10,8 @@ namespace HMGreenCityMLM.Models
 {
     public class Wallet : Common
     {
+        
+        public string PlotStatus { get; set; }
         public string ReceiptNo { get; set; }
         public int Amount2 { get; set; }
         public string word { get; set; }

@@ -51,3 +51,4 @@ E:\Repository\hmgreencity-mlm\HMGreenCityMLM\HMGreenCityMLM\bin\System.Web.Http.
 E:\Repository\hmgreencity-mlm\HMGreenCityMLM\HMGreenCityMLM\bin\System.Web.Http.WebHost.xml
 E:\Repository\hmgreencity-mlm\HMGreenCityMLM\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 E:\Repository\hmgreencity-mlm\HMGreenCityMLM\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
+E:\Repository\hmgreencity-mlm\HMGreenCityMLM\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache

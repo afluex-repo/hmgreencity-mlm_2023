@@ -847,6 +847,8 @@
     <Content Include="Views\AdminReports\DefaultAssociateList.cshtml" />
     <Content Include="Views\AdminReports\GetBusinessStatus.cshtml" />
     <Content Include="Views\AdminReports\RewardIncludedList.cshtml" />
+    <Content Include="Views\AdminReports\UpdatePlotDetails.cshtml" />
+    <Content Include="Views\Master\PlotListfromCRM.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
