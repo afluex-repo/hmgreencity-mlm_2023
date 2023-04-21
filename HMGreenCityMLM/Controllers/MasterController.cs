@@ -1403,19 +1403,14 @@ namespace HMGreenCityMLM.Controllers
                 {
                    model.Result = "yes";
                    model.PlotStatus = dsblock.Tables[0].Rows[0]["PlotStatus"].ToString();
-                    
-
                 }
             }
             return Json(model, JsonRequestBehavior.AllowGet);
             //return View();
         }
-
         
-
         public ActionResult CheckPlotForRetopup(string SiteID, string SectorID, string BlockID, string PlotNumber)
         {
-
             Master model = new Master();
             model.Fk_SiteId = SiteID;
             model.FK_SectorId = SectorID;
@@ -1432,16 +1427,11 @@ namespace HMGreenCityMLM.Controllers
                 {
                     model.Result = "yes";
                     model.PlotStatus = dsblock.Tables[0].Rows[0]["PlotStatus"].ToString();
-
-
                 }
             }
             return Json(model, JsonRequestBehavior.AllowGet);
             //return View();
         }
-
-
-
         public ActionResult CheckPlotForUpdatePlot(string SiteID, string SectorID, string BlockID, string PlotNumber)
         {
 
@@ -1462,24 +1452,15 @@ namespace HMGreenCityMLM.Controllers
                     model.Result = "yes";
                     model.PlotID = dsblock.Tables[0].Rows[0]["PK_PlotID"].ToString();
                     model.PlotStatus = dsblock.Tables[0].Rows[0]["PlotStatus"].ToString();
-
-
                 }
             }
             return Json(model, JsonRequestBehavior.AllowGet);
             //return View();
         }
-
-
-
-
-
-
-
+        
         [HttpPost]
         public ActionResult UpdatePlotDetailsToMLM(string PK_InvestmentID, string Fk_SiteId, string SectorID, string BlockID, string PlotNumber, string PlotID) 
         {
-
             Master model = new Master();
             model.PK_InvestmentID = PK_InvestmentID;
             model.Fk_SiteId = Fk_SiteId;
@@ -1495,7 +1476,6 @@ namespace HMGreenCityMLM.Controllers
                     if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
                         model.Result = "yes";
-
                     }
                     else
                     {
@@ -1506,18 +1486,9 @@ namespace HMGreenCityMLM.Controllers
                 {
                     model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
-
             }
             return Json(model, JsonRequestBehavior.AllowGet);
-
         }
-
-
-
-
-
-
-
 
     }
 }
