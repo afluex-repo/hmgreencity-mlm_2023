@@ -31,52 +31,53 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
-                                        <div class="table-responsive">
+                                        <div class="dt-responsive table-responsive">
                                             <table class="table mb-0" id="example23">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sr No.</th>
-                                                        <th>Name</th>
-                                                        <th>Site Name</th>
-                                                        <th>Sector Name</th>
-                                                        <th>Upgradation Date</th>
-                                                        <th>Product Name</th>
-                                                        <th>Amount</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model != null)
-                                                    {
-                                                        if (Model.lsttopupreport != null)
-                                                        {
-                                                            int i = 1;
-                                                            foreach (var Item in Model.lsttopupreport)
-                                                            {
-                                                                <tr class="text-left">
-                                                                    <td>@i</td>
-                                                                    <td>@Item.Name</td>
-                                                                    <td>@Item.SiteName</td>
-                                                                    <td>@Item.SectorName</td>
-                                                                    <td>@Item.UpgradtionDate</td>
-                                                                    <td>@Item.ProductName</td>
-                                                                    <td>@Item.Amount</td>
-                                                                    <td>
-                                                                        <a href="/User/PrintTopup?invid=@Item.FK_InvestmentID" target="_blank" class="btn btn-sm btn-primary">Print</a>
-                                                                    </td>y
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Sr No.</th>
+                                                                    <th>Name</th>
+                                                                    <th>Site Name</th>
+                                                                    <th>Sector Name</th>
+                                                                    <th>Upgradation Date</th>
+                                                                    <th>Product Name</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Action</th>
                                                                 </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @if (Model != null)
+                                                                {
+                                                                    if (Model.lsttopupreport != null)
+                                                                    {
+                                                                        int i = 1;
+                                                                        foreach (var Item in Model.lsttopupreport)
+                                                                        {
+                                                                            <tr class="text-left">
+                                                                                <td>@i</td>
+                                                                                <td>@Item.Name</td>
+                                                                                <td>@Item.SiteName</td>
+                                                                                <td>@Item.SectorName</td>
+                                                                                <td>@Item.UpgradtionDate</td>
+                                                                                <td>@Item.ProductName</td>
+                                                                                <td>@Item.Amount</td>
+                                                                                <td>
+                                                                                    <a href="/User/PrintTopup?invid=@Item.FK_InvestmentID" target="_blank" class="btn btn-sm btn-primary">Print</a>
+                                                                                </td>
+                                                                            </tr>
 
-                                                                i++;
-                                                            }
-                                                        }
-                                                    }
+                                                                            i++;
+                                                                        }
+                                                                    }
+                                                                }
 
-                                                </tbody>
-                                            </table>
+                                                            </tbody>
+                                                        </table>
 
-                                        </div>
-                                    </div>
-                                </div>
+                                                    </div>
+                                                </div>
+</div>
                             </div>
                         </div>
                     </div>
@@ -86,4 +87,4 @@
     </div>
 
 }
-<script src="../../AdminPanelCss/assets/vendors/jquery.js"></script>
+
