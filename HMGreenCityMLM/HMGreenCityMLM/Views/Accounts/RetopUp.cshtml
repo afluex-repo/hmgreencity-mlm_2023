@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm("RetopUpAction", "Accounts", FormMethod.Post, new { @id = "form1" }))
 {
-    
+
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -37,7 +37,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Topup Type <span style="color: red">*</span></label>                     
+                                                    <label class="col-sm-3 col-form-label">Topup Type <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
                                                         <input type="radio" name="rdbtype" onclick="return showdetails('NewBusiness')" value="NewBusiness" /> New Business
                                                         <input type="radio" name="rdbtype" onclick="return showdetails('OtherBusiness')" value="OtherBusiness" /> Other Business
@@ -90,7 +90,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Block</label>
                                                     <div class="col-sm-9">
-                                                        @Html.DropDownListFor(m => m.Fk_BlockId, new SelectList(ViewBag.ddlblock, "Value", "Text"), new { @class = "form-control"})
+                                                        @Html.DropDownListFor(m => m.Fk_BlockId, new SelectList(ViewBag.ddlblock, "Value", "Text"), new { @class = "form-control" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +98,8 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Plot Number <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
+                                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();" })
+                                                        <label id="CheckPlotStatus123" style="color:red;"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,7 +111,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -118,8 +119,6 @@
                                                     <label class="col-sm-2 col-form-label">In Words<span style="color: black">*</span></label>
                                                     <div class="col-sm-10">
                                                         @Html.TextBoxFor(m => m.word, new { @class = "form-control", @style = "font-weight:400;color:#8a8b91;", @placeholder = "Amount in words", @disabled = "true" })
-
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -127,7 +126,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Topup Date <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @Placeholder = "TopUp Date",@readonly=true })
+                                                        @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @Placeholder = "TopUp Date", @readonly = true })
                                                     </div>
                                                 </div>
                                             </div>
@@ -203,7 +202,7 @@
                                                 <span style="color: red">@TempData["Topup"] </span>
                                                 <input class="btn btn-success pull-right" onclick="return validateform()" type="submit" value="Re-Top Up" />
                                             </div>
-                                        
+
 
 
                                         </div>
@@ -225,8 +224,7 @@
 
 <style>
     .errortext {
-       border: 2px solid red !important;
-       
+        border: 2px solid red !important;
     }
 </style>
 
@@ -264,7 +262,7 @@
                 $("#loader").css({ 'display': 'none' });
             }
         });
-       
+
     });
     $('#TopUpDate').datepicker({
         dateFormat: 'dd/mm/yy',
@@ -297,7 +295,7 @@
 
         }
         else if (type == "NewBusiness") {
-           
+
             $('#TopupType').val('NewBusiness');
 
         }
@@ -494,7 +492,7 @@
             data: { Fk_SiteId: $('#Fk_SiteId').val() },
             success: function (data) {
 
-                $("#FK_SectorId").html(""); // clear before appending new list 
+                $("#FK_SectorId").html(""); // clear before appending new list
                 $("#FK_SectorId").empty();
                 $("#FK_SectorId").append(
                       $('<option></option>').val(0).html('Select Sector'));
@@ -516,7 +514,7 @@
             data: { Fk_SiteId: $('#Fk_SiteId').val(), FK_SectorId: $('#FK_SectorId').val() },
             success: function (data) {
 
-                $("#Fk_BlockId").html(""); // clear before appending new list 
+                $("#Fk_BlockId").html(""); // clear before appending new list
                 $("#Fk_BlockId").empty();
                 $("#Fk_BlockId").append(
                       $('<option></option>').val(0).html('Select Block'));
@@ -529,6 +527,43 @@
         });
         $("#divload").css({ 'display': 'none' });
 
+    }
+
+
+
+
+
+
+    function CheckPlotStatus() {
+        debugger
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#Fk_SiteId').val();
+        var sectorID = $('#FK_SectorId').val();
+        var block = $('#Fk_BlockId').val();
+        var plotno = $('#PlotNumber').val();
+
+        $.ajax({
+            url: '/Accounts/CheckPlot', type: 'get', dataType: 'json',
+            data: { 'SiteID': siteID, 'SectorID': sectorID, 'BlockID': block, 'PlotNumber': plotno },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#PlotNumber").removeClass('errortext');
+                    $("#CheckPlotStatus123").text(data.PlotStatus);
+                }
+                else if (data.Result == "no") {
+                    alert('Invalid Plot Number !');
+                    $("#PlotNumber").addClass('errortext');
+                    $('#PlotNumber').focus();
+                    $("#PlotNumber").val('');
+                }
+                else {
+                    alert('Plot not available !');
+                    $("#PlotNumber").addClass('errortext');
+                    $("#PlotNumber").val('');
+                }
+            }
+        });
     }
 </script>
 

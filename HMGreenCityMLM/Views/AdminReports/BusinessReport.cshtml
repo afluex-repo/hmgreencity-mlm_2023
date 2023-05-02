@@ -1,0 +1,229 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "BusinessReport";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("BusinessReport", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <br />
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">     Business Report </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 table-responsive">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        Login Id
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
+                                                        @Html.HiddenFor(m => m.ToLoginID)
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        From Date
+                                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From  Date" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        To Date
+                                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To  Date" })
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        Leg
+                                                        @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.Leg, "Value", "Text"), new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        IsDownline
+                                                        @Html.CheckBoxFor(m => m.IsDownline)
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <br />
+                                                        <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails" onclick="return Validate();" />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="dt-responsive table-responsive">
+                                                    <table class="table mb-0" id="example23">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr No.</th>
+                                                                <th>LoginId</th>
+                                                                <th>Name</th>
+                                                                <th>Plot Details</th>
+                                                                <th>Calculation Date</th>
+                                                                <th style="text-align:right">Amount</th>
+                                                                <th style="text-align:right">Payment Mode</th>
+                                                                <th style="text-align:right">Bank Name</th>
+                                                                <th style="text-align:right">Business Type</th>
+                                                                <th style="text-align:right;display:none">BV</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if (Model != null)
+                                                            {
+                                                                if (Model.lstassociate != null)
+                                                                {
+                                                                    int i = 1;
+                                                                    foreach (var Item in Model.lstassociate)
+                                                                    {
+                                                                        <tr class="text-left">
+                                                                            <td>@i</td>
+                                                                            <td>@Item.LoginId</td>
+                                                                            <td>@Item.DisplayName</td>
+                                                                            <td>@Item.SiteName, @Item.SectorName, @Item.PlotNumber</td>
+                                                                            <td>@Item.ClosingDate</td>
+                                                                            <td style="text-align:right">@Item.NetAmount</td>
+                                                                            <td style="text-align:right">@Item.PaymentMode</td>
+                                                                            <td style="text-align:right">@Item.BankName</td>
+                                                                            <td style="text-align:right">@Item.BusinessType</td>
+                                                                            <td style="text-align:right;display:none">@Item.LeadershipBonus</td>
+                                                                        </tr>
+                                                                        i++;
+                                                                    }
+
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td>Total</td>
+                                                                <td style="text-align:right"><b style="color:#ff0000;text-align:left">@ViewBag.TotalNetAmount</b></td>
+                                                                <td style="text-align:right"> <b style="color:#ff0000;text-align:left">@ViewBag.TotalBV</b></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+                            <!-- main-panel ends -->
+}
+
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+    $(document).ready(function () {
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+
+
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+    function Validate() {
+
+        $(".errortext").removeClass("errortext");
+
+        if ($("#IsDownline").prop("checked") == true) {
+            if ($('#LoginId').val() == '') {
+                $("#LoginId").addClass('errortext');
+                $('#LoginId').focus();
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+
+        //var LoginId = $("#LoginId").val();
+        //if (LoginId=="")
+        //{
+        //    $("#ToLoginID").val(null);
+        //}
+        //else
+        //{
+        //    var loginid = $("#ToLoginID").val();
+        //}
+    }
+
+
+    $('#ClosingDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</script>
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>

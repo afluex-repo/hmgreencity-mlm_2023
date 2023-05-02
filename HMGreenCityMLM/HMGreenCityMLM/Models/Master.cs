@@ -23,7 +23,7 @@ namespace HMGreenCityMLM.Models
         public string DirectPercent { get; set; }
         public string ROIPercent { get; set; }
         public List<Master> lstproduct { get; set; }
-
+       
         public string NewsID { get; set; }
         public string NewsHeading { get; set; }
         public string NewsBody { get; set; }
@@ -58,7 +58,24 @@ namespace HMGreenCityMLM.Models
 
         public string BlockID { get; set; }
         public string BlockName { get; set; }
+
+        public string Status { get; set; }
+        
+        
         public List<Master> lstBlock1 { get; set; }
+
+        public List<Master> lstPlot { get; set; }
+        public string PlotNumber { get; set; }
+        public string PlotArea { get; set; }
+        public string PlotRate { get; set; }
+        public string PlotAmount { get; set; }
+        public string PlotStatus { get; set; }
+        public string Fk_SiteId { get; set; }
+        public string FK_SectorId { get; set; }
+        public string Fk_BlockId { get; set; }
+        public List<SelectListItem>ddlblock { get; set; }
+        public List<SelectListItem> ddlStatus { get; set; }
+
 
         #region ProductMaster
 
@@ -181,6 +198,31 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetSiteName",para);
             return ds;
         }
+
+
+        public DataSet GetSiteNameFromCrm()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_SiteID",SiteID)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm", para);
+            return ds;
+        }
+
+
+        public DataSet GetStatusListFromCrm()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Status",Status)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetStatusListFromCrm", para);
+            return ds;
+        }
+        
 
         public DataSet GetSitePlcChargeList()
         {
@@ -325,8 +367,25 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("SelectSector", para);
             return ds;
         }
-       
 
+        public DataSet SelectSectorFromCrm()
+        {
+            SqlParameter[] para =
+             {
+                                new SqlParameter("@FK_SiteID",Fk_SiteId)
+
+                            };
+            DataSet ds = DBHelper.ExecuteQuery("SelectSectorFromCrm", para);
+            return ds;
+        }
+
+
+
+//        @SiteID 
+//@SectorID
+//@BlockID
+
+            
         public DataSet DeleteSector()
         {
             SqlParameter[] para = { new SqlParameter("@PK_SectorID", SectorID),
@@ -384,6 +443,31 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetBlockList", para);
             return ds;
         }
+
+        public DataSet GetBlockListFromCrm()
+        {
+            SqlParameter[] para ={ new SqlParameter("@SiteID",Fk_SiteId),
+                                     new SqlParameter("@SectorID",FK_SectorId),
+                                     new SqlParameter("@BlockID",Fk_BlockId),
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("GetBlockListFromCrm", para);
+            return ds;
+        }
+        public DataSet PlotListfromCRM()
+        {
+            SqlParameter[] para = { new SqlParameter("@SiteID", Fk_SiteId),
+                                  new SqlParameter("@SectorID", FK_SectorId),
+                                  new SqlParameter("@BlockID", Fk_BlockId),
+                                  //new SqlParameter("@PlotID", PlotID),
+                                  new SqlParameter("@PlotNumber", PlotNumber),
+                                    new SqlParameter("@Status", Status)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("PlotListfromCRM", para);
+            return ds;
+        }
+
+        public string PlotID { get; set; }
+
 
         public DataSet ListNoticeMaster()
         {

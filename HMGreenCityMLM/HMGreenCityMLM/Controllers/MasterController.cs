@@ -931,7 +931,6 @@ namespace HMGreenCityMLM.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("NoticeMaster")]
         [OnAction(ButtonName = "btnSave")]
@@ -939,7 +938,6 @@ namespace HMGreenCityMLM.Controllers
         {
             try
             {
-
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = new DataSet();
                 ds = obj.SaveNoticeMaster();
@@ -958,7 +956,6 @@ namespace HMGreenCityMLM.Controllers
                 {
                     TempData["NoticeMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
-
             }
             catch (Exception ex)
             {
@@ -966,8 +963,6 @@ namespace HMGreenCityMLM.Controllers
             }
             return RedirectToAction("NoticeMaster", "Master");
         }
-
-
         public ActionResult NoticeMasterList(Master model)
         {
             List<Master> lst = new List<Master>();
@@ -987,7 +982,6 @@ namespace HMGreenCityMLM.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("NoticeMaster")]
         [OnAction(ButtonName = "btnUpdate")]
@@ -1013,7 +1007,6 @@ namespace HMGreenCityMLM.Controllers
                 {
                     TempData["NoticeMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
-
             }
             catch (Exception ex)
             {
@@ -1021,8 +1014,6 @@ namespace HMGreenCityMLM.Controllers
             }
             return RedirectToAction("NoticeMasterList", "Master");
         }
-
-
         public ActionResult DeleteNotice(string id)
         {
             string FormName = "";
@@ -1058,6 +1049,299 @@ namespace HMGreenCityMLM.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+        public ActionResult SiteMasterListFromCrm(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetSiteNameFromCrm();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.SiteID = r["PK_SiteID"].ToString();
+                    obj.EncryptKey = Crypto.Encrypt(r["PK_SiteID"].ToString());
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.Location = r["Location"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstSite = lst;
+            }
+            return View(model);
+        }
+        public ActionResult SectorListFromCrm(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.SelectSectorFromCrm();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorID = r["PK_SectorID"].ToString();
+                    obj.SiteID = r["FK_SiteID"].ToString();
+                    obj.EncryptKey = Crypto.Encrypt(r["PK_SectorID"].ToString());
+                    obj.SectorName = r["SectorName"].ToString();
 
+                    lst.Add(obj);
+                }
+                model.lstSector = lst;
+            }
+            return View(model);
+        }
+        public ActionResult BlockListFromCrm(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetBlockListFromCrm();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.SectorID = r["PK_SectorID"].ToString();
+                    obj.EncryptKey = Crypto.Encrypt(r["PK_SectorID"].ToString());
+                    obj.SiteID = r["PK_SiteID"].ToString();
+                    obj.SectorName = r["SectorName"].ToString();
+                    obj.BlockID = r["PK_BlockID"].ToString();
+                    obj.BlockName = r["BlockName"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstBlock1 = lst;
+            }
+            return View(model);
+        }
+        public ActionResult PlotListfromCRM(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            model.SiteID = model.SiteID == "0" ? null : model.SiteID;
+            model.SectorID = model.SectorID == "0" ? null : model.SectorID;
+            model.BlockID = model.BlockID == "0" ? null : model.BlockID;
+            DataSet ds = model.PlotListfromCRM();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                var i = 0;
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    //   if (i < 25)
+                    {
+                        //Master obj = new Master();
+                        //obj.PlotID = r["PK_PlotID"].ToString();
+                        //obj.EncryptKey = Crypto.Encrypt(r["PK_PlotID"].ToString());
+                        //obj.SiteName = r["SiteName"].ToString();
+                        //obj.SectorName = r["SectorName"].ToString();
+                        //obj.BlockName = r["BlockName"].ToString();
+                        //obj.PlotNumber = r["PlotNumber"].ToString();
+                        //obj.PlotArea = r["TotalArea"].ToString();
+                        //obj.PlotRate = double.Parse(r["PlotRate"].ToString()).ToString("n2");
+                        //obj.PlotAmount = double.Parse(r["PlotAmount"].ToString()).ToString("n2");
+                        //obj.PLCCharge = r["PLCCharge"].ToString();
+                        ////obj.BookingPercent = r["BookingPercent"].ToString();
+                        ////obj.AllottmentPercent = (r["AllottmentPercent"].ToString());
+                        //obj.PlotStatus = (r["PlotStatus"].ToString());
+                        ////obj.ColorCSS = (r["StatusColor"].ToString());
+                        //lst.Add(obj);
+                    }
+                    //  i = i + 1;
+                }
+                model.lstPlot = lst;
+            }
+            //DataSet ds = model.GetPlotList();
+            //List<SelectListItem> ddlSector = new List<SelectListItem>();
+            //ddlSector.Add(new SelectListItem { Text = "Select Phase", Value = "0" });
+            //ViewBag.ddlSector = ddlSector;
+            //List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            //ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            //ViewBag.ddlBlock = ddlBlock;
+            #region GetSite
+            List<SelectListItem> ddlsite = new List<SelectListItem>();
+            List<SelectListItem> ddlsector = new List<SelectListItem>();
+            List<SelectListItem> ddlblock = new List<SelectListItem>();
+            DataSet ds1 = model.GetSiteNameFromCrm();
+            //DataSet ds = obj.GetSite();
+            ddlsite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+            ddlsector.Add(new SelectListItem { Text = "Select Sector", Value = "0" });
+            ddlblock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            if (ds1 != null && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                { ddlsite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() }); }
+            }
+            ViewBag.ddlsite = ddlsite;
+            ViewBag.ddlsector = ddlsector;
+            ViewBag.ddlblock = ddlblock;
+            #endregion GetSite
+            #region ddlStatus
+            int count3 = 0;
+            List<SelectListItem> ddlStatus = new List<SelectListItem>();
+            DataSet ds22 = model.GetStatusListFromCrm();
+            if (ds22 != null && ds22.Tables.Count > 0 && ds22.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds22.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlStatus.Add(new SelectListItem { Text = "Select Status", Value = "" });
+                    }
+                    ddlStatus.Add(new SelectListItem { Text = r["Status"].ToString(), Value = r["Status"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlStatus = ddlStatus;
+            #endregion
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("PlotListfromCRM")]
+        [OnAction(ButtonName = "btnSearch11")]
+        public ActionResult GetPlotListfromCRM(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            model.Fk_SiteId = model.Fk_SiteId == "0" ? null : model.Fk_SiteId;
+            model.FK_SectorId = model.FK_SectorId == "0" ? null : model.FK_SectorId;
+            model.Fk_BlockId = model.Fk_BlockId == "0" ? null : model.Fk_BlockId;
+            model.PlotNumber = model.PlotNumber == "" ? null : model.PlotNumber;
+            model.Status = model.Status == "0" ? null : model.Status;
+            DataSet ds = model.PlotListfromCRM();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                var i = 0;
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    //   if (i < 25)
+                    {
+                        Master obj = new Master();
+                        obj.PlotID = r["PK_PlotID"].ToString();
+                        obj.EncryptKey = Crypto.Encrypt(r["PK_PlotID"].ToString());
+                        obj.SiteName = r["SiteName"].ToString();
+                        obj.SectorName = r["SectorName"].ToString();
+                        obj.BlockName = r["BlockName"].ToString();
+                        obj.PlotNumber = r["PlotNumber"].ToString();
+                        obj.PlotArea = r["TotalArea"].ToString();
+                        obj.PlotRate = double.Parse(r["PlotRate"].ToString()).ToString("n2");
+                        obj.PlotAmount = double.Parse(r["PlotAmount"].ToString()).ToString("n2");
+                        obj.PLCCharge = r["PLCCharge"].ToString();
+                        //obj.BookingPercent = r["BookingPercent"].ToString();
+                        //obj.AllottmentPercent = (r["AllottmentPercent"].ToString());
+                        obj.PlotStatus = (r["PlotStatus"].ToString());
+                        //obj.ColorCSS = (r["StatusColor"].ToString());
+                        lst.Add(obj);
+                    }
+                    //  i = i + 1;
+                }
+                model.lstPlot = lst;
+            }
+            //DataSet ds = model.GetPlotList();
+            List<SelectListItem> ddlSector = new List<SelectListItem>();
+            ddlSector.Add(new SelectListItem { Text = "Select Phase", Value = "0" });
+            ViewBag.ddlSector = ddlSector;
+            List<SelectListItem> ddlBlock = new List<SelectListItem>();
+            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
+            ViewBag.ddlBlock = ddlBlock;
+            #region ddlSite
+            int count1 = 0;
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            //DataSet dsSite = model.GetSiteList();
+            DataSet dsSite = model.GetSiteNameFromCrm();
+            if (dsSite != null && dsSite.Tables.Count > 0 && dsSite.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsSite.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select Site", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["PK_SiteID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+            ViewBag.ddlSite = ddlSite;
+            #endregion
+            //#region ddlStatus
+            //List<SelectListItem> ddlStatus = new List<SelectListItem>();
+            //DataSet ds12 = model.GetStatusListFromCrm();
+            //ddlStatus.Add(new SelectListItem { Text = "Select Status", Value = "0" });
+            //if (ds12 != null && ds12.Tables[0].Rows.Count > 0)
+            //{
+            //    foreach (DataRow r in ds12.Tables[0].Rows)
+            //    { ddlStatus.Add(new SelectListItem { Text = r["Status"].ToString(), Value = r["PK_PlotID"].ToString() }); }
+            //}
+            //ViewBag.ddlStatus = ddlStatus;
+            //#endregion ddlStatus
+            #region ddlStatus
+            int count3 = 0;
+            List<SelectListItem> ddlStatus = new List<SelectListItem>();
+            DataSet ds22 = model.GetStatusListFromCrm();
+            if (ds22 != null && ds22.Tables.Count > 0 && ds22.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds22.Tables[0].Rows)
+                {
+                    if (count3 == 0)
+                    {
+                        ddlStatus.Add(new SelectListItem { Text = "Select Status", Value = "" });
+                    }
+                    ddlStatus.Add(new SelectListItem { Text = r["Status"].ToString(), Value = r["Status"].ToString() });
+                    count3 = count3 + 1;
+                }
+            }
+            ViewBag.ddlStatus = ddlStatus;
+            #endregion
+            return View(model);
+        }
+        public ActionResult GetSectorNameFromCrm(string Fk_SiteId)
+        {
+            try
+            {
+                Master model = new Master();
+                model.Fk_SiteId = Fk_SiteId;
+                #region GetSectors
+                List<SelectListItem> ddlSector = new List<SelectListItem>();
+                //DataSet dsSector = model.GetSectorList();
+                DataSet dsSector = model.SelectSectorFromCrm();
+
+                if (dsSector != null && dsSector.Tables.Count > 0)
+                {
+                    foreach (DataRow r in dsSector.Tables[0].Rows)
+                    {
+                        ddlSector.Add(new SelectListItem { Text = r["SectorName"].ToString(), Value = r["PK_SectorID"].ToString() });
+
+                    }
+                }
+                model.ddlSector = ddlSector;
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+        public ActionResult GetBlockNameFromCrm(string Fk_SiteId, string FK_SectorId)
+        {
+            try
+            {
+                Master model = new Master();
+                model.Fk_SiteId = Fk_SiteId;
+                model.FK_SectorId = FK_SectorId;
+                #region GetBlock
+                List<SelectListItem> ddlblock = new List<SelectListItem>();
+                //DataSet dsBlock = model.GetBlockList();
+                DataSet dsBlock = model.GetBlockListFromCrm();
+                if (dsBlock != null && dsBlock.Tables.Count > 0)
+                {
+                    foreach (DataRow r in dsBlock.Tables[0].Rows)
+                    {
+                        ddlblock.Add(new SelectListItem { Text = r["BlockName"].ToString(), Value = r["PK_BlockID"].ToString() });
+                    }
+                }
+                model.ddlblock = ddlblock; 
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
     }
 }

@@ -16,16 +16,15 @@ namespace HMGreenCityMLM.Models
         {
             try
             {
-                connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=hmgreendb;User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
-                //connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=hmgreendbtest;User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
-                //connectionString = "Data Source=DESKTOP-KPDI8EN\\AFLUEX;Initial Catalog=HMGreenCityMLM;User Id=sa;Password=123;Integrated Security=false;";
+            //    connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=hmgreendb;User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
+                connectionString = "Data Source=164.52.211.92,1232;Initial Catalog=hmgreendbtest;User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
+            //connectionString = "Data Source=DESKTOP-KPDI8EN\\AFLUEX;Initial Catalog=HMGreenCityMLM;User Id=sa;Password=123;Integrated Security=false;";
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         public static int ExecuteNonQuery(string commandText, params SqlParameter[] commandParameters)
         {
             int k = 0;
@@ -46,7 +45,6 @@ namespace HMGreenCityMLM.Models
                 return k;
             }
         }
-
         public static DataSet ExecuteQuery(string commandText, params SqlParameter[] parameters)
         {
             DataSet ds = new DataSet();
@@ -73,7 +71,6 @@ namespace HMGreenCityMLM.Models
                 dr["ErrorMessage"] = ex.Message;
                 dt.Rows.Add(dr);
                 ds.Tables.Add(dt);
-
             }
             return ds;
         }

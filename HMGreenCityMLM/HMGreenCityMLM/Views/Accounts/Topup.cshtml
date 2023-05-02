@@ -41,8 +41,8 @@
                                                             <input type="radio" id="rdb_type" name="rdbtype" onclick="return showdetails('Product')" /> Product
                                                         </div>*@
                                                     <div class="col-sm-9">
-                                                        <input type="radio"  name="rdbtype" onclick="return showdetails('NewBusiness')" value="NewBusiness"/> New Business
-                                                        <input type="radio"  name="rdbtype" onclick="return showdetails('OtherBusiness')"  value="OtherBusiness"/> Other Business
+                                                        <input type="radio" name="rdbtype" onclick="return showdetails('NewBusiness')" value="NewBusiness" /> New Business
+                                                        <input type="radio" name="rdbtype" onclick="return showdetails('OtherBusiness')" value="OtherBusiness" /> Other Business
                                                     </div>
                                                 </div>
                                             </div>
@@ -51,9 +51,9 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Reward<span style="color: red">*</span></label>
                                                     @*<div class="col-sm-9" style="display:none">
-                                                        <input type="radio" id="rdb_type" name="rdbtype" checked="checked" onclick="return showdetails('RealEstate')" /> Real Estate
-                                                        <input type="radio" id="rdb_type" name="rdbtype" onclick="return showdetails('Product')" /> Product
-                                                    </div>*@
+                                                            <input type="radio" id="rdb_type" name="rdbtype" checked="checked" onclick="return showdetails('RealEstate')" /> Real Estate
+                                                            <input type="radio" id="rdb_type" name="rdbtype" onclick="return showdetails('Product')" /> Product
+                                                        </div>*@
                                                     <div class="col-sm-9">
                                                         <input type="radio" name="rdbtypename" onclick="return showdetailsreward('IsInclude')" value="IsInclude" /> Is Include
                                                         <input type="radio" name="rdbtypename" onclick="return showdetailsreward('NotInclude')" value="NotInclude" /> Not Include
@@ -120,7 +120,11 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Plot Number <span style="color: red">*</span></label>
                                                     <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number" })
+                                                        @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();" })
+                                                        <label id="CheckPlotStatus123" style="color:red;"></label>
+                                                        @*@Html.HiddenFor(m => m.PlotID)
+                                                            @Html.HiddenFor(m => m.PlotSize)
+                                                            @Html.HiddenFor(m => m.BookingPercent)*@
                                                     </div>
                                                 </div>
                                             </div>
@@ -391,14 +395,13 @@
     function validateform() {
         debugger;
         $(".errortext").removeClass("errortext");
-       
+
         var status = $("input[name='rdbtype']:checked").val();
 
         if (status == "NewBusiness") {
-            
+
         }
-        else if(status == "OtherBusiness")
-        {
+        else if (status == "OtherBusiness") {
 
         }
         else {
@@ -653,6 +656,39 @@
         });
         $("#divload").css({ 'display': 'none' });
 
+    }
+
+
+    function CheckPlotStatus() {
+        debugger
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#Fk_SiteId').val();
+        var sectorID = $('#FK_SectorId').val();
+        var block = $('#Fk_BlockId').val();
+        var plotno = $('#PlotNumber').val();
+
+        $.ajax({
+            url: '/Accounts/CheckPlot', type: 'get', dataType: 'json',
+            data: { 'SiteID': siteID, 'SectorID': sectorID, 'BlockID': block, 'PlotNumber': plotno },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#PlotNumber").removeClass('errortext');
+                    $("#CheckPlotStatus123").text(data.PlotStatus);
+                }
+                else if (data.Result == "no") {
+                    alert('Invalid Plot Number !');
+                    $("#PlotNumber").addClass('errortext');
+                    $('#PlotNumber').focus();
+                    $("#PlotNumber").val('');
+                }
+                else {
+                    alert('Plot not available !');
+                    $("#PlotNumber").addClass('errortext');
+                    $("#PlotNumber").val('');
+                }
+            }
+        });
     }
 </script>
 
