@@ -124,6 +124,17 @@
             $('#Location').focus();
             return false;
         }
+
+        if ($('#Title').val() == '') {
+            $("#Title").addClass('errortext');
+            $('#Title').focus();
+            return false;
+        }
+        if ($('#News').val() == '') {
+            $("#News").addClass('errortext');
+            $('#News').focus();
+            return false;
+        }
         return true;
     }
 

@@ -38,7 +38,7 @@ namespace HMGreenCityMLM.DAL
         {
             SqlParameter[] para ={
                                     new SqlParameter("@headID",Obj.Fk_UserId),
-                                   new SqlParameter("@AdminId",Obj.LoginId)
+                                   //new SqlParameter("@AdminId",Obj.LoginId)
                                 };
             DBHelper db = new DBHelper();
             DataSet ds = DBHelper.ExecuteQuery("GetTreeMembersForAdmin", para);

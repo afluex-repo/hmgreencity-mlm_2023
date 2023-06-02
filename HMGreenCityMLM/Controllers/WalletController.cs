@@ -718,6 +718,62 @@ namespace HMGreenCityMLM.Controllers
             }
             return RedirectToAction("TopUpByPin", "Wallet");
         }
-      
+
+
+        public ActionResult PayoutLedgerNew()
+        {
+            Wallet objewallet = new Wallet();
+
+            objewallet.Fk_UserId = Session["Pk_UserId"].ToString();
+
+            List<Wallet> lst = new List<Wallet>();
+            DataSet ds = objewallet.PayoutLedgerNew();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Wallet Objload = new Wallet();
+                    Objload.Narration = dr["Narration"].ToString();
+                    Objload.DrAmount = dr["DrAMount"].ToString();
+                    Objload.CrAmount = dr["CrAmount"].ToString();
+                    Objload.AddedOn = dr["TransactionDate"].ToString();
+                    Objload.PayoutBalance = dr["Balance"].ToString();
+
+                    lst.Add(Objload);
+                }
+                objewallet.lstpayoutledger = lst;
+            }
+            return View(objewallet);
+        }
+        [HttpPost]
+        [ActionName("PayoutLedgerNew")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult PayoutLedgerNewBy(Wallet objewallet)
+        {
+
+            objewallet.Fk_UserId = Session["Pk_UserId"].ToString();
+            objewallet.FromDate = string.IsNullOrEmpty(objewallet.FromDate) ? null : Common.ConvertToSystemDate(objewallet.FromDate, "dd/MM/yyyy");
+            objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
+            List<Wallet> lst = new List<Wallet>();
+            DataSet ds = objewallet.PayoutLedgerNew();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Wallet Objload = new Wallet();
+                    Objload.Narration = dr["Narration"].ToString();
+                    Objload.DrAmount = dr["DrAMount"].ToString();
+                    Objload.CrAmount = dr["CrAmount"].ToString();
+                    Objload.AddedOn = dr["TransactionDate"].ToString();
+                    Objload.PayoutBalance = dr["Balance"].ToString();
+
+                    lst.Add(Objload);
+                }
+                objewallet.lstpayoutledger = lst;
+            }
+            return View(objewallet);
+        }
+
     }
 }

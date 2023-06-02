@@ -57,7 +57,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label"></label>
                                                     <div class="col-sm-9">
-                                                        <input type="submit" id="Set" name="Set" class="btn btn-primary" value="Set Id" />
+                                                        <input type="submit" id="Set" name="Set" class="btn btn-primary" value="Set Id" onclick="return validateform();"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,6 +189,23 @@
             var loginid = $('#ToLoginID').val();
 
         }
+    }
+
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#EmployeeId').val() == "0") {
+            $("#EmployeeId").addClass('errortext');
+            $('#EmployeeId').focus();
+            return false;
+        }
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+            return false;
+        }
+      
+        return true;
     }
 
 </script>

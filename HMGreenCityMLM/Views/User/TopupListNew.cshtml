@@ -1,11 +1,12 @@
 ﻿@model HMGreenCityMLM.Models.Reports
 
 @{
-    ViewBag.Title = "TopupList";
+    ViewBag.Title = "TopupListNew";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("PayoutLedger", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+
+@using (Html.BeginForm("PayoutLedgerNew", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <br />
     <div class="app-content content">
@@ -24,7 +25,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
                                            aria-controls="account" role="tab" aria-selected="true">
-                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Top Up List</span>
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Top Up List New</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -63,7 +64,7 @@
                                                                     <td>@Item.Amount</td>
                                                                     <td>
                                                                         <a href="/User/PrintTopup?invid=@Item.FK_InvestmentID" target="_blank" class="btn btn-sm btn-primary">Print</a>
-                                                                    </td>
+                                                                    </td>y
                                                                 </tr>
 
                                                                 i++;
@@ -87,3 +88,5 @@
 
 }
 <script src="../../AdminPanelCss/assets/vendors/jquery.js"></script>
+
+
