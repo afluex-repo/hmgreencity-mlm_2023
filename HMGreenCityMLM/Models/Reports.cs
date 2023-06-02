@@ -140,6 +140,9 @@ namespace HMGreenCityMLM.Models
         public string FormName { get; set; }
         public string FormType { get; set; }
 
+        public string FromDatenew { get; set; }
+        public string ToDatenew { get; set; }
+
 
         public string LastTopUpAmount { get; set; }
         public bool IsNewBusiness { get; set; }
@@ -300,8 +303,10 @@ namespace HMGreenCityMLM.Models
         {
             SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId),
                                       new SqlParameter("@Name", Name),
-                                      new SqlParameter("@FromDate", FromDate),
-                                      new SqlParameter("@ToDate", ToDate),
+                                      //new SqlParameter("@FromDate", FromDate),
+                                      //new SqlParameter("@ToDate", ToDate),
+                                      new SqlParameter("@FromDate", FromDatenew),
+                                      new SqlParameter("@ToDate", ToDatenew),
                                       new SqlParameter("@Package", Package),
                                       new SqlParameter("@SiteId", SiteId),
                                       new SqlParameter("@ClaculationStatus", Status),
@@ -795,6 +800,24 @@ namespace HMGreenCityMLM.Models
         }
 
 
+
+        public DataSet GetTopupReportNew()
+        {
+            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@Name", Name),
+                                      //new SqlParameter("@FromDate", FromDate),
+                                      //new SqlParameter("@ToDate", ToDate),
+                                      new SqlParameter("@FromDate", FromDatenew),
+                                      new SqlParameter("@ToDate", ToDatenew),
+                                      new SqlParameter("@Package", Package),
+                                      new SqlParameter("@SiteId", SiteId),
+                                      new SqlParameter("@ClaculationStatus", Status),
+                                      new SqlParameter("@Fk_BusinessId", BusinessType)
+                                  };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);
+            return ds;
+        }
     }
 }
 

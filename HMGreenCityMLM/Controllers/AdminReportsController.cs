@@ -85,6 +85,9 @@ namespace HMGreenCityMLM.Controllers
             currentdate = currentdate.AddMonths(-1);
             newdata.FromDate = currentdate.ToString("dd/MM/yyyy");
             newdata.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+
+            newdata.FromDatenew = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            newdata.ToDatenew = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
             DataSet ds11 = newdata.GetTopupReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -175,8 +178,11 @@ namespace HMGreenCityMLM.Controllers
             List<Reports> lst1 = new List<Reports>();
             newdata.SiteId = newdata.SiteId == "0" ? null : newdata.SiteId;
             newdata.BusinessType = newdata.BusinessType == "" ? null : newdata.BusinessType;
-            newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
-            newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+            //newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            //newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+
+            newdata.FromDatenew = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            newdata.ToDatenew = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
             newdata.LoginId = newdata.ToLoginID;
             DataSet ds11 = newdata.GetTopupReport();
 
@@ -2299,6 +2305,190 @@ namespace HMGreenCityMLM.Controllers
             #endregion
             return View(newdata);
         }
-        
+
+
+
+        public ActionResult TopupReportNew()
+        {
+            Reports newdata = new Reports();
+            List<Reports> lst1 = new List<Reports>();
+            DateTime currentdate = DateTime.Now;
+            currentdate = currentdate.AddMonths(-1);
+            newdata.FromDate = currentdate.ToString("dd/MM/yyyy");
+            newdata.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+
+            newdata.FromDatenew = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            newdata.ToDatenew = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+            DataSet ds11 = newdata.GetTopupReportNew();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.ToLoginID = r["Pk_InvestmentId"].ToString();
+                    Obj.LoginId = r["LoginId"].ToString();
+                    Obj.DisplayName = r["Name"].ToString();
+                    Obj.UpgradtionDate = r["UpgradtionDate"].ToString();
+                    Obj.Package = r["Package"].ToString();
+                    Obj.Amount = r["Amount"].ToString();
+                    Obj.TopupBy = r["TopupBy"].ToString();
+                    Obj.Status = r["Status"].ToString();
+                    Obj.PrintingDate = r["PrintingDate"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
+                    Obj.Description = r["Description"].ToString();
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
+                    Obj.ReceiptNo = r["ReceiptNo"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.BusinessType = r["Business"].ToString();
+
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    lst1.Add(Obj);
+                }
+                newdata.lsttopupreport = lst1;
+            }
+            #region ddlstatus
+            List<SelectListItem> ddlstatus = Common.BindTopupStatus();
+            ViewBag.ddlstatus = ddlstatus;
+            #endregion
+            #region Product Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProduct();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlProduct = ddlProduct;
+
+            #endregion
+            #region Site
+
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dssite = objcomm.GetSite();
+            if (dssite != null && dssite.Tables.Count > 0 && dssite.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in dssite.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["Pk_SiteID"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlSite = ddlSite;
+
+            #endregion
+            return View(newdata);
+        }
+        [HttpPost]
+        [ActionName("TopupReportNew")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult TopupReportNewBy(Reports newdata)
+        {
+            if (newdata.LoginId == null)
+            {
+                newdata.ToLoginID = null;
+            }
+            List<Reports> lst1 = new List<Reports>();
+            newdata.SiteId = newdata.SiteId == "0" ? null : newdata.SiteId;
+            newdata.BusinessType = newdata.BusinessType == "" ? null : newdata.BusinessType;
+            //newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            //newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+            newdata.FromDatenew = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
+            newdata.ToDatenew = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+            newdata.LoginId = newdata.ToLoginID;
+            DataSet ds11 = newdata.GetTopupReportNew();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.ToLoginID = r["Pk_InvestmentId"].ToString();
+                    Obj.LoginId = r["LoginId"].ToString();
+                    Obj.DisplayName = r["Name"].ToString();
+                    Obj.UpgradtionDate = r["UpgradtionDate"].ToString();
+                    Obj.Package = r["Package"].ToString();
+                    Obj.Amount = r["Amount"].ToString();
+                    Obj.TopupBy = r["TopupBy"].ToString();
+                    Obj.Status = r["Status"].ToString();
+                    Obj.PrintingDate = r["PrintingDate"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
+                    Obj.Description = r["Description"].ToString();
+                    Obj.ReceiptNo = r["ReceiptNo"].ToString();
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.BusinessType = r["Business"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    lst1.Add(Obj);
+                }
+                newdata.lsttopupreport = lst1;
+            }
+            #region ddlstatus
+            List<SelectListItem> ddlstatus = Common.BindTopupStatus();
+            ViewBag.ddlstatus = ddlstatus;
+            #endregion
+            #region Product Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProduct();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlProduct = ddlProduct;
+
+            #endregion
+            #region Site
+
+            List<SelectListItem> ddlSite = new List<SelectListItem>();
+            DataSet dssite = objcomm.GetSite();
+            if (dssite != null && dssite.Tables.Count > 0 && dssite.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in dssite.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlSite.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["Pk_SiteID"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlSite = ddlSite;
+
+            #endregion
+            return View(newdata);
+        }
     }
 }

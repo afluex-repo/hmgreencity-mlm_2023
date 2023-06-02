@@ -24,8 +24,16 @@ namespace HMGreenCityMLM.Controllers
             ds1 = obj.BindFormTypeMaster();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
+                int count = 0;
                 foreach (DataRow r in ds1.Tables[0].Rows)
-                { ddlformtype.Add(new SelectListItem { Text = r["FormType"].ToString(), Value = r["PK_FormTypeId"].ToString() }); }
+                {
+                    if (count == 0)
+                    {
+                        ddlformtype.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlformtype.Add(new SelectListItem { Text = r["FormType"].ToString(), Value = r["PK_FormTypeId"].ToString() });
+                    count++;
+                }
             }
 
             ViewBag.ddlformtype = ddlformtype;
@@ -38,8 +46,16 @@ namespace HMGreenCityMLM.Controllers
             ds1 = emp.GetEmployeeData();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
+                int count = 0;
                 foreach (DataRow r in ds1.Tables[0].Rows)
-                { ddluser.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_AdminId"].ToString() }); }
+                {
+                    if (count == 0)
+                    {
+                        ddluser.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddluser.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_AdminId"].ToString() });
+                    count++;
+                }
             }
             else
             {
@@ -118,7 +134,8 @@ namespace HMGreenCityMLM.Controllers
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds1.Tables[0].Rows)
-                { ddluser.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_AdminId"].ToString() }); }
+                {
+                    ddluser.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_AdminId"].ToString() }); }
             }
 
             ViewBag.ddluser = ddluser;

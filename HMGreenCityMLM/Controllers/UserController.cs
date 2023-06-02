@@ -827,5 +827,40 @@ namespace HMGreenCityMLM.Controllers
             }
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult TopupListNew()
+        {
+            Reports model = new Reports();
+            try
+            {
+                model.LoginId = Session["LoginID"].ToString();
+                DataSet ds = model.GetTopupReportNew();
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Reports> lstTopupReport = new List<Reports>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.FK_InvestmentID = Crypto.Encrypt(r["Pk_InvestmentId"].ToString());
+                        obj.Name = r["Name"].ToString() + " (" + r["LoginId"].ToString() + ")";
+                        obj.SiteName = r["SiteName"].ToString();
+                        obj.SectorName = r["SectorName"].ToString();
+
+                        obj.UpgradtionDate = r["UpgradtionDate"].ToString();
+                        obj.ProductName = r["Package"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        lstTopupReport.Add(obj);
+                    }
+                    model.lsttopupreport = lstTopupReport;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
     }
 }

@@ -221,6 +221,20 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+
+        public DataSet PayoutLedgerNew()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Fk_UserId", Fk_UserId),
+                                       new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate),
+
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutLedger", para);
+            return ds;
+        }
+
+
         public DataSet PayoutLedgerAdmin()
         {
             SqlParameter[] para = {

@@ -1,11 +1,12 @@
 ﻿@model HMGreenCityMLM.Models.Reports
+
 @{
-    ViewBag.Title = "TopupReport";
+    ViewBag.Title = "TopupReportNew";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 
-@using (Html.BeginForm("TopupReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("TopupReportNew", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <br />
     <div class="app-content content">
@@ -24,7 +25,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
                                            aria-controls="account" role="tab" aria-selected="true">
-                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">  Topup Reports </span>
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">  Topup Reports New</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -273,6 +274,8 @@
         });
     }
 </script>
+
+
 
 
 
