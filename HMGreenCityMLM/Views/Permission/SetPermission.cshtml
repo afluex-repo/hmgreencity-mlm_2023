@@ -90,11 +90,11 @@
                                                                 <input type="checkbox" name="chkSelect_ @i" id="chkSelect_ @i" @item.SelectedValue />            
                                                             </td>
                                                             <td>
-                                                                @if (i == 1)
+                                                                @if (i == 1 && item.Fk_FormTypeId == "9")
                                                                 {
                                                                     <input type="checkbox" name="chkSave_ @i" id="chkSave_ @i" @item.FormSave />
                                                                 } 
-                                                                @if (i == 4)
+                                                                @if (i == 4 && item.Fk_FormTypeId == "9")
                                                                 {
                                                                     <input type="checkbox" name="chkSave_ @i" id="chkSave_ @i" @item.FormSave />
                                                                 }                      
