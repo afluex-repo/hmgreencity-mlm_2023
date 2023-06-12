@@ -1139,6 +1139,9 @@ namespace HMGreenCityMLM.Controllers
                     Objload.Amount = dr["Amount"].ToString();
                     Objload.TransactionDate = dr["TransactionDate"].ToString();
                     Objload.TransactionNo = dr["TransactionNo"].ToString();
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
+                    Objload.BankName = dr["BankName"].ToString();
+                    Objload.BankBranch = dr["BankBranch"].ToString();
                     Objload.ReceiptNo = dr["Remarks"].ToString();
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(dr["Amount"].ToString());
                     lst.Add(Objload);
