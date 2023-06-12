@@ -319,4 +319,3 @@ F:\Ashwani Afluex\repository\hmgreencity-mlm\HMGreenCityMLM\bin\System.Web.Http.
 F:\Ashwani Afluex\repository\hmgreencity-mlm\HMGreenCityMLM\bin\System.Web.Http.WebHost.xml
 F:\Ashwani Afluex\repository\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 F:\Ashwani Afluex\repository\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
-F:\Ashwani Afluex\repository\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
