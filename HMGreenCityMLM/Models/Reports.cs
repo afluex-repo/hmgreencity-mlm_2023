@@ -57,6 +57,7 @@ namespace HMGreenCityMLM.Models
         public string Reward { get; set; }
 
         public string LoginId { get; set; }
+        public string TeamLoginId { get; set; }
         public string PayoutLoginId { get; set; }
 
         public string Name { get; set; }
@@ -94,6 +95,8 @@ namespace HMGreenCityMLM.Models
         public string ToName { get; set; }
 
         public string ToLoginID { get; set; }
+
+        public string ToTeamLoginId { get; set; }
 
         public string ClosingDate { get; set; }
 
@@ -764,13 +767,17 @@ namespace HMGreenCityMLM.Models
         public DataSet UpdatePlotDetails()
         {
             SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId),
+                                      //new SqlParameter("@ToLoginId", ToLoginID),
                                       new SqlParameter("@Name", Name),
                                       new SqlParameter("@FromDate", FromDate),
                                       new SqlParameter("@ToDate", ToDate),
                                       new SqlParameter("@Package", Package),
                                       new SqlParameter("@SiteId", SiteId),
                                       new SqlParameter("@ClaculationStatus", Status),
-                                      new SqlParameter("@Fk_BusinessId", BusinessType)
+                                      new SqlParameter("@Fk_BusinessId", BusinessType),
+                                      new SqlParameter("@IsDownline", IsDownline),
+                                      new SqlParameter("@Leg", Leg),
+                                      new SqlParameter("@ToLoginId", TeamLoginId),
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("UpdatePlotDetails", para);
