@@ -587,11 +587,12 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para =
                             {
                                 new SqlParameter("@Pk_InvestmentId",PK_InvestmentID),
-                                new SqlParameter("@Fk_PlotId",PlotID),
                                 new SqlParameter("@Fk_SiteId",Fk_SiteId),
                                 new SqlParameter("@Fk_SectorId",SectorID),
                                 new SqlParameter("@Fk_BlockId",BlockID),
-                                new SqlParameter("@PlotNumber",PlotNumber)
+                                new SqlParameter("@PlotNumber",PlotNumber),
+                                new SqlParameter("@Fk_PlotId",PlotID),
+                                new SqlParameter("@UpdatedBy",UpdatedBy)
                             };
             DataSet ds = DBHelper.ExecuteQuery("UpdatePlotDetailsToMLM", para);
             return ds;

@@ -1468,6 +1468,7 @@ namespace HMGreenCityMLM.Controllers
             model.BlockID = BlockID;
             model.PlotID = PlotID;
             model.PlotNumber = PlotNumber;
+            model.UpdatedBy = Session["Pk_AdminId"].ToString();
             DataSet dsblock = model.UpdatePlotDetailsToMLM();
             if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
             {

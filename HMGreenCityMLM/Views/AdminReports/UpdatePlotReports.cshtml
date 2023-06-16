@@ -1,12 +1,12 @@
 ﻿@model HMGreenCityMLM.Models.Reports
 
 @{
-    ViewBag.Title = "UpdatePlotDetails";
+    ViewBag.Title = "UpdatePlotReports";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 
-@using (Html.BeginForm("UpdatePlotDetails", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UpdatePlotReports", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <br />
     <div class="app-content content">
@@ -78,7 +78,7 @@
 
 
                                                     <div class="col-lg-3" id="divTeam" style="display:none">
-                                                        Team LoginId<span style="color:red">*</span>
+                                                        Team LoginId
                                                         @Html.TextBoxFor(m => m.TeamLoginId, new { @class = "form-control" })
                                                         @Html.HiddenFor(m => m.ToTeamLoginId)
                                                     </div>
@@ -278,7 +278,7 @@
     $(document).ready(function () {
         debugger;
         if ($("#IsDownline").is(':checked')) {
-            $("#divLeg").show(); 
+            $("#divLeg").show();
             $("#divTeam").show();
         }
         //$('#IsDownline').prop('checked', true);
@@ -510,26 +510,8 @@
                 return true;
             }
         }
-
-
-        //debugger;
-        //var login = $('#LoginId').val();
-        //if (login == "") {
-        //    $('#ToLoginID').val(null);
-        //} else {
-        //    var loginid = $('#ToLoginID').val();
-
-        //}
-        //if ($("#IsDownline").is(':checked')) {
-        //    if ($("#LoginId").val() == "") {
-        //        alert('Please Enter LoginId');
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //}
     }
 </script>
+
+
 
