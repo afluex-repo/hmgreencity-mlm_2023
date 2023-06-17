@@ -825,6 +825,22 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);
             return ds;
         }
+
+        public DataSet UpdatePlotDetailsToMLM()
+        {
+            SqlParameter[] para =
+                            {
+                                new SqlParameter("@Pk_InvestmentId",PK_InvestmentID),
+                                new SqlParameter("@Fk_SiteId",Fk_SiteId),
+                                new SqlParameter("@Fk_SectorId",SectorID),
+                                new SqlParameter("@Fk_BlockId",BlockID),
+                                new SqlParameter("@PlotNumber",PlotNumber),
+                                new SqlParameter("@Fk_PlotId",PlotID),
+                                new SqlParameter("@UpdatedBy",UpdatedBy)
+                            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdatePlotDetailsToMLM", para);
+            return ds;
+        }
     }
 }
 

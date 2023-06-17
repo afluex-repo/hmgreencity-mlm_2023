@@ -373,4 +373,3 @@ C:\Users\Afluex\Desktop\MlmNew\hmgreencity-mlm\HMGreenCityMLM\bin\System.Web.Htt
 C:\Users\Afluex\Desktop\MlmNew\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
 C:\Users\Afluex\Desktop\MlmNew\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 C:\Users\Afluex\Desktop\MlmNew\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
-F:\Ashwani Afluex\repository\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
