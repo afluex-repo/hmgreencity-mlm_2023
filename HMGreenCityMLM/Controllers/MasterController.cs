@@ -1457,39 +1457,39 @@ namespace HMGreenCityMLM.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
             //return View();
         }
-        
-        [HttpPost]
-        public ActionResult UpdatePlotDetailsToMLM(string PK_InvestmentID, string Fk_SiteId, string SectorID, string BlockID, string PlotNumber, string PlotID) 
-        {
-            Master model = new Master();
-            model.PK_InvestmentID = PK_InvestmentID;
-            model.Fk_SiteId = Fk_SiteId;
-            model.SectorID = SectorID;
-            model.BlockID = BlockID;
-            model.PlotID = PlotID;
-            model.PlotNumber = PlotNumber;
-            model.UpdatedBy = Session["Pk_AdminId"].ToString();
-            DataSet dsblock = model.UpdatePlotDetailsToMLM();
-            if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
-            {
-                try
-                {
-                    if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
-                    {
-                        model.Result = "yes";
-                    }
-                    else
-                    {
-                        model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                }
-            }
-            return Json(model, JsonRequestBehavior.AllowGet);
-        }
+
+        //[HttpPost]
+        //public ActionResult UpdatePlotDetailsToMLM(string PK_InvestmentID, string Fk_SiteId, string SectorID, string BlockID, string PlotNumber, string PlotID)
+        //{
+        //    Master model = new Master();
+        //    model.PK_InvestmentID = PK_InvestmentID;
+        //    model.Fk_SiteId = Fk_SiteId;
+        //    model.SectorID = SectorID;
+        //    model.BlockID = BlockID;
+        //    model.PlotID = PlotID;
+        //    model.PlotNumber = PlotNumber;
+        //    model.UpdatedBy = Session["Pk_AdminId"].ToString();
+        //    DataSet dsblock = model.UpdatePlotDetailsToMLM();
+        //    if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
+        //    {
+        //        try
+        //        {
+        //            if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
+        //            {
+        //                model.Result = "yes";
+        //            }
+        //            else
+        //            {
+        //                model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //        }
+        //    }
+        //    return Json(model, JsonRequestBehavior.AllowGet);
+        //}
 
     }
 }
