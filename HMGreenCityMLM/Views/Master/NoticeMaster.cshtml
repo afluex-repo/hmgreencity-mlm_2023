@@ -14,8 +14,6 @@
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
             <div class="content-body">
                 <!-- users edit start -->
                 <section class="users-edit">
@@ -49,8 +47,8 @@
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <div class="form-group row">
-                                                    <label class="col-md-12 col-form-label">News <span style="color: red">*</span></label>
-                                                    <div class="col-md-12">
+                                                    <label class="col-md-4 col-form-label">News <span style="color: red">*</span></label>
+                                                    <div class="col-md-8">
                                                         @Html.TextAreaFor(m => m.News, new { @class = "form-control", @Placeholder = "Notification", @Rows = "7", @cols = "20" })
                                                         @Html.HiddenFor(m => m.PK_NoticeMasterId, new { @class = "form-control" })
 

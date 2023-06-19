@@ -91,6 +91,7 @@
                                                         <br />
                                                         <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validateLogin();" />
                                                     </div>
+
                                                 </div>
                                                 <div class="dt-responsive table-responsive">
                                                     <table class="table mb-0" id="example24">
@@ -255,7 +256,6 @@
                     if (data.Result == "yes") {
                         alert("Record updated successfully !!");
                          UpdatePlotDetailsSearch();
-                        @*window.location.href = '@Url.Action("UpdatePlotReports", "AdminReports")';*@
                          @*window.location.href = '@Url.Action("UpdatePlotDetails", "AdminReports")';*@
                     }
                     else {
@@ -269,15 +269,16 @@
     function UpdatePlotDetailsSearch() {
         debugger;
         var data ={
-        loginid : $("#loginid").val(),
-        name : $("#name").val(),
-        siteid : $("#siteid").val(),
-        status : $("#status").val(),
-        fromdate : $("#fromdate").val(),
-        todate : $("#todate").val(),
-        businesstype : $("#businesstype").val(),
-        teamloginid : $("#teamloginid").val(),
-        leg : $("#leg").val()
+        loginid : $("#Loginid").val(),
+        name : $("#Name").val(),
+        siteid : $("#Siteid").val(),
+        status : $("#Status").val(),
+        fromdate : $("#FromDate").val(),
+        todate: $("#ToDate").val(),
+        businesstype: $("#BusinessType").val(),
+        IsDownline: $("#IsDownline").val(),
+        teamloginid: $("#TeamLoginId").val(),
+        leg : $("#Leg").val()
     }
 
         var newdata = JSON.stringify(data)
@@ -535,16 +536,17 @@
                 return false;
             }
             else {
+                $.ajax({
+                    url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
+                    success: function (data) {
+
+                    }
+                });
                 return true;
             }
         }
 
-        $.ajax({
-            url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
-            success: function (data) {
-
-            }
-        });
+       
     }
 
     

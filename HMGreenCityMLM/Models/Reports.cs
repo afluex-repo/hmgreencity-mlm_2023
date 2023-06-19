@@ -797,12 +797,13 @@ namespace HMGreenCityMLM.Models
 
         public DataSet GetSiteNameFromCrmForUpdateplotDetails()
         {
-            SqlParameter[] para =
-            {
-                new SqlParameter("@PK_SiteID",Fk_SiteId)
-            };
+            //SqlParameter[] para =
+            //{
+            //    new SqlParameter("@PK_SiteID",Fk_SiteId)
+            //};
 
-            DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm", para);
+            //DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm", para);
+            DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm");
             return ds;
         }
 

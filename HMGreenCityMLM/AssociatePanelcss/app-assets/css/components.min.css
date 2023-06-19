@@ -494,6 +494,7 @@ body.fixed-footer footer.footer-dark {
 
                         .main-menu.menu-light .navigation > li ul li > a {
                             padding: 10px 15px 10px 20px;
+                            font-size:13px;
                         }
 
                     .main-menu.menu-light .navigation > li ul .open > a, .main-menu.menu-light .navigation > li ul .sidebar-group-active > a {
@@ -898,7 +899,7 @@ body.fixed-footer footer.footer-dark {
         }
 
             .navigation li a i {
-                font-size: .8rem;
+                font-size: 0.8rem;
                 margin-right: 1.38rem;
             }
 
@@ -4118,4 +4119,14 @@ html body .content {
 .dt-responsive.table-responsive.associatman {
     margin-bottom: 110px;
 }
+}
+
+.menu-title
+{
+    font-weight:700
+}
+.col-form-label
+{
+    color: #000;
+    font-weight: 500;
 }
