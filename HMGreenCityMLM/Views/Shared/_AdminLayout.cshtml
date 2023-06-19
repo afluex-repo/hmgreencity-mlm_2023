@@ -216,6 +216,7 @@
     </style>
 </head>
 <body class="menu-expanded pace-done semi-dark-layout">
+    <div class="loader"></div>
     <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
         <div class="navbar-wrapper">
             <div class="navbar-container content">
@@ -226,7 +227,13 @@
                     <ul class="nav navbar-nav float-right">
                         <li class="dropdown dropdown-user nav-item">
                             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">@Session["Name"]</span><span class="user-status"></span></div><span><img class="round" src="../../AssociatePanelcss/app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                                <div class="user-nav d-sm-flex d-none">
+                                <span class="user-name text-bold-600">@Session["Name"]</span>
+                                <span class="user-status"></span></div>
+                                <span>
+                                <img src="~/images/hmlogo.png" class="img-fluid" height="40" width="70" />
+                                @*<img class="round" src="../../AssociatePanelcss/app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40">*@
+                               </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
 
@@ -242,23 +249,26 @@
     <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto">
-                    <a class="navbar-brand" href="/Admin/AdminDashBoard">
-                        <div class="brand-logo"></div>
-                        <h2 class="brand-text mb-0">HM Green City</h2>
+                <li class="nav-item m-auto">
+                    <a class="navbar-brand bg-white" href="/Admin/AdminDashBoard">
+                        @*<div class="brand-logo">
+
+                        </div>*@
+                        <center><img src="~/images/hmlogo.png" class="img-fluid" style="width:100px" /></center>
+                        @*<h2 class="brand-text mb-0">HM Green City</h2>*@
                     </a>
                 </li>
 
-                <li class="nav-item nav-toggle">
+                @*<li class="nav-item nav-toggle">
                     <a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">                        
                         <i class="fa fa-bars dashb" aria-hidden="true"></i>
                         <i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i>
                     </a>
-                </li>
+                </li>*@
             </ul>
         </div>
         <div class="shadow-bottom"></div>
-        <div class="main-menu-content">
+        <div class="main-menu-content mt-3">
             @{
                 Html.RenderAction("Menu", "Home", new { area = "" });
             }
@@ -316,6 +326,9 @@
         jQuery(document).ready(function () {
             Main.init();
             Index.init();
+        });
+        $(window).load(function () {
+            $('.loader').fadeOut(3000);
         });
     </script>
 </body>
