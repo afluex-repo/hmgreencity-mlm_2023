@@ -36,9 +36,6 @@
 
     <link href="../../Autofill/jquery-ui.css" rel="stylesheet" />
      <!-- END: Page CSS-->
-
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
     <link href="../../AdminPanelCss/Datatablecss/css/amchart/export.css" rel="stylesheet" />
     <!-- END: Custom CSS-->
     <style>
@@ -215,10 +212,14 @@
         .dt-buttons {
             margin-left: 0px !important;
         }
+
+
     </style>
 </head>
 
 <body class="menu-expanded pace-done semi-dark-layout">
+    <div class="loader"></div>
+
     <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
         <div class="navbar-wrapper">
             <div class="navbar-container content">
@@ -231,7 +232,7 @@
 
                         <li class="dropdown dropdown-user nav-item">
                             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">@Session["FullName"]</span><span class="user-status">@Session["Status"]</span></div><span><img class="round" src="@Session["Profile"]" alt="avatar" height="40" width="40"></span>
+                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">@Session["FullName"]</span><span class="user-status">@Session["Status"]</span></div><span><img src="~/images/hmlogo.png" class="img-fluid" height="40" width="70" /></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 
@@ -247,21 +248,24 @@
     <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto">
-                    <a class="navbar-brand" href="/User/AssociateDashBoard">
-                        <div class="brand-logo"></div>
-                        <h2 class="brand-text mb-0">HM Green City</h2>
+                <li class="nav-item m-auto">
+                    <a class="navbar-brand bg-white" href="/Admin/AdminDashBoard">
+                        @*<div class="brand-logo">
+
+                </div>*@
+                        <center><img src="~/images/hmlogo.png" class="img-fluid" style="width:100px" /></center>
+                        @*<h2 class="brand-text mb-0">HM Green City</h2>*@
                     </a>
                 </li>
-                <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="fa fa-bars dashb" aria-hidden="true"></i>
-                <i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i></a></li>
+                @*<li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="fa fa-bars dashb" aria-hidden="true"></i>
+                <i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i></a></li>*@
             </ul>
         </div>
         <div class="shadow-bottom"></div>
-        <div class="main-menu-content">
+        <div class="main-menu-content mt-3">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
-                <li class=" nav-item">
+                <li class="nav-item">
                     <a href="/User/AssociateDashBoard"><i class="feather icon-mail"></i><span class="menu-title" data-i18n="Email">Dashboard</span></a>
                 </li>
 
@@ -269,15 +273,15 @@
                     <a href="/User/Registration"><i class="feather icon-message-square"></i><span class="menu-title" data-i18n="Chat">Registration</span></a>
                 </li>*@
 
-                <li class=" nav-item">
+                <li class="nav-item">
                     <a href="/User/TopupList"><i class="feather icon-check-square"></i><span class="menu-title" data-i18n="Todo">Top Up List</span></a>
                 </li>
 
-                <li class=" nav-item">
+                <li class="nav-item">
                     <a href="/User/TopupListNew"><i class="feather icon-check-square"></i><span class="menu-title" data-i18n="Todo">Top Up List New</span></a>
                 </li>
 
-                <li class=" nav-item">
+                <li class="nav-item">
                     <a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">Profile</span></a>
                     <ul class="menu-content">
                         <li>
@@ -293,7 +297,7 @@
                     </ul>
                 </li>
 
-                <li class=" nav-item">
+                <li class="nav-item">
                     <a href="#"><i class="feather icon-user"></i><span class="menu-title" data-i18n="User">Team</span></a>
                     <ul class="menu-content">
                         <li>
@@ -309,11 +313,11 @@
                 </li>
 
               
-                <li class=" nav-item">
+                <li class="nav-item">
                     <a href="/User/UserReward"><i class="feather icon-check-square"></i><span class="menu-title" data-i18n="Todo">Rewards</span></a>
                 </li>
 
-                <li class=" nav-item">
+                <li class="nav-item">
                     <a href="#"><i class="feather icon-user"></i><span class="menu-title" data-i18n="User">Payout</span></a>
                     <ul class="menu-content">
                         <li>
@@ -384,7 +388,11 @@
             Main.init();
             Index.init();
         });
+        $(window).load(function () {
+            $('.loader').fadeOut(3000);
+        });
     </script>
+   
 </body>
 
 </html>

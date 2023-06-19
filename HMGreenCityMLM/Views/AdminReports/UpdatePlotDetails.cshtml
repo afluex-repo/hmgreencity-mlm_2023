@@ -92,10 +92,13 @@
                                                         <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validateLogin();" />
                                                     </div>
 
+                                                    @*<div id="preloader">
+                                                        <div id="loader"></div>
+                                                    </div>*@
+
                                                 </div>
                                                 <div class="dt-responsive table-responsive">
                                                     <table class="table mb-0" id="example24">
-
                                                         <thead>
                                                             <tr>
                                                                 <th>Sr No.</th>
@@ -112,7 +115,6 @@
                                                                 <th style="min-width:200px;">Block Name</th>
                                                                 <th style="min-width:200px;">Plot Number</th>
                                                                 <th>Action </th>
-
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -125,7 +127,7 @@
                                                                     {
                                                                         <tr class="text-left">
                                                                             <td>@i</td>
-                                                                            <td style="display:none;">@Item.ToLoginID</td>
+                                                                            @*<td style="display:none;">@Item.ToLoginID</td>*@
                                                                             <td>@Item.LoginId</td>
                                                                             <td>@Item.DisplayName</td>
                                                                             <td>@Item.SiteName</td>
@@ -153,7 +155,7 @@
                                                                             <td>
                                                                                 <a href="#" class="btn btn-block btn-primary" onclick="return UpdatePlotDetailsToMLM(@Item.FK_InvestmentID)">Update</a>
 
-
+                                                                             <div class="loader"></div>
                                                                             </td>
                                                                         </tr>
                                                                         i++;
@@ -249,9 +251,29 @@
             return false;
         }
         else {
+            debugger;
+            //$.ajax({
+            //    type: 'GET',
+            //    success: function (data) {
+            //        console.log(data);
+            //    }
+            //}).done(function () {
+            //    setTimeout(function () {
+            //        $(".loader").fadeOut(900);
+            //    }, 1500);
+            //});
             $.ajax({
                 url: '/AdminReports/UpdatePlotDetailsToMLM', type: 'post', dataType: 'json',
                 data: { PK_InvestmentID: FK_Invest, Fk_SiteId: Fk_SiteId, SectorID: SectorID, BlockID: BlockID, PlotNumber: PlotNumber, PlotID: PlotID },
+
+                //beforeSend: function () {
+                //    $('.loader').done(function () {
+                //        setTimeout(function () {
+                //            $(".loader").fadeOut(900);
+                //        }, 1500);
+                //    });
+                //},
+
                 success: function (data) {
                     if (data.Result == "yes") {
                         alert("Record updated successfully !!");
