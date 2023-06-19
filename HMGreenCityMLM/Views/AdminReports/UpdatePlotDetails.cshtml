@@ -102,7 +102,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Sr No.</th>
-                                                                <th style="display:none"></th>
+                                                                @*<th style="display:none"></th>*@
                                                                 <th>Login Id</th>
                                                                 <th>Name</th>
                                                                 <th>Site Name</th>
@@ -252,28 +252,19 @@
         }
         else {
             debugger;
-            //$.ajax({
-            //    type: 'GET',
-            //    success: function (data) {
-            //        console.log(data);
-            //    }
-            //}).done(function () {
-            //    setTimeout(function () {
-            //        $(".loader").fadeOut(900);
-            //    }, 1500);
-            //});
+            $.ajax({
+                type: 'GET',
+                success: function (data) {
+                    console.log(data);
+                }
+            }).done(function () {
+                setTimeout(function () {
+                    $(".loader").fadeOut(900);
+                }, 1500);
+            });
             $.ajax({
                 url: '/AdminReports/UpdatePlotDetailsToMLM', type: 'post', dataType: 'json',
                 data: { PK_InvestmentID: FK_Invest, Fk_SiteId: Fk_SiteId, SectorID: SectorID, BlockID: BlockID, PlotNumber: PlotNumber, PlotID: PlotID },
-
-                //beforeSend: function () {
-                //    $('.loader').done(function () {
-                //        setTimeout(function () {
-                //            $(".loader").fadeOut(900);
-                //        }, 1500);
-                //    });
-                //},
-
                 success: function (data) {
                     if (data.Result == "yes") {
                         alert("Record updated successfully !!");
