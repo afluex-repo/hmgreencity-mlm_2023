@@ -797,12 +797,13 @@ namespace HMGreenCityMLM.Models
 
         public DataSet GetSiteNameFromCrmForUpdateplotDetails()
         {
-            SqlParameter[] para =
-            {
-                new SqlParameter("@PK_SiteID",Fk_SiteId)
-            };
+            //SqlParameter[] para =
+            //{
+            //    new SqlParameter("@PK_SiteID",Fk_SiteId)
+            //};
 
-            DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm", para);
+            //DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm", para);
+            DataSet ds = DBHelper.ExecuteQuery("GetSiteNameFromCrm");
             return ds;
         }
 
@@ -823,6 +824,22 @@ namespace HMGreenCityMLM.Models
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);
+            return ds;
+        }
+
+        public DataSet UpdatePlotDetailsToMLM()
+        {
+            SqlParameter[] para =
+                            {
+                                new SqlParameter("@Pk_InvestmentId",PK_InvestmentID),
+                                new SqlParameter("@Fk_SiteId",Fk_SiteId),
+                                new SqlParameter("@Fk_SectorId",SectorID),
+                                new SqlParameter("@Fk_BlockId",BlockID),
+                                new SqlParameter("@PlotNumber",PlotNumber),
+                                new SqlParameter("@Fk_PlotId",PlotID),
+                                new SqlParameter("@UpdatedBy",UpdatedBy)
+                            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdatePlotDetailsToMLM", para);
             return ds;
         }
     }

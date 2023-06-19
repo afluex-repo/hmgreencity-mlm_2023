@@ -2192,8 +2192,8 @@ namespace HMGreenCityMLM.Controllers
         }
 
         [HttpPost]
-        [ActionName("UpdatePlotDetails")]
-        [OnAction(ButtonName = "Search")]
+        //[ActionName("UpdatePlotDetails")]
+        //[OnAction(ButtonName = "Search")]
         public ActionResult UpdatePlotDetails(Reports newdata)
         {
             if (newdata.LoginId == null)
@@ -2315,7 +2315,6 @@ namespace HMGreenCityMLM.Controllers
             #endregion
             return View(newdata);
         }
-
 
 
         public ActionResult TopupReportNew()
@@ -2500,124 +2499,39 @@ namespace HMGreenCityMLM.Controllers
             #endregion
             return View(newdata);
         }
+        
 
-
-        public ActionResult UpdatePlotReports()
+        [HttpPost]
+        public ActionResult UpdatePlotDetailsToMLM(string PK_InvestmentID, string Fk_SiteId, string SectorID, string BlockID, string PlotNumber, string PlotID)
         {
-            Reports newdata = new Reports();
-            List<Reports> lst1 = new List<Reports>();
-            List<SelectListItem> Leg = Common.Leg();
-            ViewBag.ddlleg = Leg;
-            DataSet ds11 = newdata.UpdatePlotDetails();
-
-            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            Reports model = new Reports();
+            model.PK_InvestmentID = PK_InvestmentID;
+            model.Fk_SiteId = Fk_SiteId;
+            model.SectorID = SectorID;
+            model.BlockID = BlockID;
+            model.PlotID = PlotID;
+            model.PlotNumber = PlotNumber;
+            model.UpdatedBy = Session["Pk_AdminId"].ToString();
+            DataSet dsblock = model.UpdatePlotDetailsToMLM();
+            if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
             {
-                foreach (DataRow r in ds11.Tables[0].Rows)
+                try
                 {
-                    Reports Obj = new Reports();
-                    Obj.ToLoginID = r["Pk_InvestmentId"].ToString();
-                    Obj.LoginId = r["LoginId"].ToString();
-                    Obj.DisplayName = r["Name"].ToString();
-                    Obj.UpgradtionDate = r["UpgradtionDate"].ToString();
-                    Obj.Package = r["Package"].ToString();
-                    Obj.Amount = r["Amount"].ToString();
-                    Obj.TopupBy = r["TopupBy"].ToString();
-                    Obj.Status = r["Status"].ToString();
-                    Obj.PrintingDate = r["PrintingDate"].ToString();
-                    Obj.PlotNumber = r["PlotNumber"].ToString();
-                    Obj.Description = r["Description"].ToString();
-                    Obj.SiteName = r["SiteName"].ToString();
-                    Obj.SectorName = r["SectorName"].ToString();
-                    Obj.PaymentMode = r["PaymentMode"].ToString();
-                    Obj.ReceiptNo = r["ReceiptNo"].ToString();
-                    Obj.BlockName = r["BlockName"].ToString();
-                    Obj.BusinessType = r["Business"].ToString();
-
-                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
-                    lst1.Add(Obj);
-                }
-                newdata.lsttopupreport = lst1;
-            }
-            #region ddlstatus
-            List<SelectListItem> ddlstatus = Common.BindTopupStatus();
-            ViewBag.ddlstatus = ddlstatus;
-            #endregion
-            #region Product Bind
-            Common objcomm = new Common();
-            List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProduct();
-            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
-            {
-                int count = 0;
-                foreach (DataRow r in ds1.Tables[0].Rows)
-                {
-                    if (count == 0)
+                    if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                        model.Result = "yes";
                     }
-                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
-                    count++;
-                }
-            }
-
-            ViewBag.ddlProduct = ddlProduct;
-            #endregion
-            #region Site
-
-            List<SelectListItem> ddlSite = new List<SelectListItem>();
-            DataSet dssite = objcomm.GetSite();
-            if (dssite != null && dssite.Tables.Count > 0 && dssite.Tables[0].Rows.Count > 0)
-            {
-                int count = 0;
-                foreach (DataRow r in dssite.Tables[0].Rows)
-                {
-                    if (count == 0)
+                    else
                     {
-                        ddlSite.Add(new SelectListItem { Text = "Select", Value = "0" });
+                        model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
-                    ddlSite.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["Pk_SiteID"].ToString() });
-                    count++;
                 }
-            }
-
-            ViewBag.ddlSite = ddlSite;
-
-
-
-
-            List<SelectListItem> ddlSite1 = new List<SelectListItem>();
-            DataSet dssite1 = newdata.GetSiteNameFromCrmForUpdateplotDetails();
-            if (dssite1 != null && dssite1.Tables.Count > 0 && dssite1.Tables[0].Rows.Count > 0)
-            {
-                int count = 0;
-                foreach (DataRow r in dssite1.Tables[0].Rows)
+                catch (Exception ex)
                 {
-                    if (count == 0)
-                    {
-                        ddlSite1.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    }
-                    ddlSite1.Add(new SelectListItem { Text = r["SiteName"].ToString(), Value = r["Pk_SiteID"].ToString() });
-                    count++;
+                    model.Result = dsblock.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
-
-            ViewBag.ddlSite1 = ddlSite1;
-
-
-
-
-
-            List<SelectListItem> ddlSector = new List<SelectListItem>();
-            ddlSector.Add(new SelectListItem { Text = "Select sector", Value = "0" });
-            ViewBag.ddlSector = ddlSector;
-
-            List<SelectListItem> ddlBlock = new List<SelectListItem>();
-            ddlBlock.Add(new SelectListItem { Text = "Select Block", Value = "0" });
-            ViewBag.ddlBlock = ddlBlock;
-
-
-            #endregion
-            return View(newdata);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -10,6 +10,7 @@
 {
     <br />
     <div class="app-content content">
+        <div class="loader"></div>
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
@@ -55,11 +56,11 @@
                                                     </div>
                                                     <div class="col-lg-3">
                                                         From Date
-                                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "readonly" })
+                                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
                                                     </div>
                                                     <div class="col-lg-3">
                                                         To Date
-                                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly" })
+                                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control"})
                                                     </div>
 
                                                     <div class="col-lg-3">
@@ -91,12 +92,18 @@
                                                         <br />
                                                         <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validateLogin();" />
                                                     </div>
+
+                                                    @*<div id="preloader">
+                                                        <div id="loader"></div>
+                                                    </div>*@
+
                                                 </div>
                                                 <div class="dt-responsive table-responsive">
                                                     <table class="table mb-0" id="example24">
                                                         <thead>
                                                             <tr>
                                                                 <th>Sr No.</th>
+                                                                @*<th style="display:none"></th>*@
                                                                 <th>Login Id</th>
                                                                 <th>Name</th>
                                                                 <th>Site Name</th>
@@ -149,6 +156,7 @@
                                                                             <td>
                                                                                 <a href="#" class="btn btn-block btn-primary" onclick="return UpdatePlotDetailsToMLM(@Item.FK_InvestmentID)">Update</a>
 
+                                                                            
                                                                             </td>
                                                                         </tr>
                                                                         i++;
@@ -205,6 +213,8 @@
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script>
+
+
     function UpdatePlotDetailsToMLM(Id) {
         debugger;
         var FK_InvestmentID6561111 = $("#FK_InvestmentID656").val(Id);
@@ -242,15 +252,34 @@
             return false;
         }
         else {
+            debugger;
+            //$.ajax({
+            //    type: 'GET',
+            //    success: function (data) {
+            //        console.log(data);
+            //    }
+            //}).done(function () {
+            //    setTimeout(function () {
+            //        $(".loader").fadeOut(900);
+            //    }, 1500);
+            //});
             $.ajax({
-                url: '/Master/UpdatePlotDetailsToMLM', type: 'post', dataType: 'json',
+                url: '/AdminReports/UpdatePlotDetailsToMLM', type: 'post', dataType: 'json',
                 data: { PK_InvestmentID: FK_Invest, Fk_SiteId: Fk_SiteId, SectorID: SectorID, BlockID: BlockID, PlotNumber: PlotNumber, PlotID: PlotID },
+
+                beforeSend: function () {
+                    $('.loader').done(function () {
+                        setTimeout(function () {
+                            $(".loader").fadeOut(900);
+                        }, 1500);
+                    });
+                },
+
                 success: function (data) {
                     if (data.Result == "yes") {
                         alert("Record updated successfully !!");
-                        window.location.href = '@Url.Action("UpdatePlotReports", "AdminReports")';
+                         UpdatePlotDetailsSearch();
                          @*window.location.href = '@Url.Action("UpdatePlotDetails", "AdminReports")';*@
-
                     }
                     else {
                         alert(data.Result);
@@ -258,6 +287,32 @@
                 }
             });
         }
+    }
+
+    function UpdatePlotDetailsSearch() {
+        debugger;
+        var data ={
+        loginid : $("#Loginid").val(),
+        name : $("#Name").val(),
+        siteid : $("#Siteid").val(),
+        status : $("#Status").val(),
+        fromdate : $("#FromDate").val(),
+        todate: $("#ToDate").val(),
+        businesstype: $("#BusinessType").val(),
+        IsDownline: $("#IsDownline").val(),
+        teamloginid: $("#TeamLoginId").val(),
+        leg : $("#Leg").val()
+    }
+
+        var newdata = JSON.stringify(data)
+
+        $.ajax({
+            url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
+            data: JSON.stringify({ dataValue: JSON.stringify(newdata) }),
+            success: function (data) {
+                location.reload();
+            }
+        });
     }
 </script>
 
@@ -503,31 +558,20 @@
                 alert('Please Enter Team LoginId');
                 return false;
             }
-            else
-            {
+            else {
+                $.ajax({
+                    url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
+                    success: function (data) {
+
+                    }
+                });
                 return true;
             }
         }
 
-
-        //debugger;
-        //var login = $('#LoginId').val();
-        //if (login == "") {
-        //    $('#ToLoginID').val(null);
-        //} else {
-        //    var loginid = $('#ToLoginID').val();
-
-        //}
-        //if ($("#IsDownline").is(':checked')) {
-        //    if ($("#LoginId").val() == "") {
-        //        alert('Please Enter LoginId');
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //}
+       
     }
-</script>
 
+    
+    </script>
+    
