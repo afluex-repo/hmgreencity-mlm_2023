@@ -10,6 +10,7 @@
 {
     <br />
     <div class="app-content content">
+        <div class="loader"></div>
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
@@ -92,10 +93,6 @@
                                                         <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validateLogin();" />
                                                     </div>
 
-                                                    @*<div id="preloader">
-                                                        <div id="loader"></div>
-                                                    </div>*@
-
                                                 </div>
                                                 <div class="dt-responsive table-responsive">
                                                     <table class="table mb-0" id="example24">
@@ -155,7 +152,7 @@
                                                                             <td>
                                                                                 <a href="#" class="btn btn-block btn-primary" onclick="return UpdatePlotDetailsToMLM(@Item.FK_InvestmentID)">Update</a>
 
-                                                                             <div class="loader"></div>
+                                                                            
                                                                             </td>
                                                                         </tr>
                                                                         i++;
@@ -215,7 +212,9 @@
 
 
     function UpdatePlotDetailsToMLM(Id) {
+        $.noConflict();
         debugger;
+
         var FK_InvestmentID6561111 = $("#FK_InvestmentID656").val(Id);
         var FK_Invest = $("#FK_InvestmentID656").val();
         //alert(FK_Invest);
@@ -251,22 +250,13 @@
             return false;
         }
         else {
-            debugger;
-            $.ajax({
-                type: 'GET',
-                success: function (data) {
-                    console.log(data);
-                }
-            }).done(function () {
-                setTimeout(function () {
-                    $(".loader").fadeOut(900);
-                }, 1500);
-            });
             $.ajax({
                 url: '/AdminReports/UpdatePlotDetailsToMLM', type: 'post', dataType: 'json',
                 data: { PK_InvestmentID: FK_Invest, Fk_SiteId: Fk_SiteId, SectorID: SectorID, BlockID: BlockID, PlotNumber: PlotNumber, PlotID: PlotID },
                 success: function (data) {
                     if (data.Result == "yes") {
+                        debugger;
+                        $(".loader").show();
                         alert("Record updated successfully !!");
                          UpdatePlotDetailsSearch();
                          @*window.location.href = '@Url.Action("UpdatePlotDetails", "AdminReports")';*@
@@ -275,11 +265,13 @@
                         alert(data.Result);
                     }
                 }
+               
             });
         }
     }
 
     function UpdatePlotDetailsSearch() {
+        $(".divload").show();
         debugger;
         var data ={
         loginid : $("#Loginid").val(),
@@ -291,18 +283,21 @@
         businesstype: $("#BusinessType").val(),
         IsDownline: $("#IsDownline").val(),
         teamloginid: $("#TeamLoginId").val(),
-        leg : $("#Leg").val()
-    }
-
-        var newdata = JSON.stringify(data)
-
+        leg: $("#Leg").val()
+        }
+        var newdata = JSON.stringify(data);
+        $(".divload").show();
         $.ajax({
             url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
+
             data: JSON.stringify({ dataValue: JSON.stringify(newdata) }),
+            
             success: function (data) {
+                $(".divload").show();
                 location.reload();
             }
         });
+        $(".divload").show();
     }
 </script>
 
@@ -343,7 +338,7 @@
         });
         $("input").attr("autocomplete", "off");
         var cityuse = [];
-        $("#loader").css({ 'display': '' });
+
         $.ajax({
             url: '/AdminReports/GetUserList',
             type: 'Post',
@@ -367,7 +362,7 @@
 
             }, error: function () {
                 alert('Some Thing wrong!');
-                $("#loader").css({ 'display': 'none' });
+                $(".loader").css({ 'display': 'none' });
             }
         });
 
@@ -396,7 +391,7 @@
 
             }, error: function () {
                 alert('Some Thing wrong!');
-                $("#loader").css({ 'display': 'none' });
+                $(".loader").css({ 'display': 'none' });
             }
         });
     });
@@ -535,6 +530,7 @@
 
 
     function validateLogin() {
+        $.noConflict();
         debugger;
         var login = $('#TeamLoginId').val();
         if (login == "") {
@@ -548,20 +544,23 @@
                 alert('Please Enter Team LoginId');
                 return false;
             }
-            else {
-                $.ajax({
-                    url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
-                    success: function (data) {
+            //else {
+            //    $.ajax({
+            //        url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
+            //        success: function (data) {
 
-                    }
-                });
-                return true;
-            }
+            //        }
+            //    });
+            //    return true;
+            //}
         }
 
-       
-    }
+        $.ajax({
+            url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
+            success: function (data) {
 
-    
+            }
+        });
+    }
     </script>
     
