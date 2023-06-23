@@ -535,3 +535,4 @@ E:\New folderMLMBackUP\hmgreencity-mlm_Clone\hmgreencity-mlm\HMGreenCityMLM\bin\
 E:\New folderMLMBackUP\hmgreencity-mlm_Clone\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
 E:\New folderMLMBackUP\hmgreencity-mlm_Clone\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 E:\New folderMLMBackUP\hmgreencity-mlm_Clone\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
+F:\Ashwani Afluex\repository\hmgreencity-mlm\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
