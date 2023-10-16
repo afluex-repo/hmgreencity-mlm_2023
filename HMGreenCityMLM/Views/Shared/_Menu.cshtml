@@ -1,9 +1,10 @@
 ﻿@model HMGreenCityMLM.Models.Home
 
-<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-
-    <li class="nav-item">
-        <a href="/Admin/AdminDashBoard"><i class="feather icon-mail"></i><span class="menu-title" data-i18n="Email">Dashboard</span></a>
+<ul class="sidebar-menu">
+    <li class="dropdown active">
+        <a href="/Admin/AdminDashBoard" class="nav-link has-dropdown">
+            <i data-feather="monitor"></i><span>Dashboard</span>
+        </a>
     </li>
     @if (Model != null)
     {
@@ -13,41 +14,24 @@
 
             foreach (var item in Model.lstMenu)
             {
-                <li class="nav-item">
-                    <a href="#">
-                        <i class="@item.Icon"></i>
-                            <span class="menu-title" data-i18n="Ecommerce">@item.MenuName</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" class="v-icon notranslate v-theme--dark nav-group-arrow iconify iconify--tabler" width="1em" height="1em" viewBox="0 0 24 24" style="font-size: 18px; height: 18px; width: 18px;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 6l6 6l-6 6"></path></svg>
-                       
-                            </a>
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown">
+                        <i data-feather="briefcase"></i><span>@item.MenuName</span>
+                    </a>
                     @if (item.Url == "#")
                     {
-                        <ul class="menu-content">
+                        <ul class="dropdown-menu">
                             @foreach (var item1 in Model.lstsubmenu)
                             {
                                 if (item1.MenuId == item.MenuId)
                                 {
-                                    <li>
-                                        <a href="@item1.Url"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">@item1.SubMenuName</span>
-                                        
-                                        </a>
-                                        
-                                     </li>
-
+                                    <li class="active"><a class="nav-link" href="@item1.Url">@item1.SubMenuName</a></li>
                                 }
                             }
-
-
-
                         </ul>
                     }
                 </li>
             }
         }
     }
-
-
-
-
-
 </ul>
