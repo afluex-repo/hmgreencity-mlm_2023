@@ -6509,6 +6509,7 @@
     <Content Include="Views\Master\PlotListfromCRM.cshtml" />
     <Content Include="Views\AdminReports\TopupReportNew.cshtml" />
     <Content Include="Views\User\TopupListNew.cshtml" />
+    <Content Include="Views\AdminReports\RewardIncludedListNew.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
