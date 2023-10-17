@@ -2535,5 +2535,62 @@ namespace HMGreenCityMLM.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult RewardIncludedListNew()
+        {
+
+            return View();
+        }
+
+
+        [HttpPost]
+        [ActionName("RewardIncludedListNew")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult RewardIncludedListNew(Reports model)
+        {
+            if (model.LoginId == null)
+            {
+                model.ToLoginID = null;
+            }
+
+            //#region ddlleg
+            //List<SelectListItem> Leg = Common.Leg();
+            //ViewBag.Leg = Leg;
+            //#endregion ddlleg
+            model.LoginId = model.ToLoginID;
+            List<Reports> lst1 = new List<Reports>();
+            //model.Leg = string.IsNullOrEmpty(model.Leg) ? null : model.Leg;
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            //model.IsDownline = Request["Chk_"].ToString(); 
+            DataSet ds11 = model.GetRewardIncludedDetailsNew();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.LoginId = r["LoginId"].ToString();
+                    Obj.DisplayName = r["FirstName"].ToString();
+                    Obj.SectorName = r["sectorname"].ToString();
+                    Obj.SiteName = r["sitename"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
+                    Obj.Reward = r["IsReward"].ToString();
+                    Obj.ClosingDate = r["CalculationDate"].ToString();
+                    Obj.NetAmount = r["AMount"].ToString();
+                    Obj.LeadershipBonus = r["BV"].ToString();
+
+                    lst1.Add(Obj);
+                }
+                model.lstassociate = lst1;
+                ViewBag.TotalNetAmount = double.Parse(ds11.Tables[0].Compute("sum(AMount)", "").ToString()).ToString("n2");
+                ViewBag.TotalBV = double.Parse(ds11.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
+            }
+
+
+            return View(model);
+        }
     }
 }

@@ -842,6 +842,19 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdatePlotDetailsToMLM", para);
             return ds;
         }
+
+
+        public DataSet GetRewardIncludedDetailsNew()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate),
+                                     new SqlParameter("@IsReward", Reward),
+                                    new SqlParameter("@IsDownline", IsDownline)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRewardIncludedDetailsNew", para);
+            return ds;
+        }
     }
 }
 
