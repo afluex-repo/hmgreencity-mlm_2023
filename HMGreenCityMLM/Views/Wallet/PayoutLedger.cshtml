@@ -6,95 +6,80 @@
 }
 @using (Html.BeginForm("PayoutLedger", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <br />
-    <div class="app-content content">
-        <div class="content-overlay"></div>
-        <div class="header-navbar-shadow"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Payout Ledger</h5>
+                        @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                    </div>
+                    @*<p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                            @TempData["ChangeAsspassword"]
+                        </p>*@
+                </div>
             </div>
-            <div class="content-body">
-                <!-- users edit start -->
-                <section class="users-edit">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <ul class="nav nav-tabs mb-3" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
-                                           aria-controls="account" role="tab" aria-selected="true">
-                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Payout Ledger</span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-
-                                        <div class="row">
-
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label>From Date  </label>
-                                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "readonly" })
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label>To Date  </label>
-                                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly" })
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <br />
-                                                    <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="dt-responsive table-responsive">
-                                            <table class="table mb-0" id="example23">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sr No.</th>
-                                                        <th>Transaction Date</th>
-                                                        <th>Narration</th>
-                                                        <th>CrAmount</th>
-                                                        <th>DrAMount</th>
-                                                        <th>Balance</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model != null)
-                                                {
-                                                    if (Model.lstpayoutledger != null)
-                                                    {
-                                                        int i = 1;
-                                                        foreach (var Item in Model.lstpayoutledger)
-                                                        {
-                                                <tr class="text-left">
-                                                    <td>@i</td>
-
-                                                    <td>@Item.AddedOn</td>
-                                                    <td>@Item.Narration</td>
-                                                    <td>@Item.CrAmount</td>
-                                                    <td>@Item.DrAmount</td>
-                                                    <td>@Item.PayoutBalance</td>
-                                                </tr>
-                                                            i++;
-                                                        }
-
-                                                    }
-                                                }
-                                                </tbody>
-                                            </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>To Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
                         </div>
                     </div>
-                </section>
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>Transaction Date</th>
+                                    <th>Narration</th>
+                                    <th>CrAmount</th>
+                                    <th>DrAMount</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstpayoutledger != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstpayoutledger)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+
+                                                <td>@Item.AddedOn</td>
+                                                <td>@Item.Narration</td>
+                                                <td>@Item.CrAmount</td>
+                                                <td>@Item.DrAmount</td>
+                                                <td>@Item.PayoutBalance</td>
+                                            </tr>
+                                            i++;
+                                        }
+
+                                    }
+                                }
+                            </tbody>
+
+
+
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -109,9 +94,13 @@
 
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear:true
     });
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
     });
 </script>
 
@@ -122,5 +111,10 @@
         });
     });
 </script>
-
+<style>
+    .btn-success {
+        margin-top: 29px;
+        margin-left: 20px;
+    }
+</style>
 
