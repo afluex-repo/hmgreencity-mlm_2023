@@ -642,3 +642,4 @@ D:\Devendra\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.xml
 D:\Devendra\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.WebHost.xml
 D:\Devendra\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 D:\Devendra\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
+D:\Devendra\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
