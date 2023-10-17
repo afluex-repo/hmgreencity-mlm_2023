@@ -8,255 +8,211 @@
 <!-- /.row -->
 @using (Html.BeginForm("ProductMaster", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-   
-    <div class="app-content content">
-        <div class="content-overlay"></div>
-        <div class="header-navbar-shadow"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
-            <div class="content-body">
-                <!-- users edit start -->
-                <section class="users-edit">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <ul class="nav nav-tabs mb-3" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
-                                           aria-controls="account" role="tab" aria-selected="true">
-                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Product Master</span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Product Name <span style="color: red">*</span></label>
-                                                    <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.ProductName, new { @placeholder = "Product Name", @class = "form-control" })
-                                                        @Html.HiddenFor(m => m.ProductID)
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Product Price <span style="color: red">*</span></label>
-                                                    <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.ProductPrice, new { @placeholder = "Product Price", @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                           
-                                           
-                                        </div>
-                                        <div class="row">
-                                          
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Binary Perc(%)<span style="color: red">*</span></label>
-                                                    <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.BinaryPercent, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-6">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Direct Perc(%) <span style="color: red">*</span></label>
-                                                    <div class="col-sm-9">
-                                                        @Html.TextBoxFor(m => m.DirectPercent, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <span style="color: red">
-                                                    @TempData["Product"]
-                                                </span>
-                                                @if (Model.ProductID == null)
-                                                {
-                                                    <input type="submit" id="btnSaveProduct" class="btn btn-success" name="btnSaveProduct" value="Save" onclick="return saveProduct();" />
-                                                }
-                                                else
-                                                {
-                                                    @*<input type="submit" id="btnUpdateProduct" class="btn btn-success pull-right" name="btnUpdateProduct" value="Update" onclick="return updateProduct();" />*@
-                                                    <a type="submit" id="btnUpdateProduct" class="btn btn-success" name="btnUpdateProduct" value="Update" onclick="return updateProduct();" href="/Master/ProductList">Update</a>
-                                                }
-
-                                                <a class="btn btn-primary" href="/Master/ProductList">Back To List</a>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /.panel-body -->
-                                </div>
-                                <!-- /.panel -->
-                                <!-- /.panel -->
-                            </div>
-
-
-
-
+    //==================================================================================================================
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Product Master</h6>
+                            <span style="color: red">
+                                @TempData["Product"]
+                            </span>
+                            @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
                         </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
 
-                        </div>
-                    </section>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-       
-                        }
-                        <style>
-                            .errortext {
-                               border: 2px solid red !important;
-                               
-                            }
-                        </style>
-                        <script>
-                            function validate() {
-                                $(".errortext").removeClass("errortext");
-                                if ($('#ProductName').val() == '') {
-                                    $("#ProductName").addClass('errortext');
-                                    $('#ProductName').focus();
-                                    return false;
-                                }
-                                if ($('#ProductPrice').val() == '') {
-                                    $("#ProductPrice").addClass('errortext');
-                                    $('#ProductPrice').focus();
-                                    return false;
-                                }
-                              
-                                if ($('#BinaryPercent').val() == '') {
-                                    $("#BinaryPercent").addClass('errortext');
-                                    $('#BinaryPercent').focus();
-                                    return false;
-                                }
-                                if ($('#DirectPercent').val() == '') {
-                                    $("#DirectPercent").addClass('errortext');
-                                    $('#DirectPercent').focus();
-                                    return false;
-                                }
-                               
-                            }
-                            function isNumberKey(evt) {
 
-                                var charCode = (evt.which) ? evt.which : event.keyCode;
-                                if (charCode != 46 && charCode > 31
-                                  && (charCode < 48 || charCode > 57))
-                                    return false;
-
-                                return true;
-                            }
-                          
-
-                            function saveProduct() {
-                                $(".errortext").removeClass("errortext");
-                                if ($('#ProductName').val() == '') {
-                                    $("#ProductName").addClass('errortext');
-                                    $('#ProductName').focus();
-                                    return false;
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label>Product Name<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ProductName, new { @placeholder = "Product Name", @class = "form-control" })
+                                @Html.HiddenFor(m => m.ProductID)
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Product Price <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ProductPrice, new { @placeholder = "Product Price", @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Binary Perc(%)<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.BinaryPercent, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Direct Perc(%) <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.DirectPercent, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                @if (Model.ProductID == null)
+                                {
+                                    <input type="submit" id="btnSaveProduct" class="btn btn-success" name="btnSaveProduct" value="Save" onclick="return saveProduct();" />
                                 }
-                                if ($('#ProductPrice').val() == '') {
-                                    $("#ProductPrice").addClass('errortext');
-                                    $('#ProductPrice').focus();
-                                    return false;
-                                }
-                               
-                                if ($('#BinaryPercent').val() == '') {
-                                    $("#BinaryPercent").addClass('errortext');
-                                    $('#BinaryPercent').focus();
-                                    return false;
-                                }
-                                if ($('#DirectPercent').val() == '') {
-                                    $("#DirectPercent").addClass('errortext');
-                                    $('#DirectPercent').focus();
-                                    return false;
-                                }
-                               
-
-                                $.ajax({
-                                    url: "/Master/SaveProduct",
-                                    Type: "Get",
-                                    DataType: "JSON",
-                                    data: { ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: "0", CGST: "0", SGST: "0", BinaryPercent: $("#BinaryPercent").val(), DirectPercent: $("#DirectPercent").val(), ROIPercent: "0", BV: "0" },
-                                    success: function (data) {
-                                        alert(data.Result);
-                                        window.location.href = '@Url.Action("ProductList", "Master")';
-
-                                    }
-
-                                });
-                            }
-
-                            function updateProduct() {
-                                $(".errortext").removeClass("errortext");
-                                if ($('#ProductName').val() == '') {
-                                    $("#ProductName").addClass('errortext');
-                                    $('#ProductName').focus();
-                                    return false;
-                                }
-                                if ($('#ProductPrice').val() == '') {
-                                    $("#ProductPrice").addClass('errortext');
-                                    $('#ProductPrice').focus();
-                                    return false;
-                                }
-                                if ($('#IGST').val() == '') {
-                                    $("#IGST").addClass('errortext');
-                                    $('#IGST').focus();
-                                    return false;
-                                }
-                                if ($('#CGST').val() == '') {
-                                    $("#CGST").addClass('errortext');
-                                    $('#CGST').focus();
-                                    return false;
-                                }
-                                if ($('#SGST').val() == '') {
-                                    $("#SGST").addClass('errortext');
-                                    $('#SGST').focus();
-                                    return false;
-                                }
-                                if ($('#BinaryPercent').val() == '') {
-                                    $("#BinaryPercent").addClass('errortext');
-                                    $('#BinaryPercent').focus();
-                                    return false;
-                                }
-                                if ($('#DirectPercent').val() == '') {
-                                    $("#DirectPercent").addClass('errortext');
-                                    $('#DirectPercent').focus();
-                                    return false;
-                                }
-                                if ($('#ROIPercent').val() == '') {
-                                    $("#ROIPercent").addClass('errortext');
-                                    $('#ROIPercent').focus();
-                                    return false;
-                                }
-                                if ($('#BV').val() == '') {
-                                    $("#BV").addClass('errortext');
-                                    $('#BV').focus();
-                                    return false;
+                                else
+                                {
+                                    @*<input type="submit" id="btnUpdateProduct" class="btn btn-success pull-right" name="btnUpdateProduct" value="Update" onclick="return updateProduct();" />*@
+                                    <a type="submit" id="btnUpdateProduct" class="btn btn-success" name="btnUpdateProduct" value="Update" onclick="return updateProduct();" href="/Master/ProductList">Update</a>
                                 }
 
-                                $.ajax({
-                                    url: "/Master/UpdateProduct",
-                                    Type: "Get",
-                                    DataType: "JSON",
-                                    data: { ProductID: $("#ProductID").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: "0", CGST: "0", SGST: "0", BinaryPercent: $("#BinaryPercent").val(), DirectPercent: $("#DirectPercent").val(), ROIPercent: "0", BV: "0" },
-                                    success: function (data) {
-                                        alert(data.Result);
-                                        window.location.href = '@Url.Action("ProductList", "Master")';
+                                <a class="btn btn-primary" href="/Master/ProductList">Back To List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    //==================================================================================================================
+}
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>
+<script>
+    function validate() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ProductName').val() == '') {
+            $("#ProductName").addClass('errortext');
+            $('#ProductName').focus();
+            return false;
+        }
+        if ($('#ProductPrice').val() == '') {
+            $("#ProductPrice").addClass('errortext');
+            $('#ProductPrice').focus();
+            return false;
+        }
 
-                                    }
+        if ($('#BinaryPercent').val() == '') {
+            $("#BinaryPercent").addClass('errortext');
+            $('#BinaryPercent').focus();
+            return false;
+        }
+        if ($('#DirectPercent').val() == '') {
+            $("#DirectPercent").addClass('errortext');
+            $('#DirectPercent').focus();
+            return false;
+        }
 
-                                });
+    }
+    function isNumberKey(evt) {
 
-                            }
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
 
-                        </script>
+        return true;
+    }
+
+
+    function saveProduct() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ProductName').val() == '') {
+            $("#ProductName").addClass('errortext');
+            $('#ProductName').focus();
+            return false;
+        }
+        if ($('#ProductPrice').val() == '') {
+            $("#ProductPrice").addClass('errortext');
+            $('#ProductPrice').focus();
+            return false;
+        }
+
+        if ($('#BinaryPercent').val() == '') {
+            $("#BinaryPercent").addClass('errortext');
+            $('#BinaryPercent').focus();
+            return false;
+        }
+        if ($('#DirectPercent').val() == '') {
+            $("#DirectPercent").addClass('errortext');
+            $('#DirectPercent').focus();
+            return false;
+        }
+
+
+        $.ajax({
+            url: "/Master/SaveProduct",
+            Type: "Get",
+            DataType: "JSON",
+            data: { ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: "0", CGST: "0", SGST: "0", BinaryPercent: $("#BinaryPercent").val(), DirectPercent: $("#DirectPercent").val(), ROIPercent: "0", BV: "0" },
+            success: function (data) {
+                alert(data.Result);
+                window.location.href = '@Url.Action("ProductList", "Master")';
+
+            }
+
+        });
+    }
+
+    function updateProduct() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ProductName').val() == '') {
+            $("#ProductName").addClass('errortext');
+            $('#ProductName').focus();
+            return false;
+        }
+        if ($('#ProductPrice').val() == '') {
+            $("#ProductPrice").addClass('errortext');
+            $('#ProductPrice').focus();
+            return false;
+        }
+        if ($('#IGST').val() == '') {
+            $("#IGST").addClass('errortext');
+            $('#IGST').focus();
+            return false;
+        }
+        if ($('#CGST').val() == '') {
+            $("#CGST").addClass('errortext');
+            $('#CGST').focus();
+            return false;
+        }
+        if ($('#SGST').val() == '') {
+            $("#SGST").addClass('errortext');
+            $('#SGST').focus();
+            return false;
+        }
+        if ($('#BinaryPercent').val() == '') {
+            $("#BinaryPercent").addClass('errortext');
+            $('#BinaryPercent').focus();
+            return false;
+        }
+        if ($('#DirectPercent').val() == '') {
+            $("#DirectPercent").addClass('errortext');
+            $('#DirectPercent').focus();
+            return false;
+        }
+        if ($('#ROIPercent').val() == '') {
+            $("#ROIPercent").addClass('errortext');
+            $('#ROIPercent').focus();
+            return false;
+        }
+        if ($('#BV').val() == '') {
+            $("#BV").addClass('errortext');
+            $('#BV').focus();
+            return false;
+        }
+
+        $.ajax({
+            url: "/Master/UpdateProduct",
+            Type: "Get",
+            DataType: "JSON",
+            data: { ProductID: $("#ProductID").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: "0", CGST: "0", SGST: "0", BinaryPercent: $("#BinaryPercent").val(), DirectPercent: $("#DirectPercent").val(), ROIPercent: "0", BV: "0" },
+            success: function (data) {
+                alert(data.Result);
+                window.location.href = '@Url.Action("ProductList", "Master")';
+
+            }
+
+        });
+
+    }
+</script>
