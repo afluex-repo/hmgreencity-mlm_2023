@@ -2,181 +2,82 @@
 @{
     Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- Responsive -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>@ViewBag.Title</title>
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/assetsAdmin/css/app.min.css">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/assetsAdmin/css/style.css">
+    <link rel="stylesheet" href="~/assetsAdmin/css/components.css">
+    <link rel="stylesheet" href="~/assetsAdmin/bundles/jqvmap/dist/jqvmap.min.css">
+    <!-- Custom style CSS -->
+    <link rel="stylesheet" href="~/assetsAdmin/css/custom.css">
+    <link rel='shortcut icon' type='image/x-icon' href='~/assetsAdmin/img/favicon.png' />
+</head>
 
-
-<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
-<!-- BEGIN: Vendor CSS-->
-
-<link href="../../AssociatePanelcss/app-assets/vendors/css/vendors.min.css" rel="stylesheet" />
-<!-- END: Vendor CSS-->
-<!-- BEGIN: Theme CSS-->
-
-<link href="../../AssociatePanelcss/app-assets/css/bootstrap.min.css" rel="stylesheet" />
-<link href="../../AssociatePanelcss/app-assets/css/bootstrap-extended.min.css" rel="stylesheet" />
-<link href="../../AssociatePanelcss/app-assets/css/colors.min.css" rel="stylesheet" />
-<link href="../../AssociatePanelcss/app-assets/css/components.min.css" rel="stylesheet" />
-
-
-<link href="../../AssociatePanelcss/app-assets/css/themes/dark-layout.min.css" rel="stylesheet" />
-<link href="../../AssociatePanelcss/app-assets/css/themes/semi-dark-layout.min.css" rel="stylesheet" />
-<!-- BEGIN: Page CSS-->
-
-<link href="../../AssociatePanelcss/app-assets/css/core/menu/menu-types/vertical-menu.min.css" rel="stylesheet" />
-<link href="../../AssociatePanelcss/app-assets/css/core/colors/palette-gradient.min.css" rel="stylesheet" />
-<link href="../../AssociatePanelcss/app-assets/css/pages/authentication.css" rel="stylesheet" />
-<!-- END: Page CSS-->
-<!-- BEGIN: Custom CSS-->
-
-<link href="../../AssociatePanelcss/assets/css/style.css" rel="stylesheet" />
-<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
-<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
-@*<section class="login-section">
-        <div class="auto-container">
-            <div class="row clearfix">
-                <div class="column col-lg-12 col-md-12 col-sm-12">
-                    <h2 class="text-center">Login Form</h2>
-                    <!-- Login Form -->
-                    <div class="login-form">
-                        <!--Login Form-->
-                        @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "signupForm" }))
-                        {
-                            <div class="form-group">
-                                <label>Login Id *</label>
-                                @Html.TextBoxFor(m => m.LoginId, new { @Placeholder = "Login Id", @required = "required" })
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <section class="section">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                        <div class="card card-primary overflow-hidden">
+                            <div class="card-header" style="background:#3c919d">
+                                <h4 class="text-white">Login</h4>
                             </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                @Html.PasswordFor(m => m.Password, new { @Placeholder = "Password", @required = "required" })
-
-                            </div>
-                            <div class="clearfix">
-                                <div class="pull-left">
-                                    <div class="form-group no-margin">
-                                        <p style="color:red"> @TempData["Login"] </p>
-                                    </div>
-                                </div>
-                                <div class="pull-right">
-                                    <div class="form-group no-margin">
-                                        <input type="submit" id="Login" class="theme-btn btn-style-one" name="Login" value="Sign In">
-                                    </div>
-                                </div>
-                            </div>
-
-                        }
-                    </div>
-                    <!--End Login Form -->
-                </div>
-            </div>
-        </div>
-    </section>*@
-
-
-<body class="vertical-layout vertical-menu-modern 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
-    <!-- BEGIN: Content-->
-    <div class="app-content content">
-        <div class="content-overlay"></div>
-        <div class="header-navbar-shadow"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
-            <div class="content-body">
-                <section class="row flexbox-container">
-                    <div class="col-xl-12 col-12 d-flex justify-content-center">
-                        <div class="card bg-authentication rounded-0 mb-0">
-                            <div class="row m-0">
-                                <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
-                                    <img src="../../AssociatePanelcss/app-assets/images/pages/login.png">
-                                </div>
-
-                                <div class="col-lg-6 col-12 p-0">
-                                    <div class="card rounded-0 mb-0 px-2">
-                                        <div class="card-header pb-1">
-                                            <div class="card-title">
-                                                <h4 class="mb-0">Login</h4>
-                                            </div>
+                            <div class="card-body">
+                                <h6 class="mb-2">
+                                    Welcome back, please login to your account.
+                                </h6>
+                             @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "signupForm" }))
+                             {
+                                    <div class="form-group">
+                                        <label for="email">Username</label>
+                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })
+                                        <div class="invalid-feedback">
+                                        
                                         </div>
-                                        <p class="px-2">Welcome back, please login to your account.</p>
-                                        <div class="card-content">
-                                            <div class="card-body pt-1">
-                                                @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "signupForm" }))
-                                                {
-                                                    <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })
-                                                        <div class="form-control-position">
-                                                            <i class="feather icon-user" style="top: 10px;"></i>
-                                                        </div>
-                                                        <label for="user-name">Username</label>
-                                                    </fieldset>
-                                                    <fieldset class="form-label-group position-relative has-icon-left">
-                                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @required = "required" })
-                                                        <div class="form-control-position">
-                                                            <i class="feather icon-lock" style="top: 10px;"></i>
-                                                        </div>
-                                                        <label for="user-password">Password</label>
-                                                    </fieldset>
-                                                    <br />
-                                                    @*<a href="/Home/Registration" class="btn btn-outline-primary float-left btn-inline">Register</a>*@
-                                                    <input type="submit" id="Login" class="btn btn-primary float-right btn-inline" name="Login" value="Sign In" />
-                                                    <br />
-                                                    
-                                                }
-                                            </div>
-                                            <div class="form-group no-margin">
-                                                <p style="color:red;"> @TempData["Login"] </p>
-                                            </div>
-                                        </div>
-
+                                        <p class="text-danger">
+                                            @TempData["Login"]
+                                        </p>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <div class="d-block">
+                                            <label for="password" class="control-label">Password</label>
+                                        </div>
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @required = "required" })
+                                        <div class="invalid-feedback">
+                                            please fill in your password
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" id="Login" class="btn btn-primary btn-lg btn-block" name="Login" value="Sign In" />
+                                    </div>
+                             }
                             </div>
                         </div>
+                        @*<div class="mt-5 text-muted text-center">
+                            Don't have an account? <a href="auth-register.html">Create One</a>
+                        </div>*@
                     </div>
-                </section>
+                </div>
             </div>
-        </div>
+        </section>
+
     </div>
-    <!-- END: Content-->
-    <!-- BEGIN: Vendor JS-->
-
-    <script src="../../AssociatePanelcss/app-assets/vendors/js/vendors.min.js"></script>
-
-    <!-- BEGIN Vendor JS-->
-    <!-- BEGIN: Page Vendor JS-->
-    <!-- END: Page Vendor JS-->
-    <!-- BEGIN: Theme JS-->
-    <script src="../../AssociatePanelcss/app-assets/js/core/app-menu.min.js"></script>
-    <script src="../../AssociatePanelcss/app-assets/js/core/app.min.js"></script>
-    <script src="../../AssociatePanelcss/app-assets/js/scripts/components.min.js"></script>
-    <script>
-    @*$(document).ready(function () {
-        $("#myModal").modal('show');
-    });
-    </script>
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="newyear">
-                                <img style="width:100%" src="../WebsiteCss/Offer.jpeg" class="img-responsive" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@ 
-    <!-- END: Theme JS-->
-    <!-- BEGIN: Page JS-->
-    <!-- END: Page JS-->
+        <!-- END: Content-->
+        <!-- General JS Scripts -->
+        <script src="~/assetsAdmin/js/app.min.js"></script>
+        <!-- Template JS File -->
+        <script src="~/assetsAdmin/js/scripts.js"></script>
+        <!-- Custom JS File -->
+        <script src="~/assetsAdmin/js/custom.js"></script>
 </body>
 
+</html>
