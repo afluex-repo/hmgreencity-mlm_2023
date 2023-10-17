@@ -346,7 +346,8 @@
         display: block;
         margin: 0 auto;
     }
-   i.girl-hold {
+
+    i.girl-hold {
         width: 50px !important;
         height: 50px !important;
         background-image: url(../../images/TreeIcon/girl-hold.png) !important;
@@ -361,6 +362,7 @@
         display: block;
         margin: 0 auto;
     }
+
     #lblDisplayName {
         font-size: 18px;
         padding: 5px 5px 10px;
@@ -462,8 +464,9 @@
     .main-menu {
         z-index: 1 !important;
     }
-    .custom{
-        color:red;
+
+    .custom {
+        color: red;
     }
 </style>
 <style>
@@ -485,285 +488,261 @@
         vertical-align: top;
     }
 </style>
-
-
-
-
-
-
-
 <div class="loader" id="divload"></div>
-
 <br />
-<div class="app-content content">
-    <div class="content-overlay"></div>
-    <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper">
-        <div class="content-header row">
+@*//==================================================================================================================*@
+<section class="section">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h6 class="mb-0">Binary Tree</h6>
+                        @*<button class="btn btn-info"><a href="/Master/ProductMaster" class="text-white">Add New</a></button>*@
+                    </div>
+                    <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="content-body">
-            <!-- users edit start -->
-            <section class="users-edit">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <ul class="nav nav-tabs mb-3" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
-                                       aria-controls="account" role="tab" aria-selected="true">
-                                        <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Binary Tree</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="form-row">
-                                                        <div class="col-md-2"></div>
-
-                                                        <div class="col-md-4">
-                                                            <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID/Name" autocomplete="off">
-
-                                                            <input type="hidden" id="ToLoginID">
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <input type="hidden" name="hfCustomerId" id="hfCustomerId">
-                                                            <input type="hidden" name="HiddenField1" id="HiddenField1">
-                                                            <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
-                                                            <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
-                                                                <input type="hidden" id="lblRequest" />Go Up
-                                                            </a>
-                                                            <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
-
-
-
-
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            <div class="col-sm-12 col-md-12" id="chart">
-                                                                <div class="tree family-tree clearfix" style="overflow-x:auto">
-                                                                    <ul>
-                                                                        <li id="firstRow">
-                                                                            <a href="" id="firstHead"></a>
-                                                                            <span id="rptRow1_lblFooter"></span>
-
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="container-fluid" id="member-details">
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-12">
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <div class="form-row">
-                                                                                        <div class="form-group col-md-9">
-                                                                                            <button type="button" class="next-tree" onclick='ClickHere(this)'>
-                                                                                                <a style="width: 100%; height: 50%; background-color: white;" title="Go Down" class="clip-tree"></a>
-
-                                                                                            </button>
-                                                                                            <div class="media-body">
-                                                                                                <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:black">@ViewBag.Fk_UserId</h3>
-                                                                                                <p class="mb-0" id="lblMemberId" style="text-align: center;color:black"></p>
-                                                                                                <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:black"></p>
-                                                                                                <p class="mb-0" id="lblstatus" style="text-align: center;color:black"></p>
-                                                                                                <p style="display:none" id="lblFk_UserId"></p>
-                                                                                            </div>
-
-
-                                                                                        </div>
-                                                                                        <div class="form-group col-md-3">
-                                                                                            <br />
-                                                                                            <button type="button" id="close">&times;</button>
-                                                                                            <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
-                                                                                        </div>
-
-
-                                                                                    </div>
-                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
-                                                                                        <div class="col-md-6">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Sponsor Details</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
-
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Type</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Left</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Right</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="TotalMemberRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="LeftBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="RightBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="TotalBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="tab-content">
+                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-4">
+                                            <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID/Name" autocomplete="off">
+
+                                            <input type="hidden" id="ToLoginID">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="hidden" name="hfCustomerId" id="hfCustomerId">
+                                            <input type="hidden" name="HiddenField1" id="HiddenField1">
+                                            <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
+                                            <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
+                                                <input type="hidden" id="lblRequest" />Go Up
+                                            </a>
+                                            <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="col-sm-12 col-md-12" id="chart">
+                                                <div class="tree family-tree clearfix" style="overflow-x:auto">
+                                                    <ul>
+                                                        <li id="firstRow">
+                                                            <a href="" id="firstHead"></a>
+                                                            <span id="rptRow1_lblFooter"></span>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="container-fluid" id="member-details">
+
+                                                    <div class="row">
+
+                                                        <div class="col-md-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="form-row">
+                                                                        <div class="form-group col-md-9">
+                                                                            <button type="button" class="next-tree" onclick='ClickHere(this)'>
+                                                                                <a style="width: 100%; height: 50%; background-color: white;" title="Go Down" class="clip-tree"></a>
+
+                                                                            </button>
+                                                                            <div class="media-body">
+                                                                                <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:black">@ViewBag.Fk_UserId</h3>
+                                                                                <p class="mb-0" id="lblMemberId" style="text-align: center;color:black"></p>
+                                                                                <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:black"></p>
+                                                                                <p class="mb-0" id="lblstatus" style="text-align: center;color:black"></p>
+                                                                                <p style="display:none" id="lblFk_UserId"></p>
                                                                             </div>
+
+
+                                                                        </div>
+                                                                        <div class="form-group col-md-3">
+                                                                            <br />
+                                                                            <button type="button" id="close">&times;</button>
+                                                                            <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
+                                                                        <div class="col-md-6">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Sponsor Details</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+
+
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
+                                                                        <div class="col-md-3">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Type</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Left</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Right</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="TotalMemberRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="LeftBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="RightBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <p class="TotalBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
-
-
-
-
-
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
+
+
+
+
+
                                             </div>
+
                                         </div>
                                     </div>
-
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
-</div>
-
-
+</section>
+@*//==================================================================================================================*@
 
 
 <style>
-    .Red{
-    border: 1px solid #d3d3d3;
-    color: red !important;
-}
-       .Green{
-    border: 1px solid #d3d3d3;
-    color: darkgreen !important;
-}
+    .Red {
+        border: 1px solid #d3d3d3;
+        color: red !important;
+    }
+
+    .Green {
+        border: 1px solid #d3d3d3;
+        color: darkgreen !important;
+    }
 </style>
 <input type="hidden" id="firtsMemberID" value="@ViewBag.Fk_UserId" />
 
@@ -773,7 +752,7 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-       
+
         $("input").attr("autocomplete", "off");
         var elements = document.getElementsByClassName('ui-widget.ui-widget-content');
         var cityuse = [];
@@ -796,29 +775,29 @@
                                 var str = ui.item.label;
                                 var strsplit = str.split("(");
                                 $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                             
+
                             },
                             minLength: 1
                         }).data("ui-autocomplete")._renderItem = function (ul, item) {
                             console.log(ul)
-                                var div = $("<li>")
-                                    .append("<li class='" + item1.cssStatus + "' id='ui-id-6' tabindex='-1'>(" + item.label + ")</li>")
-                                    .appendTo(ul);
-                                return div;
-                             
+                            var div = $("<li>")
+                                .append("<li class='" + item1.cssStatus + "' id='ui-id-6' tabindex='-1'>(" + item.label + ")</li>")
+                                .appendTo(ul);
+                            return div;
+
                         };
                     });
-             
-                //    $('#txtLoginID').autocomplete({
-                //        source: cityuse,
-                //        select: function (event, ui) {
-                //            var str = ui.item.label;
-                //            var strsplit = str.split("(");
-                //            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                //        }
-                //    })
+
+                    //    $('#txtLoginID').autocomplete({
+                    //        source: cityuse,
+                    //        select: function (event, ui) {
+                    //            var str = ui.item.label;
+                    //            var strsplit = str.split("(");
+                    //            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                    //        }
+                    //    })
                     //}
-                   
+
                 }
             }, error: function () {
                 alert('Some Thing wrong!');
@@ -943,7 +922,7 @@
 
         var loginid = $("#firtsMemberID").val();
         var UserId = $("#UserLoginId").val();
-        
+
         var topId = $("#linkGoUp").find("#lblRequest").val();
         if (parseInt(loginid) > parseInt(topId)) {
             //alert("You Are on top...!")
