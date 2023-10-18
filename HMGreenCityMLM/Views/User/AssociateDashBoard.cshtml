@@ -3,6 +3,14 @@
     ViewBag.Title = "AssociateDashBoard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    .awardBg{
+        background: rgb(76,167,186);
+        background: linear-gradient(90deg, rgba(76,167,186,0) 0%, rgba(76,167,186,1) 100%);
+    }
+</style>
+
 <div class="app-content content">
 <div class="content-overlay"></div>
 <div class="header-navbar-shadow"></div>
@@ -18,6 +26,16 @@
             @*===============================================================================*@
 
             <div class="row ">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card awardBg">
+                        <div class="card-statistic-3">
+                            <div class="card-content d-flex align-items-center">
+                                <img src="~/assetsAdmin/img/silver.png" />
+                                <h4 class="card-title pl-3 mb-0" style="color:#024a54">Silver Achiever</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-xl-3 col-lg-6">
                     <div class="card l-bg-style1">
                         <div class="card-statistic-3">
@@ -308,8 +326,9 @@
 <script src="~/scripts/jquery-1.10.2.js"></script>
 <script>
     $(document).ready(function () {
-        //$("#myModal").modal('show');
+        $("#myModal").modal('hide');
         $("#myModal1").modal('hide');
+        $("#congratulation").modal('show');
     });
 </script>
 <div id="myModal" class="modal fade" role="dialog">
@@ -350,3 +369,41 @@
         </div>
     </div>
 </div> 
+
+<style>
+    @@media (max-width:767px) {
+        #congratulation .modal-content {
+            height: 396px !important;
+        }
+    }
+    #congratulation .modal-content {
+        background-size: cover;
+        /*background-image: url('../../assetsAdmin/img/congratulation_hm.png');*/
+        /*background-image: url('../../assetsAdmin/img/congratulation_o.png');*/
+        background-image: url('../../assetsAdmin/img/congratulation_.png');
+        height: 500px;
+        position: relative;
+    }
+    #congratulation .modal-content .modal-body img{
+        width:104px;
+        position: absolute;
+        left: 38%;
+        bottom: 10%;
+    }
+</style>
+
+<div class="modal fade" id="congratulation" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="~/assetsAdmin/img/Crown.png" class="position-absolute top-50 start-100 translate-middle" />
+            </div>
+        </div>
+    </div>
+</div>
