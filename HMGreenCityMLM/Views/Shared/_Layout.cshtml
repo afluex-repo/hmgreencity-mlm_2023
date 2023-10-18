@@ -17,6 +17,30 @@
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="~/assetsAdmin/css/custom.css">
     <link rel='shortcut icon' type='image/x-icon' href='~/assetsAdmin/img/favicon.png' />
+
+    <style>
+        .main-sidebar .sidebar-menu li a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 50px;
+            padding: 0 20px;
+            width: 100%;
+            letter-spacing: 0.3px;
+            color: #000000 !important;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
+            color: #000000 !important;
+            height: 35px;
+            padding-left: 50px;
+            font-weight: 700;
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -52,7 +76,7 @@
                                  class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right pullDown">
-                            <div class="dropdown-title">gfgrgrthr</div>
+                            <div class="dropdown-title">@Session["FullName"]</div>
                             @*<a href="#!" class="dropdown-item has-icon">
                                     <i class="far
                                             fa-user"></i> Profile
@@ -80,28 +104,25 @@
                         </div>
                         <div class="sidebar-user-details">
                             <div class="user-name">HM GREEN CITY</div>
-                            <div class="user-role">Administrator</div>
+                            @*<div class="user-role">Administrator</div>*@
                         </div>
                     </div>
-
-
-
                     <div class="main-menu-content mt-3">
                         <ul class="sidebar-menu">
                             <li class="dropdown">
-                                <a href="/User/AssociateDashBoard" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+                                <a href="/User/AssociateDashBoard" class="nav-link"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="/User/TopupList" class="nav-link"><i data-feather="monitor"></i><span>Top Up List</span></a>
+                                <a href="/User/TopupList" class="nav-link"><i class="fas fa-list"></i><span>Top Up List</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="/User/TopupListNew" class="nav-link"><i data-feather="monitor"></i><span>Top Up List New</span></a>
+                                <a href="/User/TopupListNew" class="nav-link"><i class="fas fa-list"></i><span>Top Up List New</span></a>
                             </li>
 
 
                             <li class="dropdown">
                                 <a href="#" class="menu-toggle nav-link has-dropdown">
-                                    <i data-feather="briefcase"></i><span>Profile</span>
+                                    <i class="fas fa-user"></i><span>Profile</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="/User/ViewProfile">View</a></li>
@@ -112,7 +133,7 @@
 
                             <li class="dropdown">
                                 <a href="#" class="menu-toggle nav-link has-dropdown">
-                                    <i data-feather="briefcase"></i><span>Team</span>
+                                    <i class="fas fa-users"></i><span>Team</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="/User/BinaryTree">Binary Tree</a></li>
@@ -121,11 +142,11 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="/User/UserReward" class="nav-link"><i data-feather="monitor"></i><span>Rewards</span></a>
+                                <a href="/User/UserReward" class="nav-link"><i class="fas fa-trophy"></i><span>Rewards</span></a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="menu-toggle nav-link has-dropdown">
-                                    <i data-feather="briefcase"></i><span>Payout</span>
+                                    <i class="fas fa-rupee-sign"></i><span>Payout</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="/Wallet/PayoutLedger">Payout Wallet Ledger</a></li>
@@ -173,6 +194,8 @@
     <script src="~/assetsAdmin/js/scripts.js"></script>
     <!-- Custom JS File -->
     <script src="~/assetsAdmin/js/custom.js"></script>
+
+
 </body>
 
 </html>
