@@ -6,6 +6,28 @@
 }
 
 
+<style>
+    .tab1 {
+    background: linear-gradient(to right, #3b8d99, #3b8d99, #3b8d99) !important;
+    color: #fff;
+}
+
+        .tab2 {
+    background: linear-gradient(to right, #45a247, #45a247, #45a247) !important;
+    color: #fff;
+}
+            .tab3 {
+    background: linear-gradient(to right, #e93334, #e93334, #e93334) !important;  
+    color: #fff;
+}
+                .tab4 {
+    background: linear-gradient(to right, #2e1437, #2e1437, #2e1437) !important;
+    color: #fff;
+}  
+</style>
+
+
+
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -21,9 +43,9 @@
 
                 <div class="row ">
                     <div class="col-xl-3 col-lg-6">
-                        <div class="card l-bg-style1">
+                        <div class="card tab1">
                             <div class="card-statistic-3">
-                                <div class="card-icon card-icon-large"><i class="fa fa-award"></i></div>
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
                                 <div class="card-content">
                                     <h4 class="card-title">@ViewBag.TotalUsers</h4>
                                     <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList"><span class="text-white">Total Associates</span></a>
@@ -32,9 +54,9 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-6">
-                        <div class="card l-bg-style2">
+                        <div class="card tab2">
                             <div class="card-statistic-3">
-                                <div class="card-icon card-icon-large"><i class="fa fa-briefcase"></i></div>
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
                                 <div class="card-content">
                                     <h4 class="card-title">@ViewBag.ActiveUsers</h4>
                                     <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList?Status=P"><span class="text-white">Active Users</span></a>
@@ -43,9 +65,9 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-6">
-                        <div class="card l-bg-style3">
+                        <div class="card tab3">
                             <div class="card-statistic-3">
-                                <div class="card-icon card-icon-large"><i class="fa fa-globe"></i></div>
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
                                 <div class="card-content">
                                     <h4 class="card-title">@ViewBag.InactiveUsers</h4>
                                     <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList?Status=T"><span class="text-white">InActive Users</span></a>
@@ -54,9 +76,9 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-6">
-                        <div class="card l-bg-style4">
+                        <div class="card tab4">
                             <div class="card-statistic-3">
-                                <div class="card-icon card-icon-large"><i class="fa fa-money-bill-alt"></i></div>
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
                                 <div class="card-content">
                                     <h4 class="card-title">@ViewBag.BlockedUsers</h4>
                                     <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList?Status=B"><span class="text-white">Blocked Users</span></a>
@@ -65,16 +87,10 @@
                         </div>
                     </div>
                 </div>
-
-                @*====================================================================================*@
-
-        
-
-
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="card panel-default">
-                            <div class="card-header h4 text-dark">
+                            <div class="card-header h5 text-dark">
                                 Associate Details
                             </div>
                             <!-- /.panel-heading -->
@@ -89,7 +105,7 @@
 
                     <div class="col-lg-3">
                         <div class="card panel-default">
-                            <div class="card-header h4 text-dark">
+                            <div class="card-header h5 text-dark">
                                 Payout Status
                             </div>
                             <!-- /.panel-heading -->
@@ -104,7 +120,7 @@
 
                     <div class="col-lg-6">
                         <div class="card panel-default">
-                            <div class="card-header h4 text-dark">
+                            <div class="card-header h5 text-dark">
                                 Investment Details
                             </div>
                             <!-- /.panel-heading -->
@@ -120,7 +136,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card panel-default">
-                            <div class="card-header h4 text-dark">
+                            <div class="card-header h5 text-dark">
                                 Joining Details
                             </div>
                             <!-- /.panel-heading -->
@@ -133,6 +149,10 @@
                         <!-- /.panel -->
                     </div>
                 </div>
+
+                @*====================================================================================*@
+
+
             </section>
         </div>
     </div>
