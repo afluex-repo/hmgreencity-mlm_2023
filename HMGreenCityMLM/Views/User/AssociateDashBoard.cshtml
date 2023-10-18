@@ -3,134 +3,167 @@
     ViewBag.Title = "AssociateDashBoard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    .tab1 {
+        background: linear-gradient(to right, #3b8d99, #3b8d99, #3b8d99) !important;
+        color: #fff;
+    }
+
+    .tab2 {
+        background: linear-gradient(to right, #45a247, #45a247, #45a247) !important;
+        color: #fff;
+    }
+
+    .tab3 {
+        background: linear-gradient(to right, #e93334, #e93334, #e93334) !important;
+        color: #fff;
+    }
+
+    .tab4 {
+        background: linear-gradient(to right, #2e1437, #2e1437, #2e1437) !important;
+        color: #fff;
+    }
+    
+    /*.table:not(.table-sm) thead th {
+    border-bottom: none;
+    background-color: #a61a1a;
+    color: #666;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}*/
+
+
+</style>
+
 <div class="app-content content">
-<div class="content-overlay"></div>
-<div class="header-navbar-shadow"></div>
-<div class="content-wrapper">
-    <div class="content-header row">
-    </div>
-    <div class="content-body">
-        <!-- Dashboard Analytics Start -->
-        <section id="dashboard-analytics">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <!-- Dashboard Analytics Start -->
+            <section id="dashboard-analytics">
 
 
 
-            @*===============================================================================*@
+                @*===============================================================================*@
 
-            <div class="row ">
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card l-bg-style1">
-                        <div class="card-statistic-3">
-                            <div class="card-icon card-icon-large"><i class="fa fa-award"></i></div>
-                            <div class="card-content">
-                                <h4 class="card-title">@ViewBag.TotalDownline</h4>
-                            <span class="text-white">Total Downline</span>
+                <div class="row ">
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab1">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalDownline</h4>
+                                    <span class="text-white">Total Downline</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab2">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalDirects</h4>
+                                    <span class="text-white">Total Directs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab3">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalActive</h4>
+                                    <span class="text-white">Total Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab4">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalInActive</h4>
+                                    <span class="text-white">Total InActive</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card l-bg-style2">
-                        <div class="card-statistic-3">
-                            <div class="card-icon card-icon-large"><i class="fa fa-briefcase"></i></div>
-                            <div class="card-content">
-                                <h4 class="card-title">@ViewBag.TotalDirects</h4>
-                           <span class="text-white">Total Directs</span>
+
+
+
+
+
+                <div class="row ">
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab4">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalPayout</h4>
+                                    <span class="text-white">Total Payout</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab3">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalAdvance</h4>
+                                    <span class="text-white">Total Advance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab2">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalDeduction</h4>
+                                    <span class="text-white">Total Deduction</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab1">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.PayoutWalletBalance</h4>
+                                    <span class="text-white">Payout Balance</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card l-bg-style3">
-                        <div class="card-statistic-3">
-                            <div class="card-icon card-icon-large"><i class="fa fa-globe"></i></div>
-                            <div class="card-content">
-                                <h4 class="card-title">@ViewBag.TotalActive</h4>
-                      <span class="text-white">Total Active</span>
-                            </div>
+
+                @*====================================================================================*@
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-dark hrefcol">
+                            <p>http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Left </p>
+                        </div>
+                        <div class="alert alert-dark hrefcol">
+                            <p>http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card l-bg-style4">
-                        <div class="card-statistic-3">
-                            <div class="card-icon card-icon-large"><i class="fa fa-money-bill-alt"></i></div>
-                            <div class="card-content">
-                                <h4 class="card-title">@ViewBag.TotalInActive</h4>
-                         <span class="text-white">Total InActive</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-
-
-
-
-            <div class="row ">
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card l-bg-style1">
-                        <div class="card-statistic-3">
-                            <div class="card-icon card-icon-large"><i class="fa fa-award"></i></div>
-                            <div class="card-content">
-                                <h4 class="card-title">@ViewBag.TotalPayout</h4>
-                                <span class="text-white">Total Payout</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card l-bg-style2">
-                        <div class="card-statistic-3">
-                            <div class="card-icon card-icon-large"><i class="fa fa-briefcase"></i></div>
-                            <div class="card-content">
-                                <h4 class="card-title">@ViewBag.TotalAdvance</h4>
-                                <span class="text-white">Total Advance</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card l-bg-style3">
-                        <div class="card-statistic-3">
-                            <div class="card-icon card-icon-large"><i class="fa fa-globe"></i></div>
-                            <div class="card-content">
-                                <h4 class="card-title">@ViewBag.TotalDeduction</h4>
-                                <span class="text-white">Total Deduction</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6">
-                    <div class="card l-bg-style4">
-                        <div class="card-statistic-3">
-                            <div class="card-icon card-icon-large"><i class="fa fa-money-bill-alt"></i></div>
-                            <div class="card-content">
-                                <h4 class="card-title">@ViewBag.PayoutWalletBalance</h4>
-                                <span class="text-white">Payout Balance</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            @*====================================================================================*@
-
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-primary hrefcol">
-                        <p>http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Left </p>
-                    </div>
-                    <div class="alert alert-primary hrefcol">
-                        <p>http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
+                <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -139,45 +172,45 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
-                                        <thead>
-                                            <tr>
-                                                <th>Sr No.</th>
-                                                <th>Product Name</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr No.</th>
+                                                    <th>Product Name</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (Model != null)
-                                            {
-                                                if (Model.lstinvestment != null)
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
                                                 {
-                                                    int i = 1;
-                                                    foreach (var Item in Model.lstinvestment)
+                                                    if (Model.lstinvestment != null)
                                                     {
-                                                        <tr class="text-left">
-                                                            <td>@i</td>
-                                                            <td>@Item.ProductName</td>
-                                                            <td>@Item.Amount</td>
-                                                            <td>@Item.Status</td>
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstinvestment)
+                                                        {
+                                                            <tr class="text-left">
+                                                                <td>@i</td>
+                                                                <td>@Item.ProductName</td>
+                                                                <td>@Item.Amount</td>
+                                                                <td>@Item.Status</td>
 
 
-                                                        </tr>
-                                                        i++;
+                                                            </tr>
+                                                            i++;
+                                                        }
+
                                                     }
-
                                                 }
-                                            }
 
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-            </div>
-            <div class="row" >
+                </div>
+                <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -221,7 +254,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -263,47 +296,47 @@
                             </div>
                         </div>
                     </div>
-                <div class="col-lg-6 col-md-6 col-sm-12" hidden="hidden">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Current Month Business Details</h4>
-                        </div>
-                        <div class="card-content">
+                    <div class="col-lg-6 col-md-6 col-sm-12" hidden="hidden">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Current Month Business Details</h4>
+                            </div>
+                            <div class="card-content">
 
-                            <div class="table-responsive">
-                                <table class="table mb-0" id="example23">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                           
-                                            <th>Direct Business</th>
-                                            <th>Team Business</th>
-                                           
+                                <div class="table-responsive">
+                                    <table class="table mb-0" id="example23">
+                                        <thead class="thead-dark">
+                                            <tr>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="text-left">
-                                          
-                                            <td>@ViewBag.DirectBusiness</td>
-                                            <td>@ViewBag.TeamBusiness</td>
-                                            
+                                                <th>Direct Business</th>
+                                                <th>Team Business</th>
 
 
-                                        </tr>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="text-left">
 
-                                    </tbody>
-                                </table>
+                                                <td>@ViewBag.DirectBusiness</td>
+                                                <td>@ViewBag.TeamBusiness</td>
+
+
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
 
-</section>
-        <!-- Dashboard Analytics end -->
+            </section>
+            <!-- Dashboard Analytics end -->
+        </div>
     </div>
 </div>
-    </div>
 
 <script src="~/scripts/jquery-1.10.2.js"></script>
 <script>
@@ -330,7 +363,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 <div id="myModal1" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -342,7 +375,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="newyear">
-                            <img src="~/WebsiteCss/KohinoorCity1.jpeg" style="width:100%" class="img-responsive"/>
+                            <img src="~/WebsiteCss/KohinoorCity1.jpeg" style="width:100%" class="img-responsive" />
                         </div>
                     </div>
                 </div>
