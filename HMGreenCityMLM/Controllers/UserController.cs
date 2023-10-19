@@ -111,6 +111,15 @@ namespace HMGreenCityMLM.Controllers
             }
             #endregion Investment
 
+            #region Achiver Rank
+            DataSet dss = obj.GetAssociateDashboard();
+            if (dss != null && dss.Tables[4].Rows.Count > 0)
+            {
+                ViewBag.ImageURL = dss.Tables[4].Rows[0]["ImageURL"].ToString();
+                ViewBag.AchiverRank = dss.Tables[4].Rows[0]["AchiverRank"].ToString();
+            }
+            #endregion 
+
             return View(model);
         }
 

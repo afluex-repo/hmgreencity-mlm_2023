@@ -63,8 +63,9 @@
                         <div class="card awardBg">
                             <div class="card-statistic-3">
                                 <div class="card-content d-flex align-items-center">
-                                    <img src="~/assetsAdmin/img/silver.png" />
-                                    <h4 class="card-title pl-3 mb-0" style="color:#024a54">Silver Achiever</h4>
+                                    @*<img src="~/assetsAdmin/img/silver.png" />*@
+                                    <img src="@ViewBag.ImageURL" height="100" width="100" />
+                                    <h4 class="card-title pl-3 mb-0" style="color:#024a54">@ViewBag.AchiverRank</h4>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +185,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Investment Details</h4>
+                                <h4 class="card-title">Business Details</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -192,7 +193,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Sr No.</th>
-                                                    <th>Product Name</th>
+                                                    <th>Business Type</th>
                                                     <th>Amount</th>
                                                     <th>Status</th>
 
@@ -228,7 +229,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-xl-6 col-lg-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Notification</h4>
@@ -272,7 +273,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-xl-6 col-lg-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Total Business</h4>

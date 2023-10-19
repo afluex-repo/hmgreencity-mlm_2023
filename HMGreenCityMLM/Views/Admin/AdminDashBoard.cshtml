@@ -121,7 +121,7 @@
                     <div class="col-lg-6">
                         <div class="card panel-default">
                             <div class="card-header h5 text-dark">
-                                Investment Details
+                                Business Details
                             </div>
                             <!-- /.panel-heading -->
                             <div class="card-body">
@@ -294,7 +294,7 @@
                 var data = new google.visualization.DataTable();
 
                 data.addColumn('string', 'Month');
-                data.addColumn('number', 'Investment');
+                data.addColumn('number', 'Business');
                 for (var i = 0; i < datare.length; i++) {
                     data.addRow([datare[i].Month, parseInt(datare[i].Amount)]);
                 }
