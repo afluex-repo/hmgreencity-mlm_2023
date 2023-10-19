@@ -19,6 +19,8 @@ namespace HMGreenCityMLM.Models
 
         public string Status { get; set; }
         public string Fk_UserId { get; set; }
+        public string AchiverRank { get; set; }
+        public string ImageURL { get; set; }
 
         public DataSet GetDashBoardDetails()
         {
