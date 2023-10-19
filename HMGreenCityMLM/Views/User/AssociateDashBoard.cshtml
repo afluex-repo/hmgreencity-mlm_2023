@@ -296,16 +296,12 @@
                                                 <td>@ViewBag.TotalBusinessLeft</td>
                                                 <td>@ViewBag.PaidBusinessLeft</td>
                                                 <td>@ViewBag.CarryLeft</td>
-
-
                                             </tr>
                                             <tr class="text-left">
                                                 <td>Right</td>
                                                 <td>@ViewBag.TotalBusinessRight</td>
                                                 <td>@ViewBag.PaidBusinessRight</td>
                                                 <td>@ViewBag.CarryRight</td>
-
-
                                             </tr>
 
                                         </tbody>
@@ -325,23 +321,15 @@
                                     <table class="table mb-0" id="example23">
                                         <thead class="thead-dark">
                                             <tr>
-
                                                 <th>Direct Business</th>
                                                 <th>Team Business</th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="text-left">
-
                                                 <td>@ViewBag.DirectBusiness</td>
                                                 <td>@ViewBag.TeamBusiness</td>
-
-
-
                                             </tr>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -349,9 +337,8 @@
                         </div>
                     </div>
                 </div>
-
             </section>
-            <!-- Dashboard Analytics end -->
+            
         </div>
     </div>
 </div>
@@ -421,8 +408,16 @@
         width:104px;
         position: absolute;
         left: 38%;
-        bottom: 10%;
+        bottom: 16%;
     }
+        #congratulation .modal-content .modal-body h4 {
+            position: absolute;
+            left: 39%;
+            bottom: 6%;
+            color: #000;
+            font-family: ui-serif;
+        }
+
 </style>
 
 <div class="modal fade" id="congratulation" tabindex="-1" role="dialog"
@@ -435,7 +430,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="~/assetsAdmin/img/Crown.png" class="position-absolute top-50 start-100 translate-middle" />
+                <img src="@ViewBag.ImageURL" />
+                <h4>@ViewBag.AchiverRank</h4>
             </div>
         </div>
     </div>
