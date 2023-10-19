@@ -5923,15 +5923,22 @@
     <Content Include="images\search-icon.png" />
     <Content Include="images\tick.png" />
     <Content Include="images\treeicon.jpg" />
+    <Content Include="images\TreeIcon\Crown.png" />
+    <Content Include="images\TreeIcon\Daimond.png" />
     <Content Include="images\TreeIcon\default.png" />
     <Content Include="images\TreeIcon\girl-active.png" />
     <Content Include="images\TreeIcon\girl-block.png" />
     <Content Include="images\TreeIcon\girl-hold.png" />
     <Content Include="images\TreeIcon\girl-inactive.png" />
+    <Content Include="images\TreeIcon\Gold.png" />
+    <Content Include="images\TreeIcon\HMKAward.png" />
     <Content Include="images\TreeIcon\men-active.png" />
     <Content Include="images\TreeIcon\men-block.png" />
     <Content Include="images\TreeIcon\men-hold.png" />
     <Content Include="images\TreeIcon\men-inactive.png" />
+    <Content Include="images\TreeIcon\Platinum.png" />
+    <Content Include="images\TreeIcon\Silver.png" />
+    <Content Include="images\TreeIcon\Star.png" />
     <Content Include="images\user.png" />
     <Content Include="images\view.png" />
     <Content Include="images\weather.jpg" />
@@ -6567,7 +6574,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4156</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4157/</IISUrl>
+          <IISUrl>http://localhost:4156/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
