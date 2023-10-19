@@ -249,7 +249,7 @@
             }
 
     .family-tree li a .outer-ring {
-        border: 1px solid #d78a2e;
+        border: 1px solid #218190;
         padding: 5px;
         text-decoration: none;
         color: #666;
@@ -286,10 +286,11 @@
     i.men-active {
         width: 50px;
         height: 50px;
-         background-image: url(../../images/TreeIcon/men-active.png) !important;
+        background-image: url(../../images/TreeIcon/men-active.png) !important;
         /*background-image: url(~~/images/TreeIcon/men-active.png) !important;*/
         display: block;
         margin: 0 auto;
+        background-size: cover;
     }
 
 
@@ -301,6 +302,7 @@
         background-image: url(../../images/TreeIcon/men-inactive.png) !important;
         display: block;
         margin: 0 auto;
+        background-size: cover;
     }
 
     i.girl-active {
@@ -309,6 +311,7 @@
         background-image: url(../../images/TreeIcon/girl-active.png) !important;
         display: block;
         margin: 0 auto;
+        background-size: cover;
     }
 
     i.girl-inactive {
@@ -317,13 +320,16 @@
         background-image: url(../../images/TreeIcon/girl-inactive.png) !important;
         display: block;
         margin: 0 auto;
+        background-size: cover;
     }
-       i.girl-hold {
+
+    i.girl-hold {
         width: 50px !important;
         height: 50px !important;
         background-image: url(../../images/TreeIcon/girl-hold.png) !important;
         display: block;
         margin: 0 auto;
+        background-size: cover;
     }
 
     i.men-hold {
@@ -332,7 +338,9 @@
         background-image: url(../../images/TreeIcon/men-hold.png) !important;
         display: block;
         margin: 0 auto;
+        background-size: cover;
     }
+
     i.join-member {
         width: 50px;
         height: 50px;
@@ -355,12 +363,71 @@
         background-image: url(../../images/TreeIcon/girl-block.png) !important;
         display: block;
         margin: 0 auto;
+        background-size: cover;
     }
 
     i.men-block {
         width: 50px;
         height: 50px;
         background-image: url(../../images/TreeIcon/men-block.png) !important;
+        display: block;
+        margin: 0 auto;
+        background-size: cover;
+    }
+
+    i.Star {
+        width: 65px;
+        height: 65px;
+        background-image: url(../../images/TreeIcon/star.png) !important;
+        display: block;
+        margin: 0 auto;
+    }
+
+    i.Silver {
+        width: 65px;
+        height: 65px;
+        background-image: url(../../images/TreeIcon/Silver.png) !important;
+        display: block;
+        margin: 0 auto;
+        background-size: cover;
+    }
+
+    i.Gold {
+        width: 65px;
+        height: 65px;
+        background-image: url(../../images/TreeIcon/Gold.png) !important;
+        display: block;
+        margin: 0 auto;
+    }
+
+    i.Platinum {
+        width: 65px;
+        height: 65px;
+        background-image: url(../../images/TreeIcon/Platinum.png) !important;
+        display: block;
+        margin: 0 auto;
+    }
+
+    i.Daimond {
+        width: 65px;
+        height: 65px;
+        background-image: url(../../images/TreeIcon/Daimond.png) !important;
+        display: block;
+        margin: 0 auto;
+    }
+
+    i.Crown {
+        width: 65px;
+        height: 65px;
+        background-image: url(../../images/TreeIcon/Crown.png) !important;
+        display: block;
+        margin: 0 auto;
+    }
+
+    i.HMKAward {
+        width: 65px;
+        height: 65px;
+        background-image: url(../../images/TreeIcon/HMKAward.png) !important;
         display: block;
         margin: 0 auto;
     }
@@ -492,236 +559,28 @@
 
 <div class="loader" id="divload"></div>
 
-@*//==================================================================================================================*@
-<section class="section">
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h6 class="mb-0">Binary Tree</h6>
-                        @*<button class="btn btn-info"><a href="/Master/ProductMaster" class="text-white">Add New</a></button>*@
-                    </div>
-                    <p style="color: red;display: block; margin-bottom:0px; text-align:center">
-                    </p>
-                </div>
-            </div>
+<br />
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
         </div>
-    </div>
-    <div class="tab-content">
-        <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+        <div class="content-body">
+
+
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="form-row">
-                                <div class="col-md-2"></div>
-
-                                <div class="col-md-4">
-                                    <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID" autocomplete="off">
-                                    <input type="hidden" id="ToLoginID">
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="hidden" name="hfCustomerId" id="hfCustomerId">
-                                    <input type="hidden" name="HiddenField1" id="HiddenField1">
-                                    <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
-                                    <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
-                                        <input type="hidden" id="lblRequest" />Go Up
-                                    </a>
-                                    <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <div class="col-sm-12 col-md-12" id="chart">
-                                        <div class="tree family-tree clearfix" style="overflow-x:auto">
-                                            <ul>
-                                                <li id="firstRow">
-                                                    <a href="" id="firstHead"></a>
-                                                    <span id="rptRow1_lblFooter"></span>
-
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="container-fluid" id="member-details">
-
-                                            <div class="row">
-
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-9">
-                                                                    <button type="button" class="next-tree" onclick='ClickHere(this)'>
-                                                                        <a style="background-color: white;" title="Go Down" class="clip-tree"><i class="fa fa-users" aria-hidden="true"></i></a>
-
-                                                                    </button>
-                                                                    <div class="media-body">
-                                                                        <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:#fff">@ViewBag.Fk_UserId</h3>
-                                                                        <p class="mb-0" id="lblMemberId" style="text-align: center;color:#fff"></p>
-                                                                        <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:#fff"></p>
-                                                                        <p class="mb-0" id="lblstatus" style="text-align: center;color:#fff"></p>
-                                                                        <p style="display:none" id="lblFk_UserId"></p>
-                                                                    </div>
-
-
-                                                                </div>
-                                                                <div class="form-group col-md-3">
-                                                                    <br />
-                                                                    <button type="button" id="close">&times;</button>
-                                                                    <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
-                                                                <div class="col-md-6">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Topup Amount</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
-
-
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Activation Date</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
-
-
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Sponsor Details</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
-
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
-                                                                <div class="col-md-3">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Type</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Left</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Right</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Total</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Active</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">InActive</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Total</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="TotalMemberRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="LeftBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="RightBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <p class="TotalBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-
-
-                                    </div>
-
-                                </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h5 class="mb-0">Binary Tree</h5>
+                                @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
                             </div>
+                            @*<p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                                @TempData["PayPayout"]
+                            </p>*@
                         </div>
                     </div>
                 </div>
@@ -729,904 +588,1334 @@
 
 
 
+
+
+
+
+            <!-- users edit start -->
+            <section class="users-edit">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            @*<ul class="nav nav-tabs mb-3" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                       aria-controls="account" role="tab" aria-selected="true">
+                                        <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Binary Tree</span>
+                                    </a>
+                                </li>
+
+                            </ul>*@
+
+
+
+
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            @*<div class="card">
+                                                <div class="card-body">*@
+                                                    <div class="form-row">
+                                                        <div class="col-md-2"></div>
+
+                                                        <div class="col-md-4">
+                                                            <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID" autocomplete="off">
+                                                            <input type="hidden" id="ToLoginID">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="hidden" name="hfCustomerId" id="hfCustomerId">
+                                                            <input type="hidden" name="HiddenField1" id="HiddenField1">
+                                                            <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
+                                                            <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
+                                                                <input type="hidden" id="lblRequest" />Go Up
+                                                            </a>
+                                                            <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <div class="col-sm-12 col-md-12" id="chart">
+                                                                <div class="tree family-tree clearfix" style="overflow-x:auto">
+                                                                    <ul>
+                                                                        <li id="firstRow">
+                                                                            <a href="" id="firstHead"></a>
+                                                                            <span id="rptRow1_lblFooter"></span>
+
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="container-fluid" id="member-details">
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-12">
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <div class="form-row">
+                                                                                        <div class="form-group col-md-9">
+                                                                                            <button type="button" class="next-tree" onclick='ClickHere(this)'>
+                                                                                                <a style="background-color: white;" title="Go Down" class="clip-tree"><i class="fa fa-users" aria-hidden="true"></i></a>
+
+                                                                                            </button>
+                                                                                            <div class="media-body">
+                                                                                                <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:#fff">@ViewBag.Fk_UserId</h3>
+                                                                                                <p class="mb-0" id="lblMemberId" style="text-align: center;color:#fff"></p>
+                                                                                                <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:#fff"></p>
+                                                                                                <p class="mb-0" id="lblstatus" style="text-align: center;color:#fff"></p>
+                                                                                                <p style="display:none" id="lblFk_UserId"></p>
+                                                                                            </div>
+
+
+                                                                                        </div>
+                                                                                        <div class="form-group col-md-3">
+                                                                                            <br />
+                                                                                            <button type="button" id="close">&times;</button>
+                                                                                            <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
+                                                                                        </div>
+
+
+                                                                                    </div>
+                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
+                                                                                        <div class="col-md-6">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Topup Amount</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Activation Date</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Sponsor Details</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
+
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Type</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Left</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Right</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Total</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Active</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">InActive</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Total</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="TotalMemberRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="LeftBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="RightBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <p class="TotalBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                @*</div>
+                                            </div>*@
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
-</section>
+</div>
 
 
 
 
 
-    <input type="hidden" id="firtsMemberID" value="@ViewBag.Fk_UserId" />
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-    <script src="../../WebsiteCss/js/jquery.js"></script>
-    <script type="text/javascript">
 
+<input type="hidden" id="firtsMemberID" value="@ViewBag.Fk_UserId" />
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script type="text/javascript">
 
-        var winHeight = $(window).height();
-        var winWidth = $(window).width();
 
-        $("body").click(function () {
-            $("a").popover('hide');
-        });
-        $("a").click(function () {
-            $("a").popover('hide');
-        });
-        function openPopup(obj, item1, item2, item3, item4, item5, JoiningDate, ProductName, AllLeg1, AllLeg2, PermanentLeg1, PermanentLeg2, InactiveLeft, InactiveRight, PCountLeg1, PCountLeg2, PaidLeg1, PaidLeg2, BalanceLeft, BalanceRight, Profilepic, ActivationDate, AllBusinessLeft, AllBusinessRight, ProductRightBusiness, ProductLeftBusiness) {
 
-            var loginid = 'LoginId - ' + ' ' + item2;
-            var JoiningDate = 'JoiningDate - ' + ' ' + JoiningDate;
-            $("#lblFk_UserId").text(item1);
-            $("#lblMemberId").text(loginid);
-            $('#lblParnetId').text(item5);
-            $('#lblDisplayName').text(item3);
 
-            $(".LoginId").html(item5);
-            $("#lblJoiningDate").html(JoiningDate);
-            $("#lblProductName").html(ProductName);
-            $("#lblupgradedate").html(ActivationDate);
-            if (ProductName == "No Package") {
-                $("#lblstatus").html('Status - InActive');
-            }
-            else {
-                $("#lblstatus").html('Status - Active');
-            }
+    var winHeight = $(window).height();
+    var winWidth = $(window).width();
 
+    $("body").click(function () {
+        $("a").popover('hide');
+    });
+    $("a").click(function () {
+        $("a").popover('hide');
+    });
+    function openPopup(obj, item1, item2, item3, item4, item5, JoiningDate, ProductName, AllLeg1, AllLeg2, PermanentLeg1, PermanentLeg2, InactiveLeft, InactiveRight, PCountLeg1, PCountLeg2, PaidLeg1, PaidLeg2, BalanceLeft, BalanceRight, Profilepic, ActivationDate, AllBusinessLeft, AllBusinessRight, ProductRightBusiness, ProductLeftBusiness) {
 
-            $(".TotalMemberLeft").html(AllLeg1);
-            $(".TotalMemberRight").html(AllLeg2);
+        var loginid = 'LoginId - ' + ' ' + item2;
+        var JoiningDate = 'JoiningDate - ' + ' ' + JoiningDate;
+        $("#lblFk_UserId").text(item1);
+        $("#lblMemberId").text(loginid);
+        $('#lblParnetId').text(item5);
+        $('#lblDisplayName').text(item3);
 
-            $(".TotalMemberTotal").html(parseFloat(AllLeg1) + parseFloat(AllLeg2));
-
-            $(".ActiveLeft").html(PermanentLeg1);
-            $(".ActiveRight").html(PermanentLeg2);
-
-            $(".ActiveTotal").html(parseFloat(PermanentLeg1) + parseFloat(PermanentLeg2));
-
-            $(".NonActiveLeft").html(InactiveLeft);
-            $(".NonActiveRight").html(InactiveRight);
-
-            $(".NonActiveTotal").html(parseFloat(InactiveLeft) + parseFloat(InactiveRight));
-
-            $(".LeftBusiness").html(PCountLeg1);
-            $(".RightBusiness").html(PCountLeg2);
-
-            $(".TotalBusiness").html(parseFloat(PCountLeg1) + parseFloat(PCountLeg2));
-
-            $(".ProductLeftBusiness").html(ProductLeftBusiness);
-            $(".ProductRightBusiness").html(ProductRightBusiness);
-
-            $(".ProductTotalBusiness").html(parseFloat(ProductLeftBusiness) + parseFloat(ProductRightBusiness));
-
-
-            $(".PaidLeg1").html(PaidLeg1);
-            $(".PaidLeg2").html(PaidLeg2);
-
-            $(".TotalPaidLeg").html(parseFloat(PaidLeg1) + parseFloat(PaidLeg2));
-
-            $(".BalanceLeft").html(BalanceLeft);
-            $(".BalanceRight").html(BalanceRight);
-
-            $(".LeftBusinessvol").html(AllBusinessLeft);
-            $(".RightBusinessvol").html(AllBusinessRight);
-
-            $(".TotalBusinessvol").html(parseFloat(AllBusinessLeft) + parseFloat(AllBusinessRight));
-
-            $(".TotalBalance").html(parseFloat(BalanceLeft) + parseFloat(BalanceRight));
-            $("#userimage").attr("src", Profilepic);
-
-            if (winWidth < 998) {
-                $("#member-details").addClass('active');
-                $("#go-top").find('input[type="hidden"]').val(item1);
-            }
-            $("#loading-image").hide();
-            $('#' + obj.id).attr("data-content", $("#member-details").html());
-            $('[data-toggle="popover"]').popover({
-                container: 'body',
-                html: true,
-                placement: 'auto',
-                trigger: 'hover',
-                boundary: 'window'
-
-            });
-        }
-        function closePopup(obj) {
-
-            if (winWidth < 998) {
-                $("#member-details").addClass('active');
-            }
-            else {
-
-            }
-            $('#' + obj.id).removeAttr("data-content", $("#member-details").html());
-
-        }
-
-        if (winWidth > 998) {
-            $("#chart").on("mouseover", function () {
-                // $("#member-details").addClass('active');
-            });
-            $("#chart").on("mouseout", function () {
-                // $("#member-details").removeClass('active');
-            });
-        }
-
-
-
-        var Fk_UserId = "0";
-        $("#btnRoot").click(function () {
-
-
-            var loginid = $("#firtsMemberID").val();
-            var topId = $("#linkGoUp").find("#lblRequest").val();
-            if (parseInt(loginid) > parseInt(topId)) {
-                //alert("You Are on top...!")
-            }
-            else {
-                //Fk_UserId = $("#firtsMemberID").val();
-                GetDataFirst(loginid, "clicked");
-                $("#txtLoginID").val('');
-                $("#hfCustomerId").val('');
-            }
-
-        });
-
-        $("#linkGoUp").click(function () {
-            $('#divload').show();
-            $("#linkGoUp").attr("readonly", true);
-
-            if ($(this).find("#lblRequest").val() == "0") {
-                //Fk_UserId = $("#firtsMemberID").val();
-                // GetDataFirst(Fk_UserId, "clicked");
-                $('#divload').hide();
-            }
-            else {
-                if (parseInt($(this).find("#lblRequest").val()) < parseInt($("#firtsMemberID").val())) {
-                    //alert("Can't Reach With Relation with Parent")
-                } else {
-                    Fk_UserId = $(this).find("#lblRequest").val();
-                    GetDataFirst(Fk_UserId, "clicked");
-                }
-
-            }
-
-            // GetData(Fk_UserId);
-        });
-
-
-        var Fk_UserId = "0";
-        var clicked = 0;
-
-        function ClickHere(obj) {
-
-            //if ($("#" + obj.id + "").find('input[type="hidden"]').val() == "-1") {
-            //  return false;
-            //}
-            $("#member-details").removeClass('active');
-            var mID = $("#lblFk_UserId").text();
-            //var mID = $("#" + obj.id + "").find('input[type="hidden"]').val();
-            clicked = 1;
-            GetDataFirst(mID, "clicked");
-        }
-
-
-        $("#close").click(function () {
-            $("#member-details").removeClass('active');
-        });
-        $(document).ready(function () {
-
-            if (clicked != 1) {
-
-                Fk_UserId = $("#firtsMemberID").val();
-                GetDataFirst(Fk_UserId, null);
-                //GetData(Fk_UserId);
-
-            }
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $("input").attr("autocomplete", "off");
-
-            var cityuse = [];
-            $("#loader").css({ 'display': '' });
-            $.ajax({
-                url: '/User/GetUserList',
-                type: 'Post',
-                success: function (response) {
-                    if (response != null) {
-                        $(response).each(function (index, item) {
-                            cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
-                        });
-                        $('#txtLoginID').autocomplete({
-                            source: cityuse,
-                            select: function (event, ui) {
-                                var str = ui.item.label;
-                                var strsplit = str.split("(");
-
-                                $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                            }
-                        })
-                    }
-                }, error: function () {
-                    alert('Some Thing wrong!');
-                    $("#loader").css({ 'display': 'none' });
-                }
-            });
-            //$('#TopupType').val('RealEstate');
-        });
-        //$(document).ready(function () {
-        //    $("input").attr("autocomplete", "off");
-        //    var cityuse = [];
-        //    $("#loader").css({ 'display': '' });
-        //    $.ajax({
-        //        url: '/User/GetUserList',
-        //        type: 'Post',
-        //        success: function (response) {
-        //            if (response != null) {
-
-
-        //                $(response).each(function (index, item) {
-        //                    cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
-        //                });
-
-        //                $('#txtLoginID').autocomplete({
-        //                    source: cityuse,
-        //                    select: function (event, ui) {
-        //                        var str = ui.item.label;
-        //                        var strsplit = str.split("(");
-
-        //                        $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-        //                    }
-        //                })
-        //            }
-        //        }, error: function () {
-        //            alert('Some Thing wrong!');
-        //            $("#loader").css({ 'display': 'none' });
-        //        }
-        //    });
-        //});
-
-        var winHeight = $(window).height();
-        var winWidth = $(window).width();
-        var clickOption = "";
-        debugger;
-        if (winWidth < 980) {
-            //clickOption = "";
-            debugger;
-            clickOption = "";
+        $(".LoginId").html(item5);
+        $("#lblJoiningDate").html(JoiningDate);
+        $("#lblProductName").html(ProductName);
+        $("#lblupgradedate").html(ActivationDate);
+        if (ProductName == "No Package") {
+            $("#lblstatus").html('Status - InActive');
         }
         else {
-            clickOption = "onClick='ClickHere(this)'";
+            $("#lblstatus").html('Status - Active');
         }
 
 
+        $(".TotalMemberLeft").html(AllLeg1);
+        $(".TotalMemberRight").html(AllLeg2);
 
-        $(window).on("load", function () {
+        $(".TotalMemberTotal").html(parseFloat(AllLeg1) + parseFloat(AllLeg2));
 
-            var id = $("#firtsMemberID").val();
-            GetDataFirst(id);
-            GetData(id);
+        $(".ActiveLeft").html(PermanentLeg1);
+        $(".ActiveRight").html(PermanentLeg2);
+
+        $(".ActiveTotal").html(parseFloat(PermanentLeg1) + parseFloat(PermanentLeg2));
+
+        $(".NonActiveLeft").html(InactiveLeft);
+        $(".NonActiveRight").html(InactiveRight);
+
+        $(".NonActiveTotal").html(parseFloat(InactiveLeft) + parseFloat(InactiveRight));
+
+        $(".LeftBusiness").html(PCountLeg1);
+        $(".RightBusiness").html(PCountLeg2);
+
+        $(".TotalBusiness").html(parseFloat(PCountLeg1) + parseFloat(PCountLeg2));
+
+        $(".ProductLeftBusiness").html(ProductLeftBusiness);
+        $(".ProductRightBusiness").html(ProductRightBusiness);
+
+        $(".ProductTotalBusiness").html(parseFloat(ProductLeftBusiness) + parseFloat(ProductRightBusiness));
+
+
+        $(".PaidLeg1").html(PaidLeg1);
+        $(".PaidLeg2").html(PaidLeg2);
+
+        $(".TotalPaidLeg").html(parseFloat(PaidLeg1) + parseFloat(PaidLeg2));
+
+        $(".BalanceLeft").html(BalanceLeft);
+        $(".BalanceRight").html(BalanceRight);
+
+        $(".LeftBusinessvol").html(AllBusinessLeft);
+        $(".RightBusinessvol").html(AllBusinessRight);
+
+        $(".TotalBusinessvol").html(parseFloat(AllBusinessLeft) + parseFloat(AllBusinessRight));
+
+        $(".TotalBalance").html(parseFloat(BalanceLeft) + parseFloat(BalanceRight));
+        $("#userimage").attr("src", Profilepic);
+
+        if (winWidth < 998) {
+            $("#member-details").addClass('active');
+            $("#go-top").find('input[type="hidden"]').val(item1);
+        }
+        $("#loading-image").hide();
+        $('#' + obj.id).attr("data-content", $("#member-details").html());
+        $('[data-toggle="popover"]').popover({
+            container: 'body',
+            html: true,
+            placement: 'auto',
+            trigger: 'hover',
+            boundary: 'window'
 
         });
+    }
+    function closePopup(obj) {
 
-        function GetData(id) {
-            //
-            $.ajax({
-                type: "POST",
-                url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
-                data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function (response) {
-                    alert("Failed: " + response.d);
-                },
-                error: function (response) {
-                    alert("Error: " + response.d);
-                }
-            });
+        if (winWidth < 998) {
+            $("#member-details").addClass('active');
+        }
+        else {
 
+        }
+        $('#' + obj.id).removeAttr("data-content", $("#member-details").html());
 
-            function OnSuccess(response) {
+    }
 
-                debugger;
-                var ul = $("<ul></ul>");
-                var freeBlock = "";
-                var freeBlockL = "";
-                var freeBlockR = "";
-                var model = response.d;
-                if (!$.trim(model)) {
-                    $(".alert-warning").show();
-                    $("#lblWarning").text("No Member Found...For this Associate");
-                    //$("#userTree").hide();
-
-                    freeBlockL = "<li id='1'><a href='Registration.cshtml?Pid='123466'&amp;lg=L' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                    //
-                    freeBlockR = "<li id='2'><a href='Registration.cshtml?Pid='123466'&amp;lg=R' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                    //
-                    ul.append(freeBlockL + freeBlockR);
-                    $("#firstRow").fadeIn(500);
-                    window.setTimeout(function () {
-                        $('#alertbox .alert').hide(500, 0).slideUp(1500, function () {
-                            $('#alertbox .alert').slideUp(500);
-                        });
-                    }, 2000);
-
-                }
-                else {
+    if (winWidth > 998) {
+        $("#chart").on("mouseover", function () {
+            // $("#member-details").addClass('active');
+        });
+        $("#chart").on("mouseout", function () {
+            // $("#member-details").removeClass('active');
+        });
+    }
 
 
 
-                    var $child = "";
-                    var level = 0;
-                    $.each(response.d, function (i, k) {
-                        level++;
-                    });
+    var Fk_UserId = "0";
+    $("#btnRoot").click(function () {
 
-                    $.each(model, function (i, item1) {
 
-                        id = item1.Fk_UserId;
-                        var cssclass = "";
-                        var cssclaa = item1.CssClass;
-                        var Gender = item1.Gender;
-                        if (cssclaa == "active-member") {
-                            if (Gender == "M") {
-                                cssclass = "men-active";
-                            }
-                            else {
-                                cssclass = "girl-active";
-                            }
-                        }
-                        else if (cssclaa == "block-member") {
-                            if (Gender == "M") {
-                                cssclass = "men-block";
-                            }
-                            else {
-                                cssclass = "girl-block";
-                            }
-                        }
-                        else if (cssclaa == "inactive-member") {
-                            if (Gender == "M") {
-                                cssclass = "men-inactive";
-                            }
-                            else {
-                                cssclass = "girl-inactive";
-                            }
-                        }
-                        else if (cssclaa == "hold-member") {
-                            if (Gender == "M") {
-                                cssclass = "men-hold";
-                            }
-                            else {
-                                cssclass = "girl-hold";
-                            }
-                        }
-                        else {
-                            cssclass = "join-member";
-                        }
-
-                        if (level == 2) {
-                            if (id != '-1') {
-
-                                child = " <li id='level" + i + "'><a data-toggle='popover' id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                          " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
-                                                          " onmouseout='closePopup(this)' href='#' " + clickOption + " >" +
-
-                                                          "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle '></i></div></div><span class='name member-name'>" +
-                                                          " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
-                                                          "<input type='hidden' id='" + item1.Fk_UserId + "' value='" + item1.Fk_UserId + "' />" +
-                                                          "</a></li>";
-                            }
-                            else {
-
-                                child = " <li id='level" + i + "'><a id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' >" +
-                                                         "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + "  rounded-circle'></i></div></div><span class='name member-name'>" +
-                                                         " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
-                                                         "<input type='hidden' id='" + item1.Fk_UserId + "' value='" + item1.Fk_UserId + "' />" +
-                                                         "</a></li>";
-                            }
-                            ul.append(child);
-                        }
-                        else {
-                            if (id != '-1') {
-                                child = " <li id='level" + i + "'><a data-toggle='popover' id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                          " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
-                                                          " onmouseout='closePopup(this)' href='#' " + clickOption + " >" +
-                                                          "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
-                                                          " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
-                                                          "<input type='hidden' id='" + item1.Fk_UserId + "' value='" + item1.Fk_UserId + "' />" +
-                                                          "</a></li>";
-                            }
-                            else {
-                                child = " <li id='level" + i + "'><a id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' >" +
-                                                         "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
-                                                         " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
-                                                         "<input type='hidden' id='" + item1.Fk_UserId + "' value='" + item1.Fk_UserId + "' />" +
-                                                         "</a></li>";
-                            }
-                            freeBlock = "<li id='1'><a href='Registration.cshtml?Pid=" + item1.LoginId + "&amp;lg=" + item1.Leg + "' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                            //"Registration.cshtml?Pid=' + item1.LoginId + "&amp;lg=" + item1.Leg + "' it is use of up registration Pid
-                            if (item1.Leg == 'L') {
-                                ul.append(child + freeBlock);
-                            }
-                            else {
-                                ul.append(freeBlock + child);
-                            }
-
-                        }
-
-                        //if (winWidth > 766)
-                        {
-                            if (id != null) {
-                                $.ajax({
-                                    type: "POST",
-                                    url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
-                                    data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType: "json",
-                                    success: function (response2) {
-                                        var model2 = response2.d;
-                                        var ul2 = $("<ul></ul>");
-                                        var level2 = 0;
-                                        if (!$.trim(model2)) {
-                                            freeBlockL = "<li id='1'><a href='Registration.cshtml?Pid='123466'&amp;lg=L' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                            //Registration.cshtml?Pid='123466'&amp;lg=L
-                                            freeBlockR = "<li id='2'><a href='Registration.cshtml?Pid='123466'&amp;lg=R' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                            //Registration.cshtml?Pid='123466'&amp;lg=R
-                                            ul2.append(freeBlockL + freeBlockR);
-                                            //$("#firstRow").fadeIn(2000);
-                                            window.setTimeout(function () {
-                                                $('#alertbox .alert').hide(500, 0).slideUp(1500, function () {
-                                                    $('#alertbox .alert').slideUp(500);
-                                                });
-                                            }, 2000);
-                                            $("#level" + i).append(ul2);
-                                        }
-                                        else {
-                                            $.each(response2.d, function (i1, k2) {
-                                                level2++;
-                                            });
-                                            $.each(model2, function (i1, item2) {
-                                                id = item2.Fk_UserId;
-                                                var cssclass = "";
-                                                var cssclaa = item2.CssClass;
-                                                var Gender = item2.Gender;
-                                                if (cssclaa == "active-member") {
-                                                    if (Gender == "M") {
-                                                        cssclass = "men-active";
-                                                    }
-                                                    else {
-                                                        cssclass = "girl-active";
-                                                    }
-                                                }
-                                                else if (cssclaa == "block-member") {
-                                                    if (Gender == "M") {
-                                                        cssclass = "men-block";
-                                                    }
-                                                    else {
-                                                        cssclass = "girl-block";
-                                                    }
-                                                }
-                                                else if (cssclaa == "inactive-member") {
-                                                    if (Gender == "M") {
-                                                        cssclass = "men-inactive";
-                                                    }
-                                                    else {
-                                                        cssclass = "girl-inactive";
-                                                    }
-                                                }
-                                                else if (cssclaa == "hold-member") {
-                                                    if (Gender == "M") {
-                                                        cssclass = "men-hold";
-                                                    }
-                                                    else {
-                                                        cssclass = "girl-hold";
-                                                    }
-                                                }
-                                                else {
-                                                    cssclass = "join-member";
-                                                }
-                                                if (level2 == 2) {
-                                                    if (id != '-1') {
-                                                        child = " <li id='level" + i + i1 + "'><a data-toggle='popover' id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                                  " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
-                                                                  " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
-                                                                  "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + "  rounded-circle'></i></div></div><span class='name member-name'>" +
-                                                                  " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
-                                                                  "<input type='hidden' id='" + item2.Fk_UserId + "' value='" + item2.Fk_UserId + "' />" +
-                                                                  "</a></li>";
-                                                    }
-                                                    else {
-                                                        child = " <li id='level" + i + i1 + "'><a id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle'> " +
-                                                                "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
-                                                                " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
-                                                                "<input type='hidden' id='" + item2.Fk_UserId + "' value='" + item2.Fk_UserId + "' />" +
-                                                                "</a></li>";
-
-                                                    }
-                                                    ul2.append(child);
-                                                }
-                                                else {
-                                                    if (id != '-1') {
-                                                        child = " <li id='level" + i + i1 + "'><a data-toggle='popover' id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                                 " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
-                                                                 " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
-                                                                 "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
-                                                                 " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
-                                                                 "<input type='hidden' id='" + item2.Fk_UserId + "' value='" + item2.Fk_UserId + "' />" +
-                                                                 "</a></li>";
-                                                    }
-                                                    else {
-                                                        child = " <li id='level" + i + i1 + "'><a id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' >" +
-                                                                "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
-                                                                " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
-                                                                "<input type='hidden' id='" + item2.Fk_UserId + "' value='" + item2.Fk_UserId + "' />" +
-                                                                "</a></li>";
-
-                                                    }
-                                                    freeBlock = "<li id='1'><a href='Registration.cshtml?Pid=" + item2.LoginId + "&amp;lg=" + item2.Leg + "' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                                    //Registration.cshtml?Pid=" + item2.LoginId + "&amp;lg=" + item2.Leg + "
-                                                    if (item2.Leg == 'L') {
-                                                        ul2.append(child + freeBlock);
-                                                    }
-                                                    else {
-                                                        ul2.append(freeBlock + child);
-                                                    }
-                                                }
-                                                //if (winWidth > 980)
-                                                {
-                                                    if (id != null) {
-                                                        $.ajax({
-                                                            type: "POST",
-                                                            url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
-                                                            data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
-                                                            contentType: "application/json; charset=utf-8",
-                                                            dataType: "json",
-                                                            success: function (response3) {
-                                                                var model3 = response3.d;
-                                                                var ul3 = $("<ul></ul>");
-                                                                var level3 = 0;
-                                                                if (!$.trim(model3)) {
-                                                                    freeBlockL = "<li id='1'><a href='Registration.cshtml?Pid='123466'&amp;lg=L' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                                                    //Registration.cshtml?Pid='123466'&amp;lg=L
-                                                                    freeBlockR = "<li id='2'><a href='Registration.cshtml?Pid='123466'&amp;lg=R' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                                                    //Registration.cshtml?Pid='123466'&amp;lg=R
-                                                                    ul3.append(freeBlockL + freeBlockR);
-                                                                    $("#firstRow").fadeIn(500);
-                                                                    window.setTimeout(function () {
-                                                                        $('#alertbox .alert').hide(500, 0).slideUp(1500, function () {
-                                                                            $('#alertbox .alert').slideUp(500);
-                                                                        });
-                                                                    }, 2000);
-                                                                    $("#level" + i + i1).append(ul3);
-                                                                }
-                                                                else {
-                                                                    $.each(response3.d, function (i2, k3) {
-                                                                        level3++;
-                                                                    });
-                                                                    $.each(model3, function (i2, item3) {
-                                                                        id = item3.Fk_UserId;
-                                                                        var cssclass = "";
-                                                                        var cssclaa = item3.CssClass;
-                                                                        var Gender = item3.Gender;
-                                                                        if (cssclaa == "active-member") {
-                                                                            if (Gender == "M") {
-                                                                                cssclass = "men-active";
-                                                                            }
-                                                                            else {
-                                                                                cssclass = "girl-active";
-                                                                            }
-                                                                        }
-                                                                        else if (cssclaa == "block-member") {
-                                                                            if (Gender == "M") {
-                                                                                cssclass = "men-block";
-                                                                            }
-                                                                            else {
-                                                                                cssclass = "girl-block";
-                                                                            }
-                                                                        }
-                                                                        else if (cssclaa == "inactive-member") {
-                                                                            if (Gender == "M") {
-                                                                                cssclass = "men-inactive";
-                                                                            }
-                                                                            else {
-                                                                                cssclass = "girl-inactive";
-                                                                            }
-                                                                        }
-                                                                        else if (cssclaa == "hold-member") {
-                                                                            if (Gender == "M") {
-                                                                                cssclass = "men-hold";
-                                                                            }
-                                                                            else {
-                                                                                cssclass = "girl-hold";
-                                                                            }
-                                                                        }
-                                                                        else {
-                                                                            cssclass = "join-member";
-                                                                        }
-                                                                        if (level3 == 2) {
-                                                                            if (id != '-1') {
-                                                                                child = " <li id='level" + i + i1 + i2 + "'><a data-toggle='popover' id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                                                          " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
-                                                                                          " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
-                                                                                          "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
-                                                                                          " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
-                                                                                          "<input type='hidden' id='" + item3.Fk_UserId + "' value='" + item3.Fk_UserId + "' />" +
-                                                                                          "</a></li>";
-                                                                            }
-                                                                            else {
-                                                                                child = " <li id='level" + i + i1 + i2 + "'><a id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + " rounded-circle'> " +
-                                                                                          "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
-                                                                                          " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
-                                                                                          "<input type='hidden' id='" + item3.Fk_UserId + "' value='" + item3.Fk_UserId + "' />" +
-                                                                                          "</a></li>";
-                                                                            }
-                                                                            ul3.append(child);
-                                                                        }
-                                                                        else {
-                                                                            if (id != '-1') {
-                                                                                child = " <li id='level" + i + i1 + i2 + "'><a data-toggle='popover' id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + "' " +
-                                                                                            " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
-                                                                                           " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
-                                                                                           "<div class='outer-ring " + cssclass + "'><div class='member-img " + cssclass + "'><i class='" + cssclass + "'></i></div></div><span class='name member-name'>" +
-                                                                                           " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
-                                                                                           "<input type='hidden' id='" + item3.Fk_UserId + "' value='" + item3.Fk_UserId + "' />" +
-                                                                                           "</a></li>";
-                                                                            }
-                                                                            else {
-                                                                                child = " <li id='level" + i + i1 + i2 + "'><a id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + "' >" +
-                                                                                          "<div class='outer-ring " + cssclass + "'><div class='member-img " + cssclass + "'><i class='" + cssclass + "'></i></div></div><span class='name member-name'>" +
-                                                                                          " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
-                                                                                          "<input type='hidden' id='" + item3.Fk_UserId + "' value='" + item3.Fk_UserId + "' />" +
-                                                                                          "</a></li>";
-                                                                            }
-                                                                            freeBlock = "<li id='1'><a href='Registration.cshtml?Pid=" + item3.LoginId + "&amp;lg=" + item3.Leg + "' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                                                            //Registration.cshtml?Pid=" + item3.LoginId + "&amp;lg=" + item3.Leg + "
-                                                                            //if (item3.Leg == 'L') {
-                                                                            //    ul3.append(child + freeBlock);
-                                                                            //}
-                                                                            //else {
-                                                                            //    ul3.append(freeBlock + child);
-                                                                            //}
-                                                                            ul3.append(child);
-                                                                        }
-                                                                    });
-                                                                    $("#level" + i + i1).append(ul3);
-                                                                }
-                                                            },
-                                                            failure: function (response) {
-                                                                alert("Failed: " + response.d);
-                                                            },
-                                                            error: function (response) {
-                                                                alert("Error: " + response.d);
-                                                            },
-                                                            complete: function () {
-                                                                $("#firstRow").fadeIn(1000);
-                                                                $('[id*="level"]').fadeIn(500);
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                                //else {
-                                                //    $("#firstRow").fadeIn(1000);
-                                                //    $("#firstHead").attr("style", "opacity:1;");
-                                                //    $('[id*="level"]').fadeIn(300);
-                                                //}
-                                            });
-                                            $("#level" + i).append(ul2);
-                                        }
-                                        $("#firstRow").append(ul);
-                                    },
-                                    failure: function (response) {
-                                        alert("Failed: " + response.d);
-                                    },
-                                    error: function (response) {
-                                        alert("Error: " + response.d);
-                                    },
-                                    complete: function () {
-                                        $("#firstRow").fadeIn(900);
-                                        $('[id*="level"]').fadeIn(500);
-                                    }
-                                });
-                            }
-                        }
-                        //else {
-                        //    $("#firstRow").fadeIn(1000);
-                        //    $("#firstHead").attr("style", "opacity:1;");
-                        //    $('[id*="level"]').fadeIn(500);
-                        //    $("#firstRow").append(ul);
-                        //}
-                    });
-                    $("#firstRow").append(ul);
-                }
-                $("#firstRow").append(ul);
-                $('#divload').hide();
-            }
+        var loginid = $("#firtsMemberID").val();
+        var topId = $("#linkGoUp").find("#lblRequest").val();
+        if (parseInt(loginid) > parseInt(topId)) {
+            //alert("You Are on top...!")
+        }
+        else {
+            //Fk_UserId = $("#firtsMemberID").val();
+            GetDataFirst(loginid, "clicked");
+            $("#txtLoginID").val('');
+            $("#hfCustomerId").val('');
         }
 
-        function GetDataFirst(id, text) {
-            $('#divload').show();
-            $.ajax({
-                type: "POST",
-                url: "../../../Models/WebService/AgentServices.asmx/GetUserFirst",
-                data: '{memID: ' + id + '}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess2,
+    });
 
-                failure: function (response) {
-                    $('#divload').hide();
-                    alert(response.d);
+    $("#linkGoUp").click(function () {
+        $('#divload').show();
+        $("#linkGoUp").attr("readonly", true);
 
-                },
-                error: function (response) {
-                    $('#divload').hide();
-                    alert(response.d);
-                }
-
-            });
-
-            function OnSuccess2(response) {
-
-                var modal = response.d;
-                $.each(modal, function (i, item) {
-
-                    $("#headClass span").text(item.MemberName + "(" + item.LoginId + ")");
-                    var status = item.Status;
-                    var gender = item.Gender;
-                    if (status == "T") {
-                        if (gender == "M") {
-                            status = "men-inactive"
-                        }
-                        else {
-                            status = "girl-inactive"
-                        }
-                    }
-                    else if (status == "P") {
-
-                        if (gender == "M") {
-                            status = "men-active"
-                        }
-                        else {
-                            status = "girl-active"
-                        }
-                    }
-                    else if (status == "Y") {
-
-                        if (gender == "M") {
-                            status = "men-hold"
-                        }
-                        else {
-                            status = "girl-hold"
-                        }
-                    }
-                    else {
-                        if (gender == "M") {
-                            status = "men-block"
-                        }
-                        else {
-                            status = "girl-block"
-                        }
-                    }
-                    var $firstHead = $("#firstHead");
-
-
-                    $firstHead.html("<div class='outer-ring " + status + "'><div class='member-img " + status + "'><i class='" + status + " rounded-circle'></i></div></div><span class='name member-name'>" + item.LoginId + "</span><span class='member-join-time'>" + item.MemberName + "</span>");
-                    //$firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "', '" + item.ParentLoginId + "')");
-                    $firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "','" + item.Leg + "','" + item.ParentLoginId + "','" + item.JoiningDate + "','" + item.ProductName + "','" + item.AllLeg1 + "','" + item.AllLeg2 + "','" + item.PermanentLeg1 + "','" + item.PermanentLeg2 + "','" + item.InactiveLeft + "','" + item.InactiveRight + "','" + item.PCountLeg1 + "','" + item.PCountLeg2 + "','" + item.PaidLeg1 + "','" + item.PaidLeg2 + "','" + item.BalanceLeft + "','" + item.BalanceRight + "','" + item.ProfilePic + "','" + item.ActivationDate + "'," + '"' + item.AllBusinessLeft + '"' + "," + '"' + item.AllBusinessRight + '"' + "," + '"' + item.ProductRightBusiness + '"' + "," + '"' + item.ProductLeftBusiness + '"' + ")");
-                    $firstHead.attr("data-toggle", "popover");
-
-                    $("#firstHead").attr("onclick", "ClickHere(this;)");
-                    $("#firstHead").attr("class", status);
-                    $("#firstHead").attr("style", "opacity: 1;");
-                    $("#firstHead").attr("href", "#");
-                    $("#lblRequest").val(item.ParentId);
-                    if (text == "clicked") {
-                        $("#firstRow").html('');
-                        $("#firstRow").append($firstHead);
-                        GetData(item.Fk_UserId);
-                    }
-                });
-                $("#linkGoUp").attr("readonly", false);
-
+        if ($(this).find("#lblRequest").val() == "0") {
+            //Fk_UserId = $("#firtsMemberID").val();
+            // GetDataFirst(Fk_UserId, "clicked");
+            $('#divload').hide();
+        }
+        else {
+            if (parseInt($(this).find("#lblRequest").val()) < parseInt($("#firtsMemberID").val())) {
+                //alert("Can't Reach With Relation with Parent")
+            } else {
+                Fk_UserId = $(this).find("#lblRequest").val();
+                GetDataFirst(Fk_UserId, "clicked");
             }
 
         }
 
+        // GetData(Fk_UserId);
+    });
 
-        $(function () {
-            $("#btnSearch").click(function () {
 
-                var txtLoginID = $('#txtLoginID').val();
-                if (txtLoginID == "") {
-                    $('#ToLoginID').val(null);
-                } else {
-                    var txtLoginID = $('#ToLoginID').val();
-                    $('#txtLoginID').val(txtLoginID);
-                }
+    var Fk_UserId = "0";
+    var clicked = 0;
 
-                if ($("#txtLoginID").val() != "") {
-                    $.ajax({
-                        url: '../../../Models/WebService/AgentServices.asmx/SearchCustomersByLoginId2',
-                        data: "{ 'prefix': '" + $("#txtLoginID").val() + "'}",
-                        dataType: "json",
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        success: OnSuccessThis,
-                        error: function (response) {
-                            alert(response.responseText);
-                        },
-                        failure: function (response) {
-                            alert(response.responseText);
-                        },
-                        select: function (e, i) {
-                            $("[id$=hfCustomerId]").val(i.item.val);
-                        },
+    function ClickHere(obj) {
+
+        //if ($("#" + obj.id + "").find('input[type="hidden"]').val() == "-1") {
+        //  return false;
+        //}
+        $("#member-details").removeClass('active');
+        var mID = $("#lblFk_UserId").text();
+        //var mID = $("#" + obj.id + "").find('input[type="hidden"]').val();
+        clicked = 1;
+        GetDataFirst(mID, "clicked");
+    }
+
+
+    $("#close").click(function () {
+        $("#member-details").removeClass('active');
+    });
+    $(document).ready(function () {
+
+        if (clicked != 1) {
+
+            Fk_UserId = $("#firtsMemberID").val();
+            GetDataFirst(Fk_UserId, null);
+            //GetData(Fk_UserId);
+
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/User/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
                     });
-                }
+                    $('#txtLoginID').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
 
-
-                function OnSuccessThis(data) {
-
-                    console.log(data);
-                    var r = data.d;
-                    $(r).each(function () {
-                        $("[id$=hfCustomerId]").val(this.split('.')[1]);
-                        if ($("#hfCustomerId").val() != "") {
-                            if ($("#txtLoginID").val() == "") {
-                                Fk_UserId = $("#firtsMemberID").val();
-
-                            }
-                            else {
-                                Fk_UserId = $("#hfCustomerId").val();
-                                $("#firstRow").find('ul').remove();
-                                GetDataFirst(Fk_UserId);
-                                GetData(Fk_UserId);
-                            }
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
                         }
                     })
                 }
-            });
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
         });
-        //$(function () {
-        //    $("#txtLoginID").autocomplete({
-        //        source: function (request, response) {
-        //            $.ajax({
-        //                url: '/Models/WebService/AgentServices.asmx/SearchCustomersByLoginId',
-        //                data: "{ 'prefix': '" + request.term + "'}",
-        //                dataType: "json",
-        //                type: "POST",
-        //                contentType: "application/json; charset=utf-8",
-        //                success: function (data) {
-        //                    response($.map(data.d, function (item) {
-        //                        return {
-        //                            label: item.split('-')[0],
-        //                            val: item.split('-')[1]
-        //                        }
-        //                    }))
-        //                },
-        //                error: function (response) {
-        //                    alert(response.responseText);
-        //                },
-        //                failure: function (response) {
-        //                    alert(response.responseText);
-        //                }
-        //            });
-        //        },
-        //        select: function (e, i) {
-        //            $("[id$=hfCustomerId]").val(i.item.val);
-        //        },
-        //        minLength: 2
-        //    });
-        //});
-    </script>
+        //$('#TopupType').val('RealEstate');
+    });
+    //$(document).ready(function () {
+    //    $("input").attr("autocomplete", "off");
+    //    var cityuse = [];
+    //    $("#loader").css({ 'display': '' });
+    //    $.ajax({
+    //        url: '/User/GetUserList',
+    //        type: 'Post',
+    //        success: function (response) {
+    //            if (response != null) {
+
+
+    //                $(response).each(function (index, item) {
+    //                    cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+    //                });
+
+    //                $('#txtLoginID').autocomplete({
+    //                    source: cityuse,
+    //                    select: function (event, ui) {
+    //                        var str = ui.item.label;
+    //                        var strsplit = str.split("(");
+
+    //                        $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+    //                    }
+    //                })
+    //            }
+    //        }, error: function () {
+    //            alert('Some Thing wrong!');
+    //            $("#loader").css({ 'display': 'none' });
+    //        }
+    //    });
+    //});
+
+    var winHeight = $(window).height();
+    var winWidth = $(window).width();
+    var clickOption = "";
+    debugger;
+    if (winWidth < 980) {
+        //clickOption = "";
+        debugger;
+        clickOption = "";
+    }
+    else {
+        clickOption = "onClick='ClickHere(this)'";
+    }
+
+
+
+    $(window).on("load", function () {
+
+        var id = $("#firtsMemberID").val();
+        GetDataFirst(id);
+        GetData(id);
+
+    });
+
+    function GetData(id) {
+        //
+        $.ajax({
+            type: "POST",
+            url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
+            data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccess,
+            failure: function (response) {
+                alert("Failed: " + response.d);
+            },
+            error: function (response) {
+                alert("Error: " + response.d);
+            }
+        });
+
+
+        function OnSuccess(response) {
+
+            debugger;
+            var ul = $("<ul></ul>");
+            var freeBlock = "";
+            var freeBlockL = "";
+            var freeBlockR = "";
+            var model = response.d;
+            if (!$.trim(model)) {
+                $(".alert-warning").show();
+                $("#lblWarning").text("No Member Found...For this Associate");
+                //$("#userTree").hide();
+
+                freeBlockL = "<li id='1'><a href='Registration.cshtml?Pid='123466'&amp;lg=L' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
+                //
+                freeBlockR = "<li id='2'><a href='Registration.cshtml?Pid='123466'&amp;lg=R' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
+                //
+                ul.append(freeBlockL + freeBlockR);
+                $("#firstRow").fadeIn(500);
+                window.setTimeout(function () {
+                    $('#alertbox .alert').hide(500, 0).slideUp(1500, function () {
+                        $('#alertbox .alert').slideUp(500);
+                    });
+                }, 2000);
+
+            }
+            else {
+
+
+
+                var $child = "";
+                var level = 0;
+                $.each(response.d, function (i, k) {
+                    level++;
+                });
+
+                $.each(model, function (i, item1) {
+
+                    id = item1.Fk_UserId;
+                    var cssclass = "";
+                    var cssclaa = item1.CssClass;
+                    var Gender = item1.Gender;
+                    if (cssclaa == "active-member") {
+                        if (Gender == "M") {
+                            cssclass = "men-active";
+                        }
+                        else {
+                            cssclass = "girl-active";
+                        }
+                    }
+                    else if (cssclaa == "block-member") {
+                        if (Gender == "M") {
+                            cssclass = "men-block";
+                        }
+                        else {
+                            cssclass = "girl-block";
+                        }
+                    }
+                    else if (cssclaa == "inactive-member") {
+                        if (Gender == "M") {
+                            cssclass = "men-inactive";
+                        }
+                        else {
+                            cssclass = "girl-inactive";
+                        }
+                    }
+                    else if (cssclaa == "star-member") {
+
+                        cssclass = "star";
+
+                    }
+                    else if (cssclaa == "Silver-member") {
+
+                        cssclass = "Silver";
+
+                    }
+                    else if (cssclaa == "Gold-member") {
+
+                        cssclass = "Gold";
+
+                    }
+                    else if (cssclaa == "Platinum-member") {
+
+                        cssclass = "Platinum";
+
+                    }
+                    else if (cssclaa == "Daimond-member") {
+
+                        cssclass = "Daimond";
+
+                    }
+                    else if (cssclaa == "Crown-member") {
+
+                        cssclass = "Crown";
+
+                    }
+                    else if (cssclaa == "HMKAward-member") {
+
+                        cssclass = "HMKAward";
+
+                    }
+                    else if (cssclaa == "hold-member") {
+                        if (Gender == "M") {
+                            cssclass = "men-hold";
+                        }
+                        else {
+                            cssclass = "girl-hold";
+                        }
+                    }
+                    else if (cssclaa == "star-member") {
+
+                        cssclass = "star";
+
+                    }
+                    else if (cssclaa == "Silver-member") {
+
+                        cssclass = "Silver";
+
+                    }
+                    else if (cssclaa == "Gold-member") {
+
+                        cssclass = "Gold";
+
+                    }
+                    else if (cssclaa == "Platinum-member") {
+
+                        cssclass = "Platinum";
+
+                    }
+                    else if (cssclaa == "Daimond-member") {
+
+                        cssclass = "Daimond";
+
+                    }
+                    else if (cssclaa == "Crown-member") {
+
+                        cssclass = "Crown";
+
+                    }
+                    else if (cssclaa == "HMKAward-member") {
+
+                        cssclass = "HMKAward";
+
+                    }
+                    else {
+                        cssclass = "join-member";
+                    }
+
+                    if (level == 2) {
+                        if (id != '-1') {
+
+                            child = " <li id='level" + i + "'><a data-toggle='popover' id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' " +
+                                                      " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
+                                                      " onmouseout='closePopup(this)' href='#' " + clickOption + " >" +
+
+                                                      "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle '></i></div></div><span class='name member-name'>" +
+                                                      " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
+                                                      "<input type='hidden' id='" + item1.Fk_UserId + "' value='" + item1.Fk_UserId + "' />" +
+                                                      "</a></li>";
+                        }
+                        else {
+
+                            child = " <li id='level" + i + "'><a id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' >" +
+                                                     "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + "  rounded-circle'></i></div></div><span class='name member-name'>" +
+                                                     " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
+                                                     "<input type='hidden' id='" + item1.Fk_UserId + "' value='" + item1.Fk_UserId + "' />" +
+                                                     "</a></li>";
+                        }
+                        ul.append(child);
+                    }
+                    else {
+                        if (id != '-1') {
+                            child = " <li id='level" + i + "'><a data-toggle='popover' id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' " +
+                                                      " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
+                                                      " onmouseout='closePopup(this)' href='#' " + clickOption + " >" +
+                                                      "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
+                                                      " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
+                                                      "<input type='hidden' id='" + item1.Fk_UserId + "' value='" + item1.Fk_UserId + "' />" +
+                                                      "</a></li>";
+                        }
+                        else {
+                            child = " <li id='level" + i + "'><a id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' >" +
+                                                     "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
+                                                     " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
+                                                     "<input type='hidden' id='" + item1.Fk_UserId + "' value='" + item1.Fk_UserId + "' />" +
+                                                     "</a></li>";
+                        }
+                        freeBlock = "<li id='1'><a href='Registration.cshtml?Pid=" + item1.LoginId + "&amp;lg=" + item1.Leg + "' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
+                        //"Registration.cshtml?Pid=' + item1.LoginId + "&amp;lg=" + item1.Leg + "' it is use of up registration Pid
+                        if (item1.Leg == 'L') {
+                            ul.append(child + freeBlock);
+                        }
+                        else {
+                            ul.append(freeBlock + child);
+                        }
+
+                    }
+
+                    //if (winWidth > 766)
+                    {
+                        if (id != null) {
+                            $.ajax({
+                                type: "POST",
+                                url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
+                                data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (response2) {
+                                    var model2 = response2.d;
+                                    var ul2 = $("<ul></ul>");
+                                    var level2 = 0;
+                                    if (!$.trim(model2)) {
+                                        freeBlockL = "<li id='1'><a href='Registration.cshtml?Pid='123466'&amp;lg=L' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
+                                        //Registration.cshtml?Pid='123466'&amp;lg=L
+                                        freeBlockR = "<li id='2'><a href='Registration.cshtml?Pid='123466'&amp;lg=R' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
+                                        //Registration.cshtml?Pid='123466'&amp;lg=R
+                                        ul2.append(freeBlockL + freeBlockR);
+                                        //$("#firstRow").fadeIn(2000);
+                                        window.setTimeout(function () {
+                                            $('#alertbox .alert').hide(500, 0).slideUp(1500, function () {
+                                                $('#alertbox .alert').slideUp(500);
+                                            });
+                                        }, 2000);
+                                        $("#level" + i).append(ul2);
+                                    }
+                                    else {
+                                        $.each(response2.d, function (i1, k2) {
+                                            level2++;
+                                        });
+                                        $.each(model2, function (i1, item2) {
+                                            id = item2.Fk_UserId;
+                                            var cssclass = "";
+                                            var cssclaa = item2.CssClass;
+                                            var Gender = item2.Gender;
+                                            if (cssclaa == "active-member") {
+                                                if (Gender == "M") {
+                                                    cssclass = "men-active";
+                                                }
+                                                else {
+                                                    cssclass = "girl-active";
+                                                }
+                                            }
+                                            else if (cssclaa == "block-member") {
+                                                if (Gender == "M") {
+                                                    cssclass = "men-block";
+                                                }
+                                                else {
+                                                    cssclass = "girl-block";
+                                                }
+                                            }
+                                            else if (cssclaa == "inactive-member") {
+                                                if (Gender == "M") {
+                                                    cssclass = "men-inactive";
+                                                }
+                                                else {
+                                                    cssclass = "girl-inactive";
+                                                }
+                                            }
+                                            else if (cssclaa == "hold-member") {
+                                                if (Gender == "M") {
+                                                    cssclass = "men-hold";
+                                                }
+                                                else {
+                                                    cssclass = "girl-hold";
+                                                }
+                                            }
+                                            else if (cssclaa == "star-member") {
+
+                                                cssclass = "star";
+
+                                            }
+                                            else if (cssclaa == "Silver-member") {
+
+                                                cssclass = "Silver";
+
+                                            }
+                                            else if (cssclaa == "Gold-member") {
+
+                                                cssclass = "Gold";
+
+                                            }
+                                            else if (cssclaa == "Platinum-member") {
+
+                                                cssclass = "Platinum";
+
+                                            }
+                                            else if (cssclaa == "Daimond-member") {
+
+                                                cssclass = "Daimond";
+
+                                            }
+                                            else if (cssclaa == "Crown-member") {
+
+                                                cssclass = "Crown";
+
+                                            }
+                                            else if (cssclaa == "HMKAward-member") {
+
+                                                cssclass = "HMKAward";
+
+                                            }
+                                            else {
+                                                cssclass = "join-member";
+                                            }
+                                            if (level2 == 2) {
+                                                if (id != '-1') {
+                                                    child = " <li id='level" + i + i1 + "'><a data-toggle='popover' id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' " +
+                                                              " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
+                                                              " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
+                                                              "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + "  rounded-circle'></i></div></div><span class='name member-name'>" +
+                                                              " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
+                                                              "<input type='hidden' id='" + item2.Fk_UserId + "' value='" + item2.Fk_UserId + "' />" +
+                                                              "</a></li>";
+                                                }
+                                                else {
+                                                    child = " <li id='level" + i + i1 + "'><a id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle'> " +
+                                                            "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
+                                                            " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
+                                                            "<input type='hidden' id='" + item2.Fk_UserId + "' value='" + item2.Fk_UserId + "' />" +
+                                                            "</a></li>";
+
+                                                }
+                                                ul2.append(child);
+                                            }
+                                            else {
+                                                if (id != '-1') {
+                                                    child = " <li id='level" + i + i1 + "'><a data-toggle='popover' id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' " +
+                                                             " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
+                                                             " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
+                                                             "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
+                                                             " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
+                                                             "<input type='hidden' id='" + item2.Fk_UserId + "' value='" + item2.Fk_UserId + "' />" +
+                                                             "</a></li>";
+                                                }
+                                                else {
+                                                    child = " <li id='level" + i + i1 + "'><a id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' >" +
+                                                            "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
+                                                            " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
+                                                            "<input type='hidden' id='" + item2.Fk_UserId + "' value='" + item2.Fk_UserId + "' />" +
+                                                            "</a></li>";
+
+                                                }
+                                                freeBlock = "<li id='1'><a href='Registration.cshtml?Pid=" + item2.LoginId + "&amp;lg=" + item2.Leg + "' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
+                                                //Registration.cshtml?Pid=" + item2.LoginId + "&amp;lg=" + item2.Leg + "
+                                                if (item2.Leg == 'L') {
+                                                    ul2.append(child + freeBlock);
+                                                }
+                                                else {
+                                                    ul2.append(freeBlock + child);
+                                                }
+                                            }
+                                            //if (winWidth > 980)
+                                            {
+                                                if (id != null) {
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
+                                                        data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
+                                                        contentType: "application/json; charset=utf-8",
+                                                        dataType: "json",
+                                                        success: function (response3) {
+                                                            var model3 = response3.d;
+                                                            var ul3 = $("<ul></ul>");
+                                                            var level3 = 0;
+                                                            if (!$.trim(model3)) {
+                                                                freeBlockL = "<li id='1'><a href='Registration.cshtml?Pid='123466'&amp;lg=L' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
+                                                                //Registration.cshtml?Pid='123466'&amp;lg=L
+                                                                freeBlockR = "<li id='2'><a href='Registration.cshtml?Pid='123466'&amp;lg=R' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
+                                                                //Registration.cshtml?Pid='123466'&amp;lg=R
+                                                                ul3.append(freeBlockL + freeBlockR);
+                                                                $("#firstRow").fadeIn(500);
+                                                                window.setTimeout(function () {
+                                                                    $('#alertbox .alert').hide(500, 0).slideUp(1500, function () {
+                                                                        $('#alertbox .alert').slideUp(500);
+                                                                    });
+                                                                }, 2000);
+                                                                $("#level" + i + i1).append(ul3);
+                                                            }
+                                                            else {
+                                                                $.each(response3.d, function (i2, k3) {
+                                                                    level3++;
+                                                                });
+                                                                $.each(model3, function (i2, item3) {
+                                                                    id = item3.Fk_UserId;
+                                                                    var cssclass = "";
+                                                                    var cssclaa = item3.CssClass;
+                                                                    var Gender = item3.Gender;
+                                                                    if (cssclaa == "active-member") {
+                                                                        if (Gender == "M") {
+                                                                            cssclass = "men-active";
+                                                                        }
+                                                                        else {
+                                                                            cssclass = "girl-active";
+                                                                        }
+                                                                    }
+                                                                    else if (cssclaa == "block-member") {
+                                                                        if (Gender == "M") {
+                                                                            cssclass = "men-block";
+                                                                        }
+                                                                        else {
+                                                                            cssclass = "girl-block";
+                                                                        }
+                                                                    }
+                                                                    else if (cssclaa == "inactive-member") {
+                                                                        if (Gender == "M") {
+                                                                            cssclass = "men-inactive";
+                                                                        }
+                                                                        else {
+                                                                            cssclass = "girl-inactive";
+                                                                        }
+                                                                    }
+                                                                    else if (cssclaa == "hold-member") {
+                                                                        if (Gender == "M") {
+                                                                            cssclass = "men-hold";
+                                                                        }
+                                                                        else {
+                                                                            cssclass = "girl-hold";
+                                                                        }
+                                                                    }
+                                                                    else if (cssclaa == "star-member") {
+
+                                                                        cssclass = "star";
+
+                                                                    }
+                                                                    else if (cssclaa == "Silver-member") {
+
+                                                                        cssclass = "Silver";
+
+                                                                    }
+                                                                    else if (cssclaa == "Gold-member") {
+
+                                                                        cssclass = "Gold";
+
+                                                                    }
+                                                                    else if (cssclaa == "Platinum-member") {
+
+                                                                        cssclass = "Platinum";
+
+                                                                    }
+                                                                    else if (cssclaa == "Daimond-member") {
+
+                                                                        cssclass = "Daimond";
+
+                                                                    }
+                                                                    else if (cssclaa == "Crown-member") {
+
+                                                                        cssclass = "Crown";
+
+                                                                    }
+                                                                    else if (cssclaa == "HMKAward-member") {
+
+                                                                        cssclass = "HMKAward";
+
+                                                                    }
+
+                                                                    else {
+                                                                        cssclass = "join-member";
+                                                                    }
+                                                                    if (level3 == 2) {
+                                                                        if (id != '-1') {
+                                                                            child = " <li id='level" + i + i1 + i2 + "'><a data-toggle='popover' id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + " rounded-circle' " +
+                                                                                      " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
+                                                                                      " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
+                                                                                      "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
+                                                                                      " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
+                                                                                      "<input type='hidden' id='" + item3.Fk_UserId + "' value='" + item3.Fk_UserId + "' />" +
+                                                                                      "</a></li>";
+                                                                        }
+                                                                        else {
+                                                                            child = " <li id='level" + i + i1 + i2 + "'><a id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + " rounded-circle'> " +
+                                                                                      "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
+                                                                                      " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
+                                                                                      "<input type='hidden' id='" + item3.Fk_UserId + "' value='" + item3.Fk_UserId + "' />" +
+                                                                                      "</a></li>";
+                                                                        }
+                                                                        ul3.append(child);
+                                                                    }
+                                                                    else {
+                                                                        if (id != '-1') {
+                                                                            child = " <li id='level" + i + i1 + i2 + "'><a data-toggle='popover' id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + "' " +
+                                                                                        " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
+                                                                                       " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
+                                                                                       "<div class='outer-ring " + cssclass + "'><div class='member-img " + cssclass + "'><i class='" + cssclass + "'></i></div></div><span class='name member-name'>" +
+                                                                                       " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
+                                                                                       "<input type='hidden' id='" + item3.Fk_UserId + "' value='" + item3.Fk_UserId + "' />" +
+                                                                                       "</a></li>";
+                                                                        }
+                                                                        else {
+                                                                            child = " <li id='level" + i + i1 + i2 + "'><a id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + "' >" +
+                                                                                      "<div class='outer-ring " + cssclass + "'><div class='member-img " + cssclass + "'><i class='" + cssclass + "'></i></div></div><span class='name member-name'>" +
+                                                                                      " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
+                                                                                      "<input type='hidden' id='" + item3.Fk_UserId + "' value='" + item3.Fk_UserId + "' />" +
+                                                                                      "</a></li>";
+                                                                        }
+                                                                        freeBlock = "<li id='1'><a href='Registration.cshtml?Pid=" + item3.LoginId + "&amp;lg=" + item3.Leg + "' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
+                                                                        //Registration.cshtml?Pid=" + item3.LoginId + "&amp;lg=" + item3.Leg + "
+                                                                        //if (item3.Leg == 'L') {
+                                                                        //    ul3.append(child + freeBlock);
+                                                                        //}
+                                                                        //else {
+                                                                        //    ul3.append(freeBlock + child);
+                                                                        //}
+                                                                        ul3.append(child);
+                                                                    }
+                                                                });
+                                                                $("#level" + i + i1).append(ul3);
+                                                            }
+                                                        },
+                                                        failure: function (response) {
+                                                            alert("Failed: " + response.d);
+                                                        },
+                                                        error: function (response) {
+                                                            alert("Error: " + response.d);
+                                                        },
+                                                        complete: function () {
+                                                            $("#firstRow").fadeIn(1000);
+                                                            $('[id*="level"]').fadeIn(500);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                            //else {
+                                            //    $("#firstRow").fadeIn(1000);
+                                            //    $("#firstHead").attr("style", "opacity:1;");
+                                            //    $('[id*="level"]').fadeIn(300);
+                                            //}
+                                        });
+                                        $("#level" + i).append(ul2);
+                                    }
+                                    $("#firstRow").append(ul);
+                                },
+                                failure: function (response) {
+                                    alert("Failed: " + response.d);
+                                },
+                                error: function (response) {
+                                    alert("Error: " + response.d);
+                                },
+                                complete: function () {
+                                    $("#firstRow").fadeIn(900);
+                                    $('[id*="level"]').fadeIn(500);
+                                }
+                            });
+                        }
+                    }
+                    //else {
+                    //    $("#firstRow").fadeIn(1000);
+                    //    $("#firstHead").attr("style", "opacity:1;");
+                    //    $('[id*="level"]').fadeIn(500);
+                    //    $("#firstRow").append(ul);
+                    //}
+                });
+                $("#firstRow").append(ul);
+            }
+            $("#firstRow").append(ul);
+            $('#divload').hide();
+        }
+    }
+
+    function GetDataFirst(id, text) {
+        $('#divload').show();
+        $.ajax({
+            type: "POST",
+            url: "../../../Models/WebService/AgentServices.asmx/GetUserFirst",
+            data: '{memID: ' + id + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccess2,
+
+            failure: function (response) {
+                $('#divload').hide();
+                alert(response.d);
+
+            },
+            error: function (response) {
+                $('#divload').hide();
+                alert(response.d);
+            }
+
+        });
+
+        function OnSuccess2(response) {
+
+            var modal = response.d;
+            $.each(modal, function (i, item) {
+
+                $("#headClass span").text(item.MemberName + "(" + item.LoginId + ")");
+                var status = item.Status;
+                var gender = item.Gender;
+                if (status == "T") {
+                    if (gender == "M") {
+                        status = "men-inactive"
+                    }
+                    else {
+                        status = "girl-inactive"
+                    }
+                }
+                else if (status == "P") {
+
+                    if (gender == "M") {
+                        status = "men-active"
+                    }
+                    else {
+                        status = "girl-active"
+                    }
+                }
+                else if (status == "Y") {
+
+                    if (gender == "M") {
+                        status = "men-hold"
+                    }
+                    else {
+                        status = "girl-hold"
+                    }
+                }
+
+                else if (status == "star-member") {
+
+                    status = "star";
+
+                }
+                else if (status == "Silver-member") {
+
+                    status = "Silver";
+
+                }
+                else if (status == "Gold-member") {
+
+                    status = "Gold";
+
+                }
+                else if (status == "Platinum-member") {
+
+                    status = "Platinum";
+
+                }
+                else if (status == "Daimond-member") {
+
+                    status = "Daimond";
+
+                }
+                else if (status == "Crown-member") {
+
+                    status = "Crown";
+
+                }
+                else if (status == "HMKAward-member") {
+
+                    status = "HMKAward";
+
+                }
+                else {
+                    if (gender == "M") {
+                        status = "men-block"
+                    }
+                    else {
+                        status = "girl-block"
+                    }
+                }
+                var $firstHead = $("#firstHead");
+
+
+                $firstHead.html("<div class='outer-ring " + status + "'><div class='member-img " + status + "'><i class='" + status + " rounded-circle'></i></div></div><span class='name member-name'>" + item.LoginId + "</span><span class='member-join-time'>" + item.MemberName + "</span>");
+                //$firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "', '" + item.ParentLoginId + "')");
+                $firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "','" + item.Leg + "','" + item.ParentLoginId + "','" + item.JoiningDate + "','" + item.ProductName + "','" + item.AllLeg1 + "','" + item.AllLeg2 + "','" + item.PermanentLeg1 + "','" + item.PermanentLeg2 + "','" + item.InactiveLeft + "','" + item.InactiveRight + "','" + item.PCountLeg1 + "','" + item.PCountLeg2 + "','" + item.PaidLeg1 + "','" + item.PaidLeg2 + "','" + item.BalanceLeft + "','" + item.BalanceRight + "','" + item.ProfilePic + "','" + item.ActivationDate + "'," + '"' + item.AllBusinessLeft + '"' + "," + '"' + item.AllBusinessRight + '"' + "," + '"' + item.ProductRightBusiness + '"' + "," + '"' + item.ProductLeftBusiness + '"' + ")");
+                $firstHead.attr("data-toggle", "popover");
+
+                $("#firstHead").attr("onclick", "ClickHere(this;)");
+                $("#firstHead").attr("class", status);
+                $("#firstHead").attr("style", "opacity: 1;");
+                $("#firstHead").attr("href", "#");
+                $("#lblRequest").val(item.ParentId);
+                if (text == "clicked") {
+                    $("#firstRow").html('');
+                    $("#firstRow").append($firstHead);
+                    GetData(item.Fk_UserId);
+                }
+            });
+            $("#linkGoUp").attr("readonly", false);
+
+        }
+
+    }
+
+
+    $(function () {
+        $("#btnSearch").click(function () {
+
+            var txtLoginID = $('#txtLoginID').val();
+            if (txtLoginID == "") {
+                $('#ToLoginID').val(null);
+            } else {
+                var txtLoginID = $('#ToLoginID').val();
+                $('#txtLoginID').val(txtLoginID);
+            }
+
+            if ($("#txtLoginID").val() != "") {
+                $.ajax({
+                    url: '../../../Models/WebService/AgentServices.asmx/SearchCustomersByLoginId2',
+                    data: "{ 'prefix': '" + $("#txtLoginID").val() + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: OnSuccessThis,
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    select: function (e, i) {
+                        $("[id$=hfCustomerId]").val(i.item.val);
+                    },
+                });
+            }
+
+
+            function OnSuccessThis(data) {
+
+                console.log(data);
+                var r = data.d;
+                $(r).each(function () {
+                    $("[id$=hfCustomerId]").val(this.split('.')[1]);
+                    if ($("#hfCustomerId").val() != "") {
+                        if ($("#txtLoginID").val() == "") {
+                            Fk_UserId = $("#firtsMemberID").val();
+
+                        }
+                        else {
+                            Fk_UserId = $("#hfCustomerId").val();
+                            $("#firstRow").find('ul').remove();
+                            GetDataFirst(Fk_UserId);
+                            GetData(Fk_UserId);
+                        }
+                    }
+                })
+            }
+        });
+    });
+    //$(function () {
+    //    $("#txtLoginID").autocomplete({
+    //        source: function (request, response) {
+    //            $.ajax({
+    //                url: '/Models/WebService/AgentServices.asmx/SearchCustomersByLoginId',
+    //                data: "{ 'prefix': '" + request.term + "'}",
+    //                dataType: "json",
+    //                type: "POST",
+    //                contentType: "application/json; charset=utf-8",
+    //                success: function (data) {
+    //                    response($.map(data.d, function (item) {
+    //                        return {
+    //                            label: item.split('-')[0],
+    //                            val: item.split('-')[1]
+    //                        }
+    //                    }))
+    //                },
+    //                error: function (response) {
+    //                    alert(response.responseText);
+    //                },
+    //                failure: function (response) {
+    //                    alert(response.responseText);
+    //                }
+    //            });
+    //        },
+    //        select: function (e, i) {
+    //            $("[id$=hfCustomerId]").val(i.item.val);
+    //        },
+    //        minLength: 2
+    //    });
+    //});
+</script>

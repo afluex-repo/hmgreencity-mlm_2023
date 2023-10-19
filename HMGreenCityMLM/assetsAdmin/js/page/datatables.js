@@ -46,10 +46,12 @@ $("#save-stage").DataTable({
   stateSave: true,
 });
 $("#tableExport").DataTable({
-  dom: "Bfrtip",
+    dom: "Bfrtip",
+    "pageLength":50,
   buttons: ["copy", "csv", "excel", "pdf", "print"],
 });
 $("#example23").DataTable({
     dom: "Bfrtip",
+    "pageLength": 50,
     buttons: ["copy", "csv", "excel", "pdf", "print"],
 });
