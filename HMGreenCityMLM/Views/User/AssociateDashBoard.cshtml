@@ -421,8 +421,16 @@
         width:104px;
         position: absolute;
         left: 38%;
-        bottom: 10%;
+        bottom: 16%;
     }
+        #congratulation .modal-content .modal-body h4 {
+            position: absolute;
+            left: 39%;
+            bottom: 6%;
+            color: #000;
+            font-family: ui-serif;
+        }
+
 </style>
 
 <div class="modal fade" id="congratulation" tabindex="-1" role="dialog"
@@ -435,7 +443,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="~/assetsAdmin/img/Crown.png" class="position-absolute top-50 start-100 translate-middle" />
+                <img src="@ViewBag.ImageURL" />
+                <h4>@ViewBag.AchiverRank</h4>
             </div>
         </div>
     </div>
