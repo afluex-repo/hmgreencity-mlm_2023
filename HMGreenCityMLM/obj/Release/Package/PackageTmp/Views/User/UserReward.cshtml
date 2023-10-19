@@ -1,0 +1,82 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "UserReward";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("UserReward", "User", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Rewards</h5>
+                        @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                    </div>
+                    @*<p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                            @TempData["ChangeAsspassword"]
+                        </p>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                   
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>S No.</th>
+                                    <th>Reward</th>
+                                    <th>Status</th>
+                                    <th>Qualify Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lsttopupreport != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lsttopupreport)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>
+                                                    <img src="@Item.RewardImage" height="100" width="100" />
+                                                    <br />@Item.RewardName
+                                                </td>
+                                                <td><label class="@Item.Contact">@Item.Status</label></td>
+                                                <td>@Item.QualifyDate</td>
+                                                <td>
+                                                    @if (Item.Status == "Achieved")
+                                                    {
+                                                        <a class="btn btn-info btn-sm" href="/User/ClaimReward/@Item.PK_RewardItemId" onclick="return confirm('Are you sure you wish to claim this Award?');">Claim</a>
+                                                                            <a class="btn btn-warning btn-sm" href="/User/SkipReward/@Item.PK_RewardItemId" onclick="return confirm('Are you sure you wish to Skip this Award?');">Skip</a>
+                                                    }
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+

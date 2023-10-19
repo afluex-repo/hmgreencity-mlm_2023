@@ -1,0 +1,303 @@
+﻿@model HMGreenCityMLM.Models.Home
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .errortext {
+       border: 2px solid red !important;
+       
+    }
+</style>
+
+<br />
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <!-- users edit start -->
+            <section class="users-edit">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs mb-3" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                       aria-controls="account" role="tab" aria-selected="true">
+                                        <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Registration</span>
+                                    </a>
+                                </li>
+                               
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                   
+                                  
+                                        <div class="row">
+                                            <div class="col-md-6 form-group">
+                                                Sponsor Id <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);" })
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                Sponsor Name <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                Leg <span style="color: red">*</span> &nbsp;&nbsp;
+                                                <input type="radio" value="Left" checked="checked" id="left" name="Leg" />
+                                                Left &nbsp;&nbsp;
+                                                <input type="radio" value="Right" id="right" name="Leg" />
+                                                Right
+                                            </div>
+
+                                            <div class="col-md-6 form-group">
+                                                First Name <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                Last Name
+                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                Email Id
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email id" })
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                Mobile No <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                            </div>
+
+                                            <div class="col-md-6 form-group">
+                                                Gender
+                                                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlgender, "Value", "Text"), new { @class = "form-control" })
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                Pan Card <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @Placeholder = "Pan Card", @Maxlength = "10", @onchange = "return validatepan(event);" })
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                Address
+                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                Pincode
+                                                @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @Placeholder = "PinCode", @onchange = "return getstatecity();" })
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                State
+                                                @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @Disabled = "disabled" })
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                City
+                                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @Disabled = "disabled" })
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <input type="button" id="Confirm" onclick="return confirmregistration();" class="btn btn-success" name="Confirm" value="Confirm">
+                                                <input type="button" id="Register" onclick="return saveregistration();" class="btn btn-success" style="display: none" name="Register" value="Register">
+                                                <input type="button" id="Edit" onclick="editregistration();" style="display: none" class="btn btn-info" name="Edit" value="Edit">
+                                                <br />
+
+                                            </div>
+                                            <br />
+                                            <p style="color: red">@TempData["Registration"] </p>
+                                        </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script src="../../AdminPanelCss/assets/vendors/jquery.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    function validatepan(event) {
+        $(".errortext").removeClass("errortext");
+        var regExp = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/;
+        var txtpan = $('#PanCard').val();
+        if (txtpan.length == 10) {
+            if (txtpan.match(regExp)) {
+
+            }
+            else {
+                $("#PanCard").addClass('errortext');
+                $('#PanCard').focus();
+                $('#PanCard').val('');
+                alert('Please enter valid PanNo');
+
+            }
+        }
+        else {
+            $("#PanCard").addClass('errortext');
+            $('#PanCard').focus();
+            $('#PanCard').val('');
+            alert('Please enter 10 digits for a valid PAN number');
+
+        }
+    }
+
+    function getstatecity() {
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: "/Home/GetStateCity",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PinCode: $("#PinCode").val() },
+            success: function (data) {
+                if (data.Result == "1") {
+                    $("#State").val(data.State);
+                    $("#City").val(data.City);
+                }
+                else {
+                    $("#State").val('');
+                    $("#City").val('');
+                    $("#PinCode").val('');
+                    $("#PinCode").addClass('errortext');
+                    $('#PinCode').focus();
+                    alert(data.Result);
+
+                }
+
+
+            }
+
+        });
+    }
+
+    function confirmregistration() {
+        $(".errortext").removeClass("errortext");
+        if ($('#SponsorId').val() == '') {
+            $("#SponsorId").addClass('errortext');
+            $('#SponsorId').focus();
+            return false;
+        }
+        if ($('#FirstName').val() == '') {
+            $("#FirstName").addClass('errortext');
+            $('#FirstName').focus();
+            return false;
+        }
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+        if ($('#PanCard').val() == '') {
+            $("#PanCard").addClass('errortext');
+            $('#PanCard').focus();
+            return false;
+        }
+        $("#PaymentMethod").attr("disabled", "disabled");
+        $("#Commitment").attr("disabled", "disabled");
+        $("#MobileNo").attr("disabled", "disabled");
+        $("#FirstName").attr("disabled", "disabled");
+        $("#SponsorId").attr("disabled", "disabled");
+        $("#Email").attr("disabled", "disabled");
+        $("#LastName").attr("disabled", "disabled");
+        $("#Gender").attr("disabled", "disabled");
+        $("#PanCard").attr("disabled", "disabled");
+        $("#Address").attr("disabled", "disabled");
+        $("#PinCode").attr("disabled", "disabled");
+        $('#Confirm').hide();
+        $('#Edit').show();
+        $('#Register').show();
+    }
+
+    function editregistration() {
+        $("#PaymentMethod").attr("disabled", false);
+        $("#Commitment").attr("disabled", false);
+        $("#MobileNo").attr("disabled", false);
+        $("#FirstName").attr("disabled", false);
+        $("#SponsorId").attr("disabled", false);
+        $("#Email").attr("disabled", false);
+        $("#LastName").attr("disabled", false);
+        $("#Gender").attr("disabled", false);
+        $("#PanCard").attr("disabled", false);
+        $("#Address").attr("disabled", false);
+        $("#PinCode").attr("disabled", false);
+        $('#Confirm').show();
+        $('#Edit').hide();
+        $('#Register').hide();
+
+    }
+
+    function saveregistration() {
+        $("#divload").css({ 'display': '' });
+        var Leg = "";
+        if ($('#left').prop('checked')) {
+            Leg = "L";
+        }
+        else {
+            Leg = "R";
+        }
+        $.ajax({
+            url: "/User/RegistrationAction",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), Email: $("#Email").val(), MobileNo: $("#MobileNo").val(), PanCard: $("#PanCard").val(), Address: $("#Address").val(), Gender: $("#Gender").val(), OTP: $("#OTP").val(), PinCode: $("#PinCode").val(), Leg: Leg },
+            success: function (data) {
+                if (data.Response == "1") {
+                    window.location.href = '@Url.Action("ConfirmRegistration", "User")';
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    alert(data.Response);
+                }
+
+
+            }
+
+        });
+    }
+
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    function getsponsordetails(obj) {
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: '/User/GetSponserDetails',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { 'ReferBy': $(obj).val() },
+            success: function (response) {
+                if (response.Result == "Yes") {
+                    $("#divload").css({ 'display': 'none' });
+                    $('#SponsorName').val(response.DisplayName);
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    $("#SponsorId").addClass('errortext');
+                    $('#SponsorName').val('');
+                    $('#SponsorId').val('');
+                    $('#SponsorId').focus();
+                    alert(response.Result);
+                }
+            }
+        })
+    }
+</script>

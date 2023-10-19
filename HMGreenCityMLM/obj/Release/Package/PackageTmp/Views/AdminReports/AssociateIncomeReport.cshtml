@@ -1,0 +1,218 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "AssociateIncomeReport";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AssociateIncomeReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Daily Income</h5>
+                        @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                    </div>
+                    @*<p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                            @TempData["ChangeAsspassword"]
+                        </p>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>To Date</label>
+                           @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Login ID</label>
+                           @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                           @Html.HiddenFor(m => m.ToLoginID)
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Name</label>
+                           @Html.TextBoxFor(m => m.ToName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Status</label>
+                           @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.PaidStatus, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label>IsDownline</label>
+                           @Html.CheckBoxFor(m => m.IsDownline)
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validate();" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>Date</th>
+                                    <th> LoginID</th>
+                                    <th> Name</th>
+                                    <th>Amount</th>
+                                    <th>Income Type</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lsttopupreport != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lsttopupreport)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.TransactionDate</td>
+                                                <td>@Item.ToLoginID</td>
+                                                <td>@Item.ToName</td>
+                                                <td>@Item.Amount</td>
+                                                <td>@Item.IncomeType</td>
+                                                <td>@Item.Status</td>
+
+                                            </tr>
+
+                                            i++;
+
+                                        }
+
+
+                                    }
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+
+                                    <th></th>
+                                    <th></th>
+                                    <th style="text-align:right">Total Amount</th>
+                                    <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+}
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    $(document).ready(function () {
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (d) {
+                if (d != null) {
+                    $(d).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+
+    });
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+    function validate() {
+        if ($("#IsDownline").prop("checked") == true) {
+            if ($("#LoginId").val() == "") {
+                $("#LoginId").addClass();
+                $("#LoginId").focus();
+                $("#LoginId").val('');
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+
+
+
+
+
+        //var loginid = $("#LoginId").val();
+        //if (loginid=="")
+        //{
+        //    $("#ToLoginID").val(null);
+        //}
+        //else
+        //{
+        //    var loginid = $("#ToLoginID").val();
+        //}
+    }
+
+
+
+</script>
+<style>
+    .btn-success {
+        margin-top: 29px;
+        margin-left: 20px;
+    }
+</style>
