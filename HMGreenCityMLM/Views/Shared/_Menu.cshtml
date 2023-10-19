@@ -3,7 +3,7 @@
 <ul class="sidebar-menu">
     <li class="dropdown active">
         <a href="/Admin/AdminDashBoard">
-            <i data-feather="monitor"></i><span>Dashboard</span>
+            <i class="fas fa-desktop"></i><span>Dashboard</span>
         </a>
     </li>
     @if (Model != null)
@@ -16,7 +16,10 @@
             {
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">
-                        <i data-feather="briefcase"></i><span>@item.MenuName</span>
+                        <div class="parent-icon">
+                            <i class="@item.Icon"></i>
+                        </div>
+                        <span>@item.MenuName</span>
                     </a>
                     @if (item.Url == "#")
                     {
