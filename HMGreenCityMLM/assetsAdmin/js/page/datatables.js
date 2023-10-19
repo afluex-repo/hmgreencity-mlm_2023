@@ -52,5 +52,6 @@ $("#tableExport").DataTable({
 });
 $("#example23").DataTable({
     dom: "Bfrtip",
+    "pageLength": 50,
     buttons: ["copy", "csv", "excel", "pdf", "print"],
 });
