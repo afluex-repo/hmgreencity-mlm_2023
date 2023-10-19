@@ -5386,6 +5386,10 @@
     <Content Include="assetsAdmin\img\cards\mastercard.png" />
     <Content Include="assetsAdmin\img\cards\paypal.png" />
     <Content Include="assetsAdmin\img\cards\visa.png" />
+    <Content Include="assetsAdmin\img\congratulation_.png" />
+    <Content Include="assetsAdmin\img\congratulation_hm.png" />
+    <Content Include="assetsAdmin\img\congratulation_o.png" />
+    <Content Include="assetsAdmin\img\Crown.png" />
     <Content Include="assetsAdmin\img\favicon.png" />
     <Content Include="assetsAdmin\img\image-gallery\1.png" />
     <Content Include="assetsAdmin\img\image-gallery\10.png" />
@@ -5446,6 +5450,7 @@
     <Content Include="assetsAdmin\img\products\product-3.png" />
     <Content Include="assetsAdmin\img\products\product-4.png" />
     <Content Include="assetsAdmin\img\products\product-5.png" />
+    <Content Include="assetsAdmin\img\silver.png" />
     <Content Include="assetsAdmin\img\spinner-primary.svg" />
     <Content Include="assetsAdmin\img\spinner-white.svg" />
     <Content Include="assetsAdmin\img\spinner.svg" />
