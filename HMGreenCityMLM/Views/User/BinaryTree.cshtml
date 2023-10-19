@@ -571,7 +571,7 @@
             <section class="users-edit">
                 <div class="card">
                     <div class="card-content">
-                        <div class="card-body">
+                        @*<div class="card-body">*@
                             <ul class="nav nav-tabs mb-3" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
@@ -804,7 +804,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        @*</div>*@
                     </div>
                 </div>
             </section>
@@ -821,12 +821,17 @@
 
 <input type="hidden" id="firtsMemberID" value="@ViewBag.Fk_UserId" />
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+@*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>*@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script src="../../WebsiteCss/js/jquery.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 
 
@@ -1016,7 +1021,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-
+        debugger;
         $("input").attr("autocomplete", "off");
 
         var cityuse = [];
@@ -1805,7 +1810,7 @@
 
     $(function () {
         $("#btnSearch").click(function () {
-
+            debugger;
             var txtLoginID = $('#txtLoginID').val();
             if (txtLoginID == "") {
                 $('#ToLoginID').val(null);
