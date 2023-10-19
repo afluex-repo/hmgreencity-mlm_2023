@@ -63,8 +63,9 @@
                         <div class="card awardBg">
                             <div class="card-statistic-3">
                                 <div class="card-content d-flex align-items-center">
-                                    <img src="~/assetsAdmin/img/silver.png" />
-                                    <h4 class="card-title pl-3 mb-0" style="color:#024a54">Silver Achiever</h4>
+                                    @*<img src="~/assetsAdmin/img/silver.png" />*@
+                                    <img src="@ViewBag.ImageURL" height="100" width="100" />
+                                    <h4 class="card-title pl-3 mb-0" style="color:#024a54">@ViewBag.AchiverRank</h4>
                                 </div>
                             </div>
                         </div>
