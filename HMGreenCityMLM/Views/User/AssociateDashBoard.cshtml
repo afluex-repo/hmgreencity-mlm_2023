@@ -57,7 +57,6 @@
             <section id="dashboard-analytics">
 
 
-
                 @*===============================================================================*@
 
                 <div class="row ">
@@ -66,8 +65,17 @@
                             <div class="card-statistic-3">
                                 <div class="card-content d-flex align-items-center">
                                     @*<img src="~/assetsAdmin/img/silver.png" />*@
-                                    <img src="@ViewBag.ImageURL" height="100" width="100" />
-                                    <h4 class="card-title pl-3 mb-0" style="color:#024a54">@ViewBag.AchiverRank</h4>
+
+                                    @if (Model.ImageURL == "null" || Model.ImageURL == "" || Model.AchiverRank == "null" || Model.AchiverRank == "")
+                                    {
+                                        <img src="~/images/hmlogo.png" height="100" width="100" />
+                                        <h4 class="card-title pl-3 mb-0" style="color:#024a54">Welcome to HM GREEN CITY</h4>
+                                    }
+                                    else
+                                    {
+                                        <img src="@ViewBag.ImageURL" height="100" width="100" />
+                                        <h4 class="card-title pl-3 mb-0" style="color:#024a54">@ViewBag.AchiverRank</h4>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -189,7 +197,7 @@
                             <div class="input-group mb-3">
                                 <input type="text" onclick="copyRight()" class="form-control text-white" style="background:#000; cursor:pointer;" value="http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right" id="copyClipboardRight" readonly>
                                 <div class="input-group-append">
-                                    <button class="btn btn-light" id="copyButton" onclick="copyRight()"><i class="far fa-copy text-dark"></i></button>
+                                    <button class="btn btn-light" id="copyButtonRight" onclick="copyRight()"><i class="far fa-copy text-dark"></i></button>
                                 </div>
                             </div>
                             <div id="copied-successRight" class="copied">
@@ -372,6 +380,7 @@
 
     //copy js
     function copy() {
+        jQuery.noConflict();
         let copyText = document.getElementById("copyClipboard");
         let copySuccess = document.getElementById("copied-success");
         copyText.select();
@@ -382,6 +391,7 @@
         setTimeout(function () { copySuccess.style.opacity = "0" }, 5000);
     }
     function copyRight() {
+        jQuery.noConflict();
         let copyTextRight = document.getElementById("copyClipboardRight");
         let copySuccessRight = document.getElementById("copied-successRight");
         copyTextRight.select();
@@ -392,6 +402,7 @@
         setTimeout(function () { copySuccessRight.style.opacity = "0" }, 5000);
     }
 </script>
+
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -461,19 +472,31 @@
 
 </style>
 
-<div class="modal fade" id="congratulation" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <img src="@ViewBag.ImageURL" />
-                <h4>@ViewBag.AchiverRank</h4>
+    @if (Model.ImageURL == "null" || Model.ImageURL == "" || Model.AchiverRank == "null" || Model.AchiverRank == "")
+    {
+        <script>
+       $(document).ready(function () {
+        $("#congratulation").modal('hide');
+    });
+
+        </script>
+    }
+    else
+    {
+        <div class="modal fade" id="congratulation" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="@ViewBag.ImageURL" />
+                        <h4>@ViewBag.AchiverRank</h4>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    }
