@@ -1,0 +1,208 @@
+﻿@model HMGreenCityMLM.Models.Master
+
+@{
+    ViewBag.Title = "BlockMaster";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("BlockMaster", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <span style="color: red">
+        @TempData["BlockMaster"]
+    </span>
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Block Master </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Site Name <span style="color: red">*</span></label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Sector Name <span style="color: red">*</span></label>
+                                                    <div class="col-sm-8">
+                                                       @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control" })
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Sector Name <span style="color: red">*</span></label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.BlockName, new { @class = "form-control", @Placeholder = "Block Name" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-9">
+
+                                                    @if (Model.BlockID == null)
+                                                    {
+                                                        <input type="submit" id="btnSave" class="btn btn-success" name="btnSave" value="Save" onclick="return validateform();" />
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.HiddenFor(m => m.BlockID, new { @Value = @Model.BlockID })
+                                                        <input type="submit" id="btnUpdate" class="btn btn-success" name="btnUpdate" value="Update" onclick="return validateform();" />
+                                                    }
+
+                                                    <a class="btn btn-primary" href="/Master/BlockList">Back To List</a>
+
+                                                    <span style="color: red">
+                                                        @TempData["BlockMaster"]
+                                                    </span>
+
+
+                                                </div>
+                                            </div>
+                                        <!-- /.panel-body -->
+                                    </div>
+                                    <!-- /.panel -->
+                                    <!-- /.panel -->
+                                </div>
+
+
+
+
+                            </div>
+
+                        </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+<script>
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#SiteID').val() == 0) {
+            $("#SiteID").addClass('errortext');
+            $('#SiteID').focus();
+            return false;
+        }
+        if ($('#SectorID').val() == 0) {
+            $("#SectorID").addClass('errortext');
+            $('#SectorID').focus();
+            return false;
+        }
+        if ($('#BlockName').val() == '') {
+            $("#BlockName").addClass('errortext');
+            $('#BlockName').focus();
+            return false;
+        }
+        return true;
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+    function onSiteChange() {
+        $("#divload").css({ 'display': '' });
+        var value = $('#SiteID').val();
+        var values = $('#SectorID').val();
+        var tr = [];
+        $.ajax({
+            url: "/Master/GetSiteDetails",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                var j = 1;
+                if (data.Result == "yes") {
+                    $("#SectorID").html(""); // clear before appending new list
+                    $("#SectorID").empty();
+                    $("#SectorID").append(
+                          $('<option></option>').val(0).html('Select Sector'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                }
+
+
+            }
+
+        });
+
+    }
+
+</script>
+
+
+

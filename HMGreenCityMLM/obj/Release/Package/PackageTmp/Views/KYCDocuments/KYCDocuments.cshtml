@@ -1,0 +1,87 @@
+﻿@model HMGreenCityMLM.Models.KYCDocuments
+
+@{
+    ViewBag.Title = "KYCDocuments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("KYCDocuments", "KYCDocuments", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    //==================================================================================================================
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Upload KYC</h6>
+                            <span style="color: red">
+                                @TempData["DocumentUpload"]
+                            </span>
+                            @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                        </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Adhar Number <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.AdharNumber, new { @class = "form-control", @required = "required" })
+                                @Html.DisplayFor(m => m.AdharStatus, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.AdharNumber)
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Pan Number <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @required = "required" })
+                                @Html.DisplayFor(m => m.PanStatus, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.PanNumber)
+                                @*<input type ="text" id="txtLastName" value="@item1.LastName" disabled="disabled" class="form-control" />*@
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Document Number <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.DocumentNumber, new { @class = "form-control", @required = "required" })
+                                @Html.DisplayFor(m => m.DocumentStatus, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.DocumentNumber)
+                                @*<input type ="text" id="txtMobile"  value="@item1.Mobile" disabled="disabled" class="form-control" />*@
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Adhar Image <span style="color:red">*</span></label>
+                                <input type="file" name="postedFile" required="required" />
+                                <br />
+                                <img src="@Url.Content(Model.AdharImage)" height="120" width="180" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Pan Image <span style="color:red">*</span></label>
+                                <input type="file" name="postedFile" required="required" />
+                                <br />
+                                <img src="@Url.Content(Model.PanImage)" height="120" width="180" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Document Image <span style="color:red">*</span></label>
+                                <input type="file" name="postedFile" required="required" />
+                                <br />
+                                <img src="@Url.Content(Model.DocumentImage)" height="120" width="180" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="submit" id="btnUpdate" class="btn btn-success" name="btnUpdate" value="Update" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    //==================================================================================================================
+    
+}
+
