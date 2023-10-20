@@ -24,23 +24,25 @@
         background: linear-gradient(to right, #2e1437, #2e1437, #2e1437) !important;
         color: #fff;
     }
-    
-    /*.table:not(.table-sm) thead th {
-    border-bottom: none;
-    background-color: #a61a1a;
-    color: #666;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}*/
-
-
-</style>
-
-
-<style>
     .awardBg{
         background: rgb(76,167,186);
         background: linear-gradient(90deg, rgba(76,167,186,0) 0%, rgba(76,167,186,1) 100%);
+    }
+     .copied{
+            font-family: 'Montserrat', sans-serif;
+            width: 80px;
+            opacity: 0;
+            position: absolute;
+            top: 10%;
+            right: 7%;
+            /* margin: auto; */
+            font-weight: 600;
+            color: #000;
+            padding: 7px 12px;
+            background-color: #fff;
+            border-radius: 5px;
+            transition: .4s opacity;
+            z-index:100;
     }
 </style>
 
@@ -55,7 +57,6 @@
             <section id="dashboard-analytics">
 
 
-
                 @*===============================================================================*@
 
                 <div class="row ">
@@ -64,8 +65,17 @@
                             <div class="card-statistic-3">
                                 <div class="card-content d-flex align-items-center">
                                     @*<img src="~/assetsAdmin/img/silver.png" />*@
-                                    <img src="@ViewBag.ImageURL" height="100" width="100" />
-                                    <h4 class="card-title pl-3 mb-0" style="color:#024a54">@ViewBag.AchiverRank</h4>
+
+                                    @if (Model.ImageURL == "null" || Model.ImageURL == "" || Model.AchiverRank == "null" || Model.AchiverRank == "")
+                                    {
+                                        <img src="~/images/hmlogo.png" height="100" width="100" />
+                                        <h4 class="card-title pl-3 mb-0" style="color:#024a54">Welcome to HM GREEN CITY</h4>
+                                    }
+                                    else
+                                    {
+                                        <img src="@ViewBag.ImageURL" height="100" width="100" />
+                                        <h4 class="card-title pl-3 mb-0" style="color:#024a54">@ViewBag.AchiverRank</h4>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -166,17 +176,33 @@
                     </div>
                 </div>
 
-                @*====================================================================================*@
-
 
 
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-dark hrefcol">
-                            <p>http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Left </p>
+                    <div class="col-md-6">
+                        <div class="form-group position-relative">
+                            <div class="input-group mb-3">
+                                <input type="text" onclick="copy()" class="form-control text-white" style="background:#000; cursor:pointer;" value="http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Left" id="copyClipboard" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-light" id="copyButton" onclick="copy()"><i class="far fa-copy text-dark"></i></button>
+                                </div>
+                            </div>
+                            <div id="copied-success" class="copied">
+                                <span class="text-success">Copied</span>
+                            </div>
                         </div>
-                        <div class="alert alert-dark hrefcol">
-                            <p>http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group position-relative">
+                            <div class="input-group mb-3">
+                                <input type="text" onclick="copyRight()" class="form-control text-white" style="background:#000; cursor:pointer;" value="http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right" id="copyClipboardRight" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-light" id="copyButtonRight" onclick="copyRight()"><i class="far fa-copy text-dark"></i></button>
+                                </div>
+                            </div>
+                            <div id="copied-successRight" class="copied">
+                                <span class="text-success">Copied</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -296,16 +322,12 @@
                                                 <td>@ViewBag.TotalBusinessLeft</td>
                                                 <td>@ViewBag.PaidBusinessLeft</td>
                                                 <td>@ViewBag.CarryLeft</td>
-
-
                                             </tr>
                                             <tr class="text-left">
                                                 <td>Right</td>
                                                 <td>@ViewBag.TotalBusinessRight</td>
                                                 <td>@ViewBag.PaidBusinessRight</td>
                                                 <td>@ViewBag.CarryRight</td>
-
-
                                             </tr>
 
                                         </tbody>
@@ -325,23 +347,15 @@
                                     <table class="table mb-0" id="example23">
                                         <thead class="thead-dark">
                                             <tr>
-
                                                 <th>Direct Business</th>
                                                 <th>Team Business</th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="text-left">
-
                                                 <td>@ViewBag.DirectBusiness</td>
                                                 <td>@ViewBag.TeamBusiness</td>
-
-
-
                                             </tr>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -349,9 +363,8 @@
                         </div>
                     </div>
                 </div>
-
             </section>
-            <!-- Dashboard Analytics end -->
+            
         </div>
     </div>
 </div>
@@ -363,7 +376,33 @@
         $("#myModal1").modal('hide');
         $("#congratulation").modal('show');
     });
+
+
+    //copy js
+    function copy() {
+        jQuery.noConflict();
+        let copyText = document.getElementById("copyClipboard");
+        let copySuccess = document.getElementById("copied-success");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+
+        copySuccess.style.opacity = "1";
+        setTimeout(function () { copySuccess.style.opacity = "0" }, 5000);
+    }
+    function copyRight() {
+        jQuery.noConflict();
+        let copyTextRight = document.getElementById("copyClipboardRight");
+        let copySuccessRight = document.getElementById("copied-successRight");
+        copyTextRight.select();
+        copyTextRight.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyTextRight.value);
+
+        copySuccessRight.style.opacity = "1";
+        setTimeout(function () { copySuccessRight.style.opacity = "0" }, 5000);
+    }
 </script>
+
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -421,22 +460,43 @@
         width:104px;
         position: absolute;
         left: 38%;
-        bottom: 10%;
+        bottom: 16%;
     }
+        #congratulation .modal-content .modal-body h4 {
+            position: absolute;
+            left: 39%;
+            bottom: 6%;
+            color: #000;
+            font-family: ui-serif;
+        }
+
 </style>
 
-<div class="modal fade" id="congratulation" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <img src="~/assetsAdmin/img/Crown.png" class="position-absolute top-50 start-100 translate-middle" />
+    @if (Model.ImageURL == "null" || Model.ImageURL == "" || Model.AchiverRank == "null" || Model.AchiverRank == "")
+    {
+        <script>
+       $(document).ready(function () {
+        $("#congratulation").modal('hide');
+    });
+
+        </script>
+    }
+    else
+    {
+        <div class="modal fade" id="congratulation" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="@ViewBag.ImageURL" />
+                        <h4>@ViewBag.AchiverRank</h4>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    }

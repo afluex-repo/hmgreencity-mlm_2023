@@ -1,0 +1,189 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "DownLineList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Downline", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+  
+    
+
+    //==================================================================================================================
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Downline List</h6>
+                            <p style="color: red">
+                                @TempData["msg"]
+                            </p>
+                            @*<button class="btn btn-info"><a href="/Master/ProductMaster" class="text-white">Add New</a></button>*@
+                        </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                    LoginId
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @required = "required" })
+                                    @Html.HiddenFor(m => m.ToLoginID)
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    From Date
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    To Date
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Date" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    Leg
+                                    @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.ddlleg, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    Status
+                                    @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <br />
+                                    <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails" />
+                                </div>
+                         
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Login Id</th>
+                                        @*<th>Password</th>*@
+                                        <th>Name</th>
+                                        <th>Leg</th>
+                                        <th>Joining Date</th>
+                                        <th>Package</th>
+                                        <th>Activation Date</th>
+                                        <th>Mobile No</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstassociate != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstassociate)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+
+                                                    <td>@Item.LoginId</td>
+                                                    @*<td>@Item.Password</td>*@
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.Leg</td>
+                                                    <td>@Item.JoiningDate</td>
+                                                    <td>@Item.Package</td>
+                                                    <td>@Item.PermanentDate</td>
+                                                    <td>@Item.Mobile</td>
+
+                                                    <td>@Item.Status</td>
+
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        }
+                                    }
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    //==================================================================================================================
+
+
+    
+
+
+}
+
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    $(document).ready(function () {
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+</script>

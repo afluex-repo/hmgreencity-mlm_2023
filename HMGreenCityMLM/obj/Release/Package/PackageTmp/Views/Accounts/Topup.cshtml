@@ -1,0 +1,634 @@
+﻿@model HMGreenCityMLM.Models.Wallet
+@{
+    ViewBag.Title = "Topup";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm("TopUpByAdmin", "Accounts", FormMethod.Post, new { @id = "form1" }))
+{
+    <section>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Top Up</h6>
+                            <p style="color: red;display: block; margin-bottom:0px;">
+                               @TempData["Topup"] 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label class="d-block">Topup Type <span style="color: red">*</span></label>
+                                <input type="radio" name="rdbtype" onclick="return showdetails('NewBusiness')" value="NewBusiness" /> New Business <br />
+                                <input type="radio" name="rdbtype" onclick="return showdetails('OtherBusiness')" value="OtherBusiness" /> Other Business
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="d-block">Reward<span style="color: red">*</span></label>
+                                <input type="radio" name="rdbtypename" onclick="return showdetailsreward('IsInclude')" value="IsInclude" /> Is Include<br />
+                                <input type="radio" name="rdbtypename" onclick="return showdetailsreward('NotInclude')" value="NotInclude" /> Not Include
+                                @Html.HiddenFor(m => m.Reward)
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Login Id <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);" })
+                                @Html.HiddenFor(m => m.LoginId)
+                                <br />
+                                <span id="txtname" style="color: black"></span>
+                            </div>
+                            <div class="form-group col-md-3" id="divpackage" style="display:none">
+                                <label>Package <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "FillAmount();" })
+                            </div>
+                            <div class="form-group col-md-3" id="divisite">
+                                <label>Site <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.Fk_SiteId, new SelectList(ViewBag.ddlsite, "Value", "Text"), new { @class = "form-control", @onchange = "getsectorname();" })
+                            </div>
+                            <div class="form-group col-md-3" id="divsector">
+                                <label>Sector <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.FK_SectorId, new SelectList(ViewBag.ddlsector, "Value", "Text"), new { @class = "form-control", @onchange = "getblockname();" })
+                            </div>
+                            <div class="form-group col-md-3" id="divblock">
+                                <label>Block</label>
+                                @Html.DropDownListFor(m => m.Fk_BlockId, new SelectList(ViewBag.ddlblock, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-3" id="divplot">
+                                <label>Plot Number <span style="color: red">*</span></label>
+                               @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus();" })
+
+                            <span style="color:red;" id="PlotStatus123"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Amount <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Topup Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return getAmountinWords();" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Topup Date <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @Placeholder = "TopUp Date", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>In Words<span style="color: white">*</span></label>
+                                @Html.TextBoxFor(m => m.word, new { @class = "form-control", @style = "color:black;", @placeholder = "Amount in words", @disabled = "true" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Receipt No <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Receipt No", @onchange = "return validateReceipt();" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Description</label>
+                                @Html.HiddenFor(m => m.TopupType)
+                                @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @Placeholder = "Description" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Payment Mode <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
+                            </div>
+                            <div class="form-group col-md-3" id="bankname" style="display: none">
+                                <label>Bank Name</label>
+                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                            </div>
+                            <div class="form-group col-md-3" id="chequeno" style="display: none">
+                                <label>Transaction No</label>
+                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
+                            </div>
+                            <div class="form-group col-md-3" id="chequdate" style="display: none">
+                                <label>Transaction Date</label>
+                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-3" id="bankbranch" style="display: none">
+                                <label>Branch</label>
+                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="d-block">&nbsp;</label>
+                                <input class="btn btn-success mt-2" onclick="return validateform()" type="submit" value="Top Up" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+@*<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
+
+<script>
+    $(document).ready(function () {
+
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminProfile/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+                    $('#ToLoginID').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#LoginId').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+        $('#TopupType').val('RealEstate');
+    });
+
+
+
+    $('#TopUpDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+    function setAmount() {
+        var amoaunt = Number($('#Amount1').val());
+        $('#Amount').val(amoaunt);
+    }
+
+
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function getpaymentdetails() {
+        var paymentmode = ($("#PaymentMode option:selected").text());
+        if (paymentmode != "Cash") {
+            bankname.style.display = "block";
+            chequeno.style.display = "block";
+            chequdate.style.display = "block";
+            bankbranch.style.display = "block";
+        }
+        else {
+            bankname.style.display = "none";
+            chequeno.style.display = "none";
+            chequdate.style.display = "none";
+            bankbranch.style.display = "none";
+        }
+    }
+
+
+    function getAmountinWords() {
+        var Amount = $('#Amount').val();
+        $.ajax({
+            url: "/Accounts/AmountinWords",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Amount: Amount },
+            success: function (data) {
+                debugger;
+                $('#word').val(data.word);
+            }
+
+        });
+    }
+
+    function FillAmount() {
+        //$("#Fk_CityId").empty();
+        var Productid = "";
+
+        Productid = $('#Package').val();
+        if (Productid == "1") {
+
+
+            $("#Amount").val('');
+            $("#Amount").attr("disabled", false);
+        }
+        else {
+
+            $("#Amount").attr("disabled", "disabled");
+        }
+
+        $.ajax({
+            url: "/Accounts/FillAmount",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Productid: Productid },
+            success: function (data) {
+                debugger;
+                $('#Amount').val(data.Amount);
+            }
+        });
+    }
+    function validateform() {
+        debugger;
+        $(".errortext").removeClass("errortext");
+       
+        var status = $("input[name='rdbtype']:checked").val();
+
+        if (status == "NewBusiness") {
+            
+        }
+        else if(status == "OtherBusiness")
+        {
+
+        }
+        else {
+            alert("Please Select TopUp Type");
+            return false;
+        }
+
+        var rewardstatus = $("input[name='rdbtypename']:checked").val();
+        if (rewardstatus == "IsInclude") {
+
+        }
+        else if (rewardstatus == "NotInclude") {
+
+        }
+        else {
+            alert("Please Select Reward");
+            return false;
+        }
+
+
+        //if ($('#rdbtype').val() == '') {
+        //    $("#rdbtype").addClass('errortext');
+        //    $('#rdbtype').focus();
+        //    return false;
+        //}
+        if ($('#ToLoginID').val() == '') {
+            $("#ToLoginID").addClass('errortext');
+            $('#ToLoginID').focus();
+            return false;
+        }
+        //if ($('#TopupType').val() == "RealEstate") {
+        if ($('#Fk_SiteId').val() == '0') {
+            $("#Fk_SiteId").addClass('errortext');
+            $('#Fk_SiteId').focus();
+            return false;
+        }
+        if ($('#FK_SectorId').val() == '0') {
+            $("#FK_SectorId").addClass('errortext');
+            $('#FK_SectorId').focus();
+            return false;
+        }
+        if ($('#Fk_SiteId').val() == '33') {
+            if ($('#Fk_BlockId').val() == '0') {
+                $("#Fk_BlockId").addClass('errortext');
+                $('#Fk_BlockId').focus();
+                return false;
+            }
+        }
+        if ($('#PlotNumber').val() == '') {
+            $("#PlotNumber").addClass('errortext');
+            $('#PlotNumber').focus();
+            return false;
+        }
+        //else {
+        //    if ($('#Package').val() == '0') {
+        //        $("#Package").addClass('errortext');
+        //        $('#Package').focus();
+        //        return false;
+        //    }
+        //}
+
+
+        if ($('#Amount').val() == '') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            return false;
+        }
+        if ($('#TopUpDate').val() == '') {
+            $("#TopUpDate").addClass('errortext');
+            $('#TopUpDate').focus();
+            return false;
+        }
+
+        if ($('#ReceiptNo').val() == '') {
+            $("#ReceiptNo").addClass('errortext');
+            $('#ReceiptNo').focus();
+            return false;
+        }
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            return false;
+        }
+
+        return true;
+
+    }
+    function getmembername() {
+        debugger;
+        var LoginId = $('#LoginId').val();
+        $.ajax({
+            url: '/Accounts/GetMemberNameForTopUp',
+            type: "GET",
+            dataType: "JSON",
+            data: { LoginId: LoginId },
+            success: function (data) {
+                debugger;
+                if (data.Result == "Yes") {
+                    $('#txtname').html(data.DisplayName);
+
+                    //divname.style.display = "block";
+                } else {
+                    if (data.DisplayName != null) {
+                        alert(data.DisplayName);
+                        $("#LoginId").addClass('errortext');
+                        $('#txtname').html("");
+                        $('#LoginId').val("");
+                        $('#LoginId').focus();
+                        return false;
+                    }
+                    alert("Invalid Login ID");
+                    $("#LoginId").addClass('errortext');
+                    $('#txtname').html("");
+                    $('#LoginId').val("");
+                    $('#LoginId').focus();
+                }
+            }
+        });
+    }
+    function showdetails(type) {
+        if (type == "Product") {
+            $('#divisite').hide();
+            $('#divblock').hide();
+            $('#divsector').hide();
+            $('#divplot').hide();
+            $('#divpackage').show();
+            $('#TopupType').val('Product');
+
+        }
+        else if (type == "NewBusiness") {
+            //$('#divisite').hide();
+            //$('#divblock').hide();
+            //$('#divsector').hide();
+            //$('#divplot').hide();
+            //$('#divpackage').show();
+            $('#TopupType').val('NewBusiness');
+
+        }
+        else if (type == "OtherBusiness") {
+            //$('#divisite').hide();
+            //$('#divblock').hide();
+            //$('#divsector').hide();
+            //$('#divplot').hide();
+            //$('#divpackage').show();
+            $('#TopupType').val('OtherBusiness');
+        }
+        else {
+            $('#divisite').show();
+            $('#divblock').show();
+            $('#divsector').show();
+            $('#divplot').show();
+            $('#divpackage').hide();
+            $('#TopupType').val('RealEstate');
+        }
+
+    }
+    function showdetailsreward(type) {
+        if (type == "IsInclude") {
+            //$('#divisite').hide();
+            //$('#divblock').hide();
+            //$('#divsector').hide();
+            //$('#divplot').hide();
+            //$('#divpackage').show();
+            $('#Reward').val('IsInclude');
+
+        }
+        else if (type == "NotInclude") {
+            //$('#divisite').hide();
+            //$('#divblock').hide();
+            //$('#divsector').hide();
+            //$('#divplot').hide();
+            //$('#divpackage').show();
+            $('#Reward').val('NotInclude');
+        }
+        else {
+            $('#Reward').val('NotInclude');
+        }
+
+    }
+    function validateReceipt() {
+        //$("#Fk_CityId").empty();
+        var ReceiptNo = "";
+
+        ReceiptNo = $('#ReceiptNo').val();
+
+        $.ajax({
+            url: "/Accounts/ValidateReceipt",
+            Type: "Get",
+            DataType: "JSON",
+            data: { ReceiptNo: ReceiptNo },
+            success: function (data) {
+                if (data.Result == "1") {
+                    alert('Receipt No Already Exists')
+                    $('#ReceiptNo').val("");
+                }
+            }
+
+        });
+    }
+
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    //function getsectorname() {
+    //    $("#divload").css({ 'display': '' });
+    //    $.ajax({
+    //        url: '/Accounts/GetSectorName',
+    //        type: "GET",
+    //        dataType: "JSON",
+    //        data: { Fk_SiteId: $('#Fk_SiteId').val() },
+    //        success: function (data) {
+
+    //            $("#FK_SectorId").html(""); // clear before appending new list
+    //            $("#FK_SectorId").empty();
+    //            $("#FK_SectorId").append(
+    //                  $('<option></option>').val(0).html('Select Sector'));
+    //            $.each(data.ddlSector, function (index, BlockCount) {
+    //                $("#FK_SectorId").append(
+    //                      $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+    //            });
+    //        }
+
+    //    });
+    //    $("#divload").css({ 'display': 'none' });
+    //}
+    //function getblockname() {
+    //    $("#divload").css({ 'display': '' });
+    //    $.ajax({
+    //        url: '/Accounts/GetBlockName',
+    //        type: "GET",
+    //        dataType: "JSON",
+    //        data: { Fk_SiteId: $('#Fk_SiteId').val(), FK_SectorId: $('#FK_SectorId').val() },
+    //        success: function (data) {
+
+    //            $("#Fk_BlockId").html(""); // clear before appending new list
+    //            $("#Fk_BlockId").empty();
+    //            $("#Fk_BlockId").append(
+    //                  $('<option></option>').val(0).html('Select Block'));
+    //            $.each(data.ddlblock, function (index, BlockCount) {
+    //                $("#Fk_BlockId").append(
+    //                      $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+    //            });
+    //        }
+
+    //    });
+    //    $("#divload").css({ 'display': 'none' });
+
+    //}
+
+    function CheckPlotStatus() {
+        debugger
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#Fk_SiteId').val();
+        var sectorID = $('#FK_SectorId').val();
+        var block = $('#Fk_BlockId').val();
+        var plotno = $('#PlotNumber').val();
+
+        $.ajax({
+            url: '/Master/CheckPlot', type: 'get', dataType: 'json',
+            data: { 'SiteID': siteID, 'SectorID': sectorID, 'BlockID': block, 'PlotNumber': plotno },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#PlotNumber").removeClass('errortext');
+                    $("#PlotStatus123").text(data.PlotStatus);
+                }
+                else if (data.Result == "no") {
+                    alert('This Plot Number is not available !');
+                    $("#PlotNumber").addClass('errortext');
+                    $('#PlotNumber').focus();
+                    $("#PlotNumber").val('');
+                }
+                else {
+                    alert('Plot not available !');
+                    $("#PlotNumber").addClass('errortext');
+                    $("#PlotNumber").val('');
+                }
+            }
+        });
+    }
+
+</script>
+
+  @*,SiteID),
+,SectorID),
+,BlockID),*@
+
+
+<script>
+
+    //function onSiteChange() {
+    
+    function getsectorname() {
+        debugger;
+        var value = $('#Fk_SiteId').val();
+        var values = $('#FK_SectorId').val();
+        var tr = [];                         
+        $.ajax({
+            url: "/Master/SelectSectorFromCrm",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                var j = 1;
+                if (data.Result == "yes") {
+                    $('#Rate').val(data.Rate);
+                    $("#FK_SectorId").html(""); // clear before appending new list
+                    $("#FK_SectorId").empty();
+                    $("#FK_SectorId").append(
+                          $('<option></option>').val(0).html('Select Phase'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#FK_SectorId").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+
+                    });
+
+                }
+                else {
+                    $("#SectorID").empty();
+                    $('#Rate').val('');
+                }
+
+
+            }
+
+        });
+
+    }
+
+    
+
+    //function onSectorChange() {
+    function getblockname() {
+        debugger;
+        var siteID = $('#Fk_SiteId').val();
+        var sectorID = $('#FK_SectorId').val();
+        $.ajax({
+            url: '/Master/GetBlockListFromCrm', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+
+                $("#Fk_BlockId").html(""); // clear before appending new list
+                $("#Fk_BlockId").empty();
+                $("#Fk_BlockId").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#Fk_BlockId").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+</script>

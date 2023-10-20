@@ -1,0 +1,174 @@
+﻿@model HMGreenCityMLM.Models.Profile
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <br />
+    </div>
+</div>
+
+<!-- /.row -->
+@using (Html.BeginForm("ViewProfile", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    //==================================================================================================================
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Edit Profile</h6>
+                            <span style="color: red">
+                                @TempData["UpdateProfile"]
+                            </span>
+                            @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                        </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label>First Name <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Last Name</label>
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Mobile <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                @Html.ValidationMessageFor(m => m.Mobile)
+                            </div>
+                            <div class="form-group col-md-3">
+                                <img src="@Model.ProfilePicture" height="80" width="80" />
+                                <input type="file" name="fileProfilePicture" id="Image" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Sponsor Id</label>
+                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(m => m.SponsorId)
+                                @*<input type ="text"  value="@item1.SponsorId" disabled="disabled" class="form-control" />*@
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Sponsor Name</label>
+                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(m => m.SponsorName)
+                                @*<input type ="text"  value="@item1.SponsorName" disabled="disabled" class="form-control" />*@
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Email Id</label>
+                                @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.EmailId)
+                                @*<input type ="text" id="txtEmail"  value="@item1.EmailId" disabled="disabled" class="form-control" />*@
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Joining Date</label>
+                                @Html.TextBoxFor(m => m.JoiningDate, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(m => m.JoiningDate)
+                                @*<input type ="text"  value="@item1.JoiningDate" disabled="disabled" class="form-control" />*@
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Account Number <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.AccountNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.AccountNumber)
+                                @*<input type ="text" id="txtEmail"  value="@item1.EmailId" disabled="disabled" class="form-control" />*@
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>IFSC <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.IFSC, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.IFSC)
+                                @*<input type ="text"  value="@item1.JoiningDate" disabled="disabled" class="form-control" />*@
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>Bank Name <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.BankName)
+                                @*<input type ="text" id="txtEmail"  value="@item1.EmailId" disabled="disabled" class="form-control" />*@
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Bank Branch <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.BankBranch)
+                                @*<input type ="text"  value="@item1.JoiningDate" disabled="disabled" class="form-control" />*@
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="submit" id="btnUpdate" class="btn btn-success" name="btnUpdate" value="Update" onclick="return editProfile()" />
+                                <input type="button" id="btnEdit" class="btn btn-primary" value="Edit" onclick="editProfile()" style="display:none" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    //==================================================================================================================
+    
+}
+<style>
+    .errortext {
+       border: 2px solid red !important;
+       
+    }
+</style>
+<script>
+    function editProfile() {
+        debugger;
+        $(".errortext").removeClass("errortext");
+        if ($('#FirstName').val() == '') {
+            $("#FirstName").addClass('errortext');
+            $('#FirstName').focus();
+            return false;
+        }
+        if ($('#Mobile').val() == '') {
+            $("#Mobile").addClass('errortext');
+            $('#Mobile').focus();
+            return false;
+        }
+        if ($('#AccountNumber').val() == '') {
+            $("#AccountNumber").addClass('errortext');
+            $('#AccountNumber').focus();
+            return false;
+        }
+        if ($('#IFSC').val() == '') {
+            $("#IFSC").addClass('errortext');
+            $('#IFSC').focus();
+            return false;
+        }
+        if ($('#BankName').val() == '') {
+            $("#BankName").addClass('errortext');
+            $('#BankName').focus();
+            return false;
+        }
+        if ($('#BankBranch').val() == '') {
+            $("#BankBranch").addClass('errortext');
+            $('#BankBranch').focus();
+            return false;
+        }
+        return true;
+    }
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>

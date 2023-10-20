@@ -1,0 +1,104 @@
+﻿@model HMGreenCityMLM.Models.EmployeeRegistrations
+
+@{
+    ViewBag.Title = "EmployeeDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("EmployeeDetails", "EmployeeRegistration", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Employee List</h6>
+                            <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                                @TempData["EmployeeDetails"]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Name</th>
+                                        <th> Login Id</th>
+                                        <th>Password</th>
+                                        <th>Qualififcation</th>
+                                        <th>Contact No</th>
+                                        <th>Email Id</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstemp != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var item in Model.lstemp)
+                                            {
+
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@Html.DisplayFor(m => item.Name)</td>
+
+                                                    <td>@Html.DisplayFor(m => item.LoginId)</td>
+                                                    <td>@Html.DisplayFor(m => item.Password)</td>
+                                                    <td>@Html.DisplayFor(m => item.EducationQualififcation)</td>
+
+                                                    <td>@Html.DisplayFor(m => item.Mobile)</td>
+                                                    <td>@Html.DisplayFor(m => item.Email)</td>
+                                                    <td>
+                                                        <a href="/EmployeeRegistration/EmployeeRegistration?LoginID=@item.LoginId" class="btn btn-info text-dark btn-sm">
+                                                            Edit
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        @if (item.Status == "Inactive")
+                                                        {
+                                                            <a href="/EmployeeRegistration/ActivateEmployee?LoginId=@item.LoginId" class="btn btn-success btn-sm" onclick="return confirm('Sure you want to activate this User ?')">
+                                                                Activate
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="/EmployeeRegistration/DeactivateEmployee?LoginId=@item.LoginId" class="btn btn-danger text-white btn-sm" onclick="return confirm('Sure you want to deactivate this User ?')">
+                                                                Deactivate
+                                                            </a>
+                                                        }
+                                                    </td>
+
+                                                </tr>
+
+
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+

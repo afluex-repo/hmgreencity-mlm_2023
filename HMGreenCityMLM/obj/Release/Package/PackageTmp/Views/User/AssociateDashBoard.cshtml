@@ -1,0 +1,479 @@
+﻿@model HMGreenCityMLM.Models.DashBoard
+@{
+    ViewBag.Title = "AssociateDashBoard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .tab1 {
+        background: linear-gradient(to right, #3b8d99, #3b8d99, #3b8d99) !important;
+        color: #fff;
+    }
+
+    .tab2 {
+        background: linear-gradient(to right, #45a247, #45a247, #45a247) !important;
+        color: #fff;
+    }
+
+    .tab3 {
+        background: linear-gradient(to right, #e93334, #e93334, #e93334) !important;
+        color: #fff;
+    }
+
+    .tab4 {
+        background: linear-gradient(to right, #2e1437, #2e1437, #2e1437) !important;
+        color: #fff;
+    }
+    .awardBg{
+        background: rgb(76,167,186);
+        background: linear-gradient(90deg, rgba(76,167,186,0) 0%, rgba(76,167,186,1) 100%);
+    }
+     .copied{
+            font-family: 'Montserrat', sans-serif;
+            width: 80px;
+            opacity: 0;
+            position: absolute;
+            top: 10%;
+            right: 7%;
+            /* margin: auto; */
+            font-weight: 600;
+            color: #000;
+            padding: 7px 12px;
+            background-color: #fff;
+            border-radius: 5px;
+            transition: .4s opacity;
+            z-index:100;
+    }
+</style>
+
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <!-- Dashboard Analytics Start -->
+            <section id="dashboard-analytics">
+
+
+
+                @*===============================================================================*@
+
+                <div class="row ">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="card awardBg">
+                            <div class="card-statistic-3">
+                                <div class="card-content d-flex align-items-center">
+                                    @*<img src="~/assetsAdmin/img/silver.png" />*@
+                                    <img src="@ViewBag.ImageURL" height="100" width="100" />
+                                    <h4 class="card-title pl-3 mb-0" style="color:#024a54">@ViewBag.AchiverRank</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab1">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalDownline</h4>
+                                    <span class="text-white">Total Downline</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab2">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalDirects</h4>
+                                    <span class="text-white">Total Directs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab3">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalActive</h4>
+                                    <span class="text-white">Total Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab4">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalInActive</h4>
+                                    <span class="text-white">Total InActive</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row ">
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab4">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalPayout</h4>
+                                    <span class="text-white">Total Payout</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab3">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalAdvance</h4>
+                                    <span class="text-white">Total Advance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab2">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalDeduction</h4>
+                                    <span class="text-white">Total Deduction</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab1">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.PayoutWalletBalance</h4>
+                                    <span class="text-white">Payout Balance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group position-relative">
+                            <div class="input-group mb-3">
+                                <input type="text" onclick="copy()" class="form-control text-white" style="background:#000; cursor:pointer;" value="http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Left" id="copyClipboard" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-light" id="copyButton" onclick="copy()"><i class="far fa-copy text-dark"></i></button>
+                                </div>
+                            </div>
+                            <div id="copied-success" class="copied">
+                                <span class="text-success">Copied</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group position-relative">
+                            <div class="input-group mb-3">
+                                <input type="text" onclick="copyRight()" class="form-control text-white" style="background:#000; cursor:pointer;" value="http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right" id="copyClipboardRight" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-light" id="copyButton" onclick="copyRight()"><i class="far fa-copy text-dark"></i></button>
+                                </div>
+                            </div>
+                            <div id="copied-successRight" class="copied">
+                                <span class="text-success">Copied</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Business Details</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover table-bordered" id="tableExport" style="width:100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr No.</th>
+                                                    <th>Business Type</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+
+                                                </tr> 
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstinvestment != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.lstinvestment)
+                                                        {
+                                                            <tr class="text-left">
+                                                                <td>@i</td>
+                                                                <td>@Item.ProductName</td>
+                                                                <td>@Item.Amount</td>
+                                                                <td>@Item.Status</td>
+
+
+                                                            </tr>
+                                                            i++;
+                                                        }
+
+                                                    }
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Notification</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover table-bordered" id="tableExportsss" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No.</th>
+                                                <th>Title</th>
+                                                <th>News</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.NoticeMasterlist != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var Item in Model.NoticeMasterlist)
+                                                    {
+                                                        <tr class="text-left">
+                                                            <td>@i</td>
+                                                            <td>@Item.Title</td>
+                                                            <td>@Item.News</td>
+
+
+                                                        </tr>
+                                                        i++;
+                                                    }
+
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Total Business</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover table-bordered" id="tableExportsss" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Team</th>
+                                                <th>Total</th>
+                                                <th>Paid</th>
+                                                <th>C/F</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="text-left">
+                                                <td>Left</td>
+                                                <td>@ViewBag.TotalBusinessLeft</td>
+                                                <td>@ViewBag.PaidBusinessLeft</td>
+                                                <td>@ViewBag.CarryLeft</td>
+                                            </tr>
+                                            <tr class="text-left">
+                                                <td>Right</td>
+                                                <td>@ViewBag.TotalBusinessRight</td>
+                                                <td>@ViewBag.PaidBusinessRight</td>
+                                                <td>@ViewBag.CarryRight</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12" hidden="hidden">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Current Month Business Details</h4>
+                            </div>
+                            <div class="card-content">
+
+                                <div class="table-responsive">
+                                    <table class="table mb-0" id="example23">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Direct Business</th>
+                                                <th>Team Business</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="text-left">
+                                                <td>@ViewBag.DirectBusiness</td>
+                                                <td>@ViewBag.TeamBusiness</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </div>
+</div>
+
+<script src="~/scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myModal").modal('hide');
+        $("#myModal1").modal('hide');
+        $("#congratulation").modal('show');
+    });
+
+
+    //copy js
+    function copy() {
+        let copyText = document.getElementById("copyClipboard");
+        let copySuccess = document.getElementById("copied-success");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+
+        copySuccess.style.opacity = "1";
+        setTimeout(function () { copySuccess.style.opacity = "0" }, 5000);
+    }
+    function copyRight() {
+        let copyTextRight = document.getElementById("copyClipboardRight");
+        let copySuccessRight = document.getElementById("copied-successRight");
+        copyTextRight.select();
+        copyTextRight.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyTextRight.value);
+
+        copySuccessRight.style.opacity = "1";
+        setTimeout(function () { copySuccessRight.style.opacity = "0" }, 5000);
+    }
+</script>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" style="background-color: #fff;">×</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body" style="background-color: #fff;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="newyear">
+                            <img style="width:100%" src="~/WebsiteCss/KohinoorCity.jpeg" class="img-responsive" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" style="background-color: #fff;">×</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body" style="background-color: #fff;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="newyear">
+                            <img src="~/WebsiteCss/KohinoorCity1.jpeg" style="width:100%" class="img-responsive" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<style>
+    @@media (max-width:767px) {
+        #congratulation .modal-content {
+            height: 396px !important;
+        }
+    }
+    #congratulation .modal-content {
+        background-size: cover;
+        /*background-image: url('../../assetsAdmin/img/congratulation_hm.png');*/
+        /*background-image: url('../../assetsAdmin/img/congratulation_o.png');*/
+        background-image: url('../../assetsAdmin/img/congratulation_.png');
+        height: 500px;
+        position: relative;
+    }
+    #congratulation .modal-content .modal-body img{
+        width:104px;
+        position: absolute;
+        left: 38%;
+        bottom: 16%;
+    }
+        #congratulation .modal-content .modal-body h4 {
+            position: absolute;
+            left: 39%;
+            bottom: 6%;
+            color: #000;
+            font-family: ui-serif;
+        }
+
+</style>
+
+<div class="modal fade" id="congratulation" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="@ViewBag.ImageURL" />
+                <h4>@ViewBag.AchiverRank</h4>
+            </div>
+        </div>
+    </div>
+</div>

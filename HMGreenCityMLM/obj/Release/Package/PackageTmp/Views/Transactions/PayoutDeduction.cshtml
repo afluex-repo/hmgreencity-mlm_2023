@@ -1,0 +1,129 @@
+﻿@model HMGreenCityMLM.Models.Transactions
+
+@{
+    ViewBag.Title = "PayoutDeduction";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<!-- /.row -->
+@using (Html.BeginForm("PayoutWalletDeduction", "Transactions", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    
+    //==================================================================================================================
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Payout Deduction</h6>
+                            <span style="color: red">
+                                @TempData["pwallet"]
+                            </span>
+                            @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                        </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label> Login Id<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.LoginID, new { @id = "txtLoginID", @placeholder = "LoginId", @class = "form-control", @onchange = "getMemberDetails(this);" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Name <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.MemberName, new { @id = "txtMemberName", @class = "form-control", @disabled = "disabled" })
+                                @Html.HiddenFor(m => m.PK_UserID)
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Amount<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);" })
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Transaction Type<span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.TransactionAction, new SelectList(ViewBag.ddlTransactionType, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="submit" id="btnDeductEwallet" class="btn btn-success" name="btnDeductEwallet" value="Update" onclick="return validate()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    //==================================================================================================================
+    
+
+}
+<style>
+    .errortext {
+       border: 2px solid red !important;
+       
+    }
+</style>
+<script>
+    function validate() {
+        $(".errortext").removeClass("errortext");
+        if ($('#txtLoginID').val() == '') {
+            $("#txtLoginID").addClass('errortext');
+            $('#txtLoginID').focus();
+            return false;
+        }
+        if ($('#Amount').val() == '') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            return false;
+        }
+        if ($('#TransactionAction').val() == '0') {
+            $("#TransactionAction").addClass('errortext');
+            $('#TransactionAction').focus();
+            return false;
+        }
+    }
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    function getMemberDetails(obj) {
+
+        $.ajax({
+            url: '/Transactions/GetMemberDetails',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { 'LoginID': $(obj).val() },
+            success: function (response) {
+                if (response.Result == "Yes") {
+
+                    $('#txtMemberName').val(response.DisplayName);
+                }
+                else {
+
+                    $('#txtLoginID').val('');
+                    $('#txtMemberName').val('');
+                    alert(response.Result);
+                }
+            }
+        })
+    }
+</script>
+

@@ -1,0 +1,83 @@
+﻿@model HMGreenCityMLM.Models.Home
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>@ViewBag.Title</title>
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/assetsAdmin/css/app.min.css">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/assetsAdmin/css/style.css">
+    <link rel="stylesheet" href="~/assetsAdmin/css/components.css">
+    <link rel="stylesheet" href="~/assetsAdmin/bundles/jqvmap/dist/jqvmap.min.css">
+    <!-- Custom style CSS -->
+    <link rel="stylesheet" href="~/assetsAdmin/css/custom.css">
+    <link rel='shortcut icon' type='image/x-icon' href='~/assetsAdmin/img/favicon.png' />
+</head>
+
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <section class="section">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                        <div class="card card-primary overflow-hidden">
+                            <div class="card-header" style="background:#3c919d">
+                                <h4 class="text-white">Login</h4>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="mb-2">
+                                    Welcome back, please login to your account.
+                                </h6>
+                             @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "signupForm" }))
+                             {
+                                    <div class="form-group">
+                                        <label for="email">Username</label>
+                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })
+                                        <div class="invalid-feedback">
+                                        
+                                        </div>
+                                        <p class="text-danger">
+                                            @TempData["Login"]
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="d-block">
+                                            <label for="password" class="control-label">Password</label>
+                                        </div>
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @required = "required" })
+                                        <div class="invalid-feedback">
+                                            please fill in your password
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" id="Login" class="btn btn-primary btn-lg btn-block" name="Login" value="Sign In" />
+                                    </div>
+                             }
+                            </div>
+                        </div>
+                        @*<div class="mt-5 text-muted text-center">
+                            Don't have an account? <a href="auth-register.html">Create One</a>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+        <!-- END: Content-->
+        <!-- General JS Scripts -->
+        <script src="~/assetsAdmin/js/app.min.js"></script>
+        <!-- Template JS File -->
+        <script src="~/assetsAdmin/js/scripts.js"></script>
+        <!-- Custom JS File -->
+        <script src="~/assetsAdmin/js/custom.js"></script>
+</body>
+
+</html>

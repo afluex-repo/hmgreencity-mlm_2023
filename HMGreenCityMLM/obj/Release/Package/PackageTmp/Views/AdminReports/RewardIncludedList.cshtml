@@ -1,0 +1,210 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "RewardIncludedList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("RewardIncludedList", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Reward List</h5>
+                        @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                    </div>
+                    @*<p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                            @TempData["ChangeAsspassword"]
+                        </p>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Login Id</label>
+                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control",@placeholder="LoginID" })
+                            @Html.HiddenFor(m => m.ToLoginID)
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>To Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Date" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Reward</label>
+                            <select name="Reward" id="Reward" class="form-control">
+                                <option value="">Select Reward</option>
+                                <option value="1">Include</option>
+                                <option value="0">Not Include</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>IsDownline</label>
+                            @Html.CheckBoxFor(m => m.IsDownline)
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="submit" class="btn btn-info" value="Get Details" name="GetDetails" onclick="return Validate();" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>LoginId</th>
+                                    <th>Name</th>
+                                    <th>Plot Details</th>
+                                    <th>Calculation Date</th>
+                                    <th style="text-align:right">Amount</th>
+                                    <th>Reward</th>
+                                    <th style="text-align:right;display:none">BV</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>Total</b></td>
+                                    <td style="text-align:right"><b style="color:#ff0000;text-align:left">@ViewBag.TotalNetAmount</b></td>
+                                    <td style="text-align:right"> <b style="color:#ff0000;text-align:left;">@ViewBag.TotalBV</b></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstassociate != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstassociate)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.LoginId</td>
+                                                <td>@Item.DisplayName</td>
+                                                <td>@Item.SiteName, @Item.SectorName, @Item.PlotNumber</td>
+                                                <td>@Item.ClosingDate</td>
+                                                <td style="text-align:right">@Item.NetAmount</td>
+                                                <td>@Item.Reward</td>
+                                                <td style="text-align:right;display:none">@Item.LeadershipBonus</td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+    $(document).ready(function () {
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+
+
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+    function Validate() {
+
+        $(".errortext").removeClass("errortext");
+
+        if ($("#IsDownline").prop("checked") == true) {
+            if ($('#LoginId').val() == '') {
+                $("#LoginId").addClass('errortext');
+                $('#LoginId').focus();
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+
+        //var LoginId = $("#LoginId").val();
+        //if (LoginId=="")
+        //{
+        //    $("#ToLoginID").val(null);
+        //}
+        //else
+        //{
+        //    var loginid = $("#ToLoginID").val();
+        //}
+    }
+
+
+    $('#ClosingDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</script>
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>
+
+
