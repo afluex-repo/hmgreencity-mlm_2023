@@ -197,7 +197,7 @@
                             <div class="input-group mb-3">
                                 <input type="text" onclick="copyRight()" class="form-control text-white" style="background:#000; cursor:pointer;" value="http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right" id="copyClipboardRight" readonly>
                                 <div class="input-group-append">
-                                    <button class="btn btn-light" id="copyButton" onclick="copyRight()"><i class="far fa-copy text-dark"></i></button>
+                                    <button class="btn btn-light" id="copyButtonRight" onclick="copyRight()"><i class="far fa-copy text-dark"></i></button>
                                 </div>
                             </div>
                             <div id="copied-successRight" class="copied">
@@ -380,6 +380,7 @@
 
     //copy js
     function copy() {
+        jQuery.noConflict();
         let copyText = document.getElementById("copyClipboard");
         let copySuccess = document.getElementById("copied-success");
         copyText.select();
@@ -390,6 +391,7 @@
         setTimeout(function () { copySuccess.style.opacity = "0" }, 5000);
     }
     function copyRight() {
+        jQuery.noConflict();
         let copyTextRight = document.getElementById("copyClipboardRight");
         let copySuccessRight = document.getElementById("copied-successRight");
         copyTextRight.select();

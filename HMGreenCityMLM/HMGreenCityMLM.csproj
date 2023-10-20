@@ -6280,6 +6280,7 @@
     <Content Include="assetsAdmin\js\data\task-trashed.json" />
     <Content Include="assetsAdmin\js\data\task.json" />
     <None Include="Properties\PublishProfiles\HMGreenCityMLM.pubxml" />
+    <None Include="Properties\PublishProfiles\HMGreenCityMLM_2023.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -6574,7 +6575,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4156</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4156/</IISUrl>
+          <IISUrl>http://localhost:4157/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

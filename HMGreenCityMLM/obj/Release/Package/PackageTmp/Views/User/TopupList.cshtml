@@ -1,0 +1,92 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "TopupList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("PayoutLedger", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+
+
+
+    //==================================================================================================================
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Top Up List</h6>
+                            @*<span style="color: red">
+                                @TempData["Product"]
+                            </span>*@
+                            @*<button class="btn btn-info"><a href="/Master/ProductMaster" class="text-white">Add New</a></button>*@
+                        </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Name</th>
+                                        <th>Site Name</th>
+                                        <th>Sector Name</th>
+                                        <th>Upgradation Date</th>
+                                        <th>Product Name</th>
+                                        <th>Amount</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lsttopupreport != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lsttopupreport)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.SiteName</td>
+                                                    <td>@Item.SectorName</td>
+                                                    <td>@Item.UpgradtionDate</td>
+                                                    <td>@Item.ProductName</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>
+                                                        <a href="/User/PrintTopup?invid=@Item.FK_InvestmentID" target="_blank" class="btn btn-sm btn-primary">Print</a>
+                                                    </td>
+                                                </tr>
+
+                                                i++;
+                                            }
+                                        }
+                                    }
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    //==================================================================================================================
+
+    
+
+}
+<script src="../../AdminPanelCss/assets/vendors/jquery.js"></script>

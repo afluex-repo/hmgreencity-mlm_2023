@@ -1,0 +1,176 @@
+﻿@model HMGreenCityMLM.Models.Transactions
+@{
+    ViewBag.Title = "DistributePayment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("DistiributePayemntToMembers", "Transactions", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    //==================================================================================================================
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0"> Distribute Payment </h6>
+                            <p style="color:red">
+                                @TempData["DistributePayment"]
+                            </p>
+                            @*<button class="btn btn-info"><a href="/Master/ProductMaster" class="text-white">Add New</a></button>*@
+                        </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="col-md-3 mb-3">
+                                <label>Last Closing Date : </label>
+                                @Html.DisplayFor(m => m.LastClosingDate)
+                                <br />
+                                <label>Last Payout No : </label>
+                                @Html.DisplayFor(m => m.PayoutNo)
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label>Closing Date<span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.ClosingDate, new { @class = "form-control", @placeholder = "Closing Date" })
+                                @Html.HiddenFor(m => m.ClosingDateValid)
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <a onclick="return validateform()" class="btn btn-success mt-4">
+                                    Distribute Payment
+                                </a>
+                                @*<input type="submit" class="btn btn-success" value="Export To Excel" name="Export" formtarget="_blank" />*@
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                @*<a onclick="return validateform()" class="btn btn-success">
+                                    Distribute Payment
+                                </a>*@
+                                <input type="submit" class="btn btn-success mt-4" value="Export To Excel" name="Export" formtarget="_blank" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>LoginID</th>
+                                        <th>Name</th>
+                                        <th>Binary Income </th>
+                                        <th>Direct Income</th>
+                                        <th hidden="hidden">Direct Leadership Bonus</th>
+                                        <th>Gross Amount</th>
+                                        <th>TDS Amount</th>
+                                        <th>Processing</th>
+                                        <th>Net Payable Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstassociate != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstassociate)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.LoginID</td>
+                                                    <td>@Item.FirstName</td>
+                                                    <td>@Item.BinaryIncome</td>
+                                                    <td>@Item.DirectIncome</td>
+                                                    <td hidden="hidden">@Item.LeadershipBonus</td>
+                                                    <td>@Item.GrossIncome</td>
+                                                    <td>@Item.TDS</td>
+                                                    <td>@Item.Processing</td>
+                                                    <td>@Item.NetIncome</td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th style="text-align:right;width:185px;">Total Net Payable Amount</th>
+                                        <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    //==================================================================================================================
+}
+<script src="../../WebsiteCss/js/jquery.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
+
+<script src="../..//WebsiteCss/js/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+
+    $('#ClosingDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+
+        var conta = $('#ClosingDate').val();
+        if ($('#ClosingDate').val() == '') {
+            $("#ClosingDate").addClass('errortext');
+            $('#ClosingDate').focus();
+            return false;
+        }
+
+        window.location.href = '@Url.Action("DistributePaymentPassword", "Transactions")?id=' + conta;
+    }
+</script>
+<style>
+    .errortext {
+       border: 2px solid red !important;
+       
+    }
+</style>
