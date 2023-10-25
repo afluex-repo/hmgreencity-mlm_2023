@@ -50,6 +50,10 @@ namespace HMGreenCityMLM.Controllers
                 //ViewBag.ProductTotalBusinessRight = ds.Tables[3].Rows[0]["TotalBusinessRight"].ToString();
                 //ViewBag.ProductCarryLeft = ds.Tables[3].Rows[0]["CarryLeft"].ToString();
                 //ViewBag.ProductCarryRight = ds.Tables[3].Rows[0]["CarryRight"].ToString();
+                
+                ViewBag.UpdaidIncome = ds.Tables[0].Rows[0]["UpdaidIncome"].ToString();
+                ViewBag.SelfBusiness = ds.Tables[0].Rows[0]["TotalTopUp"].ToString();
+                
             }
             DashBoard model = new DashBoard();
             #region Messages
