@@ -578,6 +578,8 @@ namespace HMGreenCityMLM.Controllers
                     {
                         obj.ImageURL = dss.Tables[4].Rows[0]["ImageURL"].ToString();
                         obj.AchiverRank = dss.Tables[4].Rows[0]["AchiverRank"].ToString();
+                        obj.Name = dss.Tables[4].Rows[0]["Name"].ToString();
+                        obj.ProfilePic = dss.Tables[4].Rows[0]["ProfilePic"].ToString();
                     }
 
                     #endregion
