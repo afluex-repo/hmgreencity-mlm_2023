@@ -578,6 +578,8 @@ namespace HMGreenCityMLM.Controllers
                     {
                         obj.ImageURL = dss.Tables[4].Rows[0]["ImageURL"].ToString();
                         obj.AchiverRank = dss.Tables[4].Rows[0]["AchiverRank"].ToString();
+                        obj.Name = dss.Tables[4].Rows[0]["Name"].ToString();
+                        obj.ProfilePic = dss.Tables[4].Rows[0]["ProfilePic"].ToString();
                     }
 
                     #endregion
@@ -699,11 +701,12 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult ViewProfile(ViewProfileAPI data)
         {
-
+            
             ViewProfile obj = new ViewProfile();
             try
             {
 
+                data.LoginId = Session["LoginId"].ToString();
                 DataSet ds = data.GetUserProfile();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
