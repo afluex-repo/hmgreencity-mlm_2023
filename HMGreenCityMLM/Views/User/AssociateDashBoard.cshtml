@@ -34,7 +34,7 @@
             opacity: 0;
             position: absolute;
             top: 10%;
-            right: 7%;
+            right: 13%;
             /* margin: auto; */
             font-weight: 600;
             color: #000;
@@ -177,6 +177,7 @@
                                 <input type="text" onclick="copy()" class="form-control text-white" style="background:#000; cursor:pointer;" value="http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Left" id="copyClipboard" readonly>
                                 <div class="input-group-append">
                                     <button class="btn btn-light" id="copyButton" onclick="copy()"><i class="far fa-copy text-dark"></i></button>
+                                    <button class="btn btn-light" data-toggle="modal" data-target="#basicModal"><i class="fas fa-share-alt text-dark"></i></button>
                                 </div>
                             </div>
                             <div id="copied-success" class="copied">
@@ -198,6 +199,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 <div class="row">
                     <div class="col-12">
@@ -375,18 +377,17 @@
         let copyText = document.getElementById("copyClipboard");
         let copySuccess = document.getElementById("copied-success");
         copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(copyText.value);
+        document.execCommand("copy");
 
         copySuccess.style.opacity = "1";
         setTimeout(function () { copySuccess.style.opacity = "0" }, 5000);
     }
+
     function copyRight() {
         let copyTextRight = document.getElementById("copyClipboardRight");
         let copySuccessRight = document.getElementById("copied-successRight");
         copyTextRight.select();
-        copyTextRight.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(copyTextRight.value);
+        document.execCommand("copy");
 
         copySuccessRight.style.opacity = "1";
         setTimeout(function () { copySuccessRight.style.opacity = "0" }, 5000);
@@ -473,6 +474,36 @@
             <div class="modal-body">
                 <img src="@ViewBag.ImageURL" />
                 <h4>@ViewBag.AchiverRank</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*share link modal*@
+@*<span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right. Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
+<span class="s-icon"><a href="https://api.whatsapp.com/send?text=http:/http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
+<span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
+<span class="s-icon"><a href="https://www.instagram.com/?url=http:/http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
+<span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>*@
+ <!-- basic modal -->
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Share Link On</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="buttons">
+                    <a href="https://api.whatsapp.com/send?text=https://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Right" target="_dev" class="btn btn-icon btn-success"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="btn btn-icon btn-danger"><i class="far fa-envelope"></i></a>
+                    <a href="#" class="btn btn-icon btn-info"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="btn btn-icon btn-warning"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="btn btn-icon btn-primary"><i class="fab fa-facebook-f"></i></a>
+                </div>
             </div>
         </div>
     </div>
