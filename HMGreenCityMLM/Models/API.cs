@@ -563,6 +563,8 @@ namespace HMGreenCityMLM.Models
         public string BankBranch { get; set; }
         public string IFSC { get; set; }
         public string ProfilePicture { get; set; }
+        public string Leg { get; set; }
+        public string MemberStatus { get; set; }
     }
 
     public class UpdateProfileAPI
