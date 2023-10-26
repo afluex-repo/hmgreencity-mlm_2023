@@ -701,11 +701,12 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult ViewProfile(ViewProfileAPI data)
         {
-
+            
             ViewProfile obj = new ViewProfile();
             try
             {
 
+                data.LoginId = Session["LoginId"].ToString();
                 DataSet ds = data.GetUserProfile();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
