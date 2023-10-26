@@ -67,7 +67,7 @@
                                     @if (Model.ImageURL == "null" || Model.ImageURL == "" || Model.AchiverRank == "null" || Model.AchiverRank == "")
                                     {
                                         <img src="~/images/hmlogo.png" height="100" width="100" />
-                                        <h4 class="card-title pl-3 mb-0" style="color:#024a54">Welcome to HM GREEN CITY</h4>
+                                        <h4 class="card-title pl-3 mb-0" style="color:#024a54">Welcome to HM CITY</h4>
                                     }
                                     else
                                     {
@@ -196,6 +196,7 @@
                                 <input type="text" onclick="copy()" class="form-control text-white" style="background:#000; cursor:pointer;" value="http://admin.hmgreencity.com/Home/Registration?Pid=@Session["LoginId"]&lg=Left" id="copyClipboard" readonly>
                                 <div class="input-group-append">
                                     <button class="btn btn-light" id="copyButton" onclick="copy()"><i class="far fa-copy text-dark"></i></button>
+                                    @*<button class="btn btn-light" data-toggle="modal" data-target="#basicModal"><i class="fas fa-share-alt text-dark"></i></button>*@
                                 </div>
                             </div>
                             <div id="copied-success" class="copied">
@@ -379,6 +380,7 @@
         copySuccess.style.opacity = "1";
         setTimeout(function () { copySuccess.style.opacity = "0" }, 5000);
     }
+
     function copyRight() {
         let copyTextRight = document.getElementById("copyClipboardRight");
         let copySuccessRight = document.getElementById("copied-successRight");
