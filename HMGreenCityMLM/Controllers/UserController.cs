@@ -27,7 +27,7 @@ namespace HMGreenCityMLM.Controllers
                 ViewBag.TotalDirects = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 //ViewBag.ProductWalletBalance = ds.Tables[0].Rows[0]["ProductWalletBalance"].ToString();
                 ViewBag.PayoutWalletBalance = ds.Tables[0].Rows[0]["PayoutWalletBalance"].ToString();
-                ViewBag.TotalPayout=ds.Tables[0].Rows[0]["TotalPayout"].ToString();
+                ViewBag.TotalPayout = ds.Tables[0].Rows[0]["TotalPayout"].ToString();
                 ViewBag.TotalDeduction = ds.Tables[0].Rows[0]["TotalDeduction"].ToString();
                 ViewBag.TotalAdvance = ds.Tables[0].Rows[0]["TotalAdvance"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
@@ -50,6 +50,10 @@ namespace HMGreenCityMLM.Controllers
                 //ViewBag.ProductTotalBusinessRight = ds.Tables[3].Rows[0]["TotalBusinessRight"].ToString();
                 //ViewBag.ProductCarryLeft = ds.Tables[3].Rows[0]["CarryLeft"].ToString();
                 //ViewBag.ProductCarryRight = ds.Tables[3].Rows[0]["CarryRight"].ToString();
+                
+                ViewBag.UpdaidIncome = ds.Tables[0].Rows[0]["UpdaidIncome"].ToString();
+                ViewBag.SelfBusiness = ds.Tables[0].Rows[0]["TotalTopUp"].ToString();
+                
             }
             DashBoard model = new DashBoard();
             #region Messages
@@ -87,7 +91,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.ProductName = r["ProductName"].ToString();
                     Obj.Amount = r["Amount"].ToString();
                     Obj.Status = r["Status"].ToString();
-                    
+
                     lstinvestment.Add(Obj);
                 }
                 model.lstinvestment = lstinvestment;
@@ -112,9 +116,13 @@ namespace HMGreenCityMLM.Controllers
             #endregion Investment
 
             #region Achiver Rank
+
+
             DataSet dss = obj.GetAssociateDashboard();
             if (dss != null && dss.Tables[4].Rows.Count > 0)
             {
+                model.ImageURL = dss.Tables[4].Rows[0]["ImageURL"].ToString();
+                model.AchiverRank = dss.Tables[4].Rows[0]["AchiverRank"].ToString();
                 ViewBag.ImageURL = dss.Tables[4].Rows[0]["ImageURL"].ToString();
                 ViewBag.AchiverRank = dss.Tables[4].Rows[0]["AchiverRank"].ToString();
             }
@@ -194,7 +202,7 @@ namespace HMGreenCityMLM.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
-        
+
         public ActionResult SaveMessages(string Message, string MessageBy)
         {
             DashBoard obj = new DashBoard();
@@ -230,7 +238,7 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult BinaryTree()
         {
-            ViewBag.Fk_UserId=Session["Pk_UserId"].ToString();
+            ViewBag.Fk_UserId = Session["Pk_UserId"].ToString();
             return View();
         }
 
@@ -331,7 +339,7 @@ namespace HMGreenCityMLM.Controllers
                         Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
                         Session["PassWord"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
-                      
+
                         Session["MobileNo"] = ds.Tables[0].Rows[0]["MobileNo"].ToString();
                         //try
                         //{
@@ -424,10 +432,10 @@ namespace HMGreenCityMLM.Controllers
                     Obj.ClosingDate = r["CurrentDate"].ToString();
                     Obj.BinaryIncome = r["BinaryIncome"].ToString();
                     Obj.DirectIncome = r["Direct"].ToString();
-                  Obj.LeadershipBonus=  r["DirectLeaderShipBonus"].ToString();
+                    Obj.LeadershipBonus = r["DirectLeaderShipBonus"].ToString();
                     lst1.Add(Obj);
                 }
-                model.lsttopupreport = lst1;  
+                model.lsttopupreport = lst1;
             }
             return View(model);
         }

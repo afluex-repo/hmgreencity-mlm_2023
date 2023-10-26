@@ -1,0 +1,84 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "UnPaidIncomes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Unpaid Incomes</h5>
+                    @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                </div>
+                @*<p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        @TempData["ChangeAsspassword"]
+                    </p>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>Date</th>
+                                <th>From LoginId</th>
+                                <th>From Name</th>
+                                <th>Amount</th>
+                                <th>Income Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstunpaidincomes != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstunpaidincomes)
+                                    {
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td>@Item.Date</td>
+                                            <td>@Item.FromLoginId</td>
+                                            <td>@Item.FromUserName</td>
+
+                                            <td>@Item.Amount</td>
+
+                                            <td>@Item.IncomeType</td>
+
+                                        </tr>
+                                        i++;
+                                    }
+
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
+
+
+
+

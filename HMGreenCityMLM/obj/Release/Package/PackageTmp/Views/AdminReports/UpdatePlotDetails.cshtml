@@ -1,0 +1,569 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "UpdatePlotDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("UpdatePlotDetails", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <br />
+    <div class="app-content content">
+        <div class="loader"></div>
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="mb-0">Update Plot Details</h6>
+                                <p style="color: red;display: block; margin-bottom:0px;">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+                                        <div class="row">
+                                            <div class="col-md-12 table-responsive">
+                                                <div class="row">
+                                                    <div class="col-lg-3 mb-3">
+                                                       <label> Login Id</label>
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                                                        @Html.HiddenFor(m => m.ToLoginID)
+                                                    </div>
+
+                                                    <div class="col-lg-3 mb-3">
+                                                        <label> Name</label>
+                                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-lg-3 mb-3">
+                                                        <label>Site</label>
+                                                        @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.ddlSite, "Value", "Text"), new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>  Status</label>
+                                                        @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlstatus, "Value", "Text"), new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-lg-3 mb-3">
+                                                        <label>  From Date</label>
+                                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-lg-3 mb-3">
+                                                        <label>To Date</label>
+                                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control"})
+                                                    </div>
+
+                                                    <div class="col-lg-3 mb-3">
+                                                        <label>Business Type</label>
+                                                        <select id="BusinessType" name="BusinessType" class="form-control">
+                                                            <option value="">All Business</option>
+                                                            <option value="1">New Business</option>
+                                                            <option value="0">Other Business</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-lg-3 mb-3">
+                                                        <label> IsDownline</label><br />
+                                                        @Html.CheckBoxFor(m => m.IsDownline)
+                                                    </div>
+
+
+                                                    <div class="col-lg-3 mb-3" id="divTeam" style="display:none">
+                                                        <label> Team LoginId<span style="color:red">*</span></label>
+                                                        @Html.TextBoxFor(m => m.TeamLoginId, new { @class = "form-control" })
+                                                        @Html.HiddenFor(m => m.ToTeamLoginId)
+                                                    </div>
+                                                    <div class="col-lg-3 mb-3" id="divLeg" style="display:none">
+                                                        <label>Leg</label>
+                                                        @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.ddlLeg, "Value", "Text"), new { @class = "form-control" })
+                                                    </div>
+
+                                                    <div class="col-lg-3 mb-3">
+                                                        <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" onclick="return validateLogin();" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="dt-responsive table-responsive">
+                                                    <table class="table mb-0" id="example23">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr No.</th>
+                                                                @*<th style="display:none"></th>*@
+                                                                <th>Login Id</th>
+                                                                <th>Name</th>
+                                                                <th>Site Name</th>
+                                                                <th>Sector Name</th>
+                                                                <th>Block Name</th>
+                                                                <th>PlotNo</th>
+                                                                <th>Business Type</th>
+                                                                <th style="min-width:200px;">Site Name</th>
+                                                                <th style="min-width:200px;">Sector Name</th>
+                                                                <th style="min-width:200px;">Block Name</th>
+                                                                <th style="min-width:200px;">Plot Number</th>
+                                                                <th>Action </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if (Model != null)
+                                                            {
+                                                                if (Model.lsttopupreport != null)
+                                                                {
+                                                                    int i = 1;
+                                                                    foreach (var Item in Model.lsttopupreport)
+                                                                    {
+                                                                        <tr class="text-left">
+                                                                            <td>@i</td>
+                                                                            @*<td style="display:none;">@Item.ToLoginID</td>*@
+                                                                            <td>@Item.LoginId</td>
+                                                                            <td>@Item.DisplayName</td>
+                                                                            <td>@Item.SiteName</td>
+                                                                            <td>@Item.SectorName</td>
+                                                                            <td>@Item.BlockName</td>
+                                                                            <td>@Item.PlotNumber</td>
+                                                                            <td>@Item.BusinessType</td>
+
+                                                                            <td style="min-width:200px;">
+                                                                                @Html.DropDownListFor(m => m.Fk_SiteId, new SelectList(ViewBag.ddlSite1, "Value", "Text"), new { @class = "form-control", @id = "Fk_SiteId" + @Item.FK_InvestmentID + "", @onchange = "return onSiteChange(" + @Item.FK_InvestmentID + ");" })
+
+                                                                            </td>
+                                                                            <td style="min-width:200px;">
+                                                                                @Html.DropDownListFor(m => m.SectorID, new SelectList(ViewBag.ddlSector, "Value", "Text"), new { @class = "form-control", @id = "SectorID" + @Item.FK_InvestmentID + "", @onchange = "return onSectorChange(" + @Item.FK_InvestmentID + ");" })
+                                                                            </td>
+                                                                            <td style="min-width:200px;">
+                                                                                @Html.DropDownListFor(m => m.BlockID, new SelectList(ViewBag.ddlBlock, "Value", "Text"), new { @class = "form-control", @id = "BlockID" + @Item.FK_InvestmentID + "" })
+                                                                            </td>
+                                                                            <td style="min-width:200px;">
+
+                                                                                @Html.TextBoxFor(m => m.PlotNumber, new { @class = "form-control", @id = "PlotNumber" + @Item.FK_InvestmentID + "", @Placeholder = "Plot Number", @onchange = "return CheckPlotStatus(" + @Item.FK_InvestmentID + ");" })
+                                                                                <input type="hidden" id="PlotID" />
+                                                                                <span style="color:red;" id="PlotStatus123_@Item.FK_InvestmentID"></span>
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="#" class="btn btn-block btn-primary" onclick="return UpdatePlotDetailsToMLM(@Item.FK_InvestmentID)">Update</a>
+
+                                                                            
+                                                                            </td>
+                                                                        </tr>
+                                                                        i++;
+                                                                    }
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <input type="hidden" id="FK_InvestmentID656" />
+                </section>
+            </div>
+        </div>
+    </div>
+                        <!-- main-panel ends -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Printing Date</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="printingdate" readonly />
+                    <input type="hidden" id="hdfloginnid" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closepopup();">Close</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="printrecipt();">Print</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+
+
+    function UpdatePlotDetailsToMLM(Id) {
+        $.noConflict();
+        debugger;
+
+        var FK_InvestmentID6561111 = $("#FK_InvestmentID656").val(Id);
+        var FK_Invest = $("#FK_InvestmentID656").val();
+        //alert(FK_Invest);
+        var Fk_SiteId = $("#Fk_SiteId" + Id + "").val();
+        //alert(Fk_SiteId);
+        var SectorID = $("#SectorID" + Id + "").val();
+        //alert(SectorID);
+        var BlockID = $("#BlockID" + Id + "").val();
+        //alert(BlockID);
+        var PlotNumber = $("#PlotNumber" + Id + "").val();
+        //alert(PlotNumber);
+        var PlotID = $("#PlotID").val();
+        //alert(PlotID);
+
+        if ($("#Fk_SiteId" + Id + "").val() == "0") {
+            $("#Fk_SiteId" + Id + "").addClass('errortext');
+            $("#Fk_SiteId" + Id + "").focus();
+            return false;
+        }
+        if ($("#SectorID" + Id + "").val() == "0") {
+            $("#SectorID" + Id + "").addClass('errortext');
+            $("#SectorID" + Id + "").focus();
+            return false;
+        }
+        if ($("#BlockID" + Id + "").val() == "0") {
+            $("#BlockID" + Id + "").addClass('errortext');
+            $("#BlockID" + Id + "").focus();
+            return false;
+        }
+        if ($("#PlotNumber" + Id + "").val() == "") {
+            $("#PlotNumber" + Id + "").addClass('errortext');
+            $("#PlotNumber" + Id + "").focus();
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '/AdminReports/UpdatePlotDetailsToMLM', type: 'post', dataType: 'json',
+                data: { PK_InvestmentID: FK_Invest, Fk_SiteId: Fk_SiteId, SectorID: SectorID, BlockID: BlockID, PlotNumber: PlotNumber, PlotID: PlotID },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        debugger;
+                        $(".loader").show();
+                        alert("Record updated successfully !!");
+                         UpdatePlotDetailsSearch();
+                         @*window.location.href = '@Url.Action("UpdatePlotDetails", "AdminReports")';*@
+                    }
+                    else {
+                        alert(data.Result);
+                    }
+                }
+               
+            });
+        }
+    }
+
+    function UpdatePlotDetailsSearch() {
+        $(".divload").show();
+        debugger;
+        var data ={
+        loginid : $("#Loginid").val(),
+        name : $("#Name").val(),
+        siteid : $("#Siteid").val(),
+        status : $("#Status").val(),
+        fromdate : $("#FromDate").val(),
+        todate: $("#ToDate").val(),
+        businesstype: $("#BusinessType").val(),
+        IsDownline: $("#IsDownline").val(),
+        teamloginid: $("#TeamLoginId").val(),
+        leg: $("#Leg").val()
+        }
+        var newdata = JSON.stringify(data);
+        $(".divload").show();
+        $.ajax({
+            url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
+
+            data: JSON.stringify({ dataValue: JSON.stringify(newdata) }),
+            
+            success: function (data) {
+                $(".divload").show();
+                location.reload();
+            }
+        });
+        $(".divload").show();
+    }
+</script>
+
+@*///////////////////////////////////////////////////////////////////////////////////*@
+
+<script>
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        if ($("#IsDownline").is(':checked')) {
+            $("#divLeg").show(); 
+            $("#divTeam").show();
+        }
+        //$('#IsDownline').prop('checked', true);
+        $('#IsDownline').change(function () {
+            if (this.checked) {
+                $("#divLeg").show();
+                $("#divTeam").show();
+                //alert('Show');
+            }
+            else {
+                $("#divLeg").hide();
+                $("#divTeam").hide();
+            }
+        });
+
+
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+        $("input").attr("autocomplete", "off");
+        var cityuse = [];
+
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                debugger;
+
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#LoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $(".loader").css({ 'display': 'none' });
+            }
+        });
+
+
+
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                debugger;
+
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#TeamLoginId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+                            $('#ToTeamLoginId').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $(".loader").css({ 'display': 'none' });
+            }
+        });
+    });
+    $('#printingdate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+
+    });
+    function changeprintdate(PrintingDate, LoginId) {
+        $('#printingdate').val(PrintingDate);
+        $('#hdfloginnid').val(LoginId);
+        $('#myModal').show();
+    }
+    function closepopup() {
+        $('#myModal').hide();
+    }
+    function printrecipt() {
+        $(".errortext").removeClass("errortext");
+        if ($('#printingdate').val() == '') {
+            $("#printingdate").addClass('errortext');
+            $('#printingdate').focus();
+            return false;
+        }
+        var LoginId = $('#hdfloginnid').val();
+        $.ajax({
+            url: '/AdminReports/PrintReciept1',
+            type: "GET",
+            dataType: "JSON",
+            data: { id: LoginId, PrintingDate: $('#printingdate').val() },
+            success: function (data) {
+                debugger;
+                window.location.href = '@Url.Action("PrintReciept", "AdminReports")';
+            }
+        });
+    }
+</script>
+@*///////////////////////////////////////////////////////////////////////////////////*@
+
+
+<script>
+    function onSiteChange(Id) {
+        debugger;
+        //alert(i);
+        var value = $("#Fk_SiteId" + Id + "").val();
+        //alert(value);
+        var value1 = $("#SectorID" + Id + "").val();
+        var tr = [];
+        $.ajax({
+            url: "/Master/SelectSectorFromCrm",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SiteID: value },
+            success: function (data) {
+                var j = 1;
+                if (data.Result == "yes") {
+                    $('#Rate').val(data.Rate);
+                    $("#SectorID" + Id + "").html(""); // clear before appending new list
+                    $("#SectorID" + Id + "").empty();
+                    $("#SectorID" + Id + "").append(
+                    $('<option></option>').val(0).html('Select Phase'));
+                    $.each(data.ddlSector, function (index, Sectorcount) {
+                        $("#SectorID" + Id + "").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    });
+                }
+                else {
+                    $("#SectorID" + Id + "").empty();
+                    $('#Rate').val('');
+                }
+            }
+        });
+    }
+    function onSectorChange(Id) {
+        debugger;
+        var siteID = $("#Fk_SiteId" + Id + "").val();
+        //alert(siteID);
+        var sectorID = $("#SectorID" + Id + "").val();
+        //alert(sectorID);
+        $.ajax({
+            url: '/Master/GetBlockListFromCrmupdatePlot', type: 'post', dataType: 'json',
+            data: { 'SiteID': siteID, 'sectorID': sectorID },
+            success: function (data) {
+
+                $("#BlockID" + Id + "").html(""); // clear before appending new list
+                $("#BlockID" + Id + "").empty();
+                $("#BlockID" + Id + "").append(
+                      $('<option></option>').val(0).html('Select Block'));
+                $.each(data.lstBlock, function (index, BlockCount) {
+                    $("#BlockID" + Id + "").append(
+                          $('<option></option>').val(BlockCount.Value).html(BlockCount.Text));
+                });
+
+            }
+
+        });
+    }
+
+    function CheckPlotStatus(Id) {
+        debugger
+        var Fk_SiteId = $("#Fk_SiteId" + Id + "").val();
+        //alert(Fk_SiteId);
+        var SectorID = $("#SectorID" + Id + "").val();
+        //alert(SectorID);
+        var BlockID = $("#BlockID" + Id + "").val();
+        //alert(BlockID);
+        var PlotNumber = $("#PlotNumber" + Id + "").val();
+        //alert(PlotNumber);
+        var PlotStatus123_ = $("#PlotStatus123_" + Id).text();
+        //alert(PlotStatus123_);
+        $.ajax({
+            url: '/Master/CheckPlotForUpdatePlot', type: 'Post', dataType: 'json',
+            data: { 'SiteID': Fk_SiteId, 'SectorID': SectorID, 'BlockID': BlockID, 'PlotNumber': PlotNumber },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $("#PlotNumber" + Id + "").removeClass('errortext');
+                    $("#PlotStatus123_" + Id).text(data.PlotStatus);
+                    $("#PlotID").val(data.PlotID);
+                }
+                else if (data.Result == "no") {
+                    alert('This Plot Number is not available !');
+                    $("#PlotNumber" + Id + "").addClass('errortext');
+                    $("#PlotNumber" + Id + "").focus();
+                    $("#PlotNumber" + Id + "").val('');
+                }
+                else {
+                    alert('Plot not available !');
+                    $("#PlotNumber" + Id + "").addClass('errortext');
+                    $("#PlotNumber" + Id + "").focus();
+                    $("#PlotNumber" + Id + "").val('');
+                }
+            }
+        });
+    }
+
+
+    function validateLogin() {
+        $.noConflict();
+        debugger;
+        var login = $('#TeamLoginId').val();
+        if (login == "") {
+            $('#ToTeamLoginId').val(null);
+        } else {
+            var loginid = $('#ToTeamLoginId').val();
+
+        }
+        if ($("#IsDownline").is(':checked')) {
+            if ($("#TeamLoginId").val() == "") {
+                alert('Please Enter Team LoginId');
+                return false;
+            }
+            //else {
+            //    $.ajax({
+            //        url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
+            //        success: function (data) {
+
+            //        }
+            //    });
+            //    return true;
+            //}
+        }
+
+        $.ajax({
+            url: '/AdminReports/UpdatePlotDetails', type: 'post', datatype: 'json',
+            success: function (data) {
+
+            }
+        });
+    }
+    </script>
+    

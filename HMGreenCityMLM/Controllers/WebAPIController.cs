@@ -527,6 +527,7 @@ namespace HMGreenCityMLM.Controllers
             {
                 List<AssoeDashInvst> lstinvestment = new List<AssoeDashInvst>();
                 DataSet ds = assocdash.GetAssociateDashboard();
+                
 
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0]["Msg"].ToString() != "0")
                 {
@@ -569,11 +570,24 @@ namespace HMGreenCityMLM.Controllers
                     }
                     obj.lstinvestment = lstinvestment;
 
+                    #region Achiver Rank
+
                     obj.Fk_UserId = assocdash.Fk_UserId;
+                    DataSet dss = obj.GetAssociateDashboard();
+                    if (dss != null && dss.Tables.Count > 0 && dss.Tables[4].Rows.Count>0)
+                    {
+                        obj.ImageURL = dss.Tables[4].Rows[0]["ImageURL"].ToString();
+                        obj.AchiverRank = dss.Tables[4].Rows[0]["AchiverRank"].ToString();
+                        obj.Name = dss.Tables[4].Rows[0]["Name"].ToString();
+                        obj.ProfilePic = dss.Tables[4].Rows[0]["ProfilePic"].ToString();
+                    }
+
+                    #endregion
+
+                    
                     obj.Status = "0";
                     obj.Message = "Data Fetched";
                     return Json(obj, JsonRequestBehavior.AllowGet);
-
                 }
                 else
                 {
@@ -687,11 +701,12 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult ViewProfile(ViewProfileAPI data)
         {
-
+            
             ViewProfile obj = new ViewProfile();
             try
             {
 
+                data.LoginId = Session["LoginId"].ToString();
                 DataSet ds = data.GetUserProfile();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {

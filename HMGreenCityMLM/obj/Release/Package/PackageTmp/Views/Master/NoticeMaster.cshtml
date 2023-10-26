@@ -1,0 +1,135 @@
+﻿@model HMGreenCityMLM.Models.Master
+
+@{
+    ViewBag.Title = "NoticeMaster";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@using (Html.BeginForm("NoticeMaster", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    //==================================================================================================================
+    <span style="color: red">
+        @TempData["NoticeMaster"]
+    </span>
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Notice Master</h6>
+                            @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                        </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Title<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @placeholder = "Title" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>News<span style="color: red">*</span></label>
+                                @Html.TextAreaFor(m => m.News, new { @class = "form-control", @Placeholder = "Notification", @Rows = "7", @cols = "20" })
+                                @Html.HiddenFor(m => m.PK_NoticeMasterId, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                @if (Model.PK_NoticeMasterId == null)
+                                {
+                                    <input type="submit" id="btnSave" class="btn btn-success" name="btnSave" value="Save" onclick="return validateform();" />
+                                }
+                                else
+                                {
+                                    @Html.HiddenFor(m => m.PK_NoticeMasterId, new { @Value = @Model.PK_NoticeMasterId })
+                                    <input type="submit" id="btnUpdate" class="btn btn-success" name="btnUpdate" value="Update" onclick="return validateform();" />
+                                }
+
+                                <a class="btn btn-primary" href="/Master/NoticeMasterList">Back To List</a>
+
+                                <span style="color: red">
+                                    @TempData["NoticeMaster"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    //==================================================================================================================
+}
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+<script>
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#SiteName').val() == '') {
+            $("#SiteName").addClass('errortext');
+            $('#SiteName').focus();
+            return false;
+        }
+        if ($('#Location').val() == '') {
+            $("#Location").addClass('errortext');
+            $('#Location').focus();
+            return false;
+        }
+
+        if ($('#Title').val() == '') {
+            $("#Title").addClass('errortext');
+            $('#Title').focus();
+            return false;
+        }
+        if ($('#News').val() == '') {
+            $("#News").addClass('errortext');
+            $('#News').focus();
+            return false;
+        }
+        return true;
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+</script>
+
+
+
+

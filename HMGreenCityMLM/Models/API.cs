@@ -380,7 +380,13 @@ namespace HMGreenCityMLM.Models
         public string TotalBusinessLeft { get; set; }
         public string TotalBusinessRight { get; set; }
         public string CarryLeft { get; set; }
-///public string TeamBusiness { get; set; }
+        public string ImageURL { get; set; }
+        public string AchiverRank { get; set; }
+        public string Name { get; set; }
+        public string ProfilePic { get; set; }
+
+
+        ///public string TeamBusiness { get; set; }
         public string CarryRight { get; set; }
 
    //     public string DirectBusiness { get; set; }

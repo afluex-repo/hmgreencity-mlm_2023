@@ -19,6 +19,8 @@ namespace HMGreenCityMLM.Models
 
         public string Status { get; set; }
         public string Fk_UserId { get; set; }
+        public string AchiverRank { get; set; }
+        public string ImageURL { get; set; }
 
         public DataSet GetDashBoardDetails()
         {
@@ -30,9 +32,10 @@ namespace HMGreenCityMLM.Models
         public DataSet GetAssociateDashboard()
         {
             SqlParameter[] para = { new SqlParameter("@Fk_UserId",Fk_UserId ) , };
-            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate",para);
+            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate",para); 
             return ds;
         }
+        
 
         public string LoginId { get; set; }
 

@@ -1,0 +1,94 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "UserPermission";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("UserPermission", "AdminReports", FormMethod.Post, new { @class = "tr-form" }))
+{
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">User Permission</h5>
+                        @*<button class="btn btn-info"><a href="#!" class="text-white">Add New News</a></button>*@
+                    </div>
+                    <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                            @TempData["UserPermission"]
+                        </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Select User<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Fk_UserId, new SelectList(ViewBag.ddluser, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                       
+                        <div class="form-group col-md-4">
+                            <input type="submit" id="GetDetails" name="GetDetails" class="btn btn-primary" value="Get Details" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>Form Type</th>
+                                    <th>Form</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstpermission != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var item in Model.lstpermission)
+                                        {
+
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>
+                                                    @item.FormType
+
+                                                </td>
+
+                                                <td>
+                                                    @item.FormName
+
+                                                </td>
+
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+}
+
+
+<style>
+    .btn-primary {
+        margin-top: 29px;
+        margin-left: 20px;
+    }
+</style>
+
+
