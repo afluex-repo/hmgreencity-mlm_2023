@@ -454,8 +454,9 @@ namespace HMGreenCityMLM.Controllers
                     payoutDetail.Message = "Data Fetched";
                     return Json(payoutDetail, JsonRequestBehavior.AllowGet);
                 }
-
             }
+            payoutDetail.Status = "1";
+            payoutDetail.Message = "Data Not Fetched";
             return Json(payoutDetail, JsonRequestBehavior.AllowGet);
 
         }
