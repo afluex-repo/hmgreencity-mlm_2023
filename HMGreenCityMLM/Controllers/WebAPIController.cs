@@ -454,8 +454,9 @@ namespace HMGreenCityMLM.Controllers
                     payoutDetail.Message = "Data Fetched";
                     return Json(payoutDetail, JsonRequestBehavior.AllowGet);
                 }
-
             }
+            payoutDetail.Status = "1";
+            payoutDetail.Message = "Data Not Fetched";
             return Json(payoutDetail, JsonRequestBehavior.AllowGet);
 
         }
@@ -705,8 +706,6 @@ namespace HMGreenCityMLM.Controllers
             ViewProfile obj = new ViewProfile();
             try
             {
-
-                data.LoginId = Session["LoginId"].ToString();
                 DataSet ds = data.GetUserProfile();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -725,7 +724,8 @@ namespace HMGreenCityMLM.Controllers
                     obj.IFSC = ds.Tables[0].Rows[0]["IFSC"].ToString();
                     obj.ProfilePicture = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
                     obj.Pk_UserId = ds.Tables[0].Rows[0]["Pk_UserId"].ToString();
-
+                    obj.Leg = ds.Tables[0].Rows[0]["Leg"].ToString();
+                    obj.MemberStatus = ds.Tables[0].Rows[0]["MemberStatus"].ToString();
                     obj.Status = "0";
                     obj.Message = "Data Fetched";
 
