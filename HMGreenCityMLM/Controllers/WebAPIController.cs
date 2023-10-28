@@ -932,6 +932,8 @@ namespace HMGreenCityMLM.Controllers
                             obj1.BusinessLeft = r["BusinessLeft"].ToString();
                             obj1.BusinessRight = r["BusinessRight"].ToString();
                             obj1.ImageURL = r["ImageURL"].ToString();
+                            obj1.HoldLeft = r["HoldLeft"].ToString();
+                            obj1.HoldRight = r["HoldRight"].ToString();
                             GetGenelogy.Add(obj1);
                         }
                         obj.GetGenelogy = GetGenelogy;
