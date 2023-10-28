@@ -251,8 +251,8 @@
             }
 
     .family-tree li a .outer-ring {
-        background:#055055;
-        border: 1px solid #218190;
+        /*background:#055055;*/
+        border: 1px solid #3d3d3f;
         padding: 5px;
         text-decoration: none;
         color: #666;
@@ -561,9 +561,33 @@
         line-height: 10px;
         vertical-align: top;
     }
+    .award_img img {
+            height: 50px;
+            width: 50px;
+            margin: auto;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .award_img span {
+            display: block;
+            text-align: center;
+        }
+        .card.myAward .card-icon{
+                line-height:normal;
+        }
+        .card.myAward .card-wrap h6{
+                line-height:70px;
+        }
+        .card.myAward .card-icon img{
+            overflow:hidden;
+        }
+        @@media (min-width:992px){
+            #awardRow .col-lg-2{
+                max-width:12%;
+            }
+        }
 </style>
-
-
 
 
 
@@ -579,70 +603,53 @@
         <div class="content-header row">
         </div>
         <div class="content-body">
-
-
-            <style>
-                .award_img img {
-                    height: 50px;
-                    width: 50px;
-                    margin: auto;
-                    display: block;
-                    margin-bottom: 5px;
-                }
-
-                .award_img span {
-                    display: block;
-                    text-align: center;
-                }
-            </style>
-
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-12 col-lg-2">
                                     <h4 class="mb-0">Binary Tree</h4>
                                 </div>
-                                <div class="col-md-10">
-                                    <div class="row">
-                                        <div class="col-md-1 offset-md-5">
+                                <div class="col-md-12 col-lg-10">
+                                    <div class="row justify-content-lg-end" id="awardRow">
+                                        <div class="col-md-2 col-lg-2">
                                             <div class="award_img">
                                                 <img src="~/images/TreeIcon/HMKAward.png" alt="image" />
                                                 <span>HMK Award</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-1 col-6">
+                                        <div class="col-md-2 col-lg-2 col-6">
                                             <div class="award_img">
                                                 <img src="~/images/TreeIcon/Crown.png" alt="image" />
                                                 <span>Crown</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-1 col-6">
+                                        <div class="col-md-2 col-lg-2 col-6">
                                             <div class="award_img">
                                                 <img src="~/images/TreeIcon/Daimond.png" alt="image" />
                                                 <span>Diamond</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-1 col-6">
+                                        <div class="col-md-2 col-lg-2 col-6">
                                             <div class="award_img">
                                                 <img src="~/images/TreeIcon/Platinum.png" alt="image" />
                                                 <span>Platinum</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-1 col-6">
+                                        <div class="col-md-2 col-lg-2 col-6">
                                             <div class="award_img">
                                                 <img src="~/images/TreeIcon/Gold.png" alt="image" />
                                                 <span>Gold</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-1 col-6">
+                                        <div class="col-md-2 col-lg-2 col-6">
                                             <div class="award_img">
                                                 <img src="~/images/TreeIcon/Silver.png" alt="image" />
                                                 <span>Silver</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-1 col-6">
+                                        <div class="col-md-2 col-lg-2 col-6">
                                             <div class="award_img">
                                                 <img src="~/images/TreeIcon/Star.png" alt="image" />
                                                 <span>Star</span>
