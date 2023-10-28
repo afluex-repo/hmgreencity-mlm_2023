@@ -380,7 +380,7 @@
         background-image: url(../../images/TreeIcon/star.png) !important;
         display: block;
         margin: 0 auto;
-         background-size: cover;
+        background-size: cover;
     }
 
     i.Silver {
@@ -398,7 +398,7 @@
         background-image: url(../../images/TreeIcon/Gold.png) !important;
         display: block;
         margin: 0 auto;
-         background-size: cover;
+        background-size: cover;
     }
 
     i.Platinum {
@@ -407,7 +407,7 @@
         background-image: url(../../images/TreeIcon/Platinum.png) !important;
         display: block;
         margin: 0 auto;
-         background-size: cover;
+        background-size: cover;
     }
 
     i.Daimond {
@@ -416,7 +416,7 @@
         background-image: url(../../images/TreeIcon/Daimond.png) !important;
         display: block;
         margin: 0 auto;
-         background-size: cover;
+        background-size: cover;
     }
 
     i.Crown {
@@ -425,7 +425,7 @@
         background-image: url(../../images/TreeIcon/Crown.png) !important;
         display: block;
         margin: 0 auto;
-         background-size: cover;
+        background-size: cover;
     }
 
     i.HMKAward {
@@ -434,7 +434,7 @@
         background-image: url(../../images/TreeIcon/HMKAward.png) !important;
         display: block;
         margin: 0 auto;
-         background-size: cover;
+        background-size: cover;
     }
 
     #lblDisplayName {
@@ -674,14 +674,14 @@
                     <div class="card-content">
                         <div class="card-body">
                             @*<ul class="nav nav-tabs mb-3" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
-                                       aria-controls="account" role="tab" aria-selected="true">
-                                        <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Binary Tree</span>
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Binary Tree</span>
+                                        </a>
+                                    </li>
 
-                            </ul>*@
+                                </ul>*@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
@@ -689,220 +689,247 @@
                                         <div class="col-12">
                                             @*<div class="card">
                                                 <div class="card-body">*@
-                                                    <div class="form-row">
-                                                        <div class="col-md-2"></div>
+                                            <div class="form-row">
+                                                <div class="col-md-2"></div>
 
-                                                        <div class="col-md-4">
-                                                            <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID/Name" autocomplete="off">
+                                                <div class="col-md-4">
+                                                    <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID/Name" autocomplete="off">
 
-                                                            <input type="hidden" id="ToLoginID">
+                                                    <input type="hidden" id="ToLoginID">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="hidden" name="hfCustomerId" id="hfCustomerId">
+                                                    <input type="hidden" name="HiddenField1" id="HiddenField1">
+                                                    <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
+                                                    <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
+                                                        <input type="hidden" id="lblRequest" />Go Up
+                                                    </a>
+                                                    <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
+
+
+
+
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <div class="col-sm-12 col-md-12" id="chart">
+                                                        <div class="tree family-tree clearfix" style="overflow-x:auto">
+                                                            <ul>
+                                                                <li id="firstRow">
+                                                                    <a href="" id="firstHead"></a>
+                                                                    <span id="rptRow1_lblFooter"></span>
+
+                                                                </li>
+                                                            </ul>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <input type="hidden" name="hfCustomerId" id="hfCustomerId">
-                                                            <input type="hidden" name="HiddenField1" id="HiddenField1">
-                                                            <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
-                                                            <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
-                                                                <input type="hidden" id="lblRequest" />Go Up
-                                                            </a>
-                                                            <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
+                                                        <div class="container-fluid" id="member-details">
 
+                                                            <div class="row">
 
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="form-row">
+                                                                                <div class="form-group col-md-9">
+                                                                                    <button type="button" class="next-tree" onclick='ClickHere(this)'>
+                                                                                        <a style="width: 100%; height: 50%; background-color: white;" title="Go Down" class="clip-tree"></a>
 
-
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            <div class="col-sm-12 col-md-12" id="chart">
-                                                                <div class="tree family-tree clearfix" style="overflow-x:auto">
-                                                                    <ul>
-                                                                        <li id="firstRow">
-                                                                            <a href="" id="firstHead"></a>
-                                                                            <span id="rptRow1_lblFooter"></span>
-
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="container-fluid" id="member-details">
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-12">
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <div class="form-row">
-                                                                                        <div class="form-group col-md-9">
-                                                                                            <button type="button" class="next-tree" onclick='ClickHere(this)'>
-                                                                                                <a style="width: 100%; height: 50%; background-color: white;" title="Go Down" class="clip-tree"></a>
-
-                                                                                            </button>
-                                                                                            <div class="media-body">
-                                                                                                <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:black">@ViewBag.Fk_UserId</h3>
-                                                                                                <p class="mb-0" id="lblMemberId" style="text-align: center;color:black"></p>
-                                                                                                <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:black"></p>
-                                                                                                <p class="mb-0" id="lblstatus" style="text-align: center;color:black"></p>
-                                                                                                <p style="display:none" id="lblFk_UserId"></p>
-                                                                                            </div>
-
-
-                                                                                        </div>
-                                                                                        <div class="form-group col-md-3">
-                                                                                            <br />
-                                                                                            <button type="button" id="close">&times;</button>
-                                                                                            <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
-                                                                                        </div>
-
-
+                                                                                    </button>
+                                                                                    <div class="media-body">
+                                                                                        <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:black">@ViewBag.Fk_UserId</h3>
+                                                                                        <p class="mb-0" id="lblMemberId" style="text-align: center;color:black"></p>
+                                                                                        <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:black"></p>
+                                                                                        <p class="mb-0" id="lblstatus" style="text-align: center;color:black"></p>
+                                                                                        <p style="display:none" id="lblFk_UserId"></p>
                                                                                     </div>
-                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
-                                                                                        <div class="col-md-6">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</p>
 
 
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+                                                                                </div>
+                                                                                <div class="form-group col-md-3">
+                                                                                    <br />
+                                                                                    <button type="button" id="close">&times;</button>
+                                                                                    <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
+                                                                                </div>
 
 
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</p>
+                                                                            </div>
+                                                                            <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
+                                                                                <div class="col-md-6">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</p>
 
 
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
 
 
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Sponsor Details</p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</p>
 
 
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
 
 
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Type</p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Sponsor Details</p>
 
 
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Left</p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b"></p>
 
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Right</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="TotalMemberRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="LeftBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="RightBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <p class="TotalBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-
-
-                                                                                        </div>
-                                                                                    </div>
 
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
+                                                                                <div class="col-md-3">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Type</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Left</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Right</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Hold</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="HoldLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="HoldRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="HoldTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+
+                                                                                <div class="col-md-3">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+
+
+
+
+
+
+                                                                                <div class="col-md-3">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="TotalMemberRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="LeftBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="RightBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <p class="TotalBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
+
+
+                                                                                </div>
+                                                                            </div>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
-
-
-
                                                             </div>
-
                                                         </div>
+
+
+
+
+
                                                     </div>
-                                                @*</div>
-                                            </div>*@
+
+                                                </div>
+                                            </div>
+                                            @*</div>
+                                                </div>*@
                                         </div>
                                     </div>
 
@@ -968,22 +995,22 @@
                             minLength: 1
                         }).data("ui-autocomplete")._renderItem = function (ul, item) {
                             console.log(ul)
-                                var div = $("<li>")
-                                    .append("<li class='" + item1.cssStatus + "' id='ui-id-6' tabindex='-1'>(" + item.label + ")</li>")
-                                    .appendTo(ul);
-                                return div;
+                            var div = $("<li>")
+                                .append("<li class='" + item1.cssStatus + "' id='ui-id-6' tabindex='-1'>(" + item.label + ")</li>")
+                                .appendTo(ul);
+                            return div;
 
                         };
                     });
 
-                //    $('#txtLoginID').autocomplete({
-                //        source: cityuse,
-                //        select: function (event, ui) {
-                //            var str = ui.item.label;
-                //            var strsplit = str.split("(");
-                //            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                //        }
-                //    })
+                    //    $('#txtLoginID').autocomplete({
+                    //        source: cityuse,
+                    //        select: function (event, ui) {
+                    //            var str = ui.item.label;
+                    //            var strsplit = str.split("(");
+                    //            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                    //        }
+                    //    })
                     //}
 
                 }
@@ -1004,7 +1031,7 @@
     $("a").click(function () {
         $("a").popover('hide');
     });
-    function openPopup(obj, item1, item2, item3, item4, item5, JoiningDate, ProductName, AllLeg1, AllLeg2, PermanentLeg1, PermanentLeg2, InactiveLeft, InactiveRight, PCountLeg1, PCountLeg2, PaidLeg1, PaidLeg2, BalanceLeft, BalanceRight, Profilepic, ActivationDate, AllBusinessLeft, AllBusinessRight, ProductRightBusiness, ProductLeftBusiness) {
+    function openPopup(obj, item1, item2, item3, item4, item5, JoiningDate, ProductName, AllLeg1, AllLeg2, PermanentLeg1, PermanentLeg2,HoldLeg1,HoldLeg2, InactiveLeft, InactiveRight, PCountLeg1, PCountLeg2, PaidLeg1, PaidLeg2, BalanceLeft, BalanceRight, Profilepic, ActivationDate, AllBusinessLeft, AllBusinessRight, ProductRightBusiness, ProductLeftBusiness) {
 
         var loginid = 'LoginId - ' + ' ' + item2;
         var JoiningDate = 'JoiningDate - ' + ' ' + JoiningDate;
@@ -1034,6 +1061,13 @@
         $(".ActiveRight").html(PermanentLeg2);
 
         $(".ActiveTotal").html(parseFloat(PermanentLeg1) + parseFloat(PermanentLeg2));
+
+
+        $(".HoldLeft").html(HoldLeg1);
+        $(".HoldRight").html(HoldLeg2);
+
+        $(".HoldTotal").html(parseFloat(HoldLeg1) + parseFloat(HoldLeg2));
+
 
         $(".NonActiveLeft").html(InactiveLeft);
         $(".NonActiveRight").html(InactiveRight);
@@ -1286,9 +1320,9 @@
                         }
                     }
 
-                    else if (cssclaa == "star-member") {
+                    else if (cssclaa == "Star-member") {
 
-                        cssclass = "star";
+                        cssclass = "Star";
 
                     }
                     else if (cssclaa == "Silver-member") {
@@ -1329,9 +1363,9 @@
                             cssclass = "girl-hold";
                         }
                     }
-                    else if (cssclaa == "star-member") {
+                    else if (cssclaa == "Star-member") {
 
-                        cssclass = "star";
+                        cssclass = "Star";
 
                     }
                     else if (cssclaa == "Silver-member") {
@@ -1372,7 +1406,7 @@
                         if (id != '-1') {
 
                             child = " <li id='level" + i + "'><a data-toggle='popover' id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                      " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
+                                                      " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.HoldLeg1 + '"' + "," + '"' + item1.HoldLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
                                                       " onmouseout='closePopup(this)' href='#' " + clickOption + " >" +
 
                                                       "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle '></i></div></div><span class='name member-name'>" +
@@ -1393,7 +1427,7 @@
                     else {
                         if (id != '-1') {
                             child = " <li id='level" + i + "'><a data-toggle='popover' id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                      " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + ",," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
+                                                      " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.HoldLeg1 + '"' + "," + '"' + item1.HoldLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + ",," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
                                                       " onmouseout='closePopup(this)' href='#' " + clickOption + " >" +
                                                       "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
                                                       " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
@@ -1487,9 +1521,9 @@
                                                 }
                                             }
 
-                                            else if (cssclaa == "star-member") {
+                                            else if (cssclaa == "Star-member") {
 
-                                                cssclass = "star";
+                                                cssclass = "Star";
 
                                             }
                                             else if (cssclaa == "Silver-member") {
@@ -1529,7 +1563,7 @@
                                             if (level2 == 2) {
                                                 if (id != '-1') {
                                                     child = " <li id='level" + i + i1 + "'><a data-toggle='popover' id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                              " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
+                                                              " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.HoldLeg1 + '"' + "," + '"' + item2.HoldLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
                                                               " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
                                                               "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + "  rounded-circle'></i></div></div><span class='name member-name'>" +
                                                               " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
@@ -1549,7 +1583,7 @@
                                             else {
                                                 if (id != '-1') {
                                                     child = " <li id='level" + i + i1 + "'><a data-toggle='popover' id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                             " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
+                                                             " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.HoldLeg1 + '"' + "," + '"' + item2.HoldLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
                                                              " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
                                                              "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
                                                              " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
@@ -1642,9 +1676,9 @@
                                                                         }
                                                                     }
 
-                                                                    else if (cssclaa == "star-member") {
+                                                                    else if (cssclaa == "Star-member") {
 
-                                                                        cssclass = "star";
+                                                                        cssclass = "Star";
 
                                                                     }
                                                                     else if (cssclaa == "Silver-member") {
@@ -1684,7 +1718,7 @@
                                                                     if (level3 == 2) {
                                                                         if (id != '-1') {
                                                                             child = " <li id='level" + i + i1 + i2 + "'><a data-toggle='popover' id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                                                      " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
+                                                                                      " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.HoldLeg1 + '"' + "," + '"' + item3.HoldLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
                                                                                       " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
                                                                                       "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
                                                                                       " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
@@ -1703,7 +1737,7 @@
                                                                     else {
                                                                         if (id != '-1') {
                                                                             child = " <li id='level" + i + i1 + i2 + "'><a data-toggle='popover' id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + "' " +
-                                                                                        " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
+                                                                                        " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.HoldLeg1 + '"' + "," + '"' + item3.HoldLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
                                                                                        " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
                                                                                        "<div class='outer-ring " + cssclass + "'><div class='member-img " + cssclass + "'><i class='" + cssclass + "'></i></div></div><span class='name member-name'>" +
                                                                                        " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
@@ -1837,9 +1871,9 @@
                     }
                 }
 
-                else if (status == "star-member") {
+                else if (status == "Star-member") {
 
-                    status = "star";
+                    status = "Star";
 
                 }
                 else if (status == "Silver-member") {
@@ -1886,7 +1920,7 @@
 
                 $firstHead.html("<div class='outer-ring " + status + "'><div class='member-img " + status + "'><i class='" + status + " rounded-circle'></i></div></div><span class='name member-name'>" + item.LoginId + "</span><span class='member-join-time'>" + item.MemberName + "</span>");
                 //$firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "', '" + item.ParentLoginId + "')");
-                $firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "','" + item.Leg + "','" + item.ParentLoginId + "','" + item.JoiningDate + "','" + item.ProductName + "','" + item.AllLeg1 + "','" + item.AllLeg2 + "','" + item.PermanentLeg1 + "','" + item.PermanentLeg2 + "','" + item.InactiveLeft + "','" + item.InactiveRight + "','" + item.PCountLeg1 + "','" + item.PCountLeg2 + "','" + item.PaidLeg1 + "','" + item.PaidLeg2 + "','" + item.BalanceLeft + "','" + item.BalanceRight + "','" + item.ProfilePic + "','" + item.ActivationDate + "'," + '"' + item.AllBusinessLeft + '"' + "," + '"' + item.AllBusinessRight + '"' + "," + '"' + item.ProductRightBusiness + '"' + "," + '"' + item.ProductLeftBusiness + '"' + ")");
+                $firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "','" + item.Leg + "','" + item.ParentLoginId + "','" + item.JoiningDate + "','" + item.ProductName + "','" + item.AllLeg1 + "','" + item.AllLeg2 + "','" + item.PermanentLeg1 + "','" + item.PermanentLeg2 + "','" + item.HoldLeg1 + "','" + item.HoldLeg2 + "','" + item.InactiveLeft + "','" + item.InactiveRight + "','" + item.PCountLeg1 + "','" + item.PCountLeg2 + "','" + item.PaidLeg1 + "','" + item.PaidLeg2 + "','" + item.BalanceLeft + "','" + item.BalanceRight + "','" + item.ProfilePic + "','" + item.ActivationDate + "'," + '"' + item.AllBusinessLeft + '"' + "," + '"' + item.AllBusinessRight + '"' + "," + '"' + item.ProductRightBusiness + '"' + "," + '"' + item.ProductLeftBusiness + '"' + ")");
                 $firstHead.attr("data-toggle", "popover");
 
                 // $("#firstHead").attr("onclick", "ClickHere(this;)");
