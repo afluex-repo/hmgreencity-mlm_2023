@@ -56,6 +56,9 @@ namespace HMGreenCityMLM.Models.WebService
                     PermanentLeg1 = dr["PermanentLeg1"].ToString(),
                     PermanentLeg2 = dr["PermanentLeg2"].ToString(),
 
+                    HoldLeg1 = dr["HoldLeg1"].ToString(),
+                    HoldLeg2 = dr["HoldLeg2"].ToString(),
+
                     InactiveLeft = dr["InactiveLeft"].ToString(),
                     InactiveRight = dr["InactiveRight"].ToString(),
 
@@ -118,6 +121,9 @@ namespace HMGreenCityMLM.Models.WebService
                     PermanentLeg1 = dr["PermanentLeg1"].ToString(),
                     PermanentLeg2 = dr["PermanentLeg2"].ToString(),
 
+                    HoldLeg1 = dr["HoldLeg1"].ToString(),
+                    HoldLeg2 = dr["HoldLeg2"].ToString(),
+
                     InactiveLeft = dr["InactiveLeft"].ToString(),
                     InactiveRight = dr["InactiveRight"].ToString(),
 
@@ -175,6 +181,9 @@ namespace HMGreenCityMLM.Models.WebService
                 model.PermanentLeg1 = dr["PermanentLeg1"].ToString();
                 model.PermanentLeg2 = dr["PermanentLeg2"].ToString();
 
+                model.HoldLeg1 = dr["HoldLeg1"].ToString();
+                model.HoldLeg2 = dr["HoldLeg2"].ToString();
+
                 model.InactiveLeft = dr["InactiveLeft"].ToString();
                 model.InactiveRight = dr["InactiveRight"].ToString();
 
@@ -226,6 +235,9 @@ namespace HMGreenCityMLM.Models.WebService
 
                 model.PermanentLeg1 = dr["PermanentLeg1"].ToString();
                 model.PermanentLeg2 = dr["PermanentLeg2"].ToString();
+
+                model.HoldLeg1 = dr["HoldLeg1"].ToString();
+                model.HoldLeg2 = dr["HoldLeg2"].ToString();
 
                 model.InactiveLeft = dr["InactiveLeft"].ToString();
                 model.InactiveRight = dr["InactiveRight"].ToString();
