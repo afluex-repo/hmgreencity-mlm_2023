@@ -780,6 +780,10 @@ namespace HMGreenCityMLM.Models
         public string BusinessLeft { get; set; }
         public string BusinessRight { get; set; }
         public string ImageURL { get; set; }
+        public string HoldLeft { get; set; }
+        public string HoldRight { get; set; }
+
+
     }
 
     public class ReportsAPI
