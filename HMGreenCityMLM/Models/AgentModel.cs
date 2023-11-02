@@ -39,6 +39,9 @@ namespace HMGreenCityMLM.Models
         public string InactiveLeft { get; set; }
         public string InactiveRight { get; set; }
 
+        public string HoldLeg1 { get; set; }
+        public string HoldLeg2 { get; set; }
+
         public string Spillby { get; set; }
         public string PCountLeg1 { get; set; }
         public string PCountLeg2 { get; set; }
