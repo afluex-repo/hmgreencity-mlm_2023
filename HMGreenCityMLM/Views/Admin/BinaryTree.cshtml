@@ -377,7 +377,7 @@
     i.Star {
         width: 65px;
         height: 65px;
-        background-image: url(../../images/TreeIcon/star.png) !important;
+        background-image: url(../../images/TreeIcon/Star.png) !important;
         display: block;
         margin: 0 auto;
         background-size: cover;
@@ -1319,6 +1319,14 @@
                             cssclass = "girl-hold";
                         }
                     }
+                    else if (cssclaa == "hold-member") {
+                        if (Gender == "M") {
+                            cssclass = "men-hold";
+                        }
+                        else {
+                            cssclass = "girl-hold";
+                        }
+                    }
 
                     else if (cssclaa == "Star-member") {
 
@@ -1861,7 +1869,7 @@
                         status = "girl-active"
                     }
                 }
-                else if (status == "Y") {
+                else if (status == "H") {
 
                     if (gender == "M") {
                         status = "men-hold"
@@ -1942,6 +1950,7 @@
 
 
     $(function () {
+        debugger;
 
         $("#btnSearch").click(function () {
 
