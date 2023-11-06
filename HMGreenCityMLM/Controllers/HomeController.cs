@@ -47,31 +47,31 @@ namespace HMGreenCityMLM.Controllers
             string FormName = "";
             string Controller = "";
             ProjectStatusResponse datalist = null;
-            #region CheckProjectStatus
-            string soapResult = "";
-            HttpWebRequest request = LoginURL();
-            XmlDocument soapEnvelopeXml = new XmlDocument();
-            string json1 = "{\"ProjectId\": \"" + 15 + "\"}";
-            byte[] postBytes = Encoding.UTF8.GetBytes(json1);
-            Stream requestStream = request.GetRequestStream();
-            // now send it
-            requestStream.Write(postBytes, 0, postBytes.Length);
-            requestStream.Close();
-            using (WebResponse response = request.GetResponse())
-            {
-                using (StreamReader rd = new StreamReader(response.GetResponseStream()))
-                {
-                    soapResult = rd.ReadToEnd();
+            //#region CheckProjectStatus
+            //string soapResult = "";
+            //HttpWebRequest request = LoginURL();
+            //XmlDocument soapEnvelopeXml = new XmlDocument();
+            //string json1 = "{\"ProjectId\": \"" + 15 + "\"}";
+            //byte[] postBytes = Encoding.UTF8.GetBytes(json1);
+            //Stream requestStream = request.GetRequestStream();
+            //// now send it
+            //requestStream.Write(postBytes, 0, postBytes.Length);
+            //requestStream.Close();
+            //using (WebResponse response = request.GetResponse())
+            //{
+            //    using (StreamReader rd = new StreamReader(response.GetResponseStream()))
+            //    {
+            //        soapResult = rd.ReadToEnd();
 
-                }
+            //    }
 
-                datalist = JsonConvert.DeserializeObject<ProjectStatusResponse>(soapResult);
-            }
-            if (datalist.Response == "0")
-            {
-                return RedirectToAction("Login");
-            }
-            #endregion CheckProjectStatus
+            //    datalist = JsonConvert.DeserializeObject<ProjectStatusResponse>(soapResult);
+            //}
+            //if (datalist.Response == "0")
+            //{
+            //    return RedirectToAction("Login");
+            //}
+            //#endregion CheckProjectStatus
             try
             {
                 Home Modal = new Home();
