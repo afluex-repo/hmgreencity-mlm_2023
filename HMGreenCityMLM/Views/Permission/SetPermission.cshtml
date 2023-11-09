@@ -55,6 +55,8 @@
                                         <th>Sr No.</th>
                                         <th>Form</th>
                                         <th>Form View</th>
+                                        <th>Form Save</th>
+                                        <th>Edit</th>
                                         <th>Join Now</th>
                                     </tr>
                                 </thead>
@@ -88,7 +90,10 @@
                                                         {
                                                             <input type="checkbox" name="chkSave_ @i" id="chkSave_ @i" @item.FormSave />
                                                         }
+                                                        
                                                     </td>
+                                                    <td><input type="checkbox" name="chkEdit_ @i" id="chkEdit_ @i" @item.FormUpdate /></td>
+                                               
                                                 </tr>
                                                 i++;
                                             }
@@ -97,6 +102,8 @@
                                     }
                                 </tbody>
                             </table>
+                            <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                            <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
@@ -112,7 +119,60 @@
     </section>
 }
 
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
 <script>
+
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+        var UserType = $('#UserType').val();
+        var UserTypeName = $('#UserTypeName').val();
+        if (UserType == 'Admin' && UserTypeName != 'Admin' && UserTypeName != "") {
+            GetMenuDetails();
+        }
+    });
+    function GetMenuDetails() {
+        debugger
+        var URL = "/Permission/SetPermission";
+        $.ajax({
+            type: "POST",
+            url: "/Master/GetMenuDetails",
+            data: { URL: URL },
+            dataType: "json",
+            //contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                console.log(obj)
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].FormSave == true) {
+                        $('#Save').show();
+
+                        $("#Save").removeAttr('disabled');
+                    }
+                    else {
+                        $('#Save').hide();
+
+                        $("#Save").attr('disabled', 'disabled');
+                    }
+                    debugger
+                }
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
+
+
     function validateform() {
         $(".errortext").removeClass("errortext");
         debugger;

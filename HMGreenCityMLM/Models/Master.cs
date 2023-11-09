@@ -23,6 +23,8 @@ namespace HMGreenCityMLM.Models
         public string DirectPercent { get; set; }
         public string ROIPercent { get; set; }
         public List<Master> lstproduct { get; set; }
+        public string UserType { get; set; }
+        public string Url { get; set; }
 
         public string NewsID { get; set; }
         public string NewsHeading { get; set; }
@@ -581,7 +583,7 @@ namespace HMGreenCityMLM.Models
         public string FK_SectorId { get; set; }
         public string Fk_BlockId { get; set; }
 
-        
+
         //public DataSet UpdatePlotDetailsToMLM()
         //{
         //    SqlParameter[] para =
@@ -598,7 +600,15 @@ namespace HMGreenCityMLM.Models
         //    return ds;
         //}
 
-        
+        public DataSet GetMenuPermissionList()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_AdminId", Fk_UserId),
+                                    new SqlParameter("@UserType", UserType),
+                                    new SqlParameter("@URL",Url)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetMenuListForUser", para);
+            return ds;
+        }
 
     }
 }

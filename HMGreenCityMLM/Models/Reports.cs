@@ -59,6 +59,7 @@ namespace HMGreenCityMLM.Models
         public string LoginId { get; set; }
         public string TeamLoginId { get; set; }
         public string PayoutLoginId { get; set; }
+        public string Fk_CompanyId { get; set; }
 
         public string Name { get; set; }
 
@@ -820,7 +821,8 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@Package", Package),
                                       new SqlParameter("@SiteId", SiteId),
                                       new SqlParameter("@ClaculationStatus", Status),
-                                      new SqlParameter("@Fk_BusinessId", BusinessType)
+                                      new SqlParameter("@Fk_BusinessId", BusinessType),
+                                      new SqlParameter("@Fk_CompanyId", Fk_CompanyId),
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);
@@ -853,6 +855,28 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@IsDownline", IsDownline)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetRewardIncludedDetailsNew", para);
+            return ds;
+        }
+
+        public DataSet BusinessReportNew()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate),
+                                     new SqlParameter("@Leg", Leg),
+                                    new SqlParameter("@IsDownline", IsDownline),
+                                    new SqlParameter("@Fk_CompanyId", Fk_CompanyId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetBusinessNew", para);
+            return ds;
+        }
+
+        public DataSet GetCompanyList()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_CompanyID", Fk_CompanyId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetCompanyList", para);
             return ds;
         }
     }
