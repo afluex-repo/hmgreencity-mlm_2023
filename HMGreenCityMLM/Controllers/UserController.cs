@@ -32,6 +32,7 @@ namespace HMGreenCityMLM.Controllers
                 ViewBag.TotalAdvance = ds.Tables[0].Rows[0]["TotalAdvance"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                ViewBag.TotalHold = ds.Tables[0].Rows[0]["TotalHold"].ToString();
 
 
                 ViewBag.PaidBusinessLeft = ds.Tables[2].Rows[0]["PaidBusinessLeft"].ToString();
