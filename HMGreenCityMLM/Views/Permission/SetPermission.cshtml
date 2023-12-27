@@ -158,6 +158,11 @@
 
                         $("#Save").removeAttr('disabled');
                     }
+                    else if (obj[i].FormUpdate == true) {
+                        $('#Save').show();
+
+                        $("#Save").removeAttr('disabled');
+                    }
                     else {
                         $('#Save').hide();
 

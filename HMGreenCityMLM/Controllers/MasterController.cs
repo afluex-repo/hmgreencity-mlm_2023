@@ -1525,5 +1525,34 @@ namespace HMGreenCityMLM.Controllers
             }
         }
 
+        public ActionResult GetStateCity(string Pincode)
+        {
+            try
+            {
+                Common model = new Common();
+                model.PinCode = Pincode;
+
+                #region GetStateCity
+                DataSet dsStateCity = model.GetStateCity();
+                if (dsStateCity != null && dsStateCity.Tables[0].Rows.Count > 0)
+                {
+                    model.State = dsStateCity.Tables[0].Rows[0]["State"].ToString();
+                    model.City = dsStateCity.Tables[0].Rows[0]["City"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.State = model.City = "";
+                    model.Result = "no";
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
     }
 }
