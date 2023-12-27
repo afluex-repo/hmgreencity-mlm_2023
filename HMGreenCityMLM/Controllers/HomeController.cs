@@ -92,6 +92,7 @@ namespace HMGreenCityMLM.Controllers
                                 Session["TransPassword"] = ds.Tables[0].Rows[0]["TransPassword"].ToString();
                                 Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
+                                Session["FK_RankId"] = ds.Tables[0].Rows[0]["FK_RankId"].ToString();
                                 FormName = "AssociateDashBoard";
                                 Controller = "User";
                             }

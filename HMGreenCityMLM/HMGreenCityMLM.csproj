@@ -6529,6 +6529,8 @@
     <Content Include="Views\Website\UpdateRankforJob.cshtml" />
     <Content Include="Views\Website\UpdateHoldStatusforJob.cshtml" />
     <Content Include="Views\Website\UpdateCounterHoldActiveforJob.cshtml" />
+    <Content Include="Views\User\DownlineRegistration.cshtml" />
+    <Content Include="Views\User\ConfirmRegistrationForDown.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

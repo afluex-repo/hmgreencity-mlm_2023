@@ -79,7 +79,7 @@ namespace HMGreenCityMLM.Models.WebService
                     AllBusinessLeft = dr["AllBusinessLeft"].ToString(),
                     AllBusinessRight = dr["AllBusinessRight"].ToString(),
 
-                    LastTopupdate = dr["LastTopupdate"].ToString(),
+                    lstTopupdate = string.IsNullOrEmpty(dr["LastTopupdate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["LastTopupdate"]).ToString("dd-MMM, yyyy"),
                     LastTopupAmount = dr["LastTopupAmount"].ToString(),
 
                 });
@@ -91,15 +91,15 @@ namespace HMGreenCityMLM.Models.WebService
             return tree;
 
         }
-       // string Login
+        // string Login
 
         [ScriptMethod()]
         [WebMethod]
-        public List<AgentModel> GetGeneologyForAdmin(string memID,string UserID)
+        public List<AgentModel> GetGeneologyForAdmin(string memID, string UserID)
         {
             AgentModel model = new AgentModel();
             model.Fk_UserId = memID;
-           model.LoginId = UserID;
+            model.LoginId = UserID;
             AgentDAL obj = new AgentDAL();
             DataTable dt = obj.GetTreeMembersForAdmin(model);
             List<AgentModel> tree = new List<AgentModel>();
@@ -148,7 +148,7 @@ namespace HMGreenCityMLM.Models.WebService
                     AllBusinessLeft = dr["AllBusinessLeft"].ToString(),
                     AllBusinessRight = dr["AllBusinessRight"].ToString(),
 
-                    LastTopupdate = dr["LastTopupdate"].ToString(),
+                    lstTopupdate = string.IsNullOrEmpty(dr["LastTopupdate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["LastTopupdate"]).ToString("dd-MMM, yyyy"),
                     LastTopupAmount = dr["LastTopupAmount"].ToString(),
 
 
@@ -212,9 +212,9 @@ namespace HMGreenCityMLM.Models.WebService
                 model.AllBusinessLeft = dr["AllBusinessLeft"].ToString();
                 model.AllBusinessRight = dr["AllBusinessRight"].ToString();
 
-                model.LastTopupdate = dr["LastTopupdate"].ToString();
+                model.lstTopupdate = string.IsNullOrEmpty(dr["LastTopupdate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["LastTopupdate"]).ToString("dd-MMM, yyyy");
                 model.LastTopupAmount = dr["LastTopupAmount"].ToString();
-               
+
                 List.Add(model);
             }
 
@@ -271,8 +271,8 @@ namespace HMGreenCityMLM.Models.WebService
                 model.AllBusinessLeft = dr["AllBusinessLeft"].ToString();
                 model.AllBusinessRight = dr["AllBusinessRight"].ToString();
 
-                model.LastTopupdate = dr["LastTopupdate"].ToString();
                 model.LastTopupAmount = dr["LastTopupAmount"].ToString();
+                model.lstTopupdate = string.IsNullOrEmpty(dr["LastTopupdate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["LastTopupdate"]).ToString("dd-MMM, yyyy");
 
                 List.Add(model);
             }
@@ -354,7 +354,7 @@ namespace HMGreenCityMLM.Models.WebService
         }
 
 
-       
+
 
 
     }

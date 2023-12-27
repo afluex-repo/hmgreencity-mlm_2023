@@ -24,6 +24,10 @@
     background: linear-gradient(to right, #2e1437, #2e1437, #2e1437) !important;
     color: #fff;
 }  
+                .tab5 {
+    background: linear-gradient(0.5turn, #000, #000, #000) !important;
+    color: #fff;
+}  
 </style>
 
 
@@ -86,6 +90,18 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab5">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalHolds</h4>
+                                    <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList?Status=H"><span class="text-white">Hold Users</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
@@ -121,7 +137,7 @@
                     <div class="col-lg-6">
                         <div class="card panel-default">
                             <div class="card-header h5 text-dark">
-                                Business Details
+                               Current Year Business Details
                             </div>
                             <!-- /.panel-heading -->
                             <div class="card-body">
@@ -137,7 +153,7 @@
                     <div class="col-lg-6">
                         <div class="card panel-default">
                             <div class="card-header h5 text-dark">
-                                Joining Details
+                                Current Year Joining Details
                             </div>
                             <!-- /.panel-heading -->
                             <div class="card-body">
@@ -149,6 +165,7 @@
                         <!-- /.panel -->
                     </div>
                 </div>
+
 
                 @*====================================================================================*@
 

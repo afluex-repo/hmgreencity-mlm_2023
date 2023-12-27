@@ -23,6 +23,7 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.BlockedUsers = Ds.Tables[1].Rows[0]["BlockedUsers"].ToString();
             ViewBag.InactiveUsers = Ds.Tables[1].Rows[0]["InactiveUsers"].ToString();
             ViewBag.ActiveUsers = Ds.Tables[1].Rows[0]["ActiveUsers"].ToString();
+            ViewBag.TotalHolds = Ds.Tables[1].Rows[0]["TotalHolds"].ToString();
             #region Messages
 
 
@@ -47,6 +48,7 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lstmessages = lst1;
             }
+
             #endregion Messages
             return View(newdata);
         }

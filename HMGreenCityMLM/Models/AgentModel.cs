@@ -43,7 +43,7 @@ namespace HMGreenCityMLM.Models
         public string HoldLeg2 { get; set; }
 
         public string LastTopupAmount { get; set; }
-        public string LastTopupdate { get; set; }
+        public string lstTopupdate { get; set; }
 
         public string Spillby { get; set; }
         public string PCountLeg1 { get; set; }

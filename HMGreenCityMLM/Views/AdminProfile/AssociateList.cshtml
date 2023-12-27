@@ -87,8 +87,8 @@
                                     <th>Joining Date</th>
                                     <th>Mobile No</th>
                                     <th>Email Id</th>
-                                    <th>Action</th>
                                     <th>Status</th>
+                                    <th style="min-width:80px">Action</th>
                                     <th hidden="hidden"></th>
                                     <th>Print</th>
                                 </tr>
@@ -112,12 +112,13 @@
                                                 <td>@Item.JoiningDate</td>
                                                 <td>@Item.Mobile</td>
                                                 <td>@Item.Email</td>
+                                                <td>@Item.Status</td>
                                                 <td>
                                                     <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm edit">
                                                         Edit
                                                     </a>
-                                                </td>
-                                                <td>
+                                                @*</td>
+                                                <td>*@
                                                     @if (Item.isBlocked == "False")
                                                     {
                                                         <a href="/AdminProfile/BlockAssociate?LoginID=@Item.LoginId" class="btn btn-danger btn-sm">
