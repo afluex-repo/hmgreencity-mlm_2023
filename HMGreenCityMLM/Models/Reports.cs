@@ -59,6 +59,7 @@ namespace HMGreenCityMLM.Models
         public string LoginId { get; set; }
         public string TeamLoginId { get; set; }
         public string PayoutLoginId { get; set; }
+        public string Fk_CompanyId { get; set; }
 
         public string Name { get; set; }
 
@@ -121,6 +122,7 @@ namespace HMGreenCityMLM.Models
 
         public string DocumentImage { get; set; }
 
+        public List<Reports> lstuser { get; set; }
         public List<Reports> lsttopupreport { get; set; }
         public List<Reports> lstRewardList { get; set; }
         public List<Reports> lstAdvancePaymentReport { get; set; }
@@ -153,8 +155,28 @@ namespace HMGreenCityMLM.Models
         public string BusinessType { get; set; }
         //public bool IsInclude { get; set; }
         //public string Reward { get; set; }
+        
+        public string UserID { get; set; }
+        public string PanNo { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
+        public string FatherName { get; set; }
+        //public string NomineeRelation { get; set; }
+        //public string NomineeAge { get; set; }
+        //public string Nominee { get; set; }
+        public string FK_SponsorId { get; set; }
+        public string EncryptKey { get; set; }
+        public string AssociateName { get; set; }
+        public string AssociateID { get; set; }
 
+        public List<Reports> ListCust { get; set; }
+        public string MobileNo { get; set; }
+        public string AdharNo { get; set; }
+        public string PanCard { get; set; }
+        public string Gender { get; set; }
+        public string Response { get; set; }
+        public string RegistrationBy { get; set; }
 
 
         public List<Reports> lstDefaultAssociateList { get; set; }
@@ -820,7 +842,8 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@Package", Package),
                                       new SqlParameter("@SiteId", SiteId),
                                       new SqlParameter("@ClaculationStatus", Status),
-                                      new SqlParameter("@Fk_BusinessId", BusinessType)
+                                      new SqlParameter("@Fk_BusinessId", BusinessType),
+                                      new SqlParameter("@Fk_CompanyId", Fk_CompanyId),
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);
@@ -855,6 +878,88 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetRewardIncludedDetailsNew", para);
             return ds;
         }
+
+        public DataSet BusinessReportNew()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate),
+                                     new SqlParameter("@Leg", Leg),
+                                    new SqlParameter("@IsDownline", IsDownline),
+                                    new SqlParameter("@Fk_CompanyId", Fk_CompanyId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetBusinessNew", para);
+            return ds;
+        }
+
+        public DataSet GetCompanyList()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_CompanyID", Fk_CompanyId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetCompanyList", para);
+            return ds;
+        }
+
+        public DataSet GetSponsorName()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = DBHelper.ExecuteQuery("GetSponsorForDownlineRegistraton", para);
+            return ds;
+        }
+
+      
+
+        public DataSet SaveDownlineRegistration()
+        {
+            SqlParameter[] para = {
+                                   new SqlParameter("@SponsorId",SponsorId),
+                                   new SqlParameter("@Email",Email),
+                                   new SqlParameter("@MobileNo",MobileNo),
+                                   new SqlParameter("@FirstName",FirstName),
+                                   new SqlParameter("@LastName",LastName),
+                                    new SqlParameter("@PanCard",PanCard),
+                                    new SqlParameter("@RegistrationBy",RegistrationBy),
+                                     new SqlParameter("@Address",Address),
+                                     new SqlParameter("@Gender",Gender),
+                                      new SqlParameter("@AdharNo",AdharNo),
+                                     new SqlParameter("@PinCode",PinCode),
+                                     new SqlParameter("@Leg",Leg),
+                                     new SqlParameter("@Password",Password),
+                                     new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveDownlineRegistration", para);
+            return ds;
+        }
+
+        public DataSet GetList()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserId", UserID),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("SelectAssociate", para);
+            return ds;
+        }
+
+        public DataSet GetDownMemberDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", ReferBy),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetDownMemberName", para);
+
+            return ds;
+        }
+
+        public DataSet GetAdharDetail()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@AdharNumber", AdharNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetAdhar", para);
+            return ds;
+        }
+
+       
     }
 }
 

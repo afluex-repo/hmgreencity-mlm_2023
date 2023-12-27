@@ -38,11 +38,13 @@ namespace HMGreenCityMLM.Models
         
 
         public string LoginId { get; set; }
+        public string Name { get; set; }
 
 
-     
+
 
         public List<DashBoard> lstmessages { get; set; }
+        public List<DashBoard> lstyellowlst { get; set; }
 
         public string Pk_MessageId { get; set; }
 

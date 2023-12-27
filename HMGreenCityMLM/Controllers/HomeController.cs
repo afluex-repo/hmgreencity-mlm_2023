@@ -47,31 +47,31 @@ namespace HMGreenCityMLM.Controllers
             string FormName = "";
             string Controller = "";
             ProjectStatusResponse datalist = null;
-            #region CheckProjectStatus
-            string soapResult = "";
-            HttpWebRequest request = LoginURL();
-            XmlDocument soapEnvelopeXml = new XmlDocument();
-            string json1 = "{\"ProjectId\": \"" + 15 + "\"}";
-            byte[] postBytes = Encoding.UTF8.GetBytes(json1);
-            Stream requestStream = request.GetRequestStream();
-            // now send it
-            requestStream.Write(postBytes, 0, postBytes.Length);
-            requestStream.Close();
-            using (WebResponse response = request.GetResponse())
-            {
-                using (StreamReader rd = new StreamReader(response.GetResponseStream()))
-                {
-                    soapResult = rd.ReadToEnd();
+            //#region CheckProjectStatus
+            //string soapResult = "";
+            //HttpWebRequest request = LoginURL();
+            //XmlDocument soapEnvelopeXml = new XmlDocument();
+            //string json1 = "{\"ProjectId\": \"" + 15 + "\"}";
+            //byte[] postBytes = Encoding.UTF8.GetBytes(json1);
+            //Stream requestStream = request.GetRequestStream();
+            //// now send it
+            //requestStream.Write(postBytes, 0, postBytes.Length);
+            //requestStream.Close();
+            //using (WebResponse response = request.GetResponse())
+            //{
+            //    using (StreamReader rd = new StreamReader(response.GetResponseStream()))
+            //    {
+            //        soapResult = rd.ReadToEnd();
 
-                }
+            //    }
 
-                datalist = JsonConvert.DeserializeObject<ProjectStatusResponse>(soapResult);
-            }
-            if (datalist.Response == "0")
-            {
-                return RedirectToAction("Login");
-            }
-            #endregion CheckProjectStatus
+            //    datalist = JsonConvert.DeserializeObject<ProjectStatusResponse>(soapResult);
+            //}
+            //if (datalist.Response == "0")
+            //{
+            //    return RedirectToAction("Login");
+            //}
+            //#endregion CheckProjectStatus
             try
             {
                 Home Modal = new Home();
@@ -92,6 +92,7 @@ namespace HMGreenCityMLM.Controllers
                                 Session["TransPassword"] = ds.Tables[0].Rows[0]["TransPassword"].ToString();
                                 Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
+                                Session["FK_RankId"] = ds.Tables[0].Rows[0]["FK_RankId"].ToString();
                                 FormName = "AssociateDashBoard";
                                 Controller = "User";
                             }
@@ -105,22 +106,60 @@ namespace HMGreenCityMLM.Controllers
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                         {
-                            Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                            Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
-                            Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
-                            Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
+                            //Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                            //Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                            //Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
+                            //Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
 
-                            if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
+                            //if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
+                            //{
+                            //    Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                            //    FormName = "Registration";
+                            //    Controller = "FranchiseAdmin";
+                            //}
+                            //else
+                            //{
+                            //    FormName = "AdminDashBoard";
+                            //    Controller = "Admin";
+                            //}
+                            if (ds.Tables[0].Rows[0]["UserTypeName"].ToString() == "Admin")
                             {
-                                Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
-                                FormName = "Registration";
-                                Controller = "FranchiseAdmin";
+                                Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                                Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                                Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
+                                Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
+                                Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
+                                //Session["ProfilePic"] = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+
+                                if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
+                                {
+                                    Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                                    FormName = "Registration";
+                                    Controller = "FranchiseAdmin";
+                                }
+                                else
+                                {
+                                    FormName = "AdminDashBoard";
+                                    Controller = "Admin";
+                                }
                             }
                             else
                             {
+                                Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                                Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                                Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
+                                Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
+                                Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
+                                //Session["ProfilePic"] = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
                                 FormName = "AdminDashBoard";
                                 Controller = "Admin";
                             }
+
+
+
+
+
+
                         }
                         else
                         {

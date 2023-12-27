@@ -80,9 +80,11 @@ namespace HMGreenCityMLM.Controllers
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    Permisssions ob = new Permisssions();
+                    Permisssions ob = new Permisssions(); 
                     ob.FormName = dr["FormName"].ToString();
                     ob.IsSelectValue = Convert.ToBoolean(dr["FormView"].ToString());
+                    ob.IsUpdateValue = Convert.ToBoolean(dr["FormUpdate"].ToString());
+                    ob.IsDeleteValue = Convert.ToBoolean(dr["FormDelete"].ToString());
                     if (ob.IsSelectValue == false)
                     {
                         ob.SelectedValue = "";
@@ -102,6 +104,26 @@ namespace HMGreenCityMLM.Controllers
                     {
                         ob.FormSave = "checked";
                     }
+
+                    if (ob.IsUpdateValue == false)
+                    {
+                        ob.FormUpdate = "";
+                    }
+                    else
+                    {
+                        ob.FormUpdate = "checked";
+                    }
+                    
+
+                    if (ob.IsDeleteValue == false)
+                    {
+                        ob.FormDelete = "";
+                    }
+                    else
+                    {
+                        ob.FormDelete = "checked";
+                    }
+                    
                     ob.IsUpdateValue = Convert.ToBoolean(dr["FormUpdate"].ToString());
                     ob.IsDeleteValue = Convert.ToBoolean(dr["FormDelete"].ToString());
                     ob.Fk_FormId = dr["PK_FormId"].ToString();
@@ -177,13 +199,30 @@ namespace HMGreenCityMLM.Controllers
                     chkSave = Request["chkSave_ " + i].ToString();
                 }
                 catch { chkSave = "0"; }
-              
+
+
+                try
+                {
+                    chkupdate = Request["chkEdit_ " + i].ToString();
+                }
+                catch
+                {
+                    chkupdate = "0";
+                }
+                try
+                {
+                    chkdelete = Request["chkDelete_ " + i].ToString();
+                }
+                catch
+                {
+                    chkdelete = "0";
+                }
 
                 hdfformtypeid = Request["hdFormtypeId_ " + i].ToString();
                 hdfformid = Request["hdFormId_ " + i].ToString();
                 hdfloginid = Request["hdLoginid_ " + i].ToString();
 
-                dtpermission.Rows.Add(hdfformtypeid, hdfformid, "0", chkSave == "on" ? "1" : "0", "0", chkselect == "on" ? "1" : "0");
+                dtpermission.Rows.Add(hdfformtypeid, hdfformid, chkselect == "on" ? "1" : "0", chkSave == "on" ? "1" : "0", chkupdate == "on" ? "1" : "0", chkdelete == "on" ? "1" : "0");
             }
             obj.UserTypeFormPermisssion = dtpermission;
             obj.CreatedBy = Session["Pk_AdminId"].ToString();

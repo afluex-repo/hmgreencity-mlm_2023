@@ -23,6 +23,7 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.BlockedUsers = Ds.Tables[1].Rows[0]["BlockedUsers"].ToString();
             ViewBag.InactiveUsers = Ds.Tables[1].Rows[0]["InactiveUsers"].ToString();
             ViewBag.ActiveUsers = Ds.Tables[1].Rows[0]["ActiveUsers"].ToString();
+            ViewBag.TotalHolds = Ds.Tables[1].Rows[0]["TotalHolds"].ToString();
             #region Messages
 
 
@@ -47,6 +48,7 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lstmessages = lst1;
             }
+
             #endregion Messages
             return View(newdata);
         }
@@ -1206,6 +1208,8 @@ namespace HMGreenCityMLM.Controllers
                             Objload.CrAmount = dr["CrAmount"].ToString();
                             Objload.AddedOn = dr["TransactionDate"].ToString();
                             Objload.PayoutBalance = dr["Balance"].ToString();
+                            Objload.TransactionNo = dr["TransactionNo"].ToString();
+                            Objload.PaymentMode = dr["PaymentMode"].ToString();
 
                             lst.Add(Objload);
                         }

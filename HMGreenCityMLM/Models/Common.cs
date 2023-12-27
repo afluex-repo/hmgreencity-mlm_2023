@@ -269,6 +269,7 @@ namespace HMGreenCityMLM.Models
             AssociateStatus.Add(new SelectListItem { Text = "Active", Value = "P" });
             AssociateStatus.Add(new SelectListItem { Text = "Inactive", Value = "T" });
             AssociateStatus.Add(new SelectListItem { Text = "Blocked", Value = "B" });
+            AssociateStatus.Add(new SelectListItem { Text = "Yellow", Value = "H" });
             return AssociateStatus;
         }
         public static List<SelectListItem> Leg()
