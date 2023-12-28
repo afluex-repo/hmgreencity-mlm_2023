@@ -23,6 +23,7 @@ namespace HMGreenCityMLM.Models
         public string Fk_SiteId { get; set; }
         public bool IsDownline { get; set; }
         public string TransactionNo { get; set; }
+        public string TransactionNumber { get; set; }
         public string TransactionDate { get; set; }
         public string Description { get; set; }
         public string PaymentDate { get; set; }
