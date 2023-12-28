@@ -94,5 +94,9 @@ namespace HMGreenCityMLM.Controllers
             return RedirectToAction("ChangePassword", "Setting");
         }
 
+
+
+
+
     }
 }

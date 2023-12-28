@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using HMGreenCityMLM.Models;
 using HMGreenCityMLM.Filter;
+using Newtonsoft.Json;
 
 namespace HMGreenCityMLM.Controllers
 {
@@ -1490,6 +1491,68 @@ namespace HMGreenCityMLM.Controllers
         //    }
         //    return Json(model, JsonRequestBehavior.AllowGet);
         //}
+
+
+        public ActionResult GetMenuDetails(string URL)
+        {
+            try
+            {
+                Master model = new Master();
+                model.Fk_UserId = Session["Pk_AdminId"].ToString();
+                model.UserType = Session["UserTypeName"].ToString();
+                model.Url = URL;
+                DataSet ds = model.GetMenuPermissionList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        var MenuList = JsonConvert.SerializeObject(ds.Tables[0]);
+                        return Json(MenuList, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("0", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Json("0", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult GetStateCity(string Pincode)
+        {
+            try
+            {
+                Common model = new Common();
+                model.PinCode = Pincode;
+
+                #region GetStateCity
+                DataSet dsStateCity = model.GetStateCity();
+                if (dsStateCity != null && dsStateCity.Tables[0].Rows.Count > 0)
+                {
+                    model.State = dsStateCity.Tables[0].Rows[0]["State"].ToString();
+                    model.City = dsStateCity.Tables[0].Rows[0]["City"].ToString();
+                    model.Result = "yes";
+                }
+                else
+                {
+                    model.State = model.City = "";
+                    model.Result = "no";
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
 
     }
 }

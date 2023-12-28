@@ -28,6 +28,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-row">
+
+                        <div class="form-group col-md-3">
+                             <label>Company Name</label>
+                             @Html.DropDownListFor(m => m.Fk_CompanyId, new SelectList(ViewBag.ddlcompany, "Value", "Text"), new { @class = "form-control" })
+                        </div>
                         <div class="form-group col-md-3">
                             <label>Login ID </label>
                             @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
