@@ -1,27 +1,23 @@
 ﻿@model HMGreenCityMLM.Models.Reports
 
 @{
-    ViewBag.Title = "DownlineRankAchieverReports";
+    ViewBag.Title = "DownlineRankAchieverAssociateReports";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 
-@using (Html.BeginForm("DownlineRankAchieverReports", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("DownlineRankAchieverAssociateReports", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-
+    
     <section class="section">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h6 class="mb-0">Downline Rank Achiever Reports</h6>
-                            @*<span style="color: red">
-                                    @TempData["Product"]
-                                </span>*@
-                            @*<button class="btn btn-info"><a href="/Master/ProductMaster" class="text-white">Add New</a></button>*@
+                            <h6 class="mb-0">Downline Rank Achiever Associate Reports</h6>
+                            <button class="btn btn-info"><a href="/User/DownlineRankAchieverReports" class="text-white">Back</a></button>
                         </div>
                         <p style="color: red;display: block; margin-bottom:0px; text-align:center">
                         </p>
@@ -38,26 +34,22 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        <th>Rank Images</th>
-                                        <th>Rank Name</th>
-                                        <th>Total Achiever Left</th>
-                                        <th>Total Achiever Right</th>
+                                        <th>LoginId</th>
+                                        <th>Associate Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
                                     {
-                                        if (Model.lstdownlineAchieverreport != null)
+                                        if (Model.lstdownAchieverAssoreport != null)
                                         {
                                             int i = 1;
-                                            foreach (var Item in Model.lstdownlineAchieverreport)
+                                            foreach (var Item in Model.lstdownAchieverAssoreport)
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    <td><img src="@Item.RewardImage" alt="@Item.RankName" width="50" height="50"></td>
-                                                    <td>@Item.RankName</td>
-                                                    <td><a href="/User/DownlineRankAchieverAssociateReports?RankId=@Item.FK_RankId">@Item.TotalAchieverLeft</a></td>
-                                                    <td><a href="/User/DownlineRankAchieverAssociateReports?RankId=@Item.FK_RankId">@Item.TotalAchieverRight</a></td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Name</td>
                                                 </tr>
                                                 i++;
                                             }
@@ -73,4 +65,6 @@
         </div>
     </section>
 }
+
+
 

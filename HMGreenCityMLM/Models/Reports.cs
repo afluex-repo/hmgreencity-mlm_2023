@@ -127,6 +127,9 @@ namespace HMGreenCityMLM.Models
         public List<Reports> lstRewardList { get; set; }
         public List<Reports> lstAdvancePaymentReport { get; set; }
 
+        public List<Reports> lstdownlineAchieverreport { get; set; }
+        public List<Reports> lstdownAchieverAssoreport { get; set; }
+
         public string UpgradtionDate { get; set; }
 
         public string Package { get; set; }
@@ -177,6 +180,11 @@ namespace HMGreenCityMLM.Models
         public string Gender { get; set; }
         public string Response { get; set; }
         public string RegistrationBy { get; set; }
+
+        public string RankName { get; set; }
+        public string FK_RankId { get; set; }
+        public string TotalAchieverRight { get; set; }
+        public string TotalAchieverLeft { get; set; }
 
 
         public List<Reports> lstDefaultAssociateList { get; set; }
@@ -959,7 +967,25 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
-       
+
+        public DataSet GetDownlineRankAchiever()
+        {
+            SqlParameter[] para = {   new SqlParameter("@FK_UserId", Fk_UserId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverReports", para);
+            return ds;
+        }
+
+
+        public DataSet DownlineRankAchieverAssociateReports()
+        {
+            SqlParameter[] para = {
+                                      //new SqlParameter("@FK_UserId", Fk_UserId),
+                                      new SqlParameter("@FK_RankId", FK_RankId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverAssociateReports", para);
+            return ds;
+        }
     }
 }
 

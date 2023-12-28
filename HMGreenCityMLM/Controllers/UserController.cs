@@ -1059,8 +1059,55 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult DownlineRankAchieverReports()
         {
-            return View();
+            Reports model = new Reports();
+            try
+            {
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.GetDownlineRankAchiever();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Reports> lstdownlineAchieverreport = new List<Reports>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.FK_RankId = r["PK_RankId"].ToString();
+                        obj.RankName = r["RankName"].ToString();
+                        obj.RewardImage = r["ImgUrl"].ToString();
+                        obj.TotalAchieverLeft = r["TotalAchieverLeft"].ToString();
+                        obj.TotalAchieverRight = r["TotalAchieverRight"].ToString();
+                        lstdownlineAchieverreport.Add(obj);
+                    }
+                    model.lstdownlineAchieverreport = lstdownlineAchieverreport;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
         }
 
+        public ActionResult DownlineRankAchieverAssociateReports(string RankId)
+        {
+                Reports model = new Reports();
+                model.FK_RankId = RankId;
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.DownlineRankAchieverAssociateReports();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Reports> lstdownAchieverAssoreport = new List<Reports>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Fk_UserId = r["Pk_UserId"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        lstdownAchieverAssoreport.Add(obj);
+                    }
+                    model.lstdownAchieverAssoreport = lstdownAchieverAssoreport;
+                }
+
+            return View(model);
+        }
     }
 }
