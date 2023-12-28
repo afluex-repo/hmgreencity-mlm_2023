@@ -843,6 +843,15 @@ namespace HMGreenCityMLM.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         Wallet obj = new Wallet();
+                        //obj.LoginId = r["LoginID"].ToString();
+                        //obj.DisplayName = r["FirstName"].ToString();
+                        //obj.Amount = r["Amount"].ToString();
+                        //obj.PaymentDate = r["PaymentDate"].ToString();
+                        //obj.PaymentMode = r["PaymentMode"].ToString();
+                        //obj.TransactionNo = r["PayMode"].ToString();
+                        //obj.Description = r["Description"].ToString();
+                        //Sum = Sum + Convert.ToDecimal(r["Amount"]);
+
                         obj.LoginId = r["LoginID"].ToString();
                         obj.DisplayName = r["FirstName"].ToString();
                         obj.Amount = r["Amount"].ToString();
@@ -851,6 +860,11 @@ namespace HMGreenCityMLM.Controllers
                         obj.TransactionNo = r["PayMode"].ToString();
                         obj.Description = r["Description"].ToString();
                         Sum = Sum + Convert.ToDecimal(r["Amount"]);
+                        obj.BankName = r["BankName"].ToString();
+                        obj.BankBranch = r["BankBranch"].ToString();
+                        obj.TransactionNumber = r["TransactionNo"].ToString();
+                        obj.TransactionDate = r["TransactionDate"].ToString();
+
                         lstReport.Add(obj);
                     }
                     ViewBag.Total = Sum;
@@ -891,8 +905,13 @@ namespace HMGreenCityMLM.Controllers
                         obj.Amount = r["Amount"].ToString();
                         obj.PaymentDate = r["PaymentDate"].ToString();
                         obj.PaymentMode = r["PaymentMode"].ToString();
-                        obj.Description = r["PayMode"].ToString();
+                        obj.TransactionNo = r["PayMode"].ToString();
+                        obj.Description = r["Description"].ToString();
                         Sum = Sum + Convert.ToDecimal(r["Amount"]);
+                        obj.BankName = r["BankName"].ToString();
+                        obj.BankBranch = r["BankBranch"].ToString();
+                        obj.TransactionNumber = r["TransactionNo"].ToString();
+                        obj.TransactionDate = r["TransactionDate"].ToString();
                         lstReport.Add(obj);
                     }
                     ViewBag.Total = Sum;
