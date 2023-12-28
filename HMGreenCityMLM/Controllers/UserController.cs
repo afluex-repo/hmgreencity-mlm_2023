@@ -1056,5 +1056,11 @@ namespace HMGreenCityMLM.Controllers
             return View();
         }
 
+
+        public ActionResult DownlineRankAchieverReports()
+        {
+            return View();
+        }
+
     }
 }
