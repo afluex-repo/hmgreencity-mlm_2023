@@ -1105,10 +1105,11 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
         }
 
-        public ActionResult DownlineRankAchieverAssociateReports(string RankId)
+        public ActionResult DownlineRankAchieverAssociateReports(string RankId,string Leg)
         {
             Reports model = new Reports();
             model.FK_RankId = RankId;
+            model.Leg = Leg;
             if (model.FK_RankId != null) { 
                 model.Fk_UserId = Session["Pk_userId"].ToString();
                 DataSet ds = model.DownlineRankAchieverAssociateReports();

@@ -980,8 +980,9 @@ namespace HMGreenCityMLM.Models
         public DataSet DownlineRankAchieverAssociateReports()
         {
             SqlParameter[] para = {
-                                      //new SqlParameter("@FK_UserId", Fk_UserId),
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
                                       new SqlParameter("@FK_RankId", FK_RankId),
+                                      new SqlParameter("@Leg", Leg),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverAssociateReports", para);
             return ds;
