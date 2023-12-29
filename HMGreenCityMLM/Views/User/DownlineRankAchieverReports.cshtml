@@ -21,7 +21,7 @@
                             @*<span style="color: red">
                                     @TempData["Product"]
                                 </span>*@
-                            @*<button class="btn btn-info"><a href="/Master/ProductMaster" class="text-white">Add New</a></button>*@
+                            <a href="/User/BinaryTree" class="btn btn-info text-white">Go To Tree</a>
                         </div>
                         <p style="color: red;display: block; margin-bottom:0px; text-align:center">
                         </p>
@@ -56,8 +56,8 @@
                                                     <td>@i</td>
                                                     <td><img src="@Item.RewardImage" alt="@Item.RankName" width="50" height="50"></td>
                                                     <td>@Item.RankName</td>
-                                                    <td><a href="/User/DownlineRankAchieverAssociateReports?RankId=@Item.FK_RankId">@Item.TotalAchieverLeft</a></td>
-                                                    <td><a href="/User/DownlineRankAchieverAssociateReports?RankId=@Item.FK_RankId">@Item.TotalAchieverRight</a></td>
+                                                    <td><a href="/User/DownlineRankAchieverAssociateReports?RankId=@Item.FK_RankId&Leg=L">@Item.TotalAchieverLeft</a></td>
+                                                    <td><a href="/User/DownlineRankAchieverAssociateReports?RankId=@Item.FK_RankId&Leg=R">@Item.TotalAchieverRight</a></td>
                                                 </tr>
                                                 i++;
                                             }
