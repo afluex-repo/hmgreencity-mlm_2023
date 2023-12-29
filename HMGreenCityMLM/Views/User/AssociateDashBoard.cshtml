@@ -52,11 +52,110 @@
     }
 
    canvas{
-       width: 100%;
-        height: 100%;
+         width: 100%;
+         height: 100%;
         overflow: hidden!important;
         position: absolute;
        }
+
+
+    @@media (max-width:767px) {
+        #congratulation .modal-content {
+            height: 396px !important;
+        }
+    }
+
+    #congratulation .modal-content {
+        background-size: cover;
+        /*background-image: url('../../assetsAdmin/img/congratulation_hm.png');*/
+        /*background-image: url('../../assetsAdmin/img/congratulation_o.png');*/
+        background-image: url('../../assetsAdmin/img/congratulation_.png');
+        height: 500px;
+        position: relative;
+    }
+
+        #congratulation .modal-content .modal-body img {
+            width: 104px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 16%;
+            text-align: center;
+            margin: auto;
+        }
+
+        #congratulation .modal-content .modal-body h4 {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            text-align: center;
+            bottom: 6%;
+            color: #000;
+            font-family: ui-serif;
+        }
+
+
+    /*rank modal css*/
+    @@media (max-width:767px) {
+        #rank .modal-content {
+            height: 396px !important;
+        }
+    }
+
+    #rank .modal-content {
+        background-size: cover;
+        background-image: url('../../assetsAdmin/img/congratulation_.png');
+        height: 500px;
+        position: relative;
+    }
+        /*#rank .modal-content .modal-body img{
+       width: 104px;
+        position: absolute;
+        left: 0;
+        right:0;
+        bottom: 16%;
+        text-align: center;
+        margin: auto;
+    }*/
+        #rank .modal-content .modal-body h4 {
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        #rank .modal-content h6 {
+            color: #fff;
+            position: relative;
+        }
+
+        #rank .modal-content .modal-body .contact-list li {
+            border-color: #1a1a1a;
+            display: flex;
+        }
+
+            #rank .modal-content .modal-body .contact-list li img {
+                width: 50px;
+                height: 50px;
+                border: 1px solid #fff;
+                padding: 5px;
+            }
+
+    #rank .modal-body .contact-list li .media-body .media-title {
+        width: 144px;
+    }
+
+    #rank .modal-body .contact-list {
+        border-color: #1a1a1a;
+        margin: 0px;
+    }
+
+        #rank .modal-body .contact-list li .media-body .media-title {
+            color: #fff;
+        }
+
+        #rank .modal-body .contact-list li .media-items {
+            color: #fff;
+        }
 </style>
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -453,94 +552,7 @@
         </div>
     </div>
 </div>
-<style>
-    @@media (max-width:767px) {
-        #congratulation .modal-content {
-            height: 396px !important;
-        }
-    }
-    #congratulation .modal-content {
-        background-size: cover;
-        /*background-image: url('../../assetsAdmin/img/congratulation_hm.png');*/
-        /*background-image: url('../../assetsAdmin/img/congratulation_o.png');*/
-        background-image: url('../../assetsAdmin/img/congratulation_.png');
-        height: 500px;
-        position: relative;
-    }
-    #congratulation .modal-content .modal-body img{
-       width: 104px;
-        position: absolute;
-        left: 0;
-        right:0;
-        bottom: 16%;
-        text-align: center;
-        margin: auto;
-    }
-        #congratulation .modal-content .modal-body h4 {
-            position: absolute;
-            left:0px;
-            right:0px;
-            text-align:center;
-            bottom: 6%;
-            color: #000;
-            font-family: ui-serif;
-        }
 
-
-/*rank modal css*/
-@@media (max-width:767px) {
-        #rank .modal-content {
-            height: 396px !important;
-        }
-    }
-    #rank .modal-content {
-        background-size: cover;
-        background-image: url('../../assetsAdmin/img/congratulation_.png');
-        height: 500px;
-        position: relative;
-    }
-    /*#rank .modal-content .modal-body img{
-       width: 104px;
-        position: absolute;
-        left: 0;
-        right:0;
-        bottom: 16%;
-        text-align: center;
-        margin: auto;
-    }*/
-        #rank .modal-content .modal-body h4 {
-            text-align:center;
-            color: #fff;
-            position: relative;
-        }
-        #rank .modal-content h6{
-                color: #fff;
-                position: relative;
-        }
-        #rank .modal-content .modal-body .contact-list li{
-           border-color:#1a1a1a;
-               display: flex;
-        }
-        #rank .modal-content .modal-body .contact-list li img{
-          width: 50px;
-        height: 50px;
-        border: 1px solid #fff;
-        padding: 5px;
-        }
-        #rank .modal-body .contact-list li .media-body .media-title {
-                   width: 144px; 
-          }
-            #rank .modal-body .contact-list{
-           border-color:#1a1a1a;
-           margin:0px;
-        }
-         #rank .modal-body .contact-list li .media-body .media-title {
-            color:#fff;
-        }
-         #rank .modal-body .contact-list li .media-items {
-            color:#fff;
-        }
-</style>
 
 @if (Model.ImageURL == "null" || Model.ImageURL == "" || Model.AchiverRank == "null" || Model.AchiverRank == "")
 {
