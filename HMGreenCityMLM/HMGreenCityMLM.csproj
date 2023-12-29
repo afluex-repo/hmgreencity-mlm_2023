@@ -6532,6 +6532,7 @@
     <Content Include="Views\User\DownlineRegistration.cshtml" />
     <Content Include="Views\User\ConfirmRegistrationForDown.cshtml" />
     <Content Include="Views\User\DownlineRankAchieverReports.cshtml" />
+    <Content Include="Views\User\DownlineRankAchieverAssociateReports.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

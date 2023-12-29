@@ -131,13 +131,14 @@
         #rank .modal-content .modal-body .contact-list li {
             border-color: #1a1a1a;
             display: flex;
+               height: 50px;
         }
 
             #rank .modal-content .modal-body .contact-list li img {
-                width: 50px;
-                height: 50px;
-                border: 1px solid #fff;
-                padding: 5px;
+                width: 55px;
+                height:55px;
+                /*border: 1px solid #fff;
+                padding: 5px;*/
             }
 
     #rank .modal-body .contact-list li .media-body .media-title {
@@ -156,6 +157,7 @@
         #rank .modal-body .contact-list li .media-items {
             color: #fff;
         }
+                        }
 </style>
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -593,94 +595,42 @@ else
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+
             <div class="modal-body p-0">
-                <canvas id="birthday"></canvas> 
-                <h4>Total Rank Achievers</h4>
-                <div class="d-flex justify-content-around">
-                    <h6>Rank Name</h6>
-                    <h6>Total Achievers</h6>
-                </div>
+                <canvas id="birthday"></canvas>
+                <h4 class="mb-3 h2">Total Rank Achievers</h4>
+                @*<div class="d-flex justify-content-around">
+                <h6>Rank Name</h6>
+                <h6>Total Achievers</h6>
+            </div>*@
                 <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <ul class="list-unstyled mt-0 user-details list-unstyled-border list-unstyled-noborder contact-list">
-                            <li class="media mb-3 active">
-                                <img alt="image" class="mr-3 rounded-circle" width="35" src="/assetsAdmin/img/user.png">
-                                <div class="media-body">
-                                    <div class="media-title">Cara Stevens</div>
-                                </div>
-                                <div class="media-items">
-                                    <div class="media-item">
-                                        <div class="media-value">21</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="media mb-3">
-                                <img alt="image" class="mr-3 rounded-circle" width="35" src="/assetsAdmin/img/user.png">
-                                <div class="media-body">
-                                    <div class="media-title">Hasan Basri</div>
-                                </div>
-                                <div class="media-items">
-                                    <div class="media-item">
-                                        <div class="media-value">22</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="media mb-3">
-                                <img alt="image" class="mr-3 rounded-circle" width="35" src="/assetsAdmin/img/user.png">
-                                <div class="media-body">
-                                    <div class="media-title">John Doe</div>
-                                </div>
-                                <div class="media-items">
-                                    <div class="media-item">
-                                        <div class="media-value">45</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="media mb-3">
-                                <img alt="image" class="mr-3 rounded-circle" width="35" src="/assetsAdmin/img/user.png">
-                                <div class="media-body">
-                                    <div class="media-title">Ashton Cox</div>
-                                </div>
-                                <div class="media-items">
-                                    <div class="media-item">
-                                        <div class="media-value">16</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="media mb-3">
-                                <img alt="image" class="mr-3 rounded-circle" width="35" src="/assetsAdmin/img/user.png">
-                                <div class="media-body">
-                                    <div class="media-title">Sarah Smith</div>
-                                </div>
-                                <div class="media-items">
-                                    <div class="media-item">
-                                        <div class="media-value">09</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="media mb-3">
-                                <img alt="image" class="mr-3 rounded-circle" width="35" src="/assetsAdmin/img/user.png">
-                                <div class="media-body">
-                                    <div class="media-title">Sarah Smith</div>
-                                </div>
-                                <div class="media-items">
-                                    <div class="media-item">
-                                        <div class="media-value">09</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <img alt="image" class="mr-3 rounded-circle" width="35" src="/assetsAdmin/img/user.png">
-                                <div class="media-body">
-                                    <div class="media-title">Sarah Smith</div>
-                                </div>
-                                <div class="media-items">
-                                    <div class="media-item">
-                                        <div class="media-value">09</div>
-                                        @*<div class="media-label">Tasks</div>*@
-                                    </div>
-                                </div>
-                            </li>
+                    <div class="col-lg-8 mt-lg-5">
+                        <ul class="list-unstyled mt-0 user-details  list-unstyled-noborder contact-list">
+                            @if (Model != null)
+                            {
+                                if (Model.lstachiver != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstachiver)
+                                    {
+
+                                        <li class="media my-3">
+                                            <img alt="image" class="mr-3 rounded-circle" width="50" src="@Item.ImageURL">
+                                            <div class="media-body">
+                                                <div class="media-title">@Item.AchiverRank</div>
+                                            </div>
+                                            <div class="media-items">
+                                                <div class="media-item">
+                                                    <div class="media-value">@Item.Achiver</div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        i++;
+                                    }
+                                }
+                            }
                         </ul>
                     </div>
                 </div>
