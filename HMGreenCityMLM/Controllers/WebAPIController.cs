@@ -1579,7 +1579,7 @@ namespace HMGreenCityMLM.Controllers
 
         #endregion
 
-
+        #region DownlineRegistration
 
         public ActionResult DownlineRegistrationAction(DownlineRegistrationAPI model)
         {
@@ -1663,7 +1663,7 @@ namespace HMGreenCityMLM.Controllers
             }
         }
 
-
+        #endregion
 
     }
 }
