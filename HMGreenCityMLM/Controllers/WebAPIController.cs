@@ -544,7 +544,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
                     obj.UnpaidIncome = ds.Tables[0].Rows[0]["UpdaidIncome"].ToString();
                     obj.SelfBusiness = ds.Tables[0].Rows[0]["TotalTopUp"].ToString();
-
+                    obj.TotalHold = ds.Tables[0].Rows[0]["TotalHold"].ToString();
 
                     obj.PaidBusinessLeft = ds.Tables[2].Rows[0]["PaidBusinessLeft"].ToString();
                     obj.PaidBusinessRight = ds.Tables[2].Rows[0]["PaidBusinessRight"].ToString();
