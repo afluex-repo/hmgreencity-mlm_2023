@@ -22,6 +22,11 @@ namespace HMGreenCityMLM.Models
         public string AchiverRank { get; set; }
         public string ImageURL { get; set; }
 
+        public string FK_RankId { get; set; }
+        public string Achiver { get; set; }
+
+        public List<DashBoard> lstachiver { get; set; }
+
         public DataSet GetDashBoardDetails()
         {
 
@@ -35,14 +40,22 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate",para); 
             return ds;
         }
-        
+
+        public DataSet TotalRankAchieverList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("TotalRankAchieverList");
+            return ds;
+        }
+
 
         public string LoginId { get; set; }
+        public string Name { get; set; }
 
 
-     
+
 
         public List<DashBoard> lstmessages { get; set; }
+        public List<DashBoard> lstyellowlst { get; set; }
 
         public string Pk_MessageId { get; set; }
 

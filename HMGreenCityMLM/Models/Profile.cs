@@ -133,6 +133,13 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+        public DataSet GetUserListForAutoSearch()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId) };
+            DataSet ds = DBHelper.ExecuteQuery("GetUserListForDown", para);
+            return ds;
+        }
+
 
         public string PayoutNo { get; set; }
 

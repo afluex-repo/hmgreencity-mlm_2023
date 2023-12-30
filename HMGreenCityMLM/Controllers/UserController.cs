@@ -32,6 +32,7 @@ namespace HMGreenCityMLM.Controllers
                 ViewBag.TotalAdvance = ds.Tables[0].Rows[0]["TotalAdvance"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                ViewBag.TotalHold = ds.Tables[0].Rows[0]["TotalHold"].ToString();
 
 
                 ViewBag.PaidBusinessLeft = ds.Tables[2].Rows[0]["PaidBusinessLeft"].ToString();
@@ -126,8 +127,26 @@ namespace HMGreenCityMLM.Controllers
                 ViewBag.ImageURL = dss.Tables[4].Rows[0]["ImageURL"].ToString();
                 ViewBag.AchiverRank = dss.Tables[4].Rows[0]["AchiverRank"].ToString();
             }
-            #endregion 
+            #endregion
 
+            #region Total Rank AchieverList
+            List<DashBoard> lst2 = new List<DashBoard>();
+            DataSet dss1 = model.TotalRankAchieverList();
+
+            if (dss1 != null && dss1.Tables.Count > 0 && dss1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss1.Tables[0].Rows)
+                {
+                    DashBoard Obj = new DashBoard();
+                    Obj.FK_RankId = r["PK_RankId"].ToString();
+                    Obj.AchiverRank = r["RankName"].ToString();
+                    Obj.ImageURL = r["ImgUrl"].ToString();
+                    Obj.Achiver = r["TotalRank"].ToString();
+                    lst2.Add(Obj);
+                }
+                model.lstachiver = lst2;
+            }
+            #endregion 
             return View(model);
         }
 
@@ -377,7 +396,7 @@ namespace HMGreenCityMLM.Controllers
             {
                 obj.State = ds.Tables[0].Rows[0]["State"].ToString();
                 obj.City = ds.Tables[0].Rows[0]["City"].ToString();
-                obj.Result = "1";
+                obj.Result = "yes";
             }
             else
             {
@@ -877,6 +896,237 @@ namespace HMGreenCityMLM.Controllers
             {
 
             }
+            return View(model);
+        }
+
+       
+        public ActionResult GetSponsorName(string ReferBy)
+        {
+            Reports obj = new Reports();
+            obj.ReferBy = ReferBy;
+            DataSet ds = obj.GetDownMemberDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
+                obj.Result = "Yes";
+            }
+            else { obj.Result = "Invalid SponsorId"; }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult DownlineRegistration(string Pid, string lg)
+        {
+            Reports obj = new Reports();
+            #region ForQueryString
+            if (Request.QueryString["Pid"] != null)
+            {
+                obj.SponsorId = Request.QueryString["Pid"].ToString();
+            }
+            if (Request.QueryString["lg"] != null)
+            {
+                obj.Leg = Request.QueryString["lg"].ToString();
+                if (obj.Leg == "Right")
+                {
+                    ViewBag.RightChecked = "checked";
+                    ViewBag.LeftChecked = "";
+                    ViewBag.Disabled = "Disabled";
+                }
+                else
+                {
+                    ViewBag.RightChecked = "";
+                    ViewBag.LeftChecked = "checked";
+                    ViewBag.Disabled = "Disabled";
+                }
+            }
+            if (Request.QueryString["Pid"] != null)
+            {
+                Reports objcomm = new Reports();
+                objcomm.ReferBy = obj.SponsorId;
+                DataSet ds = objcomm.GetDownMemberDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+
+                    obj.SponsorName = ds.Tables[0].Rows[0]["FullName"].ToString();
+
+
+
+                }
+            }
+            else
+            {
+                ViewBag.RightChecked = "";
+                ViewBag.LeftChecked = "checked";
+            }
+            #endregion ForQueryString
+            #region ddlgender
+            List<SelectListItem> ddlgender = Common.BindGender();
+            ViewBag.ddlgender = ddlgender;
+            #endregion ddlgender
+            return View(obj);
+        }
+
+
+
+     
+        public ActionResult DownlineRegistrationAction(string SponsorId, string FirstName, string LastName, string Email, string MobileNo, string PanCard, string AdharNo, string Address, string Gender, string PinCode, string Leg)
+        {
+            Reports obj = new Reports();
+            try
+            {
+                obj.SponsorId = SponsorId;
+                obj.FirstName = FirstName;
+                obj.LastName = LastName;
+                obj.Email = Email;
+                obj.MobileNo = MobileNo;
+                obj.PanCard = PanCard;
+                obj.AdharNo = AdharNo;
+                obj.Address = Address;
+                obj.RegistrationBy = "Web";
+                obj.Gender = Gender;
+                obj.PinCode = PinCode;
+                obj.Leg = Leg;
+                obj.AddedBy = Session["Pk_userId"].ToString();
+                string password = Common.GenerateRandom();
+                obj.Password = Crypto.Encrypt(password);
+                DataSet ds = obj.SaveDownlineRegistration();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        Session["DisplayName"] = ds.Tables[0].Rows[0]["Name"].ToString();
+                        Session["PassWord"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
+                        Session["Transpassword"] = ds.Tables[0].Rows[0]["Password"].ToString();
+                        Session["MobileNo"] = ds.Tables[0].Rows[0]["MobileNo"].ToString();
+
+                        obj.Response = "1";
+
+                    }
+                    else
+                    {
+                        obj.Response = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Response = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetAdharDetails(string AdharNumber)
+        {
+            try
+            {
+                Reports model = new Reports();
+                model.AdharNo = AdharNumber;
+                #region GetAdharDetails
+                DataSet dsadhardetails = model.GetAdharDetail();
+                if (dsadhardetails != null && dsadhardetails.Tables[0].Rows.Count > 0)
+                {
+                    if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                    }
+                    else if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Result = "no";
+                    }
+                }
+                else
+                {
+                    model.Result = "no";
+
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        public ActionResult GetUserListForAutoSearch()
+        {
+            Profile obj = new Profile();
+            List<Profile> lst = new List<Profile>();
+            obj.LoginId = Session["LoginId"].ToString();
+            DataSet ds = obj.GetUserListForAutoSearch();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Profile objList = new Profile();
+                    objList.UserName = dr["Fullname"].ToString();
+                    objList.LoginIDD = dr["LoginId"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult ConfirmRegistrationForDown()
+        {
+            return View();
+        }
+
+
+        public ActionResult DownlineRankAchieverReports()
+        {
+            Reports model = new Reports();
+            try
+            {
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.GetDownlineRankAchiever();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Reports> lstdownlineAchieverreport = new List<Reports>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.FK_RankId = r["PK_RankId"].ToString();
+                        obj.RankName = r["RankName"].ToString();
+                        obj.RewardImage = r["ImgUrl"].ToString();
+                        obj.TotalAchieverLeft = r["TotalAchieverLeft"].ToString();
+                        obj.TotalAchieverRight = r["TotalAchieverRight"].ToString();
+                        lstdownlineAchieverreport.Add(obj);
+                    }
+                    model.lstdownlineAchieverreport = lstdownlineAchieverreport;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+
+        public ActionResult DownlineRankAchieverAssociateReports(string RankId,string Leg)
+        {
+            Reports model = new Reports();
+            model.FK_RankId = RankId;
+            model.Leg = Leg;
+            if (model.FK_RankId != null) { 
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.DownlineRankAchieverAssociateReports();
+                if (ds != null && ds.Tables[0].Rows.Count > 0){
+                List<Reports> lstdownAchieverAssoreport = new List<Reports>();
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Fk_UserId = r["Pk_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    lstdownAchieverAssoreport.Add(obj);
+                }
+                model.lstdownAchieverAssoreport = lstdownAchieverAssoreport;
+             }
+        }
+
             return View(model);
         }
     }

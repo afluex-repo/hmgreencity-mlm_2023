@@ -585,7 +585,28 @@ namespace HMGreenCityMLM.Controllers
 
                     #endregion
 
-                    
+
+                    #region Total Rank AchieverList
+
+                    List<AssoeDashtotalachiverrank> lst2 = new List<AssoeDashtotalachiverrank>();
+                    DataSet dss1 = assocdash.GetAssociateDashboard();
+
+                    if (dss1 != null && dss1.Tables.Count > 0 && dss1.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in dss1.Tables[5].Rows)
+                        {
+                            AssoeDashtotalachiverrank Obj2 = new AssoeDashtotalachiverrank();
+                            Obj2.FK_RankId = r["PK_RankId"].ToString();
+                            Obj2.AchiverRankpopup = r["RankName"].ToString();
+                            Obj2.ImageURLpopup = r["ImgUrl"].ToString();
+                            Obj2.Achiver = r["TotalRank"].ToString();
+                            lst2.Add(Obj2);
+                        }
+                        obj.lstachiver = lst2;
+                    }
+
+                    #endregion
+
                     obj.Status = "0";
                     obj.Message = "Data Fetched";
                     return Json(obj, JsonRequestBehavior.AllowGet);
