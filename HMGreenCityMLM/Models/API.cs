@@ -362,6 +362,7 @@ namespace HMGreenCityMLM.Models
 
     public class AssociateDashBoardAPI
     {
+        public List<AssoeDashtotalachiverrank> lstachiver { get; set; }
         public List<AssoeDashInvst> lstinvestment { get; set; }
         public string SelfBusiness { get; set; }
         public string TotalHold { get; set; }
@@ -402,6 +403,17 @@ namespace HMGreenCityMLM.Models
         }
 
     }
+
+    public class AssoeDashtotalachiverrank
+    {
+        public List<AssoeDashtotalachiverrank> lstachiver { get; set; }
+        public string ImageURLpopup { get; set; }
+        public string AchiverRankpopup { get; set; }
+        public string FK_RankId { get; set; }
+        public string Achiver { get; set; }
+    }
+
+
     public class Response
     {
         public string Status { get; set; }
