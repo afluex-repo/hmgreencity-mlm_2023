@@ -365,6 +365,7 @@ namespace HMGreenCityMLM.Models
         public List<AssoeDashtotalachiverrank> lstachiver { get; set; }
         public List<AssoeDashInvst> lstinvestment { get; set; }
         public string SelfBusiness { get; set; }
+        public string TotalHold { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
         public string TotalDownline { get; set; }
