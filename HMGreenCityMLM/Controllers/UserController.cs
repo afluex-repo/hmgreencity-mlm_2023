@@ -127,8 +127,26 @@ namespace HMGreenCityMLM.Controllers
                 ViewBag.ImageURL = dss.Tables[4].Rows[0]["ImageURL"].ToString();
                 ViewBag.AchiverRank = dss.Tables[4].Rows[0]["AchiverRank"].ToString();
             }
-            #endregion 
+            #endregion
 
+            #region Total Rank AchieverList
+            List<DashBoard> lst2 = new List<DashBoard>();
+            DataSet dss1 = model.TotalRankAchieverList();
+
+            if (dss1 != null && dss1.Tables.Count > 0 && dss1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss1.Tables[0].Rows)
+                {
+                    DashBoard Obj = new DashBoard();
+                    Obj.FK_RankId = r["PK_RankId"].ToString();
+                    Obj.AchiverRank = r["RankName"].ToString();
+                    Obj.ImageURL = r["ImgUrl"].ToString();
+                    Obj.Achiver = r["TotalRank"].ToString();
+                    lst2.Add(Obj);
+                }
+                model.lstachiver = lst2;
+            }
+            #endregion 
             return View(model);
         }
 
@@ -1059,8 +1077,57 @@ namespace HMGreenCityMLM.Controllers
 
         public ActionResult DownlineRankAchieverReports()
         {
-            return View();
+            Reports model = new Reports();
+            try
+            {
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.GetDownlineRankAchiever();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Reports> lstdownlineAchieverreport = new List<Reports>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.FK_RankId = r["PK_RankId"].ToString();
+                        obj.RankName = r["RankName"].ToString();
+                        obj.RewardImage = r["ImgUrl"].ToString();
+                        obj.TotalAchieverLeft = r["TotalAchieverLeft"].ToString();
+                        obj.TotalAchieverRight = r["TotalAchieverRight"].ToString();
+                        lstdownlineAchieverreport.Add(obj);
+                    }
+                    model.lstdownlineAchieverreport = lstdownlineAchieverreport;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
         }
 
+        public ActionResult DownlineRankAchieverAssociateReports(string RankId,string Leg)
+        {
+            Reports model = new Reports();
+            model.FK_RankId = RankId;
+            model.Leg = Leg;
+            if (model.FK_RankId != null) { 
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.DownlineRankAchieverAssociateReports();
+                if (ds != null && ds.Tables[0].Rows.Count > 0){
+                List<Reports> lstdownAchieverAssoreport = new List<Reports>();
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.Fk_UserId = r["Pk_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    lstdownAchieverAssoreport.Add(obj);
+                }
+                model.lstdownAchieverAssoreport = lstdownAchieverAssoreport;
+             }
+        }
+
+            return View(model);
+        }
     }
 }
