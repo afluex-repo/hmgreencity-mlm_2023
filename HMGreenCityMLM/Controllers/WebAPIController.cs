@@ -544,7 +544,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
                     obj.UnpaidIncome = ds.Tables[0].Rows[0]["UpdaidIncome"].ToString();
                     obj.SelfBusiness = ds.Tables[0].Rows[0]["TotalTopUp"].ToString();
-
+                    obj.TotalHold = ds.Tables[0].Rows[0]["TotalHold"].ToString();
 
                     obj.PaidBusinessLeft = ds.Tables[2].Rows[0]["PaidBusinessLeft"].ToString();
                     obj.PaidBusinessRight = ds.Tables[2].Rows[0]["PaidBusinessRight"].ToString();
@@ -585,7 +585,28 @@ namespace HMGreenCityMLM.Controllers
 
                     #endregion
 
-                    
+
+                    #region Total Rank AchieverList
+
+                    List<AssoeDashtotalachiverrank> lst2 = new List<AssoeDashtotalachiverrank>();
+                    DataSet dss1 = assocdash.GetAssociateDashboard();
+
+                    if (dss1 != null && dss1.Tables.Count > 0 && dss1.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in dss1.Tables[5].Rows)
+                        {
+                            AssoeDashtotalachiverrank Obj2 = new AssoeDashtotalachiverrank();
+                            Obj2.FK_RankId = r["PK_RankId"].ToString();
+                            Obj2.AchiverRankpopup = r["RankName"].ToString();
+                            Obj2.ImageURLpopup = r["ImgUrl"].ToString();
+                            Obj2.Achiver = r["TotalRank"].ToString();
+                            lst2.Add(Obj2);
+                        }
+                        obj.lstachiver = lst2;
+                    }
+
+                    #endregion
+
                     obj.Status = "0";
                     obj.Message = "Data Fetched";
                     return Json(obj, JsonRequestBehavior.AllowGet);
@@ -1471,8 +1492,7 @@ namespace HMGreenCityMLM.Controllers
         #endregion
 
         #region StatusDropdown
-
-
+        
         public ActionResult StatusDropdown(State Status1)
         {
             UpdateProfile onj = new UpdateProfile();
@@ -1492,9 +1512,158 @@ namespace HMGreenCityMLM.Controllers
 
         }
 
+        #endregion
 
+        #region GetSponserList
 
+        public ActionResult GetSponserList(SponserListAPI model)
+        {
+            SponserListAPI obj = new SponserListAPI();
+            try
+            {
+                List<lstsponserlist> lstsponserlist = new List<lstsponserlist>();
+                DataSet ds = model.GetUserListForAutoSearch();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        lstsponserlist objList = new lstsponserlist();
+                        objList.UserName = dr["Fullname"].ToString();
+                        objList.LoginIDD = dr["LoginId"].ToString();
+                        lstsponserlist.Add(objList);
+                    }
+                    obj.lstsponserlist = lstsponserlist;
+
+                    obj.Status = "0";
+                    obj.Message = "Data Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch(Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         #endregion
+
+        #region GetStateCity
+
+        public ActionResult GetStateCity(PinCodeAPI model)
+        {
+            DataSet ds = model.GetStateCity();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                model.State = ds.Tables[0].Rows[0]["State"].ToString();
+                model.City = ds.Tables[0].Rows[0]["City"].ToString();
+                
+                model.Status = "0";
+                model.Message = "Name Fetched";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Status = "1";
+                model.Message = "Invalid PinCode";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region DownlineRegistration
+
+        public ActionResult DownlineRegistrationAction(DownlineRegistrationAPI model)
+        {
+            DRegistrationAPI objDR = new DRegistrationAPI();
+
+            if (model.SponsorId == "" || model.SponsorId == null)
+            {
+                objDR.Status = "1";
+                objDR.Message = "Please Enter Sponsor Id";
+                return Json(objDR, JsonRequestBehavior.AllowGet);
+            }
+            if (model.FirstName == "" || model.FirstName == null)
+            {
+                objDR.Status = "1";
+                objDR.Message = "Please Enter First Name";
+                return Json(objDR, JsonRequestBehavior.AllowGet);
+            }
+            if (model.MobileNo == "" || model.MobileNo == null)
+            {
+                objDR.Status = "1";
+                objDR.Message = "Please Enter Mobile No";
+                return Json(objDR, JsonRequestBehavior.AllowGet);
+            }
+            if (model.PanCard == "" || model.PanCard == null)
+            {
+                objDR.Status = "1";
+                objDR.Message = "Please Enter PanCard No";
+                return Json(objDR, JsonRequestBehavior.AllowGet);
+            }
+            if (model.AdharNo == "" || model.AdharNo == null)
+            {
+                objDR.Status = "1";
+                objDR.Message = "Please Enter Aadhaar No";
+                return Json(objDR, JsonRequestBehavior.AllowGet);
+            }
+            if (model.Leg == "" || model.Leg == null)
+            {
+                objDR.Status = "1";
+                objDR.Message = "Please Select Leg";
+                return Json(objDR, JsonRequestBehavior.AllowGet);
+            }
+            try
+            {
+                model.RegistrationBy = "App";
+                string password = Common.GenerateRandom();
+                model.Password = Crypto.Encrypt(password);
+                DataSet ds = model.SaveDownlineRegistration();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        objDR.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        objDR.DisplayName = ds.Tables[0].Rows[0]["Name"].ToString();
+                        objDR.PassWord= Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
+                        objDR.Transpassword = ds.Tables[0].Rows[0]["Password"].ToString();
+                        objDR.MobileNo = ds.Tables[0].Rows[0]["MobileNo"].ToString();
+
+                        objDR.Status = "0";
+                        objDR.Message = "Downline Registration Done Succesfully.";
+                        return Json(objDR, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        objDR.Status = "1";
+                        objDR.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(objDR, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    objDR.Status = "1";
+                    objDR.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(objDR, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                objDR.Status = "1";
+                objDR.Message = ex.Message;
+                return Json(objDR, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
     }
 }
