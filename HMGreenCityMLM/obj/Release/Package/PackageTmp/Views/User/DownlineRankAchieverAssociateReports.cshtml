@@ -1,0 +1,70 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "DownlineRankAchieverAssociateReports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("DownlineRankAchieverAssociateReports", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Downline Rank Achiever Associate Reports</h6>
+                            <a  href="/User/DownlineRankAchieverReports" class="btn btn-info text-white">Back</a>
+                        </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>LoginId</th>
+                                        <th>Achiever Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstdownAchieverAssoreport != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstdownAchieverAssoreport)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Name</td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+

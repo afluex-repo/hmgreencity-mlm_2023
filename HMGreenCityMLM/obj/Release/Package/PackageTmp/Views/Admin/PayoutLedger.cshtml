@@ -53,10 +53,13 @@
                                 <tr>
                                     <th>Sr No.</th>
                                     <th>Transaction Date</th>
+                                    <th>Transaction No</th>
+                                    <th>Payment Mode</th>
                                     <th>Narration</th>
                                     <th>CrAmount</th>
                                     <th>DrAMount</th>
                                     <th>Balance</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,8 +72,9 @@
                                         {
                                             <tr class="text-left">
                                                 <td>@i</td>
-
                                                 <td>@Item.AddedOn</td>
+                                                <td>@Item.TransactionNo</td>
+                                                <td>@Item.PaymentMode</td>
                                                 <td>@Item.Narration</td>
                                                 <td>@Item.CrAmount</td>
                                                 <td>@Item.DrAmount</td>

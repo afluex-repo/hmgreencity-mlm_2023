@@ -62,7 +62,9 @@
                                         int i = 1;
                                         foreach (var Item in Model.lstAssociateLoginLog)
                                         {
+                                            
                                             <tr class="text-left">
+                                               
                                                 <td>@i</td>
                                                 <td>@Item.DisplayName</td>
                                                 <td>@Item.LoginId</td>
@@ -70,6 +72,7 @@
                                                 <td>@Item.LoginDateTime</td>
                                                 <td>@Item.IP</td>
                                                 <td>@Item.Remarks</td>
+                                                
                                             </tr>
                                             i++;
                                         }
