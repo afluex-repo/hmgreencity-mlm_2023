@@ -52,7 +52,7 @@
                                 @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control" })
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 mt-2">
                                 <input type="submit" id="btnSearch" class="btn btn-success mt-4" name="Search" value="Search" />
                             </div>
                         </div>
@@ -106,16 +106,20 @@
     </section>
     //==============================================================================  
 }
-<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../../WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
 
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
     });
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
     });
 </script>
 <script>
