@@ -1089,4 +1089,57 @@ namespace HMGreenCityMLM.Models
         public string MobileNo { get; set; }
     }
 
+
+    public class DownlineRankAchieverAPI
+    {
+        public string Fk_UserId { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<lstDownlineRankAchiever> lstdownlineAchieverreport { get; set; }
+
+        public DataSet GetDownlineRankAchiever()
+        {
+            SqlParameter[] para = {   new SqlParameter("@FK_UserId", Fk_UserId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverReports", para);
+            return ds;
+        }
+    }
+
+    public class lstDownlineRankAchiever
+    {
+        public string FK_RankId { get; set; }
+        public string RankName { get; set; }
+        public string RewardImage { get; set; }
+        public string TotalAchieverLeft { get; set; }
+        public string TotalAchieverRight { get; set; }
+    }
+
+    public class DownlineRankAchieverAssociateAPI
+    {
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public string FK_RankId { get; set; }
+        public string Fk_UserId { get; set; }
+        public string Leg { get; set; }
+        public List<lstDownlineRankAchieverAssociate> lstdownAchieverAssoreporttt { get; set; }
+
+        public DataSet DownlineRankAchieverAssociateReports()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                      new SqlParameter("@FK_RankId", FK_RankId),
+                                      new SqlParameter("@Leg", Leg),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverAssociateReports", para);
+            return ds;
+        }
+    }
+
+    public class lstDownlineRankAchieverAssociate
+    {
+        public string Fk_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string Name { get; set; }
+    }
 }
