@@ -1,0 +1,315 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "UpdateProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("UpdateProfile", "Downline", FormMethod.Post, new { @id = "signupForm" }))
+{
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- users edit start -->
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-3" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account"
+                                           aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="feather icon-user mr-25"></i><span class="d-none d-sm-block">Update Profile</span>
+                                            <p style="color: red">@TempData["Registration"] </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-4 form-group">
+                                                Sponsor Id <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Sponsor Id", @onchange = "return getsponsordetails();" })
+                                                @Html.ValidationMessageFor(m => m.LoginId)
+                                                @Html.HiddenFor(m => m.LoginId)
+                                                @Html.HiddenFor(m => m.Pk_UserId)
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                Sponsor Name <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                Leg <span style="color: red">*</span> &nbsp;&nbsp;
+                                                <input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
+                                                Left &nbsp;&nbsp;
+                                                <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
+                                                Right
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                Login Id <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.LoginIDD, new { @class = "form-control", @Placeholder = "Login Id" })
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                First Name <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                Last Name
+                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                Joining Date <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.JoiningDate, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                Package
+                                                @Html.TextBoxFor(m => m.Package, new { @class = "form-control", @Placeholder = "Package" })
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                               Activation Date
+                                                @Html.TextBoxFor(m => m.FromActivationDate, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                         
+                                            <div class="col-md-4 form-group">
+                                                Mobile No <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                                @Html.ValidationMessageFor(m => m.MobileNo)
+                                            </div>
+
+                                            <div class="col-md-4 form-group">
+                                                Status
+                                                @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control" })
+                                            </div>
+                                           
+                                            <div class="col-md-6">
+                                                <a href="#" id="Register" onclick="return updateregistration();" class="btn btn-success">Update</a>
+                                                <br />
+                                            </div>
+
+                                            <br />
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" id="login" name="login" value="@Session["LoginId"]" />
+                                <input type="hidden" id="sponser" name="sponser" value="@Session["FullName"]" />
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<link href="../../AssociatePanelcss/assets/css/style.css" rel="stylesheet" />
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+        debugger;
+        var login = $("#login").val();
+        var sponser = $("#sponser").val();
+        $("#LoginId").val(login);
+        $("#SponsorId").val(login);
+        $("#SponsorName").val(sponser);
+
+        $("input").attr("autocomplete", "off");
+        debugger;
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/User/GetUserListForAutoSearch',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+                    debugger
+                    $('#SponsorId').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#LoginId').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+
+
+    function getsponsordetails() {
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        debugger;
+        $.ajax({
+            url: '/User/GetSponsorName',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { 'ReferBy': $("#LoginId").val() },
+            success: function (response) {
+                if (response.Result == "Yes") {
+                    $("#divload").css({ 'display': 'none' });
+                    $('#SponsorName').val(response.DisplayName);
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    $("#SponsorId").addClass('errortext');
+                    $('#SponsorName').val('');
+                    $('#SponsorId').val('');
+                    $('#SponsorId').focus();
+                    alert(response.Result);
+                }
+            }
+        })
+    }
+   
+
+    function updateregistration() {
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        debugger;
+
+        if ($('#SponsorId').val() == '') {
+            $("#SponsorId").addClass('errortext');
+            $('#SponsorId').focus();
+            return false;
+        }
+        if ($('#SponsorName').val() == '') {
+            $("#SponsorName").addClass('errortext');
+            $('#SponsorName').focus();
+            return false;
+        }
+        if ($('#LoginIDD').val() == '') {
+            $("#LoginIDD").addClass('errortext');
+            $('#LoginIDD').focus();
+            return false;
+        }
+        if ($('#FirstName').val() == '') {
+            $("#FirstName").addClass('errortext');
+            $('#FirstName').focus();
+            return false;
+        }
+        if ($('#JoiningDate').val() == '') {
+            $("#JoiningDate").addClass('errortext');
+            $('#JoiningDate').focus();
+            return false;
+        }
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+        if ($('#Status').val() == '') {
+            $("#Status").addClass('errortext');
+            $('#Status').focus();
+            return false;
+        }
+
+
+        var Leg = "";
+        if ($('#left').prop('checked')) {
+            Leg = "L";
+        }
+        else {
+            Leg = "R";
+        }
+
+        $.ajax({
+            url: "/Downline/UpdateProfileAction",
+            Type: "Post",
+            DataType: "JSON",
+            data: { SponsorId: $("#LoginId").val(), LoginIDD: $("#LoginIDD").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), JoiningDate: $("#JoiningDate").val(), Package: $("#Package").val(), FromActivationDate: $("#FromActivationDate").val(), MobileNo: $("#MobileNo").val(), Status: $("#Status").val(), Leg: Leg,UserId: $("#Pk_UserId").val() },
+            success: function (data) {
+                if (data.Response == "1") {
+                    window.location.href = '@Url.Action("DownLineList", "Downline")';
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    alert(data.Response);
+                }
+            }
+        });
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+</script>
+
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+
+    $('#JoiningDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
+    });
+
+    $('#FromActivationDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
+    });
+
+    
+</script>
+
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>
+
