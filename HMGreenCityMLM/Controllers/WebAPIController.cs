@@ -1665,5 +1665,99 @@ namespace HMGreenCityMLM.Controllers
 
         #endregion
 
+        #region DownlineRankAchieverReports
+
+        public ActionResult DownlineRankAchieverReports(DownlineRankAchieverAPI model)
+        {
+            DownlineRankAchieverAPI obj = new DownlineRankAchieverAPI();
+            try
+            {
+                DataSet ds = model.GetDownlineRankAchiever();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<lstDownlineRankAchiever> lstdownlineAchieverreport = new List<lstDownlineRankAchiever>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstDownlineRankAchiever objDownlineList = new lstDownlineRankAchiever();
+                        objDownlineList.FK_RankId = r["PK_RankId"].ToString();
+                        objDownlineList.RankName = r["RankName"].ToString();
+                        objDownlineList.RewardImage = r["ImgUrl"].ToString();
+                        objDownlineList.TotalAchieverLeft = r["TotalAchieverLeft"].ToString();
+                        objDownlineList.TotalAchieverRight = r["TotalAchieverRight"].ToString();
+                        lstdownlineAchieverreport.Add(objDownlineList);
+                    }
+                    obj.lstdownlineAchieverreport = lstdownlineAchieverreport;
+
+                    obj.Status = "0";
+                    obj.Message = "Data Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region DownlineRankAchieverAssociateReports
+
+        public ActionResult DownlineRankAchieverAssociateReports(DownlineRankAchieverAssociateAPI model)
+        {
+            DownlineRankAchieverAssociateAPI obj = new DownlineRankAchieverAssociateAPI();
+            try
+            {
+                if (model.FK_RankId != null)
+                {
+                    DataSet ds = model.DownlineRankAchieverAssociateReports();
+                    if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    {
+                        List<lstDownlineRankAchieverAssociate> lstdownAchieverAssoreporttt = new List<lstDownlineRankAchieverAssociate>();
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            lstDownlineRankAchieverAssociate obj55 = new lstDownlineRankAchieverAssociate();
+                            obj55.Fk_UserId = r["Pk_UserId"].ToString();
+                            obj55.LoginId = r["LoginId"].ToString();
+                            obj55.Name = r["Name"].ToString();
+                            lstdownAchieverAssoreporttt.Add(obj55);
+                        }
+                        obj.lstdownAchieverAssoreporttt = lstdownAchieverAssoreporttt;
+
+                        obj.Status = "0";
+                        obj.Message = "Data Fetched";
+                        return Json(obj, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = "List Not Fetched !!!";
+                        return Json(obj, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = "List Not Fetched !!!";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch(Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
     }
 }

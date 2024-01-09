@@ -67,9 +67,12 @@
                             @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.ddlLeg, "Value", "Text"), new { @class = "form-control" })
                         </div>
                         <div class="form-group col-md-3">
-                            <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return validateLogin();" />
+                            <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return GetMenuDetails();" />
                         </div>
                     </div>
+
+                    <input type="hidden" id="UserType" value="@Session["UserType"]" />
+                    <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                     <br />
                     <div class="table-responsive">
                         <table class="table table-striped table-hover" id="tableExport"  style="width:100%;">
@@ -84,8 +87,8 @@
                                     <th>Joining Date</th>
                                     <th>Mobile No</th>
                                     <th>Email Id</th>
-                                    <th>Action</th>
                                     <th>Status</th>
+                                    <th style="min-width:80px">Action</th>
                                     <th hidden="hidden"></th>
                                     <th>Print</th>
                                 </tr>
@@ -109,12 +112,13 @@
                                                 <td>@Item.JoiningDate</td>
                                                 <td>@Item.Mobile</td>
                                                 <td>@Item.Email</td>
+                                                <td>@Item.Status</td>
                                                 <td>
-                                                    <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
+                                                    <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm edit">
                                                         Edit
                                                     </a>
-                                                </td>
-                                                <td>
+                                                @*</td>
+                                                <td>*@
                                                     @if (Item.isBlocked == "False")
                                                     {
                                                         <a href="/AdminProfile/BlockAssociate?LoginID=@Item.LoginId" class="btn btn-danger btn-sm">
@@ -174,59 +178,35 @@
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
 
-    function validateLogin() {
-        var login = $('#LoginId').val();
-        if (login == "") {
-            $('#ToLoginID').val(null);
-        } else {
-            var loginid = $('#ToLoginID').val();
+    //function validateLogin() {
+    //    var login = $('#LoginId').val();
+    //    if (login == "") {
+    //        $('#ToLoginID').val(null);
+    //    } else {
+    //        var loginid = $('#ToLoginID').val();
 
-        }
-        if ($("#IsDownline").is(':checked')) {
-            if ($("#LoginId").val() == "") {
-                alert('Please Enter LoginId');
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-    }
-
-    //$(document).ready(function () {
-    //    $("input").attr("autocomplete", "off");
-
-    //    var cityuse = [];
-    //    $("#loader").css({ 'display': '' });
-    //    $.ajax({
-    //        url: '/AdminProfile/GetUserList',
-    //        type: 'Post',
-    //        success: function (response) {
-    //            if (response != null) {
-
-
-    //                $(response).each(function (index, item) {
-    //                    cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
-    //                });
-
-    //                $('#LoginId').autocomplete({
-    //                    source: cityuse,
-    //                    select: function (event, ui) {
-    //                        var str = ui.item.label;
-    //                        var strsplit = str.split("(");
-
-    //                        $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-    //                    }
-    //                })
-    //            }
-    //        }, error: function () {
-    //            alert('Some Thing wrong!');
-    //            $("#loader").css({ 'display': 'none' });
+    //    }
+    //    if ($("#IsDownline").is(':checked')) {
+    //        if ($("#LoginId").val() == "") {
+    //            alert('Please Enter LoginId');
+    //            return false;
     //        }
-    //    });
-    //});
+    //        else
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //}
+
+    
     $(document).ready(function () {
+        debugger;
+        var UserType = $('#UserType').val();
+        var UserTypeName = $('#UserTypeName').val();
+        if (UserType == 'Admin' && UserTypeName != 'Admin') {
+            GetMenuDetails();
+        }
+
         if ($("#IsDownline").is(':checked')) {
             $("#divLeg").show();
         }
@@ -271,6 +251,74 @@
             }
         });
     });
+
+
+    function GetMenuDetails() {
+        debugger;
+        var login = $('#LoginId').val();
+        var URL = "/AdminProfile/AssociateList";
+        if (login == "") {
+            $('#ToLoginID').val(null);
+        } else {
+            var loginid = $('#ToLoginID').val();
+
+        }
+        if ($("#IsDownline").is(':checked')) {
+            if ($("#LoginId").val() == "") {
+                alert('Please Enter LoginId');
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Master/GetMenuDetails",
+            data: { URL: URL },
+            dataType: "json",
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                console.log(data)
+                for (var i = 0; i < obj.length; i++) {
+                    debugger
+                    if (obj[i].FormDelete == true && obj[i].FormUpdate == false) {
+                        $(".edit").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(9).visible(false);
+                    }
+                    else if (obj[i].FormDelete == false && obj[i].FormUpdate == true) {
+                        $(".edit").show();
+                        var table = $('#tableExport').DataTable();
+                        table.column(9).visible(true);
+                    }
+                    else if (obj[i].FormDelete == true && obj[i].FormUpdate == true) {
+                        $(".edit").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(9).visible(false);
+                    }
+                    else if (obj[i].FormDelete == false && obj[i].FormUpdate == false) {
+                        $(".edit").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(9).visible(false);
+                    }
+                    else {
+                        $(".edit").hide();
+                        var table = $('#tableExport').DataTable();
+                        table.column(9).visible(false);
+                    }
+
+                }
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
+
+
 
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
