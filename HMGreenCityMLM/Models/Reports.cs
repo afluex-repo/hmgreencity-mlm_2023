@@ -62,6 +62,7 @@ namespace HMGreenCityMLM.Models
         public string Fk_CompanyId { get; set; }
 
         public string Name { get; set; }
+        public string Pk_UserId { get; set; }
 
         public string JoiningDate { get; set; }
 
@@ -185,7 +186,7 @@ namespace HMGreenCityMLM.Models
         public string FK_RankId { get; set; }
         public string TotalAchieverRight { get; set; }
         public string TotalAchieverLeft { get; set; }
-
+        
 
         public List<Reports> lstDefaultAssociateList { get; set; }
 
@@ -985,6 +986,35 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@Leg", Leg),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverAssociateReports", para);
+            return ds;
+        }
+
+
+        public DataSet GetDownlineListforUpdateProfile()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Pk_UserId) };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineListforUpdateProfile", para);
+            return ds;
+        }
+
+
+        public DataSet UpdateProfile()
+        {
+
+            SqlParameter[] para = {new SqlParameter("@UserId", UserID),
+                                    new SqlParameter("@SponsorId", SponsorId),
+                                    new SqlParameter("@LoginId", LoginIDD),
+                                    new SqlParameter("@FirstName", FirstName),
+                                    new SqlParameter("@LastName", LastName),
+                                    new SqlParameter("@JoiningDate", JoiningDate),
+                                    new SqlParameter("@FK_ProductId", Package),
+                                    new SqlParameter("@PermanentDate", FromActivationDate),
+                                    new SqlParameter("@Mobile", MobileNo),
+                                    new SqlParameter("@Leg", Leg),
+                                    new SqlParameter("@Status", Status),
+                                     new SqlParameter("@UpdatedBy", UpdatedBy),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateDownlineProfile", para);
             return ds;
         }
     }
