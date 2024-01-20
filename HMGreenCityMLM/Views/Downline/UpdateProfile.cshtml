@@ -32,77 +32,100 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-                                        
+
                                         <div class="row">
                                             <div class="col-md-4 form-group">
                                                 Sponsor Id <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Sponsor Id", @onchange = "return getsponsordetails();" })
+                                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Sponsor Id", @onchange = "return getsponsordetails();", @Disabled = "true" })
                                                 @Html.ValidationMessageFor(m => m.LoginId)
                                                 @Html.HiddenFor(m => m.LoginId)
                                                 @Html.HiddenFor(m => m.Pk_UserId)
                                             </div>
-
                                             <div class="col-md-4 form-group">
                                                 Sponsor Name <span style="color: red">*</span>
                                                 @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
                                             </div>
-
                                             <div class="col-md-4 form-group">
                                                 Leg <span style="color: red">*</span> &nbsp;&nbsp;
-                                                <input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
+                                                <input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" Disabled="true"/>
                                                 Left &nbsp;&nbsp;
-                                                <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
+                                                <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked   Disabled="true"/>
                                                 Right
                                             </div>
-
                                             <div class="col-md-4 form-group">
                                                 Login Id <span style="color: red">*</span>
-                                                @Html.TextBoxFor(m => m.LoginIDD, new { @class = "form-control", @Placeholder = "Login Id" })
+                                                @Html.TextBoxFor(m => m.LoginIDD, new { @class = "form-control", @Placeholder = "Login Id", @Disabled = "true" })
                                             </div>
-
                                             <div class="col-md-4 form-group">
                                                 First Name <span style="color: red">*</span>
                                                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Placeholder = "First Name" })
                                             </div>
-
                                             <div class="col-md-4 form-group">
                                                 Last Name
                                                 @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Placeholder = "Last Name" })
                                             </div>
-
                                             <div class="col-md-4 form-group">
                                                 Joining Date <span style="color: red">*</span>
                                                 @Html.TextBoxFor(m => m.JoiningDate, new { @class = "form-control", @readonly = "readonly" })
                                             </div>
-
                                             <div class="col-md-4 form-group">
-                                                Package
-                                                @Html.TextBoxFor(m => m.Package, new { @class = "form-control", @Placeholder = "Package" })
+                                                Status
+                                                @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control" })
                                             </div>
+                                            @*<div class="col-md-4 form-group">
+                                                    Package
+                                                    @Html.TextBoxFor(m => m.Package, new { @class = "form-control", @Placeholder = "Package" })
+                                                </div>*@
 
-                                            <div class="col-md-4 form-group">
-                                               Activation Date
+                                            @*<div class="col-md-4 form-group">
+                                                Activation Date
                                                 @Html.TextBoxFor(m => m.FromActivationDate, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>*@
+                                            <div class="col-md-4 form-group">
+                                                Email Id
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email id" })
                                             </div>
-                                         
                                             <div class="col-md-4 form-group">
                                                 Mobile No <span style="color: red">*</span>
                                                 @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
                                                 @Html.ValidationMessageFor(m => m.MobileNo)
                                             </div>
-
                                             <div class="col-md-4 form-group">
-                                                Status
-                                                @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control" })
+                                                Gender
+                                                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlgender, "Value", "Text"), new { @class = "form-control" })
                                             </div>
-                                           
+                                            <div class="col-md-4 form-group">
+                                                Pan Card
+                                                @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @Placeholder = "Pan Card", @Maxlength = "10", @onchange = "return validatepan(event);" })
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                Adhar No <span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No ", @maxlength = "12", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validateAdhar();" })
+                                            </div>
+
+                                            <div class="col-md-8 form-group">
+                                                Address
+                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                Pincode
+                                                @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @Placeholder = "PinCode", @onchange = "return getstatecity();" })
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                State
+                                                @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @Disabled = "disabled" })
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                City
+                                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Placeholder = "City", @Disabled = "disabled" })
+                                            </div>
                                             <div class="col-md-6">
                                                 <a href="#" id="Register" onclick="return updateregistration();" class="btn btn-success">Update</a>
                                                 <br />
                                             </div>
 
                                             <br />
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +218,7 @@
             }
         })
     }
-   
+
 
     function updateregistration() {
         $("#divload").css({ 'display': '' });
@@ -227,17 +250,21 @@
             $('#JoiningDate').focus();
             return false;
         }
-        if ($('#MobileNo').val() == '') {
-            $("#MobileNo").addClass('errortext');
-            $('#MobileNo').focus();
-            return false;
-        }
         if ($('#Status').val() == '') {
             $("#Status").addClass('errortext');
             $('#Status').focus();
             return false;
         }
-
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+        if ($('#AdharNo').val() == '') {
+            $("#AdharNo").addClass('errortext');
+            $('#AdharNo').focus();
+            return false;
+        }
 
         var Leg = "";
         if ($('#left').prop('checked')) {
@@ -251,9 +278,14 @@
             url: "/Downline/UpdateProfileAction",
             Type: "Post",
             DataType: "JSON",
-            data: { SponsorId: $("#LoginId").val(), LoginIDD: $("#LoginIDD").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), JoiningDate: $("#JoiningDate").val(), Package: $("#Package").val(), FromActivationDate: $("#FromActivationDate").val(), MobileNo: $("#MobileNo").val(), Status: $("#Status").val(), Leg: Leg,UserId: $("#Pk_UserId").val() },
+            data: {
+                SponsorId: $("#LoginId").val(), LoginIDD: $("#LoginIDD").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), JoiningDate: $("#JoiningDate").val(), Package: $("#Package").val(), MobileNo: $("#MobileNo").val(), Status: $("#Status").val(), Leg: Leg, UserId: $("#Pk_UserId").val(),
+                Email: $("#Email").val(), Gender: $("#Gender").val(), Address: $("#Address").val(), PinCode: $("#PinCode").val(), AdharNo: $("#AdharNo").val(), PanCard: $("#PanCard").val(),
+                State: $("#State").val(), City: $("#City").val()
+            },
             success: function (data) {
                 if (data.Response == "1") {
+                    alert("Profile Updated successfully !!");
                     window.location.href = '@Url.Action("DownLineList", "Downline")';
                 }
                 else {
@@ -263,6 +295,81 @@
             }
         });
     }
+
+
+
+    function getstatecity() {
+        debugger;
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: "/Home/GetStateCity",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PinCode: $("#PinCode").val() },
+            success: function (data) {
+                if (data.Result == "1") {
+                    $("#State").val(data.State);
+                    $("#City").val(data.City);
+                }
+                else {
+                    $("#State").val('');
+                    $("#City").val('');
+                    $("#PinCode").val('');
+                    $("#PinCode").addClass('errortext');
+                    $('#PinCode').focus();
+                    alert(data.Result);
+                }
+
+
+            }
+
+        });
+    }
+
+
+    function validatepan(event) {
+        $(".errortext").removeClass("errortext");
+        var regExp = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/;
+        var txtpan = $('#PanCard').val();
+        if (txtpan.length == 10) {
+            if (txtpan.match(regExp)) {
+
+            }
+            else {
+                $("#PanCard").addClass('errortext');
+                $('#PanCard').focus();
+                $('#PanCard').val('');
+                alert('Please enter valid PanNo');
+            }
+        }
+        else {
+            $("#PanCard").addClass('errortext');
+            $('#PanCard').focus();
+            $('#PanCard').val('');
+            alert('Please enter 10 digits for a valid PAN number');
+        }
+    }
+
+
+    function validateAdhar() {
+        var AdharNumber = $('#AdharNo').val();
+        $.ajax({
+            url: '/Home/GetAdharDetails', type: 'post', dataType: 'json',
+            data: { 'AdharNumber': AdharNumber },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $('#AdharNo').val(AdharNumber);
+                }
+                else if (data.Result == "no") {
+                    alert("Adhar No already registred another ID try another no.!!");
+                    $("#AdharNo").val('');
+                    $("#AdharNo").addClass('errortext');
+                }
+            }
+        });
+    }
+
+
 
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -304,7 +411,7 @@
         changeYear: true
     });
 
-    
+
 </script>
 
 <style>
