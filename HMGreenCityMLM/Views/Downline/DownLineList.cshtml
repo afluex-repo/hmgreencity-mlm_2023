@@ -53,7 +53,7 @@
                             </div>
 
                             <div class="form-group col-md-3 mt-2">
-                                <input type="submit" id="btnSearch" class="btn btn-success mt-4" name="Search" value="Search" />
+                                <input type="submit" id="btnSearch" class="btn btn-success mt-4" name="btnSearch" value="Search" />
                             </div>
                         </div>
                         <br />
@@ -70,6 +70,10 @@
                                         <th>Activation Date</th>
                                         <th>Mobile No</th>
                                         <th>Status</th>
+                                        @if (Session["FK_RankId"].ToString() == "1")
+                                        {
+                                            <th>Action</th>
+                                        }
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,10 +94,23 @@
                                                     <td>@Item.PermanentDate</td>
                                                     <td>@Item.Mobile</td>
                                                     <td>@Item.Status</td>
+                                                    @if (Session["FK_RankId"].ToString() == "1")
+                                                    {
+                                                        if (Item.Status == "InActive")
+                                                        {
+                                                            <td>
+                                                                <a href="/Downline/UpdateProfile?UserId=@Item.Pk_UserId" class="btn btn-warning" target="_blank">Edit</a>
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td></td>
+                                                        }
+                                                    }
+
                                                 </tr>
                                                 i++;
                                             }
-
                                         }
                                     }
                                 </tbody>
@@ -104,7 +121,7 @@
             </div>
         </div>
     </section>
-    //==============================================================================  
+    //==============================================================================
 }
 <script src="../../WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
