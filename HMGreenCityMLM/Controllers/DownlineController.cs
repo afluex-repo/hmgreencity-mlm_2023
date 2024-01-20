@@ -81,6 +81,7 @@ namespace HMGreenCityMLM.Controllers
             }
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
+
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.ddlleg = Leg;
             return View(model);
@@ -128,7 +129,13 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "btnSearch")]
         public ActionResult DownLineListBy(Reports model)
         {
-
+            
+            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
+            ViewBag.ddlStatus = AssociateStatus;
+            
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
+            
             List<Reports> lst = new List<Reports>();
             model.LoginId = Session["LoginId"].ToString();
             DataSet ds = model.GetDownlineList();
@@ -151,10 +158,8 @@ namespace HMGreenCityMLM.Controllers
                 }
                 model.lstassociate = lst;
             }
-            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
-            ViewBag.ddlStatus = AssociateStatus;
-            List<SelectListItem> Leg = Common.Leg();
-            ViewBag.ddlleg = Leg;
+          
+            
             return View(model);
         }
 
