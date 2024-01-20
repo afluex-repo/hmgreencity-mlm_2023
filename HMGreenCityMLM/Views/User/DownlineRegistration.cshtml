@@ -184,7 +184,7 @@
             url: '/User/GetSponsorName',
             type: 'GET',
             dataType: 'JSON',
-            data: { 'ReferBy': $("#LoginId").val() },
+            data: { 'ReferBy': $("#SponsorId").val() },
             success: function (response) {
                 if (response.Result == "Yes") {
                     $("#divload").css({ 'display': 'none' });
@@ -327,7 +327,7 @@
             url: "/User/DownlineRegistrationAction",
             Type: "Post",
             DataType: "JSON",
-            data: { SponsorId: $("#LoginId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), Email: $("#Email").val(), MobileNo: $("#MobileNo").val(), PanCard: $("#PanCard").val(), AdharNo: $("#AdharNo").val(), Address: $("#Address").val(), Gender: $("#Gender").val(), PinCode: $("#PinCode").val(), Leg: Leg },
+            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), Email: $("#Email").val(), MobileNo: $("#MobileNo").val(), PanCard: $("#PanCard").val(), AdharNo: $("#AdharNo").val(), Address: $("#Address").val(), Gender: $("#Gender").val(), PinCode: $("#PinCode").val(), Leg: Leg },
             success: function (data) {
                 if (data.Response == "1") {
                     window.location.href = '@Url.Action("ConfirmRegistrationForDown", "User")';
