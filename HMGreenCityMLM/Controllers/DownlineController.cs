@@ -81,6 +81,7 @@ namespace HMGreenCityMLM.Controllers
             }
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
+
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.ddlleg = Leg;
             return View(model);
@@ -128,7 +129,13 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "btnSearch")]
         public ActionResult DownLineListBy(Reports model)
         {
-
+            
+            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
+            ViewBag.ddlStatus = AssociateStatus;
+            
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
+            
             List<Reports> lst = new List<Reports>();
             model.LoginId = Session["LoginId"].ToString();
             DataSet ds = model.GetDownlineList();
@@ -138,6 +145,7 @@ namespace HMGreenCityMLM.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Reports obj = new Reports();
+                    obj.Pk_UserId = Crypto.Encrypt(r["Pk_UserId"].ToString());
                     obj.Name = r["Name"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.JoiningDate = r["JoiningDate"].ToString();
@@ -150,10 +158,8 @@ namespace HMGreenCityMLM.Controllers
                 }
                 model.lstassociate = lst;
             }
-            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
-            ViewBag.ddlStatus = AssociateStatus;
-            List<SelectListItem> Leg = Common.Leg();
-            ViewBag.ddlleg = Leg;
+          
+            
             return View(model);
         }
 
@@ -203,6 +209,14 @@ namespace HMGreenCityMLM.Controllers
             }
             #endregion ForQueryString
 
+
+            #region ddlgender
+            List<SelectListItem> ddlgender = Common.BindGender();
+            ViewBag.ddlgender = ddlgender;
+            #endregion ddlgender
+
+
+
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
 
@@ -225,6 +239,14 @@ namespace HMGreenCityMLM.Controllers
                     obj.Package = ds.Tables[0].Rows[0]["ProductName"].ToString();
                     obj.Status = ds.Tables[0].Rows[0]["Status"].ToString();
                     obj.FromActivationDate = ds.Tables[0].Rows[0]["PermanentDate"].ToString();
+                    obj.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    obj.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
+                    obj.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    obj.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    obj.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                    obj.PanCard = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                    obj.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    obj.City = ds.Tables[0].Rows[0]["City"].ToString();
                     lst1.Add(obj);
                 }
 
@@ -232,43 +254,54 @@ namespace HMGreenCityMLM.Controllers
             return View(obj);
         }
 
-        public ActionResult UpdateProfileAction(Reports model, string UserId,string SponsorId,string LoginIDD,string FirstName, string LastName,string JoiningDate,string Package,string FromActivationDate,string MobileNo,string Status, string Leg)
+        
+
+
+        public ActionResult UpdateProfileAction(Reports model, string UserId,string SponsorId,string LoginIDD,string FirstName, string LastName,string JoiningDate, string Package,string MobileNo,string Status, string Leg, string Email, string Gender, string Address, string PinCode, string AdharNo, string PanCard, string State, string City)
         {
             try
             {
                 model.UserID = UserId;
-
                 model.SponsorId = SponsorId;
                 model.LoginIDD = LoginIDD;
                 model.FirstName = FirstName;
                 model.LastName = LastName;
                 model.JoiningDate = JoiningDate;
                 model.Package = Package;
-                model.FromActivationDate = FromActivationDate;
+                //model.FromActivationDate = FromActivationDate;
                 model.MobileNo = MobileNo;
                 model.Status = Status;
                 model.Leg = Leg;
+                model.Email = Email;
+                model.Gender = Gender;
+                model.Address = Address;
+                model.PinCode = PinCode;
+                model.AdharNo = AdharNo;
+                model.PanCard = PanCard;
+                model.State = State;
+                model.City = City;
 
-                model.JoiningDate = string.IsNullOrEmpty(model.JoiningDate) ? null : Common.ConvertToSystemDate(model.JoiningDate, "dd-MM-yyyy");
-                model.FromActivationDate = string.IsNullOrEmpty(model.FromActivationDate) ? null : Common.ConvertToSystemDate(model.FromActivationDate, "dd-MM-yyyy");
+                //model.JoiningDate = string.IsNullOrEmpty(model.JoiningDate) ? null : Common.ConvertToSystemDate(model.JoiningDate, "dd-MM-yyyy");
+                //model.FromActivationDate = string.IsNullOrEmpty(model.FromActivationDate) ? null : Common.ConvertToSystemDate(model.FromActivationDate, "dd-MM-yyyy");
                 model.UpdatedBy = Session["Pk_userId"].ToString(); 
                 DataSet ds = model.UpdateProfile();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        TempData["Registration"] = "Profile Updated successfully !!";
+                        model.Response = "1";
+                        //TempData["Registration"] = "Profile Updated successfully !!";
                     }                   
                     else
                     {
-                        TempData["Registration"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        model.Response = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex) {
-                TempData["Registration"] = ex.Message;
+                model.Response = ex.Message;
             }
-            return RedirectToAction("DownLineList", "Downline");
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
     }
