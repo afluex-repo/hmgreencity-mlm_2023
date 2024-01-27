@@ -62,8 +62,11 @@ namespace HMGreenCityMLM.Models
         public string Fk_CompanyId { get; set; }
 
         public string Name { get; set; }
+        public string Pk_UserId { get; set; }
 
         public string JoiningDate { get; set; }
+
+        public DateTime JoiningDates { get; set; }
 
         public string Mobile { get; set; }
 
@@ -185,7 +188,7 @@ namespace HMGreenCityMLM.Models
         public string FK_RankId { get; set; }
         public string TotalAchieverRight { get; set; }
         public string TotalAchieverLeft { get; set; }
-
+        
 
         public List<Reports> lstDefaultAssociateList { get; set; }
 
@@ -296,15 +299,16 @@ namespace HMGreenCityMLM.Models
         public DataSet GetDirectList()
         {
 
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@Name", Name),
-                                    new SqlParameter("@FromDate", FromDate),
-                                    new SqlParameter("@ToDate", ToDate),
-                                    new SqlParameter("@FromActivationDate", FromActivationDate),
-                                    new SqlParameter("@ToActivationDate", ToActivationDate),
-                                    new SqlParameter("@Leg", Leg),
-                                    new SqlParameter("@Status", Status),
-                                  };
+            SqlParameter[] para = {
+                           new SqlParameter("@LoginId", LoginId),
+                           new SqlParameter("@Name", Name),
+                           new SqlParameter("@FromDate", FromDate),
+                           new SqlParameter("@ToDate", ToDate),
+                           new SqlParameter("@FromActivationDate", FromActivationDate),
+                           new SqlParameter("@ToActivationDate", ToActivationDate),
+                           new SqlParameter("@Leg", Leg),
+                           new SqlParameter("@Status", Status),
+                           };
             DataSet ds = DBHelper.ExecuteQuery("GetDirectList", para);
             return ds;
         }
@@ -987,6 +991,45 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverAssociateReports", para);
             return ds;
         }
+
+
+        public DataSet GetDownlineListforUpdateProfile()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Pk_UserId) };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineListforUpdateProfile", para);
+            return ds;
+        }
+
+
+        public DataSet UpdateProfile()
+        {
+
+            SqlParameter[] para = {new SqlParameter("@UserId", UserID),
+                                    new SqlParameter("@SponsorId", SponsorId),
+                                    new SqlParameter("@LoginId", LoginIDD),
+                                    new SqlParameter("@FirstName", FirstName),
+                                    new SqlParameter("@LastName", LastName),
+                                    //new SqlParameter("@JoiningDate", JoiningDate),
+                                    new SqlParameter("@FK_ProductId", Package),
+                                    //new SqlParameter("@PermanentDate", FromActivationDate),
+                                    new SqlParameter("@Mobile", MobileNo),
+                                    new SqlParameter("@Leg", Leg),
+                                    new SqlParameter("@Status", Status),
+                                    new SqlParameter("@UpdatedBy", UpdatedBy),
+                                    new SqlParameter("@Email", Email),
+                                    new SqlParameter("@Sex", Gender),
+                                    new SqlParameter("@Address", Address),
+                                    new SqlParameter("@PinCode", PinCode),
+                                    new SqlParameter("@AdharNumber", AdharNo),
+                                    new SqlParameter("@PanNumber", PanCard),
+                                    new SqlParameter("@State", State),
+                                    new SqlParameter("@City", City)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateDownlineProfile", para);
+            return ds;
+        }
+        
+
     }
 }
 

@@ -362,8 +362,10 @@ namespace HMGreenCityMLM.Models
 
     public class AssociateDashBoardAPI
     {
+        public List<AssoeDashtotalachiverrank> lstachiver { get; set; }
         public List<AssoeDashInvst> lstinvestment { get; set; }
         public string SelfBusiness { get; set; }
+        public string TotalHold { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
         public string TotalDownline { get; set; }
@@ -401,6 +403,17 @@ namespace HMGreenCityMLM.Models
         }
 
     }
+
+    public class AssoeDashtotalachiverrank
+    {
+        public List<AssoeDashtotalachiverrank> lstachiver { get; set; }
+        public string ImageURLpopup { get; set; }
+        public string AchiverRankpopup { get; set; }
+        public string FK_RankId { get; set; }
+        public string Achiver { get; set; }
+    }
+
+
     public class Response
     {
         public string Status { get; set; }
@@ -983,5 +996,150 @@ namespace HMGreenCityMLM.Models
     {
         public string Status1 { get; set; }
         public string Message { get; set; }
+    }
+
+    public class SponserListAPI
+    {
+        public string LoginId { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+
+        public List<lstsponserlist> lstsponserlist { get; set; }
+
+        public DataSet GetUserListForAutoSearch()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId) };
+            DataSet ds = DBHelper.ExecuteQuery("GetUserListForDown", para);
+            return ds;
+        }
+    }
+
+    public class lstsponserlist
+    {
+        public string UserName { get; set; }
+        public string LoginIDD { get; set; }
+    }
+
+    public class PinCodeAPI
+    {
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string PinCode { get; set; }
+
+        public DataSet GetStateCity()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@PinCode",PinCode),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetStateCity", para);
+            return ds;
+        }
+    }
+
+    public class DownlineRegistrationAPI
+    {
+        public string SponsorId { get; set; }
+        public string Email { get; set; }
+        public string MobileNo { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PanCard { get; set; }
+        public string RegistrationBy { get; set; }
+        public string Address { get; set; }
+        public string Gender { get; set; }
+        public string AdharNo { get; set; }
+        public string PinCode { get; set; }
+        public string Leg { get; set; }
+        public string Password { get; set; }
+        public string AddedBy { get; set; }
+        
+        public DataSet SaveDownlineRegistration()
+        {
+            SqlParameter[] para = {
+                                   new SqlParameter("@SponsorId",SponsorId),
+                                   new SqlParameter("@Email",Email),
+                                   new SqlParameter("@MobileNo",MobileNo),
+                                   new SqlParameter("@FirstName",FirstName),
+                                   new SqlParameter("@LastName",LastName),
+                                   new SqlParameter("@PanCard",PanCard),
+                                   new SqlParameter("@RegistrationBy",RegistrationBy),
+                                   new SqlParameter("@Address",Address),
+                                   new SqlParameter("@Gender",Gender),
+                                   new SqlParameter("@AdharNo",AdharNo),
+                                   new SqlParameter("@PinCode",PinCode),
+                                   new SqlParameter("@Leg",Leg),
+                                   new SqlParameter("@Password",Password),
+                                   new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveDownlineRegistration", para);
+            return ds;
+        }
+    }
+
+    public class DRegistrationAPI
+    {
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public string LoginId { get; set; }
+        public string DisplayName { get; set; }
+        public string PassWord { get; set; }
+        public string Transpassword { get; set; }
+        public string MobileNo { get; set; }
+    }
+
+
+    public class DownlineRankAchieverAPI
+    {
+        public string Fk_UserId { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<lstDownlineRankAchiever> lstdownlineAchieverreport { get; set; }
+
+        public DataSet GetDownlineRankAchiever()
+        {
+            SqlParameter[] para = {   new SqlParameter("@FK_UserId", Fk_UserId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverReports", para);
+            return ds;
+        }
+    }
+
+    public class lstDownlineRankAchiever
+    {
+        public string FK_RankId { get; set; }
+        public string RankName { get; set; }
+        public string RewardImage { get; set; }
+        public string TotalAchieverLeft { get; set; }
+        public string TotalAchieverRight { get; set; }
+    }
+
+    public class DownlineRankAchieverAssociateAPI
+    {
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public string FK_RankId { get; set; }
+        public string Fk_UserId { get; set; }
+        public string Leg { get; set; }
+        public List<lstDownlineRankAchieverAssociate> lstdownAchieverAssoreporttt { get; set; }
+
+        public DataSet DownlineRankAchieverAssociateReports()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                      new SqlParameter("@FK_RankId", FK_RankId),
+                                      new SqlParameter("@Leg", Leg),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverAssociateReports", para);
+            return ds;
+        }
+    }
+
+    public class lstDownlineRankAchieverAssociate
+    {
+        public string Fk_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string Name { get; set; }
     }
 }
