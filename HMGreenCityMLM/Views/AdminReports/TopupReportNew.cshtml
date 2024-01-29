@@ -66,6 +66,22 @@
                                 <option value="0">Other Business</option>
                             </select>
                         </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label>IsDownline</label>
+                            @Html.CheckBoxFor(m => m.IsDownline)
+                        </div>
+
+
+                        <div class="form-group col-md-3" id="divLeg" style="display:none">
+                            <label>Leg</label>
+                            @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.ddlLeg, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+
+
+
+
                         <div class="form-group col-md-3">
                             <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
                         </div>
@@ -208,6 +224,22 @@
 <script>
     $(document).ready(function () {
         debugger;
+        if ($("#IsDownline").is(':checked')) {
+            $("#divLeg").show();
+        }
+        //$('#IsDownline').prop('checked', true);
+        $('#IsDownline').change(function () {
+            if (this.checked) {
+                $("#divLeg").show();
+                //alert('Show');
+            }
+            else {
+                $("#divLeg").hide();
+            }
+        });
+
+
+
         $('#dataTables-example').DataTable({
             responsive: true
         });

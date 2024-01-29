@@ -2426,6 +2426,11 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlSite = ddlSite;
 
             #endregion
+            #region Leg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
+            #endregion
+
             return View(newdata);
         }
         [HttpPost]
@@ -2539,6 +2544,11 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlSite = ddlSite;
 
             #endregion
+            #region Leg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
+            #endregion
+
             return View(newdata);
         }
         
