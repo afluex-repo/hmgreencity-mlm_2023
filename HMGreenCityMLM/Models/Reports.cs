@@ -194,6 +194,18 @@ namespace HMGreenCityMLM.Models
        
         public List<Reports> lstDefaultAssociateList { get; set; }
 
+
+        public string UserTypeName { get; set; }
+
+        public string Pk_AdminId { get; set; }
+        public bool SevenDayView { get; set; }
+
+        
+
+
+
+
+
         public DataSet GetPayoutReport()
         {
             SqlParameter[] para = { new SqlParameter("@LoginID", ToLoginID),
