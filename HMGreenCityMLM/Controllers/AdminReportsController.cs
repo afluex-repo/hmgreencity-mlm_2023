@@ -2343,6 +2343,7 @@ namespace HMGreenCityMLM.Controllers
 
             Reports newdata = new Reports();
             List<Reports> lst1 = new List<Reports>();
+            
             DateTime currentdate = DateTime.Now;
             currentdate = currentdate.AddMonths(-1);
             newdata.FromDate = currentdate.ToString("dd/MM/yyyy");

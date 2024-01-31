@@ -147,6 +147,7 @@ namespace HMGreenCityMLM.Models
         public static Home GetMenus(string Pk_AdminId, string UserType)
         {
             Home model = new Home();
+            
             List<Home> lstmenu = new List<Home>();
             List<Home> lstsubmenu = new List<Home>();
 
@@ -155,6 +156,7 @@ namespace HMGreenCityMLM.Models
             DataSet dsHeader = model.loadHeaderMenu();
             if (dsHeader != null && dsHeader.Tables.Count > 0)
             {
+                
                 if (dsHeader.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow r in dsHeader.Tables[0].Rows)
