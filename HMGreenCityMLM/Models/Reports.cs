@@ -188,8 +188,10 @@ namespace HMGreenCityMLM.Models
         public string FK_RankId { get; set; }
         public string TotalAchieverRight { get; set; }
         public string TotalAchieverLeft { get; set; }
-        
+        public List<Reports> lstdownlineAchieverreportforadmin { get; set; }
+        public List<Reports> lstdownAchieverAdminreport { get; set; }
 
+       
         public List<Reports> lstDefaultAssociateList { get; set; }
 
         public DataSet GetPayoutReport()
@@ -856,6 +858,8 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@ClaculationStatus", Status),
                                       new SqlParameter("@Fk_BusinessId", BusinessType),
                                       new SqlParameter("@Fk_CompanyId", Fk_CompanyId),
+                                      new SqlParameter("@IsDownline", IsDownline),
+                                      new SqlParameter("@Leg", Leg)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);
@@ -1028,8 +1032,33 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateDownlineProfile", para);
             return ds;
         }
-        
 
+
+
+        public DataSet GetDownlineRankAchieverForAdmin()
+        {
+            SqlParameter[] para = {   new SqlParameter("@FK_UserId", Fk_UserId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverReportsForAdmin", para);
+            return ds;
+        }
+
+        public DataSet DownlineRankAchieverAdminReports()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                      new SqlParameter("@FK_RankId", FK_RankId),
+                                      new SqlParameter("@Leg", Leg),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverAdminReports", para);
+            return ds;
+        }
+
+        public DataSet GetUser()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetUserForAdmin");
+            return ds;
+        }
     }
 }
 

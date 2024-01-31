@@ -1,0 +1,75 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "DownlineRankAchieverReportsForAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("DownlineRankAchieverReportsForAdmin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Downline Rank Achiever Reports</h6>
+                            <a href="/Admin/BinaryTree" class="btn btn-info text-white">Go To Tree</a>
+                        </div>
+                        <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th></th>
+                                        <th>Rank Name</th>
+                                        <th>Total Achiever Left</th>
+                                        <th>Total Achiever Right</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstdownlineAchieverreportforadmin != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstdownlineAchieverreportforadmin)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td><img src="@Item.RewardImage" alt="@Item.RankName" width="50" height="50"></td>
+                                                    <td>@Item.RankName</td>
+                                                    <td><a href="/Admin/DownlineRankAchieverAdminReports?RankId=@Item.FK_RankId&Leg=L" style="text-decoration:none" target="_blank">@Item.TotalAchieverLeft</a></td>
+                                                    <td><a href="/Admin/DownlineRankAchieverAdminReports?RankId=@Item.FK_RankId&Leg=R" style="text-decoration:none" target="_blank">@Item.TotalAchieverRight</a></td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+
