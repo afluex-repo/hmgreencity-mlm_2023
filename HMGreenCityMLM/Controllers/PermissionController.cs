@@ -86,6 +86,7 @@ namespace HMGreenCityMLM.Controllers
                     ob.IsUpdateValue = Convert.ToBoolean(dr["FormUpdate"].ToString());
                     ob.IsDeleteValue = Convert.ToBoolean(dr["FormDelete"].ToString());
                     ob.IsSevenDayView = Convert.ToBoolean(dr["SevenDayView"].ToString());
+                    ob.Fk_FormId = dr["PK_FormId"].ToString();
 
                     if (ob.IsSelectValue == false)
                     {
