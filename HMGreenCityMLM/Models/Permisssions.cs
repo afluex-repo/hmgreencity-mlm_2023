@@ -21,11 +21,15 @@ namespace HMGreenCityMLM.Models
         public string LoginId { get; set; }
         public string ToLoginID { get; set; }
         public string EmployeeLoginId { get; set; }
+        public string SevenDayView { get; set; }
 
+        
         public bool IsSaveValue { get; set; }
         public bool IsUpdateValue { get; set; }
         public bool IsSelectValue { get; set; }
         public bool IsDeleteValue { get; set; }
+        public bool IsSevenDayView { get; set; }
+        
         public string SelectedValue { get; set; }
         public string CreatedBy { get; set; }
         public DataTable UserTypeFormPermisssion { get; set; }

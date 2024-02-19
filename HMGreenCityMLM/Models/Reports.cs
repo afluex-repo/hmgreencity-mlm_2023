@@ -194,6 +194,18 @@ namespace HMGreenCityMLM.Models
        
         public List<Reports> lstDefaultAssociateList { get; set; }
 
+
+        public string UserTypeName { get; set; }
+
+        public string Pk_AdminId { get; set; }
+        public bool SevenDayView { get; set; }
+
+        
+
+
+
+
+
         public DataSet GetPayoutReport()
         {
             SqlParameter[] para = { new SqlParameter("@LoginID", ToLoginID),
@@ -859,7 +871,8 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@Fk_BusinessId", BusinessType),
                                       new SqlParameter("@Fk_CompanyId", Fk_CompanyId),
                                       new SqlParameter("@IsDownline", IsDownline),
-                                      new SqlParameter("@Leg", Leg)
+                                      new SqlParameter("@Leg", Leg),
+                                      new SqlParameter("@Fk_EmployeeId", Fk_UserId)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);

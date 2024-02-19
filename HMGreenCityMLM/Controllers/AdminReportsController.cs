@@ -2343,13 +2343,16 @@ namespace HMGreenCityMLM.Controllers
 
             Reports newdata = new Reports();
             List<Reports> lst1 = new List<Reports>();
+            newdata.Fk_UserId = Session["Pk_AdminId"].ToString();
+
             DateTime currentdate = DateTime.Now;
             currentdate = currentdate.AddMonths(-1);
             newdata.FromDate = currentdate.ToString("dd/MM/yyyy");
             newdata.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
-
+          
             newdata.FromDatenew = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDatenew = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+           
             DataSet ds11 = newdata.GetTopupReportNew();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -2470,6 +2473,8 @@ namespace HMGreenCityMLM.Controllers
             newdata.ToDatenew = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
             newdata.LoginId = newdata.ToLoginID;
             newdata.Fk_CompanyId = newdata.Fk_CompanyId == "0" ? null : newdata.Fk_CompanyId;
+
+            newdata.Fk_UserId = Session["Pk_AdminId"].ToString();
             DataSet ds11 = newdata.GetTopupReportNew();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)

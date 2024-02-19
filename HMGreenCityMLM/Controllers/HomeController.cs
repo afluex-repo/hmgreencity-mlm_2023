@@ -151,6 +151,8 @@ namespace HMGreenCityMLM.Controllers
                                 Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
                                 Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
                                 //Session["ProfilePic"] = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                                
+                                
                                 FormName = "AdminDashBoard";
                                 Controller = "Admin";
                             }

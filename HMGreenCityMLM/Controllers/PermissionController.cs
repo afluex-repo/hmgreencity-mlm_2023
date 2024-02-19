@@ -80,11 +80,14 @@ namespace HMGreenCityMLM.Controllers
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    Permisssions ob = new Permisssions(); 
+                    Permisssions ob = new Permisssions();
                     ob.FormName = dr["FormName"].ToString();
                     ob.IsSelectValue = Convert.ToBoolean(dr["FormView"].ToString());
                     ob.IsUpdateValue = Convert.ToBoolean(dr["FormUpdate"].ToString());
                     ob.IsDeleteValue = Convert.ToBoolean(dr["FormDelete"].ToString());
+                    ob.IsSevenDayView = Convert.ToBoolean(dr["SevenDayView"].ToString());
+                    ob.Fk_FormId = dr["PK_FormId"].ToString();
+
                     if (ob.IsSelectValue == false)
                     {
                         ob.SelectedValue = "";
@@ -113,7 +116,7 @@ namespace HMGreenCityMLM.Controllers
                     {
                         ob.FormUpdate = "checked";
                     }
-                    
+
 
                     if (ob.IsDeleteValue == false)
                     {
@@ -123,9 +126,19 @@ namespace HMGreenCityMLM.Controllers
                     {
                         ob.FormDelete = "checked";
                     }
-                    
+                    if (ob.IsSevenDayView == false)
+                    {
+                        ob.SevenDayView = "";
+                    }
+                    else
+                    {
+                        ob.SevenDayView = "checked";
+                    }
+
                     ob.IsUpdateValue = Convert.ToBoolean(dr["FormUpdate"].ToString());
                     ob.IsDeleteValue = Convert.ToBoolean(dr["FormDelete"].ToString());
+                    //ob.IsSevenDayView = Convert.ToBoolean(dr["SevenDayView"].ToString());
+
                     ob.Fk_FormId = dr["PK_FormId"].ToString();
                     ob.Fk_FormTypeId = dr["pk_formtypeid"].ToString();
                     ob.Fk_UserId = dr["Fk_UserId"].ToString();
@@ -157,7 +170,8 @@ namespace HMGreenCityMLM.Controllers
             {
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
-                    ddluser.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_AdminId"].ToString() }); }
+                    ddluser.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["PK_AdminId"].ToString() });
+                }
             }
 
             ViewBag.ddluser = ddluser;
@@ -178,22 +192,34 @@ namespace HMGreenCityMLM.Controllers
             string hdfformtypeid = "";
             string hdfformid = "";
             string hdfloginid = "";
+            string chkSevenDayView = "";
+
+
             DataTable dtpermission = new DataTable();
             dtpermission.Columns.Add("Fk_FormTypeId");
             dtpermission.Columns.Add("Fk_FormId");
+            dtpermission.Columns.Add("IsSelect");
             dtpermission.Columns.Add("IsSave");
             dtpermission.Columns.Add("IsUpdate");
             dtpermission.Columns.Add("IsDelete");
-            dtpermission.Columns.Add("IsSelect");
+            dtpermission.Columns.Add("IsSevenDayView");
             for (int i = 1; i < int.Parse(hdrows); i++)
             {
-
+                
+                try
+                {
+                    chkSevenDayView = Request["chkSevenDayView1_ " + i].ToString();
+                }
+                catch
+                {
+                    chkSevenDayView = "0";
+                }
+                
                 try
                 {
                     chkselect = Request["chkSelect_ " + i].ToString();
                 }
                 catch { chkselect = "0"; }
-
                 try
                 {
                     chkSave = Request["chkSave_ " + i].ToString();
@@ -217,12 +243,14 @@ namespace HMGreenCityMLM.Controllers
                 {
                     chkdelete = "0";
                 }
-
+                
                 hdfformtypeid = Request["hdFormtypeId_ " + i].ToString();
                 hdfformid = Request["hdFormId_ " + i].ToString();
                 hdfloginid = Request["hdLoginid_ " + i].ToString();
 
-                dtpermission.Rows.Add(hdfformtypeid, hdfformid, chkselect == "on" ? "1" : "0", chkSave == "on" ? "1" : "0", chkupdate == "on" ? "1" : "0", chkdelete == "on" ? "1" : "0");
+                dtpermission.Rows.Add(hdfformtypeid, hdfformid, chkselect == "on" ? "1" : "0", chkSave == "on" ? "1" : "0", chkupdate == "on" ? "1" : "0", chkdelete == "on" ? "1" : "0", chkSevenDayView == "on" ? "1" : "0");
+
+                
             }
             obj.UserTypeFormPermisssion = dtpermission;
             obj.CreatedBy = Session["Pk_AdminId"].ToString();
