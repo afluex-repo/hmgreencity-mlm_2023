@@ -2343,6 +2343,7 @@ namespace HMGreenCityMLM.Controllers
 
             Reports newdata = new Reports();
             List<Reports> lst1 = new List<Reports>();
+            
             DateTime currentdate = DateTime.Now;
             currentdate = currentdate.AddMonths(-1);
             newdata.FromDate = currentdate.ToString("dd/MM/yyyy");
@@ -2426,6 +2427,11 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlSite = ddlSite;
 
             #endregion
+            #region Leg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
+            #endregion
+
             return View(newdata);
         }
         [HttpPost]
@@ -2539,6 +2545,11 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlSite = ddlSite;
 
             #endregion
+            #region Leg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
+            #endregion
+
             return View(newdata);
         }
         

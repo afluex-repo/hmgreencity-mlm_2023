@@ -27,6 +27,10 @@ namespace HMGreenCityMLM.Models
         public string City { get; set; }
         public string State { get; set; }
 
+
+
+        
+
         public string PK_InvestmentID { get; set; }
         public string PlotID { get; set; }
 

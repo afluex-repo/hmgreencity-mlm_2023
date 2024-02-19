@@ -48,7 +48,7 @@ namespace HMGreenCityMLM.Models.WebService
                     CssClass = dr["cssStatus"].ToString(),
                     SelfBusiness = dr["PackageName"].ToString(),
                     Href = dr["href"].ToString(),
-                    JoiningDate = string.IsNullOrEmpty(dr["ActivationDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["ActivationDate"]).ToString("dd-MMM, yyyy"),
+                    JoiningDate = string.IsNullOrEmpty(dr["JoiningDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["JoiningDate"]).ToString("dd-MMM, yyyy"),
                     Spillby = dr["Spillby"].ToString(),
                     AllLeg1 = dr["AllLeg1"].ToString(),
                     AllLeg2 = dr["AllLeg2"].ToString(),
@@ -75,7 +75,7 @@ namespace HMGreenCityMLM.Models.WebService
                     Gender = dr["Gender"].ToString(),
                     ProfilePic = dr["ProfilePic"].ToString(),
                     //ActivationDate = dr["ActivationDate"].ToString(),
-                    ActivationDate = string.IsNullOrEmpty(dr["JoiningDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["JoiningDate"]).ToString("dd-MMM, yyyy"),
+                    ActivationDate = dr["ActivationDate"].ToString(),
                     AllBusinessLeft = dr["AllBusinessLeft"].ToString(),
                     AllBusinessRight = dr["AllBusinessRight"].ToString(),
 
@@ -117,7 +117,7 @@ namespace HMGreenCityMLM.Models.WebService
                     CssClass = dr["cssStatus"].ToString(),
                     SelfBusiness = dr["PackageName"].ToString(),
                     Href = dr["href"].ToString(),
-                    JoiningDate = string.IsNullOrEmpty(dr["ActivationDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["ActivationDate"]).ToString("dd-MMM, yyyy"),
+                    JoiningDate = string.IsNullOrEmpty(dr["JoiningDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["JoiningDate"]).ToString("dd-MMM, yyyy"),
                     Spillby = dr["Spillby"].ToString(),
                     AllLeg1 = dr["AllLeg1"].ToString(),
                     AllLeg2 = dr["AllLeg2"].ToString(),
@@ -143,8 +143,8 @@ namespace HMGreenCityMLM.Models.WebService
                     ProductName = dr["PackageName"].ToString(),
                     Gender = dr["Gender"].ToString(),
                     ProfilePic = dr["ProfilePic"].ToString(),
-                    ActivationDate = string.IsNullOrEmpty(dr["JoiningDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["JoiningDate"]).ToString("dd-MMM, yyyy"),
-                    //ActivationDate = dr["ActivationDate"].ToString(),
+                    //ActivationDate = string.IsNullOrEmpty(dr["ActivationDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["ActivationDate"]).ToString("dd-MMM, yyyy"),
+                    ActivationDate = dr["ActivationDate"].ToString(),
                     AllBusinessLeft = dr["AllBusinessLeft"].ToString(),
                     AllBusinessRight = dr["AllBusinessRight"].ToString(),
 
@@ -181,8 +181,7 @@ namespace HMGreenCityMLM.Models.WebService
                 model.ParentLoginId = dr["ParentLoginId"].ToString();
                 model.BlockStatus = dr["BlockStatus"].ToString();
                 model.Fk_UserId = memID;
-                model.JoiningDate = Convert.ToDateTime(dr["JoiningDate"]).ToString("dd-MMM, yyyy");
-
+                model.JoiningDate = string.IsNullOrEmpty(dr["JoiningDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["JoiningDate"]).ToString("dd-MMM, yyyy");
                 model.AllLeg1 = dr["AllLeg1"].ToString();
                 model.AllLeg2 = dr["AllLeg2"].ToString();
 
@@ -207,8 +206,8 @@ namespace HMGreenCityMLM.Models.WebService
                 model.ProductName = dr["PackageName"].ToString();
                 model.Gender = dr["Gender"].ToString();
                 model.ProfilePic = dr["ProfilePic"].ToString();
-                //model.ActivationDate = dr["ActivationDate"].ToString();
-                model.ActivationDate = string.IsNullOrEmpty(dr["ActivationDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["ActivationDate"]).ToString("dd-MMM, yyyy");
+                model.ActivationDate = dr["ActivationDate"].ToString();
+                //model.ActivationDate = string.IsNullOrEmpty(dr["ActivationDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["ActivationDate"]).ToString("dd-MMM, yyyy");
                 model.AllBusinessLeft = dr["AllBusinessLeft"].ToString();
                 model.AllBusinessRight = dr["AllBusinessRight"].ToString();
 
@@ -240,7 +239,7 @@ namespace HMGreenCityMLM.Models.WebService
                 model.ParentLoginId = dr["ParentLoginId"].ToString();
                 model.BlockStatus = dr["BlockStatus"].ToString();
                 model.Fk_UserId = memID;
-                model.JoiningDate = Convert.ToDateTime(dr["JoiningDate"]).ToString("dd-MMM, yyyy");
+                model.JoiningDate = string.IsNullOrEmpty(dr["JoiningDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["JoiningDate"]).ToString("dd-MMM, yyyy");
 
                 model.AllLeg1 = dr["AllLeg1"].ToString();
                 model.AllLeg2 = dr["AllLeg2"].ToString();
@@ -266,8 +265,8 @@ namespace HMGreenCityMLM.Models.WebService
                 model.ProductName = dr["PackageName"].ToString();
                 model.Gender = dr["Gender"].ToString();
                 model.ProfilePic = dr["ProfilePic"].ToString();
-                //model.ActivationDate = dr["ActivationDate"].ToString();
-                model.ActivationDate = string.IsNullOrEmpty(dr["ActivationDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["ActivationDate"]).ToString("dd-MMM, yyyy");
+                model.ActivationDate = dr["ActivationDate"].ToString();
+                //model.ActivationDate = string.IsNullOrEmpty(dr["ActivationDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["ActivationDate"]).ToString("dd-MMM, yyyy");
                 model.AllBusinessLeft = dr["AllBusinessLeft"].ToString();
                 model.AllBusinessRight = dr["AllBusinessRight"].ToString();
 
