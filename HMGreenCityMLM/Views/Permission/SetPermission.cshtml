@@ -98,7 +98,9 @@
 
                                                     @if (item.Fk_FormTypeId == "4")
                                                     {
+                                                        if(item.Fk_FormId == "70") { 
                                                         <td><input type="checkbox" name="chkSevenDayView1_ @i" id="chkSevenDayView1_ @i" @item.SevenDayView />  </td>
+                                                        }
                                                     }
 
                                                 </tr>

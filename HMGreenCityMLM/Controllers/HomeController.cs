@@ -154,7 +154,7 @@ namespace HMGreenCityMLM.Controllers
                                 
                                 
                                 FormName = "AdminDashBoard";
-                                Controller = "Admin";p
+                                Controller = "Admin";
                             }
 
 
