@@ -616,7 +616,12 @@
                             <div class="row">
                                 <div class="col-md-12 col-lg-3">
                                     <h4 class="mb-0">Binary Tree</h4>
-                                    <a target="_blank" href="/Admin/DownlineRankAchieverReportsForAdmin" class="btn btn-info mt-2 text-white">Check Your Downline Rank Achiever</a>
+                                    @*<a target="_blank" href="/Admin/DownlineRankAchieverReportsForAdmin?ID=" id="lblFk_UserId" class="btn btn-info mt-2 text-white">Check Your Downline Rank Achiever</a>*@
+
+                                    <span id="lblFk_UserId"  class="btn btn-info mt-2 text-white" style="display:none"></span>
+                                    <button target="_blank"  onclick="return memDownId();" class="btn btn-info mt-2 text-white">Check Your Downline Rank Achiever</button>
+                                   
+
                                 </div>
                                 <div class="col-md-12 col-lg-9">
                                     <div class="row justify-content-lg-end" id="awardRow">
@@ -2078,6 +2083,16 @@
     //        minLength: 2
     //    });
     //});
+
+
+    function memDownId()
+    {
+        debugger;
+        var memDownid = $("#lblFk_UserId").text();
+        let myUrl = "/Admin/DownlineRankAchieverReportsForAdmin?Mem=" + memDownid;
+        //window.location.href = myUrl;
+        window.open(myUrl, '_blank');
+    }
 </script>
 
 
