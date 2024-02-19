@@ -871,7 +871,8 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@Fk_BusinessId", BusinessType),
                                       new SqlParameter("@Fk_CompanyId", Fk_CompanyId),
                                       new SqlParameter("@IsDownline", IsDownline),
-                                      new SqlParameter("@Leg", Leg)
+                                      new SqlParameter("@Leg", Leg),
+                                      new SqlParameter("@Fk_EmployeeId", Fk_UserId)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);

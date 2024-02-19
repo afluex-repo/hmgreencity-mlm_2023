@@ -53,8 +53,8 @@
                                                     <td>@i</td>
                                                     <td><img src="@Item.RewardImage" alt="@Item.RankName" width="50" height="50"></td>
                                                     <td>@Item.RankName</td>
-                                                    <td><a href="/Admin/DownlineRankAchieverAdminReports?RankId=@Item.FK_RankId&Leg=L" style="text-decoration:none" target="_blank">@Item.TotalAchieverLeft</a></td>
-                                                    <td><a href="/Admin/DownlineRankAchieverAdminReports?RankId=@Item.FK_RankId&Leg=R" style="text-decoration:none" target="_blank">@Item.TotalAchieverRight</a></td>
+                                                    <td><a href="/Admin/DownlineRankAchieverAdminReports?RankId=@Item.FK_RankId&userId=@Item.UserID&Leg=L" style="text-decoration:none" target="_blank">@Item.TotalAchieverLeft</a></td>
+                                                    <td><a href="/Admin/DownlineRankAchieverAdminReports?RankId=@Item.FK_RankId&userId=@Item.UserID&Leg=R" style="text-decoration:none" target="_blank">@Item.TotalAchieverRight</a></td>
                                                 </tr>
                                                 i++;
                                             }
