@@ -5901,6 +5901,7 @@
     <Content Include="images\loader.gif" />
     <Content Include="images\lock.png" />
     <Content Include="images\logo.png" />
+    <Content Include="images\logonew.png" />
     <Content Include="images\mail.png" />
     <Content Include="images\pdf.png" />
     <Content Include="images\Printer.png" />
