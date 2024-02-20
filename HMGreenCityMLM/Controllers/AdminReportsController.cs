@@ -444,8 +444,13 @@ namespace HMGreenCityMLM.Controllers
             List<Reports> lst1 = new List<Reports>();
             //incomeReport.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             //incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
-            incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
-            incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
+            DateTime now = DateTime.Now;
+            DateTime currentDate = DateTime.Now;
+            currentDate = currentDate.AddDays(-30);
+            incomeReport.FromDate = currentDate.ToString("dd/MM/yyyy");
+            incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+            incomeReport.NFromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
+            incomeReport.NToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
 
             DataSet ds11 = incomeReport.GetIncomeReport();
 
@@ -487,8 +492,8 @@ namespace HMGreenCityMLM.Controllers
             //    incomeReport.ToLoginID = null;
             //}
             List<Reports> lst1 = new List<Reports>();
-            incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
-            incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
+            incomeReport.NFromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
+            incomeReport.NToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
             if (incomeReport.Status == "null")
             {
                 incomeReport.Status = null;
@@ -2752,5 +2757,10 @@ namespace HMGreenCityMLM.Controllers
 
         #endregion
 
+
+       public ActionResult NewPlanAchieverRewardReports()
+       {
+            return View();
+       }
     }
 }

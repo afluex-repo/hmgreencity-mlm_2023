@@ -25,6 +25,14 @@ namespace HMGreenCityMLM.Models
         public string FK_RankId { get; set; }
         public string Achiver { get; set; }
 
+
+        public string TotalUsers { get; set; }
+        public string ActiveUsers { get; set; }
+        public string InactiveUsers { get; set; }
+        public string BlockedUsers { get; set; }
+        public string TotalHolds { get; set; }
+
+
         public List<DashBoard> lstachiver { get; set; }
 
         public DataSet GetDashBoardDetails()

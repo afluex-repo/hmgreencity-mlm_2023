@@ -6536,6 +6536,7 @@
     <Content Include="Views\Downline\UpdateProfile.cshtml" />
     <Content Include="Views\Admin\DownlineRankAchieverReportsForAdmin.cshtml" />
     <Content Include="Views\Admin\DownlineRankAchieverAdminReports.cshtml" />
+    <Content Include="Views\AdminReports\NewPlanAchieverRewardReports.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
