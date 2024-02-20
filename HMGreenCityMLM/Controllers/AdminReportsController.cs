@@ -444,8 +444,13 @@ namespace HMGreenCityMLM.Controllers
             List<Reports> lst1 = new List<Reports>();
             //incomeReport.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             //incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
-            incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
-            incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
+            DateTime now = DateTime.Now;
+            DateTime currentDate = DateTime.Now;
+            currentDate = currentDate.AddDays(-30);
+            incomeReport.FromDate = currentDate.ToString("dd/MM/yyyy");
+            incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+            incomeReport.NFromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
+            incomeReport.NToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
 
             DataSet ds11 = incomeReport.GetIncomeReport();
 
@@ -487,8 +492,8 @@ namespace HMGreenCityMLM.Controllers
             //    incomeReport.ToLoginID = null;
             //}
             List<Reports> lst1 = new List<Reports>();
-            incomeReport.FromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
-            incomeReport.ToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
+            incomeReport.NFromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
+            incomeReport.NToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
             if (incomeReport.Status == "null")
             {
                 incomeReport.Status = null;
@@ -2343,13 +2348,16 @@ namespace HMGreenCityMLM.Controllers
 
             Reports newdata = new Reports();
             List<Reports> lst1 = new List<Reports>();
+            newdata.Fk_UserId = Session["Pk_AdminId"].ToString();
+
             DateTime currentdate = DateTime.Now;
             currentdate = currentdate.AddMonths(-1);
             newdata.FromDate = currentdate.ToString("dd/MM/yyyy");
             newdata.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
-
+          
             newdata.FromDatenew = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDatenew = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+           
             DataSet ds11 = newdata.GetTopupReportNew();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -2426,6 +2434,11 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlSite = ddlSite;
 
             #endregion
+            #region Leg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
+            #endregion
+
             return View(newdata);
         }
         [HttpPost]
@@ -2465,6 +2478,8 @@ namespace HMGreenCityMLM.Controllers
             newdata.ToDatenew = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
             newdata.LoginId = newdata.ToLoginID;
             newdata.Fk_CompanyId = newdata.Fk_CompanyId == "0" ? null : newdata.Fk_CompanyId;
+
+            newdata.Fk_UserId = Session["Pk_AdminId"].ToString();
             DataSet ds11 = newdata.GetTopupReportNew();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -2539,6 +2554,11 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlSite = ddlSite;
 
             #endregion
+            #region Leg
+            List<SelectListItem> Leg = Common.Leg();
+            ViewBag.ddlleg = Leg;
+            #endregion
+
             return View(newdata);
         }
         
@@ -2737,5 +2757,10 @@ namespace HMGreenCityMLM.Controllers
 
         #endregion
 
+
+       public ActionResult NewPlanAchieverRewardReports()
+       {
+            return View();
+       }
     }
 }

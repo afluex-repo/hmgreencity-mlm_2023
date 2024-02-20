@@ -153,7 +153,8 @@ namespace HMGreenCityMLM.Models
 
         public string FromDatenew { get; set; }
         public string ToDatenew { get; set; }
-
+        public string NFromDate { get; set; }
+        public string NToDate { get; set; }
 
         public string LastTopUpAmount { get; set; }
         public bool IsNewBusiness { get; set; }
@@ -188,9 +189,23 @@ namespace HMGreenCityMLM.Models
         public string FK_RankId { get; set; }
         public string TotalAchieverRight { get; set; }
         public string TotalAchieverLeft { get; set; }
+        public List<Reports> lstdownlineAchieverreportforadmin { get; set; }
+        public List<Reports> lstdownAchieverAdminreport { get; set; }
+
+       
+        public List<Reports> lstDefaultAssociateList { get; set; }
+
+
+        public string UserTypeName { get; set; }
+
+        public string Pk_AdminId { get; set; }
+        public bool SevenDayView { get; set; }
+
         
 
-        public List<Reports> lstDefaultAssociateList { get; set; }
+
+
+
 
         public DataSet GetPayoutReport()
         {
@@ -235,8 +250,8 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@ToName", ToName),
                                     new SqlParameter("@IncomeType", IncomeType),
                                     new SqlParameter("@Status", Status),
-                                    new SqlParameter("@FromDate", FromDate),
-                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@FromDate", NFromDate),
+                                    new SqlParameter("@ToDate", NToDate),
                                  new SqlParameter("@IsDownline", IsDownline)
             };
             DataSet ds = DBHelper.ExecuteQuery("IncomeReport", para);
@@ -856,6 +871,9 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@ClaculationStatus", Status),
                                       new SqlParameter("@Fk_BusinessId", BusinessType),
                                       new SqlParameter("@Fk_CompanyId", Fk_CompanyId),
+                                      new SqlParameter("@IsDownline", IsDownline),
+                                      new SqlParameter("@Leg", Leg),
+                                      new SqlParameter("@Fk_EmployeeId", Fk_UserId)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);
@@ -1028,8 +1046,33 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateDownlineProfile", para);
             return ds;
         }
-        
 
+
+
+        public DataSet GetDownlineRankAchieverForAdmin()
+        {
+            SqlParameter[] para = {   new SqlParameter("@FK_UserId", Fk_UserId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverReportsForAdmin", para);
+            return ds;
+        }
+
+        public DataSet DownlineRankAchieverAdminReports()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                      new SqlParameter("@FK_RankId", FK_RankId),
+                                      new SqlParameter("@Leg", Leg),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverAdminReports", para);
+            return ds;
+        }
+
+        public DataSet GetUser()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetUserForAdmin");
+            return ds;
+        }
     }
 }
 

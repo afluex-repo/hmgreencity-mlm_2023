@@ -5901,6 +5901,7 @@
     <Content Include="images\loader.gif" />
     <Content Include="images\lock.png" />
     <Content Include="images\logo.png" />
+    <Content Include="images\logonew.png" />
     <Content Include="images\mail.png" />
     <Content Include="images\pdf.png" />
     <Content Include="images\Printer.png" />
@@ -6534,6 +6535,9 @@
     <Content Include="Views\User\DownlineRankAchieverReports.cshtml" />
     <Content Include="Views\User\DownlineRankAchieverAssociateReports.cshtml" />
     <Content Include="Views\Downline\UpdateProfile.cshtml" />
+    <Content Include="Views\Admin\DownlineRankAchieverReportsForAdmin.cshtml" />
+    <Content Include="Views\Admin\DownlineRankAchieverAdminReports.cshtml" />
+    <Content Include="Views\AdminReports\NewPlanAchieverRewardReports.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

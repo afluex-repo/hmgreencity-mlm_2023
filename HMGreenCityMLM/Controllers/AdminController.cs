@@ -146,7 +146,7 @@ namespace HMGreenCityMLM.Controllers
 
                     details.Total = (dr["Total"].ToString());
                     details.Status = (dr["Status"].ToString());
-
+                    
 
                     dataList.Add(details);
 
@@ -1310,5 +1310,74 @@ namespace HMGreenCityMLM.Controllers
             }
         }
 
+        #region Downline Rank Achiever Reports For Admin
+
+        public ActionResult DownlineRankAchieverReportsForAdmin(string Mem)
+        {
+            Reports model = new Reports();
+            //DataSet ds1 = model.GetUser();
+            //if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            //{
+            //    model.Fk_UserId = ds1.Tables[0].Rows[0]["FirstUser"].ToString();
+            //}
+            model.Fk_UserId = Mem;
+            try
+            {
+                DataSet ds = model.GetDownlineRankAchieverForAdmin();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Reports> lstdownlineAchieverreportforadmin = new List<Reports>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.UserID = Crypto.Encrypt(r["UserId"].ToString());
+                        obj.FK_RankId = r["PK_RankId"].ToString();
+                        obj.RankName = r["RankName"].ToString();
+                        obj.RewardImage = r["ImgUrl"].ToString();
+                        obj.TotalAchieverLeft = r["TotalAchieverLeft"].ToString();
+                        obj.TotalAchieverRight = r["TotalAchieverRight"].ToString();
+                        lstdownlineAchieverreportforadmin.Add(obj);
+                    }
+                    model.lstdownlineAchieverreportforadmin = lstdownlineAchieverreportforadmin;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+
+
+
+
+        public ActionResult DownlineRankAchieverAdminReports(string UserID, string RankId, string Leg)
+        {
+            Reports model = new Reports();
+            model.FK_RankId = RankId;
+            model.Leg = Leg;
+            if (model.FK_RankId != null)
+            {
+                //model.Fk_UserId = Session["Pk_AdminId"].ToString();
+                model.Fk_UserId = Crypto.Decrypt(UserID);
+                DataSet ds = model.DownlineRankAchieverAdminReports();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Reports> lstdownAchieverAdminreport = new List<Reports>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Fk_UserId = r["Pk_UserId"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        lstdownAchieverAdminreport.Add(obj);
+                    }
+                    model.lstdownAchieverAdminreport = lstdownAchieverAdminreport;
+                }
+            }
+
+            return View(model);
+        }
+        #endregion
     }
 }

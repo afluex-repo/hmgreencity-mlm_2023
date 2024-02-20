@@ -27,6 +27,10 @@ namespace HMGreenCityMLM.Models
         public string City { get; set; }
         public string State { get; set; }
 
+
+
+        
+
         public string PK_InvestmentID { get; set; }
         public string PlotID { get; set; }
 
@@ -340,7 +344,7 @@ namespace HMGreenCityMLM.Models
 
     public class SoftwareDetails
     {
-        public static string CompanyName = "HM Green City";
+        public static string CompanyName = "HM GROUP OF COMPANY";
         public static string CompanyAddress = "H.O. : 8/883/2, Vikas Nagar, khurram Nagar Road, Opp, Fatimi Masjid, Lucknow";
         public static string Pin1 = "";
         public static string State1 = "UP";

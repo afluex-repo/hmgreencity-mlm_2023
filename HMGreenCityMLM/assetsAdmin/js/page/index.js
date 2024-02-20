@@ -37,11 +37,7 @@ function chart1() {
       {
         name: "income",
         data: [15, 48, 36, 20, 40, 60, 35, 20],
-      },
-      {
-        name: "expense",
-        data: [8, 22, 60, 35, 17, 24, 48, 37],
-      },
+      }
     ],
     chart: {
       height: 350,
@@ -143,33 +139,21 @@ function chart1() {
         {
           name: "income",
           data: [15, 48, 36, 20, 40, 60, 35, 20],
-        },
-        {
-          name: "expense",
-          data: [8, 22, 60, 35, 17, 24, 48, 37],
-        },
+        }
       ]);
     } else if (id && id === "2") {
       chart.updateSeries([
         {
           name: "income",
           data: [19, 38, 43, 27, 44, 55, 32, 26],
-        },
-        {
-          name: "expense",
-          data: [12, 20, 58, 39, 21, 31, 41, 37],
-        },
+        }
       ]);
     } else if (id && id === "3") {
       chart.updateSeries([
         {
           name: "income",
           data: [10, 28, 22, 32, 41, 51, 42, 30],
-        },
-        {
-          name: "expense",
-          data: [17, 22, 42, 35, 31, 28, 53, 31],
-        },
+        }
       ]);
     }
   });
