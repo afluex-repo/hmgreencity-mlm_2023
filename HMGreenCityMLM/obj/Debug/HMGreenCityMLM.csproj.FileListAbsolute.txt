@@ -854,6 +854,5 @@ F:\Sarfraz Ahmad\repository\hmgreencity-mlm_2023\HMGreenCityMLM\bin\Newtonsoft.J
 F:\Sarfraz Ahmad\repository\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Net.Http.Formatting.xml
 F:\Sarfraz Ahmad\repository\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.xml
 F:\Sarfraz Ahmad\repository\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.WebHost.xml
-F:\Sarfraz Ahmad\repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
 F:\Sarfraz Ahmad\repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 F:\Sarfraz Ahmad\repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
