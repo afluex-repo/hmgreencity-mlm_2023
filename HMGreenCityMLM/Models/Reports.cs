@@ -153,7 +153,8 @@ namespace HMGreenCityMLM.Models
 
         public string FromDatenew { get; set; }
         public string ToDatenew { get; set; }
-
+        public string NFromDate { get; set; }
+        public string NToDate { get; set; }
 
         public string LastTopUpAmount { get; set; }
         public bool IsNewBusiness { get; set; }
@@ -249,8 +250,8 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@ToName", ToName),
                                     new SqlParameter("@IncomeType", IncomeType),
                                     new SqlParameter("@Status", Status),
-                                    new SqlParameter("@FromDate", FromDate),
-                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@FromDate", NFromDate),
+                                    new SqlParameter("@ToDate", NToDate),
                                  new SqlParameter("@IsDownline", IsDownline)
             };
             DataSet ds = DBHelper.ExecuteQuery("IncomeReport", para);
