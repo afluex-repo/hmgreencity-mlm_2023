@@ -670,8 +670,8 @@ namespace HMGreenCityMLM.Models
 
     public class PayoutLedger
     {
-      
-      
+        public string TransactionNo { get; set; }
+        public string TDSCharge { get; set; }
         public string Narration { get; set; }
         public string DrAmount { get; set; }
         public string CrAmount { get; set; }
@@ -1141,5 +1141,65 @@ namespace HMGreenCityMLM.Models
         public string Fk_UserId { get; set; }
         public string LoginId { get; set; }
         public string Name { get; set; }
+    }
+
+
+    public class KYCDocumentsAPI
+    {
+        public string AdharImage { get; set; }
+        public string PanImage { get; set; }
+        public string DocumentImage { get; set; }
+        public string Pk_UserID { get; set; }
+        public string AdharNumber { get; set; }
+        public string PanNumber { get; set; }
+        public string DocumentNumber { get; set; }
+
+        public DataSet UploadKYCDocuments()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID",Pk_UserID) ,
+                                      new SqlParameter("@AdharNumber", AdharNumber) ,
+                                      new SqlParameter("@AdharImage", AdharImage) ,
+                                      new SqlParameter("@PanNumber", PanNumber),
+                                      new SqlParameter("@PanImage", PanImage) ,
+                                      new SqlParameter("@DocumentNumber", DocumentNumber) ,
+                                      new SqlParameter("@DocumentImage", DocumentImage)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UploadKYC", para);
+            return ds;
+        }
+    }
+
+    public class KYCResponse
+    {
+        public string Message { get; set; }
+        public string Status { get; set; }
+    }
+
+    public class KYCListAPI
+    {
+        public string Pk_UserID { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<lstKycDocument> lstKycdocuments { get; set; }
+
+        public DataSet GetKYCDocuments()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID",Pk_UserID) };
+            DataSet ds = DBHelper.ExecuteQuery("GetKYCDocuments", para);
+            return ds;
+        }
+    }
+
+    public class lstKycDocument
+    {
+        public string AdharNumber { get; set; }
+        public string AdharImage { get; set; }
+        public string AdharStatus { get; set; }
+        public string PanNumber { get; set; }
+        public string PanImage { get; set; }
+        public string PanStatus { get; set; }
+        public string DocumentNumber { get; set; }
+        public string DocumentImage { get; set; }
+        public string DocumentStatus { get; set; }
     }
 }

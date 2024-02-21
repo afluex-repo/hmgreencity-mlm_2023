@@ -407,8 +407,7 @@ namespace HMGreenCityMLM.Controllers
 
 
         #endregion
-
-
+        
         #region PayoutReport
 
 
@@ -771,12 +770,109 @@ namespace HMGreenCityMLM.Controllers
 
         #endregion
 
+        #region KYCDocuments
+
+        public ActionResult KYCDocuments(HttpPostedFileBase AadharFile, HttpPostedFileBase PanFile, HttpPostedFileBase DocumentFile,KYCDocumentsAPI obj)
+        {
+            KYCResponse Response = new KYCResponse();
+            try
+            {
+                if (AadharFile != null)
+                {   
+                    obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AadharFile.FileName);
+                    AadharFile.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage))); 
+                }
+                if (PanFile != null)
+                {
+                    obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(PanFile.FileName);
+                    PanFile.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
+                }
+                if (DocumentFile != null)
+                {
+                    obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(DocumentFile.FileName);
+                    DocumentFile.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+                }
+               
+                DataSet ds = obj.UploadKYCDocuments();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        Response.Message = "Documents uploaded successfully..";
+                        Response.Status = "0";
+                        return Json(Response, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        Response.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        Response.Status = "1";
+                        return Json(Response, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Message = ex.Message;
+                Response.Status = "1";
+                return Json(Response, JsonRequestBehavior.AllowGet);
+            }
+            return Json(Response, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region GetKYCList
+
+        public ActionResult GetKYCList(KYCListAPI model)
+        {
+            KYCListAPI obj = new KYCListAPI();
+            try
+            {
+                List<lstKycDocument> lstKycdocuments = new List<lstKycDocument>();
+                DataSet ds = model.GetKYCDocuments();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        lstKycDocument KYClist = new lstKycDocument();
+                        KYClist.AdharNumber = dr["AdharNumber"].ToString();
+                        KYClist.AdharImage = dr["AdharImage"].ToString();
+                        KYClist.AdharStatus = dr["AdharStatus"].ToString();
+                        KYClist.PanNumber = dr["PanNumber"].ToString();
+                        KYClist.PanImage = dr["PanImage"].ToString();
+                        KYClist.PanStatus = dr["PanStatus"].ToString();
+                        KYClist.DocumentNumber = dr["DocumentNumber"].ToString();
+                        KYClist.DocumentImage = dr["DocumentImage"].ToString();
+                        KYClist.DocumentStatus = dr["DocumentStatus"].ToString();
+                        lstKycdocuments.Add(KYClist);
+                    }
+                    obj.lstKycdocuments = lstKycdocuments;
+
+                    obj.Status = "0";
+                    obj.Message = "KYC Documents Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+        
         #region UpdateProfile
 
         public ActionResult UpdateProfile(HttpPostedFileBase fileProfilePicture, UpdateProfileAPI obj)
         {
-            string FormName = "";
-            string Controller = "";
             UpdateProfile data = new UpdateProfile();
             try
             {
@@ -862,6 +958,8 @@ namespace HMGreenCityMLM.Controllers
                     Objload.CrAmount = dr["CrAmount"].ToString();
                     Objload.AddedOn = dr["TransactionDate"].ToString();
                     Objload.PayoutBalance = dr["Balance"].ToString();
+                    Objload.TDSCharge = dr["TDSCharge"].ToString();
+                    Objload.TransactionNo = dr["TransactionNo"].ToString();
 
                     lst.Add(Objload);
                 }
@@ -1045,8 +1143,7 @@ namespace HMGreenCityMLM.Controllers
             }
         }
         #endregion
-
-
+        
         #region BusinessReportBy
 
         public ActionResult BusinessReportBy(BusinessReportAPI model)
@@ -1322,8 +1419,7 @@ namespace HMGreenCityMLM.Controllers
         #endregion
 
         #region Downline
-
-
+        
         public ActionResult Downline(DownlineAPI direct)
         {
             UpdateProfile objs = new UpdateProfile();
@@ -1368,8 +1464,7 @@ namespace HMGreenCityMLM.Controllers
             }
 
         }
-
-
+        
         public ActionResult SearchDownline(DownlineSearchAPI direct)
         {
             UpdateProfile objs = new UpdateProfile();
@@ -1464,8 +1559,7 @@ namespace HMGreenCityMLM.Controllers
         }
 
         #endregion
-
-
+        
         #region LegDropdown
 
 
