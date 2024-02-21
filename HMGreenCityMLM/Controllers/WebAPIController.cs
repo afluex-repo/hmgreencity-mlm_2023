@@ -772,7 +772,7 @@ namespace HMGreenCityMLM.Controllers
 
         #region KYCDocuments
 
-        public ActionResult KYCDocuments(HttpPostedFileBase AadharFile, HttpPostedFileBase PanFile, HttpPostedFileBase DocumentFile,KYCDocumentsAPI obj)
+        public ActionResult KYCDocuments(HttpPostedFileBase AadharFile, HttpPostedFileBase AdharBacksideFile, HttpPostedFileBase PanFile, HttpPostedFileBase DocumentFile,KYCDocumentsAPI obj)
         {
             KYCResponse Response = new KYCResponse();
             try
@@ -781,6 +781,11 @@ namespace HMGreenCityMLM.Controllers
                 {   
                     obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AadharFile.FileName);
                     AadharFile.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage))); 
+                }
+                if (AdharBacksideFile != null)
+                {
+                    obj.AdharBacksideImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AdharBacksideFile.FileName);
+                    AdharBacksideFile.SaveAs(Path.Combine(Server.MapPath(obj.AdharBacksideImage)));
                 }
                 if (PanFile != null)
                 {
@@ -837,6 +842,7 @@ namespace HMGreenCityMLM.Controllers
                         lstKycDocument KYClist = new lstKycDocument();
                         KYClist.AdharNumber = dr["AdharNumber"].ToString();
                         KYClist.AdharImage = dr["AdharImage"].ToString();
+                        KYClist.AdharBacksideImage = dr["AdharBacksideImage"].ToString();
                         KYClist.AdharStatus = dr["AdharStatus"].ToString();
                         KYClist.PanNumber = dr["PanNumber"].ToString();
                         KYClist.PanImage = dr["PanImage"].ToString();
