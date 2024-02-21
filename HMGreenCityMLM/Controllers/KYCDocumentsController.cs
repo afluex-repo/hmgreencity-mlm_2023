@@ -29,6 +29,7 @@ namespace HMGreenCityMLM.Controllers
 
                 obj.AdharNumber = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                 obj.AdharImage = ds.Tables[0].Rows[0]["AdharImage"].ToString();
+                obj.AdharBacksideImage = ds.Tables[0].Rows[0]["AdharBacksideImage"].ToString();
                 obj.AdharStatus = "Status : " + ds.Tables[0].Rows[0]["AdharStatus"].ToString();
                 obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                 obj.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
@@ -61,10 +62,15 @@ namespace HMGreenCityMLM.Controllers
                         }
                         if (count == 1)
                         {
+                            obj.AdharBacksideImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            file.SaveAs(Path.Combine(Server.MapPath(obj.AdharBacksideImage)));
+                        }
+                        if (count == 2)
+                        {
                             obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
                         }
-                        if (count == 2)
+                        if (count == 3)
                         {
                             obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
