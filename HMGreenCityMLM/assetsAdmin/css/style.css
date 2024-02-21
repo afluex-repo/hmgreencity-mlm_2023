@@ -7131,8 +7131,10 @@ body.layout-3 .main-footer {
 
 .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
 	  color: #000000 !important;
-        height: 35px;
+        /*height: 35px;*/
+        height: auto;
         padding-left: 50px;
+        align-items: self-start;
         font-weight: 700;
 }
 
