@@ -641,6 +641,49 @@ namespace HMGreenCityMLM.Controllers
             }
             return View(model);
         }
+        
+        [HttpPost]
+        [ActionName("TopupList")]
+        [OnAction(ButtonName = "topupSearch")]
+        public ActionResult TopupListSearch(Reports model)
+        {
+            try
+            {
+                model.LoginId = Session["LoginID"].ToString();
+                model.FromDatenew = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDatenew = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                DataSet ds = model.GetTopupReport();
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Reports> lstTopupReport = new List<Reports>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.FK_InvestmentID = Crypto.Encrypt(r["Pk_InvestmentId"].ToString());
+                        obj.Name = r["Name"].ToString() + " (" + r["LoginId"].ToString() + ")";
+                        obj.SiteName = r["SiteName"].ToString();
+                        obj.SectorName = r["SectorName"].ToString();
+
+                        obj.UpgradtionDate = r["UpgradtionDate"].ToString();
+                        obj.ProductName = r["Package"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        lstTopupReport.Add(obj);
+                    }
+                    model.lsttopupreport = lstTopupReport;
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = ds.Tables[0].Rows[0].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            return View(model);
+        }
+
 
         public ActionResult PrintTopup(string invid)
         {
@@ -899,7 +942,49 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
         }
 
-       
+        [HttpPost]
+        [ActionName("TopupListNew")]
+        [OnAction(ButtonName = "lstnewSearch")]
+        public ActionResult TopupListNewSearch(Reports model)
+        {
+            try
+            {
+                model.LoginId = Session["LoginID"].ToString();
+                model.FromDatenew = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDatenew = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                DataSet ds = model.GetTopupReportNew();
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Reports> lstTopupReport = new List<Reports>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.FK_InvestmentID = Crypto.Encrypt(r["Pk_InvestmentId"].ToString());
+                        obj.Name = r["Name"].ToString() + " (" + r["LoginId"].ToString() + ")";
+                        obj.SiteName = r["SiteName"].ToString();
+                        obj.SectorName = r["SectorName"].ToString();
+
+                        obj.UpgradtionDate = r["UpgradtionDate"].ToString();
+                        obj.ProductName = r["Package"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        lstTopupReport.Add(obj);
+                    }
+                    model.lsttopupreport = lstTopupReport;
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = ds.Tables[0].Rows[0].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            return View(model);
+        }
+
+
         public ActionResult GetSponsorName(string ReferBy)
         {
             Reports obj = new Reports();
