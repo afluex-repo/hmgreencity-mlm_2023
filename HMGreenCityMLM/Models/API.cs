@@ -1246,7 +1246,7 @@ namespace HMGreenCityMLM.Models
     }
     public class TopUpNew
     {
-        //public string PlotNumber { get; set; }
+        public string PlotNumber { get; set; }
         public string Name { get; set; }
         public string Package { get; set; }
         public string UpgradtionDate { get; set; }
@@ -1255,5 +1255,6 @@ namespace HMGreenCityMLM.Models
         public string SiteName { get; set; }
         public string FK_InvestmentID { get; set; }
         public string SectorName { get; set; }
+
     }
 }

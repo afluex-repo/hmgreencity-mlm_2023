@@ -1887,7 +1887,7 @@ namespace HMGreenCityMLM.Controllers
                         obj1.UpgradtionDate = r["UpgradtionDate"].ToString();
                         obj1.ProductName = r["Package"].ToString();
                         obj1.Amount = r["Amount"].ToString();
-                        //obj1.PlotNumber = r["PlotNumber"].ToString();
+                        obj1.PlotNumber = r["PlotNumber"].ToString();
                         lstTopupReportNew.Add(obj1);
                     }
                     obj.lstTopupReportNew = lstTopupReportNew;
