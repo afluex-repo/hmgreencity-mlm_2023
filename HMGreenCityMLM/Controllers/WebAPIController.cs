@@ -272,6 +272,8 @@ namespace HMGreenCityMLM.Controllers
 
             try
             {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
                 DataSet ds = model.GetTopupReport();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -1873,6 +1875,8 @@ namespace HMGreenCityMLM.Controllers
             }
             try
             {
+                model.FromDatenew = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDatenew = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
                 DataSet ds = model.GetTopupReportNew();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -1887,11 +1891,11 @@ namespace HMGreenCityMLM.Controllers
                         obj1.UpgradtionDate = r["UpgradtionDate"].ToString();
                         obj1.ProductName = r["Package"].ToString();
                         obj1.Amount = r["Amount"].ToString();
-                        //obj1.PlotNumber = r["PlotNumber"].ToString();
+                        obj1.PlotNumber = r["PlotNumber"].ToString();
                         lstTopupReportNew.Add(obj1);
                     }
                     obj.lstTopupReportNew = lstTopupReportNew;
-                    obj.Message = "TopupListNew Fetched.";
+                    obj.Message = "New TopupList Fetched.";
                     obj.Status = "0";
                 }
                 else

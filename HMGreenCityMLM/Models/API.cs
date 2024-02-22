@@ -200,9 +200,13 @@ namespace HMGreenCityMLM.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
         public DataSet GetTopupReport()
         {
-            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId)
+            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@FromDate",FromDate),
+                                      new SqlParameter("@ToDate",ToDate)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreport", para);
@@ -213,13 +217,10 @@ namespace HMGreenCityMLM.Models
     {
     public string PlotNumber { get; set; }
     public string Name { get; set; }
-    public string FromDate { get; set; }
-    public string ToDate { get; set; }
     public string Package { get; set; }
     public string UpgradtionDate { get; set; }
     public string ProductName { get; set; }
     public string Amount { get; set; }
-    //public string PlotNumber { get; set; }
     public string SiteName { get; set; }
     public string FK_InvestmentID { get; set; }
     public string SectorName { get; set; }
@@ -1223,6 +1224,8 @@ namespace HMGreenCityMLM.Models
         public string IsDownline { get; set; }
         public string Leg { get; set; }
         public string Fk_UserId { get; set; }
+        public string ToDate { get; set; }
+        public string FromDate { get; set; }
 
         public DataSet GetTopupReportNew()
         {
@@ -1246,7 +1249,7 @@ namespace HMGreenCityMLM.Models
     }
     public class TopUpNew
     {
-        //public string PlotNumber { get; set; }
+        public string PlotNumber { get; set; }
         public string Name { get; set; }
         public string Package { get; set; }
         public string UpgradtionDate { get; set; }
@@ -1255,5 +1258,6 @@ namespace HMGreenCityMLM.Models
         public string SiteName { get; set; }
         public string FK_InvestmentID { get; set; }
         public string SectorName { get; set; }
+
     }
 }
