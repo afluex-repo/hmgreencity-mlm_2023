@@ -1859,5 +1859,57 @@ namespace HMGreenCityMLM.Controllers
         }
 
         #endregion
+
+        #region TopupListNew
+
+        public ActionResult TopupListNew(TopUpNewAPI model)
+        {
+            TopUpNewAPI obj = new TopUpNewAPI();
+            if (model.LoginId == "" || model.LoginId == null)
+            {
+                obj.Status = "1";
+                obj.Message = "Please enter LoginId";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            try
+            {
+                DataSet ds = model.GetTopupReportNew();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<TopUpNew> lstTopupReportNew = new List<TopUpNew>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        TopUpNew obj1 = new TopUpNew();
+                        obj1.FK_InvestmentID = Crypto.Encrypt(r["Pk_InvestmentId"].ToString());
+                        obj1.Name = r["Name"].ToString() + " (" + r["LoginId"].ToString() + ")";
+                        obj1.SiteName = r["SiteName"].ToString();
+                        obj1.SectorName = r["SectorName"].ToString();
+                        obj1.UpgradtionDate = r["UpgradtionDate"].ToString();
+                        obj1.ProductName = r["Package"].ToString();
+                        obj1.Amount = r["Amount"].ToString();
+                        //obj1.PlotNumber = r["PlotNumber"].ToString();
+                        lstTopupReportNew.Add(obj1);
+                    }
+                    obj.lstTopupReportNew = lstTopupReportNew;
+                    obj.Message = "TopupListNew Fetched.";
+                    obj.Status = "0";
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = "No Data Found";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Message = ex.Message;
+                obj.Status = "1";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
     }
 }
