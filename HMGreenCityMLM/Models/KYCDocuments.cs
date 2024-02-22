@@ -12,6 +12,7 @@ namespace HMGreenCityMLM.Models
         public string PKUserID { get; set; }
         public string AdharNumber { get; set; }
         public string AdharImage { get; set; }
+        public string AdharBacksideImage { get; set; }
         public string AdharStatus { get; set; }
         public string PanNumber { get; set; }
         public string PanImage { get; set; }
@@ -25,6 +26,7 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para = { new SqlParameter("@FK_UserID",PKUserID ) ,
                                       new SqlParameter("@AdharNumber", AdharNumber) ,
                                       new SqlParameter("@AdharImage", AdharImage) ,
+                                      new SqlParameter("@AdharBacksideImage",AdharBacksideImage),
                                       new SqlParameter("@PanNumber", PanNumber),
                                       new SqlParameter("@PanImage", PanImage) ,
                                       new SqlParameter("@DocumentNumber", DocumentNumber) ,

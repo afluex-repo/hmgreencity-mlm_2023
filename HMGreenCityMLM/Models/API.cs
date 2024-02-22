@@ -200,9 +200,13 @@ namespace HMGreenCityMLM.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
         public DataSet GetTopupReport()
         {
-            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId)
+            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@FromDate",FromDate),
+                                      new SqlParameter("@ToDate",ToDate)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreport", para);
@@ -213,13 +217,10 @@ namespace HMGreenCityMLM.Models
     {
     public string PlotNumber { get; set; }
     public string Name { get; set; }
-    public string FromDate { get; set; }
-    public string ToDate { get; set; }
     public string Package { get; set; }
     public string UpgradtionDate { get; set; }
     public string ProductName { get; set; }
     public string Amount { get; set; }
-    //public string PlotNumber { get; set; }
     public string SiteName { get; set; }
     public string FK_InvestmentID { get; set; }
     public string SectorName { get; set; }
@@ -670,8 +671,8 @@ namespace HMGreenCityMLM.Models
 
     public class PayoutLedger
     {
-      
-      
+        public string TransactionNo { get; set; }
+        public string TDSCharge { get; set; }
         public string Narration { get; set; }
         public string DrAmount { get; set; }
         public string CrAmount { get; set; }
@@ -1141,5 +1142,122 @@ namespace HMGreenCityMLM.Models
         public string Fk_UserId { get; set; }
         public string LoginId { get; set; }
         public string Name { get; set; }
+    }
+
+
+    public class KYCDocumentsAPI
+    {
+        public string AdharImage { get; set; }
+        public string AdharBacksideImage { get; set; }
+        public string PanImage { get; set; }
+        public string DocumentImage { get; set; }
+        public string Pk_UserID { get; set; }
+        public string AdharNumber { get; set; }
+        public string PanNumber { get; set; }
+        public string DocumentNumber { get; set; }
+
+        public DataSet UploadKYCDocuments()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID",Pk_UserID) ,
+                                      new SqlParameter("@AdharNumber", AdharNumber) ,
+                                      new SqlParameter("@AdharImage", AdharImage) ,
+                                      new SqlParameter("@AdharBacksideImage",AdharBacksideImage),
+                                      new SqlParameter("@PanNumber", PanNumber),
+                                      new SqlParameter("@PanImage", PanImage) ,
+                                      new SqlParameter("@DocumentNumber", DocumentNumber) ,
+                                      new SqlParameter("@DocumentImage", DocumentImage)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UploadKYC", para);
+            return ds;
+        }
+    }
+
+    public class KYCResponse
+    {
+        public string Message { get; set; }
+        public string Status { get; set; }
+    }
+
+    public class KYCListAPI
+    {
+        public string Pk_UserID { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<lstKycDocument> lstKycdocuments { get; set; }
+
+        public DataSet GetKYCDocuments()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID",Pk_UserID) };
+            DataSet ds = DBHelper.ExecuteQuery("GetKYCDocuments", para);
+            return ds;
+        }
+    }
+
+    public class lstKycDocument
+    {
+        public string AdharNumber { get; set; }
+        public string AdharImage { get; set; }
+        public string AdharBacksideImage { get; set; }
+        public string AdharStatus { get; set; }
+        public string PanNumber { get; set; }
+        public string PanImage { get; set; }
+        public string PanStatus { get; set; }
+        public string DocumentNumber { get; set; }
+        public string DocumentImage { get; set; }
+        public string DocumentStatus { get; set; }
+    }
+
+
+    public class TopUpNewAPI
+    {
+        public List<TopUpNew> lstTopupReportNew { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string Name { get; set; }
+        public string FromDatenew { get; set; }
+        public string ToDatenew { get; set; }
+        public string Package { get; set; }
+        public string SiteId { get; set; }
+        public string BusinessType { get; set; }
+        public string Fk_CompanyId { get; set; }
+        public string IsDownline { get; set; }
+        public string Leg { get; set; }
+        public string Fk_UserId { get; set; }
+        public string ToDate { get; set; }
+        public string FromDate { get; set; }
+
+        public DataSet GetTopupReportNew()
+        {
+            SqlParameter[] para = {   new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@Name", Name),
+                                      new SqlParameter("@FromDate", FromDatenew),
+                                      new SqlParameter("@ToDate", ToDatenew),
+                                      new SqlParameter("@Package", Package),
+                                      new SqlParameter("@SiteId", SiteId),
+                                      new SqlParameter("@ClaculationStatus", Status),
+                                      new SqlParameter("@Fk_BusinessId", BusinessType),
+                                      new SqlParameter("@Fk_CompanyId", Fk_CompanyId),
+                                      new SqlParameter("@IsDownline", IsDownline),
+                                      new SqlParameter("@Leg", Leg),
+                                      new SqlParameter("@Fk_EmployeeId", Fk_UserId)
+                                  };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetTopupreportNew", para);
+            return ds;
+        }
+    }
+    public class TopUpNew
+    {
+        public string PlotNumber { get; set; }
+        public string Name { get; set; }
+        public string Package { get; set; }
+        public string UpgradtionDate { get; set; }
+        public string ProductName { get; set; }
+        public string Amount { get; set; }
+        public string SiteName { get; set; }
+        public string FK_InvestmentID { get; set; }
+        public string SectorName { get; set; }
+
     }
 }

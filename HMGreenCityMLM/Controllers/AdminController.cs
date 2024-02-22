@@ -146,7 +146,7 @@ namespace HMGreenCityMLM.Controllers
 
                     details.Total = (dr["Total"].ToString());
                     details.Status = (dr["Status"].ToString());
-
+                    
 
                     dataList.Add(details);
 

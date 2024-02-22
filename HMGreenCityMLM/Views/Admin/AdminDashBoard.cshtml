@@ -52,7 +52,7 @@
                                 <div class="card-icon card-icon-large"><i class=""></i></div>
                                 <div class="card-content">
                                     <h4 class="card-title">@ViewBag.TotalUsers</h4>
-                                    <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList"><span class="text-white">Total Associates</span></a>
+                                    <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList"><span class="text-white">Total Business Partner</span></a>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                     <div class="col-lg-3">
                         <div class="card panel-default">
                             <div class="card-header h5 text-dark">
-                                Associate Details
+                                Business Partner Details
                             </div>
                             <!-- /.panel-heading -->
                             <div class="card-body">
@@ -145,8 +145,34 @@
                             </div>
                             <!-- /.panel-body -->
                         </div>
-                        <!-- /.panel -->
-                        <!-- /.panel -->
+
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-xl-6 ">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Revenue Chart</h4>
+                                <div class="card-header-action">
+                                    <ul class="nav nav-pills" role="tablist" id="chart-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active card-tab-style" data-toggle="tab" data-id="1" role="tab"
+                                               aria-selected="true">2017</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link card-tab-style" data-toggle="tab" data-id="2" role="tab"
+                                               aria-selected="false">2018</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link card-tab-style" data-toggle="tab" data-id="3" role="tab"
+                                               aria-selected="false">2019</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart1"></div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="row">
