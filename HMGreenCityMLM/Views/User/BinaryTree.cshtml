@@ -612,7 +612,12 @@
                             <div class="row">
                                 <div class="col-md-12 col-lg-3">
                                     <h4 class="mb-0">Binary Tree</h4>
-                                    <a href="/User/DownlineRankAchieverReports" class="btn btn-info mt-2 text-white">Check Your Downline Rank Achiever</a>
+                                    @*<a href="/User/DownlineRankAchieverReports" class="btn btn-info mt-2 text-white">Check Your Downline Rank Achiever</a>*@
+
+                                    @*<a target="_blank" href="/User/DownlineRankAchieverReports?ID=" id="lblFk_UserId" class="btn btn-info mt-2 text-white">Check Your Downline Rank Achiever</a>*@
+
+                                    <span id="lblFk_UserId" class="btn btn-info mt-2 text-white" style="display:none"></span>
+                                    <button target="_blank" onclick="return memDownId();" class="btn btn-info mt-2 text-white">Check Your Downline Rank Achiever</button>
                                 </div>
                                 <div class="col-md-12 col-lg-9">
                                     <div class="row justify-content-lg-end" id="awardRow">
@@ -2014,6 +2019,24 @@
             }
         });
     });
+
+
+    function memDownId() {
+        debugger;
+        var firstid = $("#firstHead").text();
+        var firstID = firstid.slice(0, 8);
+        if (firstID == "HMCITYHM") {
+            var memDownid = 'HMCITYHM'.slice(0, 6);
+        }
+        else {
+            var memDownid = firstid.slice(0, 8);
+        }
+        let myUrl = "/User/DownlineRankAchieverReports?Mem=" + memDownid;
+        //window.location.href = myUrl;
+        window.open(myUrl, '_blank');
+
+    }
+
     //$(function () {
     //    $("#txtLoginID").autocomplete({
     //        source: function (request, response) {
