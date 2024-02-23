@@ -1050,7 +1050,7 @@ namespace HMGreenCityMLM.Controllers
                             obj1.MemberLevel = r["MemberLevel"].ToString();
                             obj1.Leg = r["Leg"].ToString();
                             obj1.Id = r["Id"].ToString();
-
+                            obj1.YellowDate = r["YellowDate"].ToString();
                             obj1.ActivationDate = r["ActivationDate"].ToString();
                             obj1.ActiveLeft = r["ActiveLeft"].ToString();
                             obj1.ActiveRight = r["ActiveRight"].ToString();

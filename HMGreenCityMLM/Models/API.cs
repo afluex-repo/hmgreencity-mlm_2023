@@ -782,7 +782,7 @@ namespace HMGreenCityMLM.Models
         public string Fk_SponsorId { get; set; }
         public string MemberName { get; set; }
         public string MemberLevel { get; set; }
-
+        public string YellowDate { get; set; }
         public string Id { get; set; }
         public string Leg { get; set; }
 
