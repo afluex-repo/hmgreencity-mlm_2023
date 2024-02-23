@@ -966,7 +966,6 @@ namespace HMGreenCityMLM.Controllers
                     Objload.CrAmount = dr["CrAmount"].ToString();
                     Objload.AddedOn = dr["TransactionDate"].ToString();
                     Objload.PayoutBalance = dr["Balance"].ToString();
-                    Objload.TDSCharge = dr["TDSCharge"].ToString();
                     Objload.TransactionNo = dr["TransactionNo"].ToString();
 
                     lst.Add(Objload);

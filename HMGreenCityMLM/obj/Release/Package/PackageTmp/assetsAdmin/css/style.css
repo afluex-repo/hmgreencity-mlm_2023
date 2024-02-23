@@ -7131,8 +7131,10 @@ body.layout-3 .main-footer {
 
 .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
 	  color: #000000 !important;
-        height: 35px;
+        /*height: 35px;*/
+        height: auto;
         padding-left: 50px;
+        align-items: self-start;
         font-weight: 700;
 }
 
@@ -9142,7 +9144,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
 }
 
 .light-sidebar.sidebar-mini .main-sidebar .sidebar-menu {
-	background-color: #fff
+	background-color: #117b7f
 }
 
 .light-sidebar.sidebar-mini .main-sidebar .sidebar-menu li.active a {
