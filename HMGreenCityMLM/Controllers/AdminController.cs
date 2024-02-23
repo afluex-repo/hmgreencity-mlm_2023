@@ -1320,7 +1320,7 @@ namespace HMGreenCityMLM.Controllers
             //{
             //    model.Fk_UserId = ds1.Tables[0].Rows[0]["FirstUser"].ToString();
             //}
-            model.Fk_UserId = Mem;
+            model.LoginId = Mem;
             try
             {
                 DataSet ds = model.GetDownlineRankAchieverForAdmin();
@@ -1381,3 +1381,6 @@ namespace HMGreenCityMLM.Controllers
         #endregion
     }
 }
+
+
+
