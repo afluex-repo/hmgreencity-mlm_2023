@@ -4303,7 +4303,7 @@ table tr:hover .table-links {
 }
 
 .nav-pills .nav-item .nav-link {
-	color: #6777ef;
+	color: #007a7f;
 	padding-left: 15px !important;
 	padding-right: 15px !important
 }
@@ -10930,7 +10930,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
 
 .theme-white .nav-pills .nav-link.active {
 	color: #fff;
-	background-color: #6777ef
+	background-color: #007a7f
 }
 
 .theme-white .nav-pills .show>.nav-link {
