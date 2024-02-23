@@ -73,7 +73,7 @@
                                                 @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlgender, "Value", "Text"), new { @class = "form-control" })
                                             </div>
                                             <div class="col-md-6 form-group">
-                                                Pan Card
+                                                Pan Card <span style="color: red">*</span>
                                                 @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @Placeholder = "Pan Card", @Maxlength = "10", @onchange = "return validatepan(event);" })
                                             </div>
                                             <div class="col-md-6 form-group">
@@ -184,6 +184,7 @@
             url: '/User/GetSponsorName',
             type: 'GET',
             dataType: 'JSON',
+            //data: { 'ReferBy': $("#SponsorId").val() },
             data: { 'ReferBy': $("#LoginId").val() },
             success: function (response) {
                 if (response.Result == "Yes") {
