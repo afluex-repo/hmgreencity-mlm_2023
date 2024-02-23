@@ -1051,7 +1051,7 @@ namespace HMGreenCityMLM.Models
 
         public DataSet GetDownlineRankAchieverForAdmin()
         {
-            SqlParameter[] para = {   new SqlParameter("@FK_UserId", Fk_UserId),
+            SqlParameter[] para = {   new SqlParameter("@LoginId", LoginId),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("DownlineRankAchieverReportsForAdmin", para);
             return ds;
