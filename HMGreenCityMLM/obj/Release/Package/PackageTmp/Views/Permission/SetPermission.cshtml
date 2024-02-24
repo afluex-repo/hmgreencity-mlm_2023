@@ -57,6 +57,7 @@
                                         <th>Form View</th>
                                         <th>Form Save</th>
                                         <th>Edit</th>
+                                        <th>7 Days View</th>
                                         <th>Join Now</th>
                                     </tr>
                                 </thead>
@@ -90,10 +91,18 @@
                                                         {
                                                             <input type="checkbox" name="chkSave_ @i" id="chkSave_ @i" @item.FormSave />
                                                         }
-                                                        
+
                                                     </td>
                                                     <td><input type="checkbox" name="chkEdit_ @i" id="chkEdit_ @i" @item.FormUpdate /></td>
-                                               
+
+
+                                                    @if (item.Fk_FormTypeId == "4")
+                                                    {
+                                                        if(item.Fk_FormId == "70") { 
+                                                        <td><input type="checkbox" name="chkSevenDayView1_ @i" id="chkSevenDayView1_ @i" @item.SevenDayView />  </td>
+                                                        }
+                                                    }
+
                                                 </tr>
                                                 i++;
                                             }
@@ -163,11 +172,17 @@
 
                         $("#Save").removeAttr('disabled');
                     }
+                        //else if (obj[i].SevenDayView == true) {
+                        //    $('#Save').show();
+
+                        //    $("#Save").removeAttr('disabled');
+                        //}
                     else {
                         $('#Save').hide();
 
                         $("#Save").attr('disabled', 'disabled');
                     }
+
                     debugger
                 }
             },
@@ -197,8 +212,8 @@
     }
 </script>
 <style>
-    .errortext{
-        background:#f5a9a9 !important;
+    .errortext {
+        background: #f5a9a9 !important;
         border: 1px solid #ea0000;
     }
 </style>

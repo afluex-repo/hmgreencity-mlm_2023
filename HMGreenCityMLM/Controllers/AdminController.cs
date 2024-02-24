@@ -48,6 +48,9 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lstmessages = lst1;
             }
+            #endregion Messages
+
+            #region dataListyearBusiness
             List<DashBoard> dataListyear = new List<DashBoard>();
             DataSet Dsyear = new DataSet();
             DataTable dt = new DataTable();
@@ -67,8 +70,9 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lstdetailsYear = dataListyear;
             }
+            #endregion
 
-            #endregion Messages
+
             return View(newdata);
         }
 
@@ -1367,7 +1371,7 @@ namespace HMGreenCityMLM.Controllers
             //{
             //    model.Fk_UserId = ds1.Tables[0].Rows[0]["FirstUser"].ToString();
             //}
-            model.Fk_UserId = Mem;
+            model.LoginId = Mem;
             try
             {
                 DataSet ds = model.GetDownlineRankAchieverForAdmin();
@@ -1428,3 +1432,6 @@ namespace HMGreenCityMLM.Controllers
         #endregion
     }
 }
+
+
+
