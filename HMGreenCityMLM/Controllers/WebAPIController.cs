@@ -966,7 +966,6 @@ namespace HMGreenCityMLM.Controllers
                     Objload.CrAmount = dr["CrAmount"].ToString();
                     Objload.AddedOn = dr["TransactionDate"].ToString();
                     Objload.PayoutBalance = dr["Balance"].ToString();
-                    Objload.TDSCharge = dr["TDSCharge"].ToString();
                     Objload.TransactionNo = dr["TransactionNo"].ToString();
 
                     lst.Add(Objload);
@@ -1012,7 +1011,6 @@ namespace HMGreenCityMLM.Controllers
         #region Tree
         public ActionResult Tree(TreeAPI model)
         {
-
             UpdateProfile sta = new UpdateProfile();
             TreeAPI obj = new TreeAPI();
             if (model.LoginId == "" || model.LoginId == null)
@@ -1044,6 +1042,7 @@ namespace HMGreenCityMLM.Controllers
                             obj1.Fk_ParentId = r["Fk_ParentId"].ToString();
                             obj1.Fk_SponsorId = r["Fk_SponsorId"].ToString();
                             obj1.SponsorId = r["SponsorId"].ToString();
+                            obj1.SponsorDetails = r["SponsorDetails"].ToString();
                             obj1.LoginId = r["LoginId"].ToString();
                             obj1.TeamPermanent = r["TeamPermanent"].ToString();
                             obj1.MemberName = r["MemberName"].ToString();
@@ -1061,6 +1060,9 @@ namespace HMGreenCityMLM.Controllers
                             obj1.ImageURL = r["ImageURL"].ToString();
                             obj1.HoldLeft = r["HoldLeft"].ToString();
                             obj1.HoldRight = r["HoldRight"].ToString();
+                            obj1.LastNewBusinessAmount = r["LasttopupAmount"].ToString();
+                            obj1.LastNewBusinessTopupDate = r["LasttopupDate"].ToString();
+                            obj1.TopupAmount = r["PackageName"].ToString();
                             GetGenelogy.Add(obj1);
                         }
                         obj.GetGenelogy = GetGenelogy;
