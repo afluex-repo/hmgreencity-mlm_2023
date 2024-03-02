@@ -1066,15 +1066,15 @@ namespace HMGreenCityMLM.Controllers
                             obj1.TopupAmount = r["PackageName"].ToString();
                             if (r["Status"].ToString() == "Y")
                             {
-                                obj1.Status = "Hold";
+                                obj1.StatusUser = "Hold";
                             }
                             else if(r["Status"].ToString() == "P")
                             {
-                                obj1.Status = "Active";
+                                obj1.StatusUser = "Active";
                             }
                             else if(r["Status"].ToString() == "T")
                             {
-                                obj1.Status = "InActive";
+                                obj1.StatusUser = "InActive";
                             }
                             GetGenelogy.Add(obj1);
                         }
