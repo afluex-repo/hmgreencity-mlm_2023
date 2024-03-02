@@ -1064,18 +1064,7 @@ namespace HMGreenCityMLM.Controllers
                             obj1.LastNewBusinessAmount = r["LasttopupAmount"].ToString();
                             obj1.LastNewBusinessTopupDate = r["LasttopupDate"].ToString();
                             obj1.TopupAmount = r["PackageName"].ToString();
-                            if (r["Status"].ToString() == "Y")
-                            {
-                                obj1.StatusUser = "Hold";
-                            }
-                            else if(r["Status"].ToString() == "P")
-                            {
-                                obj1.StatusUser = "Active";
-                            }
-                            else if(r["Status"].ToString() == "T")
-                            {
-                                obj1.StatusUser = "InActive";
-                            }
+                            obj1.StatusUser = r["Status"].ToString();
                             GetGenelogy.Add(obj1);
                         }
                         obj.GetGenelogy = GetGenelogy;
