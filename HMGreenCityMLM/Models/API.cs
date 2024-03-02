@@ -791,6 +791,9 @@ namespace HMGreenCityMLM.Models
         public string Leg { get; set; }
 
         public string ActivationDate { get; set; }
+        public string JoiningDate { get; set; }
+        public string StatusUser { get; set; }
+        public string Status { get; set; }
         public string ActiveLeft { get; set; }
         public string ActiveRight { get; set; }
         public string InactiveLeft { get; set; }
