@@ -801,7 +801,6 @@ E:\Tanishq\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.xm
 E:\Tanishq\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.WebHost.xml
 E:\Tanishq\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 E:\Tanishq\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
-D:\Devendra\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
 E:\Tanishq\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
 F:\Sarfraz Ahmad\repository\hmgreencity-mlm_2023\HMGreenCityMLM\bin\ApplicationInsights.config
 F:\Sarfraz Ahmad\repository\hmgreencity-mlm_2023\HMGreenCityMLM\bin\roslyn\csc.exe
