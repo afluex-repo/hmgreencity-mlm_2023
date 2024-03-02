@@ -9,6 +9,7 @@ namespace HMGreenCityMLM.Models
 {
     public class KYCDocuments
     {
+        public string Status { get; set; }
         public string PKUserID { get; set; }
         public string AdharNumber { get; set; }
         public string AdharImage { get; set; }
@@ -21,6 +22,14 @@ namespace HMGreenCityMLM.Models
         public string DocumentImage { get; set; }
         public string DocumentStatus { get; set; }
 
+        public string IFSCCode { get; set; }
+        public string AccountHolderName { get; set; }
+        public string BankName { get; set; }
+        public string BankBranch { get; set; }
+
+
+        
+
         public DataSet UploadKYCDocuments()
         {
             SqlParameter[] para = { new SqlParameter("@FK_UserID",PKUserID ) ,
@@ -30,7 +39,12 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@PanNumber", PanNumber),
                                       new SqlParameter("@PanImage", PanImage) ,
                                       new SqlParameter("@DocumentNumber", DocumentNumber) ,
-                                      new SqlParameter("@DocumentImage", DocumentImage)
+                                      new SqlParameter("@DocumentImage", DocumentImage),
+
+                                      new SqlParameter("@BankHolderName", AccountHolderName),
+                                      new SqlParameter("@MemberBankName", BankName) ,
+                                      new SqlParameter("@MemberBranch", BankBranch) ,
+                                      new SqlParameter("@IFSCCode", IFSCCode)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UploadKYC", para);
             return ds;

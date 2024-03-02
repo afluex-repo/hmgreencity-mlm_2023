@@ -49,6 +49,10 @@
                                                                 <th>Document Number</th>
                                                                 <th>Document Image</th>
                                                                 <th>Document Type</th>
+                                                                <th>Account Holder Name</th>
+                                                                <th>Bank Name</th>
+                                                                <th>Bank Branch</th>
+                                                                <th>IFSC Code</th>
                                                                 <th>Status</th>
                                                                 <th></th>
                                                             </tr>
@@ -70,19 +74,24 @@
                                                                                 <img src="@Item.DocumentImage" height="120" width="180" />
                                                                             </td>
                                                                             <td>@Item.DocumentType</td>
+                                                                            <td>@Item.AccountHolderName</td>
+                                                                            <td>@Item.BankName</td>
+                                                                            <td>@Item.BankBranch</td>
+                                                                            <td>@Item.IFSCCode</td>
+
                                                                             <td>@Item.Status</td>
                                                                             <td>
-                                                                                @*@Html.ActionLink("Approve","ApproveKYC","Admin",new{@Item.PK_DocumentID,@Item.DocumentType})*@
-                                                                                <a href="/Admin/ApproveKYC?Id=@Item.PK_DocumentID&&DocumentType=@Item.DocumentType&&LoginID=@Item.LoginId" runat="server" class="btn btn-success pull-right" name="btnUpdate">Approve</a>
+                                                                                @if (Item.Status == "Pending")
+                                                                                {
+                                                                                    @*@Html.ActionLink("Approve","ApproveKYC","Admin",new{@Item.PK_DocumentID,@Item.DocumentType})*@
+                                                                                    <a href="/Admin/ApproveKYC?Id=@Item.PK_DocumentID&&DocumentType=@Item.DocumentType&&LoginID=@Item.LoginId" runat="server" class="btn btn-success pull-right" name="btnUpdate">Approve</a>
+                                                                                }
                                                                             </td>
                                                                         </tr>
-
                                                                         i++;
                                                                     }
                                                                 }
                                                             }
-
-
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -91,6 +100,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>

@@ -97,7 +97,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.DocumentType = r["DocumentType"].ToString();
                     obj.DocumentImage = (r["DocumentImage"].ToString());
                     obj.Status = (r["Status"].ToString());
-
+           
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
