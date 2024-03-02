@@ -101,8 +101,6 @@ namespace HMGreenCityMLM.Controllers
                     obj.BankName = (r["MemberBankName"].ToString());
                     obj.BankBranch = (r["MemberBranch"].ToString());
                     obj.IFSCCode = (r["IFSCCode"].ToString());
-                    //obj.AdharBacksideImage = (r["AdharBacksideImage"].ToString());
-                    
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
