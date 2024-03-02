@@ -81,8 +81,7 @@ namespace HMGreenCityMLM.Controllers
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
             List<Reports> lst = new List<Reports>();
-
-            model.Status = null;
+            model.Status = "Pending";
             DataSet ds = model.AssociateListForKYC();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
