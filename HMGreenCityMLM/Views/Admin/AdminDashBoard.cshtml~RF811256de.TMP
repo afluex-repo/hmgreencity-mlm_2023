@@ -1,0 +1,730 @@
+﻿@model HMGreenCityMLM.Models.DashBoard
+
+@{
+    ViewBag.Title = "AdminDashBoard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    .tab1 {
+    background: linear-gradient(to right, #3b8d99, #3b8d99, #3b8d99) !important;
+    color: #fff;
+}
+
+        .tab2 {
+    background: linear-gradient(to right, #45a247, #45a247, #45a247) !important;
+    color: #fff;
+}
+            .tab3 {
+    background: linear-gradient(to right, #e93334, #e93334, #e93334) !important;  
+    color: #fff;
+}
+                .tab4 {
+    background: linear-gradient(to right, #2e1437, #2e1437, #2e1437) !important;
+    color: #fff;
+}  
+                .tab5 {
+    background: linear-gradient(0.5turn, #ffd800, #ffd800, #ffd800) !important;
+    color: #000000;
+}  
+</style>
+
+
+
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-body">
+            <section id="dashboard-analytics">
+                <div class="form-group">
+                    <p style="color:red;"> @TempData["DistributePaymentPassword"] </p>
+                </div>
+
+
+                @*===============================================================================*@
+
+                <div class="row ">
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab1">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.TotalUsers</h4>
+                                    <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList"><span class="text-white">Total Business Partner</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab2">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.ActiveUsers</h4>
+                                    <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList?Status=P"><span class="text-white">Active Users</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab3">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.InactiveUsers</h4>
+                                    <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList?Status=T"><span class="text-white">InActive Users</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab4">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title">@ViewBag.BlockedUsers</h4>
+                                    <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList?Status=B"><span class="text-white">Blocked Users</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card tab5">
+                            <div class="card-statistic-3">
+                                <div class="card-icon card-icon-large"><i class=""></i></div>
+                                <div class="card-content">
+                                    <h4 class="card-title text-dark">@ViewBag.TotalHolds</h4>
+                                    <a class="mb-0" style="color:#000000" href="/AdminProfile/AssociateList?Status=H"><span class="text-dark">Hold Users</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="card panel-default">
+                            <div class="card-header h5 text-dark">
+                                Business Partner Details
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="card-body">
+                                <div id="divusers"></div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                        <!-- /.panel -->
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="card panel-default">
+                            <div class="card-header h5 text-dark">
+                                Payout Status
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="card-body">
+                                <div id="divpayout"></div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                        <!-- /.panel -->
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card panel-default">
+                            <div class="card-header h5 text-dark">
+                               Current Year Business Details
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="card-body">
+                                <div id="divinvestment"></div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-xl-6 ">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Revenue Chart</h4>
+                                <div class="card-header-action">
+                                    <ul class="nav nav-pills" role="tablist" id="chart-tabs">
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstdetailsYear != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstdetailsYear)
+                                                {
+                                                    if (i == 1)
+                                                    {
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active card-tab-style" data-toggle="tab" data-id="@i" role="tab"
+                                                               aria-selected="true">@Item.Year</a>
+                                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active card-tab-style" data-toggle="tab" data-id="@i" role="tab"
+                                                               aria-selected="false">@Item.Year</a>
+                                                        </li>
+                                                    }
+
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                        
+                                        @*<li class="nav-item">
+                                            <a class="nav-link card-tab-style" data-toggle="tab" data-id="2" role="tab"
+                                               aria-selected="false">2023</a>
+                                        </li>*@
+                                        @*<li class="nav-item">
+                                            <a class="nav-link card-tab-style" data-toggle="tab" data-id="3" role="tab"
+                                               aria-selected="false">2019</a>
+                                        </li>*@
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart1"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card panel-default">
+                            <div class="card-header h5 text-dark">
+                                Current Year Joining Details
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="card-body">
+                                <div id="divjoining"></div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                        <!-- /.panel -->
+                    </div>
+                </div>
+
+
+                @*====================================================================================*@
+
+
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="~/scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myModal").modal('hide');
+    });
+</script>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" style="background-color: #fff;">×</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body" style="background-color: #fff;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="newyear">
+                            <img style="width:100%" src="~/WebsiteCss/Offer.jpeg" class="img-responsive" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(bindusers);
+
+    function bindusers() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/Admin/GetUserDetails',
+            data: JSON.stringify(),
+            success:
+            function (response) {
+                var datare = response;
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Status');
+                data.addColumn('number', 'Total');
+                for (var i = 0; i < datare.length; i++) {
+                    data.addRow([datare[i].Status, parseInt(datare[i].Total)]);
+                }
+
+                var chart = new google.visualization.PieChart(document.getElementById('divusers'));
+                var options = {
+                    pieSliceText: 'value-and-percentage',
+                    format: 'decimal',
+                    is3D: true,
+                    legend: { position: 'bottom' },
+                    animation: {
+                        startup: true,
+                        duration: 1000,
+                        easing: 'out',
+                    }, chartArea: { width: "100%", height: "80%" }
+                };
+
+                chart.draw(data, options);
+            },
+            error: function () {
+            }
+        });
+    }
+
+</script>
+
+
+<script type="text/javascript">
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(bindrecharegedetails);
+
+    function bindrecharegedetails() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/Admin/GetPayoutStatus',
+            data: JSON.stringify(),
+            success:
+            function (response) {
+                var datare = response;
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Status');
+                data.addColumn('number', 'Total');
+                for (var i = 0; i < datare.length; i++) {
+                    data.addRow([datare[i].Status, parseInt(datare[i].Total)]);
+                }
+
+                var chart = new google.visualization.PieChart(document.getElementById('divpayout'));
+                var options = {
+                    pieSliceText: 'value-and-percentage',
+                    format: 'decimal',
+                    is3D: true,
+                    legend: { position: 'bottom' },
+                    animation: {
+                        startup: true,
+                        duration: 1000,
+                        easing: 'out',
+                    }, chartArea: { width: "100%", height: "80%" }
+                };
+
+                chart.draw(data, options);
+            },
+            error: function () {
+            }
+        });
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["imagebarchart"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/Admin/GetInvestmentDetails',
+            data: JSON.stringify(),
+            success:
+            function (response) {
+                var datare = response;
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Month');
+                data.addColumn('number', 'Business');
+                for (var i = 0; i < datare.length; i++) {
+                    data.addRow([datare[i].Month, parseInt(datare[i].Amount)]);
+                }
+
+                var chart = new google.visualization.ImageBarChart(document.getElementById('divinvestment'));
+                var options = {
+                    pieSliceText: 'value-and-percentage',
+                    format: 'decimal',
+                    is3D: true,
+                    legend: { position: 'bottom' },
+                    animation: {
+                        startup: true,
+                        duration: 1000,
+                        easing: 'out',
+                    }, chartArea: { width: "100%", height: "80%" }
+                };
+                chart.draw(data, options);
+            },
+            error: function () {
+            }
+        });
+    }
+
+</script>
+
+
+<script type="text/javascript">
+
+    google.charts.load("current", { packages: ["imagebarchart"] });
+    google.charts.setOnLoadCallback(joiningdata);
+
+    function joiningdata() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/Admin/GetJoiningDeatils',
+            data: JSON.stringify(),
+            success:
+            function (response) {
+                var datare = response;
+                var data = new google.visualization.DataTable();
+
+                data.addColumn('string', 'Month');
+                data.addColumn('number', 'Total Users');
+                for (var i = 0; i < datare.length; i++) {
+                    data.addRow([datare[i].Month, parseInt(datare[i].Total)]);
+                }
+
+                var chart = new google.visualization.ImageBarChart(document.getElementById('divjoining'));
+                var options = {
+                    pieSliceText: 'value-and-percentage',
+                    format: 'decimal',
+                    is3D: true,
+                    legend: { position: 'bottom' },
+                    animation: {
+                        startup: true,
+                        duration: 1000,
+                        easing: 'out',
+                    }, chartArea: { width: "100%", height: "80%" }
+                };
+
+                chart.draw(data, options);
+
+
+
+
+            },
+            error: function () {
+            }
+        });
+    }
+
+</script>
+<script type="text/javascript">
+
+    google.charts.load("current", { packages: ["imagebarchart"] });
+    google.charts.setOnLoadCallback(chart1);
+
+    function chart1() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/Admin/GetInvestmentDetails',
+            data: JSON.stringify(),
+            success:
+            function (d) {
+                debugger;
+                var BMonth = [];
+                var Bamount = [];
+                var t = JSON.parse(JSON.stringify(d));
+                for (var i = 0; i < t.length; i++) {
+                    BMonth.push(t[i].Month);
+                    Bamount.push(t[i].Amount);
+                }
+                var options = {
+                    series: [
+                      {
+                          name: "Business",
+                          data: Bamount,
+                      }
+                    ],
+                    chart: {
+                        height: 350,
+                        type: "area",
+                        dropShadow: {
+                            enabled: true,
+                            opacity: 0.3,
+                            blur: 5,
+                            left: -7,
+                            top: 22,
+                        },
+                        toolbar: {
+                            show: false,
+                        },
+                    },
+                    colors: ["#8b31d0", "#757575"],
+                    dataLabels: {
+                        enabled: false,
+                    },
+                    stroke: {
+                        show: true,
+                        curve: "smooth",
+                        width: 3,
+                        lineCap: "square",
+                    },
+
+                    xaxis: {
+                        axisBorder: {
+                            show: false,
+                        },
+                        axisTicks: {
+                            show: false,
+                        },
+                        crosshairs: {
+                            show: true,
+                        },
+
+                        categories: BMonth,
+                        labels: {
+                            offsetX: 0,
+                            offsetY: 5,
+                            style: {
+                                fontSize: "12px",
+                                fontFamily: "Segoe UI",
+                                cssClass: "apexcharts-xaxis-title",
+                            },
+                        },
+                    },
+                    yaxis: {
+                        labels: {
+                            offsetX: 0,
+                            offsetY: 0,
+                            style: {
+                                fontSize: "12px",
+                                fontFamily: "Segoe UI",
+                                cssClass: "apexcharts-yaxis-title",
+                            },
+                        },
+                    },
+                    legend: {
+                        position: "top",
+                        horizontalAlign: "right",
+                        markers: {
+                            width: 10,
+                            height: 10,
+                        },
+                        itemMargin: {
+                            horizontal: 0,
+                            vertical: 20,
+                        },
+                    },
+                    tooltip: {
+                        theme: "dark",
+                        marker: {
+                            show: true,
+                        },
+                        x: {
+                            show: true,
+                        },
+                    },
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            type: "vertical",
+                            shadeIntensity: 1,
+                            inverseColors: !1,
+                            opacityFrom: 0.28,
+                            opacityTo: 0.05,
+                            stops: [45, 100],
+                        },
+                    },
+                };
+
+                var chart = new ApexCharts(document.querySelector("#chart1"), options);
+                chart.render();
+
+                $('#chart-tabs a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+                    var id = $(this).attr("data-id");
+                    if (id && id === "1") {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            url: '/Admin/GetInvestmentDetails',
+                            data: JSON.stringify(),
+                            success:
+                            function (d) {
+                                debugger;
+                                var BMonth = [];
+                                var Bamount = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    BMonth.push(t[i].Month);
+                                    Bamount.push(t[i].Amount);
+                                }
+
+                                chart.updateSeries([
+                                  {
+                                      name: "Business",
+                                      data: Bamount,
+                                  }
+                                ]);
+                            }
+                        })
+                    }
+                    else if (id && id === "2") {
+                        debugger;
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            url: '/Admin/GetInvestmentDetailsyear',
+                            data: JSON.stringify(),
+                            success:
+                            function (d) {
+                                debugger;
+                                var BYear = [];
+                                var BYamount = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    BYear.push(t[i].Year);
+                                    BYamount.push(t[i].Amount);
+                                }
+                                chart.updateSeries(
+                                    [{
+                                        name: "Business",
+                                        data: BYamount,
+                                    }]);
+                            }
+                        })
+                    }
+                    else if (id && id === "3") {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            url: '/Admin/GetInvestmentDetailsyear',
+                            data: JSON.stringify(),
+                            success:
+                            function (d) {
+                                debugger;
+                                var BYear = [];
+                                var BYamount = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    BYear.push(t[i].Year);
+                                    BYamount.push(t[i].Amount);
+                                }
+                                chart.updateSeries(
+                                    [{
+                                        name: "Business",
+                                        data: BYamount,
+                                    }]);
+                            }
+                        })
+                    }
+                    else if (id && id === "4") {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            url: '/Admin/GetInvestmentDetailsyear',
+                            data: JSON.stringify(),
+                            success:
+                            function (d) {
+                                debugger;
+                                var BMonth = [];
+                                var BYamount = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    BYear.push(t[i].Year);
+                                    BYamount.push(t[i].Amount);
+                                }
+                                chart.updateSeries(
+                                    [{
+                                        name: "Business",
+                                        data: BYamount,
+                                    }]);
+                            }
+                        })
+                    }
+                    else if (id && id === "5") {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            url: '/Admin/GetInvestmentDetailsyear',
+                            data: JSON.stringify(),
+                            success:
+                            function (d) {
+                                debugger;
+                                var Year = [];
+                                var BYamount = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    BYear.push(t[i].Year);
+                                    BYamount.push(t[i].Amount);
+                                }
+                                chart.updateSeries(
+                                    [{
+                                        name: "Business",
+                                        data: BYamount,
+                                    }]);
+                            }
+                        })
+                    }
+                    //else if (id && id === "3") {
+                    //    chart.updateSeries([
+                    //      {
+                    //          name: "income",
+                    //          data: [10, 28, 22, 32, 41, 51, 42, 30],
+                    //      }
+                    //    ]);
+                    //}
+                });
+            }
+      });
+    }
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#myModal1").modal('hide');
+    });
+</script>
+<div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" style="background-color: #fff;">×</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body" style="background-color: #fff;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="newyear">
+                            <img src="~/WebsiteCss/KohinoorCity1.jpeg" style="width:100%" class="img-responsive" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

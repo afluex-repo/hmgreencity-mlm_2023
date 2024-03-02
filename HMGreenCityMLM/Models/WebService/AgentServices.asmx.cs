@@ -81,6 +81,7 @@ namespace HMGreenCityMLM.Models.WebService
 
                     lstTopupdate = string.IsNullOrEmpty(dr["LastTopupdate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["LastTopupdate"]).ToString("dd-MMM, yyyy"),
                     LastTopupAmount = dr["LastTopupAmount"].ToString(),
+                    lstYellowDate = string.IsNullOrEmpty(dr["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["YellowDate"]).ToString("dd-MMM, yyyy"),
 
                 });
 
@@ -150,9 +151,11 @@ namespace HMGreenCityMLM.Models.WebService
 
                     lstTopupdate = string.IsNullOrEmpty(dr["LastTopupdate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["LastTopupdate"]).ToString("dd-MMM, yyyy"),
                     LastTopupAmount = dr["LastTopupAmount"].ToString(),
+                    lstYellowDate = string.IsNullOrEmpty(dr["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["YellowDate"]).ToString("dd-MMM, yyyy"),
 
+                  
 
-                });
+            });
 
 
 
@@ -213,6 +216,7 @@ namespace HMGreenCityMLM.Models.WebService
 
                 model.lstTopupdate = string.IsNullOrEmpty(dr["LastTopupdate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["LastTopupdate"]).ToString("dd-MMM, yyyy");
                 model.LastTopupAmount = dr["LastTopupAmount"].ToString();
+                model.lstYellowDate = string.IsNullOrEmpty(dr["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["YellowDate"]).ToString("dd-MMM, yyyy");
 
                 List.Add(model);
             }
@@ -272,6 +276,7 @@ namespace HMGreenCityMLM.Models.WebService
 
                 model.LastTopupAmount = dr["LastTopupAmount"].ToString();
                 model.lstTopupdate = string.IsNullOrEmpty(dr["LastTopupdate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["LastTopupdate"]).ToString("dd-MMM, yyyy");
+                model.lstYellowDate = string.IsNullOrEmpty(dr["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(dr["YellowDate"]).ToString("dd-MMM, yyyy");
 
                 List.Add(model);
             }

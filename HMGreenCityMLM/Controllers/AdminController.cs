@@ -48,8 +48,31 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lstmessages = lst1;
             }
-
             #endregion Messages
+
+            #region dataListyearBusiness
+            List<DashBoard> dataListyear = new List<DashBoard>();
+            DataSet Dsyear = new DataSet();
+            DataTable dt = new DataTable();
+            Ds = newdata.GetDashBoardDetails();
+            if (Ds.Tables.Count > 0)
+            {
+                foreach (DataRow dr in Ds.Tables[5].Rows)
+                {
+                    DashBoard detailsyear = new DashBoard();
+
+
+                    detailsyear.Amount = (dr["Amount"].ToString());
+                    detailsyear.Year = (dr["Year"].ToString());
+
+
+                    dataListyear.Add(detailsyear);
+                }
+                newdata.lstdetailsYear = dataListyear;
+            }
+            #endregion
+
+
             return View(newdata);
         }
 
@@ -212,6 +235,34 @@ namespace HMGreenCityMLM.Controllers
                 }
             }
             return Json(dataList, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetInvestmentDetailsyear(string Year)
+        {
+            List<DashBoard> dataListyear = new List<DashBoard>();
+            DataSet Ds = new DataSet();
+            DataTable dt = new DataTable();
+            DashBoard newdata = new DashBoard();
+            newdata.Year = Year;
+            Ds = newdata.GetDashBoardDetailsYears();
+            if (Ds.Tables.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow dr in Ds.Tables[0].Rows)
+                {
+                    DashBoard detailsyear = new DashBoard();
+
+
+                    detailsyear.Amount = (dr["Amount"].ToString());
+                    detailsyear.Month = (dr["Month"].ToString());
+                    detailsyear.Year = (dr["Year"].ToString());
+
+
+                    dataListyear.Add(detailsyear);
+
+                    count++;
+                }
+            }
+            return Json(dataListyear, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetJoiningDeatils()
@@ -1320,7 +1371,7 @@ namespace HMGreenCityMLM.Controllers
             //{
             //    model.Fk_UserId = ds1.Tables[0].Rows[0]["FirstUser"].ToString();
             //}
-            model.Fk_UserId = Mem;
+            model.LoginId = Mem;
             try
             {
                 DataSet ds = model.GetDownlineRankAchieverForAdmin();
@@ -1381,3 +1432,6 @@ namespace HMGreenCityMLM.Controllers
         #endregion
     }
 }
+
+
+
