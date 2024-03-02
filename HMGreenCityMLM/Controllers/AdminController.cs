@@ -97,7 +97,12 @@ namespace HMGreenCityMLM.Controllers
                     obj.DocumentType = r["DocumentType"].ToString();
                     obj.DocumentImage = (r["DocumentImage"].ToString());
                     obj.Status = (r["Status"].ToString());
-
+                    obj.AccountHolderName = (r["BankHolderName"].ToString());
+                    obj.BankName = (r["MemberBankName"].ToString());
+                    obj.BankBranch = (r["MemberBranch"].ToString());
+                    obj.IFSCCode = (r["IFSCCode"].ToString());
+                    //obj.AdharBacksideImage = (r["AdharBacksideImage"].ToString());
+                    
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
