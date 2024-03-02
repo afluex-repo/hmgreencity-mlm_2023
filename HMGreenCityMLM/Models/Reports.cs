@@ -82,6 +82,9 @@ namespace HMGreenCityMLM.Models
         public string PermanentDate { get; set; }
 
         public string Status { get; set; }
+        public string UploadDate { get; set; }
+
+        
         public string FromLoginId { get; set; }
 
         public string FromUserName { get; set; }
@@ -308,8 +311,11 @@ namespace HMGreenCityMLM.Models
         }
         public DataSet AssociateListForKYC()
         {
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                      new SqlParameter("@Status", Status)
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@Status", Status),
+                  new SqlParameter("@FromDate", FromDate),
+                   new SqlParameter("@ToDate", ToDate)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetAgentListForKYC", para);
             return ds;
