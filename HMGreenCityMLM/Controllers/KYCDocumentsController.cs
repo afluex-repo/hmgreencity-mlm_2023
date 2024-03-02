@@ -37,6 +37,7 @@ namespace HMGreenCityMLM.Controllers
                 obj.DocumentNumber = ds.Tables[0].Rows[0]["DocumentNumber"].ToString();
                 obj.DocumentImage = ds.Tables[0].Rows[0]["DocumentImage"].ToString();
                 obj.DocumentStatus = "Status : " + ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
+                obj.Status = ds.Tables[0].Rows[0]["DocumentStatus"].ToString();
                 obj.AccountHolderName = ds.Tables[0].Rows[0]["BankHolderName"].ToString();
                 obj.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                 obj.BankBranch = ds.Tables[0].Rows[0]["MemberBranch"].ToString();

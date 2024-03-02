@@ -9,6 +9,7 @@ namespace HMGreenCityMLM.Models
 {
     public class KYCDocuments
     {
+        public string Status { get; set; }
         public string PKUserID { get; set; }
         public string AdharNumber { get; set; }
         public string AdharImage { get; set; }
