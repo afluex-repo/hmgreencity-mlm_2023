@@ -14,6 +14,7 @@ namespace HMGreenCityMLM.Models
         public string Title { get; set; }
         public string News { get; set; }
         public List<DashBoard> NoticeMasterlist { get; set; }
+        public List<DashBoard> lstdetailsYear { get; set; }
 
         public string Total { get; set; }
 
@@ -24,6 +25,7 @@ namespace HMGreenCityMLM.Models
 
         public string FK_RankId { get; set; }
         public string Achiver { get; set; }
+        public string Year { get; set; }
 
 
         public string TotalUsers { get; set; }
@@ -39,6 +41,12 @@ namespace HMGreenCityMLM.Models
         {
 
             DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetails");
+            return ds;
+        }
+        public DataSet GetDashBoardDetailsYears()
+        {
+            SqlParameter[] para = { new SqlParameter("@Year", Year), };
+            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsYear", para);
             return ds;
         }
 

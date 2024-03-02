@@ -133,22 +133,8 @@
                         <!-- /.panel -->
                         <!-- /.panel -->
                     </div>
-                        <div class="col-lg-6">
-                            <div class="card panel-default">
-                                <div class="card-header h5 text-dark">
-                                    Current Year Joining Details
-                                </div>
-                                <!-- /.panel-heading -->
-                                <div class="card-body">
-                                    <div id="divjoining"></div>
-                                </div>
-                                <!-- /.panel-body -->
-                            </div>
-                            <!-- /.panel -->
-                            <!-- /.panel -->
-                        </div>
-                   
-                    @*<div class="col-lg-6">
+
+                    <div class="col-lg-6">
                         <div class="card panel-default">
                             <div class="card-header h5 text-dark">
                                Current Year Business Details
@@ -160,15 +146,11 @@
                             <!-- /.panel-body -->
                         </div>
 
-                    </div>*@
-
-
-
-                    @*========================== START Year & Month Business Details =================================*@
-                    <div class="col-lg-6 col-xl-6 ">
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-xl-6 ">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Current Year Business Details</h4>
+                                <h4>Revenue Chart</h4>
                                 <div class="card-header-action">
                                     <ul class="nav nav-pills" role="tablist" id="chart-tabs">
                                         @if (Model != null)
@@ -181,35 +163,57 @@
                                                     if (i == 1)
                                                     {
                                                         <li class="nav-item">
-                                                            <a class="nav-link active card-tab-style" href="#chart1_1" id="yearid2_1" data-toggle="tab" data-id="1" role="tab"
-                                                               aria-selected="false">@Item.Year</a>
+                                                            <a class="nav-link active card-tab-style" data-toggle="tab" data-id="@i" role="tab"
+                                                               aria-selected="true">@Item.Year</a>
                                                         </li>
                                                     }
                                                     else
                                                     {
                                                         <li class="nav-item">
-                                                            <a class="nav-link card-tab-style" id="yearid2_@i" href="#chart_@i" data-toggle="tab" data-id="@i" role="tab"
+                                                            <a class="nav-link active card-tab-style" data-toggle="tab" data-id="@i" role="tab"
                                                                aria-selected="false">@Item.Year</a>
                                                         </li>
                                                     }
+
                                                     i++;
                                                 }
-
                                             }
                                         }
+                                        
+                                        @*<li class="nav-item">
+                                            <a class="nav-link card-tab-style" data-toggle="tab" data-id="2" role="tab"
+                                               aria-selected="false">2023</a>
+                                        </li>*@
+                                        @*<li class="nav-item">
+                                            <a class="nav-link card-tab-style" data-toggle="tab" data-id="3" role="tab"
+                                               aria-selected="false">2019</a>
+                                        </li>*@
                                     </ul>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div id="chart1"></div>
-                                <div id="chart123" ></div>
                             </div>
                         </div>
-                    </div>
-                    @*========================== END Year & Month Business Details =================================*@
 
+                    </div>
                 </div>
-                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card panel-default">
+                            <div class="card-header h5 text-dark">
+                                Current Year Joining Details
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="card-body">
+                                <div id="divjoining"></div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                        <!-- /.panel -->
+                    </div>
+                </div>
 
 
                 @*====================================================================================*@
@@ -431,28 +435,27 @@
     }
 
 </script>
-
 <script type="text/javascript">
 
     google.charts.load("current", { packages: ["imagebarchart"] });
     google.charts.setOnLoadCallback(chart1);
 
     function chart1() {
-        const Years = { Year: $("#yearid2_1").text() };
         $.ajax({
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json',
-            url: '/Admin/GetInvestmentDetailsyear',
-            data: JSON.stringify(Years),
+            url: '/Admin/GetInvestmentDetails',
+            data: JSON.stringify(),
             success:
             function (d) {
+                debugger;
                 var BMonth = [];
                 var Bamount = [];
                 var t = JSON.parse(JSON.stringify(d));
                 for (var i = 0; i < t.length; i++) {
                     BMonth.push(t[i].Month);
-                    Bamount.push(parseInt(t[i].Amount));
+                    Bamount.push(t[i].Amount);
                 }
                 var options = {
                     series: [
@@ -475,7 +478,7 @@
                             show: false,
                         },
                     },
-                    colors: ["#007a7f", "#007a7f"],
+                    colors: ["#8b31d0", "#757575"],
                     dataLabels: {
                         enabled: false,
                     },
@@ -497,9 +500,7 @@
                             show: true,
                         },
 
-                        //categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         categories: BMonth,
-                        //categories: BYMonth,
                         labels: {
                             offsetX: 0,
                             offsetY: 5,
@@ -559,154 +560,150 @@
                 chart.render();
 
                 $('#chart-tabs a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
-                    debugger;
                     var id = $(this).attr("data-id");
-                    if (id && id === $(this).attr("data-id")) {
-                        const Years = { Year: $("#yearid2_" + id).text() };
-                        var toggleButton = document.getElementById("yearid2_"+id);
+                    if (id && id === "1") {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            url: '/Admin/GetInvestmentDetails',
+                            data: JSON.stringify(),
+                            success:
+                            function (d) {
+                                debugger;
+                                var BMonth = [];
+                                var Bamount = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    BMonth.push(t[i].Month);
+                                    Bamount.push(t[i].Amount);
+                                }
+
+                                chart.updateSeries([
+                                  {
+                                      name: "Business",
+                                      data: Bamount,
+                                  }
+                                ]);
+                            }
+                        })
+                    }
+                    else if (id && id === "2") {
+                        debugger;
                         $.ajax({
                             type: 'POST',
                             dataType: 'json',
                             contentType: 'application/json',
                             url: '/Admin/GetInvestmentDetailsyear',
-                            data: JSON.stringify(Years) ,
+                            data: JSON.stringify(),
                             success:
                             function (d) {
                                 debugger;
-                                var BYMonth = [];
-                                var Bamount = [];
+                                var BYear = [];
+                                var BYamount = [];
                                 var t = JSON.parse(JSON.stringify(d));
                                 for (var i = 0; i < t.length; i++) {
-                                    BYMonth.push(t[i].Month);
-                                    Bamount.push(parseInt(t[i].Amount));
+                                    BYear.push(t[i].Year);
+                                    BYamount.push(t[i].Amount);
                                 }
-
-                                //chart.updateSeries([
-                                //  {
-                                //      name: "Business",
-                                //      data: Bamount,
-                                //  }
-                                //]);
-                              
-                                var options_New = {
-                                    series: [
-                                      {
-                                          name: "Business",
-                                          data: Bamount,
-                                      }
-                                    ],
-                                    chart: {
-                                        height: 350,
-                                        type: "area",
-                                        dropShadow: {
-                                            enabled: true,
-                                            opacity: 0.3,
-                                            blur: 5,
-                                            left: -7,
-                                            top: 22,
-                                        },
-                                        toolbar: {
-                                            show: false,
-                                        },
-                                    },
-                                    colors: ["#007a7f", "#007a7f"],
-                                    dataLabels: {
-                                        enabled: false,
-                                    },
-                                    stroke: {
-                                        show: true,
-                                        curve: "smooth",
-                                        width: 3,
-                                        lineCap: "square",
-                                    },
-
-                                    xaxis: {
-                                        axisBorder: {
-                                            show: false,
-                                        },
-                                        axisTicks: {
-                                            show: false,
-                                        },
-                                        crosshairs: {
-                                            show: true,
-                                        },
-
-                                        //categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                                        //categories: BMonth,
-                                        categories: BYMonth,
-                                        labels: {
-                                            offsetX: 0,
-                                            offsetY: 5,
-                                            style: {
-                                                fontSize: "12px",
-                                                fontFamily: "Segoe UI",
-                                                cssClass: "apexcharts-xaxis-title",
-                                            },
-                                        },
-                                    },
-                                    yaxis: {
-                                        labels: {
-                                            offsetX: 0,
-                                            offsetY: 0,
-                                            style: {
-                                                fontSize: "12px",
-                                                fontFamily: "Segoe UI",
-                                                cssClass: "apexcharts-yaxis-title",
-                                            },
-                                        },
-                                    },
-                                    legend: {
-                                        position: "top",
-                                        horizontalAlign: "right",
-                                        markers: {
-                                            width: 10,
-                                            height: 10,
-                                        },
-                                        itemMargin: {
-                                            horizontal: 0,
-                                            vertical: 20,
-                                        },
-                                    },
-                                    tooltip: {
-                                        theme: "dark",
-                                        marker: {
-                                            show: true,
-                                        },
-                                        x: {
-                                            show: true,
-                                        },
-                                    },
-                                    fill: {
-                                        type: "gradient",
-                                        gradient: {
-                                            type: "vertical",
-                                            shadeIntensity: 1,
-                                            inverseColors: !1,
-                                            opacityFrom: 0.28,
-                                            opacityTo: 0.05,
-                                            stops: [45, 100],
-                                        },
-                                    },
-                                };
-                                chart.destroy();
-                                var chart1 = new ApexCharts(document.querySelector("#chart1"), options_New);
-                                chart1.render();
+                                chart.updateSeries(
+                                    [{
+                                        name: "Business",
+                                        data: BYamount,
+                                    }]);
                             }
-                            
                         })
                     }
+                    else if (id && id === "3") {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            url: '/Admin/GetInvestmentDetailsyear',
+                            data: JSON.stringify(),
+                            success:
+                            function (d) {
+                                debugger;
+                                var BYear = [];
+                                var BYamount = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    BYear.push(t[i].Year);
+                                    BYamount.push(t[i].Amount);
+                                }
+                                chart.updateSeries(
+                                    [{
+                                        name: "Business",
+                                        data: BYamount,
+                                    }]);
+                            }
+                        })
+                    }
+                    else if (id && id === "4") {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            url: '/Admin/GetInvestmentDetailsyear',
+                            data: JSON.stringify(),
+                            success:
+                            function (d) {
+                                debugger;
+                                var BMonth = [];
+                                var BYamount = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    BYear.push(t[i].Year);
+                                    BYamount.push(t[i].Amount);
+                                }
+                                chart.updateSeries(
+                                    [{
+                                        name: "Business",
+                                        data: BYamount,
+                                    }]);
+                            }
+                        })
+                    }
+                    else if (id && id === "5") {
+                        $.ajax({
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            url: '/Admin/GetInvestmentDetailsyear',
+                            data: JSON.stringify(),
+                            success:
+                            function (d) {
+                                debugger;
+                                var Year = [];
+                                var BYamount = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    BYear.push(t[i].Year);
+                                    BYamount.push(t[i].Amount);
+                                }
+                                chart.updateSeries(
+                                    [{
+                                        name: "Business",
+                                        data: BYamount,
+                                    }]);
+                            }
+                        })
+                    }
+                    //else if (id && id === "3") {
+                    //    chart.updateSeries([
+                    //      {
+                    //          name: "income",
+                    //          data: [10, 28, 22, 32, 41, 51, 42, 30],
+                    //      }
+                    //    ]);
+                    //}
                 });
-                
-               
             }
       });
     }
 
 
 </script>
-
-
-
 <script>
     $(document).ready(function () {
         $("#myModal1").modal('hide');

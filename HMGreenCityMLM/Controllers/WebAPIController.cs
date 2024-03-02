@@ -1051,6 +1051,7 @@ namespace HMGreenCityMLM.Controllers
                             obj1.Id = r["Id"].ToString();
                             obj1.YellowDate = r["YellowDate"].ToString();
                             obj1.ActivationDate = r["ActivationDate"].ToString();
+                            obj1.JoiningDate = r["JoiningDate"].ToString();
                             obj1.ActiveLeft = r["ActiveLeft"].ToString();
                             obj1.ActiveRight = r["ActiveRight"].ToString();
                             obj1.InactiveLeft = r["InactiveLeft"].ToString();
@@ -1063,6 +1064,18 @@ namespace HMGreenCityMLM.Controllers
                             obj1.LastNewBusinessAmount = r["LasttopupAmount"].ToString();
                             obj1.LastNewBusinessTopupDate = r["LasttopupDate"].ToString();
                             obj1.TopupAmount = r["PackageName"].ToString();
+                            if (r["Status"].ToString() == "Y")
+                            {
+                                obj1.StatusUser = "Hold";
+                            }
+                            else if(r["Status"].ToString() == "P")
+                            {
+                                obj1.StatusUser = "Active";
+                            }
+                            else if(r["Status"].ToString() == "T")
+                            {
+                                obj1.StatusUser = "InActive";
+                            }
                             GetGenelogy.Add(obj1);
                         }
                         obj.GetGenelogy = GetGenelogy;
