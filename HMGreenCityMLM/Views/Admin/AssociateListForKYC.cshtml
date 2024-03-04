@@ -6,7 +6,7 @@
 
 
 
-@using (Html.BeginForm("ApproveKYC", "Admin", FormMethod.Post, new { @id = "form1", name = "formKYC" }))
+@using (Html.BeginForm("AssociateListForKYC", "Admin", FormMethod.Post, new { @id = "form1", name = "formKYC" }))
 {
 
 
@@ -32,6 +32,41 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">
+                                <div class="form-row">
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label>LoginId<span style="color:red"></span></label>
+                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "LoginID" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Status<span style="color:red"></span></label>
+                                            <select class="form-control" id="Status" name="Status">
+                                                <option value="Pending">Pending</option>
+                                                <option value="Approved">Approved</option>
+                                                @*<option value="Rejected">Rejected</option>*@
+
+                                            </select>
+                                        </div>
+
+
+                                        <div class="form-group col-md-3">
+                                            <label>From Date</label>
+                                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date" , @autocomplete = "off" })
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label>To Date</label>
+                                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Date" , @autocomplete = "off" })
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <input type="submit" id="btnSearch" class="btn btn-success" name="btnSearch" value="Search" />
+                                    </div>
+                                </div>
+
+
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
@@ -46,11 +81,12 @@
                                                                 <th>Sr No.</th>
                                                                 <th> Login Id</th>
                                                                 <th>Name</th>
-                                                                <th>Document Number</th>
-                                                                <th>Document Image</th>
                                                                 <th>Document Type</th>
+                                                                <th>Document Image</th>
+                                                                <th>Document Number</th>
                                                                 <th>Status</th>
-                                                                <th></th>
+                                                                <th>Upload Date</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -65,24 +101,25 @@
                                                                             <td>@i</td>
                                                                             <td>@Item.LoginId</td>
                                                                             <td>@Item.Name</td>
-                                                                            <td>@Item.DocumentNumber</td>
+                                                                            <td>@Item.DocumentType</td>
                                                                             <td>
                                                                                 <img src="@Item.DocumentImage" height="120" width="180" />
                                                                             </td>
-                                                                            <td>@Item.DocumentType</td>
+                                                                            <td>@Item.DocumentNumber</td>
                                                                             <td>@Item.Status</td>
+                                                                            <td>@Item.UploadDate</td>
                                                                             <td>
-                                                                                @*@Html.ActionLink("Approve","ApproveKYC","Admin",new{@Item.PK_DocumentID,@Item.DocumentType})*@
-                                                                                <a href="/Admin/ApproveKYC?Id=@Item.PK_DocumentID&&DocumentType=@Item.DocumentType&&LoginID=@Item.LoginId" runat="server" class="btn btn-success pull-right" name="btnUpdate">Approve</a>
+                                                                                @if (Item.Status == "Pending")
+                                                                                {
+                                                                                    @*@Html.ActionLink("Approve","ApproveKYC","Admin",new{@Item.PK_DocumentID,@Item.DocumentType})*@
+                                                                                    <a href="/Admin/ApproveKYC?Id=@Item.PK_DocumentID&&DocumentType=@Item.DocumentType&&LoginID=@Item.LoginId" runat="server" class="btn btn-success pull-right" name="btnUpdate">Approve</a>
+                                                                                }
                                                                             </td>
                                                                         </tr>
-
                                                                         i++;
                                                                     }
                                                                 }
                                                             }
-
-
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -91,6 +128,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>
@@ -98,3 +137,23 @@
 
 
 }
+
+
+
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+  
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+ 
+</script>

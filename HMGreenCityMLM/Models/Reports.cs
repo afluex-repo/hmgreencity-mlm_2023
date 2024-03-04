@@ -40,6 +40,7 @@ namespace HMGreenCityMLM.Models
         public string MemberAccNo { get; set; }
         public string IFSCCode { get; set; }
         public string BankName { get; set; }
+        public string AccountHolderName { get; set; }
         public string MaturityDate { get; set; }
         public string Description { get; set; }
         public string Pk_PaidBoosterId { get; set; }
@@ -81,6 +82,9 @@ namespace HMGreenCityMLM.Models
         public string PermanentDate { get; set; }
 
         public string Status { get; set; }
+        public string UploadDate { get; set; }
+
+        
         public string FromLoginId { get; set; }
 
         public string FromUserName { get; set; }
@@ -124,6 +128,9 @@ namespace HMGreenCityMLM.Models
         public string DocumentType { get; set; }
 
         public string DocumentImage { get; set; }
+        public string AdharBacksideImage { get; set; }
+
+        
 
         public List<Reports> lstuser { get; set; }
         public List<Reports> lsttopupreport { get; set; }
@@ -304,8 +311,11 @@ namespace HMGreenCityMLM.Models
         }
         public DataSet AssociateListForKYC()
         {
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                      new SqlParameter("@Status", Status)
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@Status", Status),
+                  new SqlParameter("@FromDate", FromDate),
+                   new SqlParameter("@ToDate", ToDate)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetAgentListForKYC", para);
             return ds;
