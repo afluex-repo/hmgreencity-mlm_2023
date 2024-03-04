@@ -1892,6 +1892,7 @@ namespace HMGreenCityMLM.Controllers
                         obj1.Name = r["Name"].ToString() + " (" + r["LoginId"].ToString() + ")";
                         obj1.SiteName = r["SiteName"].ToString();
                         obj1.SectorName = r["SectorName"].ToString();
+                        obj1.BlockName = r["BlockName"].ToString();
                         obj1.UpgradtionDate = r["UpgradtionDate"].ToString();
                         obj1.ProductName = r["Package"].ToString();
                         obj1.Amount = r["Amount"].ToString();
