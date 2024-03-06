@@ -2094,22 +2094,50 @@
     //    });
     //});
 
+
+    function memDownId() {
+        debugger;
+        var firstid = $("#firstHead").text();
+        var firstID = firstid.slice(0, 8);
+        if (firstID == "HMCITYHM") {
+            var memdownid = 'HMCITYHM'.slice(0, 6);
+        }
+        else {
+            var memdownid = firstid.slice(0, 8);
+        }
+        let myurl = "/Admin/DownlineRankAchieverReportsForAdmin?Mem=" + memdownid;
+        //window.location.href = myurl;
+        window.open(myurl, '_blank');
+
+    }
+</script>
+
+
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+<script>
     
     function memDownId() {
         debugger;
         var firstid = $("#firstHead").text();
         var firstID = firstid.slice(0, 8);
         if (firstID == "HMCITYHM") {
-            var memDownid = 'HMCITYHM'.slice(0, 6);
+            var memDownUserid = 'HMCITYHM'.slice(0, 6);
         }
         else {
-            var memDownid = firstid.slice(0, 8);
+            var memDownUserid = firstid.slice(0, 8);
         }
-        let myUrl = "/Admin/DownlineRankAchieverReportsForAdmin?Mem=" + memDownid;
+        var memDownid = CryptoJS.AES.encrypt("Message", "memDownUserid");
+
+        let myUrl = "/Admin/DownlineRankAchieverReportsForAdmin?id=" + memDownid + '&Mem=' + memDownUserid;
         //window.location.href = myUrl;
         window.open(myUrl, '_blank');
 
     }
-</script>
+
+    
+</script>*@
+
+
+
 
 
