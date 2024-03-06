@@ -761,10 +761,12 @@ namespace HMGreenCityMLM.Models
         public string Message { get; set; }
         public string LoginId { get; set; }
         public string Fk_headId { get; set; }
+        public string Name { get; set; }
         public DataSet GetTree()
         {
             SqlParameter[] para = {   new SqlParameter("@LoginId", LoginId),
-                 new SqlParameter("@Fk_headId", Fk_headId)
+                                      new SqlParameter("@Fk_headId", Fk_headId),
+                                      //new SqlParameter("@Name",Name)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTree", para);

@@ -1009,6 +1009,7 @@ namespace HMGreenCityMLM.Controllers
         #endregion
 
         #region Tree
+
         public ActionResult Tree(TreeAPI model)
         {
             UpdateProfile sta = new UpdateProfile();
@@ -1489,8 +1490,7 @@ namespace HMGreenCityMLM.Controllers
 
             DownlineSearchA od = new DownlineSearchA();
             DownlineSearch obj = new DownlineSearch();
-
-
+            
             if (direct.Status == "null")
             {
                 direct.Status = null;
@@ -1508,9 +1508,7 @@ namespace HMGreenCityMLM.Controllers
             {
                 direct.Name = direct.Name;
             }
-
-
-
+            
             if (direct.Leg == "null")
             {
                 direct.Leg = null;
@@ -1573,8 +1571,7 @@ namespace HMGreenCityMLM.Controllers
         #endregion
         
         #region LegDropdown
-
-
+        
         public ActionResult LegDropdown(Downl direct)
         {
             UpdateProfile onj = new UpdateProfile();
@@ -1591,9 +1588,6 @@ namespace HMGreenCityMLM.Controllers
             return Json(objectToSerialize, JsonRequestBehavior.AllowGet);
 
         }
-
-
-
 
         #endregion
 
