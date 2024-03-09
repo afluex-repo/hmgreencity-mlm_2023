@@ -48,8 +48,31 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lstmessages = lst1;
             }
-
             #endregion Messages
+
+            #region dataListyearBusiness
+            List<DashBoard> dataListyear = new List<DashBoard>();
+            DataSet Dsyear = new DataSet();
+            DataTable dt = new DataTable();
+            Ds = newdata.GetDashBoardDetails();
+            if (Ds.Tables.Count > 0)
+            {
+                foreach (DataRow dr in Ds.Tables[5].Rows)
+                {
+                    DashBoard detailsyear = new DashBoard();
+
+
+                    detailsyear.Amount = (dr["Amount"].ToString());
+                    detailsyear.Year = (dr["Year"].ToString());
+
+
+                    dataListyear.Add(detailsyear);
+                }
+                newdata.lstdetailsYear = dataListyear;
+            }
+            #endregion
+
+
             return View(newdata);
         }
 
@@ -58,8 +81,7 @@ namespace HMGreenCityMLM.Controllers
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
             List<Reports> lst = new List<Reports>();
-
-            model.Status = null;
+            model.Status = "Pending";
             DataSet ds = model.AssociateListForKYC();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -74,7 +96,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.DocumentType = r["DocumentType"].ToString();
                     obj.DocumentImage = (r["DocumentImage"].ToString());
                     obj.Status = (r["Status"].ToString());
-
+                    obj.UploadDate = (r["UploadDate"].ToString());
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -82,6 +104,44 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        [ActionName("AssociateListForKYC")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult AssociateListsForKYC(Reports model)
+        {
+            List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
+            ViewBag.ddlKYCStatus = ddlKYCStatus;
+            List<Reports> lst = new List<Reports>();
+            
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.LoginId = model.LoginId == " " ? null : model.LoginId;
+            model.Status = model.Status == " " ? null : model.Status;
+            //model.Status = null;
+            DataSet ds = model.AssociateListForKYC();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.PK_DocumentID = r["PK_UserDocumentID"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.DocumentNumber = r["DocumentNumber"].ToString();
+                    obj.DocumentType = r["DocumentType"].ToString();
+                    obj.DocumentImage = (r["DocumentImage"].ToString());
+                    obj.Status = (r["Status"].ToString());
+                    obj.UploadDate = (r["UploadDate"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstassociate = lst;
+            }
+            return View(model);
+        }
+
+        
         public ActionResult ApproveKYC(string Id, string DocumentType, string LoginID)
         {
             string FormName = "";
@@ -212,6 +272,34 @@ namespace HMGreenCityMLM.Controllers
                 }
             }
             return Json(dataList, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetInvestmentDetailsyear(string Year)
+        {
+            List<DashBoard> dataListyear = new List<DashBoard>();
+            DataSet Ds = new DataSet();
+            DataTable dt = new DataTable();
+            DashBoard newdata = new DashBoard();
+            newdata.Year = Year;
+            Ds = newdata.GetDashBoardDetailsYears();
+            if (Ds.Tables.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow dr in Ds.Tables[0].Rows)
+                {
+                    DashBoard detailsyear = new DashBoard();
+
+
+                    detailsyear.Amount = (dr["Amount"].ToString());
+                    detailsyear.Month = (dr["Month"].ToString());
+                    detailsyear.Year = (dr["Year"].ToString());
+
+
+                    dataListyear.Add(detailsyear);
+
+                    count++;
+                }
+            }
+            return Json(dataListyear, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetJoiningDeatils()

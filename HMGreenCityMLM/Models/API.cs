@@ -776,17 +776,24 @@ namespace HMGreenCityMLM.Models
     {
         public string Fk_UserId { get; set; }
         public string SponsorId { get; set; }
+        public string SponsorDetails { get; set; }
         public string Fk_ParentId { get; set; }
         public string TeamPermanent { get; set; }
         public string LoginId { get; set; }
         public string Fk_SponsorId { get; set; }
         public string MemberName { get; set; }
         public string MemberLevel { get; set; }
-
+        public string LastNewBusinessAmount { get; set; }
+        public string LastNewBusinessTopupDate { get; set; }
+        public string TopupAmount { get; set; }
+        public string YellowDate { get; set; }
         public string Id { get; set; }
         public string Leg { get; set; }
 
         public string ActivationDate { get; set; }
+        public string JoiningDate { get; set; }
+        public string StatusUser { get; set; }
+        public string Status { get; set; }
         public string ActiveLeft { get; set; }
         public string ActiveRight { get; set; }
         public string InactiveLeft { get; set; }
@@ -1258,6 +1265,7 @@ namespace HMGreenCityMLM.Models
         public string SiteName { get; set; }
         public string FK_InvestmentID { get; set; }
         public string SectorName { get; set; }
+        public string BlockName { get; set; }
 
     }
 }

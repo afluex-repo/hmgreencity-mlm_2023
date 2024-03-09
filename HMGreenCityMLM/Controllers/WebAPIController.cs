@@ -966,7 +966,6 @@ namespace HMGreenCityMLM.Controllers
                     Objload.CrAmount = dr["CrAmount"].ToString();
                     Objload.AddedOn = dr["TransactionDate"].ToString();
                     Objload.PayoutBalance = dr["Balance"].ToString();
-                    Objload.TDSCharge = dr["TDSCharge"].ToString();
                     Objload.TransactionNo = dr["TransactionNo"].ToString();
 
                     lst.Add(Objload);
@@ -1012,7 +1011,6 @@ namespace HMGreenCityMLM.Controllers
         #region Tree
         public ActionResult Tree(TreeAPI model)
         {
-
             UpdateProfile sta = new UpdateProfile();
             TreeAPI obj = new TreeAPI();
             if (model.LoginId == "" || model.LoginId == null)
@@ -1044,14 +1042,16 @@ namespace HMGreenCityMLM.Controllers
                             obj1.Fk_ParentId = r["Fk_ParentId"].ToString();
                             obj1.Fk_SponsorId = r["Fk_SponsorId"].ToString();
                             obj1.SponsorId = r["SponsorId"].ToString();
+                            obj1.SponsorDetails = r["SponsorDetails"].ToString();
                             obj1.LoginId = r["LoginId"].ToString();
                             obj1.TeamPermanent = r["TeamPermanent"].ToString();
                             obj1.MemberName = r["MemberName"].ToString();
                             obj1.MemberLevel = r["MemberLevel"].ToString();
                             obj1.Leg = r["Leg"].ToString();
                             obj1.Id = r["Id"].ToString();
-
+                            obj1.YellowDate = r["YellowDate"].ToString();
                             obj1.ActivationDate = r["ActivationDate"].ToString();
+                            obj1.JoiningDate = r["JoiningDate"].ToString();
                             obj1.ActiveLeft = r["ActiveLeft"].ToString();
                             obj1.ActiveRight = r["ActiveRight"].ToString();
                             obj1.InactiveLeft = r["InactiveLeft"].ToString();
@@ -1061,6 +1061,10 @@ namespace HMGreenCityMLM.Controllers
                             obj1.ImageURL = r["ImageURL"].ToString();
                             obj1.HoldLeft = r["HoldLeft"].ToString();
                             obj1.HoldRight = r["HoldRight"].ToString();
+                            obj1.LastNewBusinessAmount = r["LasttopupAmount"].ToString();
+                            obj1.LastNewBusinessTopupDate = r["LasttopupDate"].ToString();
+                            obj1.TopupAmount = r["PackageName"].ToString();
+                            obj1.StatusUser = r["Status"].ToString();
                             GetGenelogy.Add(obj1);
                         }
                         obj.GetGenelogy = GetGenelogy;
@@ -1888,6 +1892,7 @@ namespace HMGreenCityMLM.Controllers
                         obj1.Name = r["Name"].ToString() + " (" + r["LoginId"].ToString() + ")";
                         obj1.SiteName = r["SiteName"].ToString();
                         obj1.SectorName = r["SectorName"].ToString();
+                        obj1.BlockName = r["BlockName"].ToString();
                         obj1.UpgradtionDate = r["UpgradtionDate"].ToString();
                         obj1.ProductName = r["Package"].ToString();
                         obj1.Amount = r["Amount"].ToString();

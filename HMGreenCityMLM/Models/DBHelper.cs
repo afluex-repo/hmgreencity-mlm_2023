@@ -25,8 +25,6 @@ namespace HMGreenCityMLM.Models
                 throw;
             }
         } 
-
-
         public static int ExecuteNonQuery(string commandText, params SqlParameter[] commandParameters)
         {
             int k = 0;

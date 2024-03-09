@@ -6,7 +6,7 @@
 }
 
 
-@using (Html.BeginForm("PayoutLedgerNew", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("TopupListNew", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
 
     //==================================================================================================================
@@ -29,10 +29,25 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label>From Date</label>
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>To Date</label>
+                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="submit" id="lstnewSearch" class="btn btn-success pull-left" name="lstnewSearch" value="Search" />
+                            </div>
+                        </div>
+                        <br />
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
                                 <thead>
@@ -65,7 +80,7 @@
                                                     <td>@Item.Amount</td>
                                                     <td>
                                                         <a href="/User/PrintTopup?invid=@Item.FK_InvestmentID" target="_blank" class="btn btn-sm btn-primary">Print</a>
-                                                    </td>y
+                                                    </td>
                                                 </tr>
 
                                                 i++;
@@ -87,6 +102,27 @@
     
 
 }
-<script src="../../AdminPanelCss/assets/vendors/jquery.js"></script>
+<script src="../../WebsiteCss/js/jquery.js"></script>
 
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
 
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear:true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
+    });
+</script>
+
+<style>
+    .btn-success {
+        margin-top: 29px;
+        margin-left: 20px;
+    }
+</style>
