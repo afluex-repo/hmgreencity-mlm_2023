@@ -42,6 +42,14 @@
                             @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly" })
                         </div>
                         <div class="form-group col-md-3">
+                            <label>Transaction From Date</label>
+                            @Html.TextBoxFor(m => m.TFromDate, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Transaction To Date</label>
+                            @Html.TextBoxFor(m => m.TToDate, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="form-group col-md-3">
                             <input type="submit" name="GetDetails" class="btn btn-info" value="Get Details" />
                         </div>
                     </div>
@@ -131,6 +139,18 @@
 
     });
     $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+
+    $('#TFromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+
+    });
+    $('#TToDate').datepicker({
         dateFormat: 'dd/mm/yy',
         changeYear: true,
         changeMonth: true

@@ -799,7 +799,11 @@ namespace HMGreenCityMLM.Controllers
                     obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(DocumentFile.FileName);
                     DocumentFile.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
                 }
-               
+                obj.AccountHolderName = obj.AccountHolderName == " " ? null : obj.AccountHolderName;
+                obj.BankName = obj.BankName == " " ? null : obj.BankName;
+                obj.BankBranch = obj.BankBranch == " " ? null : obj.BankBranch;
+                obj.IFSCCode = obj.IFSCCode == " " ? null : obj.IFSCCode;
+
                 DataSet ds = obj.UploadKYCDocuments();
                 if (ds != null && ds.Tables.Count > 0)
                 {
