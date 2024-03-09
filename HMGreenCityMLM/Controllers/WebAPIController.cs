@@ -799,7 +799,11 @@ namespace HMGreenCityMLM.Controllers
                     obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(DocumentFile.FileName);
                     DocumentFile.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
                 }
-               
+                obj.AccountHolderName = obj.AccountHolderName == " " ? null : obj.AccountHolderName;
+                obj.BankName = obj.BankName == " " ? null : obj.BankName;
+                obj.BankBranch = obj.BankBranch == " " ? null : obj.BankBranch;
+                obj.IFSCCode = obj.IFSCCode == " " ? null : obj.IFSCCode;
+
                 DataSet ds = obj.UploadKYCDocuments();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -1009,6 +1013,7 @@ namespace HMGreenCityMLM.Controllers
         #endregion
 
         #region Tree
+
         public ActionResult Tree(TreeAPI model)
         {
             UpdateProfile sta = new UpdateProfile();
@@ -1489,8 +1494,7 @@ namespace HMGreenCityMLM.Controllers
 
             DownlineSearchA od = new DownlineSearchA();
             DownlineSearch obj = new DownlineSearch();
-
-
+            
             if (direct.Status == "null")
             {
                 direct.Status = null;
@@ -1508,9 +1512,7 @@ namespace HMGreenCityMLM.Controllers
             {
                 direct.Name = direct.Name;
             }
-
-
-
+            
             if (direct.Leg == "null")
             {
                 direct.Leg = null;
@@ -1573,8 +1575,7 @@ namespace HMGreenCityMLM.Controllers
         #endregion
         
         #region LegDropdown
-
-
+        
         public ActionResult LegDropdown(Downl direct)
         {
             UpdateProfile onj = new UpdateProfile();
@@ -1591,9 +1592,6 @@ namespace HMGreenCityMLM.Controllers
             return Json(objectToSerialize, JsonRequestBehavior.AllowGet);
 
         }
-
-
-
 
         #endregion
 
