@@ -88,6 +88,7 @@
                                     <th>Mobile No</th>
                                     <th>Email Id</th>
                                     <th>Status</th>
+                                    <th style="min-width:112px">Green/Yellow Date</th>
                                     <th style="min-width:80px">Action</th>
                                     <th hidden="hidden"></th>
                                     <th>Print</th>
@@ -102,7 +103,7 @@
                                         int i = 1;
                                         foreach (var Item in Model.lstassociate)
                                         {
-                                            <tr class="text-left">
+                                            <tr class="text-left" style="Background-color:@Item.StatusColor">
                                                 <td>@i</td>
                                                 <td>@Item.LoginId</td>
                                                 <td>@Item.Password</td>
@@ -113,6 +114,7 @@
                                                 <td>@Item.Mobile</td>
                                                 <td>@Item.Email</td>
                                                 <td>@Item.Status</td>
+                                                <td>@Item.StatusDate</td>
                                                 <td>
                                                     <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm edit">
                                                         Edit
