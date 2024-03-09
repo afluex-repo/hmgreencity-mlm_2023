@@ -1402,6 +1402,9 @@ namespace HMGreenCityMLM.Controllers
 
         #region Downline Rank Achiever Reports For Admin
 
+
+       
+
         public ActionResult DownlineRankAchieverReportsForAdmin(string Mem)
         {
             Reports model = new Reports();
@@ -1410,6 +1413,8 @@ namespace HMGreenCityMLM.Controllers
             //{
             //    model.Fk_UserId = ds1.Tables[0].Rows[0]["FirstUser"].ToString();
             //}
+
+            //model.LoginId = Mem;
             model.LoginId = Mem;
             try
             {
