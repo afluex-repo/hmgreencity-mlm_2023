@@ -1222,6 +1222,9 @@ namespace HMGreenCityMLM.Models
         public string DocumentNumber { get; set; }
         public string DocumentImage { get; set; }
         public string DocumentStatus { get; set; }
+        public string BankHolderName { get; set; }
+        public string BankName { get; set; }
+        public string IFSCCode { get; set; }
     }
 
 
