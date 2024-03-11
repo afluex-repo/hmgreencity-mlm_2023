@@ -10,6 +10,8 @@ namespace HMGreenCityMLM.Models
 {
     public class Wallet : Common
     {
+        public string TFromDate { get; set; }
+        public string TToDate { get; set; }
         public string ReceiptNo { get; set; }
         public int Amount2 { get; set; }
         public string word { get; set; }
@@ -450,8 +452,10 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId),
                                     new SqlParameter("@LoginId", LoginId),
                                     new SqlParameter("@FromDate", FromDate),
-                                    new SqlParameter("@ToDate", ToDate), };
-            DataSet ds = DBHelper.ExecuteQuery("GetPaidPayoutDetails", para);
+                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@TransactionFromDate", TFromDate),
+                                    new SqlParameter("@TransactionToDate", TToDate), };
+        DataSet ds = DBHelper.ExecuteQuery("GetPaidPayoutDetails", para);
             return ds;
         }
         #endregion

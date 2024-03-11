@@ -299,6 +299,9 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
+                    //obj.StatusDate = r["StatusDate"].ToString();
+                    obj.StatusDate = string.IsNullOrEmpty(r["StatusDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["StatusDate"]).ToString("dd-MMM, yyyy");
+                    obj.StatusColor = r["StatusColor"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -340,6 +343,9 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
+                    //obj.StatusDate = r["StatusDate"].ToString();
+                    obj.StatusDate = string.IsNullOrEmpty(r["StatusDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["StatusDate"]).ToString("dd-MMM, yyyy");
+                    obj.StatusColor = r["StatusColor"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
