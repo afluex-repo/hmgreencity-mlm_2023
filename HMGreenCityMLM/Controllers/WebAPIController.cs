@@ -859,6 +859,7 @@ namespace HMGreenCityMLM.Controllers
                         KYClist.BankHolderName = dr["BankHolderName"].ToString();
                         KYClist.BankName = dr["MemberBankName"].ToString();
                         KYClist.IFSCCode = dr["IFSCCode"].ToString();
+                        KYClist.BranchName = dr["MemberBranch"].ToString();
                         lstKycdocuments.Add(KYClist);
                     }
                     obj.lstKycdocuments = lstKycdocuments;
