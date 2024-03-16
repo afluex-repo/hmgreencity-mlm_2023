@@ -1225,6 +1225,7 @@ namespace HMGreenCityMLM.Models
         public string BankHolderName { get; set; }
         public string BankName { get; set; }
         public string IFSCCode { get; set; }
+        public string BranchName { get; set; }
     }
 
 
