@@ -410,6 +410,9 @@ namespace HMGreenCityMLM.Controllers
             }
             List<Reports> lst = new List<Reports>();
             //model.LoginId = model.ToLoginID;
+            
+            model.AdharNo = model.AdharNo == " " ? null : model.AdharNo;
+
             DataSet ds = model.GetAssociateList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
