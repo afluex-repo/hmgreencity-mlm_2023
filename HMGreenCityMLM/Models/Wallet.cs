@@ -454,7 +454,9 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate),
                                     new SqlParameter("@TransactionFromDate", TFromDate),
-                                    new SqlParameter("@TransactionToDate", TToDate), };
+                                    new SqlParameter("@TransactionToDate", TToDate),
+                                     new SqlParameter("@BankName", BankName),
+            };
         DataSet ds = DBHelper.ExecuteQuery("GetPaidPayoutDetails", para);
             return ds;
         }

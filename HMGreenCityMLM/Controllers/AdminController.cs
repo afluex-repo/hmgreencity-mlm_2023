@@ -1235,6 +1235,7 @@ namespace HMGreenCityMLM.Controllers
             objewallet.ToDate = string.IsNullOrEmpty(objewallet.ToDate) ? null : Common.ConvertToSystemDate(objewallet.ToDate, "dd/MM/yyyy");
             objewallet.TFromDate = string.IsNullOrEmpty(objewallet.TFromDate) ? null : Common.ConvertToSystemDate(objewallet.TFromDate, "dd/MM/yyyy");
             objewallet.TToDate = string.IsNullOrEmpty(objewallet.TToDate) ? null : Common.ConvertToSystemDate(objewallet.TToDate, "dd/MM/yyyy");
+            objewallet.BankName = objewallet.BankName == " " ? null : objewallet.BankName;
             objewallet.LoginId = objewallet.ToLoginID;
             DataSet ds = objewallet.GetPaidPayout();
             ViewBag.Total = "0";
