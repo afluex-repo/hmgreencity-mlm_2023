@@ -84,7 +84,8 @@ namespace HMGreenCityMLM.Models
         public string Status { get; set; }
 
         public string StatusColor { get; set; }
-        public string StatusDate { get; set; }
+        public string GreenDate { get; set; }
+        public string YellowDate { get; set; }
 
         public string UploadDate { get; set; }
 

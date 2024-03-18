@@ -761,10 +761,12 @@ namespace HMGreenCityMLM.Models
         public string Message { get; set; }
         public string LoginId { get; set; }
         public string Fk_headId { get; set; }
+        public string Name { get; set; }
         public DataSet GetTree()
         {
             SqlParameter[] para = {   new SqlParameter("@LoginId", LoginId),
-                 new SqlParameter("@Fk_headId", Fk_headId)
+                                      new SqlParameter("@Fk_headId", Fk_headId),
+                                      //new SqlParameter("@Name",Name)
                                   };
 
             DataSet ds = DBHelper.ExecuteQuery("GetTree", para);
@@ -1162,6 +1164,10 @@ namespace HMGreenCityMLM.Models
         public string AdharNumber { get; set; }
         public string PanNumber { get; set; }
         public string DocumentNumber { get; set; }
+        public string AccountHolderName { get; set; }
+        public string BankName { get; set; }
+        public string BankBranch { get; set; }
+        public string IFSCCode { get; set; }
 
         public DataSet UploadKYCDocuments()
         {
@@ -1172,7 +1178,11 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@PanNumber", PanNumber),
                                       new SqlParameter("@PanImage", PanImage) ,
                                       new SqlParameter("@DocumentNumber", DocumentNumber) ,
-                                      new SqlParameter("@DocumentImage", DocumentImage)
+                                      new SqlParameter("@DocumentImage", DocumentImage),
+                                      new SqlParameter("@BankHolderName", AccountHolderName),
+                                      new SqlParameter("@MemberBankName", BankName) ,
+                                      new SqlParameter("@MemberBranch", BankBranch) ,
+                                      new SqlParameter("@IFSCCode", IFSCCode)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UploadKYC", para);
             return ds;
@@ -1212,6 +1222,10 @@ namespace HMGreenCityMLM.Models
         public string DocumentNumber { get; set; }
         public string DocumentImage { get; set; }
         public string DocumentStatus { get; set; }
+        public string BankHolderName { get; set; }
+        public string BankName { get; set; }
+        public string IFSCCode { get; set; }
+        public string BranchName { get; set; }
     }
 
 

@@ -598,6 +598,8 @@ namespace HMGreenCityMLM.Controllers
                     Obj.NetAmount = r["NetAmount"].ToString();
                     Obj.LeadershipBonus = r["DirectLeaderShipBonus"].ToString();
                     Obj.ProductWallet = r["ProductWallet"].ToString();
+                    Obj.MobileNo = r["Mobile"].ToString();
+                    Obj.RankName = r["AchiverRank"].ToString();
                     lst1.Add(Obj);
                 }
                 payoutDetail.lsttopupreport = lst1;
