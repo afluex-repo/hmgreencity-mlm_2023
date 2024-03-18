@@ -299,9 +299,9 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
-                    //obj.StatusDate = r["StatusDate"].ToString();
-                    obj.StatusDate = string.IsNullOrEmpty(r["StatusDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["StatusDate"]).ToString("dd-MMM, yyyy");
-                    obj.StatusColor = r["StatusColor"].ToString();
+                    obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
+                    obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
+                    //obj.StatusColor = r["StatusColor"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -343,9 +343,9 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
-                    //obj.StatusDate = r["StatusDate"].ToString();
-                    obj.StatusDate = string.IsNullOrEmpty(r["StatusDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["StatusDate"]).ToString("dd-MMM, yyyy");
-                    obj.StatusColor = r["StatusColor"].ToString();
+                    obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
+                    obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
+                    //obj.StatusColor = r["StatusColor"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
