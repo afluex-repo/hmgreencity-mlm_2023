@@ -84,7 +84,8 @@ namespace HMGreenCityMLM.Models
         public string Status { get; set; }
 
         public string StatusColor { get; set; }
-        public string StatusDate { get; set; }
+        public string GreenDate { get; set; }
+        public string YellowDate { get; set; }
 
         public string UploadDate { get; set; }
 
@@ -308,12 +309,7 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@SponsorName", SponsorName),
                                     new SqlParameter("@Status", Status),
                                     new SqlParameter("@IsDownline", IsDownline),
-                                    new SqlParameter("@Leg", Leg),
-                                       new SqlParameter("@AdharNumber", AdharNo),
-
-                                    
-
-
+                                    new SqlParameter("@Leg", Leg)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateList", para);
             return ds;
