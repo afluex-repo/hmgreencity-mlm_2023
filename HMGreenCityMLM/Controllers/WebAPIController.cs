@@ -856,10 +856,10 @@ namespace HMGreenCityMLM.Controllers
                         KYClist.DocumentNumber = dr["DocumentNumber"].ToString();
                         KYClist.DocumentImage = dr["DocumentImage"].ToString();
                         KYClist.DocumentStatus = dr["DocumentStatus"].ToString();
-                        KYClist.BankHolderName = dr["BankHolderName"].ToString();
+                        KYClist.AccountHolderName = dr["BankHolderName"].ToString();
                         KYClist.BankName = dr["MemberBankName"].ToString();
                         KYClist.IFSCCode = dr["IFSCCode"].ToString();
-                        KYClist.BranchName = dr["MemberBranch"].ToString();
+                        KYClist.BankBranch = dr["MemberBranch"].ToString();
                         lstKycdocuments.Add(KYClist);
                     }
                     obj.lstKycdocuments = lstKycdocuments;

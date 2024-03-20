@@ -57,6 +57,13 @@
                             <label>Status</label>
                             @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlstatus, "Value", "Text"), new { @class = "form-control" })
                         </div>
+
+
+                        @*<div class="form-group col-md-3">
+                            <label>Adhar Number</label>
+                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control"})
+                        </div>*@
+
                         <div class="form-group col-md-3">
                             <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return validateLogin();" />
                         </div>
