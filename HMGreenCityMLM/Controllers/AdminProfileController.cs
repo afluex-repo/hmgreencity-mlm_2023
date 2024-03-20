@@ -315,7 +315,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult AssociateListBy(Reports model)
         {
-            if(model.LoginId==null)
+            if (model.LoginId == null)
             {
                 model.ToLoginID = null;
             }
@@ -391,6 +391,8 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
+                    obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
+                    obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
                     lst.Add(obj);
                 }
                 model.lstassociatenew = lst;
@@ -404,11 +406,12 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult AssociateListByNew2(Reports model)
         {
-            if(model.LoginId==null)
+            if (model.LoginId == null)
             {
                 model.ToLoginID = null;
             }
             List<Reports> lst = new List<Reports>();
+            model.AdharNo = model.AdharNo == " " ? null : model.AdharNo;
             //model.LoginId = model.ToLoginID;
             DataSet ds = model.GetAssociateList();
 
@@ -428,6 +431,8 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
+                    obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
+                    obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
                     lst.Add(obj);
                 }
                 model.lstassociatenew = lst;
@@ -472,7 +477,7 @@ namespace HMGreenCityMLM.Controllers
 
             DataSet ds = obj.GetUserProfile();
 
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                 obj.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
@@ -676,10 +681,10 @@ namespace HMGreenCityMLM.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult WelcomeLetter(string id)
+        public ActionResult WelcomeLetter(string LoginID)
         {
             Reports model = new Reports();
-            model.LoginId = id;
+            model.LoginId = LoginID;
             DataSet ds = model.GetAssociateList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
