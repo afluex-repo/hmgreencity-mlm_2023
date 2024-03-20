@@ -1222,10 +1222,10 @@ namespace HMGreenCityMLM.Models
         public string DocumentNumber { get; set; }
         public string DocumentImage { get; set; }
         public string DocumentStatus { get; set; }
-        public string BankHolderName { get; set; }
+        public string AccountHolderName { get; set; }
         public string BankName { get; set; }
         public string IFSCCode { get; set; }
-        public string BranchName { get; set; }
+        public string BankBranch { get; set; }
     }
 
 
