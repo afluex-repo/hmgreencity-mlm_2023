@@ -774,30 +774,88 @@ namespace HMGreenCityMLM.Controllers
 
         #region KYCDocuments
 
-        public ActionResult KYCDocuments(HttpPostedFileBase AadharFile, HttpPostedFileBase AdharBacksideFile, HttpPostedFileBase PanFile, HttpPostedFileBase DocumentFile,KYCDocumentsAPI obj)
+        //public ActionResult KYCDocuments(HttpPostedFileBase AadharFile, HttpPostedFileBase AdharBacksideFile, HttpPostedFileBase PanFile, HttpPostedFileBase DocumentFile,KYCDocumentsAPI obj)
+        //{
+        //    KYCResponse Response = new KYCResponse();
+        //    try
+        //    {
+        //        if (AadharFile != null)
+        //        {   
+        //            obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AadharFile.FileName);
+        //            AadharFile.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage))); 
+        //        }
+        //        if (AdharBacksideFile != null)
+        //        {
+        //            obj.AdharBacksideImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AdharBacksideFile.FileName);
+        //            AdharBacksideFile.SaveAs(Path.Combine(Server.MapPath(obj.AdharBacksideImage)));
+        //        }
+        //        if (PanFile != null)
+        //        {
+        //            obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(PanFile.FileName);
+        //            PanFile.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
+        //        }
+        //        if (DocumentFile != null)
+        //        {
+        //            obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(DocumentFile.FileName);
+        //            DocumentFile.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+        //        }
+        //        obj.AccountHolderName = obj.AccountHolderName == " " ? null : obj.AccountHolderName;
+        //        obj.BankName = obj.BankName == " " ? null : obj.BankName;
+        //        obj.BankBranch = obj.BankBranch == " " ? null : obj.BankBranch;
+        //        obj.IFSCCode = obj.IFSCCode == " " ? null : obj.IFSCCode;
+
+        //        DataSet ds = obj.UploadKYCDocuments();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                Response.Message = "Documents uploaded successfully..";
+        //                Response.Status = "0";
+        //                return Json(Response, JsonRequestBehavior.AllowGet);
+        //            }
+        //            else
+        //            {
+        //                Response.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //                Response.Status = "1";
+        //                return Json(Response, JsonRequestBehavior.AllowGet);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Response.Message = ex.Message;
+        //        Response.Status = "1";
+        //        return Json(Response, JsonRequestBehavior.AllowGet);
+        //    }
+        //    return Json(Response, JsonRequestBehavior.AllowGet);
+        //}
+
+            
+
+        public ActionResult KYCDocuments(HttpPostedFileBase AdharImage, HttpPostedFileBase AdharBacksideImage, HttpPostedFileBase PanImage, HttpPostedFileBase DocumentImage, KYCDocumentsAPI obj)
         {
             KYCResponse Response = new KYCResponse();
             try
             {
-                if (AadharFile != null)
-                {   
-                    obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AadharFile.FileName);
-                    AadharFile.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage))); 
-                }
-                if (AdharBacksideFile != null)
+                if (AdharImage != null)
                 {
-                    obj.AdharBacksideImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AdharBacksideFile.FileName);
-                    AdharBacksideFile.SaveAs(Path.Combine(Server.MapPath(obj.AdharBacksideImage)));
+                    obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AdharImage.FileName);
+                    AdharImage.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
                 }
-                if (PanFile != null)
+                if (AdharBacksideImage != null)
                 {
-                    obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(PanFile.FileName);
-                    PanFile.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
+                    obj.AdharBacksideImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(AdharBacksideImage.FileName);
+                    AdharBacksideImage.SaveAs(Path.Combine(Server.MapPath(obj.AdharBacksideImage)));
                 }
-                if (DocumentFile != null)
+                if (PanImage != null)
                 {
-                    obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(DocumentFile.FileName);
-                    DocumentFile.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
+                    obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(PanImage.FileName);
+                    PanImage.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
+                }
+                if (DocumentImage != null)
+                {
+                    obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(DocumentImage.FileName);
+                    DocumentImage.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
                 }
                 obj.AccountHolderName = obj.AccountHolderName == " " ? null : obj.AccountHolderName;
                 obj.BankName = obj.BankName == " " ? null : obj.BankName;
@@ -829,6 +887,15 @@ namespace HMGreenCityMLM.Controllers
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+
+
+
+
+
 
         #endregion
 
