@@ -10,6 +10,7 @@ namespace HMGreenCityMLM
 {
     public  class Crypto
     {
+        public static object AES { get; internal set; }
 
         public static string Encrypt(string clearText)
         {

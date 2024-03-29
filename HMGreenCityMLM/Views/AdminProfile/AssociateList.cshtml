@@ -88,6 +88,8 @@
                                     <th>Mobile No</th>
                                     <th>Email Id</th>
                                     <th>Status</th>
+                                    <th style="min-width:112px">Green Date</th>
+                                    <th style="min-width:112px">Yellow Date</th>
                                     <th style="min-width:80px">Action</th>
                                     <th hidden="hidden"></th>
                                     <th>Print</th>
@@ -113,6 +115,9 @@
                                                 <td>@Item.Mobile</td>
                                                 <td>@Item.Email</td>
                                                 <td>@Item.Status</td>
+
+                                                <td style="background-color:#D3F7C4">@Item.GreenDate</td>
+                                                <td style="background-color:#fffec8">@Item.YellowDate</td>
                                                 <td>
                                                     <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm edit">
                                                         Edit
