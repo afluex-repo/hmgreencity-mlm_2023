@@ -309,7 +309,8 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@SponsorName", SponsorName),
                                     new SqlParameter("@Status", Status),
                                     new SqlParameter("@IsDownline", IsDownline),
-                                    new SqlParameter("@Leg", Leg)
+                                    new SqlParameter("@Leg", Leg),
+                                       new SqlParameter("@AdharNumber", AdharNo)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateList", para);
             return ds;
