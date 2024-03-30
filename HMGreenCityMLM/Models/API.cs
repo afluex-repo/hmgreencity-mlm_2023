@@ -1171,7 +1171,7 @@ namespace HMGreenCityMLM.Models
 
         public DataSet UploadKYCDocuments()
         {
-            SqlParameter[] para = { new SqlParameter("@FK_UserID",Pk_UserID) ,
+            SqlParameter[] para = {   new SqlParameter("@FK_UserID",Pk_UserID ) ,
                                       new SqlParameter("@AdharNumber", AdharNumber) ,
                                       new SqlParameter("@AdharImage", AdharImage) ,
                                       new SqlParameter("@AdharBacksideImage",AdharBacksideImage),
