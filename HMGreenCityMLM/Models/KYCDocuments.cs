@@ -32,7 +32,7 @@ namespace HMGreenCityMLM.Models
 
         public DataSet UploadKYCDocuments()
         {
-            SqlParameter[] para = { new SqlParameter("@FK_UserID",PKUserID ) ,
+            SqlParameter[] para = {   new SqlParameter("@FK_UserID",PKUserID ) ,
                                       new SqlParameter("@AdharNumber", AdharNumber) ,
                                       new SqlParameter("@AdharImage", AdharImage) ,
                                       new SqlParameter("@AdharBacksideImage",AdharBacksideImage),
@@ -40,7 +40,6 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@PanImage", PanImage) ,
                                       new SqlParameter("@DocumentNumber", DocumentNumber) ,
                                       new SqlParameter("@DocumentImage", DocumentImage),
-
                                       new SqlParameter("@BankHolderName", AccountHolderName),
                                       new SqlParameter("@MemberBankName", BankName) ,
                                       new SqlParameter("@MemberBranch", BankBranch) ,
