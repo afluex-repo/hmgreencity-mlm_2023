@@ -467,6 +467,10 @@ namespace HMGreenCityMLM.Controllers
                     Obj.Amount = r["Amount"].ToString();
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -516,6 +520,11 @@ namespace HMGreenCityMLM.Controllers
                     Obj.Amount = r["Amount"].ToString();
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
+
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
