@@ -64,7 +64,6 @@ namespace HMGreenCityMLM.Controllers
             //        soapResult = rd.ReadToEnd();
 
             //    }
-
             //    datalist = JsonConvert.DeserializeObject<ProjectStatusResponse>(soapResult);
             //}
             //if (datalist.Response == "0")
@@ -156,7 +155,6 @@ namespace HMGreenCityMLM.Controllers
                                 FormName = "AdminDashBoard";
                                 Controller = "Admin";
                             }
-                            
                         }
                         else
                         {
@@ -172,9 +170,7 @@ namespace HMGreenCityMLM.Controllers
                         Controller = "Home";
 
                     }
-
                 }
-
                 else
                 {
                     TempData["Login"] = "Incorrect LoginId Or Password";
@@ -191,9 +187,7 @@ namespace HMGreenCityMLM.Controllers
             }
 
             return RedirectToAction(FormName, Controller);
-
-
-
+            
         }
 
         public ActionResult Registration()

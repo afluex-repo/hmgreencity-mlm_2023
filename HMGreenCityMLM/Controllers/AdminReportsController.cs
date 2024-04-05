@@ -304,8 +304,7 @@ namespace HMGreenCityMLM.Controllers
         //                    list.Add(obj);
 
         //                }
-
-
+        
         //                model.lsttopupreport = list;
         //            }
 
@@ -313,7 +312,6 @@ namespace HMGreenCityMLM.Controllers
         //        catch (Exception ex)
         //        {
         //        }
-
         //    }
         //    return View(model);
         //}
@@ -402,8 +400,7 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lsttransactionlog = lst1;
             }
-
-
+            
             return View(newdata);
         }
         [HttpPost]
@@ -432,8 +429,7 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lsttransactionlog = lst1;
             }
-
-
+            
             return View(newdata);
         }
 
@@ -467,6 +463,10 @@ namespace HMGreenCityMLM.Controllers
                     Obj.Amount = r["Amount"].ToString();
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -498,7 +498,6 @@ namespace HMGreenCityMLM.Controllers
             {
                 incomeReport.Status = null;
             }
-
             //incomeReport.LoginId = incomeReport.ToLoginID;
 
             DataSet ds11 = incomeReport.GetIncomeReport();
@@ -516,6 +515,11 @@ namespace HMGreenCityMLM.Controllers
                     Obj.Amount = r["Amount"].ToString();
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
+
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -691,8 +695,7 @@ namespace HMGreenCityMLM.Controllers
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
-
-
+                
             }
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
@@ -1979,7 +1982,6 @@ namespace HMGreenCityMLM.Controllers
             //{
 
             //}
-
             if (Type == "IsInclude")
             {
                 model.IsInclude = true;
