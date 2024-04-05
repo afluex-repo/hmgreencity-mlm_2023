@@ -304,8 +304,7 @@ namespace HMGreenCityMLM.Controllers
         //                    list.Add(obj);
 
         //                }
-
-
+        
         //                model.lsttopupreport = list;
         //            }
 
@@ -313,7 +312,6 @@ namespace HMGreenCityMLM.Controllers
         //        catch (Exception ex)
         //        {
         //        }
-
         //    }
         //    return View(model);
         //}
@@ -402,8 +400,7 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lsttransactionlog = lst1;
             }
-
-
+            
             return View(newdata);
         }
         [HttpPost]
@@ -432,8 +429,7 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lsttransactionlog = lst1;
             }
-
-
+            
             return View(newdata);
         }
 
@@ -502,7 +498,6 @@ namespace HMGreenCityMLM.Controllers
             {
                 incomeReport.Status = null;
             }
-
             //incomeReport.LoginId = incomeReport.ToLoginID;
 
             DataSet ds11 = incomeReport.GetIncomeReport();
@@ -700,8 +695,7 @@ namespace HMGreenCityMLM.Controllers
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
-
-
+                
             }
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
@@ -1988,7 +1982,6 @@ namespace HMGreenCityMLM.Controllers
             //{
 
             //}
-
             if (Type == "IsInclude")
             {
                 model.IsInclude = true;

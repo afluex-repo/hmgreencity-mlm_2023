@@ -64,7 +64,6 @@ namespace HMGreenCityMLM.Controllers
             //        soapResult = rd.ReadToEnd();
 
             //    }
-
             //    datalist = JsonConvert.DeserializeObject<ProjectStatusResponse>(soapResult);
             //}
             //if (datalist.Response == "0")
@@ -156,7 +155,6 @@ namespace HMGreenCityMLM.Controllers
                                 FormName = "AdminDashBoard";
                                 Controller = "Admin";
                             }
-                            
                         }
                         else
                         {
@@ -172,9 +170,7 @@ namespace HMGreenCityMLM.Controllers
                         Controller = "Home";
 
                     }
-
                 }
-
                 else
                 {
                     TempData["Login"] = "Incorrect LoginId Or Password";
@@ -191,9 +187,7 @@ namespace HMGreenCityMLM.Controllers
             }
 
             return RedirectToAction(FormName, Controller);
-
-
-
+            
         }
 
         public ActionResult Registration()
@@ -563,7 +557,38 @@ namespace HMGreenCityMLM.Controllers
             }
         }
 
+        public ActionResult LogMenuClick(string submenuItem, string menuItems)
+        {
+            try
+            {
+                Home model = new Home();
+                model.SubMenuNameItem = submenuItem;
+                model.MenuNameItem = menuItems;
+                model.LoginId = Session["LoginId"].ToString();
+                DataSet ds = model.SaveLogMenuClick();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Result = "no";
+                    }
+                }
+                else
+                {
+                    model.Result = "no";
 
+                }
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
 
 
 
