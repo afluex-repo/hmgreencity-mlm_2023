@@ -38,6 +38,9 @@ namespace HMGreenCityMLM.Models
     {
         public string Password { get; set; }
         public string LoginId { get; set; }
+
+        public string SubMenuNameItem { get; set; }
+        public string MenuNameItem { get; set; }
         [Required(ErrorMessage = "Please Fill SponsorId ")]
         public string SponsorId { get; set; }
         [Required(ErrorMessage = "Please Fill Sponsor Name ")]
@@ -101,6 +104,17 @@ namespace HMGreenCityMLM.Models
                 new SqlParameter("@AdharNumber", AdharNo)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAdharDetails", para);
+            return ds;
+        }
+
+        public DataSet SaveLogMenuClick()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@SubMenuNameItem", SubMenuNameItem),
+                new SqlParameter("@MenuNameItem", MenuNameItem),
+                 new SqlParameter("@LoginID", LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveLogMenuClick", para);
             return ds;
         }
 
