@@ -12,22 +12,29 @@
         {
             foreach (var item in Model.lstMenu)
             {
+                
                 <li class="dropdown">
                     <a href="#" class="menu-toggle nav-link has-dropdown">
                         <div class="parent-icon">
                             <i class="@item.Icon"></i>
                         </div>
-                        <span>@item.MenuName</span>
+                        <span id="menuname_@item.MenuId" onclick="return logMenuClick(@item.MenuId)">@item.MenuName</span>
+                        <input type="hidden" id="menuname" />
                     </a>
                     @if (item.Url == "#")
                     {
                         <ul class="dropdown-menu">
                             @foreach (var item1 in Model.lstsubmenu)
                             {
+
                                 if (item1.MenuId == item.MenuId)
                                 {
-                                    <li class="active"><a class="nav-link" href="@item1.Url">@item1.SubMenuName</a></li>
+                                    
+                                    <li class="active"  ><a class="nav-link" href="@item1.Url" id="submenuname_@item1.SubMenuId" onclick="logSubMenuClick(@item1.SubMenuId)">@item1.SubMenuName</a></li>
+                                   
+                                   
                                 }
+
                             }
                         </ul>
                     }
@@ -36,3 +43,31 @@
         }
     }
 </ul>
+<script>
+    //$(document).ready(function() {
+    function logMenuClick(im) {
+        debugger;
+        var menuItem = $('#menuname_' + im).text();
+        $('#menuname').val(menuItem);
+    }
+    function logSubMenuClick(is) {
+        debugger;
+       
+        var submenuItem = $('#submenuname_' + is).text();
+        var menuItems = $('#menuname').val();
+        $.ajax({
+            url: '@Url.Action("LogMenuClick", "Home")',
+            method: 'POST',
+            data: { submenuItem: submenuItem, menuItems: menuItems },
+            success: function () {
+                //alert('Menu click logged successfully.');
+            },
+            error: function () {
+                //alert('Failed to log menu click.');
+            }
+        })
+    }
+    
+
+
+</script>
