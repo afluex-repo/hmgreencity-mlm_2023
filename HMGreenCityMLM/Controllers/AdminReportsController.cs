@@ -304,8 +304,7 @@ namespace HMGreenCityMLM.Controllers
         //                    list.Add(obj);
 
         //                }
-
-
+        
         //                model.lsttopupreport = list;
         //            }
 
@@ -313,7 +312,6 @@ namespace HMGreenCityMLM.Controllers
         //        catch (Exception ex)
         //        {
         //        }
-
         //    }
         //    return View(model);
         //}
@@ -402,8 +400,7 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lsttransactionlog = lst1;
             }
-
-
+            
             return View(newdata);
         }
         [HttpPost]
@@ -432,8 +429,7 @@ namespace HMGreenCityMLM.Controllers
                 }
                 newdata.lsttransactionlog = lst1;
             }
-
-
+            
             return View(newdata);
         }
 
@@ -467,6 +463,10 @@ namespace HMGreenCityMLM.Controllers
                     Obj.Amount = r["Amount"].ToString();
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -498,7 +498,6 @@ namespace HMGreenCityMLM.Controllers
             {
                 incomeReport.Status = null;
             }
-
             //incomeReport.LoginId = incomeReport.ToLoginID;
 
             DataSet ds11 = incomeReport.GetIncomeReport();
@@ -516,6 +515,11 @@ namespace HMGreenCityMLM.Controllers
                     Obj.Amount = r["Amount"].ToString();
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
+
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -691,8 +695,7 @@ namespace HMGreenCityMLM.Controllers
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
-
-
+                
             }
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
@@ -1979,7 +1982,6 @@ namespace HMGreenCityMLM.Controllers
             //{
 
             //}
-
             if (Type == "IsInclude")
             {
                 model.IsInclude = true;
@@ -2764,5 +2766,106 @@ namespace HMGreenCityMLM.Controllers
        {
             return View();
        }
+
+
+
+
+        #region Associate Income Report New
+
+        public ActionResult AssociateIncomeReportNew()
+        {
+            Reports incomeReport = new Reports();
+            List<Reports> lst1 = new List<Reports>();
+            //incomeReport.FromDate = DateTime.Now.ToString("dd/MM/yyyy");
+            //incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+            DateTime now = DateTime.Now;
+            DateTime currentDate = DateTime.Now;
+            currentDate = currentDate.AddDays(-30);
+            incomeReport.FromDate = currentDate.ToString("dd/MM/yyyy");
+            incomeReport.ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+            incomeReport.NFromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
+            incomeReport.NToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
+
+            DataSet ds11 = incomeReport.GetIncomeReportNew();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.TransactionDate = r["DATE"].ToString();
+                    Obj.FromName = r["FromName"].ToString();
+                    Obj.FromLoginId = r["FromLoginID"].ToString();
+                    Obj.ToName = r["ToName"].ToString();
+                    Obj.ToLoginID = r["ToLoginID"].ToString();
+                    Obj.Amount = r["Amount"].ToString();
+                    Obj.IncomeType = r["IncomeType"].ToString();
+                    Obj.Status = r["Status"].ToString();
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    lst1.Add(Obj);
+                }
+                incomeReport.lsttopupreportnew = lst1;
+            }
+
+
+            #region PaidStatus
+            List<SelectListItem> PaidStatus = Common.PaidStatus();
+            ViewBag.PaidStatus = PaidStatus;
+            #endregion PaidStatus
+
+            return View(incomeReport);
+        }
+
+        [HttpPost]
+        [ActionName("AssociateIncomeReportNew")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult AssociateIncomeReportByNew(Reports incomeReport)
+        {
+            List<Reports> lst1 = new List<Reports>();
+            incomeReport.NFromDate = string.IsNullOrEmpty(incomeReport.FromDate) ? null : Common.ConvertToSystemDate(incomeReport.FromDate, "dd/MM/yyyy");
+            incomeReport.NToDate = string.IsNullOrEmpty(incomeReport.ToDate) ? null : Common.ConvertToSystemDate(incomeReport.ToDate, "dd/MM/yyyy");
+            if (incomeReport.Status == "null")
+            {
+                incomeReport.Status = null;
+            }
+            DataSet ds11 = incomeReport.GetIncomeReportNew();
+
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    Reports Obj = new Reports();
+                    Obj.TransactionDate = r["DATE"].ToString();
+                    Obj.FromName = r["FromName"].ToString();
+                    Obj.FromLoginId = r["FromLoginID"].ToString();
+                    Obj.ToName = r["ToName"].ToString();
+                    Obj.ToLoginID = r["ToLoginID"].ToString();
+                    Obj.Amount = r["Amount"].ToString();
+                    Obj.IncomeType = r["IncomeType"].ToString();
+                    Obj.Status = r["Status"].ToString();
+
+                    Obj.SiteName = r["SiteName"].ToString();
+                    Obj.SectorName = r["SectorName"].ToString();
+                    Obj.BlockName = r["BlockName"].ToString();
+                    Obj.PlotNumber = r["PlotNumber"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    lst1.Add(Obj);
+                }
+                incomeReport.lsttopupreportnew = lst1;
+            }
+
+
+            #region PaidStatus
+            List<SelectListItem> PaidStatus = Common.PaidStatus();
+            ViewBag.PaidStatus = PaidStatus;
+            #endregion PaidStatus
+            return View(incomeReport);
+        }
+
+        #endregion
     }
 }
