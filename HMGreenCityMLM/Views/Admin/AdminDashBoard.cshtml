@@ -393,57 +393,11 @@
 </script>
 
 
-<script type="text/javascript">
 
-    google.charts.load("current", { packages: ["imagebarchart"] });
-    google.charts.setOnLoadCallback(joiningdata);
-
-    function joiningdata() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            url: '/Admin/GetJoiningDeatils',
-            data: JSON.stringify(),
-            success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
-
-                data.addColumn('string', 'Month');
-                data.addColumn('number', 'Total Users');
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow([datare[i].Month, parseInt(datare[i].Total)]);
-                }
-
-                var chart = new google.visualization.ImageBarChart(document.getElementById('divjoining'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'bottom' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "100%", height: "80%" }
-                };
-
-                chart.draw(data, options);
-
-
-
-
-            },
-            error: function () {
-            }
-        });
-    }
-
-</script>
 
 <script type="text/javascript">
 
+    /// Start Current Year Business Details Chart
     google.charts.load("current", { packages: ["imagebarchart"] });
     google.charts.setOnLoadCallback(chart1);
 
@@ -712,7 +666,11 @@
       });
     }
 
+    /// END Current Year Business Details Chart
 
+
+
+    /// Start Joining Details graph
     google.charts.load("current", { packages: ["imagebarchart"] });
     google.charts.setOnLoadCallback(smallchart1);
 
@@ -830,6 +788,8 @@
        }
     })
     }
+
+    /// END Joining Details graph
 </script>
 
 
