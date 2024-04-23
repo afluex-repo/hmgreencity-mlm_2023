@@ -139,6 +139,7 @@ namespace HMGreenCityMLM.Models
 
         public List<Reports> lstuser { get; set; }
         public List<Reports> lsttopupreport { get; set; }
+        public List<Reports> lsttopupreportnew { get; set; }
         public List<Reports> lstRewardList { get; set; }
         public List<Reports> lstAdvancePaymentReport { get; set; }
 
@@ -271,6 +272,22 @@ namespace HMGreenCityMLM.Models
         }
 
 
+
+        public DataSet GetIncomeReportNew()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@ToLoginId", ToLoginID),
+                                    new SqlParameter("@FromName", FromName),
+                                    new SqlParameter("@ToName", ToName),
+                                    new SqlParameter("@IncomeType", IncomeType),
+                                    new SqlParameter("@Status", Status),
+                                    new SqlParameter("@FromDate", NFromDate),
+                                    new SqlParameter("@ToDate", NToDate),
+                                 new SqlParameter("@IsDownline", IsDownline)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("IncomeReportNew", para);
+            return ds;
+        }
 
 
         public DataSet GetProductIncomeReport()

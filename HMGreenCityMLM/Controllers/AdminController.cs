@@ -1219,6 +1219,10 @@ namespace HMGreenCityMLM.Controllers
         #region PaidPayout
         public ActionResult PaidPayout()
         {
+            #region ddlLeg
+            List<SelectListItem> ddlLeg = Common.Leg();
+            ViewBag.ddlLeg = ddlLeg;
+            #endregion ddlLeg
             return View();
         }
         [HttpPost]
@@ -1226,6 +1230,10 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetPaidPayout(Wallet objewallet)
         {
+            #region ddlLeg
+            List<SelectListItem> ddlLeg = Common.Leg();
+            ViewBag.ddlLeg = ddlLeg;
+            #endregion ddlLeg
             if (objewallet.LoginId == null)
             {
                 objewallet.ToLoginID = null;
