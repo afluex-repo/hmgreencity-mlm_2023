@@ -2,7 +2,7 @@
 
 $(function () {
   //chart1();
-  //chart2();
+  chart2();
   smallchart1();
   smallchart2();
   smallchart3();
@@ -163,18 +163,18 @@ $(function () {
 //  var options = {
 //    series: [
 //      {
-//        name: "Net Profit",
+//        name: "net profit",
 //        data: [44, 55, 57, 56, 61, 58],
 //      },
 //      {
-//        name: "Revenue",
+//        name: "revenue",
 //        data: [76, 85, 101, 98, 87, 105],
 //      },
 //    ],
 //    chart: {
 //      type: "bar",
 //      height: 350,
-//      dropShadow: {
+//      dropshadow: {
 //        enabled: true,
 //        color: "#000",
 //        top: 18,
@@ -186,15 +186,15 @@ $(function () {
 //        show: false,
 //      },
 //    },
-//    colors: ["#5C9FFB", "#AEAEAE"],
-//    plotOptions: {
+//    colors: ["#5c9ffb", "#aeaeae"],
+//    plotoptions: {
 //      bar: {
 //        horizontal: false,
-//        columnWidth: "50%",
-//        endingShape: "rounded",
+//        columnwidth: "50%",
+//        endingshape: "rounded",
 //      },
 //    },
-//    dataLabels: {
+//    datalabels: {
 //      enabled: false,
 //    },
 //    stroke: {
@@ -203,7 +203,7 @@ $(function () {
 //      colors: ["transparent"],
 //    },
 //    xaxis: {
-//      categories: ["jan", "Feb", "Mar", "Apr", "May", "Jun"],
+//      categories: ["jan", "feb", "mar", "apr", "may", "jun"],
 //    },
 //    yaxis: {
 //      title: {
@@ -224,7 +224,7 @@ $(function () {
 //    },
 //  };
 
-//  var chart = new ApexCharts(document.querySelector("#chart2"), options);
+//  var chart = new apexcharts(document.queryselector("#chart2"), options);
 //  chart.render();
 //}
 
