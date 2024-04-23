@@ -50,6 +50,14 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+        public DataSet GetDashBoardDetailsJoiningYear()
+        {
+            SqlParameter[] para = { new SqlParameter("@Year", Year), };
+            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsJoiningYear", para);
+            return ds;
+        }
+
+
         public DataSet GetAssociateDashboard()
         {
             SqlParameter[] para = { new SqlParameter("@Fk_UserId",Fk_UserId ) , };
