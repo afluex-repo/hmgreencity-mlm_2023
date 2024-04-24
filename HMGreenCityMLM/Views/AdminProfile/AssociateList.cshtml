@@ -79,7 +79,7 @@
                     <input type="hidden" id="UserTypeName" value="@Session["UserTypeName"]" />
                     <br />
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover" id="tableExport"  style="width:100%;">
+                        <table class="table table-striped table-hover" id="tableExport234"  style="width:100%;">
                             <thead>
                                 <tr>
                                     <th>Sr No.</th>
@@ -95,9 +95,9 @@
                                     <th>Status</th>
                                     <th style="min-width:112px">Green Date</th>
                                     <th style="min-width:112px">Yellow Date</th>
-                                    <th style="min-width:80px">Action</th>
+                                    <th style="min-width:80px" class="not-export-col">Action</th>
                                     <th hidden="hidden"></th>
-                                    <th>Print</th>
+                                    <th class="not-export-col">Print</th>
                                 </tr>
                             </thead>
                            
@@ -297,17 +297,17 @@
                     debugger
                     if (obj[i].FormDelete == true && obj[i].FormUpdate == false) {
                         $(".edit").hide();
-                        var table = $('#tableExport').DataTable();
+                        var table = $('#tableExport234').DataTable();
                         table.column(9).visible(false);
                     }
                     else if (obj[i].FormDelete == false && obj[i].FormUpdate == true) {
                         $(".edit").show();
-                        var table = $('#tableExport').DataTable();
+                        var table = $('#tableExport234').DataTable();
                         table.column(9).visible(true);
                     }
                     else if (obj[i].FormDelete == true && obj[i].FormUpdate == true) {
                         $(".edit").hide();
-                        var table = $('#tableExport').DataTable();
+                        var table = $('#tableExport234').DataTable();
                         table.column(9).visible(false);
                     }
                     else if (obj[i].FormDelete == false && obj[i].FormUpdate == false) {
@@ -317,7 +317,7 @@
                     }
                     else {
                         $(".edit").hide();
-                        var table = $('#tableExport').DataTable();
+                        var table = $('#tableExport234').DataTable();
                         table.column(9).visible(false);
                     }
 

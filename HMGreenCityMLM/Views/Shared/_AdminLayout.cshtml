@@ -123,5 +123,32 @@
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
     <script src="../../Autofill/jquery-ui.js"></script>
     <script src="~/assetsAdmin/js/custom.js"></script>
+
+    <script>
+    $(document).ready(function () {
+        $("#tableExport234").DataTable({
+            dom: "Bfrtip",
+            "pageLength": 50,
+            buttons: [
+               "copy", "csv", "excel", {
+                   extend: 'pdf',
+                   orientation: 'landscape',
+                   pageSize: 'LEGAL',
+                   exportOptions: {
+                       columns: ':visible',
+                       columns: ':visible:not(.not-export-col)',
+                   }
+               }, {
+                   extend: 'print',
+                   //text: 'Imprimir',
+                   exportOptions: {
+                       columns: ':visible'
+                   },
+                   autoPrint: true
+               }
+            ]
+        })
+    })
+    </script>
 </body>
 </html>
