@@ -458,7 +458,7 @@ namespace HMGreenCityMLM.Models
                                     new SqlParameter("@BankName", BankName),
                                     new SqlParameter("@IsDownline", IsDownline),
                                     new SqlParameter("@Leg", Leg)
-        };
+                                 };
         DataSet ds = DBHelper.ExecuteQuery("GetPaidPayoutDetails", para);
             return ds;
         }
