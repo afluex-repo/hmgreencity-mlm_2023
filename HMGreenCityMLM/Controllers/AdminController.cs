@@ -302,19 +302,20 @@ namespace HMGreenCityMLM.Controllers
             return Json(dataListyear, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetJoiningDeatils()
+        public ActionResult GetJoiningDeatils(string YearsJoining)
         {
             List<DashBoard> dataList = new List<DashBoard>();
             DataSet Ds = new DataSet();
             DataTable dt = new DataTable();
+          
             DashBoard newdata = new DashBoard();
-
-            Ds = newdata.GetDashBoardDetails();
+            newdata.Year = YearsJoining;
+            Ds = newdata.GetDashBoardDetailsJoiningYear();
             if (Ds.Tables.Count > 0)
             {
-                ViewBag.TotalUsers = Ds.Tables[4].Rows.Count;
+                ViewBag.TotalUsers = Ds.Tables[0].Rows.Count;
                 int count = 0;
-                foreach (DataRow dr in Ds.Tables[4].Rows)
+                foreach (DataRow dr in Ds.Tables[0].Rows)
                 {
                     DashBoard details = new DashBoard();
 
