@@ -81,25 +81,6 @@ namespace HMGreenCityMLM.Controllers
                             obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
                         }
-                        //if ((((System.Web.HttpPostedFileBase[])(postedFile))[0]) != null || ((System.Web.HttpPostedFileWrapper)(((System.Web.HttpPostedFileBase[])(postedFile))[0])).ContentLength > 0)
-                        //{
-                        //    //obj.AdharImage = (((System.Web.HttpPostedFileBase[])(postedFile))[0]).ToString();    
-                        //    obj.AdharImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        //    file.SaveAs(Path.Combine(Server.MapPath(obj.AdharImage)));
-                        //}
-                        //if ((((System.Web.HttpPostedFileBase[])(postedFile))[1]) != null || ((System.Web.HttpPostedFileWrapper)(((System.Web.HttpPostedFileBase[])(postedFile))[1])).ContentLength > 0)
-                        //{
-                        //    //obj.AdharImage = (((System.Web.HttpPostedFileBase[])(postedFile))[0]).ToString();    
-                        //    obj.PanImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        //    file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
-                        //}
-                        //if ((((System.Web.HttpPostedFileBase[])(postedFile))[2]).ToString() != null || ((System.Web.HttpPostedFileWrapper)(((System.Web.HttpPostedFileBase[])(postedFile))[2])).ContentLength > 0)
-                        //{
-                        //    //obj.AdharImage = (((System.Web.HttpPostedFileBase[])(postedFile))[0]).ToString();    
-                        //    obj.DocumentImage = "/KYCDocuments/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        //    file.SaveAs(Path.Combine(Server.MapPath(obj.DocumentImage)));
-                        //}
-
                     }
                     count++;
                 }
