@@ -58,6 +58,10 @@
                             <label>Status</label>
                             @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlstatus, "Value", "Text"), new { @class = "form-control" })
                         </div>
+                        <div class="form-group col-md-3">
+                            <label>Adhar Number</label>
+                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control" })
+                        </div>
                         <div class="form-group col-md-1">
                             <label>Downline</label>
                             @Html.CheckBoxFor(m => m.IsDownline)
@@ -67,7 +71,7 @@
                             @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.ddlLeg, "Value", "Text"), new { @class = "form-control" })
                         </div>
                         <div class="form-group col-md-3">
-                            <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return GetMenuDetails();" />
+                            <input type="submit" id="btnSearch" class="btn btn-success" name="Search" value="Search" onclick="return GetMenuDetails();" />
                         </div>
                     </div>
 
@@ -87,6 +91,7 @@
                                     <th>Joining Date</th>
                                     <th>Mobile No</th>
                                     <th>Email Id</th>
+                                    <th>Aadhar Number</th>
                                     <th>Status</th>
                                     <th style="min-width:112px">Green Date</th>
                                     <th style="min-width:112px">Yellow Date</th>
@@ -114,6 +119,7 @@
                                                 <td>@Item.JoiningDate</td>
                                                 <td>@Item.Mobile</td>
                                                 <td>@Item.Email</td>
+                                                <td>@Item.AdharNo</td>
                                                 <td>@Item.Status</td>
 
                                                 <td style="background-color:#D3F7C4">@Item.GreenDate</td>
@@ -338,3 +344,9 @@
 
 
 </script>
+<style>
+    .btn-success {
+        margin-top: 29px;
+        margin-left: 20px;
+    }
+</style>

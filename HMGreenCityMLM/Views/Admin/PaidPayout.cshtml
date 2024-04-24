@@ -54,6 +54,14 @@
                             <label>Bank Name</label>
                             @Html.TextBoxFor(m => m.BankName, new { @class = "form-control" })
                         </div>
+                        <div class="form-group col-md-1">
+                            <label>Downline</label>
+                            @Html.CheckBoxFor(m => m.IsDownline)
+                        </div>
+                        <div class="form-group col-md-2" id="divLeg" style="display:none">
+                            <label>Leg</label>
+                            @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.ddlLeg, "Value", "Text"), new { @class = "form-control" })
+                        </div>
                         <div class="form-group col-md-3">
                             <input type="submit" name="GetDetails" class="btn btn-info" value="Get Details" />
                         </div>
@@ -158,6 +166,19 @@
 </script>
 <script>
     $(document).ready(function () {
+        if ($("#IsDownline").is(':checked')) {
+            $("#divLeg").show();
+        }
+        //$('#IsDownline').prop('checked', true);
+        $('#IsDownline').change(function () {
+            if (this.checked) {
+                $("#divLeg").show();
+                //alert('Show');
+            }
+            else {
+                $("#divLeg").hide();
+            }
+        });
         $('#dataTables-example').DataTable({
             responsive: true
         });
