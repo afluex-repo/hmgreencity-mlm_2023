@@ -299,6 +299,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
+                    obj.AdharNo = r["AadharNumber"].ToString();
                     obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
                     obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
                     //obj.StatusColor = r["StatusColor"].ToString();
@@ -343,6 +344,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
+                    obj.AdharNo = r["AadharNumber"].ToString();
                     obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
                     obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
                     //obj.StatusColor = r["StatusColor"].ToString();
@@ -391,6 +393,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
+                    obj.AdharNo = r["AadharNumber"].ToString();
                     obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
                     obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
                     lst.Add(obj);
@@ -431,6 +434,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.SponsorName = (r["SponsorName"].ToString());
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
+                    obj.AdharNo = r["AadharNumber"].ToString();
                     obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
                     obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
                     lst.Add(obj);
