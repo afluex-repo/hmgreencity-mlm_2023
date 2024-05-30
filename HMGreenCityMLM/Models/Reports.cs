@@ -390,6 +390,28 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("ApproveKYC", para);
             return ds;
         }
+        public DataSet RejectKYC()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@PK_DocumentID", PK_DocumentID),
+                                      new SqlParameter("@DocumentType", DocumentType),
+                                      new SqlParameter("@Status", Status),
+                                      new SqlParameter("@UpdatedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("RejectKYC", para);
+            return ds;
+        }
+        public DataSet DeletedKYC()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@PK_DocumentID", PK_DocumentID),
+                                      new SqlParameter("@DocumentType", DocumentType),
+                                      new SqlParameter("@Status", Status),
+                                      new SqlParameter("@UpdatedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteKYC", para);
+            return ds;
+        }
 
         public DataSet GetTopupReport()
         {

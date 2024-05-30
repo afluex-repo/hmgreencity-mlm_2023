@@ -186,6 +186,94 @@ namespace HMGreenCityMLM.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+        public ActionResult RejectKYC(string Id, string DocumentType, string LoginID)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
+                ViewBag.ddlKYCStatus = ddlKYCStatus;
+                List<Reports> lst = new List<Reports>();
+
+                Reports model = new Reports();
+                model.LoginId = LoginID;
+                model.PK_DocumentID = Id;
+                model.DocumentType = DocumentType;
+                model.Status = "Rejected";
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = new DataSet();
+                ds = model.RejectKYC();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["KYCVerification"] = "KYC Rejected Successfully..";
+                        FormName = "AssociateListForKYC";
+                        Controller = "Admin";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["KYCVerification"] = "Error : " + ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "AssociateListForKYC";
+                        Controller = "Admin";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["KYCVerification"] = ex.Message;
+                FormName = "AssociateListForKYC";
+                Controller = "Admin";
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+        public ActionResult DeleteKYC(string Id, string DocumentType, string LoginID)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
+                ViewBag.ddlKYCStatus = ddlKYCStatus;
+                List<Reports> lst = new List<Reports>();
+
+                Reports model = new Reports();
+                model.LoginId = LoginID;
+                model.PK_DocumentID = Id;
+                model.DocumentType = DocumentType;
+                model.Status = "Not Uploaded";
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = new DataSet();
+                ds = model.DeletedKYC();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["KYCVerification"] = "KYC Deleted Successfully..";
+                        FormName = "AssociateListForKYC";
+                        Controller = "Admin";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["KYCVerification"] = "Error : " + ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "AssociateListForKYC";
+                        Controller = "Admin";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["KYCVerification"] = ex.Message;
+                FormName = "AssociateListForKYC";
+                Controller = "Admin";
+            }
+            return RedirectToAction(FormName, Controller);
+        }
 
         public ActionResult GetUserDetails()
         {
