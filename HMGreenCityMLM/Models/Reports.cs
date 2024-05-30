@@ -63,6 +63,9 @@ namespace HMGreenCityMLM.Models
         public string Fk_CompanyId { get; set; }
 
         public string Name { get; set; }
+
+        public string NewRank { get; set; }
+        public string OldRank { get; set; }
         public string Pk_UserId { get; set; }
 
         public string JoiningDate { get; set; }
@@ -80,8 +83,10 @@ namespace HMGreenCityMLM.Models
         public List<Reports> lstBusinessStatus { get; set; }
 
         public string PermanentDate { get; set; }
+        public string ActivationDate { get; set; }
 
         public string Status { get; set; }
+        public string Rank { get; set; }
 
         public string StatusColor { get; set; }
         public string GreenDate { get; set; }
@@ -97,6 +102,7 @@ namespace HMGreenCityMLM.Models
         public string IncomeType { get; set; }
 
         public string Date { get; set; }
+        public string RankUpdateDate { get; set; }
 
         public List<Reports> lstunpaidincomes { get; set; }
 
@@ -207,6 +213,7 @@ namespace HMGreenCityMLM.Models
 
        
         public List<Reports> lstDefaultAssociateList { get; set; }
+        public List<Reports> lstRankAchievementReports { get; set; }
 
 
         public string UserTypeName { get; set; }
@@ -381,6 +388,28 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@UpdatedBy", AddedBy)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("ApproveKYC", para);
+            return ds;
+        }
+        public DataSet RejectKYC()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@PK_DocumentID", PK_DocumentID),
+                                      new SqlParameter("@DocumentType", DocumentType),
+                                      new SqlParameter("@Status", Status),
+                                      new SqlParameter("@UpdatedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("RejectKYC", para);
+            return ds;
+        }
+        public DataSet DeletedKYC()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId),
+                                      new SqlParameter("@PK_DocumentID", PK_DocumentID),
+                                      new SqlParameter("@DocumentType", DocumentType),
+                                      new SqlParameter("@Status", Status),
+                                      new SqlParameter("@UpdatedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteKYC", para);
             return ds;
         }
 
@@ -964,6 +993,15 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+        public DataSet GetRankList()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_RankID", FK_RankId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetRankList", para);
+            return ds;
+        }
+
         public DataSet GetSponsorName()
         {
             SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
@@ -1104,6 +1142,21 @@ namespace HMGreenCityMLM.Models
         public DataSet GetUser()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetUserForAdmin");
+            return ds;
+        }
+
+
+
+        public DataSet GetRankAchievementReports()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                       new SqlParameter("@Rank",Rank),
+                                        new SqlParameter("@IsDownline", IsDownline),
+                                          new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRankAchievementReports", para);
             return ds;
         }
     }
