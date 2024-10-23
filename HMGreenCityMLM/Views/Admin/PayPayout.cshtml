@@ -34,6 +34,9 @@
                     <p style="color: red;display: block; margin-bottom:0px; text-align:center">
                         @TempData["PayPayout"]
                     </p>
+                    <p style="color: red;display: block; margin-bottom:0px; text-align:center">
+                        @TempData["PayoutUpdate"]
+                    </p>
                 </div>
             </div>
         </div>
@@ -138,7 +141,7 @@
                                             <input type="text" class="form-control" id="txtamount_@i" name="txtamount_@i" />
                                         </td>
                                         <td>
-                                            @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control ddlPaymentMode_" + @i, @onchange = "return getpaymentdetails(" + @i + ");" })
+                                      @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control ddlPaymentMode_" + @i, @onchange = "return getpaymentdetails(" + @i + ");" })
                                             <input type="hidden" name="paymentmode_@i" />
                                         </td>
                                         <td width="200px" id="tdbankname_@i">
@@ -218,16 +221,6 @@
 
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -551,32 +544,41 @@
     //}
 
     function getpaymentdetails(index) {
+        debugger;
         var paymentmode = $('.ddlPaymentMode_' + index).val();
 
+        // Set the selected payment mode to the hidden input field
         $('[name="paymentmode_' + index + '"]').val(paymentmode);
 
+        // Hide all input fields and headers initially
+        $('#txtbankname_' + index).hide();
+        $('#txtbankbranch_' + index).hide();
+        $('#txttranno_' + index).hide();
+        $('#txttransdate_' + index).hide();
+
+        $('#thbankname, #thbranch, #thtransactionnumber, #thtransactiondate').hide();
+
         if (paymentmode == "Cash" || paymentmode == "0") {
+            // Do nothing as all fields should remain hidden
+        } else if (paymentmode == "UPI") {
+            // Show headers for Bank Name and Bank Branch, and headers for Transaction No and Transaction Date
+            $('#thbankname, #thbranch, #thtransactionnumber, #thtransactiondate').show();
+
+            // Only show the Transaction No and Transaction Date input fields
+            $('#txttranno_' + index).show();
+            $('#txttransdate_' + index).show();
+
+            // Ensure Bank Name and Bank Branch input fields remain hidden
             $('#txtbankname_' + index).hide();
             $('#txtbankbranch_' + index).hide();
-            $('#txttranno_' + index).hide();
-            $('#txttransdate_' + index).hide();
-            //$('#thbranch').show();
-            //$('#thbankname').show();
-            //$('#thtransactionnumber').show();
-            //$('#thtransactiondate').show();
-        }
-        else {
+        } else {
+            // Show headers and input fields for Bank Name, Bank Branch, Transaction No, and Transaction Date for other payment modes
+            $('#thbankname, #thbranch, #thtransactionnumber, #thtransactiondate').show();
             $('#txtbankname_' + index).show();
             $('#txtbankbranch_' + index).show();
             $('#txttranno_' + index).show();
             $('#txttransdate_' + index).show();
-            //$('#thbranch').show();
-            //$('#thbankname').show();
-            //$('#thtransactionnumber').show();
-            //$('#thtransactiondate').show();
         }
-
-
     }
 
     function isNumberKey(evt) {

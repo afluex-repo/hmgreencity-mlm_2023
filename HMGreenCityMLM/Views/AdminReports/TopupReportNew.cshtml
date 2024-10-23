@@ -82,9 +82,6 @@
                             @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.ddlLeg, "Value", "Text"), new { @class = "form-control" })
                         </div>
 
-
-
-
                         <div class="form-group col-md-3">
                             <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
                         </div>
@@ -165,8 +162,7 @@
                                     }
                                 }
                             </tbody>
-
-                        </table>
+                         </table>
                     </div>
                 </div>
             </div>
@@ -191,7 +187,6 @@
                     <button type="button" class="btn btn-success" data-dismiss="modal" onclick="printrecipt();">Print</button>
                 </div>
             </div>
-
         </div>
     </div>
 }
@@ -240,8 +235,6 @@
                 $("#divLeg").hide();
             }
         });
-
-
 
         $('#dataTables-example').DataTable({
             responsive: true

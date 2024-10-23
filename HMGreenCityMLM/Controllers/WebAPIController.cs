@@ -15,10 +15,8 @@ namespace HMGreenCityMLM.Controllers
     public class WebAPIController : Controller
     {
         #region Login
-        public ActionResult Login(LoginAPI model)
+        public ActionResult LoginNew(LoginAPI model)
         {
-
-
             LoginAPI obj = new LoginAPI();
             if (model.LoginId == "" || model.LoginId == null)
             {
@@ -31,7 +29,6 @@ namespace HMGreenCityMLM.Controllers
                 obj.Status = "1";
                 obj.Message = "Please Enter Password";
             }
-
             try
             {
                 //string Password = model.Password;
@@ -44,7 +41,6 @@ namespace HMGreenCityMLM.Controllers
                         {
                             if (model.Password == Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString()))
                             {
-
                                 obj.LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
                                 obj.UserId = dsResult.Tables[0].Rows[0]["Pk_userId"].ToString();
                                 obj.UserType = dsResult.Tables[0].Rows[0]["UserType"].ToString();
@@ -55,14 +51,11 @@ namespace HMGreenCityMLM.Controllers
                                 obj.Status = dsResult.Tables[0].Rows[0]["Status"].ToString();
                                 obj.Status = "0";
                                 obj.Message = "Successfully Logged in";
-
                                 return Json(obj, JsonRequestBehavior.AllowGet);
-
                             }
                             obj.Status = "1";
                             obj.Message = "Incorrect LoginId Or Password";
                             return Json(obj, JsonRequestBehavior.AllowGet);
-
                         }
                         else if (dsResult.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                         {
@@ -77,7 +70,6 @@ namespace HMGreenCityMLM.Controllers
                             {
                                 obj.FranchiseAdminID = dsResult.Tables[0].Rows[0]["Pk_adminId"].ToString();
                             }
-
                         }
                         else
                         {
@@ -88,15 +80,11 @@ namespace HMGreenCityMLM.Controllers
                     }
                     else
                     {
-
                         obj.Status = "1";
                         obj.Message = "Invalid LoginId or Password.";
                         return Json(obj, JsonRequestBehavior.AllowGet);
                     }
-
                 }
-
-
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

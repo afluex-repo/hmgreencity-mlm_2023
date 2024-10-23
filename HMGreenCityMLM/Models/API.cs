@@ -94,7 +94,7 @@ namespace HMGreenCityMLM.Models
         {
             SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
                                 new SqlParameter("@Password",Password)};
-            DataSet ds = DBHelper.ExecuteQuery("Login", para);
+            DataSet ds = DBHelper.ExecuteQuery("LoginForMobile", para);
             return ds;
         }
     }
