@@ -103,24 +103,24 @@ namespace HMGreenCityMLM.Controllers
 
                             }
                         }
-                        else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
+                       else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                         {
-                            //Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                            //Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
-                            //Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
-                            //Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
+                            Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                            Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                            Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
+                            Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
 
-                            //if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
-                            //{
-                            //    Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
-                            //    FormName = "Registration";
-                            //    Controller = "FranchiseAdmin";
-                            //}
-                            //else
-                            //{
-                            //    FormName = "AdminDashBoard";
-                            //    Controller = "Admin";
-                            //}
+                            if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
+                            {
+                                Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                                FormName = "Registration";
+                                Controller = "FranchiseAdmin";
+                            }
+                            else
+                            {
+                                FormName = "AdminDashBoard";
+                                Controller = "Admin";
+                            }
                             if (ds.Tables[0].Rows[0]["UserTypeName"].ToString() == "Admin")
                             {
                                 Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
@@ -150,8 +150,8 @@ namespace HMGreenCityMLM.Controllers
                                 Session["UserTypeName"] = ds.Tables[0].Rows[0]["UserTypeName"].ToString();
                                 Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
                                 //Session["ProfilePic"] = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
-                                
-                                
+
+
                                 FormName = "AdminDashBoard";
                                 Controller = "Admin";
                             }

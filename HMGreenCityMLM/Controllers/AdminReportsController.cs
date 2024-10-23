@@ -2386,8 +2386,8 @@ namespace HMGreenCityMLM.Controllers
                     Obj.ReceiptNo = r["ReceiptNo"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.BusinessType = r["Business"].ToString();
-
-                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
+                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;
@@ -2507,7 +2507,9 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.BusinessType = r["Business"].ToString();
-                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
+                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;

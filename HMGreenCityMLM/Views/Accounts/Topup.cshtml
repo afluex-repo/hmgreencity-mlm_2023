@@ -202,19 +202,59 @@
 
     function getpaymentdetails() {
         var paymentmode = ($("#PaymentMode option:selected").text());
-        if (paymentmode != "Cash") {
+
+        var bankname = document.getElementById("bankname");
+        var chequeno = document.getElementById("chequeno");
+        var chequdate = document.getElementById("chequdate");
+        var bankbranch = document.getElementById("bankbranch");
+
+        if (paymentmode == "Cash" || paymentmode == "0") {
+            // Hide all fields for Cash or when value is 0
+            bankname.style.display = "none";
+            chequeno.style.display = "none";
+            chequdate.style.display = "none";
+            bankbranch.style.display = "none";
+        }
+        else if (paymentmode == "UPI") {
+            // Show only chequeno and chequdate for UPI
+            bankname.style.display = "none";
+            chequeno.style.display = "block";
+            chequdate.style.display = "block";
+            bankbranch.style.display = "none";
+        }
+        else if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft") {
+            // Show all fields for NEFT, Cheque, RTGS, and DD
             bankname.style.display = "block";
             chequeno.style.display = "block";
             chequdate.style.display = "block";
             bankbranch.style.display = "block";
         }
         else {
+            // Default: Hide all fields for any other payment modes
             bankname.style.display = "none";
             chequeno.style.display = "none";
             chequdate.style.display = "none";
             bankbranch.style.display = "none";
         }
+
+
+
+
+
+        //if (paymentmode != "Cash") {
+        //    bankname.style.display = "block";
+        //    chequeno.style.display = "block";
+        //    chequdate.style.display = "block";
+        //    bankbranch.style.display = "block";
+        //}
+        //else {
+        //    bankname.style.display = "none";
+        //    chequeno.style.display = "none";
+        //    chequdate.style.display = "none";
+        //    bankbranch.style.display = "none";
+        //}
     }
+
 
 
     function getAmountinWords() {

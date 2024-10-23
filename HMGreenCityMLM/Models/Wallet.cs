@@ -51,6 +51,8 @@ namespace HMGreenCityMLM.Models
         public string ToLoginID { get; set; }
         public bool IsNewBusiness { get; set; }
         public bool IsInclude { get; set; }
+
+        public string Pk_PayoutPaidId { get; set; }
         public DataSet ValidatingReceipt()
         {
             SqlParameter[] para = {
@@ -98,8 +100,8 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@DDChequeDate", DDChequeDate) ,
                                       new SqlParameter("@BankBranch", BankBranch) ,
                                       new SqlParameter("@DocumentImg", DocumentImg),
-                                          new SqlParameter("@BankName", BankName),
-                                            new SqlParameter("@AddedBy", AddedBy)
+                                      new SqlParameter("@BankName", BankName),
+                                      new SqlParameter("@AddedBy", AddedBy)
 
                                      };
             DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);
@@ -548,5 +550,42 @@ namespace HMGreenCityMLM.Models
         }
 
         public string SiteID { get; set; }
+     
+        public string DeletedBy { get; set; }
+        public string DeclineRemarks { get; set; }
+        public string Pk_UserId { get; set; }
+        public string Remarks { get; set; }
+
+        public DataSet DeletePaidPayout()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Pk_PayoutPaidId",Pk_PayoutPaidId),
+                new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@Deletedby",DeletedBy),
+                new SqlParameter("@Amount",Amount)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeletePaidPayout", para);
+            return ds;
+        }
+
+        public DataSet UpdatePaidPayout()
+        {
+            SqlParameter[] para =
+            {
+                 new SqlParameter("@Pk_PayoutPaidId",Pk_PayoutPaidId),
+                 new SqlParameter("@Amount",Amount),
+                 new SqlParameter("@LoginId",LoginId),
+                 new SqlParameter("@PaymentMode", PaymentMode),
+                 new SqlParameter("@BankName", BankName),
+                 new SqlParameter("@BankBranch", BankBranch),
+                 new SqlParameter("@TransactionNo", TransactionNo),
+                 new SqlParameter("@TransactionDate", TransactionDate),
+                 new SqlParameter("@Remarks", Remarks),
+                 new SqlParameter("@UpdatedBy", UpdatedBy)
+            };  
+            DataSet ds = DBHelper.ExecuteQuery("UpdatePaidPayout", para);
+            return ds;
+        }
     }
 }

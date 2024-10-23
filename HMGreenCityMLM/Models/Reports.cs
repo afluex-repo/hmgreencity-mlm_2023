@@ -221,7 +221,7 @@ namespace HMGreenCityMLM.Models
         public string Pk_AdminId { get; set; }
         public bool SevenDayView { get; set; }
 
-        
+        public string Pk_PayoutPaidId { get; set; }
 
 
 
