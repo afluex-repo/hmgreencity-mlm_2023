@@ -1110,14 +1110,14 @@ namespace HMGreenCityMLM.Controllers
         }
 
         #region PayPayout
-        public ActionResult PayPayout()
+        public ActionResult PayPayout(string Id)
         {
             #region ddlLeg
             List<SelectListItem> ddlLeg = Common.Leg();
             ViewBag.ddlLeg = ddlLeg;
             #endregion ddlLeg
             Reports model = new Reports();
-
+            model.LoginId = Id;
             List<Reports> lst = new List<Reports>();
             DataSet ds = model.GetPayPayout();
             ViewBag.Total = "0";
@@ -1159,7 +1159,7 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlLeg = ddlLeg;
             #endregion ddlLeg
             ViewBag.Total = "0";
-            //model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
+            model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
             //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             model.LoginId = model.ToLoginID;
@@ -1178,7 +1178,6 @@ namespace HMGreenCityMLM.Controllers
                     obj.IFSCCode = (r["IFSCCode"].ToString());
                     obj.BankName = (r["MemberBankName"].ToString());
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
-
                     obj.Amount = (r["Amount"].ToString());
                     obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
                     ViewBag.Total = Math.Round(Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString()));
@@ -1310,7 +1309,10 @@ namespace HMGreenCityMLM.Controllers
         {
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.ddlleg = Leg;
-
+            #region ddlpaymentmode
+            List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+            #endregion
             return View();
         }
         [HttpPost]
@@ -1320,6 +1322,12 @@ namespace HMGreenCityMLM.Controllers
         {
             List<SelectListItem> Leg = Common.Leg();
             ViewBag.ddlleg = Leg;
+
+            #region ddlpaymentmode
+            List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+            #endregion
+
             if (objewallet.LoginId == null)
             {
                 objewallet.ToLoginID = null;
@@ -1349,6 +1357,7 @@ namespace HMGreenCityMLM.Controllers
                     Objload.BankName = dr["BankName"].ToString();
                     Objload.BankBranch = dr["BankBranch"].ToString();
                     Objload.ReceiptNo = dr["Remarks"].ToString();
+                    Objload.Pk_PayoutPaidId = dr["Pk_PayoutPaidId"].ToString();
                     ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(dr["Amount"].ToString());
                     lst.Add(Objload);
                 }
@@ -1569,6 +1578,89 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
         }
         #endregion
+
+
+
+        public ActionResult DeletePaidPayout(string Id,string LoginId,string Amount)
+
+        {
+            Wallet model = new Wallet();
+           
+            try
+            {
+                model.Pk_PayoutPaidId = Id;
+                model.LoginId = LoginId;
+                model.DeletedBy = Session["Pk_AdminId"].ToString();
+                model.Amount = Amount;
+                DataSet ds = model.DeletePaidPayout();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Payout"] = "Paid Payout Deleted Successfully..";
+
+                    }
+                    else
+                    {
+                        TempData["Payout"] =ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        
+                    }
+                }
+            }   
+            catch(Exception ex)
+            {
+                TempData["Payout"] = ex.Message;
+            }
+            return RedirectToAction("PaidPayout", "Admin");
+        }
+
+      public ActionResult EditPaidPayout(string Amount, string Loginid, string Id,string PaymentMode, string BankName,string BankBranch,string Transdate,string TransNo,string Remarks)
+        {
+            Wallet model = new Wallet();
+
+            try
+            {
+                model.Pk_PayoutPaidId = Id;
+                model.Amount = Amount;
+                model.BankName = BankName;
+                model.BankBranch = BankBranch;
+                model.TransactionNo = TransNo;
+                model.TransactionDate = Transdate;
+                model.Remarks = Remarks;
+                model.LoginId = Loginid;
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+
+                if (PaymentMode != "0")
+                {
+                    model.PaymentMode = PaymentMode;
+                }
+                else
+                {
+                    model.PaymentMode = PaymentMode == "0" ? null : PaymentMode;
+                }
+
+                
+                DataSet ds = model.UpdatePaidPayout();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        model.Result = "Yes";
+                    }
+                    else
+                    {
+                        model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+              
+            }
+            catch(Exception ex)
+            {
+                model.Result = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
 

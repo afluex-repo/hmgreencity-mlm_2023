@@ -217,6 +217,7 @@ namespace HMGreenCityMLM.Models
             PaymentMode.Add(new SelectListItem { Text = "NEFT", Value = "NEFT" });
             PaymentMode.Add(new SelectListItem { Text = "RTGS", Value = "RTGS" });
             PaymentMode.Add(new SelectListItem { Text = "Demand Draft", Value = "DD" });
+            PaymentMode.Add(new SelectListItem { Text = "UPI", Value = "UPI" });
             return PaymentMode;
         }
         public static List<SelectListItem> BindPaymentModeForList()
