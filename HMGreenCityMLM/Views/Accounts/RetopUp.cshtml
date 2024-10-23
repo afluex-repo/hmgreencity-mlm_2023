@@ -441,8 +441,17 @@
            success: function (data) {
                $("#divload").css({ 'display': 'none' });
                if (data.Result == "yes") {
-                   $("#PlotNumber").removeClass('errortext');
-                   $("#PlotStatus123").text(data.PlotStatus);
+                   if (data.PlotStatus == "Available") {
+                       alert('This Plot is available. So you can not do the top up !!');
+                       $("#PlotNumber").addClass('errortext');
+                       $('#PlotNumber').focus();
+                       $("#PlotNumber").val('');
+                       $("#PlotStatus123").text('');
+                   }
+                   else {
+                       $("#PlotNumber").removeClass('errortext');
+                       $("#PlotStatus123").text(data.PlotStatus);
+                   }
                }
                else if (data.Result == "no") {
                    alert('This Plot Number is not available !');

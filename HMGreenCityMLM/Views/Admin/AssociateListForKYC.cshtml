@@ -5,7 +5,40 @@
 }
 
 
+<style>
+   .popup {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+}
 
+.popup img {
+  display: block;
+  margin: auto;
+  max-width: 60%;
+  max-height: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition:ease-in-out .5s;
+}
+
+.close-popup {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+}
+</style>
 @using (Html.BeginForm("AssociateListForKYC", "Admin", FormMethod.Post, new { @id = "form1", name = "formKYC" }))
 {
 
@@ -20,7 +53,10 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h6 class="mb-0">Approve KYC</h6>
+                                <h6 class="mb-0">Approve/Reject KYC</h6>
+                                <span style="color: red">
+                                    @TempData["KYCVerification"]
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -44,6 +80,7 @@
                                             <select class="form-control" id="Status" name="Status">
                                                 <option value="Pending">Pending</option>
                                                 <option value="Approved">Approved</option>
+                                                <option value="Rejected">Rejected</option>
                                             </select>
                                         </div>
 
@@ -100,17 +137,22 @@
                                                                             <td>@Item.LoginId</td>
                                                                             <td>@Item.Name</td>
                                                                             <td>@Item.DocumentType</td>
-                                                                            <td>
-                                                                                <img src="@Item.DocumentImage" height="120" width="180" />
-                                                                            </td>
+                                                                            <td class="zoom">
+                                                                                    <img src="@Item.DocumentImage" height="120" width="180" class="zoomable-image"/>
+                                                                                </td>
+                                                                          
+                                                                        
+
                                                                             <td>@Item.DocumentNumber</td>
                                                                             <td>@Item.Status</td>
                                                                             <td>@Item.UploadDate</td>
-                                                                            <td>
+                                                                            <td class="text-center">
                                                                                 @if (Item.Status == "Pending")
                                                                                 {
                                                                                     @*@Html.ActionLink("Approve","ApproveKYC","Admin",new{@Item.PK_DocumentID,@Item.DocumentType})*@
-                                                                                    <a href="/Admin/ApproveKYC?Id=@Item.PK_DocumentID&&DocumentType=@Item.DocumentType&&LoginID=@Item.LoginId" runat="server" class="btn btn-success pull-right" name="btnUpdate">Approve</a>
+                                                                                    <a href="/Admin/ApproveKYC?Id=@Item.PK_DocumentID&&DocumentType=@Item.DocumentType&&LoginID=@Item.LoginId" runat="server" class="btn btn-success pull-right" name="btnUpdate"  onclick="return confirm('Are you sure you want to Approve this KYC Details?');">Approve</a>
+                                                                                    <a href="/Admin/RejectKYC?Id=@Item.PK_DocumentID&&DocumentType=@Item.DocumentType&&LoginID=@Item.LoginId" runat="server" class="btn btn-warning pull-right mt-1" name="btnUpdate" onclick="return confirm('Are you sure you want to Reject this KYC Details?');">Reject</a>
+                                                                                    <a href="/Admin/DeleteKYC?Id=@Item.PK_DocumentID&&DocumentType=@Item.DocumentType&&LoginID=@Item.LoginId" runat="server" class="btn btn-danger pull-right mt-1" name="btnUpdate" onclick="return confirm('Are you sure you want to Delete this KYC Details?');">Delete</a>
                                                                                 }
                                                                             </td>
                                                                         </tr>
@@ -133,7 +175,10 @@
         </div>
     </div>
 
-
+    <div id="image-popup" class="popup">
+        <span class="close-popup">&times;</span>
+        <img class="popup-image" src="" alt="Zoomed Image">
+    </div>
 }
 
 
@@ -147,10 +192,37 @@
 
 <script>
 
+    //// start zoom view document
+    document.addEventListener('DOMContentLoaded', function () {
+        var images = document.querySelectorAll('.zoomable-image');
+        var popup = document.getElementById('image-popup');
+        var popupImage = document.querySelector('.popup-image');
+        var closePopup = document.querySelector('.close-popup');
+
+        images.forEach(function (image) {
+            image.addEventListener('click', function () {
+                var imageUrl = image.src;
+                popupImage.src = imageUrl;
+                popup.style.display = 'block';
+            });
+        });
+
+        closePopup.addEventListener('click', function () {
+            popup.style.display = 'none';
+        });
+
+        window.addEventListener('click', function (event) {
+            if (event.target == popup) {
+                popup.style.display = 'none';
+            }
+        });
+    });
+    //// end zoom view document
+
     $(document).ready(function () {
         $("#Status").val($("#hdf").val()).attr("selected", "selected");
     });
-
+   
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });

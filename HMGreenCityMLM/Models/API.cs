@@ -1280,6 +1280,7 @@ namespace HMGreenCityMLM.Models
         public string FK_InvestmentID { get; set; }
         public string SectorName { get; set; }
         public string BlockName { get; set; }
-
     }
+
+
 }

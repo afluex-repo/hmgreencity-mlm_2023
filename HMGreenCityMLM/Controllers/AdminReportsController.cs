@@ -739,7 +739,7 @@ namespace HMGreenCityMLM.Controllers
                         obj.Package = (r["ProductName"].ToString());
                         obj.Status = (r["Status"].ToString());
                         obj.Mobile = (r["Mobile"].ToString());
-
+                        //obj.ActivationDate = (r["ActivationDate"].ToString());
                         lst.Add(obj);
                     }
                     model.lstassociate = lst;
@@ -2867,5 +2867,82 @@ namespace HMGreenCityMLM.Controllers
         }
 
         #endregion
+
+
+
+        public ActionResult RankAchievementReports()
+        {
+            #region ddlRank
+            int ccount = 0;
+            Reports master = new Reports();
+            List<SelectListItem> ddlRank = new List<SelectListItem>();
+            DataSet dsRank = master.GetRankList();
+            if (dsRank != null && dsRank.Tables.Count > 0 && dsRank.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsRank.Tables[0].Rows)
+                {
+                    if (ccount == 0)
+                    {
+                        ddlRank.Add(new SelectListItem { Text = "Select Rank", Value = "0" });
+                    }
+                    ddlRank.Add(new SelectListItem { Text = r["RankName"].ToString(), Value = r["PK_RankId"].ToString() });
+                    ccount = ccount + 1;
+                }
+            }
+            ViewBag.ddlRank = ddlRank;
+            #endregion
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("RankAchievementReports")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult RankAchievementDetails(Reports model)
+        {
+            #region ddlRank
+            int ccount = 0;
+            Reports master = new Reports();
+            List<SelectListItem> ddlRank = new List<SelectListItem>();
+            DataSet dsRank = master.GetRankList();
+            if (dsRank != null && dsRank.Tables.Count > 0 && dsRank.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsRank.Tables[0].Rows)
+                {
+                    if (ccount == 0)
+                    {
+                        ddlRank.Add(new SelectListItem { Text = "Select Rank", Value = "0" });
+                    }
+                    ddlRank.Add(new SelectListItem { Text = r["RankName"].ToString(), Value = r["PK_RankId"].ToString() });
+                    ccount = ccount + 1;
+                }
+            }
+            ViewBag.ddlRank = ddlRank;
+            #endregion
+
+            List<Reports> list = new List<Reports>();
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.Rank = model.Rank == "0" ? null : model.Rank;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetRankAchievementReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.OldRank = r["OldRank"].ToString();
+                    obj.NewRank = r["NewRank"].ToString();
+                    obj.RankUpdateDate = r["RankUpdateDate"].ToString();
+                    //obj.RankUpdateDate = string.IsNullOrEmpty(r["RankUpdateDate"].ToString()) ? "N/A" : r["RankUpdateDate"].ToString();
+                    list.Add(obj);
+                }
+                model.lstRankAchievementReports = list;
+            }
+            return View(model);
+
+        }
+
     }
 }

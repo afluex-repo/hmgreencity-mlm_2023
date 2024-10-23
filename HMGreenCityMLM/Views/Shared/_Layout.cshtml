@@ -192,6 +192,32 @@
             buttons: ["copy", "csv", "excel", "pdf", "print"],
         });
     </script>
+    <script>
+    $(document).ready(function () {
+        $("#tableExport234").DataTable({
+            dom: "Bfrtip",
+            "pageLength": 50,
+            buttons: [
+               "copy", "csv", "excel", {
+                   extend: 'pdf',
+                   orientation: 'landscape',
+                   pageSize: 'LEGAL',
+                   exportOptions: {
+                       columns: ':visible',
+                       columns: ':visible:not(.not-export-col)',
+                   }
+               }, {
+                   extend: 'print',
+                   //text: 'Imprimir',
+                   exportOptions: {
+                       columns: ':visible'
+                   },
+                   autoPrint: true
+               }
+            ]
+        })
+    })
+    </script>
 </body>
 
 </html>
