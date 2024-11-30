@@ -16,9 +16,9 @@ namespace HMGreenCityMLM.Models
         {
             try
             {
-                connectionString = "Data Source=101.53.150.220,1438;Initial Catalog=hmgreendb; User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
+                //connectionString = "Data Source=101.53.150.220,1438;Initial Catalog=hmgreendb; User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
 
-                //connectionString = "Data Source=101.53.150.220,1438;Initial Catalog=hmgreendbtest; User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
+                connectionString = "Data Source=101.53.150.220,1438;Initial Catalog=hmgreendbtest; User Id=hmgreenusernew; Password=W1ttl1&9; Integrated Security=false;";
 
 
 
