@@ -408,10 +408,15 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult TransactionLogBy(Reports newdata)
         {
+            if (newdata.LoginId == null)
+            {
+                newdata.ToLoginID = null;
+            }
 
             List<Reports> lst1 = new List<Reports>();
             newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
+            newdata.LoginId = newdata.ToLoginID;
             DataSet ds11 = newdata.GetTransactionLog();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
