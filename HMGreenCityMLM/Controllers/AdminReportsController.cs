@@ -429,7 +429,6 @@ namespace HMGreenCityMLM.Controllers
                     Obj.AddedOn = r["AddedOn"].ToString();
                     Obj.Action = r["Action"].ToString();
                     Obj.Remarks = r["Remarks"].ToString();
-
                     lst1.Add(Obj);
                 }
                 newdata.lsttransactionlog = lst1;
