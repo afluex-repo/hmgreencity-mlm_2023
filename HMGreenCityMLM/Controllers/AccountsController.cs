@@ -443,6 +443,7 @@ namespace HMGreenCityMLM.Controllers
             try
             {
                 obj.TopUpDate = Common.ConvertToSystemDate(obj.TopUpDate, "dd/MM/yyyy");
+                obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/MM/yyyy");
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 //obj.Package = "4";
                 if (obj.TopupType == "NewBusiness")

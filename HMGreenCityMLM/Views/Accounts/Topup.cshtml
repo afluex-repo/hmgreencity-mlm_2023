@@ -95,15 +95,15 @@
                                 @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
                             </div>
                             <div class="form-group col-md-3" id="bankname" style="display: none">
-                                <label>Bank Name</label>
+                                <label>Bank Name <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
                             </div>
                             <div class="form-group col-md-3" id="chequeno" style="display: none">
-                                <label>Transaction No</label>
+                                <label>Transaction No <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
                             </div>
                             <div class="form-group col-md-3" id="chequdate" style="display: none">
-                                <label>Transaction Date</label>
+                                <label>Transaction Date </label>
                                 @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = "readonly" })
                             </div>
                             <div class="form-group col-md-3" id="bankbranch" style="display: none">
@@ -201,6 +201,7 @@
     }
 
     function getpaymentdetails() {
+        debugger;
         var paymentmode = ($("#PaymentMode option:selected").text());
 
         var bankname = document.getElementById("bankname");
@@ -236,23 +237,6 @@
             chequdate.style.display = "none";
             bankbranch.style.display = "none";
         }
-
-
-
-
-
-        //if (paymentmode != "Cash") {
-        //    bankname.style.display = "block";
-        //    chequeno.style.display = "block";
-        //    chequdate.style.display = "block";
-        //    bankbranch.style.display = "block";
-        //}
-        //else {
-        //    bankname.style.display = "none";
-        //    chequeno.style.display = "none";
-        //    chequdate.style.display = "none";
-        //    bankbranch.style.display = "none";
-        //}
     }
 
 
@@ -388,10 +372,62 @@
             $('#ReceiptNo').focus();
             return false;
         }
-        if ($('#PaymentMode').val() == '0') {
-            $("#PaymentMode").addClass('errortext');
-            $('#PaymentMode').focus();
-            return false;
+        //if ($('#PaymentMode').val() == '0') {
+        //    $("#PaymentMode").addClass('errortext');
+        //    $('#PaymentMode').focus();
+        //    return false;
+        //}
+        //if ($('#BankName').val() == '0') {
+        //    $("#BankName").addClass('errortext');
+        //    $('#BankName').focus();
+        //    return false;
+        //}
+        //if ($('#TransactionNo').val() == '') {
+        //    $("#TransactionNo").addClass('errortext');
+        //    $('#TransactionNo').focus();
+        //    return false;
+        //}
+        //if ($('#TransactionDate').val() == '') {
+        //    $("#TransactionDate").addClass('errortext');
+        //    $('#TransactionDate').focus();
+        //    return false;
+        //}
+        //if ($('#BankBranch').val() == '') {
+        //    $("#BankBranch").addClass('errortext');
+        //    $('#BankBranch').focus();
+        //    return false;
+        //}
+
+        //return true;
+
+        var paymentmode = $("#PaymentMode option:selected").text();
+        if (paymentmode == "Cash" || paymentmode == "0") {
+            // Skip validation for Bank details
+        }
+        else if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft") {
+            if ($('#BankName').val() == '0') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                return false;
+            }
+            if ($('#TransactionNo').val() == '') {
+                $("#TransactionNo").addClass('errortext');
+                $('#TransactionNo').focus();
+                return false;
+            }
+        }
+        else if (paymentmode == "UPI") {
+               if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                return false;
+                }
+                if ($('#TransactionNo').val() == '') {
+                    $("#TransactionNo").addClass('errortext');
+                    $('#TransactionNo').focus();
+                    return false;
+                }
+                
         }
 
         return true;
