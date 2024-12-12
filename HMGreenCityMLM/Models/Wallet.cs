@@ -324,10 +324,14 @@ namespace HMGreenCityMLM.Models
                                         new SqlParameter("@Fk_BlockId", Fk_BlockId),
                                         new SqlParameter("@PlotNumber", PlotNumber),
                                         new SqlParameter("@Description", Description),
-                                                                    new SqlParameter("@ReceiptNo", ReceiptNo),
-                                                                    new SqlParameter("@PaymentMode", PaymentMode),
-                                                                        new SqlParameter("@IsNewBusiness", IsNewBusiness),
-                                                                         new SqlParameter("@IsInclude", IsInclude)
+                                        new SqlParameter("@ReceiptNo", ReceiptNo),
+                                        new SqlParameter("@PaymentMode", PaymentMode),
+                                        new SqlParameter("@TransactionNo", TransactionNo),
+                                        new SqlParameter("@TransactionDate", TransactionDate),
+                                        new SqlParameter("@BankName", BankName),
+                                        new SqlParameter("@BankBranch", BankBranch),
+                                        new SqlParameter("@IsNewBusiness", IsNewBusiness),
+                                        new SqlParameter("@IsInclude", IsInclude)
 
 
             };

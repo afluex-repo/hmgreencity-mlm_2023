@@ -91,14 +91,14 @@
                                         @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
                                     </div>
                                     <div class="col-md-4" id="bankname" style="display: none">
-                                        <label class="col-form-label">Bank Name </label>
+                                        <label class="col-form-label">Bank Name <span style="color: red">*</span></label>
                                         @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
                                     </div>
                                     <div class="col-md-4" id="chequeno" style="display: none">
-                                        <label class="col-sm-3 col-form-label">Transaction No</label>
-                                        <div class="col-sm-9">
+                                   <label class="col-form-label">Transaction No <span style="color: red">*</span></label>
+                                      
                                             @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
-                                        </div>
+                                      
                                     </div>
                                     <div class="col-md-4" id="chequdate" style="display: none">
                                         <label class="col-form-label">Transaction Date</label>
@@ -116,6 +116,7 @@
                             </div>
                         </div>
                     </div>
+                    </section>
             </div>
     
         </div>
@@ -164,21 +165,50 @@
    $('#TopUpDate').datepicker({
        dateFormat: 'dd/mm/yy',
    });
+   $('#TransactionDate').datepicker({
+       dateFormat: 'dd/mm/yy',
+   });
+
+   //function getpaymentdetails() {
+   //    debugger;
+   //    var paymentmode = ($("#PaymentMode option:selected").text());
+   //    if (paymentmode != "Cash") {
+   //        bankname.style.display = "block";
+   //        chequeno.style.display = "block";
+   //        chequdate.style.display = "block";
+   //        bankbranch.style.display = "block";
+   //    }
+   //    else {
+   //        bankname.style.display = "none";
+   //        chequeno.style.display = "none";
+   //        chequdate.style.display = "none";
+   //        bankbranch.style.display = "none";
+   //    }
+    //}
 
    function getpaymentdetails() {
+       debugger;
        var paymentmode = ($("#PaymentMode option:selected").text());
-       if (paymentmode != "Cash") {
+
+       // Hide all fields initially
+       bankname.style.display = "none";
+       chequeno.style.display = "none";
+       chequdate.style.display = "none";
+       bankbranch.style.display = "none";
+
+       if (paymentmode === "NEFT" || paymentmode === "Cheque" || paymentmode === "RTGS" || paymentmode === "Demand Draft") {
+           // Show all fields
            bankname.style.display = "block";
            chequeno.style.display = "block";
            chequdate.style.display = "block";
            bankbranch.style.display = "block";
+       } else if (paymentmode === "UPI") {
+           // Show only bankname, chequeno, and chequdate
+           bankname.style.display = "block";
+           chequeno.style.display = "block";
+           chequdate.style.display = "block";
        }
-       else {
-           bankname.style.display = "none";
-           chequeno.style.display = "none";
-           chequdate.style.display = "none";
-           bankbranch.style.display = "none";
-       }
+       // Else part for "Cash" or "0" is already handled with initial hiding of fields.
    }
    function showdetails(type) {
        debugger;
@@ -274,7 +304,6 @@
            return false;
        }
 
-
        var rewardstatus = $("input[name='rdbtypename']:checked").val();
 
        if (rewardstatus == "IsInclude") {
@@ -311,13 +340,7 @@
                return false;
            }
        }
-       //if ($('#Fk_BlockId').val() == '0') {
-       //    $("#Fk_BlockId").addClass('errortext');
-       //    $('#Fk_BlockId').focus();
-       //    return false;
-       //}
-
-       if ($('#PlotNumber').val() == '') {
+      if ($('#PlotNumber').val() == '') {
            $("#PlotNumber").addClass('errortext');
            $('#PlotNumber').focus();
            return false;
@@ -344,6 +367,24 @@
            $('#PaymentMode').focus();
            return false;
        }
+       var paymentmode = $("#PaymentMode option:selected").text();
+
+       if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft" || paymentmode == "UPI") {
+           if ($('#BankName').val() == '') {
+               $("#BankName").addClass('errortext');
+               $('#BankName').focus();
+               return false;
+           }
+           if ($('#TransactionNo').val() == '') {
+               $("#TransactionNo").addClass('errortext');
+               $('#TransactionNo').focus();
+               return false;
+           }
+       } else if (paymentmode == "Cash" || paymentmode == "0") {
+           // No validation required for Cash or default case
+       }
+
+       return true;
        return true;
 
    }
