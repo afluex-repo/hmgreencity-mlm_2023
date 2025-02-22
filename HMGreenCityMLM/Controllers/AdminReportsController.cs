@@ -464,14 +464,14 @@ namespace HMGreenCityMLM.Controllers
                     Obj.FromLoginId = r["FromLoginID"].ToString();
                     Obj.ToName = r["ToName"].ToString();
                     Obj.ToLoginID = r["ToLoginID"].ToString();
-                    Obj.Amount = r["Amount"].ToString();
+                    Obj.AmountNew = Convert.ToDecimal(r["Amount"]);
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
-                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreport = lst1;
@@ -516,7 +516,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.FromLoginId = r["FromLoginID"].ToString();
                     Obj.ToName = r["ToName"].ToString();
                     Obj.ToLoginID = r["ToLoginID"].ToString();
-                    Obj.Amount = r["Amount"].ToString();
+                    Obj.AmountNew = Convert.ToDecimal(r["Amount"]);
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
 
@@ -524,7 +524,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
-                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreport = lst1;
@@ -2803,14 +2803,14 @@ namespace HMGreenCityMLM.Controllers
                     Obj.FromLoginId = r["FromLoginID"].ToString();
                     Obj.ToName = r["ToName"].ToString();
                     Obj.ToLoginID = r["ToLoginID"].ToString();
-                    Obj.Amount = r["Amount"].ToString();
+                    Obj.AmountNew = Convert.ToDecimal(r["Amount"]);
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
-                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreportnew = lst1;
@@ -2849,15 +2849,14 @@ namespace HMGreenCityMLM.Controllers
                     Obj.FromLoginId = r["FromLoginID"].ToString();
                     Obj.ToName = r["ToName"].ToString();
                     Obj.ToLoginID = r["ToLoginID"].ToString();
-                    Obj.Amount = r["Amount"].ToString();
+                    Obj.AmountNew = Convert.ToDecimal(r["Amount"]);
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
-
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
-                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreportnew = lst1;
