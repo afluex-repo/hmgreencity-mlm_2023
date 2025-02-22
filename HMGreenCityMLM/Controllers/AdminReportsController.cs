@@ -715,6 +715,7 @@ namespace HMGreenCityMLM.Controllers
             ViewBag.ddlleg = Leg;
             return View();
         }
+
         [HttpPost]
         [ActionName("DownLine")]
         [OnAction(ButtonName = "GetDetails")]
@@ -2772,9 +2773,7 @@ namespace HMGreenCityMLM.Controllers
        {
             return View();
        }
-
-
-
+        
 
         #region Associate Income Report New
 

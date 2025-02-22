@@ -82,6 +82,7 @@ namespace HMGreenCityMLM.Models
         public string PK_InvestmentID { get; set; }
 
         
+        public string LoginId { get; set; }
 
         #region ProductMaster
 
@@ -609,6 +610,21 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetMenuListForUser", para);
             return ds;
         }
+
+
+        //public DataSet CheckPlotForRetopupForLoginId()
+        //{
+        //    SqlParameter[] para =
+        //                    {
+        //                        new SqlParameter("@LoginId",LoginId),
+        //                        new SqlParameter("@Fk_SiteID",Fk_SiteId),
+        //                        new SqlParameter("@Fk_SectorId",FK_SectorId),
+        //                        new SqlParameter("@Fk_BlockID",Fk_BlockId),
+        //                        new SqlParameter("@PlotNumber",PlotNumber)
+        //                    };
+        //    DataSet ds = DBHelper.ExecuteQuery("GetPlotStatus", para);
+        //    return ds;
+        //}
 
     }
 }

@@ -372,11 +372,11 @@
             $('#ReceiptNo').focus();
             return false;
         }
-        //if ($('#PaymentMode').val() == '0') {
-        //    $("#PaymentMode").addClass('errortext');
-        //    $('#PaymentMode').focus();
-        //    return false;
-        //}
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            return false;
+        }
         //if ($('#BankName').val() == '0') {
         //    $("#BankName").addClass('errortext');
         //    $('#BankName').focus();
@@ -405,7 +405,7 @@
             // Skip validation for Bank details
         }
         else if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft") {
-            if ($('#BankName').val() == '0') {
+            if ($('#BankName').val() == '') {
                 $("#BankName").addClass('errortext');
                 $('#BankName').focus();
                 return false;
