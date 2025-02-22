@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "DistributePayment";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    decimal TotalNetIncome = 0;
 }
 
 @using (Html.BeginForm("DistiributePayemntToMembers", "Transactions", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
@@ -80,6 +81,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                   
                                     @if (Model != null)
                                     {
                                         if (Model.lstassociate != null)
@@ -100,6 +102,7 @@
                                                     <td>@Item.NetIncome</td>
                                                 </tr>
                                                 i++;
+                                                //TotalNetIncome = TotalNetIncome + Convert.ToDecimal(@Item.NetIncome);
                                             }
                                         }
                                     }
@@ -109,12 +112,12 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                         <th style="text-align:right;width:185px;">Total Net Payable Amount</th>
                                         <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
                                     </tr>
                                 </tfoot>
                             </table>

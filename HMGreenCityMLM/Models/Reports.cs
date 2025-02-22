@@ -57,6 +57,7 @@ namespace HMGreenCityMLM.Models
         public bool IsInclude { get; set; }
         public string Reward { get; set; }
 
+        public string AdminLoginId { get; set; }
         public string LoginId { get; set; }
         public string TeamLoginId { get; set; }
         public string PayoutLoginId { get; set; }
@@ -467,6 +468,8 @@ namespace HMGreenCityMLM.Models
             SqlParameter[] para = {     new SqlParameter("@Action", Action),
                                         new SqlParameter("@FromDate", FromDate),
                                         new SqlParameter("@ToDate", ToDate),
+                                        new SqlParameter("@AdminLoginId",AdminLoginId),
+                                        new SqlParameter("@LoginId",LoginId)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetTransactionLog", para);
             return ds;

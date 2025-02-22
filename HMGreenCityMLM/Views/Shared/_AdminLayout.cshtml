@@ -133,23 +133,58 @@
             dom: "Bfrtip",
             "pageLength": 50,
             buttons: [
-               "copy", "csv", "excel", {
-                   extend: 'pdf',
-                   orientation: 'landscape',
-                   pageSize: 'LEGAL',
-                   exportOptions: {
-                       columns: ':visible',
-                       columns: ':visible:not(.not-export-col)',
-                   }
-               }, {
-                   extend: 'print',
-                   //text: 'Imprimir',
-                   exportOptions: {
-                       columns: ':visible'
-                   },
-                   autoPrint: true
-               }
+                {
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: ':visible:not(.not-export-col)' // Exclude columns with the 'not-export-col' class
+                    }
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':visible:not(.not-export-col)' // Exclude unnecessary columns
+                    }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':visible:not(.not-export-col)' // Exclude unnecessary columns
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    exportOptions: {
+                        columns: ':visible:not(.not-export-col)' // Exclude unnecessary columns
+                    }
+                },
+                {
+                    extend: 'print',
+                    autoPrint: true,
+                    exportOptions: {
+                        columns: ':visible:not(.not-export-col)' // Exclude unnecessary columns
+                    }
+                }
             ]
+            //buttons: [
+            //   "copy", "csv", "excel", {
+            //       extend: 'pdf',
+            //       orientation: 'landscape',
+            //       pageSize: 'LEGAL',
+            //       exportOptions: {
+            //           columns: ':visible',
+            //           columns: ':visible:not(.not-export-col)',
+            //       }
+            //   }, {
+            //       extend: 'print',
+            //       //text: 'Imprimir',
+            //       exportOptions: {
+            //           columns: ':visible'
+            //       },
+            //       autoPrint: true
+            //   }
+            //]
         })
     })
     </script>

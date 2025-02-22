@@ -1554,5 +1554,30 @@ namespace HMGreenCityMLM.Controllers
             }
         }
 
+        //public ActionResult CheckPlotForRetopupUsingLoginId(string LoginId,string SiteID, string SectorID, string BlockID, string PlotNumber)
+        //{
+        //    Master model = new Master();
+        //    model.Fk_SiteId = SiteID;
+        //    model.FK_SectorId = SectorID;
+        //    model.Fk_BlockId = BlockID;
+        //    model.PlotNumber = PlotNumber;
+        //    model.LoginId=LoginId;
+        //    DataSet dsblock = model.CheckPlotForRetopupForLoginId();
+        //    if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
+        //    {
+        //        if (dsblock.Tables[0].Rows[0]["MSG"].ToString() == "0")
+        //        {
+        //            model.Result = "no";
+        //        }
+        //        else
+        //        {
+        //            model.Result = "yes";
+        //            model.PlotStatus = dsblock.Tables[0].Rows[0]["PlotStatus"].ToString();
+        //        }
+        //    }
+        //    return Json(model, JsonRequestBehavior.AllowGet);
+        //    //return View();
+        //}
+
     }
 }
