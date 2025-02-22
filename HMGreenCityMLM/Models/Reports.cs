@@ -224,6 +224,7 @@ namespace HMGreenCityMLM.Models
 
         public string Pk_PayoutPaidId { get; set; }
 
+        public decimal  AmountNew { get; set; }
 
 
 
