@@ -244,8 +244,8 @@ namespace HMGreenCityMLM.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@LoginId", LoginId),
-                                       new SqlParameter("@FromDate", FromDate),
-                                        new SqlParameter("@ToDate", ToDate),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate),
 
                                      };
             DataSet ds = DBHelper.ExecuteQuery("PayoutLedgerAdmin", para);
