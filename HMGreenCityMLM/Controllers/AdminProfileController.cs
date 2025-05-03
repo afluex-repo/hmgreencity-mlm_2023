@@ -300,6 +300,8 @@ namespace HMGreenCityMLM.Controllers
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
                     obj.AdharNo = r["AadharNumber"].ToString();
+                    obj.PanNo = r["PanNumber"].ToString();
+                    obj.AddharPanStatus = r["AddharPanStatus"].ToString();
                     obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
                     obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
                     //obj.StatusColor = r["StatusColor"].ToString();
@@ -345,6 +347,8 @@ namespace HMGreenCityMLM.Controllers
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
                     obj.AdharNo = r["AadharNumber"].ToString();
+                    obj.PanNo = r["PanNumber"].ToString();
+                    obj.AddharPanStatus = r["AddharPanStatus"].ToString();
                     obj.YellowDate = string.IsNullOrEmpty(r["YellowDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["YellowDate"]).ToString("dd-MMM, yyyy");
                     obj.GreenDate = string.IsNullOrEmpty(r["GreenDate"].ToString()) ? "N/A" : Convert.ToDateTime(r["GreenDate"]).ToString("dd-MMM, yyyy");
                     //obj.StatusColor = r["StatusColor"].ToString();
@@ -415,7 +419,7 @@ namespace HMGreenCityMLM.Controllers
             }
             List<Reports> lst = new List<Reports>();
             model.AdharNo = model.AdharNo == " " ? null : model.AdharNo;
-            //model.LoginId = model.ToLoginID;
+            model.LoginId = model.ToLoginID;
             DataSet ds = model.GetAssociateList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -504,6 +508,7 @@ namespace HMGreenCityMLM.Controllers
                 obj.RealtionName = ds.Tables[0].Rows[0]["GaurdianName"].ToString();
                 obj.AccountHolder = ds.Tables[0].Rows[0]["BankHolderName"].ToString();
                 obj.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                obj.AddharPanStatus = ds.Tables[0].Rows[0]["AadharPANstatus"].ToString();
                 // return View(obj);
             }
             return View(obj);

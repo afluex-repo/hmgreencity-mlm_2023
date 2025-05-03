@@ -65,8 +65,8 @@
                                 <tr>
                                     <th>Sr No.</th>
                                     <th>Date</th>
-                                    <th> LoginID</th>
-                                    <th> Name</th>
+                                    <th>LoginID</th>
+                                    <th>Name</th>
                                     <th>Plot Info</th>
                                     <th>Amount</th>
                                     <th>Income Type</th>
@@ -79,10 +79,10 @@
                                     if (Model.lsttopupreportnew != null)
                                     {
                                         int i = 1;
-                                        decimal totalAmount = 0;
+                                        //decimal totalAmount = 0;
                                         foreach (var Item in Model.lsttopupreportnew)
                                         {
-                                            totalAmount += Item.AmountNew; // Calculate total
+                                            //totalAmount += Item.AmountNew; // Calculate total
                                             <tr class="text-left">
                                                 <td>@i</td>
                                                 <td>@Item.TransactionDate</td>
@@ -108,13 +108,13 @@
                                     <th></th>
                                     <th></th>
                                     <th style="text-align:right">Total Amount</th>
-                                    <th style="color:dodgerblue;font-weight:800">
+                                    @*<th style="color:dodgerblue;font-weight:800">
                                         @if (Model != null && Model.lsttopupreportnew != null)
                                         {
                                             @(Model.lsttopupreportnew.Sum(x => x.AmountNew))
                                         }
-                                    </th>
-                                    @*<th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>*@
+                                    </th>*@
+                                    <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
                                     <th></th>
                                     <th></th>
 

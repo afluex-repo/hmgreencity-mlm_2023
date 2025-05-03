@@ -78,10 +78,10 @@
                                     if (Model.lsttopupreport != null)
                                     {
                                         int i = 1;
-                                        decimal totalAmount = 0;
+                                        //decimal totalAmount = 0;
                                         foreach (var Item in Model.lsttopupreport)
                                         {
-                                            totalAmount += Item.AmountNew; // Calculate total
+                                            //totalAmount += Item.AmountNew; // Calculate total
                                             <tr class="text-left">
                                                 <td>@i</td>
                                                 <td>@Item.TransactionDate</td>
@@ -105,18 +105,17 @@
                             <tfoot>
                                 <tr>
                                     <th></th>
-
                                     <th></th>
                                     <th></th>
                                     <th></th>
                                     <th style="text-align:right">Total Amount</th>
-                                    <th style="color:dodgerblue;font-weight:800">
+                                    @*<th style="color:dodgerblue;font-weight:800">
                                         @if (Model != null && Model.lsttopupreport != null)
                                         {
                                             @(Model.lsttopupreport.Sum(x => x.AmountNew))
                                         }
-                                    </th>
-                                    @*<th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>*@
+                                    </th>*@
+                                    <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
                                     <th></th>
                                     <th></th>
                                  </tr>

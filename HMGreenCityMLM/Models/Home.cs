@@ -36,6 +36,7 @@ namespace HMGreenCityMLM.Models
     }
     public class Home
     {
+        public string AddharPanStatus { get; set; }
         public string Password { get; set; }
         public string LoginId { get; set; }
 
@@ -91,7 +92,8 @@ namespace HMGreenCityMLM.Models
                                      new SqlParameter("@PinCode",PinCode),
                                      new SqlParameter("@Leg",Leg),
                                      new SqlParameter("@Password",Password),
-                                     new SqlParameter("@AddedBy",AddedBy)
+                                     new SqlParameter("@AddedBy",AddedBy),
+                                     new SqlParameter("@AddharPanStatus",AddharPanStatus)
 
                                    };
             DataSet ds = DBHelper.ExecuteQuery("Registration", para);
