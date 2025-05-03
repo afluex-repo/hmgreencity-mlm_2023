@@ -84,6 +84,15 @@
                             <label>Adhar Number</label>
                             @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No" })
                         </div>
+
+                        <div class="form-group col-md-3">
+                            <label>Adhar & PAN KYC Status</label>
+                            @Html.DropDownListFor(m => m.AddharPanStatus, new SelectList(new[]
+                              {
+                                new SelectListItem { Text = "Linked", Value = "Linked" },
+                                new SelectListItem { Text = "Not Linked", Value = "Not Linked" }
+                              }, "Value", "Text"), "Please select", new { @class = "form-control" })
+                        </div>
                         <div class="form-group col-md-3">
                             <label>PinCode</label>
                             @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @Placeholder = "PinCode", @onchange = "return getstatecity();" })
@@ -131,8 +140,7 @@
             return false;
         }
 
-
-        return true;
+       return true;
     }
     function getstatecity() {
         $(".errortext").removeClass("errortext");

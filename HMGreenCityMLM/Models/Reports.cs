@@ -141,8 +141,8 @@ namespace HMGreenCityMLM.Models
 
         public string DocumentImage { get; set; }
         public string AdharBacksideImage { get; set; }
+        public string AddharPanStatus { get; set; }
 
-        
 
         public List<Reports> lstuser { get; set; }
         public List<Reports> lsttopupreport { get; set; }
@@ -204,30 +204,19 @@ namespace HMGreenCityMLM.Models
         public string Gender { get; set; }
         public string Response { get; set; }
         public string RegistrationBy { get; set; }
-
         public string RankName { get; set; }
         public string FK_RankId { get; set; }
         public string TotalAchieverRight { get; set; }
         public string TotalAchieverLeft { get; set; }
         public List<Reports> lstdownlineAchieverreportforadmin { get; set; }
         public List<Reports> lstdownAchieverAdminreport { get; set; }
-
-       
         public List<Reports> lstDefaultAssociateList { get; set; }
         public List<Reports> lstRankAchievementReports { get; set; }
-
-
         public string UserTypeName { get; set; }
-
-        public string Pk_AdminId { get; set; }
-        public bool SevenDayView { get; set; }
-
-        public string Pk_PayoutPaidId { get; set; }
-
-        public decimal  AmountNew { get; set; }
-
-
-
+        public string Pk_AdminId {get;set;}
+        public bool SevenDayView {get; set;}
+        public string Pk_PayoutPaidId {get;set;}
+        public decimal  AmountNew {get;set;}
 
         public DataSet GetPayoutReport()
         {

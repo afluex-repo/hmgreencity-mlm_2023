@@ -471,7 +471,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
-                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreport = lst1;
@@ -491,6 +491,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult AssociateIncomeReportBy(Reports incomeReport)
         {
+           
             //if (incomeReport.LoginId == null)
             //{
             //    incomeReport.ToLoginID = null;
@@ -524,7 +525,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
-                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreport = lst1;
@@ -2810,7 +2811,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
-                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreportnew = lst1;
@@ -2856,7 +2857,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
                     Obj.PlotNumber = r["PlotNumber"].ToString();
-                    //ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
                 incomeReport.lsttopupreportnew = lst1;

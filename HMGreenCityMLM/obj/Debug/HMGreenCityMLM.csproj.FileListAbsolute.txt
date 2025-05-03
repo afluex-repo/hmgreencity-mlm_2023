@@ -857,6 +857,7 @@ E:\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
 E:\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
 F:\Ashwani Afluex\repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
 E:\Tanishq\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
+E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\ApplicationInsights.config
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\roslyn\csc.exe
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -908,5 +909,4 @@ E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\Newtonsoft.Json.xml
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Net.Http.Formatting.xml
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.xml
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.WebHost.xml
-E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb

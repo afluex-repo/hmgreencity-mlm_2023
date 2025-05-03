@@ -514,7 +514,7 @@ namespace HMGreenCityMLM.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string Email, string MobileNo, string PanCard, string AdharNo, string Address, string Gender, string OTP, string PinCode, string Leg)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string Email, string MobileNo, string PanCard, string AdharNo, string Address, string Gender, string OTP, string PinCode, string Leg,string AddharPanStatus)
         {
             Home obj = new Home();
 
@@ -534,6 +534,7 @@ namespace HMGreenCityMLM.Controllers
                 obj.Gender = Gender;
                 obj.PinCode = PinCode;
                 obj.Leg = Leg;
+                obj.AddharPanStatus = AddharPanStatus;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 string password = Common.GenerateRandom();
                 obj.Password = Crypto.Encrypt(password);
@@ -1130,6 +1131,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
                     obj.IFSCCode = (r["IFSCCode"].ToString());
+                    obj.AddharPanStatus = r["AddharPanStatus"].ToString();
                     obj.BankName = (r["MemberBankName"].ToString());
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
                     obj.Amount = (r["Amount"].ToString());
@@ -1176,6 +1178,7 @@ namespace HMGreenCityMLM.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
                     obj.IFSCCode = (r["IFSCCode"].ToString());
+                    obj.AddharPanStatus = r["AddharPanStatus"].ToString();
                     obj.BankName = (r["MemberBankName"].ToString());
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
                     obj.Amount = (r["Amount"].ToString());
