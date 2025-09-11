@@ -594,7 +594,7 @@ namespace HMGreenCityMLM.Controllers
                     Reports Obj = new Reports();
                     Obj.EncryptName = Crypto.Encrypt(r["LoginId"].ToString());
                     Obj.EncryptPayoutNo = Crypto.Encrypt(r["PayoutNo"].ToString());
-
+                    Obj.Pk_UserId = r["PK_UserId"].ToString();
                     Obj.LoginId = r["LoginId"].ToString();
                     Obj.DisplayName = r["FirstName"].ToString();
                     Obj.PayoutNo = r["PayoutNo"].ToString();
@@ -2947,6 +2947,42 @@ namespace HMGreenCityMLM.Controllers
             }
             return View(model);
 
+        }
+
+
+        public ActionResult ClosingWisePayoutDetails(string Pk_UserId, string PayoutNo)
+        {
+            Reports model = new Reports();
+            model.Pk_UserId = Pk_UserId;
+            model.PayoutNo = PayoutNo;
+          
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetPayoutWiseIncomeDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+               
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["CustomerId"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.AssociateID = r["AssociateId"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.UsedFor = r["UsedFor"].ToString();
+                    obj.PaidAmount = r["BV"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.CalculationDate = r["CalculationDate"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.CommPercentage = r["CommissionPercentage"].ToString();
+                    obj.Income = r["Amount"].ToString();
+                    ViewBag.Total = ds.Tables[1].Rows[0]["TotalIncome"].ToString();
+                  
+                    lst.Add(obj);
+                }
+                model.ClosingWisePayoutlist = lst;
+            }
+            return View(model);
         }
 
     }

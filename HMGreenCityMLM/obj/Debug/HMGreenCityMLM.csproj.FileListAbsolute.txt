@@ -910,3 +910,4 @@ E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Net.Http.Form
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.xml
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.WebHost.xml
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
+E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache

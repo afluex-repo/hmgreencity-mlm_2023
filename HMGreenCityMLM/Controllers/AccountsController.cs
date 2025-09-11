@@ -202,8 +202,7 @@ namespace HMGreenCityMLM.Controllers
                 else
                 {
 
-                }
-                
+                }                
                 DataSet ds = obj.TopUpIdByAdmin();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
