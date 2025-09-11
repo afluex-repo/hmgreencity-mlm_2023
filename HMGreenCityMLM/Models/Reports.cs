@@ -157,6 +157,8 @@ namespace HMGreenCityMLM.Models
 
         public string Package { get; set; }
         public string PaymentDate { get; set; }
+        public string CalculationDate { get; set; }
+
         public string PaymentMode { get; set; }
         public string Quantity { get; set; }
         public string Amount { get; set; }
@@ -217,6 +219,27 @@ namespace HMGreenCityMLM.Models
         public bool SevenDayView {get; set;}
         public string Pk_PayoutPaidId {get;set;}
         public decimal  AmountNew {get;set;}
+
+        public string CustomerName { get; set; }
+        public string PaidAmount { get; set; }
+        public string UsedFor { get; set; }
+        public string CommPercentage { get; set; }
+
+        public List<Reports> ClosingWisePayoutlist { get; set; }
+
+        public string Income { get; set; }
+
+        public DataSet GetPayoutWiseIncomeDetails()
+        {
+            SqlParameter[] para = {
+
+                            new SqlParameter("@Fk_UserId", Pk_UserId),
+                            new SqlParameter("@PayoutNo", PayoutNo)
+
+                                      };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutWiseIncomeDetails", para);
+            return ds;
+        }
 
         public DataSet GetPayoutReport()
         {
