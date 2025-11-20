@@ -1219,7 +1219,17 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaidRankwiseIncome", para);
             return ds;
         }
-
+        public DataSet GetRankwiseMonthlyIncome()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate),
+                                      //new SqlParameter("@Fk_RankId",RankIncome)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRankwiseMonthlyIncome", para);
+            return ds;
+        }
     }
 }
 
