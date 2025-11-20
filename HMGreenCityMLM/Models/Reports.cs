@@ -9,6 +9,9 @@ namespace HMGreenCityMLM.Models
 {
     public class Reports : Common
     {
+        public List<Reports> lstRankwaisepaidincomeReports { get; set; }
+        public string RankIncome { get; set; }
+        public List<Reports> lstRankwaisehourlyincomeReports { get; set; }
         public string SiteId { get; set; }
         public string Total { get; set; }
         public string ReceiptNo { get; set; }
@@ -141,8 +144,8 @@ namespace HMGreenCityMLM.Models
 
         public string DocumentImage { get; set; }
         public string AdharBacksideImage { get; set; }
+        public string AddharPanStatus { get; set; }
 
-        
 
         public List<Reports> lstuser { get; set; }
         public List<Reports> lsttopupreport { get; set; }
@@ -157,6 +160,8 @@ namespace HMGreenCityMLM.Models
 
         public string Package { get; set; }
         public string PaymentDate { get; set; }
+        public string CalculationDate { get; set; }
+
         public string PaymentMode { get; set; }
         public string Quantity { get; set; }
         public string Amount { get; set; }
@@ -204,29 +209,40 @@ namespace HMGreenCityMLM.Models
         public string Gender { get; set; }
         public string Response { get; set; }
         public string RegistrationBy { get; set; }
-
         public string RankName { get; set; }
         public string FK_RankId { get; set; }
         public string TotalAchieverRight { get; set; }
         public string TotalAchieverLeft { get; set; }
         public List<Reports> lstdownlineAchieverreportforadmin { get; set; }
         public List<Reports> lstdownAchieverAdminreport { get; set; }
-
-       
         public List<Reports> lstDefaultAssociateList { get; set; }
         public List<Reports> lstRankAchievementReports { get; set; }
-
-
         public string UserTypeName { get; set; }
+        public string Pk_AdminId {get;set;}
+        public bool SevenDayView {get; set;}
+        public string Pk_PayoutPaidId {get;set;}
+        public decimal  AmountNew {get;set;}
 
-        public string Pk_AdminId { get; set; }
-        public bool SevenDayView { get; set; }
+        public string CustomerName { get; set; }
+        public string PaidAmount { get; set; }
+        public string UsedFor { get; set; }
+        public string CommPercentage { get; set; }
 
-        public string Pk_PayoutPaidId { get; set; }
+        public List<Reports> ClosingWisePayoutlist { get; set; }
 
+        public string Income { get; set; }
 
+        public DataSet GetPayoutWiseIncomeDetails()
+        {
+            SqlParameter[] para = {
 
+                            new SqlParameter("@Fk_UserId", Pk_UserId),
+                            new SqlParameter("@PayoutNo", PayoutNo)
 
+                                      };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutWiseIncomeDetails", para);
+            return ds;
+        }
 
         public DataSet GetPayoutReport()
         {
@@ -1162,6 +1178,48 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetRankAchievementReports", para);
             return ds;
         }
+
+        public DataSet GetRankwiseHourlyIncome()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate),
+                                      new SqlParameter("@Fk_RankId",RankIncome)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRankwiseHourlyIncome", para);
+            return ds;
+        }
+
+        public DataSet PayIncome()
+        {
+            SqlParameter[] para =
+            {
+                 new SqlParameter("@Amount",Amount),
+                 new SqlParameter("@LoginId",LoginId),
+                 new SqlParameter("@PaymentMode", PaymentMode),
+                 new SqlParameter("@BankName", BankName),
+                 new SqlParameter("@BankBranch", BankBranch),
+                 new SqlParameter("@TransactionNo", TransactionNo),
+                 new SqlParameter("@TransactionDate", TransactionDate),
+                 new SqlParameter("@Description", Remarks),
+                 new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayHourlyIncome", para);
+            return ds;
+        }
+
+        public DataSet GetPaiRankIncomeReport()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPaidRankwiseIncome", para);
+            return ds;
+        }
+
     }
 }
 

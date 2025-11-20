@@ -1,0 +1,151 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "PaidRankwiseIncomeReport";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("PaidRankwiseIncomeReport", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">RankWise Hourly Paid Income Report</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Login Id</label>
+                            @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control", @placeholder = "LoginID" })
+                            @Html.HiddenFor(m => m.LoginId)
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label>From Payment Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>To Payment Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Date" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @*<label class="d-block">&nbsp;</label>*@
+                            <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>Login Id</th>
+                                    <th>Name</th>
+                                    <th>Amount</th>
+                                    <th>PaymentMode</th>
+                                    <th>TransactionNo</th>
+                                    <th>TransactionDate</th>
+                                    <th>BankName</th>
+                                    <th>BranchName</th>
+                                    <th>Remarks</th>
+                                    <th>PaymentDate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstRankwaisepaidincomeReports != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstRankwaisepaidincomeReports)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.LoginId</td>
+                                                <td>@Item.Name</td>
+                                                <td>@Item.Amount</td>
+                                                <td>@Item.PaymentMode</td>
+                                                <td>@Item.TransactionNo</td>
+                                                <td>@Item.TransactionDate</td>
+                                                <td>@Item.BankName</td>
+                                                <td>@Item.BankBranch</td>
+                                                <td>@Item.Remarks</td>
+                                                <td>@Item.PaymentDate</td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+
+    $(document).ready(function () {
+        debugger;
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+        $("input").attr("autocomplete", "off");
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminReports/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                debugger;
+
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+
+                    $('#ToLoginID').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+                            $('#LoginId').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+    });
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+
+
+</script>
+

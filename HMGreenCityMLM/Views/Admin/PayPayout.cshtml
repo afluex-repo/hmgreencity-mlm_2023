@@ -82,6 +82,7 @@
                                     <th>Account No</th>
                                     <th>Bank Name</th>
                                     <th>IFSC Code</th>
+                                    <th>KYC Status</th>
                                     <th>Amount</th>
                                     <th style="padding: 10px 50px;white-space: nowrap;">Remarks</th>
                                     <th style="padding: 10px 50px;white-space: nowrap;">Pay Amount</th>
@@ -96,6 +97,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -124,6 +126,7 @@
                                         <td>@Item.MemberAccNo</td>
                                         <td>@Item.BankName</td>
                                         <td>@Item.IFSCCode</td>
+                                        <td>@Item.AddharPanStatus</td>
                                         <td hidden="hidden">
                                             <a href="#" class="btn btn-danger btn-sm" onclick="openDeletePopup('@Item.LoginId');">
                                                 @Item.Amount
@@ -131,7 +134,7 @@
                                         </td>
                                         <td>
                                             <a href="#" class="btn btn-danger btn-sm" onclick="openDeletePopup('@Item.LoginId');">
-                                                @Item.Amount1
+                                                @Item.AmountNew
                                             </a>
                                         </td>
                                         <td>

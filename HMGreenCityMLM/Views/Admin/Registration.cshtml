@@ -72,13 +72,21 @@
                                             Gender
                                             @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlgender, "Value", "Text"), new { @class = "form-control" })
                                         </div>
-                                        <div class="col-md-6 form-group">
+                                        <div class="col-md-4 form-group">
                                             Pan Card
                                             @Html.TextBoxFor(m => m.PanCard, new { @class = "form-control", @Placeholder = "Pan Card", @Maxlength = "10", @onchange = "return validatepan(event);" })
                                         </div>
-                                        <div class="col-md-6 form-group">
-                                            Adhar No <span style="color: red">*</span>
+                                        <div class="col-md-4 form-group">
+                                            Aadhar No <span style="color: red">*</span>
                                             @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No ", @maxlength = "12", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validateAdhar();" })
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            Aadhar & PAN Linked Status <span style="color: red">*</span>
+                                            @Html.DropDownListFor(m => m.AddharPanStatus, new SelectList(new[]
+                              {
+                                new SelectListItem { Text = "Linked", Value = "Linked" },
+                                new SelectListItem { Text = "Not Linked", Value = "Not Linked" }
+                              }, "Value", "Text"), "Please select", new { @class = "form-control" })
                                         </div>
                                         <div class="col-md-12 form-group">
                                             Address
@@ -229,6 +237,11 @@
             return false;
         }
 
+        if ($('#AddharPanStatus').val() == '') {
+            $("#AddharPanStatus").addClass('errortext');
+            $('#AddharPanStatus').focus();
+            return false;
+        }
 
 
         $("#PaymentMethod").attr("disabled", "disabled");
@@ -278,7 +291,7 @@
             url: "/Admin/RegistrationAction",
             Type: "Get",
             DataType: "JSON",
-            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), Email: $("#Email").val(), MobileNo: $("#MobileNo").val(), PanCard: $("#PanCard").val(), AdharNo: $("#AdharNo").val(), Address: $("#Address").val(), Gender: $("#Gender").val(), OTP: $("#OTP").val(), PinCode: $("#PinCode").val(), Leg: Leg },
+            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), Email: $("#Email").val(), MobileNo: $("#MobileNo").val(), PanCard: $("#PanCard").val(), AdharNo: $("#AdharNo").val(), Address: $("#Address").val(), Gender: $("#Gender").val(), OTP: $("#OTP").val(), PinCode: $("#PinCode").val(), AddharPanStatus: $("#AddharPanStatus").val(), Leg: Leg },
             success: function (data) {
                 if (data.Response == "1") {
                     window.location.href = '@Url.Action("ConfirmRegistration", "Admin")';

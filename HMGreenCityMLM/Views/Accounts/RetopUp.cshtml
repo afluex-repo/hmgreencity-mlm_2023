@@ -196,7 +196,7 @@
        chequdate.style.display = "none";
        bankbranch.style.display = "none";
 
-       if (paymentmode === "NEFT" || paymentmode === "Cheque" || paymentmode === "RTGS" || paymentmode === "Demand Draft") {
+       if (paymentmode === "NEFT" || paymentmode === "Cheque" || paymentmode === "RTGS" || paymentmode === "Demand Draft" || paymentmode == "IMPS") {
            // Show all fields
            bankname.style.display = "block";
            chequeno.style.display = "block";
@@ -369,7 +369,7 @@
        }
        var paymentmode = $("#PaymentMode option:selected").text();
 
-       if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft" || paymentmode == "UPI") {
+       if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft" || paymentmode == "UPI" || paymentmode == "IMPS") {
            if ($('#BankName').val() == '') {
                $("#BankName").addClass('errortext');
                $('#BankName').focus();

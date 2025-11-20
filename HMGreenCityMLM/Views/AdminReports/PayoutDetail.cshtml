@@ -66,7 +66,9 @@
                             <thead>
                                 <tr>
                                     <th>Sr No.</th>
-                                    <th> Login Id</th>
+                                    <th>Login Id</th>
+                                    <td class="d-none">Pk_UserId</td>
+                                  
                                     <th>Name</th>
                                     <th>Mobile No</th>
                                     <th>Status</th>
@@ -80,13 +82,15 @@
                                     <th>Processing Fee</th>
                                     <th hidden="hidden">Product Wallet</th>
                                     <th>Net Payable Amount</th>
-                                    <th hidden="hidden">Action</th>
+                                    <th class="d-none">...</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th></th>
                                     <th></th>
+                                    <th class="d-none">...</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -98,8 +102,10 @@
                                     <th>@ViewBag.GrossAmount</th>
                                     <th>@ViewBag.TDSAmount</th>
                                     <th>@ViewBag.ProcessingFee</th>
-                                    <th hidden="hidden"></th>
                                     <th>@ViewBag.NetAmount</th>
+                                    <th class="d-none">...</th>
+                                    <th hidden="hidden"></th>
+                                    <th></th>
 
                                 </tr>
                             </tfoot>
@@ -114,6 +120,7 @@
                                             <tr class="text-left">
                                                 <td>@i</td>
                                                 <td>@Item.LoginId</td>
+                                                <td class="d-none">@Item.Pk_UserId</td>
                                                 <td>@Item.DisplayName</td>
                                                 <td>@Item.MobileNo</td>
                                                 <td>@Item.RankName</td>
@@ -130,6 +137,12 @@
                                                 <td hidden="hidden">
                                                     <a href="/AdminReports/PayoutReceipt?lid=@Item.EncryptName&pno=@Item.EncryptPayoutNo" class="btn btn-sm btn-primary" target="_blank">Print</a>
                                                 </td>
+                                                <td>
+                                                    <a href="/AdminReports/ClosingWisePayoutDetails?Pk_UserId=@Item.Pk_UserId&PayoutNo=@Item.PayoutNo" class="btn btn-success btn-sm" target="_blank">Payout Details</a>
+                                                </td>
+
+
+
                                             </tr>
                                             i++;
                                         }

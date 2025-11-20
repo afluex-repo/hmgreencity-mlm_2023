@@ -113,7 +113,7 @@ namespace HMGreenCityMLM.Controllers
             List<SelectListItem> ddlKYCStatus = Common.BindKYCStatus();
             ViewBag.ddlKYCStatus = ddlKYCStatus;
             List<Reports> lst = new List<Reports>();
-            
+
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             model.LoginId = model.LoginId == " " ? null : model.LoginId;
@@ -141,7 +141,7 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
         }
 
-        
+
         public ActionResult ApproveKYC(string Id, string DocumentType, string LoginID)
         {
             string FormName = "";
@@ -294,7 +294,7 @@ namespace HMGreenCityMLM.Controllers
 
                     details.Total = (dr["Total"].ToString());
                     details.Status = (dr["Status"].ToString());
-                    
+
 
                     dataList.Add(details);
 
@@ -395,7 +395,7 @@ namespace HMGreenCityMLM.Controllers
             List<DashBoard> dataList = new List<DashBoard>();
             DataSet Ds = new DataSet();
             DataTable dt = new DataTable();
-          
+
             DashBoard newdata = new DashBoard();
             newdata.Year = YearsJoining;
             Ds = newdata.GetDashBoardDetailsJoiningYear();
@@ -424,7 +424,7 @@ namespace HMGreenCityMLM.Controllers
         {
             ViewBag.Fk_UserId = "1";
 
-            ViewBag.LoginId=Session["LoginId"].ToString();
+            ViewBag.LoginId = Session["LoginId"].ToString();
 
             return View();
         }
@@ -433,7 +433,7 @@ namespace HMGreenCityMLM.Controllers
         {
             Permisssions p = new Permisssions();
             p.EmployeeId = Session["Pk_AdminId"].ToString();
-          
+
             DataSet ds = p.GetMainId();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -514,7 +514,7 @@ namespace HMGreenCityMLM.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string Email, string MobileNo, string PanCard, string AdharNo, string Address, string Gender, string OTP, string PinCode, string Leg)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string Email, string MobileNo, string PanCard, string AdharNo, string Address, string Gender, string OTP, string PinCode, string Leg, string AddharPanStatus)
         {
             Home obj = new Home();
 
@@ -534,6 +534,7 @@ namespace HMGreenCityMLM.Controllers
                 obj.Gender = Gender;
                 obj.PinCode = PinCode;
                 obj.Leg = Leg;
+                obj.AddharPanStatus = AddharPanStatus;
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
                 string password = Common.GenerateRandom();
                 obj.Password = Crypto.Encrypt(password);
@@ -1130,10 +1131,13 @@ namespace HMGreenCityMLM.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
                     obj.IFSCCode = (r["IFSCCode"].ToString());
+                    obj.AddharPanStatus = r["AddharPanStatus"].ToString();
                     obj.BankName = (r["MemberBankName"].ToString());
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
                     obj.Amount = (r["Amount"].ToString());
-                    ViewBag.Total = Math.Round(Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString()));
+                    obj.AmountNew = Convert.ToDecimal(r["Amount"]);
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
+                    //ViewBag.Total = Math.Round(Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString()));
                     obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
                     lst.Add(obj);
                 }
@@ -1176,11 +1180,14 @@ namespace HMGreenCityMLM.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
                     obj.IFSCCode = (r["IFSCCode"].ToString());
+                    obj.AddharPanStatus = r["AddharPanStatus"].ToString();
                     obj.BankName = (r["MemberBankName"].ToString());
                     obj.Fk_UserId = (r["Pk_UserId"].ToString());
                     obj.Amount = (r["Amount"].ToString());
+                    obj.AmountNew = Convert.ToDecimal(r["Amount"]);
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString());
                     obj.Amount1 = Math.Round(Convert.ToDecimal(r["Amount"].ToString()));
-                    ViewBag.Total = Math.Round(Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString()));
+                    //ViewBag.Total = Math.Round(Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Amount"].ToString()));
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -1507,7 +1514,7 @@ namespace HMGreenCityMLM.Controllers
         #region Downline Rank Achiever Reports For Admin
 
 
-       
+
 
         public ActionResult DownlineRankAchieverReportsForAdmin(string Mem)
         {
@@ -1581,11 +1588,11 @@ namespace HMGreenCityMLM.Controllers
 
 
 
-        public ActionResult DeletePaidPayout(string Id,string LoginId,string Amount)
+        public ActionResult DeletePaidPayout(string Id, string LoginId, string Amount)
 
         {
             Wallet model = new Wallet();
-           
+
             try
             {
                 model.Pk_PayoutPaidId = Id;
@@ -1602,19 +1609,19 @@ namespace HMGreenCityMLM.Controllers
                     }
                     else
                     {
-                        TempData["Payout"] =ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        
+                        TempData["Payout"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+
                     }
                 }
-            }   
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 TempData["Payout"] = ex.Message;
             }
             return RedirectToAction("PaidPayout", "Admin");
         }
 
-      public ActionResult EditPaidPayout(string Amount, string Loginid, string Id,string PaymentMode, string BankName,string BankBranch,string Transdate,string TransNo,string Remarks)
+        public ActionResult EditPaidPayout(string Amount, string Loginid, string Id, string PaymentMode, string BankName, string BankBranch, string Transdate, string TransNo, string Remarks)
         {
             Wallet model = new Wallet();
 
@@ -1639,7 +1646,7 @@ namespace HMGreenCityMLM.Controllers
                     model.PaymentMode = PaymentMode == "0" ? null : PaymentMode;
                 }
 
-                
+
                 DataSet ds = model.UpdatePaidPayout();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -1652,14 +1659,87 @@ namespace HMGreenCityMLM.Controllers
                         model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
-              
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 model.Result = ex.Message;
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult PayRankWiseHourlyIncome()
+        {
+            #region ddlpaymentmode
+            List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+            #endregion
+            return View();
+        }
+
+
+        public ActionResult GetMemberNameForHourlyIncome(string LoginId)
+        {
+            Common obj = new Common();
+            obj.ReferBy = LoginId;
+            DataSet ds = obj.GetMemberDetailsForIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                {
+                    obj.DisplayName = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    obj.Result = "No";
+                }
+                else
+                {
+                    obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
+                    obj.Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                    obj.Result = "Yes";
+                }
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        
+        public ActionResult PayHourlyIncome(Reports model)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
+                DataSet ds = model.PayIncome();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["PayRankWiseHourlyIncome"] = "Amount Paid Successfully..";
+                        FormName = "PayRankWiseHourlyIncome";
+                        Controller = "Admin";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["PayRankWiseHourlyIncome"] = "Error : " + ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "PayRankWiseHourlyIncome";
+                        Controller = "Admin";
+                    }
+                }
+                else
+                {
+                    TempData["PayRankWiseHourlyIncome"] = "Error : " + ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    FormName = "PayRankWiseHourlyIncome";
+                    Controller = "Admin";
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["PayRankWiseHourlyIncome"] = "Error : " + ex.Message;
+                FormName = "PayRankWiseHourlyIncome";
+                Controller = "Admin";
+            }
+            return RedirectToAction(FormName,Controller);
+        }
+
 
     }
 }

@@ -1,0 +1,291 @@
+﻿@model HMGreenCityMLM.Models.Reports
+
+@{
+    ViewBag.Title = "PayRankWiseHourlyIncome";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("PayHourlyIncome", "Admin", FormMethod.Post, new { @id = "form1" }))
+{
+    <section>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h6 class="mb-0">Pay RankWise Hourly Income</h6>
+                            <p style="color: red;display: block; margin-bottom:0px;">
+                                @TempData["PayRankWiseHourlyIncome"]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Login Id <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ToLoginID, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);" })
+                                @Html.HiddenFor(m => m.LoginId)
+                                <span id="txtname" style="color: red"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Amount <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return getAmountinWords();" })
+                                <span id="txtamount" style="color:red"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Remarks <span style="color: red">*</span></label>
+                                @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", @Placeholder = "Remarks" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Payment Mode <span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return getpaymentdetails();" })
+                            </div>
+                            <div class="form-group col-md-3" id="bankname" style="display: none">
+                                <label>Bank Name <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                            </div>
+                            <div class="form-group col-md-3" id="chequeno" style="display: none">
+                                <label>Transaction No <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Transaction No" })
+                            </div>
+                            <div class="form-group col-md-3" id="chequdate" style="display: none">
+                                <label>Transaction Date </label>
+                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-3" id="bankbranch" style="display: none">
+                                <label>Branch</label>
+                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="d-block">&nbsp;</label>
+                                <input class="btn btn-success mt-2" onclick="return validateform()" type="submit" value="Pay" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+
+<style>
+    .errortext {
+        border: 2px solid red !important;
+    }
+</style>
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script src="../../WebsiteCss/js/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+    $(document).ready(function () {
+
+        $("input").attr("autocomplete", "off");
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+        $.ajax({
+            url: '/AdminProfile/GetUserList',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
+                    });
+                    $('#ToLoginID').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var strsplit = str.split("(");
+
+                            $('#LoginId').val(strsplit[1].substr(0, strsplit[1].length - 1));
+                        }
+                    })
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+        $('#TopupType').val('RealEstate');
+    });
+
+
+
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function getpaymentdetails() {
+        debugger;
+        var paymentmode = ($("#PaymentMode option:selected").text());
+
+        var bankname = document.getElementById("bankname");
+        var chequeno = document.getElementById("chequeno");
+        var chequdate = document.getElementById("chequdate");
+        var bankbranch = document.getElementById("bankbranch");
+
+        if (paymentmode == "Cash" || paymentmode == "0") {
+            // Hide all fields for Cash or when value is 0
+            bankname.style.display = "none";
+            chequeno.style.display = "none";
+            chequdate.style.display = "none";
+            bankbranch.style.display = "none";
+        }
+        else if (paymentmode == "UPI") {
+            // Show only chequeno and chequdate for UPI
+            bankname.style.display = "block";
+            chequeno.style.display = "block";
+            chequdate.style.display = "block";
+            bankbranch.style.display = "none";
+        }
+        else if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft" || paymentmode == "IMPS") {
+            // Show all fields for NEFT, Cheque, RTGS, and DD
+            bankname.style.display = "block";
+            chequeno.style.display = "block";
+            chequdate.style.display = "block";
+            bankbranch.style.display = "block";
+        }
+        else {
+            // Default: Hide all fields for any other payment modes
+            bankname.style.display = "none";
+            chequeno.style.display = "none";
+            chequdate.style.display = "none";
+            bankbranch.style.display = "none";
+        }
+    }
+
+
+
+    function validateform() {
+        debugger;
+        $(".errortext").removeClass("errortext");
+
+       
+        if ($('#ToLoginID').val() == '') {
+            $("#ToLoginID").addClass('errortext');
+            $('#ToLoginID').focus();
+            return false;
+        }
+       
+        if ($('#Amount').val() == '') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            return false;
+        }
+        if ($('#TopUpDate').val() == '') {
+            $("#TopUpDate").addClass('errortext');
+            $('#TopUpDate').focus();
+            return false;
+        }
+        if ($('#Remarks').val() == '') {
+            $("#Remarks").addClass('errortext');
+            $('#Remarks').focus();
+            return false;
+        }
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            return false;
+        }
+       
+        var paymentmode = $("#PaymentMode option:selected").text();
+        if (paymentmode == "Cash" || paymentmode == "0") {
+            // Skip validation for Bank details
+        }
+        else if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft") {
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                return false;
+            }
+            if ($('#TransactionNo').val() == '') {
+                $("#TransactionNo").addClass('errortext');
+                $('#TransactionNo').focus();
+                return false;
+            }
+        }
+        else if (paymentmode == "UPI") {
+               if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                return false;
+                }
+                if ($('#TransactionNo').val() == '') {
+                    $("#TransactionNo").addClass('errortext');
+                    $('#TransactionNo').focus();
+                    return false;
+                }
+
+        }
+
+        return true;
+
+    }
+
+    function getmembername() {
+        debugger;
+        var LoginId = $('#LoginId').val();
+        $.ajax({
+            url: '/Admin/GetMemberNameForHourlyIncome',
+            type: "GET",
+            dataType: "JSON",
+            data: { LoginId: LoginId },
+            success: function (data) {
+                debugger;
+                if (data.Result == "Yes") {
+                    $('#txtname').html(data.DisplayName);
+                    $('#txtamount').html(data.Amount);
+
+                    //divname.style.display = "block";
+                } else {
+                    if (data.DisplayName != null) {
+                        alert(data.DisplayName);
+                        $("#LoginId").addClass('errortext');
+                        $('#txtname').html("");
+                        $('#LoginId').val("");
+                        $('#LoginId').focus();
+                        return false;
+                    }
+                    alert("Invalid Login ID");
+                    $("#LoginId").addClass('errortext');
+                    $('#txtname').html("");
+                    $('#LoginId').val("");
+                    $('#LoginId').focus();
+                }
+            }
+        });
+    }
+
+
+</script>
+
+
+
+
+

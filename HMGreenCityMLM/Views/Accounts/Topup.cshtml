@@ -223,7 +223,7 @@
             chequdate.style.display = "block";
             bankbranch.style.display = "none";
         }
-        else if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft") {
+        else if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft" || paymentmode == "IMPS") {
             // Show all fields for NEFT, Cheque, RTGS, and DD
             bankname.style.display = "block";
             chequeno.style.display = "block";
@@ -404,7 +404,7 @@
         if (paymentmode == "Cash" || paymentmode == "0") {
             // Skip validation for Bank details
         }
-        else if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft") {
+        else if (paymentmode == "NEFT" || paymentmode == "Cheque" || paymentmode == "RTGS" || paymentmode == "Demand Draft" || paymentmode == "IMPS") {
             if ($('#BankName').val() == '') {
                 $("#BankName").addClass('errortext');
                 $('#BankName').focus();

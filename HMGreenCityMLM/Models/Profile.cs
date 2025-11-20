@@ -41,6 +41,7 @@ namespace HMGreenCityMLM.Models
 
         public string cssStatus { get; set; }
 
+        public string AddharPanStatus { get; set; }
 
         public DataSet GetUserProfile()
         {
@@ -87,16 +88,18 @@ namespace HMGreenCityMLM.Models
                                       new SqlParameter("@IFSC", IFSC),
                                       new SqlParameter("@UpdatedBy", UpdatedBy) ,
                                       new SqlParameter("@SponsorId", SponsorId),
-                                        new SqlParameter("@PanNumber", PanNumber) ,
-                                         new SqlParameter("@RealtionName", RealtionName) ,
-                                          new SqlParameter("@Relation", Relation) ,
-                                           new SqlParameter("@Address", Address) ,
-                                            new SqlParameter("@State", State) ,
-                                             new SqlParameter("@City", City) ,
-                                             new SqlParameter("@Gender", Gender) ,
-                                              new SqlParameter("@PinCode", PinCode),
-                                               new SqlParameter("@BankHolderName", AccountHolder),
-                                                new SqlParameter("@AdharNo", AdharNo)
+                                      new SqlParameter("@PanNumber", PanNumber) ,
+                                      new SqlParameter("@RealtionName", RealtionName) ,
+                                      new SqlParameter("@Relation", Relation) ,
+                                      new SqlParameter("@Address", Address) ,
+                                      new SqlParameter("@State", State) ,
+                                      new SqlParameter("@City", City) ,
+                                      new SqlParameter("@Gender", Gender) ,
+                                      new SqlParameter("@PinCode", PinCode),
+                                      new SqlParameter("@BankHolderName", AccountHolder),
+                                      new SqlParameter("@AdharNo", AdharNo),
+                                      new SqlParameter("@AddharPanStatus",AddharPanStatus)
+
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateAssociateProfileByAdmin", para);
             return ds;

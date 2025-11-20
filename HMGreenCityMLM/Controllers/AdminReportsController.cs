@@ -464,7 +464,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.FromLoginId = r["FromLoginID"].ToString();
                     Obj.ToName = r["ToName"].ToString();
                     Obj.ToLoginID = r["ToLoginID"].ToString();
-                    Obj.Amount = r["Amount"].ToString();
+                    Obj.AmountNew = Convert.ToDecimal(r["Amount"]);
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
                     Obj.SiteName = r["SiteName"].ToString();
@@ -491,6 +491,7 @@ namespace HMGreenCityMLM.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult AssociateIncomeReportBy(Reports incomeReport)
         {
+           
             //if (incomeReport.LoginId == null)
             //{
             //    incomeReport.ToLoginID = null;
@@ -516,7 +517,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.FromLoginId = r["FromLoginID"].ToString();
                     Obj.ToName = r["ToName"].ToString();
                     Obj.ToLoginID = r["ToLoginID"].ToString();
-                    Obj.Amount = r["Amount"].ToString();
+                    Obj.AmountNew = Convert.ToDecimal(r["Amount"]);
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
 
@@ -593,7 +594,7 @@ namespace HMGreenCityMLM.Controllers
                     Reports Obj = new Reports();
                     Obj.EncryptName = Crypto.Encrypt(r["LoginId"].ToString());
                     Obj.EncryptPayoutNo = Crypto.Encrypt(r["PayoutNo"].ToString());
-
+                    Obj.Pk_UserId = r["PK_UserId"].ToString();
                     Obj.LoginId = r["LoginId"].ToString();
                     Obj.DisplayName = r["FirstName"].ToString();
                     Obj.PayoutNo = r["PayoutNo"].ToString();
@@ -2803,7 +2804,7 @@ namespace HMGreenCityMLM.Controllers
                     Obj.FromLoginId = r["FromLoginID"].ToString();
                     Obj.ToName = r["ToName"].ToString();
                     Obj.ToLoginID = r["ToLoginID"].ToString();
-                    Obj.Amount = r["Amount"].ToString();
+                    Obj.AmountNew = Convert.ToDecimal(r["Amount"]);
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
                     Obj.SiteName = r["SiteName"].ToString();
@@ -2849,10 +2850,9 @@ namespace HMGreenCityMLM.Controllers
                     Obj.FromLoginId = r["FromLoginID"].ToString();
                     Obj.ToName = r["ToName"].ToString();
                     Obj.ToLoginID = r["ToLoginID"].ToString();
-                    Obj.Amount = r["Amount"].ToString();
+                    Obj.AmountNew = Convert.ToDecimal(r["Amount"]);
                     Obj.IncomeType = r["IncomeType"].ToString();
                     Obj.Status = r["Status"].ToString();
-
                     Obj.SiteName = r["SiteName"].ToString();
                     Obj.SectorName = r["SectorName"].ToString();
                     Obj.BlockName = r["BlockName"].ToString();
@@ -2948,6 +2948,120 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
 
         }
+
+
+        public ActionResult ClosingWisePayoutDetails(string Pk_UserId, string PayoutNo)
+        {
+            Reports model = new Reports();
+            model.Pk_UserId = Pk_UserId;
+            model.PayoutNo = PayoutNo;
+          
+            List<Reports> lst = new List<Reports>();
+            DataSet ds = model.GetPayoutWiseIncomeDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+               
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["CustomerId"].ToString();
+                    obj.CustomerName = r["CustomerName"].ToString();
+                    obj.AssociateID = r["AssociateId"].ToString();
+                    obj.AssociateName = r["AssociateName"].ToString();
+                    obj.UsedFor = r["UsedFor"].ToString();
+                    obj.PaidAmount = r["BV"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.CalculationDate = r["CalculationDate"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.CommPercentage = r["CommissionPercentage"].ToString();
+                    obj.Income = r["Amount"].ToString();
+                    ViewBag.Total = ds.Tables[1].Rows[0]["TotalIncome"].ToString();
+                  
+                    lst.Add(obj);
+                }
+                model.ClosingWisePayoutlist = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult RankWiseHourlyIncome()
+        {
+            List<SelectListItem> RankIncome = Common.RankIncome();
+            ViewBag.ddlRankIncome = RankIncome;
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("RankWiseHourlyIncome")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult RankWiseHourlyIncome(Reports model)
+        {
+            List<Reports> list = new List<Reports>();
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDateTime(model.FromDate, "dd/MM/yyyy HH:mm:ss");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDateTime(model.ToDate, "dd/MM/yyyy HH:mm:ss");
+            DataSet ds = model.GetRankwiseHourlyIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.FromDate = r["SlotStart"].ToString();
+                    obj.ToDate = r["SlotEnd"].ToString();
+                    obj.Amount = r["TotalBenefitEarned"].ToString();
+                    obj.Income = r["MonthlyIncome"].ToString();
+                    obj.RankName = r["RankName"].ToString();
+                    obj.Total = r["TotalBenefitEarnedByUser"].ToString();
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["TotalBenefitEarned"].ToString());
+                    list.Add(obj);
+                }
+                model.lstRankwaisehourlyincomeReports = list;
+            }
+            List<SelectListItem> RankIncome = Common.RankIncome();
+            ViewBag.ddlRankIncome = RankIncome;
+            return View(model);
+        }
+
+        public ActionResult PaidRankwiseIncomeReport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("PaidRankwiseIncomeReport")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetPaidRankwiseIncomeReport(Reports model)
+        {
+            List<Reports> list = new List<Reports>();
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetPaiRankIncomeReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BankBranch = r["BranchName"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.Remarks = r["Remarks"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    list.Add(obj);
+                }
+                model.lstRankwaisepaidincomeReports = list;
+            }
+            return View(model);
+        }
+
 
     }
 }

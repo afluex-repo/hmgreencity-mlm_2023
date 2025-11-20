@@ -78,15 +78,17 @@
                                     if (Model.lsttopupreport != null)
                                     {
                                         int i = 1;
+                                        //decimal totalAmount = 0;
                                         foreach (var Item in Model.lsttopupreport)
                                         {
+                                            //totalAmount += Item.AmountNew; // Calculate total
                                             <tr class="text-left">
                                                 <td>@i</td>
                                                 <td>@Item.TransactionDate</td>
                                                 <td>@Item.ToLoginID</td>
                                                 <td>@Item.ToName</td>
                                                 <td>@Item.SiteName,@Item.SectorName,@Item.BlockName (@Item.PlotNumber)</td>
-                                                <td>@Item.Amount</td>
+                                                <td>@Item.AmountNew</td>
                                                 <td>@Item.IncomeType</td>
                                                 <td>@Item.Status</td>
 
@@ -103,16 +105,20 @@
                             <tfoot>
                                 <tr>
                                     <th></th>
-
                                     <th></th>
                                     <th></th>
                                     <th></th>
                                     <th style="text-align:right">Total Amount</th>
+                                    @*<th style="color:dodgerblue;font-weight:800">
+                                        @if (Model != null && Model.lsttopupreport != null)
+                                        {
+                                            @(Model.lsttopupreport.Sum(x => x.AmountNew))
+                                        }
+                                    </th>*@
                                     <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
                                     <th></th>
                                     <th></th>
-
-                                </tr>
+                                 </tr>
                             </tfoot>
 
                         </table>
