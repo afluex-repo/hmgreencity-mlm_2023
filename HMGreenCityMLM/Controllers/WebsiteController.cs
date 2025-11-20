@@ -48,7 +48,15 @@ namespace HMGreenCityMLM.Controllers
         }
 
 
-
+        public ActionResult UpdateRankwiseHourlyIncome()
+        {
+            Website model = new Website();
+            DataSet ds = model.RankwiseHourlyIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+            }
+            return RedirectToAction("Login", "Home");
+        }
 
 
     }

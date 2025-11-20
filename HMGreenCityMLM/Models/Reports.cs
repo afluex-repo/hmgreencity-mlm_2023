@@ -9,6 +9,9 @@ namespace HMGreenCityMLM.Models
 {
     public class Reports : Common
     {
+        public List<Reports> lstRankwaisepaidincomeReports { get; set; }
+        public string RankIncome { get; set; }
+        public List<Reports> lstRankwaisehourlyincomeReports { get; set; }
         public string SiteId { get; set; }
         public string Total { get; set; }
         public string ReceiptNo { get; set; }
@@ -1175,6 +1178,48 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("GetRankAchievementReports", para);
             return ds;
         }
+
+        public DataSet GetRankwiseHourlyIncome()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate),
+                                      new SqlParameter("@Fk_RankId",RankIncome)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRankwiseHourlyIncome", para);
+            return ds;
+        }
+
+        public DataSet PayIncome()
+        {
+            SqlParameter[] para =
+            {
+                 new SqlParameter("@Amount",Amount),
+                 new SqlParameter("@LoginId",LoginId),
+                 new SqlParameter("@PaymentMode", PaymentMode),
+                 new SqlParameter("@BankName", BankName),
+                 new SqlParameter("@BankBranch", BankBranch),
+                 new SqlParameter("@TransactionNo", TransactionNo),
+                 new SqlParameter("@TransactionDate", TransactionDate),
+                 new SqlParameter("@Description", Remarks),
+                 new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayHourlyIncome", para);
+            return ds;
+        }
+
+        public DataSet GetPaiRankIncomeReport()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPaidRankwiseIncome", para);
+            return ds;
+        }
+
     }
 }
 

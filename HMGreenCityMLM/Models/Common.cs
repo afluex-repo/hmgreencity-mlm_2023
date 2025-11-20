@@ -26,10 +26,10 @@ namespace HMGreenCityMLM.Models
         public string PinCode { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public string Amount { get; set; }
 
 
 
-        
 
         public string PK_InvestmentID { get; set; }
         public string PlotID { get; set; }
@@ -44,6 +44,43 @@ namespace HMGreenCityMLM.Models
             }
             return s;
         }
+
+        public static string ConvertToSystemDateTime(string InputDate, string InputFormat)
+        {
+            if (string.IsNullOrWhiteSpace(InputDate))
+                throw new Exception("Input date is null or empty");
+
+            DateTime parsedDate;
+
+            // List of acceptable formats
+            string[] formats = new[]
+            {
+        "dd/MM/yyyy HH:mm:ss",
+        "dd/MM/yyyy HH:mm",
+        "MM/dd/yyyy HH:mm:ss",
+        "MM/dd/yyyy HH:mm",
+        "yyyy-MM-ddTHH:mm:ss",
+        "yyyy-MM-ddTHH:mm"
+    };
+
+            try
+            {
+                // Try parsing the date using all formats
+                parsedDate = DateTime.ParseExact(InputDate, formats,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None);
+            }
+            catch (FormatException)
+            {
+                throw new Exception("Invalid Date or Time format");
+            }
+
+            // Return date/time in standard SQL-friendly format: MM/dd/yyyy HH:mm:ss
+            return parsedDate.ToString("dd/MM/yyyy HH:mm:ss");
+        }
+
+
+
         public static string ConvertToSystemDate(string InputDate, string InputFormat)
         {
             string DateString = "";
@@ -114,7 +151,7 @@ namespace HMGreenCityMLM.Models
             {
                 SqlParameter[] para = {
                                           new SqlParameter("@FormName", FormName) ,
-                                          new SqlParameter("@AdminId", AdminId) 
+                                          new SqlParameter("@AdminId", AdminId)
                                       };
 
                 DataSet ds = DBHelper.ExecuteQuery("PermissionsOfForm", para);
@@ -128,9 +165,9 @@ namespace HMGreenCityMLM.Models
         #endregion
         public DataSet GetMemberDetails()
         {
-            SqlParameter[] para = { 
+            SqlParameter[] para = {
                                       new SqlParameter("@LoginId", ReferBy),
-                                    
+
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetMemberName", para);
 
@@ -154,7 +191,16 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
+        public DataSet GetMemberDetailsForIncome()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", ReferBy),
 
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetMemberNameForHourlyIncome", para);
+
+            return ds;
+        }
 
         public DataSet GetSiteNameFromCrm()
         {
@@ -179,7 +225,7 @@ namespace HMGreenCityMLM.Models
             return ds;
         }
 
-        
+
         public DataSet GetMemberDetailsForSale()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", ReferBy), };
@@ -217,26 +263,27 @@ namespace HMGreenCityMLM.Models
             PaymentMode.Add(new SelectListItem { Text = "NEFT", Value = "NEFT" });
             PaymentMode.Add(new SelectListItem { Text = "RTGS", Value = "RTGS" });
             PaymentMode.Add(new SelectListItem { Text = "Demand Draft", Value = "DD" });
+            PaymentMode.Add(new SelectListItem { Text = "IMPS", Value = "IMPS" });
             PaymentMode.Add(new SelectListItem { Text = "UPI", Value = "UPI" });
             return PaymentMode;
         }
         public static List<SelectListItem> BindPaymentModeForList()
         {
             List<SelectListItem> PaymentMode = new List<SelectListItem>();
-            PaymentMode.Add(new SelectListItem { Text = "All", Value = null  });
+            PaymentMode.Add(new SelectListItem { Text = "All", Value = null });
             PaymentMode.Add(new SelectListItem { Text = "Cash", Value = "Cash" });
             PaymentMode.Add(new SelectListItem { Text = "Supplier", Value = "Supplier" });
-          
-            
+
+
             return PaymentMode;
         }
-        
+
         public static List<SelectListItem> BindGender()
         {
             List<SelectListItem> Gender = new List<SelectListItem>();
             Gender.Add(new SelectListItem { Text = "Male", Value = "M" });
             Gender.Add(new SelectListItem { Text = "Female", Value = "F" });
-           
+
             return Gender;
         }
         public static List<SelectListItem> BindPasswordType()
@@ -287,7 +334,7 @@ namespace HMGreenCityMLM.Models
             return Leg;
         }
 
-       
+
         public static List<SelectListItem> BindTopupStatus()
         {
             List<SelectListItem> IncomeStatus = new List<SelectListItem>();
@@ -297,13 +344,25 @@ namespace HMGreenCityMLM.Models
 
             return IncomeStatus;
         }
+
+        public static List<SelectListItem> RankIncome()
+        {
+            List<SelectListItem> RankIncome = new List<SelectListItem>();
+            RankIncome.Add(new SelectListItem { Text = "All", Value = null });
+            RankIncome.Add(new SelectListItem { Text = "Star (25000/-)", Value = "1" });
+            RankIncome.Add(new SelectListItem { Text = "Silver (50000/-)", Value = "2" });
+            RankIncome.Add(new SelectListItem { Text = "Gold (150000/-)", Value = "3" });
+
+            return RankIncome;
+        }
+
         public static List<SelectListItem> BindRealation()
         {
             List<SelectListItem> PaymentMode = new List<SelectListItem>();
             PaymentMode.Add(new SelectListItem { Text = "S/O", Value = "S/O" });
             PaymentMode.Add(new SelectListItem { Text = "D/O", Value = "D/O" });
             PaymentMode.Add(new SelectListItem { Text = "W/O", Value = "W/O" });
-           
+
             return PaymentMode;
         }
         public static List<SelectListItem> PaidStatus()
@@ -315,13 +374,13 @@ namespace HMGreenCityMLM.Models
 
             return PaidStatus;
         }
-      
+
 
         public DataSet GetStateCity()
         {
-            SqlParameter[] para = { 
+            SqlParameter[] para = {
                                       new SqlParameter("@PinCode", PinCode),
-                                    
+
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetStateCity", para);
 

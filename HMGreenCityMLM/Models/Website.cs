@@ -27,5 +27,11 @@ namespace HMGreenCityMLM.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateCounterHoldActive");
             return ds;
         }
+
+        public DataSet RankwiseHourlyIncome()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("CheckUserRankDuration");
+            return ds;
+        }
     }
 }

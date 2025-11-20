@@ -6542,6 +6542,10 @@
     <Content Include="Views\AdminReports\AssociateIncomeReportNew.cshtml" />
     <Content Include="Views\AdminReports\RankAchievementReports.cshtml" />
     <Content Include="Views\AdminReports\ClosingWisePayoutDetails.cshtml" />
+    <Content Include="Views\AdminReports\RankWiseHourlyIncome.cshtml" />
+    <Content Include="Views\Website\UpdateRankwiseHourlyIncome.cshtml" />
+    <Content Include="Views\Admin\PayRankWiseHourlyIncome.cshtml" />
+    <Content Include="Views\AdminReports\PaidRankwiseIncomeReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
