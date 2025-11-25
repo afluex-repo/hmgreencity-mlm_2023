@@ -1979,6 +1979,135 @@ namespace HMGreenCityMLM.Controllers
 
         #endregion
 
-       
+        #region RankWiseHourlyIncomeForDashboard
+
+        public ActionResult GetHourlyRankData(GetHourlyRankAPI model)
+        {
+            try
+            {
+                DataSet ds = model.GetHourlyRankDetailsForMobile();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.TotalAmount = ds.Tables[0].Rows[0]["TotalAmount"].ToString();
+                    model.PaidAmount = ds.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    model.Balance = ds.Tables[0].Rows[0]["Balance"].ToString();
+
+                    model.Message = "Data Fetched.";
+                    model.Status = "0";
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "No Data Found";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Message = ex.Message;
+                model.Status = "1";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region GetPaidHourlyIncome
+
+        public ActionResult GetPaidRankwiseIncomeReport(PaidIncomeReportAPI model)
+        {
+            PaidIncomeReportAPI obj = new PaidIncomeReportAPI();
+            try
+            {
+                DataSet ds = model.GetPaiRankIncomeReport();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<PaidHourlyIncomeReport> lstPaidIncomeReport = new List<PaidHourlyIncomeReport>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        PaidHourlyIncomeReport obj1 = new PaidHourlyIncomeReport();
+                        obj1.LoginId = r["LoginId"].ToString();
+                        obj1.Name = r["Name"].ToString();
+                        obj1.TransactionNo = r["TransactionNo"].ToString();
+                        obj1.TransactionDate = r["TransactionDate"].ToString();
+                        obj1.Amount = r["Amount"].ToString();
+                        obj1.BankName = r["BankName"].ToString();
+                        obj1.BankBranch = r["BranchName"].ToString();
+                        obj1.PaymentMode = r["PaymentMode"].ToString();
+                        obj1.Remarks = r["Remarks"].ToString();
+                        obj1.PaymentDate = r["PaymentDate"].ToString();
+                        lstPaidIncomeReport.Add(obj1);
+                    }
+                    obj.lstPaidIncomeReport = lstPaidIncomeReport;
+                    obj.Message = "Paid Hourly Income Fetched.";
+                    obj.Status = "0";
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = "No Data Found";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Message = ex.Message;
+                obj.Status = "1";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region GetRankwiseIncomeReport
+
+        public ActionResult GetRankwiseIncomeReport(HourlyIncomeReportAPI model)
+        {
+            HourlyIncomeReportAPI obj = new HourlyIncomeReportAPI();
+            try
+            {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDateTime(model.FromDate, "dd/MM/yyyy HH:mm:ss");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDateTime(model.ToDate, "dd/MM/yyyy HH:mm:ss");
+                DataSet ds = model.GetRankwiseHourlyIncome();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<HourlyIncomeReport> lstHourlyIncomeReport = new List<HourlyIncomeReport>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        HourlyIncomeReport obj1 = new HourlyIncomeReport();
+                        obj1.LoginId = r["LoginId"].ToString();
+                        obj1.Name = r["Name"].ToString();
+                        obj1.SlotStartTime = r["SlotStart"].ToString();
+                        obj1.SlotEndTime = r["SlotEnd"].ToString();
+                        obj1.Amount = r["TotalBenefitEarned"].ToString();
+                        obj1.Income = r["MonthlyIncome"].ToString();
+                        obj1.RankName = r["RankName"].ToString();
+                        obj1.Total = r["TotalBenefitEarnedByUser"].ToString();
+                        lstHourlyIncomeReport.Add(obj1);
+                    }
+                    obj.lstHourlyIncomeReport = lstHourlyIncomeReport;
+                    obj.Message = "Hourly Income Fetched.";
+                    obj.Status = "0";
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = "No Data Found";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Message = ex.Message;
+                obj.Status = "1";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
     }
 }

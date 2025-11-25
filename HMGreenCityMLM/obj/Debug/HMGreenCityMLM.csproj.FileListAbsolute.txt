@@ -910,7 +910,6 @@ E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.xml
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\bin\System.Web.Http.WebHost.xml
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
 E:\RISHI\REPOSITORY\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
-E:\Tanishq\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
 E:\Satish\Satish_Repo\hmgreencity-mlm_2023\HMGreenCityMLM\bin\ApplicationInsights.config
 E:\Satish\Satish_Repo\hmgreencity-mlm_2023\HMGreenCityMLM\bin\roslyn\csc.exe
 E:\Satish\Satish_Repo\hmgreencity-mlm_2023\HMGreenCityMLM\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -967,3 +966,4 @@ E:\Satish\Satish_Repo\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityM
 E:\Satish\Satish_Repo\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenC.8CC9FBA8.Up2Date
 E:\Satish\Satish_Repo\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.dll
 E:\Satish\Satish_Repo\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.pdb
+E:\Tanishq\Repository\hmgreencity-mlm_2023\HMGreenCityMLM\obj\Debug\HMGreenCityMLM.csprojResolveAssemblyReference.cache
