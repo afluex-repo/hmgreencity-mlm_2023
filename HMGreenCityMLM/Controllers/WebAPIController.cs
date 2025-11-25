@@ -2060,7 +2060,54 @@ namespace HMGreenCityMLM.Controllers
         }
 
         #endregion
-        
+
+        #region GetRankwiseIncomeReport
+
+        public ActionResult GetRankwiseIncomeReport(HourlyIncomeReportAPI model)
+        {
+            HourlyIncomeReportAPI obj = new HourlyIncomeReportAPI();
+            try
+            {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDateTime(model.FromDate, "dd/MM/yyyy HH:mm:ss");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDateTime(model.ToDate, "dd/MM/yyyy HH:mm:ss");
+                DataSet ds = model.GetRankwiseHourlyIncome();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<HourlyIncomeReport> lstHourlyIncomeReport = new List<HourlyIncomeReport>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        HourlyIncomeReport obj1 = new HourlyIncomeReport();
+                        obj1.LoginId = r["LoginId"].ToString();
+                        obj1.Name = r["Name"].ToString();
+                        obj1.SlotStartTime = r["SlotStart"].ToString();
+                        obj1.SlotEndTime = r["SlotEnd"].ToString();
+                        obj1.Amount = r["TotalBenefitEarned"].ToString();
+                        obj1.Income = r["MonthlyIncome"].ToString();
+                        obj1.RankName = r["RankName"].ToString();
+                        obj1.Total = r["TotalBenefitEarnedByUser"].ToString();
+                        lstHourlyIncomeReport.Add(obj1);
+                    }
+                    obj.lstHourlyIncomeReport = lstHourlyIncomeReport;
+                    obj.Message = "Hourly Income Fetched.";
+                    obj.Status = "0";
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = "No Data Found";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Message = ex.Message;
+                obj.Status = "1";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
 
     }
 }

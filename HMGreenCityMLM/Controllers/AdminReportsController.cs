@@ -3062,6 +3062,46 @@ namespace HMGreenCityMLM.Controllers
             return View(model);
         }
 
+        public ActionResult RankWiseMonthlyIncome()
+        {
+            List<SelectListItem> RankIncome = Common.RankIncome();
+            ViewBag.ddlRankIncome = RankIncome;
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("RankWiseMonthlyIncome")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult RankWiseMonthlyIncome(Reports model)
+        {
+            List<Reports> list = new List<Reports>();
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDateTime(model.FromDate, "dd/MM/yyyy HH:mm:ss");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDateTime(model.ToDate, "dd/MM/yyyy HH:mm:ss");
+            DataSet ds = model.GetRankwiseMonthlyIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Reports obj = new Reports();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.FromDate = r["MonthYear"].ToString();
+                   // obj.ToDate = r["SlotEnd"].ToString();
+                    obj.Amount = r["Income"].ToString();
+                   // obj.Income = r["MonthlyIncome"].ToString();
+                    //obj.RankName = r["RankName"].ToString();
+                    obj.Total = r["Balance"].ToString();
+                    ViewBag.Total = Convert.ToDecimal(ViewBag.Total) + Convert.ToDecimal(r["Income"].ToString());
+                    list.Add(obj);
+                }
+                model.lstRankwaisehourlyincomeReports = list;
+            }
+            List<SelectListItem> RankIncome = Common.RankIncome();
+            ViewBag.ddlRankIncome = RankIncome;
+            return View(model);
+        }
+
 
     }
 }

@@ -1300,12 +1300,10 @@ namespace HMGreenCityMLM.Models
 
     public class PaidIncomeReportAPI
     {
-        public List<PaidHourlyIncomeReport> lstPaidIncomeReport { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
-        public string FromDate { get; set; }
-        public string ToDate { get; set; }
         public string Pk_UserID { get; set; }
+        public List<PaidHourlyIncomeReport> lstPaidIncomeReport { get; set; }
 
         public DataSet GetPaiRankIncomeReport()
         {
@@ -1329,6 +1327,39 @@ namespace HMGreenCityMLM.Models
         public string PaymentMode { get; set; }
         public string Remarks { get; set; }
         public string PaymentDate { get; set; }
+    }
+
+    public class HourlyIncomeReportAPI
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List<HourlyIncomeReport> lstHourlyIncomeReport { get; set; }
+
+        public DataSet GetRankwiseHourlyIncome()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRankwiseHourlyIncomeForAssociate", para);
+            return ds;
+        }
+    }
+
+    public class HourlyIncomeReport
+    {
+        public string Name { get; set; }
+        public string LoginId { get; set; }
+        public string SlotStartTime { get; set; }
+        public string SlotEndTime { get; set; }
+        public string Amount { get; set; }
+        public string Income { get; set; }
+        public string RankName { get; set; }
+        public string Total { get; set; }
     }
 
 
