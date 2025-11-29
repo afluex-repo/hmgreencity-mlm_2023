@@ -14,6 +14,7 @@ namespace HMGreenCityMLM.Models
         public string UpdatedBy { get; set; }
         public string ReferBy { get; set; }
         public string Result { get; set; }
+        public string Msg { get; set; }
         public string DisplayName { get; set; }
         public string AddedOn { get; set; }
         public string SectorID { get; set; }
@@ -28,7 +29,7 @@ namespace HMGreenCityMLM.Models
         public string State { get; set; }
         public string Amount { get; set; }
 
-
+        public string ReceiptNo { get; set; }
 
 
         public string PK_InvestmentID { get; set; }
@@ -392,6 +393,17 @@ namespace HMGreenCityMLM.Models
             int _max = 9999;
             Random _rdm = new Random();
             return _rdm.Next(_min, _max);
+        }
+
+        public DataSet CheckReceiptNo()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@ReceiptNo", ReceiptNo),
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("CheckReceiptNo", para);
+
+            return ds;
         }
     }
 

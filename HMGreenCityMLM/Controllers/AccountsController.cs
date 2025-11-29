@@ -622,5 +622,29 @@ namespace HMGreenCityMLM.Controllers
             }
         }
 
+        public ActionResult CheckReceiptNo(string ReceiptNo)
+        {
+            Common obj = new Common();
+            obj.ReceiptNo = ReceiptNo;
+            DataSet ds = obj.CheckReceiptNo();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+
+                if (ds.Tables[0].Rows[0]["Status"].ToString() == "0")
+                {
+                    obj.Msg = ds.Tables[0].Rows[0]["Message"].ToString();
+                    obj.Result = "No";
+                }
+                if (ds.Tables[0].Rows[0]["Status"].ToString() == "1")
+                {
+                    obj.Msg = ds.Tables[0].Rows[0]["Message"].ToString();
+                    obj.Result = "Yes";
+                }
+
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
