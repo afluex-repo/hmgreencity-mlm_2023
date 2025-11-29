@@ -1362,5 +1362,34 @@ namespace HMGreenCityMLM.Models
         public string Total { get; set; }
     }
 
+    public class UserFullRankHistory
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Fk_UserId { get; set; }
+        public List<FullRankHistory> UserFullRankHistorys { get; set; }
 
+        public DataSet GetUserFullRankHistory()
+        {
+            SqlParameter[] para = {
+            new SqlParameter("@UserId", Fk_UserId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetUserFullRankHistory", para);
+            return ds;
+        }
+    }
+
+    public class FullRankHistory
+    {
+        public string FullName { get; set; }
+        public string NewRankId { get; set; }
+        public string NewRankName { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string AchiverRank { get; set; }
+        public string ImageURL { get; set; }
+        public string SelfBusiness { get; set; }
+
+       
+    }
 }

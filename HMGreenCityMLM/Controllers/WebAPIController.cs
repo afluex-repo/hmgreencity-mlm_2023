@@ -2109,5 +2109,47 @@ namespace HMGreenCityMLM.Controllers
 
         #endregion
 
+        #region GetUserFullRankHistory
+        public ActionResult GetUserFullRankHistory(UserFullRankHistory model)
+        {
+            try
+            {
+                DataSet ds = model.GetUserFullRankHistory();
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<FullRankHistory> lstUserFullRankHistory = new List<FullRankHistory>();
+
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        lstUserFullRankHistory.Add(new FullRankHistory
+                        {
+                            FullName = r["FullName"].ToString(),
+                            NewRankId = r["NewRankId"].ToString(),
+                            NewRankName = r["NewRankName"].ToString(),
+                            StartDate = r["StartDate"].ToString(),
+                            EndDate = r["EndDate"].ToString(),
+                            AchiverRank = r["AchiverRank"].ToString(),
+                            ImageURL = r["ImageURL"].ToString(),
+                            SelfBusiness = r["SelfBusiness"].ToString()
+                        });
+                    }
+                    model.UserFullRankHistorys = lstUserFullRankHistory;
+                    model.Message = "Paid Hourly Income Fetched.";
+                    model.Status = "0";
+                }
+                else
+                {
+                    return Json(new { Status = "1", Message = "No Data Found" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = "1", Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
     }
 }

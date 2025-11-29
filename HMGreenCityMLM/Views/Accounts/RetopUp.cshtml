@@ -84,7 +84,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label class="col-form-label">Receipt No  <span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Receipt No" })
+                                        @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", @Placeholder = "Receipt No", @onchange = "return CheckReceiptNo();" })
+                                        <span id="ReceiptError" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="col-form-label">Payment Mode <span style="color: red">*</span></label>
@@ -362,6 +363,11 @@
            $('#ReceiptNo').focus();
            return false;
        }
+       if ($('#ReceiptError').text() != '') {
+           $("#ReceiptNo").addClass('errortext');
+           $('#ReceiptNo').focus();
+           return false;
+       }
        if ($('#PaymentMode').val() == '0') {
            $("#PaymentMode").addClass('errortext');
            $('#PaymentMode').focus();
@@ -572,5 +578,36 @@
            }
 
        });
-   }
+    }
+
+    function CheckReceiptNo() {
+        debugger;
+        var ReceiptNo = $('#ReceiptNo').val();
+        if ($('#ReceiptNo').val() == '') {
+            $("#ReceiptNo").addClass('errortext');
+            $('#ReceiptNo').focus();
+            return false;
+        }
+        $.ajax({
+            url: '/Accounts/CheckReceiptNo',
+            type: "GET",
+            dataType: "JSON",
+            data: { ReceiptNo: ReceiptNo },
+            success: function (data) {
+                debugger;
+                if (data.Result == "No") {
+                    $('#ReceiptError').text(data.Msg);
+                    $('#ReceiptNo').val('');
+                    $("#ReceiptNo").addClass('errortext');
+                    $('#ReceiptNo').focus();
+                    return false;
+                } else {
+                    if (data.Result == "Yes") {
+                        $('#ReceiptError').text('');
+                        $("#ReceiptNo").removeClass('errortext');
+                    }
+                }
+            }
+        });
+    }
 </script>
